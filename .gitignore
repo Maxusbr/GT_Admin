@@ -1,0 +1,5 @@
+*.dll
+*.user
+*.nupkg
+*.pdb
+*.exe
