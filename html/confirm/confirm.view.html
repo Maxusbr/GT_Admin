@@ -1,0 +1,25 @@
+<div>
+	<div class="row">
+		<div class="col-md-8">
+			<h2>Подтверждение авторизации</h2>
+		</div>
+		<div class="col-md-4">
+			<p class="text-right">
+				Еще не зарегистрированы?<br />
+				<a href="#/register">Регистрация</a>
+			</p>
+		</div>
+	</div>
+	<p class="text-center">Скопируйте код, который пришел Вам в сообщении в это поле:</p>
+
+	<p>
+		<input type="text" class="form-control text-center" ng-model="vm.code" />
+	</p>
+
+	<p class="text-right">
+		<button ng-click="vm.checkCode()" class="btn btn-primary">
+			Войти
+		</button>
+	</p>
+
+</div>

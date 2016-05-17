@@ -1,0 +1,26 @@
+.content-body {
+	background-color: #333e47;
+
+	padding-bottom: 50px;
+}
+
+.form-body {
+	background-color: #f9f9f9;
+	padding: 30px;
+
+	border-radius: 10px;
+}
+
+.credits {
+	padding: 30px 0;
+	color: #7c8891;
+}
+
+.flags {
+	margin: 20px;
+	cursor: pointer;
+}
+
+.error-block {
+	color: #FF0000;
+}
