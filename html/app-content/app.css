@@ -11,16 +11,68 @@
 	border-radius: 10px;
 }
 
-.credits {
-	padding: 30px 0;
-	color: #7c8891;
-}
-
-.flags {
-	margin: 20px;
-	cursor: pointer;
-}
-
 .error-block {
 	color: #FF0000;
+}
+
+.btn-primary {
+	background-image: none;
+	filter: none;
+	color: #20ae4d;
+	border-color: #20ae4d;
+	background-color: #fff;
+	width: 100%;
+	border-radius: 0;
+
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+	background-color: #6dae79;
+	background-position: 0 -15px;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+	background-color: #e6f2df;
+	border-color: #20ae4d;
+}
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover,
+.btn-primary[disabled].focus, .btn-primary[disabled]:focus,
+.btn-primary[disabled],
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+	background-color: #e6f2df;
+	border-color: #6dae79;
+}
+
+.form-control {
+	border: 0;
+	border-bottom: 1px solid #ccc;
+	border-radius: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.my-link {
+	color: #f2523c;
+	border-bottom: 1px dashed #f2523c;
+	text-decoration: none;
+}
+
+.my-link:hover {
+	color: #f2523c;
+	border-bottom: 0;
+	text-decoration: underline;
+}
+
+.form-group input[type=checkbox] {
+	width: 20px;
+	height: 20px;
+}
+
+.form-group label {
+	font-size: small;
+	font-weight: normal;
 }

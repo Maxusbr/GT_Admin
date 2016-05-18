@@ -7,7 +7,7 @@
           'ngCookies',
           'vcRecaptcha',
           'ngResource',
-          'webix'
+            // 'webix'
         ])
         .config(config)
         .run(run);
@@ -86,7 +86,7 @@
             var recovery = $location.path().indexOf('/recovery/') + 1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn && !recovery) {
-                $location.path('#/sign-in');
+                $location.path('/sign-in');
             }
         });
     }

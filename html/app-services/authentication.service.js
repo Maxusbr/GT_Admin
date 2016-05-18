@@ -15,55 +15,46 @@
 
         return service;
 
-        function Login(user) {
-            console.log(user);
+        function Login(username, password, callback) {
 
             /* Dummy authentication for testing, uses $timeout to simulate api call
              ----------------------------------------------*/
-            //$timeout(function () {
-            //    var response;
-            //    UserService.GetByUsername(username)
-            //        .then(function (user) {
-            //            if (user !== null && user.password === password) {
-            //                response = { success: true };
-            //            } else {
-            //                response = { success: false, message: 'Username or password is incorrect' };
-            //            }
-            //            callback(response);
-            //        });
-            //}, 1000);
+            $timeout(function () {
+                var response;
+                console.log(username);
+                console.log(password);
+                UserService.GetByUsername(username)
+                    .then(function (user) {
+                        console.log(user);
+                        if (user !== null && user.password === password) {
+                            response = {success: true};
+                        } else {
+                            response = {success: false, message: 'Username or password is incorrect'};
+                        }
+                        callback(response);
+                    });
+            }, 1000);
 
             /* Use this for real authentication
              ----------------------------------------------*/
-             return $http.post('https://api.teleds.com/user/login', user);
+            //$http.post('/api/authenticate', { username: username, password: password })
+            //    .success(function (response) {
+            //        callback(response);
+            //    });
 
         }
 
-        function SetCredentials(data, user) {
-            //var authdata = Base64.encode(username + ':' + password);
-						//
-            //$rootScope.globals = {
-            //    currentUser: {
-            //        username: username,
-            //        authdata: authdata
-            //    }
-            //};
-
-            //$cookieStore.put('token', data.token);
-						//
-            //$http.defaults.headers.common['Authorization'] = 'Basic ' + data.token; // jshint ignore:line
-            //$cookieStore.put('globals', $rootScope.globals);
-
-            //var authdata = Base64.encode(username + ':' + password);
+        function SetCredentials(username, password) {
+            var authdata = Base64.encode(username + ':' + password);
 
             $rootScope.globals = {
                 currentUser: {
-                    username: user.email,
-                    authdata: data.token
+                    username: username,
+                    authdata: authdata
                 }
             };
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + data.token; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         }
 

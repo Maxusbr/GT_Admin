@@ -15,25 +15,8 @@
         service.Create = Create;
         service.Update = Update;
         service.Delete = Delete;
-        service.RecoveryPassword = RecoveryPassword;
 
         return service;
-
-        function ChangePassword () {
-            return $http({
-                url: "/user",
-                method: "POST",
-                data: user
-            });
-        }
-
-        function RecoveryPassword (email) {
-            return $http({
-                url: "/user/recover-password",
-                method: "POST",
-                data: {email: email}
-            });
-        }
 
         function GetAll() {
             return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
@@ -48,13 +31,7 @@
         }
 
         function Create(user) {
-            console.info(user);
-
-            return $http({
-                url: "/user",
-                method: "POST",
-                data: user
-            });
+            return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Update(user) {
@@ -78,4 +55,4 @@
         }
     }
 
-})  ();
+})();

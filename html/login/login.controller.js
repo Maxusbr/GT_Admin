@@ -6,10 +6,8 @@
         .controller('LoginController', LoginController);
 
     LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
-    function LoginController($location, AuthenticationService, FlashService, $cookies) {
+    function LoginController($location, AuthenticationService, FlashService) {
         var vm = this;
-
-        vm.user = {};
 
         vm.login = login;
 
@@ -20,14 +18,16 @@
 
         function login() {
             vm.dataLoading = true;
-            AuthenticationService.Login(vm.user)
-              .success(function(data, status) {
-                    console.info('Login success!');
-                    AuthenticationService.SetCredentials(data, vm.user);
+            AuthenticationService.Login(vm.username, vm.password, function (response) {
+                if (response.success) {
+                    AuthenticationService.SetCredentials(vm.username, vm.password);
                     $location.path('/');
-
-              });
-        }
+                } else {
+                    FlashService.Error(response.message);
+                    vm.dataLoading = false;
+                }
+            });
+        };
     }
 
 })();

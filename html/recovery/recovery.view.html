@@ -1,21 +1,19 @@
-<div>
+<div class="col-md-8 col-md-offset-2">
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-7">
 			<h2>Восстановление пароля</h2>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-5">
 			<p class="text-right">
 				Еще не зарегистрированы?<br />
-				<a href="#/register">Регистрация</a>
+				<a href="#/register" class="my-link">Регистрация</a>
 			</p>
 		</div>
 	</div>
 
 	<div ng-if="!vm.emailCheck">
-		<p class="text-center">Email:</p>
-
 		<p>
-			<input type="text" class="form-control text-center" ng-model="vm.email" />
+			<input type="text" class="form-control text-center" ng-model="vm.email" placeholder="Email"/>
 		</p>
 
 		<p class="text-right">
