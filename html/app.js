@@ -63,6 +63,44 @@
               controllerAs: 'vm'
             })
 
+            .when('/main', {
+                controller: 'MainController',
+                templateUrl: 'main/main.view.html',
+                controllerAs: 'vm'
+            })
+            .when('/main/user', {
+                controller: 'MainUserController',
+                templateUrl: 'main/user/user.view.html',
+                controllerAs: 'vm'
+            })
+            .when('/main/role', {
+                controller: 'MainRoleController',
+                templateUrl: 'main/role/role.view.html',
+                controllerAs: 'vm'
+            })
+
+            .when('/main/events', {
+                controller: 'MainEventsController',
+                templateUrl: 'main/events/events.view.html',
+                controllerAs: 'vm'
+            })
+            .when('/main/events-is', {
+                controller: 'MainEventsIsController',
+                templateUrl: 'main/events-is/events-is.view.html',
+                controllerAs: 'vm'
+            })
+            .when('/main/platform', {
+                controller: 'MainPlatformController',
+                templateUrl: 'main/platform/platform.view.html',
+                controllerAs: 'vm'
+            })
+            .when('/main/halls', {
+                controller: 'MainHallsController',
+                templateUrl: 'main/halls/halls.view.html',
+                controllerAs: 'vm'
+            })
+
+
             .otherwise({ redirectTo: '/login' });
 
         //$locationProvider.html5Mode(true);
@@ -82,7 +120,15 @@
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/sign-in', '/registration', '/registration/confirm', '/recovery', '/success']) === -1;
+            var restrictedPage = $.inArray($location.path(),
+                    ['/main',
+                        '/main/user',
+                        '/main/role',
+                        '/main/events',
+                        '/main/events-is',
+                        '/main/platform',
+                        '/main/halls',
+                        '/sign-in', '/registration', '/registration/confirm', '/recovery', '/success']) === -1;
             var recovery = $location.path().indexOf('/recovery/') + 1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn && !recovery) {

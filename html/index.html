@@ -8,15 +8,10 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="text-center">
-        <img src="/app-content/images/logo.png">
-    </div>
-    <div>
-        <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
-             ng-if="flash" ng-bind="flash.message"></div>
-        <div ng-view></div>
-    </div>
+<div class="container-fluid">
+    <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
+         ng-if="flash" ng-bind="flash.message"></div>
+    <div ng-view class="view"></div>
 </div>
 
 <script src="app-content/jquery-2.2.1.min.js"></script>
@@ -43,9 +38,13 @@
 <script src="register/register.controller.js"></script>
 <script src="confirm/confirm.controller.js"></script>
 <script src="recovery/recovery.controller.js"></script>
-<script src="components/lang/lang.controller.js"></script>
+<!--<script src="components/lang/lang.controller.js"></script>-->
+<script src="components/menu/menu.controller.js"></script>
 <script src="success/success.controller.js"></script>
 <script src="change_password/change_password.controller.js"></script>
 <script src="recovery_confirm/recovery_confirm.controller.js"></script>
+<script src="main/main.controller.js"></script>
+<script src="main/user/user.controller.js"></script>
+<script src="main/role/role.controller.js"></script>
 </body>
 </html>

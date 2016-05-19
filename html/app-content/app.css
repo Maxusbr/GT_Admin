@@ -15,44 +15,55 @@
 	color: #FF0000;
 }
 
-.btn-primary {
+.btn {
+	border-radius: 0;
+	padding-left: 25px;
+	padding-right: 25px;
+}
+
+.btn-success {
 	background-image: none;
 	filter: none;
 	color: #20ae4d;
 	border-color: #20ae4d;
 	background-color: #fff;
-	width: 100%;
+	/*width: 100%;// .btn-block*/
 	border-radius: 0;
 
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-success:hover,
+.btn-success:focus {
 	background-color: #6dae79;
 	background-position: 0 -15px;
 }
 
-.btn-primary:active,
-.btn-primary.active {
+.btn-success:active,
+.btn-success.active {
 	background-color: #e6f2df;
 	border-color: #20ae4d;
 }
 
-.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover,
-.btn-primary[disabled].focus, .btn-primary[disabled]:focus,
-.btn-primary[disabled],
-.btn-primary[disabled]:hover,
-fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+.btn-success.disabled.focus, .btn-success.disabled:focus, .btn-success.disabled:hover,
+.btn-success[disabled].focus, .btn-success[disabled]:focus,
+.btn-success[disabled],
+.btn-success[disabled]:hover,
+fieldset[disabled] .btn-success.focus, fieldset[disabled] .btn-success:focus, fieldset[disabled] .btn-success:hover {
 	background-color: #e6f2df;
 	border-color: #6dae79;
 }
 
-.form-control {
+input.form-control {
 	border: 0;
 	border-bottom: 1px solid #ccc;
 	border-radius: 0;
 	-webkit-box-shadow: none;
 	box-shadow: none;
+}
+
+input.form-control.form-control-search {
+	background: #dbdbdb;
+	color: #8c8c8c;
 }
 
 .my-link {
@@ -67,12 +78,65 @@ fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fi
 	text-decoration: underline;
 }
 
-.form-group input[type=checkbox] {
-	width: 20px;
-	height: 20px;
+.mycheckbox {
+	position: relative;
+	top: -3px;
 }
 
-.form-group label {
+.mycheckbox input[type=checkbox] {
+	width: 25px;
+	height: 25px;
+	position: relative;
+	top: 8px;
+}
+
+.mycheckbox label {
 	font-size: small;
 	font-weight: normal;
+	margin: 0;
+}
+
+html, body, .container-fluid, .view, .main {
+	height: 100%
+}
+
+.sidebar {
+	background: #3c3c3c;
+	height: 100%;
+	padding: 0;
+	font-size: 150%;
+	color: #e7e7e7;
+}
+
+.sidebar a {
+	color: #e7e7e7 !important;
+}
+
+.sidebar a:hover {
+	background-color: #3c3537 !important;
+}
+
+.logo {
+	padding: 15px;
+}
+
+.space {
+	padding-top: 10px;
+}
+
+.space-lg {
+	padding-top: 20px;
+}
+
+.mytable {
+	font-size: 150%;
+}
+
+.mytable th, .mytable td {
+	padding: 25px 5px !important;
+}
+
+.bg-gray {
+	background: #555;
+	color: #e7e7e7;
 }

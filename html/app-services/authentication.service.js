@@ -21,11 +21,8 @@
              ----------------------------------------------*/
             $timeout(function () {
                 var response;
-                console.log(username);
-                console.log(password);
                 UserService.GetByUsername(username)
                     .then(function (user) {
-                        console.log(user);
                         if (user !== null && user.password === password) {
                             response = {success: true};
                         } else {

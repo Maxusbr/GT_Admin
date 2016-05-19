@@ -1,35 +1,41 @@
-<div>
-	<div class="row">
-		<div class="col-md-8">
-			<h2>Сменить пароль</h2>
-		</div>
+<div class="container">
+	<div class="text-center">
+		<img src="/app-content/images/logo.png">
 	</div>
-	<p>Ключ: {{vm.key}}</p>
-	<p class="text-center">Введите новый пароль:</p>
 
-	<p>
-		<input type="password" class="form-control text-center" ng-model="vm.password1" />
-	</p>
+	<div>
+		<div class="row">
+			<div class="col-md-8">
+				<h2>Сменить пароль</h2>
+			</div>
+		</div>
+		<p>Ключ: {{vm.key}}</p>
+		<p class="text-center">Введите новый пароль:</p>
 
-	<p class="text-center">Повторите пароль:</p>
+		<p>
+			<input type="password" class="form-control text-center" ng-model="vm.password1"/>
+		</p>
 
-	<p>
-		<input type="password" class="form-control text-center" ng-model="vm.password2" />
-	</p>
-	<p class="text-center error-block" ng-if="vm.passwordInvalid">
-		Пароли введены некорректно!
-	</p>
-	<p class="text-center error-block" ng-if="!vm.passwordInvalid">
+		<p class="text-center">Повторите пароль:</p>
 
-	</p>
+		<p>
+			<input type="password" class="form-control text-center" ng-model="vm.password2"/>
+		</p>
+		<p class="text-center error-block" ng-if="vm.passwordInvalid">
+			Пароли введены некорректно!
+		</p>
+		<p class="text-center error-block" ng-if="!vm.passwordInvalid">
 
-	<p class="text-right">
-		<a class="btn btn-link" href="/#/">
-			Назад
-		</a>
-		<button ng-click="vm.checkCode()" class="btn btn-primary">
-			Изменить пароль
-		</button>
-	</p>
+		</p>
 
+		<p class="text-right">
+			<a class="btn btn-link" href="/#/">
+				Назад
+			</a>
+			<button ng-click="vm.checkCode()" class="btn btn-success btn-block">
+				Изменить пароль
+			</button>
+		</p>
+
+	</div>
 </div>
