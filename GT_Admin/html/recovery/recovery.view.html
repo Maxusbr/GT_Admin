@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="text-center">
+		<img src="/app-content/images/logo.png">
+	</div>
+
+	<div class="col-md-8 col-md-offset-2">
+		<div class="row">
+			<div class="col-md-7">
+				<h2>Восстановление пароля</h2>
+			</div>
+			<div class="col-md-5">
+				<p class="text-right">
+					Еще не зарегистрированы?<br/>
+					<a href="#/registration" class="my-link">Регистрация</a>
+				</p>
+			</div>
+		</div>
+
+		<div ng-if="!vm.emailCheck">
+			<p>
+				<input type="text" class="form-control text-center" ng-model="vm.email" placeholder="Email"/>
+			</p>
+
+			<p class="text-right">
+				<button ng-click="vm.checkCode()" class="btn btn-success btn-block">
+					Отправить
+				</button>
+			</p>
+		</div>
+		<div ng-if="vm.emailCheck">
+			<p class="text-center">
+				Заявка на восстановление пароля отправлена! Дальнейшие инструкции высланы Вам на Ваш почтовый ящик.
+			</p>
+		</div>
+	</div>
+</div>
