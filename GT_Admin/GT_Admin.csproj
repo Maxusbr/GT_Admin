@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -105,10 +109,6 @@
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -180,14 +180,76 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="html\app-content\angular-cookies.js" />
+    <Content Include="html\app-content\angular-recaptcha.js" />
+    <Content Include="html\app-content\angular-recaptcha.min.js" />
+    <Content Include="html\app-content\angular-resource.min.js" />
+    <Content Include="html\app-content\angular-route.js" />
+    <Content Include="html\app-content\angular.min.js" />
+    <Content Include="html\app-content\app.css" />
+    <Content Include="html\app-content\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="html\app-content\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="html\app-content\bootstrap\css\bootstrap.css" />
+    <Content Include="html\app-content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="html\app-content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="html\app-content\bootstrap\js\bootstrap.js" />
+    <Content Include="html\app-content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="html\app-content\bootstrap\js\npm.js" />
+    <Content Include="html\app-content\jquery-2.2.1.min.js" />
+    <Content Include="html\app-services\authentication.service.js" />
+    <Content Include="html\app-services\flash.service.js" />
+    <Content Include="html\app-services\user.service.js" />
+    <Content Include="html\app-services\user.service.local-storage.js" />
+    <Content Include="html\app.js" />
+    <Content Include="html\change_password\change_password.controller.js" />
+    <Content Include="html\change_password\change_password.view.html" />
+    <Content Include="html\components\lang\lang.controller.js" />
+    <Content Include="html\components\lang\lang.view.html" />
+    <Content Include="html\components\menu\menu.controller.js" />
+    <Content Include="html\components\menu\menu.view.html" />
+    <Content Include="html\confirm\confirm.controller.js" />
+    <Content Include="html\confirm\confirm.view.html" />
+    <Content Include="html\home\home.controller.js" />
+    <Content Include="html\home\home.view.html" />
+    <Content Include="html\index.html" />
+    <Content Include="html\login.css" />
+    <Content Include="html\login.html" />
+    <Content Include="html\login\login.controller.js" />
+    <Content Include="html\login\login.view.html" />
+    <Content Include="html\main\events-is\events-is.controller.js" />
+    <Content Include="html\main\events-is\events-is.view.html" />
+    <Content Include="html\main\events\events.controller.js" />
+    <Content Include="html\main\events\events.view.html" />
+    <Content Include="html\main\halls\halls.controller.js" />
+    <Content Include="html\main\halls\halls.view.html" />
+    <Content Include="html\main\main.controller.js" />
+    <Content Include="html\main\main.view.html" />
+    <Content Include="html\main\platform\platform.controller.js" />
+    <Content Include="html\main\platform\platform.view.html" />
+    <Content Include="html\main\role\role.controller.js" />
+    <Content Include="html\main\role\role.view.html" />
+    <Content Include="html\main\user\user.controller.js" />
+    <Content Include="html\main\user\user.view.html" />
+    <Content Include="html\recovery\recovery.controller.js" />
+    <Content Include="html\recovery\recovery.view.html" />
+    <Content Include="html\recovery_confirm\recovery_confirm.controller.js" />
+    <Content Include="html\recovery_confirm\recovery_confirm.view.html" />
+    <Content Include="html\register\register.controller.js" />
+    <Content Include="html\register\register.view.html" />
+    <Content Include="html\success\success.controller.js" />
+    <Content Include="html\success\success.view.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="html\app-content\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="html\app-content\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="html\app-content\bootstrap\css\bootstrap.css.map" />
+    <Content Include="html\app-content\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="html\app-content\webix\codebase\webix.js.map" />
     <None Include="Properties\PublishProfiles\GTAdmin20160429064857.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
