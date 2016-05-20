@@ -5,8 +5,8 @@
         .module('app')
         .controller('MainHallsController', MainHallsController);
 
-    MainHallsController.$inject = ['HallsService', '$rootScope'];
-    function MainHallsController(HallsService, $rootScope) {
+    MainHallsController.$inject = ['$rootScope'];
+    function MainHallsController($rootScope) {
         var vm = this;
 
     }

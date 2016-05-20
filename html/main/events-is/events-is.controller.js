@@ -5,8 +5,8 @@
         .module('app')
         .controller('MainEventsIsController', MainEventsIsController);
 
-    MainEventsIsController.$inject = ['EventsIsService', '$rootScope'];
-    function MainEventsIsController(EventsIsService, $rootScope) {
+    MainEventsIsController.$inject = ['$rootScope'];
+    function MainEventsIsController($rootScope) {
         var vm = this;
 
     }

@@ -5,8 +5,8 @@
         .module('app')
         .controller('MainPlatformController', MainPlatformController);
 
-    MainPlatformController.$inject = ['PlatformService', '$rootScope'];
-    function MainPlatformController(PlatformService, $rootScope) {
+    MainPlatformController.$inject = ['$rootScope'];
+    function MainPlatformController($rootScope) {
         var vm = this;
 
     }
