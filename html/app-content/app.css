@@ -11,6 +11,7 @@
 	border-radius: 10px;
 }
 
+
 .error-block {
 	color: #FF0000;
 }
@@ -116,6 +117,29 @@ html, body, .container-fluid, .view, .main {
 	background-color: #3c3537 !important;
 }
 
+.sidebar1 {
+	background: #6a6a82;
+	height: 100%;
+	padding: 0;
+	font-size: 120%;
+	color: #9594A1;
+}
+
+.sidebar1 a {
+	color: #9594A1;
+}
+
+.sidebar1 a:hover {
+	background: #94949d !important;
+	color: #222129 !important;
+}
+
+.sidebar1 input {
+	background: #6a6a82 !important;
+	color: #9594a1 !important;
+}
+
+
 .logo {
 	padding: 15px;
 }
@@ -139,4 +163,9 @@ html, body, .container-fluid, .view, .main {
 .bg-gray {
 	background: #555;
 	color: #e7e7e7;
+}
+
+.form-mytext {
+	height: 52px;
+	font-size: 130%;
 }
