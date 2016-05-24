@@ -11,12 +11,16 @@
 <div class="container-fluid">
     <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
          ng-if="flash" ng-bind="flash.message"></div>
-    <div ng-view class="view"></div>
+    <!--<div ng-view class="view"></div>-->
+    <div class="view" ui-view></div>
 </div>
 
 <script src="app-content/jquery-2.2.1.min.js"></script>
 <script src="app-content/angular.min.js"></script>
-<script src="app-content/angular-route.js"></script>
+<!--<script src="app-content/angular-route.js"></script>-->
+
+<script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+
 <script src="app-content/angular-cookies.js"></script>
 <script src="app-content/angular-recaptcha.js"></script>
 <script src="app-content/angular-resource.min.js"></script>
@@ -40,6 +44,7 @@
 <script src="recovery/recovery.controller.js"></script>
 <!--<script src="components/lang/lang.controller.js"></script>-->
 <script src="components/menu/menu.controller.js"></script>
+<script src="components/usermenu/usermenu.controller.js"></script>
 <script src="success/success.controller.js"></script>
 <script src="change_password/change_password.controller.js"></script>
 <script src="recovery_confirm/recovery_confirm.controller.js"></script>
@@ -50,6 +55,11 @@
 <script src="main/halls/halls.controller.js"></script>
 <script src="main/platform/platform.controller.js"></script>
 <script src="main/role/role.controller.js"></script>
+
 <script src="main/user/user.controller.js"></script>
+<script src="main/user/invite.controller.js"></script>
+<script src="main/user/list.controller.js"></script>
+<script src="main/user/profile.controller.js"></script>
+<script src="main/user/register.controller.js"></script>
 </body>
 </html>

@@ -97,7 +97,7 @@ input.form-control.form-control-search {
 	margin: 0;
 }
 
-html, body, .container-fluid, .view, .main {
+html, body, .container-fluid, .view, .main, .h100 {
 	height: 100%
 }
 
