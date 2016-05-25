@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Getticket_CAS", "Getticket_CAS\Getticket_CAS.csproj", "{5CAF3B2C-AAAB-485E-84A7-62D5455345FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Getticket.CAS.DataModel", "Getticket.CAS.DataModel\Getticket.CAS.DataModel.csproj", "{8DDD11A0-7FBD-412C-992A-234F220DEB5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CAF3B2C-AAAB-485E-84A7-62D5455345FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CAF3B2C-AAAB-485E-84A7-62D5455345FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CAF3B2C-AAAB-485E-84A7-62D5455345FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CAF3B2C-AAAB-485E-84A7-62D5455345FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DDD11A0-7FBD-412C-992A-234F220DEB5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DDD11A0-7FBD-412C-992A-234F220DEB5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DDD11A0-7FBD-412C-992A-234F220DEB5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DDD11A0-7FBD-412C-992A-234F220DEB5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
