@@ -1,15 +1,15 @@
-(function () {
+﻿(function () {
     'use strict';
 
     angular
         .module('app')
-        .controller('MainUserListController', MainUserListController)
+        .controller('MainEventsIsListController', MainEventsIsListController);
 
-    MainUserListController.$inject = ['$rootScope'];
-    function MainUserListController($rootScope) {
+
+    MainEventsIsListController.$inject = ['$rootScope', '$stateParams', '$filter'];
+    function MainEventsIsListController($rootScope, $stateParams, $filter) {
         var vm = this;
-
-        $rootScope.userlist = [
+        $rootScope.eventslist = [
             {
                 "fname": "Хан",
                 "sname": "Cоло",
@@ -94,6 +94,8 @@
 
             },
         ]
+        var filtered = $filter('filter')($rootScope.eventslist, {id: $stateParams.id});
+        $rootScope.event = filtered.length ? filtered[0] : null;
 
     }
 
