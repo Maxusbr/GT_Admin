@@ -66,6 +66,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="main\events-is\detail.controller.js" />
+    <Content Include="main\events-is\detail.view.html" />
+    <Content Include="main\events-is\list.controller.js" />
+    <Content Include="main\events-is\list.view.html" />
+    <Content Include="main\user\invite.view.html" />
+    <Content Include="main\user\profile.view.html" />
+    <Content Include="main\user\register.view.html" />
     <Content Include="packages.config" />
     <Content Include="app-content\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="app-content\bootstrap\css\bootstrap-theme.min.css.map" />
