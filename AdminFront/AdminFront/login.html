@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="webixApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Авторизация</title>
+
+	<script src="app-content/jquery-2.2.1.min.js"></script>
+
+	<script src="app-content/angular.min.js"></script>
+	<script src="app-content/angular-route.js"></script>
+	<script src="app-content/angular-cookies.js"></script>
+	<script src="app-content/angular-recaptcha.js"></script>
+	<script src="app-content/angular-resource.min.js"></script>
+	<script src="app-content/webix/codebase/webix.js"></script>
+
+	<link rel="stylesheet" href="login.css" />
+	<link rel="stylesheet" href="app-content/webix/codebase/webix.css" />
+
+	<script>
+		var app = angular.module('webixApp', [ "webix" ]);
+	</script>
+</head>
+<body>
+
+<div webix-ui css="main-background" type="clean">
+	<div view="cols" height="60" type="clean">
+		<div>
+
+		</div>
+		<div>
+
+		</div>
+		<div>
+
+		</div>
+	</div>
+	<div view="cols" type="clean">
+		<div class="logo-block">
+			<div>
+				<img class="logo" src="logo.png" />
+				<div id="log_form">
+
+				</div>
+				<script language="JavaScript">
+					webix.ui({
+						view:"form",
+						id:"log_form",
+						css: 'log_form',
+						container:"log_form",
+						width:300,
+						elements:[
+							{ view:"text", label:"Email"},
+							{ view:"text", type:"password", label:"Пароль"},
+							{ margin:5, cols:[
+								{ view:"button", value:"Войти" , type:"form" },
+								{ view:"button", value:"Регистрация", url: '/registration' }
+							]}
+						]
+					});
+				</script>
+			</div>
+		</div>
+	</div>
+	<div height="60">
+
+	</div>
+</div>
+
+</body>
+</html>

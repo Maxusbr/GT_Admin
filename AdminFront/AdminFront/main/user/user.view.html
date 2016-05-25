@@ -1,0 +1,300 @@
+<div class="row content h100">
+    <div class="col-md-2 sidebar1 collapse width" id="usermenu">
+    <div class="col-md-2  sidebar">
+        <!--Sidebar content-->
+        <user-menu></user-menu>
+    </div>
+    <div class="col-md-12" id="usercontent">
+    <div class="col-md-10">
+        <!--Body content-->
+        <h1>Регистрация
+            <small>нового пользователя</small>
+        </h1>
+        <div class="space-lg"></div>
+        <div class="container-fluid">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Имя">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Фамилия">
+                </div>
+                <div class="space"></div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Компания">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Должность">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Телефон">
+                </div>
+                <div class="space"></div>
+                <div class="form-group mycheckbox">
+                    <label><input type="checkbox" value="">&nbsp; Сгенерировать пароль автоматически</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="usr" placeholder="Пароль">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mycheckbox text-nowrap">
+                    <label><input type="checkbox" value="">&nbsp; Не отправлять Welcom Letter и др. письма</label>
+                </div>
+                <div class="space"></div>
+                <div class="form-group">
+                    <select class="form-control input-lg" id="sel1">
+                        <option>Организатор</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                    <label for="sel1" class="small text-muted">Роль для ограничения прав</label>
+                </div>
+                <div class="space"></div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary btn-lg">Зарегистрировать</button>
+                </div>
+            </div>
+        </div>
+
+
+        <h1>Приглашение
+            <small>нового пользователя</small>
+        </h1>
+        <p class="text-muted"><span class="text-uppercase">Внимание!</span> приглашение на регистрацию действует 10
+            суток для однократной регистрации только на указанный email</p>
+        <div class="space-lg"></div>
+        <div class="container-fluid">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="email" placeholder="Email">
+                    <label for="email" class="small text-muted">email адрес организатора</label>
+                </div>
+                <div class="form-group">
+                    <select class="form-control input-lg" id="sel1">
+                        <option>Организатор</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                    <label for="sel1" class="small text-muted">Роль для ограничения прав</label>
+                </div>
+                <div class="space-lg"></div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary btn-lg">Зарегистрировать</button>
+                </div>
+            </div>
+        </div>
+        <div ui-view></div>
+                <th class="row"><span class="col-md-8 text-nowrap">Имя <span
+                        class="glyphicon glyphicon-chevron-down"></span></span> <span
+                        class="col-md-4 text-right text-nowrap"><span
+                        class="glyphicon glyphicon-sort-by-attributes"></span></span></th>
+                <th class="row"><span class="col-md-8 text-nowrap">Компания <span
+                        class="glyphicon glyphicon-chevron-down"></span></span> <span
+                        class="col-md-4 text-right text-nowrap"><span
+                        class="glyphicon glyphicon-th-list"></span>&nbsp;<span
+                        class="glyphicon glyphicon-sort-by-attributes"></span></span></th>
+                <th class="text-nowrap">События <span class="glyphicon glyphicon-chevron-down"></span></th>
+                <th class="text-nowrap">Роль <span class="glyphicon glyphicon-chevron-down"></span></th>
+                <th class="row"><span class="col-md-8 text-nowrap">Статус <span
+                        class="glyphicon glyphicon-chevron-down"></span></span> <span
+                        class="col-md-4 text-right text-nowrap"><span
+                        class="glyphicon glyphicon-th-list"></span>&nbsp;<span
+                        class="glyphicon glyphicon-sort-by-attributes"></span></span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+                <td>john@example.com</td>
+            </tr>
+            <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>Moe</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+            </tr>
+            <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+                <td>july@example.com</td>
+                <td>july@example.com</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <!--перейти в профиль-->
+        <!--<div class="container-fluid">-->
+        <div class="row">
+            <div class="col-md-3 sidebar1" style="height:700px">
+                <div style="padding: 5px;font-size: 200%">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="form-group" style="padding-bottom: 20px;">
+                    <input type="search" class="form-control form-control-search input-lg" id="search"
+                           placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль">
+                </div>
+                <ul class="nav nav-list">
+                    <li class="active"><a href="#">Усманов Алишер</a></li>
+                    <li class="active"><a href="#">Монро Мэрилин</a></li>
+                    <li class="active"><a href="#">Филькинштейн Евгений</a></li>
+                    <li class="active"><a href="#">Емельяненько Федор</a></li>
+                    <li class="active"><a href="#">Поветкин Александр</a></li>
+                    <li class="active"><a href="#">Липницкая Юлия</a></li>
+                    <li class="active"><a href="#">Джонсон Брайн</a></li>
+                </ul>
+                <div>
+                    <button class="btn btn-success btn-lg btn-block"
+                            style="font-size: 400%;background-color: #6dae79;color:#fff;"><span
+                            class="glyphicon glyphicon-plus"></span></button>
+                </div>
+                <div style="padding-top: 10px;">
+                    <div class="btn-group-vertical btn-block">
+                        <button class="btn btn-success btn-lg btn-block"
+                                style="font-size: 120%;background-color: #6dae79;color:#fff;">Пригласить
+                        </button>
+                        <button class="btn btn-success btn-lg btn-block"
+                                style="font-size: 120%;background-color: #6dae79;color:#fff;">Зарегистрировать
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4"><h2>Филькенштейн Евгений</h2></div>
+                        <div class="col-md-4 text-muted" style="font-size:130%;">4 события, Представитель
+                            организатора<br>
+                            <small>Последний вход 27.07.2016 18.08.44 (22 мин.)</small>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Сохранить изменения</button>
+                            <div class="text-primary">Все изменения сохранены 27.07.2016 18.08.44</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="col-md-4">
+                                <div class="form-group form-mytext">
+                                    Имя
+                                </div>
+                                <div class="form-group form-mytext">
+                                    Фамилия
+                                </div>
+                                <div class="form-group mycheckbox text-info">
+                                    <label><input type="checkbox" value="">&nbsp; Выслать копию пароля на ваш email
+                                        qwe@qwe.ru</label>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-info btn-lg btn-block">Сменить пароль на
+                                        новый
+                                    </button>
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-mytext">
+                                    Компания
+                                </div>
+                                <div class="form-group form-mytext">
+                                    Должность
+                                </div>
+                                <div class="form-group form-mytext">
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-danger btn-lg btn-block">Заблокировать
+                                        пользователя
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group form-mytext">
+                                    email
+                                </div>
+                                <div class="form-group form-mytext">
+                                    Телефон
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="space"></div>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr class="bg-gray">
+                                <th class="text-nowrap">Событие <span class="glyphicon glyphicon-chevron-down"></span>
+                                </th>
+                                <th class="text-nowrap">Роль <span class="glyphicon glyphicon-chevron-down"></span></th>
+                                <th class="text-nowrap">Дата события <span
+                                        class="glyphicon glyphicon-chevron-down"></span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>John</td>
+                                <td>Doe</td>
+                                <td>john@example.com</td>
+                            </tr>
+                            <tr>
+                                <td>Mary</td>
+                                <td>Moe</td>
+                                <td>mary@example.com</td>
+                            </tr>
+                            <tr>
+                                <td>July</td>
+                                <td>Dooley</td>
+                                <td>july@example.com</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="space"></div>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr class="bg-gray">
+                                <th class="text-nowrap">Дата <span class="glyphicon glyphicon-chevron-down"></span></th>
+                                <th class="text-nowrap">Активность <span
+                                        class="glyphicon glyphicon-chevron-down"></span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>John</td>
+                                <td>Doe</td>
+                            </tr>
+                            <tr>
+                                <td>Mary</td>
+                                <td>Moe</td>
+                            </tr>
+                            <tr>
+                                <td>July</td>
+                                <td>Dooley</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--</div>-->
+
+
+
+
+    </div>
+</div>
