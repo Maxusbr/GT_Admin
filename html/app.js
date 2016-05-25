@@ -1,114 +1,121 @@
-(function () {
+﻿(function () {
     'use strict';
 
     angular
         .module('app', [
-          'ngRoute',
-          'ngCookies',
-          'vcRecaptcha',
-          'ngResource',
+            // 'ngRoute',
+            'ui.router',
+            'ngCookies',
+            'vcRecaptcha',
+            // 'ngMessages',
+            'ngResource',
             // 'webix'
         ])
-        .config(config)
-        .run(run);
+        .config(config);
+    // .run(run);
 
-    config.$inject = ['$routeProvider', '$locationProvider'];
-    function config($routeProvider, $locationProvider) {
-        $routeProvider
-            .when('/', {
-                controller: 'HomeController',
-                templateUrl: 'home/home.view.html',
-                controllerAs: 'vm'
-            })
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function config($stateProvider, $urlRouterProvider) {
 
-            .when('/sign-in', {
-                controller: 'LoginController',
-                templateUrl: 'login/login.view.html',
-                controllerAs: 'vm'
-            })
 
-            .when('/registration', {
-                controller: 'RegisterController',
-                templateUrl: 'register/register.view.html',
-                controllerAs: 'vm'
-            })
+        $urlRouterProvider.when("", "/main");
+        $urlRouterProvider.when("/", "/main");
 
-            .when('/registration/confirm', {
-                controller: 'ConfirmController',
-                templateUrl: 'confirm/confirm.view.html',
-                controllerAs: 'vm'
-            })
+        // For any unmatched url, send to /route1
+        $urlRouterProvider.otherwise("/login");
 
-            .when('/recovery', {
-              controller: 'RecoveryController',
-              templateUrl: 'recovery/recovery.view.html',
-              controllerAs: 'vm'
-            })
-
-            .when('/recovery/:key', {
-              controller: 'RecoveryConfirmController',
-              templateUrl: 'recovery_confirm/recovery_confirm.view.html',
-              controllerAs: 'vm'
-            })
-
-            .when('/change_password', {
-              controller: 'ChangePasswordController',
-              templateUrl: 'change_password/change_password.view.html',
-              controllerAs: 'vm'
-            })
-
-            .when('/success', {
-              controller: 'SuccessController',
-              templateUrl: 'success/success.view.html',
-              controllerAs: 'vm'
-            })
-
-            .when('/main', {
+        $stateProvider
+            .state('main', {
+                abstract: true,
+                url: '/main',
+                templateUrl: '/main/main.view.html',
                 controller: 'MainController',
-                templateUrl: 'main/main.view.html',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter main abstract");
+                }
             })
-            .when('/main/user', {
-                controller: 'MainUserController',
-                templateUrl: 'main/user/user.view.html',
-                controllerAs: 'vm'
+            .state('home', {
+                url: '/',
+                templateUrl: '/home/home.view.html',
+                controller: 'HomeController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter home");
+                }
             })
-            .when('/main/role', {
-                controller: 'MainRoleController',
-                templateUrl: 'main/role/role.view.html',
-                controllerAs: 'vm'
+            .state('login', {
+                url: '/sign-in',
+                templateUrl: '/login/login.view.html',
+                controller: 'LoginController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter login");
+                }
             })
-
-            .when('/main/events', {
-                controller: 'MainEventsController',
-                templateUrl: 'main/events/events.view.html',
-                controllerAs: 'vm'
+            .state('registration', {
+                url: '/registration',
+                templateUrl: '/register/register.view.html',
+                controller: 'RegisterController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter register");
+                }
             })
-            .when('/main/events-is', {
-                controller: 'MainEventsIsController',
-                templateUrl: 'main/events-is/events-is.view.html',
-                controllerAs: 'vm'
+            .state('registration.confirm', {
+                url: '/confirm',
+                templateUrl: '/confirm/confirm.view.html',
+                controller: 'ConfirmController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter confirm");
+                }
             })
-            .when('/main/platform', {
-                controller: 'MainPlatformController',
-                templateUrl: 'main/platform/platform.view.html',
-                controllerAs: 'vm'
+            .state('recovery', {
+                url: '/recovery',
+                templateUrl: '/recovery/recovery.view.html',
+                controller: 'RecoveryController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter recovery");
+                }
             })
-            .when('/main/halls', {
-                controller: 'MainHallsController',
-                templateUrl: 'main/halls/halls.view.html',
-                controllerAs: 'vm'
+            .state('recovery.congirm', {
+                url: '/:key',
+                templateUrl: '/recovery_confirm/recovery_confirm.view.html',
+                controller: 'RecoveryConfirmController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter recovery_confirm");
+                }
             })
-
-
-            .otherwise({ redirectTo: '/login' });
+            .state('change_password', {
+                url: '/change_password',
+                templateUrl: '/change_password/change_password.view.html',
+                controller: 'ChangePasswordController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter change_password");
+                }
+            })
+            .state('success', {
+                url: '/success',
+                templateUrl: '/success/success.view.html',
+                controller: 'SuccessController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter success");
+                }
+            })
 
         //$locationProvider.html5Mode(true);
     }
 
-    run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
-    function run($rootScope, $location, $cookieStore, $http, $httpProvider) {
+
+    // run.$inject = ['$rootScope', '$location', '$cookieStore', '$http'];
+    // function run($rootScope, $location, $cookieStore, $http, $httpProvider) {
         // keep user logged in after page refresh
+    /*
 
         $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
         delete $http.defaults.headers.common['X-Requested-With'];
@@ -123,6 +130,9 @@
             var restrictedPage = $.inArray($location.path(),
                     ['/main',
                         '/main/user',
+                        '/main/user/register',
+                        '/main/user/invite',
+                        '/main/user/profile',
                         '/main/role',
                         '/main/events',
                         '/main/events-is',
@@ -135,6 +145,7 @@
                 $location.path('/sign-in');
             }
         });
-    }
+     */
+    // }
 
 })();

@@ -7,7 +7,7 @@
 </div>
 <ul class="nav nav-list">
     <li ng-repeat="link in usermenu" ng-class="{ active: isActive('{{ link.href }}') }">
-        <a ng-href="/#/main/user/profile/{{ link.id }}" href="">{{ link.title }}</a>
+        <a href="/#/main/user/profile/{{ link.id }}">{{ link.title }}</a>
     </li>
 </ul>
 <div id="plusbutton">

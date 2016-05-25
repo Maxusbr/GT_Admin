@@ -56,6 +56,7 @@ function userMenuCtrl($rootScope, $location) {
     }
     $rootScope.UserAdd = function () {
         $('#usermenu').collapse('hide')
+        $('#usercontent').addClass('col-md-12').removeClass('col-md-10');
         $('#addbutton').hide();
         $('#plusbutton').show();
         $location.path("/main/user/register");
@@ -63,6 +64,7 @@ function userMenuCtrl($rootScope, $location) {
     }
     $rootScope.UserInvite = function () {
         $('#usermenu').collapse('hide')
+        $('#usercontent').addClass('col-md-12').removeClass('col-md-10');
         $('#addbutton').hide();
         $('#plusbutton').show();
         $location.path("/main/user/invite");

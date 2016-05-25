@@ -1,12 +1,12 @@
-(function () {
+﻿(function () {
     'use strict';
 
     angular
         .module('app')
         .controller('MainEventsController', MainEventsController);
 
-    MainEventsController.$inject = ['EventsService', '$rootScope'];
-    function MainEventsController(EventsService, $rootScope) {
+    MainEventsController.$inject = ['$rootScope'];
+    function MainEventsController($rootScope) {
         var vm = this;
 
     }

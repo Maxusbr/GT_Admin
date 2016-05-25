@@ -1,4 +1,4 @@
-.content-body {
+﻿.content-body {
 	background-color: #333e47;
 
 	padding-bottom: 50px;
@@ -22,15 +22,43 @@
 	padding-right: 25px;
 }
 
+.btn-primary {
+	background-image: none;
+	filter: none;
+	color: #fff;
+	border-color: #f0f0f7;
+	background-color: #323896;
+}
+
+/*
+.btn-primary:hover,
+.btn-primary:focus {
+	background-color: #6dae79;
+	background-position: 0 -15px;
+}
+
+.btn-primary:active,
+.btn-primary.active {
+	background-color: #e6f2df;
+	border-color: #20ae4d;
+}
+
+.btn-primary.disabled.focus, .btn-primary.disabled:focus, .btn-primary.disabled:hover,
+.btn-primary[disabled].focus, .btn-primary[disabled]:focus,
+.btn-primary[disabled],
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:hover {
+	background-color: #e6f2df;
+	border-color: #6dae79;
+}
+*/
+
 .btn-success {
 	background-image: none;
 	filter: none;
 	color: #20ae4d;
 	border-color: #20ae4d;
 	background-color: #fff;
-	/*width: 100%;// .btn-block*/
-	border-radius: 0;
-
 }
 
 .btn-success:hover,
@@ -97,13 +125,24 @@ input.form-control.form-control-search {
 	margin: 0;
 }
 
-html, body, .container-fluid, .view, .main, .h100 {
-	height: 100%
+html {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.container-fluid, .view, .main, .h100 {
+	min-height: 100%;
 }
 
 .sidebar {
-	background: #3c3c3c;
-	height: 100%;
+	background: #201f27;
+	/*height: 100%;*/
+	height: 1000px;
 	padding: 0;
 	font-size: 150%;
 	color: #e7e7e7;
@@ -113,13 +152,42 @@ html, body, .container-fluid, .view, .main, .h100 {
 	color: #e7e7e7 !important;
 }
 
-.sidebar a:hover {
+.sidebar .active a {
+	background-color: #2d2d36 !important;
+}
+
+.sidebar a:hover, .sidebar a:focus {
 	background-color: #3c3537 !important;
 }
 
+.sidebar li {
+	position: relative;
+}
+
+.sidebar button.green-button {
+	display: none;
+	text-align: center;
+	padding: 11px 6px !important;
+	font-size: 25px;
+	line-height: 25px;
+	background: #89d25f !important;
+	color: #fff !important;
+	position: absolute;
+	width: 42px;
+	top: 0;
+	right: -42px;
+	z-index: 100;
+}
+
+.sidebar li:hover button.green-button {
+	display: block;
+}
+
+
 .sidebar1 {
 	background: #6a6a82;
-	height: 100%;
+	/*height: 100%;*/
+	height: 1000px;
 	padding: 0;
 	font-size: 120%;
 	color: #9594A1;
@@ -153,10 +221,16 @@ html, body, .container-fluid, .view, .main, .h100 {
 }
 
 .mytable {
-	font-size: 150%;
+	font-size: 120%;
 }
 
-.mytable th, .mytable td {
+.mytable th {
+	font-size: 130%;
+	padding: 25px 5px !important;
+	background: #6a6a82;
+}
+
+.mytable td {
 	padding: 25px 5px !important;
 }
 
@@ -169,3 +243,75 @@ html, body, .container-fluid, .view, .main, .h100 {
 	height: 52px;
 	font-size: 130%;
 }
+
+.td-username a {
+	height: 30px;
+	display: none;
+}
+
+.td-username:hover a {
+	display: block;
+	color: #6264b3;
+	font-size: 80%;
+}
+
+.td-username div.head {
+	height: 30px;
+}
+
+.td-username div.text {
+	height: 30px;
+	display: block;
+}
+
+.td-username:hover div.text {
+	display: none;
+}
+
+.td-username:hover {
+	font-size: 110%;
+	background: #323897;
+	color: #fff;
+}
+
+.text-success {
+	color: #62c46d;
+}
+
+.text-danger {
+	color: #f4725c;
+}
+
+.text-primary {
+	color: #5459a9;
+}
+
+.css-form input.ng-invalid.ng-dirty {
+	border: 1px solid red !important;
+}
+
+/*.css-form input.ng-valid.ng-dirty {*/
+/*background-color: #78FA89 !important;*/
+/*}*/
+
+.mytabs a {
+	color: #000;
+	border-bottom: 3px solid #fff !important;
+	position: relative;
+	top: 3px;
+}
+
+.mytabs .active a {
+	border: 0 !important;
+	border-bottom: 3px solid #000 !important;
+	border-radius: 0;
+}
+
+.mytabs a:hover {
+	background-color: #fff !important;
+	border: 0;
+	border-bottom: 3px solid #000 !important;
+	border-radius: 0;
+}
+
+

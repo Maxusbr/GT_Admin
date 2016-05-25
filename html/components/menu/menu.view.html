@@ -1,12 +1,11 @@
 <div class="text-center logo">
-    <img src="/app-content/images/logo.png" class="img-circle" alt="Cinque Terre" width="150" height="150">
+    <img src="/app-content/images/logo.png" class="img-circle" alt="Cinque Terre" width="100" height="100">
 </div>
 <ul class="nav nav-list">
-    <li class="active"><a href="#/main/events">Мероприятия</a></li>
-    <li class="active"><a href="#/main/events-is">События</a></li>
-    <li class="active"><a href="#/main/platform">Площадки</a></li>
-    <li class="active"><a href="#/main/halls">Залы</a></li>
-    <li class="divider"></li>
-    <li class="active"><a href="#/main/role">Роли</a></li>
-    <li class="active"><a href="#/main/user">Пользователи</a></li>
+    <li ng-repeat="link in menu" ng-class="{ active: isActive('{{ link.href }}') }">
+        <a href="/#{{ link.href }}">{{ link.title }}</a>
+        <button ng-if="link.button" ng-click="ShowMenu(link.menu,link.content,link.w)" type="button"
+                class="btn btn-info green-button"><span
+                class="glyphicon glyphicon-plus"></span></button>
+    </li>
 </ul>
