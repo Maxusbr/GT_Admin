@@ -1,164 +1,23 @@
-        <!--Body content-->
-        <div class="row">
-            <div class="col-md-3 sidebar1" style="height:700px">
-                <div style="padding: 5px;font-size: 200%">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="form-group" style="padding-bottom: 20px;">
-                    <input type="search" class="form-control form-control-search input-lg" id="search"
-                           placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль">
-                </div>
-
-                <ul class="nav nav-list">
-                    <li class="active"><a href="#">Бой за звание чемпиона мира по боксу в супертяжелом весе по версии
-                        WBA</a></li>
-                    <li class="active"><a href="#">Чемпионат мира по фигурному катания в Москве</a></li>
-                    <li class="active"><a href="#">Петр Налич и биг-бенд "Песни Утесова и не только..."</a></li>
-                    <li class="active"><a href="#">А Кролл К Ролл День джаза в Доме музыки "Все цвета московсю...</a>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="col-md-9">
-                <div class="container">
-                    <div class="row">
-                        <ul class="nav nav-tabs">
-                            <li><a data-toggle="tab" data-target="#stats">Статистика</a></li>
-                            <li><a data-toggle="tab" data-target="#messages">Сообщения</a></li>
-                            <li><a data-toggle="tab" data-target="#inputs">Входы</a></li>
-                            <li><a data-toggle="tab" data-target="#settings">Настройки</a></li>
-                        </ul>
-                    </div>
-                    <div class="tab-content">
-                        <div id="stats" class="tab-pane active">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Вход</th>
-                                    <th>Инциденты</th>
-                                    <th>Терминал</th>
-                                    <th>Пропускная<br>способность</th>
-                                    <th>Сообщения<br>(вх/исх)</th>
-                                    <th>Решено<br>инцидентов</th>
-                                    <th>Паузы</th>
-                                    <th>Время<br>работы</th>
-                                </tr>
-                                <tr class="bg-gray">
-                                    <th class="text-success">В работе</th>
-                                    <th>5/15</th>
-                                    <th>A,w</th>
-                                    <th><span class="text-danger">7 ч/м</span></th>
-                                    <th><span class="glyphicon glyphicon-arrow-down"></span>9/12<span
-                                            class="glyphicon glyphicon-arrow-up"></span></th>
-                                    <th><span class="text-success">7</span>/11</th>
-                                    <th>12 мин.</th>
-                                    <th>1ч39м/4ч</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Стандарт, 17<br><span class="text-success">В работе</span></td>
-                                    <td><span class="text-danger">4</span>/11</td>
-                                    <td>Android/81%</td>
-                                    <td><span class="text-danger">7 ч\м / 96%</span></td>
-                                    <td><span class="glyphicon glyphicon-arrow-down"></span>9/12<span
-                                            class="glyphicon glyphicon-arrow-up"></span></td>
-                                    <td><span class="text-success">7</span>/11</td>
-                                    <td>12 мин.</td>
-                                    <td>1ч39м/4ч</td>
-                                </tr>
-                                <tr>
-                                    <td>VIP, 01<br><span class="text-success">Переход на 17</span></td>
-                                    <td><span class="text-danger">1</span>/4</td>
-                                    <td>Windows/Сеть</td>
-                                    <td><span class="text-danger">3 ч\м / 42%</span></td>
-                                    <td><span class="glyphicon glyphicon-arrow-down"></span>2/1<span
-                                            class="glyphicon glyphicon-arrow-up"></span></td>
-                                    <td>&mdash;</td>
-                                    <td>12 мин.</td>
-                                    <td>1ч39м/4ч</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="messages" class="tab-pane active">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th>Дата\Время</th>
-                                    <th>ID</th>
-                                    <th>Сообщение</th>
-                                    <th>Отправитель</th>
-                                    <th>Получатели</th>
-                                    <th>Статус</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><span class="text-success">19:18:23</span></td>
-                                    <td>510</td>
-                                    <td><span class="alert-success">На проблема 1(#488)</span><span
-                                            class="text-success">Отправила с охранником новы сканер ловите.</span></td>
-                                    <td>Дарья</td>
-                                    <td>Все@Событие</td>
-                                    <td><span class="glyphicon glyphicon-ok"></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="text-success">19:18:23</span></td>
-                                    <td>510</td>
-                                    <td><span class="alert-success">На проблема 1(#488)</span><span
-                                            class="text-success">Отправила с охранником новы сканер ловите.</span></td>
-                                    <td>Дарья</td>
-                                    <td>Все@Событие</td>
-                                    <td><span class="glyphicon glyphicon-ok"></span></td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="inputs" class="tab-pane">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr class="bg-gray">
-                                    <th>Вход</th>
-                                    <th>Время<br>работы</th>
-                                    <th>Активность</th>
-                                    <th>Назначить вход</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><span class="text-success">Стандарт, 17</span></td>
-                                    <td><span class="text-success">17:00 - 19:00 (осталось 1ч 38м)</span></td>
-                                    <td>2 оператора, <span class="text-info">71%</span></td>
-                                    <td><span class="glyphicon glyphicon-check"></span><span class="text-success">Активен, 22м</span>
-                                        17:00 - 18:20 (осталось 58 м)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Стандарт, 1</td>
-                                    <td>закрыт</td>
-                                    <td>&mdash;</td>
-                                    <td>&mdash;</td>
-                                </tr>
-                                <tr>
-                                    <td>Стандарт, 2</td>
-                                    <td>17:00 - 19:00 (осталось 1ч 38м)</td>
-                                    <td>3 оператора, <span class="text-success">34%</span></td>
-                                    <td><span class="glyphicon glyphicon-unchecked"></span><span class="text-muted"> &mdash;
-                                        не назначен</span></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div id="settings" class="tab-pane">
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+﻿<div class="row main">
+    <div class="col-md-3 sidebar1 collapse in width" id="eventismenu" style="height:1000px"
+         ng-controller="MainEventsIsController">
+        <div style="padding: 5px;font-size: 200%">
+            <button type="button" class="close" ng-click="HideEventIsMenu()" data-dismiss="modal">&times;</button>
         </div>
+        <div class="form-group" style="padding-bottom: 20px;">
+            <input type="search" class="form-control form-control-search input-lg" id="search"
+                   placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль">
+        </div>
+
+        <ul class="nav nav-list">
+            <li ng-repeat="link in eventsislist" ng-if="!link.invite && link.event!='-'">
+                <a ng-href="/#/main/event-is/detail/{{ link.id }}">{{ link.event }}</a>
+            </li>
+        </ul>
+
+    </div>
+    <div class="col-md-9 h100 content" id="eventiscontent">
+        <!--Body content-->
+        <div ui-view class="h100"></div>
+    </div>
+</div>

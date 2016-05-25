@@ -1,12 +1,12 @@
-(function () {
+﻿(function () {
     'use strict';
 
     angular
         .module('app')
         .controller('MainRoleController', MainRoleController);
 
-    MainRoleController.$inject = ['RoleService', '$rootScope'];
-    function MainRoleController(RoleService, $rootScope) {
+    MainRoleController.$inject = ['$rootScope'];
+    function MainRoleController($rootScope) {
         var vm = this;
 
     }
