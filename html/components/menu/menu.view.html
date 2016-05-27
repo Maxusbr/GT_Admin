@@ -1,10 +1,11 @@
 <div class="text-center mainlogo">
     <img src="/app-content/images/logo.png" class="img-circle" alt="Logo">
 </div>
+<div class="text-center">Vitaliy B <span class="glyphicon glyphicon-pencil"></span></div>
 <div class="space-lg"></div>
 <ul class="nav nav-list">
     <li ng-repeat="link in menu" ng-class="{ active: isActive('{{ link.href }}') }">
-        <a href="/#{{ link.href }}">{{ link.title }} <span ng-if="link.countAll" class="small"><span class="text-success">{{ link.countActive }}</span>&nbsp;/&nbsp;{{link.countAll}}</span></a>
+        <a href="/#{{ link.href }}">{{ link.title }}<span ng-if="link.countAll" class="small">&nbsp;<span class="text-success">{{ link.countActive }}</span>&nbsp;/&nbsp;{{link.countAll}}</span></a>
         <button ng-if="link.button" ng-click="ShowMenu(link.menu,link.content)" type="button"
                 class="btn btn-info green-button"><span
                 class="glyphicon glyphicon-plus"></span></button>

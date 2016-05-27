@@ -1,6 +1,5 @@
 ﻿<div class="row main">
-    <div class="col-md-3 sidebar1 collapse in width" id="eventismenu" style="height:1000px"
-         ng-controller="MainEventsIsController">
+    <div class="col-md-3 sidebar1 collapse in width" id="eventismenu" ng-controller="MainEventsIsController">
         <div style="padding: 5px;font-size: 200%">
             <button type="button" class="close" ng-click="HideEventIsMenu()" data-dismiss="modal">&times;</button>
         </div>
@@ -12,17 +11,15 @@
 
         <ul class="nav nav-list">
             <li ng-repeat="link in eventsislist | filter:searchEventIsMenu" ng-if="!link.invite && link.event!='-'">
-                <a ng-href="/#/main/event-is/detail/{{ link.id }}">
-                    <span ng-class="{bsuccess:link.success}">
-                    <span ng-class="{bwarning:link.warning}">
-                    <span ng-class="{bdanger:link.danger}">
-                    <span class="linktitle">
-                    {{ link.event }}
-                    </span>
-                    </span>
-                    </span>
-                    </span>
-                </a>
+                <a ng-href="/#/main/event-is/detail/{{ link.id }}" class="event">
+                    <span ng-if="link.success" class="bsuccess"></span>
+                    <span ng-if="link.warning" class="bwarning" ng-class="{s:link.success}"></span>
+                    <span ng-if="link.danger" class="bdanger" ng-class="{s:link.success}"></span>
+
+                    <span ng-if="link.msuccess" class="msuccess"></span>
+                    <span ng-if="link.mwarning" class="mwarning"></span>
+                    <span ng-if="link.mdanger" class="mdanger"></span>
+                    {{ link.event }}</a>
             </li>
         </ul>
 

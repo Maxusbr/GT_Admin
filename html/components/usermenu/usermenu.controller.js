@@ -50,15 +50,21 @@ function userMenuCtrl($rootScope, $location) {
 
     $rootScope.HideUserMenu = function () {
         $('#usermenu').collapse('hide')
-        $('#usercontent').addClass('col-md-12').removeClass('col-md-10');
+        $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
+        $('#addbutton').hide();
+        $('#plusbutton').show();
     }
-    $rootScope.PlusClick = function () {
+    $rootScope.PlusOver = function () {
         $('#plusbutton').hide();
         $('#addbutton').show();
     }
+    $rootScope.PlusOut = function () {
+        $('#plusbutton').show();
+        $('#addbutton').hide();
+    }
     $rootScope.UserAdd = function () {
         $('#usermenu').collapse('hide')
-        $('#usercontent').addClass('col-md-12').removeClass('col-md-10');
+        $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
         $('#addbutton').hide();
         $('#plusbutton').show();
         $location.path("/main/user/register");
@@ -66,7 +72,7 @@ function userMenuCtrl($rootScope, $location) {
     }
     $rootScope.UserInvite = function () {
         $('#usermenu').collapse('hide')
-        $('#usercontent').addClass('col-md-12').removeClass('col-md-10');
+        $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
         $('#addbutton').hide();
         $('#plusbutton').show();
         $location.path("/main/user/invite");

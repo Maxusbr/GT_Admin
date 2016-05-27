@@ -12,15 +12,10 @@
     </li>
 </ul>
 <div id="plusbutton">
-    <button ng-click="PlusClick()" class="btn btn-success btn-lg btn-block"
-            style="font-size: 400%;background-color: #6dae79;color:#fff;position: absolute;bottom: 0;"><span
-            class="glyphicon glyphicon-plus"></span></button>
+    <button ng-mouseover="PlusOver()" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-plus"></span></button>
 </div>
-<div id="addbutton" style="display:none;padding-top: 10px;position: absolute;bottom: 0;" class="btn-group-vertical btn-block">
-        <button ng-click="UserInvite()" class="btn btn-success btn-lg btn-block"
-                style="font-size: 100%;background-color: #6dae79;color:#fff;">Пригласить
-        </button>
-        <button ng-click="UserAdd()" class="btn btn-success btn-lg btn-block"
-                style="font-size: 90%;background-color: #6dae79;color:#fff;">Зарегистрировать
-        </button>
+<div id="addbutton" ng-mouseout="PlusOut()" style="display:none;padding-top: 10px;position: absolute;bottom: 0;" class="btn-group-vertical btn-block">
+    <button ng-click="UserInvite()" class="btn btn-success btn-lg btn-block invite">Пригласить</button>
+    <div></div>
+    <button ng-click="UserAdd()" class="btn btn-success btn-lg btn-block register">Зарегистрировать</button>
 </div>

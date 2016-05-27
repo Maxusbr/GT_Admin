@@ -68,6 +68,9 @@ function mainMenuCtrl($rootScope, $location) {
             $(content).addClass('col-md-12 col-sm-12');
         }
         $(menu).collapse('toggle');
+        $('#addbutton').hide();
+        $('#plusbutton').show();
+
     }
 
 }
