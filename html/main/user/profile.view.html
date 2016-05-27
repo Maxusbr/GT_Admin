@@ -23,9 +23,13 @@
                                 <div class="form-group form-mytext">
                                     Фамилия
                                 </div>
-                                <div class="form-group mycheckbox text-info">
-                                    <label><input type="checkbox" value="">&nbsp; Выслать копию пароля на ваш email
-                                        qwe@qwe.ru</label>
+                                <div class="form-group form-mytext">
+                                    <div class="form-group my-profile-checkbox text-info">
+                                        <label><input type="checkbox" value="" ng-model="vm.user.letter">
+                                            <span ng-if="vm.user.letter" class="glyphicon glyphicon glyphicon-ok"></span>
+                                            <span ng-if="!vm.user.letter" class="glyphicon"></span>
+                                            Выслать копию пароля на ваш email {{user.email}}</label>
+                                    </div>
                                 </div>
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-info btn-lg btn-block">Сменить пароль на
@@ -66,28 +70,38 @@
                         <table class="table table-hover">
                             <thead>
                             <tr class="bg-gray">
-                                <th class="text-nowrap">Событие <span class="glyphicon glyphicon-chevron-down"></span>
+                                <th class="text-nowrap">
+                                    <a href="" ng-click="peSortType = 'event'; peSortReverse = !peSortReverse">
+                                        Событие
+                                        <span ng-show="peSortType == 'event' && !peSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                        <span ng-show="peSortType == 'event' && peSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                    </a>
                                 </th>
-                                <th class="text-nowrap">Роль <span class="glyphicon glyphicon-chevron-down"></span></th>
-                                <th class="text-nowrap">Дата события <span
-                                        class="glyphicon glyphicon-chevron-down"></span></th>
+                                <th class="text-nowrap">
+                                    <a href="" ng-click="peSortType = 'role'; peSortReverse = !peSortReverse">
+                                        Роль
+                                        <span ng-show="peSortType == 'role' && !peSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                        <span ng-show="peSortType == 'role' && peSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                    </a>
+                                </th>
+                                <th class="text-nowrap">
+                                    <a href="" ng-click="peSortType = 'date'; peSortReverse = !peSortReverse">
+                                        Дата события
+                                        <span ng-show="peSortType == 'date' && !peSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                        <span ng-show="peSortType == 'date' && peSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                    </a>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>Mary</td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
+                            <tr ng-repeat="row in eventslist | orderBy:peSortType:peSortReverse" ng-if="row.event!='-'">
+                                <td>
+                                    <div class="sign"><span ng-if="row.warning" class="glyphicon glyphicon-warning-sign"></span>
+                                        {{row.event}}
+                                    </div>
+                                </td>
+                                <td>{{row.role}}</td>
+                                <td ng-class="{ 'text-success':row.active, 'text-danger':!row.active }">{{row.date}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -95,23 +109,26 @@
                         <table class="table table-hover">
                             <thead>
                             <tr class="bg-gray">
-                                <th class="text-nowrap">Дата <span class="glyphicon glyphicon-chevron-down"></span></th>
-                                <th class="text-nowrap">Активность <span
-                                        class="glyphicon glyphicon-chevron-down"></span></th>
+                                <th class="text-nowrap">
+                                    <a href="" ng-click="paSortType = 'date'; paSortReverse = !paSortReverse">
+                                        Дата
+                                        <span ng-show="paSortType == 'date' && !paSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                        <span ng-show="paSortType == 'date' && paSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                    </a>
+                                </th>
+                                <th class="text-nowrap">
+                                    <a href="" ng-click="paSortType = 'desctiption'; paSortReverse = !paSortReverse">
+                                        Активность
+                                        <span ng-show="paSortType == 'desctiption' && !paSortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                                        <span ng-show="paSortType == 'desctiption' && paSortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                                    </a>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                            </tr>
-                            <tr>
-                                <td>Mary</td>
-                                <td>Moe</td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
+                            <tr ng-repeat="row in profileActivity | orderBy:paSortType:paSortReverse">
+                                <td ng-class="{ 'text-success':row.active, 'text-danger':!row.active }">{{row.date}}</td>
+                                <td>{{row.description}}</td>
                             </tr>
                             </tbody>
                         </table>

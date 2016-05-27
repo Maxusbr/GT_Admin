@@ -1,16 +1,17 @@
 ﻿
         <!--Body content-->
         <h1>Регистрация
-            <small>нового пользователя</small>
+            <span class="weight-normal">нового пользователя</span>
         </h1>
         <div class="space-lg"></div>
         <div class="container-fluid">
+            <form name="form" novalidate>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="usr" placeholder="Имя">
+                    <input type="text" class="form-control" id="usr" placeholder="Имя" name="fname" ng-model="user.fname" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="usr" placeholder="Фамилия">
+                    <input type="text" class="form-control" id="usr" placeholder="Фамилия" name="sname" ng-model="user.sname" required>
                 </div>
                 <div class="space"></div>
                 <div class="form-group">
@@ -22,37 +23,68 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="usr" placeholder="Email">
+                    <input type="email" class="form-control" placeholder="Email" name="email" ng-model="user.email" required>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="usr" placeholder="Телефон">
                 </div>
                 <div class="space"></div>
                 <div class="form-group mycheckbox">
-                    <label><input type="checkbox" value="">&nbsp; Сгенерировать пароль автоматически</label>
+			<label>
+				<input type="checkbox" ng-click="generatePassword()" id="generatePassword" value="">
+                <span ng-if="passtype=='text'" class="glyphicon glyphicon-ok"></span>
+                <span ng-if="passtype=='password'" class="glyphicon"></span>
+				Сгенерировать пароль автоматически
+			</label>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="usr" placeholder="Пароль">
+                    <input type="{{passtype}}" class="form-control" placeholder="Пароль" name="password" ng-model="user.password" ng-minlength="5" required>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group mycheckbox text-nowrap">
-                    <label><input type="checkbox" value="">&nbsp; Не отправлять Welcom Letter и др. письма</label>
+			<label>
+				<input type="checkbox" value="" name="noletter" ng-model="user.noletter" >
+                <span ng-if="user.noletter" class="glyphicon glyphicon-ok"></span>
+                <span ng-if="!user.noletter" class="glyphicon"></span>
+				Не отправлять Welcom Letter и др. письма
+			</label>
                 </div>
                 <div class="space"></div>
                 <div class="form-group">
-                    <select class="form-control input-lg" id="sel1">
-                        <option>Организатор</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <select name="role" id="role"
+                            ng-model="user.role" class="form-control"
+                            ng-options="role.id as role.name for role in roles"
+                            required>
+                        <option value="">Выберите роль</option>
                     </select>
-                    <label for="sel1" class="small text-muted">Роль для ограничения прав</label>
+                    <label for="role" class="small text-muted">Роль для ограничения прав</label>
                 </div>
                 <div class="space"></div>
                 <div class="form-actions">
-                    <button type="button" class="btn btn-primary btn-lg">Зарегистрировать</button>
+                    <button type="button" ng-click="register(user)" class="btn btn-primary btn-lg">Зарегистрировать</button>
                 </div>
+            </div>
+            </form>
+        </div>
+        <div>
+            <div class="help-block" ng-messages="form.fname.$error" ng-if="submitted">
+                <div ng-message="required">Имя обязательно для заполнения</div>
+            </div>
+            <div class="help-block" ng-messages="form.sname.$error" ng-if="submitted">
+                <div ng-message="required">Фамилия обязательно для заполнения</div>
+
+            </div>
+            <div class="help-block" ng-messages="form.email.$error" ng-if="submitted">
+                <div ng-message="required">Email обязательно для заполнения</div>
+                <div ng-message="email">Неверный формат Email</div>
+            </div>
+            <div class="help-block" ng-messages="form.role.$error" ng-if="submitted">
+                <div ng-message="required">Не выбрано значение Роли</div>
+            </div>
+            <div class="help-block" ng-messages="form.password.$error" ng-if="submitted">
+                <div ng-message="required">Пароль обязателен для заполнения</div>
+                <div ng-message="minlength">Пароль не менее 5 символов</div>
             </div>
         </div>
         <!--</div>-->

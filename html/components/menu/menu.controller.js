@@ -20,9 +20,10 @@ function mainMenuCtrl($rootScope, $location) {
             "title": "События",
             "href": "/main/event-is",
             "button": true,
+            "countActive": "25",
+            "countAll": "55",
             "menu": "#eventismenu",
             "content": "#eventiscontent",
-            "w": 3
         },
         {
             "title": "Площадки",
@@ -42,29 +43,31 @@ function mainMenuCtrl($rootScope, $location) {
             "button": true,
             "menu": "#usermenu",
             "content": "#usercontent",
-            "w": 2
         }
     ];
 
     $rootScope.isActive = function (location) {
         // console.log($location.path() +' ' +location);
         // console.log($location.path().search(location));
-        // console.log($location.path().search(location) > -1);
+        // console.log($location.path().search(location)>=0);
         // return location === '/#' + $location.path()
-        return $location.path().search(location) > -1
+        return $location.path().search(location) >= 0;
     }
-    $rootScope.ShowMenu = function (menu, content, w) {
-        var nw = 12 - w
-        console.log(menu, ' ', content, ' ', 'col-md-' + nw);
-        $(menu).collapse('toggle');
-        if ($(menu).is(':visible')) {
-            $(content).removeClass('col-md-12');
-            $(content).addClass('col-md-' + nw);
+    $rootScope.ShowMenu = function (menu, content) {
+        if (!$(menu).is('.in')) {
+            if ($(menu).is('.col-md-2')) {
+                $(content).addClass('col-md-10 col-sm-10');
+            }
+            if ($(menu).is('.col-md-3')) {
+                $(content).addClass('col-md-9 col-sm-9');
+            }
+            $(content).removeClass('col-md-12 col-sm-12');
         } else {
-            $(content).removeClass('col-md-' + nw);
-            $(content).addClass('col-md-12');
+            $(content).removeClass('col-md-9 col-sm-9')
+            $(content).removeClass('col-md-10 col-sm-10');
+            $(content).addClass('col-md-12 col-sm-12');
         }
-
+        $(menu).collapse('toggle');
     }
 
 }

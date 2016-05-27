@@ -11,6 +11,8 @@ angular.module('app')
 userMenuCtrl.$inject = ['$rootScope', '$location'];
 function userMenuCtrl($rootScope, $location) {
 
+    $rootScope.searchUserMenu = '';
+    
     $rootScope.usermenu = [
         {
             "title": "Усманов Алишер",

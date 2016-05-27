@@ -10,6 +10,12 @@
         var vm = this;
 
         $scope.user = {};
+        $scope.roles = [
+            {id: 1, name: 'R1'},
+            {id: 2, name: 'R2'},
+            {id: 3, name: 'R3'},
+            {id: 4, name: 'R4'},
+        ];
 
         $scope.invite = function (user) {
             $scope.user = angular.copy(user);

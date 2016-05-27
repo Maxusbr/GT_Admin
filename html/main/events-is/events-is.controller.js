@@ -39,6 +39,8 @@
     function MainEventsIsController($rootScope) {
         var vm = this;
 
+        $rootScope.searchEventIsMenu = '';
+
         $rootScope.HideEventIsMenu = function () {
             console.log('aaaaaaaaaaaaa');
             $('#eventismenu').collapse('hide')
@@ -67,6 +69,9 @@
                 "company": "ООО Две стороны силы",
                 "event": "3 Чемпионат мира по фигурному катанию",
                 "active": false,
+                "warning": true,
+                "danger": true,
+                "success": true,
                 "role": "Представитель орг.",
                 "status": "Запланирована продажа билетов на 20.10.2016",
                 "statusclass": "text-muted",
