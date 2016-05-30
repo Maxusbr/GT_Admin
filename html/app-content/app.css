@@ -213,7 +213,7 @@ input.form-control {
 input.form-control.form-control-search {
 	background: #f1f3f4;
 	color: #a19b9e;
-	font-size:130%;
+	font-size: 107%;
 	height: 2.35em;
 }
 select.form-control {
@@ -378,6 +378,11 @@ body {
 
 .sidebar1 a {
 	color: #9594A1;
+}
+
+.sidebar1 .active a {
+	background: #94949d !important;
+	color: #222129 !important;
 }
 
 .sidebar1 a:hover {

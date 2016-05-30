@@ -6,17 +6,18 @@ angular.module('app')
             templateUrl: '/components/usermenu/usermenu.view.html',
             controller: 'userMenuCtrl'
         };
-    });
+    })
 
 userMenuCtrl.$inject = ['$rootScope', '$location'];
 function userMenuCtrl($rootScope, $location) {
 
     $rootScope.searchUserMenu = '';
-    
+
     $rootScope.usermenu = [
         {
             "title": "Усманов Алишер",
-            "id": "1"
+            "id": "1",
+            "active": true
         },
         {
             "title": "Монро Мэрилин",
@@ -108,34 +109,64 @@ function userMenuCtrl($rootScope, $location) {
         },
     ];
 
-    $rootScope.isActive = function (location) {
-        return location === '/#' + $location.path()
+    // $rootScope.isActive = isActive;
+    $rootScope.HideUserMenu = HideUserMenu;
+    $rootScope.PlusOver = PlusOver;
+    $rootScope.PlusOut = PlusOut;
+    $rootScope.UserAdd = UserAdd;
+    $rootScope.UserInvite = UserInvite;
+
+    $rootScope.$watch(function () {
+        return $location.path()
+    }, function (params) {
+        console.log(params);
+        isActive();
+    });
+
+
+    function isActive(id) {
+        /*
+         $.each($('#usermenu a'), function(key,val) {
+         if (('/#'+$location.path()).indexOf($(val).attr('href'))>=0){
+         $rootScope.menu[key].active=true;
+         } else {
+         $rootScope.menu[key].active=false;
+         }
+         });
+         */
     }
 
-    $rootScope.HideUserMenu = function () {
-        $('#usermenu').collapse('hide')
+    function HideUserMenu() {
+        // $('#usermenu').collapse('hide')
+        $('#usermenu').hide();
         $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
         $('#addbutton').hide();
         $('#plusbutton').show();
     }
-    $rootScope.PlusOver = function () {
+
+    function PlusOver() {
         $('#plusbutton').hide();
         $('#addbutton').show();
     }
-    $rootScope.PlusOut = function () {
+
+    function PlusOut() {
         $('#plusbutton').show();
         $('#addbutton').hide();
     }
-    $rootScope.UserAdd = function () {
-        $('#usermenu').collapse('hide')
+
+    function UserAdd() {
+        // console.log($location);
+        // $('#usermenu').collapse('hide')
+        $('#usermenu').hide();
         $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
         $('#addbutton').hide();
         $('#plusbutton').show();
         $location.path("/main/user/register");
-        // console.log($location);
     }
-    $rootScope.UserInvite = function () {
-        $('#usermenu').collapse('hide')
+
+    function UserInvite() {
+        // $('#usermenu').collapse('hide')
+        $('#usermenu').hide();
         $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
         $('#addbutton').hide();
         $('#plusbutton').show();

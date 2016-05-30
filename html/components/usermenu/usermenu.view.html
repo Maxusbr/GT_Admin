@@ -8,7 +8,7 @@
 </div>
 <div id="menu-wr">
 <ul class="nav nav-list">
-    <li ng-repeat=" link in usermenu | filter:searchUserMenu " ng-class="{ active: isActive('{{ link.href }}') }">
+    <li ng-repeat=" link in usermenu | filter:searchUserMenu " ng-class="{ active: link.active }">
         <a href="/#/main/user/profile/{{ link.id }}">{{ link.title }}</a>
     </li>
 </ul>
@@ -16,7 +16,7 @@
 <div id="plusbutton">
     <button ng-mouseenter="PlusOver()" class="btn btn-success btn-lg btn-block"><span class="glyphicon glyphicon-plus"></span></button>
 </div>
-<div id="addbutton" ng-mouselive="PlusOut()" class="btn-group-vertical btn-block">
+<div id="addbutton" ng-mouseleave="PlusOut()" class="btn-group-vertical btn-block">
     <button ng-click="UserInvite()" class="btn btn-success btn-lg btn-block invite">Пригласить</button>
     <div></div>
     <button ng-click="UserAdd()" class="btn btn-success btn-lg btn-block register">Зарегистрировать</button>

@@ -14,7 +14,7 @@ function mainMenuCtrl($rootScope, $location) {
     $rootScope.menu = [
         {
             "title": "Мероприятия",
-            "href": "/main/events"
+            "href": "/main/events",
         },
         {
             "title": "События",
@@ -27,15 +27,15 @@ function mainMenuCtrl($rootScope, $location) {
         },
         {
             "title": "Площадки",
-            "href": "/main/platform"
+            "href": "/main/platform",
         },
         {
             "title": "Залы",
-            "href": "/main/halls"
+            "href": "/main/halls",
         },
         {
             "title": "Роли",
-            "href": "/main/role"
+            "href": "/main/role",
         },
         {
             "title": "Пользователи",
@@ -43,18 +43,38 @@ function mainMenuCtrl($rootScope, $location) {
             "button": true,
             "menu": "#usermenu",
             "content": "#usercontent",
+            "active": true
         }
     ];
 
-    $rootScope.isActive = function (location) {
-        // console.log($location.path() +' ' +location);
-        // console.log($location.path().search(location));
-        // console.log($location.path().search(location)>=0);
-        // return location === '/#' + $location.path()
-        return $location.path().search(location) >= 0;
+    // $rootScope.isActive = isActive;
+    $rootScope.ShowMenu = ShowMenu;
+    // $rootScope.ClickMenu = ClickMenu;
+
+
+    $rootScope.$watch(function () {
+        return $location.path()
+    }, function (params) {
+        console.log(params);
+        isActive();
+    });
+
+
+    function isActive() {
+        $.each($('#mainmenu a'), function (key, val) {
+            if (('/#' + $location.path()).indexOf($(val).attr('href')) >= 0) {
+                $rootScope.menu[key].active = true;
+            } else {
+                $rootScope.menu[key].active = false;
+            }
+        });
     }
-    $rootScope.ShowMenu = function (menu, content) {
-        if (!$(menu).is('.in')) {
+
+
+    function ShowMenu(menu, content) {
+        // $location.path("/main/user/list");
+
+        if (!$(menu).is(':visible')) {
             if ($(menu).is('.col-md-2')) {
                 $(content).addClass('col-md-10 col-sm-10');
             }
@@ -67,10 +87,10 @@ function mainMenuCtrl($rootScope, $location) {
             $(content).removeClass('col-md-10 col-sm-10');
             $(content).addClass('col-md-12 col-sm-12');
         }
-        $(menu).collapse('toggle');
+        // $(menu).collapse('toggle');
+        $(menu).toggle();
         $('#addbutton').hide();
         $('#plusbutton').show();
-
     }
 
 }
