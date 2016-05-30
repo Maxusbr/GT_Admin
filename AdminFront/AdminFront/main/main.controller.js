@@ -14,6 +14,8 @@
         // For any unmatched url, send to /route1
         $urlRouterProvider.otherwise("/main/user");
 
+        // $rootScope.menuActive = '';
+
         $stateProvider
             .state('main.user', {
                 abstract: true,
@@ -23,6 +25,7 @@
                 // controller: 'MainUserController',
                 onEnter: function () {
                     console.log("enter main.user");
+                    // $rootScope.menuActive = 'user';
                 }
             })
             .state('main.events', {
@@ -42,6 +45,7 @@
                 controller: 'MainEventsIsController',
                 onEnter: function () {
                     console.log("enter main.events-is");
+                    // $rootScope.menuActive = 'eventsis';
                 }
             })
             .state('main.halls', {
