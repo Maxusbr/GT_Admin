@@ -5,38 +5,57 @@
     <form class="row" role="form">
         <div class="form-group col-md-8">
             <input type="search" class="form-control form-control-search input-lg" id="search"
-                   placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль">
+                   placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль"
+                   ng-model="searchUser">
         </div>
-        <div class="form-group col-md-3 col-md-offset-1">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Сохранить изменения</button>
-            <div class="text-primary">Все изменения сохранены 27.07.2016 18.08.44</div>
+        <div class="form-group col-md-4 text-right">
+            <button type="submit" class="btn btn-primary btn-lg">Сохранить изменения</button>
+            <div class="text-primary text-right small">Все изменения сохранены 27.07.2016 18.08.44</div>
         </div>
     </form>
 </div>
-<div class="space"></div>
 <table class="table table-hover mytable">
     <thead>
     <tr class="bg-gray">
-        <th class="row col-md-2"><span class="col-md-8 text-nowrap">Имя <span
-                class="glyphicon glyphicon-chevron-down"></span></span> <span
-                class="col-md-4 text-right text-nowrap"><span
-                class="glyphicon glyphicon-sort-by-attributes"></span></span></th>
-        <th class="row col-md-2"><span class="col-md-8 text-nowrap">Компания <span
-                class="glyphicon glyphicon-chevron-down"></span></span> <span
-                class="col-md-4 text-right text-nowrap"><span
-                class="glyphicon glyphicon-th-list"></span>&nbsp;<span
-                class="glyphicon glyphicon-sort-by-attributes"></span></span></th>
-        <th class="text-nowrap col-md-4">События <span class="glyphicon glyphicon-chevron-down"></span></th>
-        <th class="text-nowrap col-md-2">Роль <span class="glyphicon glyphicon-chevron-down"></span></th>
-        <th class="row col-md-2"><span class="col-md-8 text-nowrap">Статус <span
-                class="glyphicon glyphicon-chevron-down"></span></span> <span
-                class="col-md-4 text-right text-nowrap"><span
-                class="glyphicon glyphicon-th-list"></span>&nbsp;<span
-                class="glyphicon glyphicon-sort-by-attributes"></span></span></th>
+        <th class="text-nowrap col-md-2">
+            <a href="" ng-click="sortType = 'fname'; sortReverse = !sortReverse">
+                Имя
+                <span ng-show="sortType == 'fname' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sortType == 'fname' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+        </th>
+        <th class="text-nowrap col-md-2">
+            <a href="" ng-click="sortType = 'company'; sortReverse = !sortReverse">
+                Компания
+                <span ng-show="sortType == 'company' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sortType == 'company' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+        </th>
+        <th class="text-nowrap col-md-4">
+            <a href="" ng-click="sortType = 'event'; sortReverse = !sortReverse">
+                События
+                <span ng-show="sortType == 'event' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sortType == 'event' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+        </th>
+        <th class="text-nowrap col-md-2">
+            <a href="" ng-click="sortType = 'role'; sortReverse = !sortReverse">
+                Роль
+                <span ng-show="sortType == 'role' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sortType == 'role' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+        </th>
+        <th class="text-nowrap col-md-2">
+            <a href="" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+                Статус
+                <span ng-show="sortType == 'status' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                <span ng-show="sortType == 'status' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+            </a>
+        </th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="row in userlist">
+    <tr ng-repeat="row in userlist | orderBy:sortType:sortReverse | filter:searchUser ">
         <td class="td-username">
             <div class="head" ng-if="row.fname||row.sname">{{ row.fname }} {{ row.sname }}</div>
             <div class="head" ng-if="row.invite">Приглашение</div>

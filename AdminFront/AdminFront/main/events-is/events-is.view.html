@@ -6,12 +6,23 @@
         </div>
         <div class="form-group" style="padding-bottom: 20px;">
             <input type="search" class="form-control form-control-search input-lg" id="search"
-                   placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль">
+                   placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль"
+                   ng-model="searchEventIsMenu">
         </div>
 
         <ul class="nav nav-list">
-            <li ng-repeat="link in eventsislist" ng-if="!link.invite && link.event!='-'">
-                <a ng-href="/#/main/event-is/detail/{{ link.id }}">{{ link.event }}</a>
+            <li ng-repeat="link in eventsislist | filter:searchEventIsMenu" ng-if="!link.invite && link.event!='-'">
+                <a ng-href="/#/main/event-is/detail/{{ link.id }}">
+                    <span ng-class="{bsuccess:link.success}">
+                    <span ng-class="{bwarning:link.warning}">
+                    <span ng-class="{bdanger:link.danger}">
+                    <span class="linktitle">
+                    {{ link.event }}
+                    </span>
+                    </span>
+                    </span>
+                    </span>
+                </a>
             </li>
         </ul>
 
