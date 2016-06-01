@@ -57,6 +57,7 @@
     MainUserController.$inject = [/*'UserService',*/ '$rootScope'];
     function MainUserController(/*UserService,*/ $rootScope) {
         var vm = this;
+        $rootScope.menuActive = 'user';
 
 
     }

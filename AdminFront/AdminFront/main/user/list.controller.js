@@ -9,6 +9,10 @@
     function MainUserListController($rootScope) {
         var vm = this;
 
+        $rootScope.sortType = 'event'; // set the default sort type
+        $rootScope.sortReverse = false;  // set the default sort order
+        $rootScope.searchUser = '';     // set the default search/filter term
+
         $rootScope.userlist = [
             {
                 "fname": "Хан",

@@ -7,7 +7,7 @@
             'ui.router',
             'ngCookies',
             'vcRecaptcha',
-            // 'ngMessages',
+            'ngMessages',
             'ngResource',
             // 'webix'
         ])

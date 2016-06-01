@@ -39,6 +39,8 @@
     function MainEventsIsController($rootScope) {
         var vm = this;
 
+        $rootScope.searchEventIsMenu = '';
+
         $rootScope.HideEventIsMenu = function () {
             console.log('aaaaaaaaaaaaa');
             $('#eventismenu').collapse('hide')
@@ -67,6 +69,9 @@
                 "company": "ООО Две стороны силы",
                 "event": "3 Чемпионат мира по фигурному катанию",
                 "active": false,
+                "warning": false,
+                "danger": true,
+                "success": true,
                 "role": "Представитель орг.",
                 "status": "Запланирована продажа билетов на 20.10.2016",
                 "statusclass": "text-muted",
@@ -81,6 +86,7 @@
                 "company": "ОAO Шлемы и Плащи",
                 "event": "1/2 Петр налич и биг-бенд \"Песни Утесова и не только...\"",
                 "active": true,
+                "msuccess": true,
                 "role": "Оператор",
                 "status": "На событии, Пауза, Вход \"У женского туалета\"",
                 "statusclass": "text-danger",
@@ -108,6 +114,7 @@
                 "company": "ИП Викодиныч",
                 "event": "8 А.Кролл, Л.Ролл, М. Волл День джаза в Доме музыки. \"Все цвета московского джаза\"",
                 "active": false,
+                "success": true,
                 "role": "Старший оператор",
                 "status": "Назначен на вход, Вход 17",
                 "statusclass": "",
