@@ -6,9 +6,18 @@
         .controller('MainEventsIsDetailController', MainEventsIsDetailController);
 
 
-    MainEventsIsDetailController.$inject = ['$rootScope', '$stateParams', '$filter'];
-    function MainEventsIsDetailController($rootScope, $stateParams, $filter) {
+    MainEventsIsDetailController.$inject = ['$rootScope', '$stateParams', '$filter', '$location'];
+    function MainEventsIsDetailController($rootScope, $stateParams, $filter, $location) {
         var vm = this;
+	
+	$rootScope.$watch(function () {
+		return $location.path()
+	}, function (params) {
+		console.log(params);
+		$rootScope.id = $stateParams.id;
+	});
+
+	
         $rootScope.eventslist = [
             {
                 "fname": "Хан",

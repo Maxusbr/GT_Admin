@@ -557,10 +557,14 @@ body {
 /*background-color: #78FA89 !important;*/
 /*}*/
 
-.reg  input.ng-valid.ng-dirty{
-background: #e6f2df !important;
-color: #6dae79 !important;
-border-bottom:2px solid #6dae79 !important;
+.reg input {
+	border: 0 !important;
+}
+
+.reg input.ng-valid.ng-dirty {
+	background: #e6f2df !important;
+	color: #6dae79 !important;
+	/*border-bottom:2px solid #6dae79 !important;*/
 }
 
 .mytabs a {

@@ -8,10 +8,12 @@ angular.module('app')
         };
     })
 
-userMenuCtrl.$inject = ['$rootScope', '$location'];
-function userMenuCtrl($rootScope, $location) {
+userMenuCtrl.$inject = ['$rootScope', '$location', '$stateParams'];
+function userMenuCtrl($rootScope, $location, $stateParams) {
 
     $rootScope.searchUserMenu = '';
+    $rootScope.id = $stateParams.id;
+
 
     $rootScope.usermenu = [
         {

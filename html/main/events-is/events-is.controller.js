@@ -35,9 +35,10 @@
             })
     }
 
-    MainEventsIsController.$inject = ['$rootScope'];
-    function MainEventsIsController($rootScope) {
+    MainEventsIsController.$inject = ['$rootScope', '$stateParams'];
+    function MainEventsIsController($rootScope, $stateParams) {
         var vm = this;
+	$rootScope.id = $stateParams.id;
 
         $rootScope.searchEventIsMenu = '';
 
@@ -46,6 +47,8 @@
             $('#eventismenu').collapse('hide')
             $('#eventiscontent').addClass('col-md-12').removeClass('col-md-9');
         }
+
+
 
         $rootScope.eventsislist = [
             {

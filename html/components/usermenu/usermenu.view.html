@@ -8,7 +8,7 @@
 </div>
 <div id="menu-wr">
 <ul class="nav nav-list">
-    <li ng-repeat=" link in usermenu | filter:searchUserMenu " ng-class="{ active: link.active }">
+    <li ng-repeat=" link in usermenu | filter:searchUserMenu " ng-class="{ active: link.id==id }">
         <a href="/#/main/user/profile/{{ link.id }}">{{ link.title }}</a>
     </li>
 </ul>

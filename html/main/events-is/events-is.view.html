@@ -10,7 +10,7 @@
         </div>
 
         <ul class="nav nav-list">
-            <li ng-repeat="link in eventsislist | filter:searchEventIsMenu" ng-if="!link.invite && link.event!='-'">
+            <li ng-repeat="link in eventsislist | filter:searchEventIsMenu" ng-if="!link.invite && link.event!='-'"  ng-class="{ active: link.id==id }">
                 <a ng-href="/#/main/event-is/detail/{{ link.id }}" class="event">
                     <span ng-if="link.success" class="bsuccess"></span>
                     <span ng-if="link.warning" class="bwarning" ng-class="{s:link.success}"></span>

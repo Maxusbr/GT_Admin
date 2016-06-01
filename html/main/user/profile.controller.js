@@ -6,8 +6,8 @@
         .module('app')
         .controller('MainUserProfileController', MainUserProfileController);
 
-    MainUserProfileController.$inject = ['$rootScope', '$stateParams', '$filter'];
-    function MainUserProfileController($rootScope, $stateParams, $filter) {
+    MainUserProfileController.$inject = ['$rootScope', '$stateParams', '$filter', '$location'];
+    function MainUserProfileController($rootScope, $stateParams, $filter, $location) {
         var vm = this;
         $rootScope.peSortType = 'date'; // set the default sort type
         $rootScope.peSortReverse = false;  // set the default sort order
@@ -16,6 +16,14 @@
 
         $rootScope.user = {"email": "qwe@qwe.ru"};
 
+	$rootScope.$watch(function () {
+		return $location.path()
+	}, function (params) {
+		console.log(params);
+		$rootScope.id = $stateParams.id;
+	});
+
+	
         $rootScope.eventslist = [
             {
                 "fname": "Хан",
