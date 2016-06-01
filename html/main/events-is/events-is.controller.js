@@ -44,7 +44,8 @@
 
         $rootScope.HideEventIsMenu = function () {
             console.log('aaaaaaaaaaaaa');
-            $('#eventismenu').collapse('hide')
+            // $('#eventismenu').collapse('hide')
+            $('#eventismenu').hide();
             $('#eventiscontent').addClass('col-md-12').removeClass('col-md-9');
         }
 
