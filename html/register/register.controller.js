@@ -11,6 +11,7 @@
 
         vm.user = {};
         vm.passtype = 'password';
+        vm.emailpattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
 
         vm.register = register;
         vm.generatePassword = generatePassword;
