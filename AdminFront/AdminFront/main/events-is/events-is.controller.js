@@ -35,17 +35,21 @@
             })
     }
 
-    MainEventsIsController.$inject = ['$rootScope'];
-    function MainEventsIsController($rootScope) {
+    MainEventsIsController.$inject = ['$rootScope', '$stateParams'];
+    function MainEventsIsController($rootScope, $stateParams) {
         var vm = this;
+	$rootScope.id = $stateParams.id;
 
         $rootScope.searchEventIsMenu = '';
 
         $rootScope.HideEventIsMenu = function () {
             console.log('aaaaaaaaaaaaa');
-            $('#eventismenu').collapse('hide')
+            // $('#eventismenu').collapse('hide')
+            $('#eventismenu').hide();
             $('#eventiscontent').addClass('col-md-12').removeClass('col-md-9');
         }
+
+
 
         $rootScope.eventsislist = [
             {

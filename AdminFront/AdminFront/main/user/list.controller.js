@@ -11,6 +11,16 @@
 
         $rootScope.sortType = 'event'; // set the default sort type
         $rootScope.sortReverse = false;  // set the default sort order
+        $rootScope.sortFName = '';
+        $rootScope.sortReverseFName = false;
+        $rootScope.sortCompany = '';
+        $rootScope.sortReverseCompany = false;
+        $rootScope.sortEvent = '';
+        $rootScope.sortReverseEvent = false;
+        $rootScope.sortRole = '';
+        $rootScope.sortReverseRole = false;
+        $rootScope.sortStatus = '';
+        $rootScope.sortReverseStatus = false;
         $rootScope.searchUser = '';     // set the default search/filter term
 
         $rootScope.userlist = [

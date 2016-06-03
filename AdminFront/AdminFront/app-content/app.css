@@ -390,6 +390,12 @@ body {
 	color: #222129 !important;
 }
 
+#eventismenu.sidebar1 a:hover {
+	background: #6a6a82 !important;
+	color: #9594A1 !important;
+	border: 1px solid #bbc;
+}
+
 .sidebar1 input {
 	background: #6a6a82 !important;
 	color: #9594a1 !important;
@@ -557,10 +563,14 @@ body {
 /*background-color: #78FA89 !important;*/
 /*}*/
 
-.reg  input.ng-valid.ng-dirty{
-background: #e6f2df !important;
-color: #6dae79 !important;
-border-bottom:2px solid #6dae79 !important;
+.reg input {
+	border: 0 !important;
+}
+
+.reg input.ng-valid.ng-dirty {
+	background: #e6f2df !important;
+	color: #6dae79 !important;
+	/*border-bottom:2px solid #6dae79 !important;*/
 }
 
 .mytabs a {

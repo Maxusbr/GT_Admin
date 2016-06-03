@@ -18,44 +18,56 @@
     <thead>
     <tr class="bg-gray">
         <th class="text-nowrap col-md-2">
-            <a href="" ng-click="sortType = 'fname'; sortReverse = !sortReverse">
+            <a href="" ng-click="sortFName==''?sortFName = 'fname':sortFName = '';">
                 Имя
-                <span ng-show="sortType == 'fname' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                <span ng-show="sortType == 'fname' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                <span ng-show="sortFName" class="glyphicon glyphicon-chevron-down"></span></a>
+
+            <a href="" ng-click="sortReverseFName = !sortReverseFName">
+                <span style="display: block;float: right;" ng-show="sortFName == 'fname' && !sortReverseFName" class="glyphicon glyphicon-sort-by-attributes"></span>
+                <span style="display: block;float: right;" ng-show="sortFName == 'fname' && sortReverseFName" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
+
         </th>
         <th class="text-nowrap col-md-2">
-            <a href="" ng-click="sortType = 'company'; sortReverse = !sortReverse">
+            <a href="" ng-click="sortCompany==''?sortCompany = 'company':sortCompany = '';">
                 Компания
-                <span ng-show="sortType == 'company' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                <span ng-show="sortType == 'company' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                <span ng-show="sortCompany" class="glyphicon glyphicon-chevron-down"></span></a>
+            <a href="" ng-click="sortReverseCompany = !sortReverseCompany">
+                <span style="display: block;float: right;" ng-show="sortCompany == 'company' && !sortReverseCompany" class="glyphicon glyphicon-sort-by-attributes"></span>
+                <span style="display: block;float: right;" ng-show="sortCompany == 'company' && sortReverseCompany" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
         </th>
         <th class="text-nowrap col-md-4">
-            <a href="" ng-click="sortType = 'event'; sortReverse = !sortReverse">
+            <a href="" ng-click="sortEvent==''?sortEvent = 'event':sortEvent = '';">
                 События
-                <span ng-show="sortType == 'event' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                <span ng-show="sortType == 'event' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                <span ng-show="sortEvent" class="glyphicon glyphicon-chevron-down"></span></a>
+            <a href="" ng-click="sortReverseEvent = !sortReverseEvent">
+                <span style="display: block;float: right;" ng-show="sortEvent == 'event' && !sortReverseEvent" class="glyphicon glyphicon-sort-by-attributes"></span>
+                <span style="display: block;float: right;" ng-show="sortEvent == 'event' && sortReverseEvent" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
         </th>
         <th class="text-nowrap col-md-2">
-            <a href="" ng-click="sortType = 'role'; sortReverse = !sortReverse">
+            <a href="" ng-click="sortRole==''?sortRole = 'role':sortRole = '';">
                 Роль
-                <span ng-show="sortType == 'role' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                <span ng-show="sortType == 'role' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                <span ng-show="sortRole" class="glyphicon glyphicon-chevron-down"></span></a>
+            <a href="" ng-click="sortReverseRole = !sortReverseRole">
+                <span style="display: block;float: right;" ng-show="sortRole && !sortReverseRole" class="glyphicon glyphicon-sort-by-attributes"></span>
+                <span style="display: block;float: right;" ng-show="sortRole && sortReverseRole" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
         </th>
         <th class="text-nowrap col-md-2">
-            <a href="" ng-click="sortType = 'status'; sortReverse = !sortReverse">
+            <a href="" ng-click="sortStatus==''?sortStatus = 'status':sortStatus = '';">
                 Статус
-                <span ng-show="sortType == 'status' && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-                <span ng-show="sortType == 'status' && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                <span ng-show="sortStatus" class="glyphicon glyphicon-chevron-down"></span></a>
+            <a href="" ng-click="sortReverseStatus = !sortReverseStatus">
+                <span style="display: block;float: right;" ng-show="sortStatus && !sortReverseStatus" class="glyphicon glyphicon-sort-by-attributes"></span>
+                <span style="display: block;float: right;" ng-show="sortStatus && sortReverseStatus" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
         </th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="row in userlist | orderBy:sortType:sortReverse | filter:searchUser ">
+    <tr ng-repeat="row in userlist | filter:searchUser | orderBy:sortFName:sortReverseFName | orderBy:sortCompany:sortReverseCompany | orderBy:sortEvent:sortReverseEvent | orderBy:sortRole:sortReverseRole | orderBy:sortStatus:sortReverseStatus ">
         <td class="td-username">
             <div class="head" ng-if="row.fname||row.sname">{{ row.fname }} {{ row.sname }}</div>
             <div class="head" ng-if="row.invite">Приглашение</div>

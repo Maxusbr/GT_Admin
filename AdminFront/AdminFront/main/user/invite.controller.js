@@ -9,6 +9,8 @@
     function MainUserInviteController(UserService, $scope) {
         var vm = this;
 
+        $scope.emailpattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+
         $scope.user = {};
         $scope.roles = [
             {id: 1, name: 'R1'},

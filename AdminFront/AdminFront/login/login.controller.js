@@ -10,6 +10,7 @@
         var vm = this;
 
         vm.login = login;
+        vm.emailpattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
 
         (function initController() {
             // reset login status

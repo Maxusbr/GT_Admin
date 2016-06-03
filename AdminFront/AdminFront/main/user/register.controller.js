@@ -9,6 +9,8 @@
     function MainUserRegisterController(UserService, $scope) {
         var vm = this;
 
+        $scope.emailpattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+
         $scope.submitted = false;
         $scope.passtype = 'password';
         $scope.user = {};

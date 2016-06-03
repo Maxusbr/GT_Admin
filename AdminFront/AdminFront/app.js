@@ -14,8 +14,8 @@
         .config(config);
     // .run(run);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    function config($stateProvider, $urlRouterProvider) {
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+    function config($stateProvider, $urlRouterProvider, $locationProvider) {
 
 
         $urlRouterProvider.when("", "/main");
@@ -108,7 +108,7 @@
                 }
             })
 
-        //$locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode(true).hashPrefix('#');
     }
 
 
