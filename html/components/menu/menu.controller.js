@@ -14,7 +14,7 @@ function mainMenuCtrl($rootScope, $location) {
     $rootScope.menu = [
         {
             "title": "Мероприятия",
-            "href": "/main/events",
+            "href": "/main/events"
         },
         {
             "title": "События",
@@ -23,28 +23,35 @@ function mainMenuCtrl($rootScope, $location) {
             "countActive": "25",
             "countAll": "55",
             "menu": "#eventismenu",
-            "content": "#eventiscontent",
+            "content": "#eventiscontent"
         },
         {
             "title": "Площадки",
-            "href": "/main/platform",
+            "href": "/main/platform"
         },
         {
             "title": "Залы",
-            "href": "/main/halls",
+            "href": "/main/halls"
         },
         {
             "title": "Роли",
-            "href": "/main/role",
+            "href": "/main/role"
         },
         {
             "title": "Пользователи",
             "href": "/main/user",
             "button": true,
             "menu": "#usermenu",
-            "content": "#usercontent",
-            "active": true
+            "content": "#usercontent"
+        },
+        {
+            title: 'Персоны',
+            href: '/main/persona',
+            button: true,
+            menu: '#personamenu',
+            content: '#personacontent'
         }
+
     ];
 
     // $rootScope.isActive = isActive;

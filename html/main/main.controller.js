@@ -75,12 +75,19 @@
                     console.log("enter main.role");
                 }
             })
+            .state('main.persona', {
+                url: '/persona',
+                // loaded into ui-view of parent's template
+                templateUrl: '/main/persona/persona.view.html',
+                controller: 'MainPersonaController',
+                onEnter: function () {
+
+                }
+            })
 
     }
-    
+
     MainController.$inject = ['$rootScope'];
     function MainController($rootScope) {
     }
-
-
 })();

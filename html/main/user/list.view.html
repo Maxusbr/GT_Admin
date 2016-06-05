@@ -3,12 +3,12 @@
 <div class="space"></div>
 <div class="container-fluid">
     <form class="row" role="form">
-        <div class="form-group col-md-8">
+        <div class="form-group col-md-16">
             <input type="search" class="form-control form-control-search input-lg" id="search"
                    placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль"
                    ng-model="searchUser">
         </div>
-        <div class="form-group col-md-4 text-right">
+        <div class="form-group col-md-8 text-right">
             <button type="submit" class="btn btn-primary btn-lg">Сохранить изменения</button>
             <div class="text-primary text-right small">Все изменения сохранены 27.07.2016 18.08.44</div>
         </div>
@@ -17,7 +17,7 @@
 <table class="table table-hover mytable">
     <thead>
     <tr class="bg-gray">
-        <th class="text-nowrap col-md-2">
+        <th class="text-nowrap col-md-4">
             <a href="" ng-click="sortFName==''?sortFName = 'fname':sortFName = '';">
                 Имя
                 <span ng-show="sortFName" class="glyphicon glyphicon-chevron-down"></span></a>
@@ -28,7 +28,7 @@
             </a>
 
         </th>
-        <th class="text-nowrap col-md-2">
+        <th class="text-nowrap col-md-4">
             <a href="" ng-click="sortCompany==''?sortCompany = 'company':sortCompany = '';">
                 Компания
                 <span ng-show="sortCompany" class="glyphicon glyphicon-chevron-down"></span></a>
@@ -37,7 +37,7 @@
                 <span style="display: block;float: right;" ng-show="sortCompany == 'company' && sortReverseCompany" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
         </th>
-        <th class="text-nowrap col-md-4">
+        <th class="text-nowrap col-md-8">
             <a href="" ng-click="sortEvent==''?sortEvent = 'event':sortEvent = '';">
                 События
                 <span ng-show="sortEvent" class="glyphicon glyphicon-chevron-down"></span></a>
@@ -46,7 +46,7 @@
                 <span style="display: block;float: right;" ng-show="sortEvent == 'event' && sortReverseEvent" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
         </th>
-        <th class="text-nowrap col-md-2">
+        <th class="text-nowrap col-md-4">
             <a href="" ng-click="sortRole==''?sortRole = 'role':sortRole = '';">
                 Роль
                 <span ng-show="sortRole" class="glyphicon glyphicon-chevron-down"></span></a>
@@ -55,7 +55,7 @@
                 <span style="display: block;float: right;" ng-show="sortRole && sortReverseRole" class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
         </th>
-        <th class="text-nowrap col-md-2">
+        <th class="text-nowrap col-md-4">
             <a href="" ng-click="sortStatus==''?sortStatus = 'status':sortStatus = '';">
                 Статус
                 <span ng-show="sortStatus" class="glyphicon glyphicon-chevron-down"></span></a>

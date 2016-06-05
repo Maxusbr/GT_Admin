@@ -7,6 +7,7 @@
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    
     function config($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.when("/main/event-is", "/main/event-is/detail/1");
@@ -38,7 +39,7 @@
     MainEventsIsController.$inject = ['$rootScope', '$stateParams'];
     function MainEventsIsController($rootScope, $stateParams) {
         var vm = this;
-	$rootScope.id = $stateParams.id;
+        $rootScope.id = $stateParams.id;
 
         $rootScope.searchEventIsMenu = '';
 
@@ -46,9 +47,8 @@
             console.log('aaaaaaaaaaaaa');
             // $('#eventismenu').collapse('hide')
             $('#eventismenu').hide();
-            $('#eventiscontent').addClass('col-md-12').removeClass('col-md-9');
+            $('#eventiscontent').addClass('col-md-24').removeClass('col-md-18');
         }
-
 
 
         $rootScope.eventsislist = [
@@ -139,7 +139,7 @@
                 "button": "Акцепт регистрации",
                 "id": "6"
 
-            },
+            }
         ]
 
     }

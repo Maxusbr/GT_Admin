@@ -6,7 +6,7 @@
         <div class="space-lg"></div>
         <div class="container-fluid">
             <form name="form" novalidate>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <input type="text" class="form-control" id="usr" placeholder="Имя" name="fname" ng-model="user.fname" required>
                 </div>
@@ -21,7 +21,7 @@
                     <input type="text" class="form-control" id="usr" placeholder="Должность">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <div class="form-group">
                     <input type="email" class="form-control" placeholder="Email" name="email" ng-model="user.email" ng-pattern="emailpattern" required>
                 </div>
@@ -41,7 +41,7 @@
                     <input type="{{passtype}}" class="form-control" placeholder="Пароль" name="password" ng-model="user.password" ng-minlength="5" required>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="form-group mycheckbox text-nowrap">
 			<label>
 				<input type="checkbox" value="" name="noletter" ng-model="user.noletter" >

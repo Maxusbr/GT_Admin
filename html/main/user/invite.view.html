@@ -9,7 +9,7 @@
         <div class="space-lg"></div>
         <div class="container-fluid">
             <form name="form" class="css-form" novalidate>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="form-group">
                         <input type="email" class="form-control" id="email" name="email" ng-model="user.email" ng-pattern="emailpattern" placeholder="Email" required>
                         <label for="email" class="small text-muted">email адрес организатора</label>
@@ -27,7 +27,7 @@
                         <button type="button" ng-click="invite(user)" class="btn btn-primary btn-lg">Отправить приглашение</button>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="form-group">
                         <div class="help-block" ng-messages="form.email.$error"
                              ng-if="form.email.$touched"
