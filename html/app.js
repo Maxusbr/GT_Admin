@@ -17,7 +17,7 @@
     run.$inject = ['$rootScope', '$templateCache'];
 
     function run($rootScope, $templateCache) {
-        $rootScope.$on('$viewContentLoaded', function() {
+        $rootScope.$on('$viewContentLoaded', function () {
             $templateCache.removeAll();
         })
     }

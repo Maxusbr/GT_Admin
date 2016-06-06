@@ -83,8 +83,7 @@
                 onEnter: function () {
 
                 }
-            })
-
+            });
     }
 
     MainController.$inject = ['$rootScope'];

@@ -8,10 +8,16 @@ angular.module('app')
         };
     });
 
-mainMenuCtrl.$inject = ['$rootScope', '$location'];
-function mainMenuCtrl($rootScope, $location) {
+mainMenuCtrl.$inject = ['$scope', '$location', '$timeout'];
+function mainMenuCtrl($scope, $location, $timeout) {
 
-    $rootScope.menu = [
+    $scope.HideCustomMenu = function () {
+        $timeout(function () {
+            angular.element('.main-menu__list li.active > button').triggerHandler('click');
+        });
+    };
+
+    $scope.menu = [
         {
             "title": "Мероприятия",
             "href": "/main/events"
@@ -19,11 +25,12 @@ function mainMenuCtrl($rootScope, $location) {
         {
             "title": "События",
             "href": "/main/event-is",
-            "button": true,
             "countActive": "25",
             "countAll": "55",
-            "menu": "#eventismenu",
-            "content": "#eventiscontent"
+            "content": "#eventiscontent",
+            customMenu: {
+                expand: '#eventismenu'
+            }
         },
         {
             "title": "Площадки",
@@ -40,65 +47,47 @@ function mainMenuCtrl($rootScope, $location) {
         {
             "title": "Пользователи",
             "href": "/main/user",
-            "button": true,
-            "menu": "#usermenu",
+            customMenu: {
+                expand: '.custom-menu__container',
+                toggle: '#user__container'
+            },
             "content": "#usercontent"
         },
         {
             title: 'Персоны',
             href: '/main/persona',
             button: true,
-            menu: '#personamenu',
-            content: '#personacontent'
+            customMenu: {
+                expand: '.custom-menu__container',
+                toggle: '#persona__container'
+            }
         }
 
     ];
 
-    // $rootScope.isActive = isActive;
-    $rootScope.ShowMenu = ShowMenu;
-    // $rootScope.ClickMenu = ClickMenu;
+    $scope.ToggleCustomMenu = function (menuSelector, toggleSelector) {
+        var menu = $(menuSelector);
+        var content = $(toggleSelector);
 
+        menu.toggle();
+        content.toggleClass('col-md-19 col-md-24');
+    };
 
-    $rootScope.$watch(function () {
+    $scope.$watch(function () {
         return $location.path()
     }, function (params) {
-        console.log(params);
         isActive();
     });
 
-
     function isActive() {
-        $.each($('#mainmenu a'), function (key, val) {
+        $.each($('#main-menu__container a'), function (key, val) {
             if (('/#' + $location.path()).indexOf($(val).attr('href')) >= 0) {
-                $rootScope.menu[key].active = true;
-            } else {
-                $rootScope.menu[key].active = false;
+                $scope.menu[key].active = true;
+            }
+            else {
+                $scope.menu[key].active = false;
             }
         });
+
     }
-
-
-    function ShowMenu(menu, content) {
-        // $location.path("/main/user/list");
-
-        if (!$(menu).is(':visible')) {
-            if ($(menu).is('.col-md-2')) {
-                $(content).addClass('col-md-10 col-sm-10');
-            }
-            if ($(menu).is('.col-md-3')) {
-                $(content).addClass('col-md-9 col-sm-9');
-            }
-            $(content).removeClass('col-md-12 col-sm-12');
-        } else {
-            $(content).removeClass('col-md-9 col-sm-9')
-            $(content).removeClass('col-md-10 col-sm-10');
-            $(content).addClass('col-md-12 col-sm-12');
-        }
-        // $(menu).collapse('toggle');
-        $(menu).toggle();
-        $('#addbutton').hide();
-        $('#plusbutton').show();
-    }
-
 }
-

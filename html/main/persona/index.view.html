@@ -1,0 +1,169 @@
+<!-- BEGIN: First Row -->
+<div class="row">
+    <div class="col-md-24" style="padding-top: 15px">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="row">
+                        <img src="http://placehold.it/120x120" alt="Placeholder">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="col-md-24" style="line-height: 40px;font-size: 18px;">
+                <div class="row">
+                    {{ person.name.lastName }}
+                </div>
+            </div>
+            <div class="col-md-24" style="line-height: 40px;font-size: 18px;">
+                <div class="row">
+                    {{ person.name.firstName }}
+                </div>
+            </div>
+            <div class="col-md-24" style="line-height: 40px;font-size: 18px;">
+                <div class="row">
+                    {{ person.name.middleName }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 col-md-offset-2">
+
+            <div class="col-md-24" style="line-height: 40px;font-size: 18px;">
+                <div class="row">
+                    {{ person.nameTranslated.lastName }}
+                </div>
+            </div>
+            <div class="col-md-24" style="line-height: 40px;font-size: 18px;">
+                <div class="row">
+                    {{ person.nameTranslated.firstName }}
+                </div>
+            </div>
+            <div class="col-md-24" style="line-height: 40px;font-size: 18px;">
+                <div class="row">
+                    {{ person.nameTranslated.middleName }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <select class="form-control">
+                    <option>9 февраля 1991 (25 лет)</option>
+                </select>
+                <p>
+                    <span class="text-muted">(зодиак)</span>
+                    Водолей /
+                    <span class="text-muted">(восточный)</span>
+                    Коза
+                </p>
+            </div>
+
+            <div class="row">
+                <select class="form-control">
+                    <option>Ленинград, СССР</option>
+                </select>
+                <p>
+                    (Санкт-Петербург, Россия)
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: First Row -->
+
+<style>
+    .persona-info-block {
+        font-size: 12px;
+    }
+
+    .nav-tabs {
+        border-bottom: 1px solid #fafaf9;
+    }
+
+    .nav-tabs > li > a {
+        border-radius: 0;
+        border: none;
+        color: #000;
+        font-size: 18px;
+    }
+
+    .nav-tabs > li {
+        padding: 0 18px;
+    }
+
+    .nav-tabs > li:hover, .nav-tabs > li.active {
+        border-bottom: 3px solid #000;
+        background-color: transparent;
+    }
+
+    .nav-tabs li.active > a {
+        border: none;
+    }
+
+    .nav-tabs li.active > a:hover, .nav-tabs li.active > a:focus {
+        border: none;
+    }
+
+    .nav-tabs > li a:focus, .nav-tabs li a:hover {
+        background-color: transparent;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-24">
+        <!-- Sex Switches -->
+        <div class="col-md-3">
+            <div class="row">
+                <div class="radio-input-container">
+                    <div class="radio-input">
+                        <input type="radio" value="None" id="roundedOne" name="check">
+                        <label for="roundedOne"></label>
+                    </div>
+
+                    <span>M</span>
+                </div>
+
+                <div class="radio-input-container">
+                    <div class="radio-input">
+                        <input type="radio" value="None" id="roundedTwo" checked name="check">
+                        <label for="roundedTwo"></label>
+                    </div>
+
+                    <span>Ж</span>
+                </div>
+            </div>
+        </div>
+        <!-- End Sex Switches -->
+
+        <!-- Last Changes -->
+        <div class="col-md-20 persona-info-block">
+            <p>
+                <span class="text-muted">Последние изменение персоны / </span>
+                <span>Фото, 25 августа, Дарья Редактор</span>
+                <span>(все изменения)</span>
+            </p>
+            <p>
+                Рейтинг просмотров 71% (Подробнее - недельный, месячный) <br>
+                В избраном 136
+            </p>
+        </div>
+        <!-- End Last Changes -->
+    </div>
+
+    <div class="col-md-24">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">Описание</a></li>
+            <li role="presentation"><a href="#">Факты</a></li>
+            <li role="presentation"><a href="#">Связи</a></li>
+            <li role="presentation"><a href="#">Связи</a></li>
+            <li role="presentation"><a href="#">Медиа и файлы</a></li>
+            <li role="presentation"><a href="#">Интернет</a></li>
+            <li role="presentation"><a href="#">Антропометрия</a></li>
+        </ul>
+    </div>
+</div>

@@ -7,7 +7,7 @@
         .config(config);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
-    
+
     function config($stateProvider, $urlRouterProvider) {
 
         $urlRouterProvider.when("/main/event-is", "/main/event-is/detail/1");

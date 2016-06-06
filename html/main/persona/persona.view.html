@@ -1,0 +1,51 @@
+<div class="row full-height">
+    <div class="col-md-5 custom-menu__container full-height">
+        <div class="form-group" style="padding-bottom: 20px;">
+            <input type="search" class="form-control form-control-search input-lg" id="search"
+                   placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль"
+                   ng-model="searchEventIsMenu">
+        </div>
+    </div>
+
+
+    <div class="col-md-19">
+        <div id="persona__container" ui-view>
+
+        </div>
+    </div>
+</div>
+
+<!--<div class="row h100">-->
+<!--<div class="col-md-5 sidebar1 collapse h100 in" id="persona-menu" ng-controller="MainPersonaController" style="overflow: scroll">-->
+<!--<div style="padding: 5px;font-size: 200%">-->
+<!--<button type="button" class="close" ng-click="HidePersonaMenu()" data-dismiss="modal">&times;</button>-->
+<!--</div>-->
+<!--<div class="form-group" style="padding-bottom: 20px;">-->
+<!--<input type="search" class="form-control form-control-search input-lg" id="search"-->
+<!--placeholder="Имя, Фамилия, Отчество, Событие"-->
+<!--ng-model="personaMenuFilter">-->
+<!--</div>-->
+<!--&lt;!&ndash;<button ng-click="order('name')">Name</button>&ndash;&gt;-->
+<!--<ul class="nav nav-list" style="max-height: 60%; overflow: scroll">-->
+<!--<li ng-repeat="persona in menuScope | filter:personaMenuFilter | orderBy:predicate:reverse"-->
+<!--ng-class="{ active: persona.id == id }" class="persona-menu-container">-->
+<!--<a ng-href="/#/main/persona/{{ persona.id }}">{{ persona.name }} <span ng-show="persona.nameTranslated">/ {{ persona.nameTranslated }} </span>-->
+
+<!--<p class="persona-menu-container__event">-->
+<!--<span class="type">{{ persona.type }}</span>-->
+<!--<span class="event">{{ persona.event }}</span>-->
+<!--</p>-->
+<!--</a>-->
+<!--</li>-->
+<!--</ul>-->
+
+<!--<p style="padding: 15px 15px;">-->
+<!--<a href="" style="color: white">еще 20...</a>-->
+<!--</p>-->
+
+<!--<button class="fixed"> <span class="glyphicon glyphicon-plus" style="font-size: 200%;"></span> Добавить</button>-->
+<!--</div>-->
+<!--<div class="col-md-19 full-height" id="persona__container">-->
+<!--<div ui-view class="full-height"></div>-->
+<!--</div>-->
+<!--</div>-->

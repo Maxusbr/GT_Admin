@@ -6,16 +6,23 @@ angular.module('app')
             templateUrl: '/components/usermenu/usermenu.view.html',
             controller: 'userMenuCtrl'
         };
-    })
+    });
 
-userMenuCtrl.$inject = ['$rootScope', '$location', '$stateParams'];
-function userMenuCtrl($rootScope, $location, $stateParams) {
+userMenuCtrl.$inject = ['$rootScope', '$scope', '$location', '$stateParams'];
+function userMenuCtrl($rootScope, $scope, $location, $stateParams) {
 
-    $rootScope.searchUserMenu = '';
+    $scope.searchUserMenu = '';
     $rootScope.id = $stateParams.id;
 
+    $scope.Hide = function () {
+        $('.custom-menu__fixed_button').hide();
+    };
 
-    $rootScope.usermenu = [
+    $scope.Show = function () {
+        $('.custom-menu__fixed_button').show();
+    };
+
+    $scope.userMenuList = [
         {
             "title": "Усманов Алишер",
             "id": "1",
@@ -108,72 +115,18 @@ function userMenuCtrl($rootScope, $location, $stateParams) {
         {
             "title": "Джонсон Брайн",
             "id": "7"
-        },
+        }
     ];
 
-    // $rootScope.isActive = isActive;
-    $rootScope.HideUserMenu = HideUserMenu;
-    $rootScope.PlusOver = PlusOver;
-    $rootScope.PlusOut = PlusOut;
-    $rootScope.UserAdd = UserAdd;
-    $rootScope.UserInvite = UserInvite;
-
-    $rootScope.$watch(function () {
-        return $location.path()
-    }, function (params) {
-        console.log(params);
-        isActive();
-    });
-
-
-    function isActive(id) {
-        /*
-         $.each($('#usermenu a'), function(key,val) {
-         if (('/#'+$location.path()).indexOf($(val).attr('href'))>=0){
-         $rootScope.menu[key].active=true;
-         } else {
-         $rootScope.menu[key].active=false;
-         }
-         });
-         */
-    }
-
-    function HideUserMenu() {
-        // $('#usermenu').collapse('hide')
-        $('#usermenu').hide();
-        $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
-        $('#addbutton').hide();
-        $('#plusbutton').show();
-    }
-
-    function PlusOver() {
-        $('#plusbutton').hide();
-        $('#addbutton').show();
-    }
-
-    function PlusOut() {
-        $('#plusbutton').show();
-        $('#addbutton').hide();
-    }
+    $scope.UserAdd = UserAdd;
+    $scope.UserInvite = UserInvite;
 
     function UserAdd() {
-        // console.log($location);
-        // $('#usermenu').collapse('hide')
-        $('#usermenu').hide();
-        $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
-        $('#addbutton').hide();
-        $('#plusbutton').show();
         $location.path("/main/user/register");
     }
 
     function UserInvite() {
-        // $('#usermenu').collapse('hide')
-        $('#usermenu').hide();
-        $('#usercontent').addClass('col-md-12 col-sm-12').removeClass('col-md-10 col-sm-10');
-        $('#addbutton').hide();
-        $('#plusbutton').show();
         $location.path("/main/user/invite");
-        // console.log($location);
     }
 
 
