@@ -5,9 +5,16 @@
         .module('app')
         .controller('MainPersonaIndexController', MainPersonaIndexController);
 
-    MainPersonaIndexController.$inject = ['$rootScope', '$stateParams'];
+    MainPersonaIndexController.$inject = ['$scope', '$stateParams'];
 
-    function MainPersonaIndexController($rootScope, $stateParams) {
-        $rootScope.id = $stateParams.id;
+    function MainPersonaIndexController($scope, $stateParams) {
+        $scope.id = $stateParams.id;
+
+        $scope.SwitchElements = function () {
+            $('.persona-main__container').hide();
+
+            $('.persona-info__full-block').hide();
+            $('.persona-info__small-block').show();
+        }
     }
 })();

@@ -9,25 +9,22 @@
 }
 
 .btn-primary {
-    background-image: none;
     filter: none;
     color: #fff;
     border-color: #f0f0f7;
-    background-color: #323896;
+    background: #323896 none;
 }
 
 .btn-success {
-    background-image: none;
     filter: none;
     color: #20ae4d;
     border-color: #20ae4d;
-    background-color: #fff;
+    background: #fff none;
 }
 
 .btn-success:hover,
 .btn-success:focus {
-    background-color: #6dae79;
-    background-position: 0 -15px;
+    background: #6dae79 0 -15px;
 }
 
 .btn-success:active,
@@ -46,17 +43,15 @@ fieldset[disabled] .btn-success.focus, fieldset[disabled] .btn-success:focus, fi
 }
 
 .btn-warning {
-    background-image: none;
     filter: none;
     color: #f9ae1d;
     border-color: #f9a90e;
-    background-color: #fff;
+    background: #fff none;
 }
 
 .btn-warning:hover,
 .btn-warning:focus {
-    background-color: #fff4db;
-    background-position: 0 -15px;
+    background: #fff4db 0 -15px;
     color: #fcc758;
 }
 
@@ -76,19 +71,17 @@ fieldset[disabled] .btn-warning.focus, fieldset[disabled] .btn-warning:focus, fi
 }
 
 .btn-info {
-    background-image: none;
     filter: none;
     color: #453e9e;
     border-color: #453e9e;
-    background-color: #fff;
+    background: #fff none;
 }
 
 .btn-danger {
-    background-image: none;
     filter: none;
     color: #f04122;
     border-color: #f04122;
-    background-color: #fff;
+    background: #fff none;
 }
 
 /*
@@ -137,7 +130,7 @@ select.form-control {
 
 .mycheckbox {
     color: #9595a2;
-    margin-bottom: 10px;
+    padding: 6px 12px;
 }
 
 .my-profile-checkbox {
@@ -157,6 +150,7 @@ select.form-control {
     float: left;
     font-size: 1.8em;
     margin-right: .2em;
+    margin-top: 2px;
 }
 
 .mycheckbox span {
@@ -190,120 +184,6 @@ select.form-control {
     left: 0;
     font-size: 1.5em;
     color: #f04122;
-}
-
-.text-gray {
-    color: #dbdbdb;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-.container-fluid, .view, .main, .h100 {
-    height: 100%;
-}
-
-.main {
-    min-width: 900px !important;
-}
-
-.sidebar {
-    /*min-width: 130px !important;*/
-    background: #1b1d29;
-    height: 100%;
-    /*height: 1000px;*/
-    padding: 0;
-    font-size: 111%;
-    color: #717182;
-}
-
-.sidebar a {
-    color: #717182;
-}
-
-.sidebar .active a {
-    background-color: #2d2d36 !important;
-    color: #fff;
-}
-
-.sidebar a:hover, .sidebar a:focus {
-    background-color: #3c3537 !important;
-    color: #fff;
-}
-
-.sidebar li {
-    position: relative;
-}
-
-.sidebar button.green-button {
-    display: none;
-    text-align: center;
-    padding: 11px 6px !important;
-    /* 	font-size: 112pt; */
-    line-height: 112.5%;
-    border-color: #8fca72 !important;
-    background: #8fca72 !important;
-    color: #fff !important;
-    position: absolute;
-    width: 2em;
-    top: 0;
-    right: -2em;
-    z-index: 100;
-}
-
-.sidebar li:hover button.green-button {
-    display: block;
-}
-
-.sidebar1 {
-    /*min-width: 260px;*/
-    background: #6b6a75;
-    height: 100%;
-    /*height: 1000px;*/
-    padding: 0;
-    font-size: 115%;
-    color: #9594A1;
-}
-
-.sidebar1 a {
-    color: #abacac;
-    outline: none;
-}
-
-.sidebar1 .active a {
-    background: #94949d;
-    color: #222129;
-}
-
-.sidebar1 a:hover {
-    background: #94949d;
-    color: #222129;
-}
-
-#eventismenu.sidebar1 a:hover {
-    background: #6a6a82 !important;
-    color: #9594A1 !important;
-    border: 1px solid #bbc;
-}
-
-.sidebar1 input {
-    background: #6b6a75;
-    color: #9594a1;
-}
-
-.sidebar1 a span {
-    display: block;
-}
-
-.sidebar1 a.event {
-    font-size: 85% !important;
 }
 
 .bwarning,
@@ -349,33 +229,6 @@ body {
     background: red;
 }
 
-.logo {
-}
-
-.logo img {
-    width: 100%;
-}
-
-.mainlogo {
-    padding: 15px;
-}
-
-.mainlogo img {
-    width: 8ex;
-    height: 8ex;
-}
-
-.space {
-    padding-top: 10px;
-}
-
-.space-lg {
-    padding-top: 20px;
-}
-
-.mytable {
-    /* 	font-size: 120%; */
-}
 
 .mytable th {
     font-size: 113%;
@@ -449,59 +302,6 @@ body {
     color: #5459a9;
 }
 
-.css-form input.ng-invalid.ng-dirty {
-    border: 1px solid red !important;
-}
-
-/*.css-form input.ng-valid.ng-dirty {*/
-/*background-color: #78FA89 !important;*/
-/*}*/
-
-.reg input {
-    border: 0 !important;
-}
-
-.reg input.ng-valid.ng-dirty {
-    background: #e6f2df !important;
-    color: #6dae79 !important;
-    /*border-bottom:2px solid #6dae79 !important;*/
-}
-
-user-menu {
-    display: block;
-    height: 100%;
-}
-
-#close-wr {
-    padding: 5px;
-    font-size: 200%;
-}
-
-#close-wr .close {
-    position: relative;
-    z-index: 100;
-}
-
-#search-wr {
-    padding-bottom: 20px;
-    position: relative;
-    z-index: 90;
-}
-
-#menu-wr {
-    height: 100%;
-    padding: 100px 0;
-    position: relative;
-    z-index: 10;
-    top: -110px;
-    left: 0;
-}
-
-#usermenu ul, #eventismenu ul {
-    max-height: 100%;
-    overflow-y: auto;
-}
-
 body, html {
     height: 100%;
 }
@@ -517,6 +317,24 @@ ui-view {
 * {
     margin: 0;
     padding: 0;
+}
+
+.register__container {
+
+}
+
+.register__container input.form-control {
+    border: 0;
+    box-shadow: none;
+    color: #6b6a75;
+    font-size: 130%;
+    border-radius: 0;
+}
+
+.register__container input.form-control + label,
+.register__container select.form-control + label {
+    padding-left: 12px;
+    font-weight: normal;
 }
 
 /* <editor-fold desc="Main Menu"> */
@@ -552,7 +370,9 @@ ui-view {
     color: white;
 }
 
-.main-menu__list .nav > li.active > a, .main-menu__list .nav > li > a:hover, .main-menu__list .nav > li > a:focus {
+.main-menu__list .nav > li.active > a,
+.main-menu__list .nav > li > a:hover,
+.main-menu__list .nav > li > a:focus {
     background: #2b2b30;
     color: #fff;
     outline: none;
@@ -595,7 +415,7 @@ ui-view {
 .nav-tabs > li > a {
     border-radius: 0;
     border: none;
-    color: #000;
+    color: #101016;
     font-size: 18px;
 }
 
@@ -604,8 +424,9 @@ ui-view {
     cursor: pointer;
 }
 
-.nav-tabs > li:hover, .nav-tabs > li.active {
-    border-bottom: 3px solid #000;
+.nav-tabs > li:hover,
+.nav-tabs > li.active {
+    border-bottom: 3px solid #101016;
     background-color: transparent;
 }
 
@@ -613,11 +434,13 @@ ui-view {
     border: none;
 }
 
-.nav-tabs li.active > a:hover, .nav-tabs li.active > a:focus {
+.nav-tabs li.active > a:hover,
+.nav-tabs li.active > a:focus {
     border: none;
 }
 
-.nav-tabs > li a:focus, .nav-tabs li a:hover {
+.nav-tabs > li a:focus,
+.nav-tabs li a:hover {
     background-color: transparent;
 }
 
@@ -734,7 +557,7 @@ ui-view {
 .custom-menu__close > button {
     font-size: 30px;
     margin-left: 5px;
-    color: #000;
+    color: #101016;
     text-shadow: none;
     opacity: 1;
     transition: all 500ms;
@@ -782,28 +605,33 @@ ui-view {
     overflow-x: scroll;
 }
 
-.custom-menu__container .nav li > a:hover, .custom-menu__container .nav li > a:focus {
+.custom-menu__container .nav li > a:hover,
+.custom-menu__container .nav li > a:focus {
     background: none;
 }
 
-.custom-menu__container .nav li.active > a, .custom-menu__container .nav li:hover > a {
+.custom-menu__container .nav li.active > a,
+.custom-menu__container .nav li:hover > a {
     background: none;
-    color: #000;
+    color: #101016;
 }
 
-.custom-menu__container .nav li.active, .custom-menu__container .nav li:hover {
+.custom-menu__container .nav li.active,
+.custom-menu__container .nav li:hover {
     background-color: #8e9092;
-    color: #000;
+    color: #101016;
     border-top: 1px solid #838488;
     border-bottom: 1px solid #838488;
 }
 
-.custom-menu__container .nav li.active .persona-menu-container__event .type, .custom-menu__container .nav li:hover .persona-menu-container__event .type {
+.custom-menu__container .nav li.active .persona-menu-container__event .type,
+.custom-menu__container .nav li:hover .persona-menu-container__event .type {
     background-color: #6b6a75;
     color: #abacac;
 }
 
-.custom-menu__container .nav li.active .persona-menu-container__event .event, .custom-menu__container .nav li:hover .persona-menu-container__event .event {
+.custom-menu__container .nav li.active .persona-menu-container__event .event,
+.custom-menu__container .nav li:hover .persona-menu-container__event .event {
     color: #605f62;
 }
 
@@ -816,6 +644,20 @@ ui-view {
 
 .custom-menu__container .persona-menu-container__event .event {
     color: #8b8c8d;
+}
+
+.custom-menu__container p.load-more {
+    margin: 20px;
+}
+
+.custom-menu__container p.load-more a {
+    color: white;
+}
+
+.custom-menu__fixed_button button:hover,
+.custom-menu__fixed_button_splitted button:hover {
+    background-color: #8ac273;
+    color: white;
 }
 
 .custom-menu__fixed_button_splitted {
@@ -847,6 +689,94 @@ ui-view {
 
 /* </editor-fold> */
 
-.persona-info-block {
-    font-size: 12px;
+/* <editor-fold desc="Persona"> */
+
+.persona-main__table thead td {
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+.persona-main__table tbody {
+    font-size: 11px;
+}
+
+.persona-main__table tbody tr:first-child td {
+    border-top: none;
+}
+
+.persona-main__table tbody tr:hover {
+    background-color: #ebecf2;
+}
+
+.persona-main__table tbody tr:hover a.persona-table__edit {
+    display: inline;
+}
+
+.persona-main__table tbody tr a.persona-table__edit {
+    font-size: 150%;
+    position: absolute;
+    right: 10px;
+    text-decoration: none;
+    top: 10px;
+    display: none;
+}
+
+.persona-main__container, .tab-pane {
+    padding-top: 30px;
+    font-size: 11px;
+}
+
+.persona-main__container span.title {
+    font-size: 13px;
+}
+
+.persona-main__container_media {
+    background: url('/app-content/images/placeholder.jpg') no-repeat;
+    width: 120px;
+    height: 120px;
+    position: relative
+}
+
+.persona-main__container_media span {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.persona-info__full-block,
+.persona-info__small-block {
+    padding-top: 15px;
+    margin-bottom: 20px;
+}
+
+.persona-info__full-block .persona-info__name-row {
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.persona-info__small-block .persona-info__name-row {
+    font-size: 18px;
+    line-height: 50px;
+}
+
+.persona-info__small-block .persona-info__addition-info p {
+    margin: 0;
+}
+
+.persona-info__small-block .persona-info__addition-info p:first-child {
+    font-size: 18px;
+}
+
+/* </editor-fold> */
+
+a.load-more {
+    color: white;;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #6b6a75;
+}
+
+a, .text-generated {
+    color: #364484;
 }

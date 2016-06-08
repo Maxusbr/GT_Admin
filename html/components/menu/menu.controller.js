@@ -29,7 +29,8 @@ function mainMenuCtrl($scope, $location, $timeout) {
             "countAll": "55",
             "content": "#eventiscontent",
             customMenu: {
-                expand: '#eventismenu'
+                expand: '.custom-menu__container',
+                toggle: '#eventIs__content'
             }
         },
         {
@@ -64,6 +65,10 @@ function mainMenuCtrl($scope, $location, $timeout) {
         }
 
     ];
+
+    $timeout(function() {
+        isActive();
+    });
 
     $scope.ToggleCustomMenu = function (menuSelector, toggleSelector) {
         var menu = $(menuSelector);

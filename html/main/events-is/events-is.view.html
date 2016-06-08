@@ -1,32 +1,34 @@
 ﻿<div class="row full-height">
     <div class="col-md-5 custom-menu__container full-height">
-        <div class="row">
-            <div class="form-group" style="padding-bottom: 20px;">
-                <input type="search" class="search-test" id="search"
-                       placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль"
-                       ng-model="searchEventIsMenu">
+        <div class="row full-height">
+            <div class="custom-menu__close" ng-click="HideCustomMenu()">
+                <button type="button" class="close">&times;</button>
             </div>
 
-            <ul class="nav nav-list">
-                <li ng-repeat="link in eventsislist | filter:searchEventIsMenu" ng-if="!link.invite && link.event!='-'"
-                    ng-class="{ active: link.id==id }">
-                    <a ng-href="/#/main/event-is/detail/{{ link.id }}" class="event">
-                        <span ng-if="link.success" class="bsuccess"></span>
-                        <span ng-if="link.warning" class="bwarning" ng-class="{s:link.success}"></span>
-                        <span ng-if="link.danger" class="bdanger" ng-class="{s:link.success}"></span>
+            <input type="search" class="custom-menu__search form-control"
+                   placeholder="событие, мероприятие, компания"
+                   ng-model="searchEventIsMenu">
 
-                        <span ng-if="link.msuccess" class="msuccess"></span>
-                        <span ng-if="link.mwarning" class="mwarning"></span>
-                        <span ng-if="link.mdanger" class="mdanger"></span>
-                        {{ link.event }}</a>
+            <ul class="nav nav-list">
+                <li ng-repeat="item in eventsislist | filter:searchEventIsMenu" ng-class="{ active: item.id == id }"
+                    ng-if="!item.invite && item.event!='-'">
+                    <a ng-href="/#/main/event-is/detail/{{ item.id }}" class="event">
+                        <span ng-if="item.success" class="bsuccess"></span>
+                        <span ng-if="item.warning" class="bwarning" ng-class="{s:item.success}"></span>
+                        <span ng-if="item.danger" class="bdanger" ng-class="{s:item.success}"></span>
+
+                        <span ng-if="item.msuccess" class="msuccess"></span>
+                        <span ng-if="item.mwarning" class="mwarning"></span>
+                        <span ng-if="item.mdanger" class="mdanger"></span>
+                        {{ item.event }}
+                    </a>
                 </li>
             </ul>
         </div>
     </div>
 
-
-    <div class="col-md-19">
-        <div id="eventiscontent" ui-view>
+    <div class="col-md-19" id="eventIs__content">
+        <div ui-view>
 
         </div>
     </div>

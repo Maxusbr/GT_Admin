@@ -1,62 +1,66 @@
 ﻿<!--Body content-->
 
+<div class="col-md-24">
+    <h3>
+        <strong>Приглашение</strong> нового пользователя
+    </h3>
 
-<h1>Приглашение
-    <span class="weight-normal">нового пользователя</span>
-</h1>
-<p class="text-gray small"><span class="text-uppercase">Внимание!</span> приглашение на регистрацию действует 10
-    суток для однократной регистрации только на указанный email</p>
-<div class="space-lg"></div>
-<div class="container-fluid">
-    <form name="form" class="css-form" novalidate>
-        <div class="col-md-6">
-            <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" ng-model="user.email"
-                       ng-pattern="emailpattern" placeholder="Email" required>
-                <label for="email" class="small text-muted">email адрес организатора</label>
-            </div>
-            <div class="form-group">
-                <select name="role" id="role"
-                        ng-model="user.role" class="form-control input-lg"
-                        ng-options="role.id as role.name for role in roles"
-                        required>
-                    <option value="">Выберите роль</option>
-                </select>
-                <label for="role" class="small text-muted">Роль для ограничения прав</label>
-            </div>
-            <div class="form-actions">
-                <button type="button" ng-click="invite(user)" class="btn btn-primary btn-lg">Отправить приглашение
-                </button>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <div class="help-block" ng-messages="form.email.$error"
-                     ng-if="form.email.$touched"
-                >
-                    <!--<div ng-messages-include="/main/user/messages.html"></div>-->
-                    <div ng-message="required">Email обязательно для заполнения</div>
-                    <div ng-message="email">Неверный формат Email</div>
-                    <div ng-message="pattern">Неверный формат Email</div>
-
-                </div>
-                <!--
-                                                               <pre>form = {{ form | json }}</pre>
-                                                               <pre>form.email.$touched = {{ form.email.$touched | json }}</pre>
-                                                               <pre>form.email.$error = {{ form.email.$error | json }}</pre>
-                -->
-            </div>
-            <div class="form-group space-lg">
-                <div class="help-block" ng-messages="form.role.$error"
-                     ng-if="form.email.$touched"
-                >
-                    <div ng-message="required">Не выбрано значение Роли</div>
-                </div>
-            </div>
-            <div class="space-lg"></div>
-        </div>
-    </form>
+    <p class="text-muted small"><span class="text-uppercase">Внимание!</span> приглашение на регистрацию действует 10
+        суток для однократной регистрации только на указанный email</p>
 </div>
-<!--</div>-->
+
+
+<div class="col-md-24 register__container">
+    <div class="row">
+        <form name="form" class="css-form" novalidate>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" name="email" ng-model="user.email"
+                           ng-pattern="emailpattern" placeholder="Email" required>
+                    <label for="email" class="small text-muted">email адрес организатора</label>
+                </div>
+                <div class="form-group">
+                    <select name="role" id="role"
+                            ng-model="user.role" class="form-control input-lg"
+                            ng-options="role.id as role.name for role in roles"
+                            required>
+                        <option value="">Выберите роль</option>
+                    </select>
+                    <label for="role" class="small text-muted">Роль для ограничения прав</label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" ng-click="invite(user)" class="btn btn-primary btn-lg">Отправить приглашение
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="help-block" ng-messages="form.email.$error"
+                         ng-if="form.email.$touched"
+                    >
+                        <!--<div ng-messages-include="/main/user/messages.html"></div>-->
+                        <div ng-message="required">Email обязательно для заполнения</div>
+                        <div ng-message="email">Неверный формат Email</div>
+                        <div ng-message="pattern">Неверный формат Email</div>
+
+                    </div>
+                    <!--
+                                                                   <pre>form = {{ form | json }}</pre>
+                                                                   <pre>form.email.$touched = {{ form.email.$touched | json }}</pre>
+                                                                   <pre>form.email.$error = {{ form.email.$error | json }}</pre>
+                    -->
+                </div>
+                <div class="form-group space-lg">
+                    <div class="help-block" ng-messages="form.role.$error"
+                         ng-if="form.email.$touched"
+                    >
+                        <div ng-message="required">Не выбрано значение Роли</div>
+                    </div>
+                </div>
+                <div class="space-lg"></div>
+            </div>
+        </form>
+    </div>
+</div>
 
 
