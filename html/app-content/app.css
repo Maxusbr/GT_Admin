@@ -700,6 +700,12 @@ ui-view {
     font-size: 11px;
 }
 
+
+.persona-main__table tbody tr td {
+    position: relative;
+    padding-right: 35px;
+}
+
 .persona-main__table tbody tr:first-child td {
     border-top: none;
 }
