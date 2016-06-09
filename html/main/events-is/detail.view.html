@@ -1,13 +1,17 @@
-﻿<div class="row">
-    <div class="col-md-24">
-        <h3>{{event.event}} <span class="text-success">Активное событие 1ч 52м</span></h3>
+﻿<div class="row" style="padding-top: 20px;">
+    <div class="col-md-18" style="font-size: 18px;">
+        {{event.event}}
     </div>
-    <div class="col-md-10"><h1><span class="text-muted">Входной контроль</span> / {{ event.fname }}&nbsp;{{ event.sname
-        }}
-    </h1>
-        <div class="col-md-8 col-md-offset-5  small">{{ event.email }}<br>{{ event.phone }}</div>
+    <div class="col-md-6">
+        <span class="text-success">Активное событие 1ч 52м</span></h3>
     </div>
-    <div class="col-md-8 text-success small"><h3>работает вход 17 (22м / 96%)</h3></div>
+    <div class="col-md-10">
+        <h2>
+            <span class="text-muted">Входной контроль</span> <span class="black"> / {{ event.fname }} {{ event.sname}}</span>
+        </h2>
+        <div class="col-md-8 col-md-offset-5 small">{{ event.email }}<br>{{ event.phone }}</div>
+    </div>
+    <div class="col-md-8"><h3 class="text-success smaller">работает, вход 17 (22м / <span class="text-danger">96%</span>)</h3></div>
 </div>
 <div class="space-lg"></div>
 

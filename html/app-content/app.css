@@ -786,3 +786,11 @@ h1, h2, h3, h4, h5, h6 {
 a, .text-generated {
     color: #364484;
 }
+
+.black {
+    color: #101016;
+}
+
+.smaller {
+    font-size: 80%;
+}

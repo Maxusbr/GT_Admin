@@ -8,7 +8,7 @@ angular.module('app')
         };
     });
 
-mainMenuCtrl.$inject = ['$scope', '$location', '$timeout'];
+    mainMenuCtrl.$inject = ['$scope', '$location', '$timeout'];
 function mainMenuCtrl($scope, $location, $timeout) {
 
     $scope.HideCustomMenu = function () {

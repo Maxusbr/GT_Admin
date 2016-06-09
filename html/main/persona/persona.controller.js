@@ -6,12 +6,15 @@
         .controller('MainPersonaController', MainPersonaController)
         .config(config);
 
+
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function config($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.when('/main/persona', '/main/persona/1');
-        $urlRouterProvider.otherwise('/main/halls');
+        $urlRouterProvider.when("/main/persona", "/main/persona/1");
+
+        // For any unmatched url, send to /route1
+        $urlRouterProvider.otherwise("/main/event-is/detail/1");
 
         $stateProvider
             .state('main.persona.index', {
