@@ -26,8 +26,8 @@ namespace Getticket.Web.API.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-V2NNC9Q\\SQLEXPRESS;Initial Catalog=Getticket;Integrated Secur" +
-            "ity=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SADKNIGHT-PC\\SQLEXPRESS;Initial Catalog=Getticket;Integrated Security" +
+            "=True")]
         public string getticketConection {
             get {
                 return ((string)(this["getticketConection"]));

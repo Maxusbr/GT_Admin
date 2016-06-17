@@ -9,9 +9,15 @@ namespace Getticket.Web.DAL.Entities
         }
 
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserInfo> UserInfos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder
+               .Entity<User>()
+               .HasRequired(u => u.UserInfo)
+               .WithRequiredPrincipal()
+               .WillCascadeOnDelete(true);
         }
     }
 }
