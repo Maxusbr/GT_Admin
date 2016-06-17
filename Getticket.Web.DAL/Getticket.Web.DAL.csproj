@@ -61,6 +61,7 @@
     <Compile Include="Entities\UserStatus.cs" />
     <Compile Include="Enums\AccessRoleType.cs" />
     <Compile Include="Enums\UserStatusType.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\UserRepository.cs" />
   </ItemGroup>
