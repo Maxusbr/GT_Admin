@@ -28,45 +28,45 @@ namespace Getticket.Web.API.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-V2NNC9Q\\SQLEXPRESS;Initial Catalog=Getticket;Integrated Secur" +
             "ity=True")]
-        public string getticketConection {
+        public string GetticketConection {
             get {
-                return ((string)(this["getticketConection"]));
+                return ((string)(this["GetticketConection"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public int daysForInviteToLive {
+        public int DaysForInviteToLive {
             get {
-                return ((int)(this["daysForInviteToLive"]));
+                return ((int)(this["DaysForInviteToLive"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public int passwordMinLength {
+        public int PasswordMinLength {
             get {
-                return ((int)(this["passwordMinLength"]));
+                return ((int)(this["PasswordMinLength"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("20")]
-        public int passwordMaxLength {
+        public int PasswordMaxLength {
             get {
-                return ((int)(this["passwordMaxLength"]));
+                return ((int)(this["PasswordMaxLength"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890")]
-        public string passwordAcceptableSymbols {
+        public string PasswordAcceptableSymbols {
             get {
-                return ((string)(this["passwordAcceptableSymbols"]));
+                return ((string)(this["PasswordAcceptableSymbols"]));
             }
         }
     }
