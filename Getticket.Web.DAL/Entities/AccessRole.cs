@@ -1,4 +1,5 @@
 ﻿using Getticket.Web.DAL.Enums;
+using System.Collections.Generic;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -7,6 +8,11 @@ namespace Getticket.Web.DAL.Entities
     /// </summary>
     public class AccessRole : BaseEntity
     {
+        public AccessRole()
+        {
+            this.Users = new HashSet<User>();
+        }
+
         /// <summary>
         /// Список всех ролей котоые имеет пользователь
         /// </summary>
@@ -21,5 +27,11 @@ namespace Getticket.Web.DAL.Entities
         /// Описание роли
         /// </summary>
         public string Desciption { get; set; }
+
+
+        /// <summary>
+        /// Ссылка на пользователей
+        /// </summary>
+        public ICollection<User> Users { get; set; }
     }
 }

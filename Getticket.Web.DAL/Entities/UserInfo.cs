@@ -4,7 +4,7 @@ namespace Getticket.Web.DAL.Entities
 {
     public class UserInfo : BaseEntity
     {
-        public UserInfo() { }
+        public UserInfo(){}
 
         /// <summary>
         /// Имя
@@ -30,5 +30,7 @@ namespace Getticket.Web.DAL.Entities
         /// Мобильный телефон (+79*********)
         /// </summary>
         public string Phone { get; set; }
+
+        public User User { get; set; }
     }
 }

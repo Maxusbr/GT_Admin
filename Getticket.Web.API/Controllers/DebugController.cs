@@ -4,26 +4,51 @@ using Getticket.Web.DAL.Repository;
 
 namespace Getticket.Web.API.Controllers
 {
+    /// <summary>
+    /// Контроллер исключительно для отладки приложения
+    /// </summary>
     [RoutePrefix("debug")]
     public class DebugController : ApiController
     {
-        private UserRepository userRep = new UserRepository();
+        private UserRepository UserRep { get; set; }
 
         public DebugController()
         {
+            this.UserRep = new UserRepository();
+        }
 
+        [HttpPost]
+        [Route("test")]
+        public IHttpActionResult Test()
+        {
+            UserInfo ui = new UserInfo() { Phone = "+79159998877" };
+            AccessRole ar = new AccessRole() { Name = "ar1" };
+            User user = new User { UserName = "Вася", AccessRole = ar, UserInfo = ui };
+            UserRep.Save(user);
+
+            user.UserInfo.Name = "Василий";
+            UserRep.Save(user);
+
+            AccessRole ar2 = new AccessRole() { Name = "ar2" };
+            user.AccessRole = ar2;
+            UserRep.Save(user);
+
+            UserRep.Delete(user);
+            return Ok();
         }
 
         [HttpPost]
         [Route("test1")]
         public IHttpActionResult Test1()
         {
-            User user = new User();
+            User user = new User() {
+                UserName = "test@test.ru",
+                UserInfo = new UserInfo(),
+                UserStatus = new UserStatus(),
+                AccessRole = new AccessRole()
+            };
 
-            user.UserName = "wer@yaetd.ru";
-            user.UserInfo = new UserInfo();
-
-            if (userRep.Add(user) != null)
+            if (UserRep.Save(user) != null)
             {
                 return Ok();
             }
@@ -34,13 +59,13 @@ namespace Getticket.Web.API.Controllers
         [Route("test2")]
         public IHttpActionResult Test2()
         {
-            User user = userRep.Find(1);
+            User user = UserRep.FindById(1);
             if (user != null)
             {
                 user.UserName = "werwwtt@yaetd.ru";
                 user.UserInfo.Name = "Иван";
                 user.UserInfo.LastName = "Петров";
-                user = userRep.Update(user);
+                user = UserRep.Save(user);
                 return Ok();
             }
 
@@ -51,7 +76,7 @@ namespace Getticket.Web.API.Controllers
         [Route("test3")]
         public IHttpActionResult Test3()
         {
-            if (userRep.Delete(1))
+            if (UserRep.Delete(1))
             {
                 return Json<string>("Record delete");
             }
