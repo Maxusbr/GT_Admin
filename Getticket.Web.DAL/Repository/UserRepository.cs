@@ -1,121 +1,59 @@
 ﻿using Getticket.Web.DAL.Entities;
-using System;
+using Getticket.Web.DAL.Enums;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Getticket.Web.DAL.Repository
 {
-    public class UserRepository : IDisposable
+    public class UserRepository : BaseRepository<User>
     {
-        private GetticketDBContext db;
 
         public UserRepository()
         {
-            this.db = new GetticketDBContext();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Entity"></param>
-        /// <returns></returns>
-        public User Add(User Entity)
-        {
-            db.Users.Add(Entity);
-            db.SaveChanges();
-            return Entity;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Entity"></param>
-        /// <returns></returns>
-        public User Update(User Entity)
-        {
-            User UserToSave = db.Users.Find(Entity.Id);
-            if (UserToSave == null)
-            {
-                return null;
-            }
-            else
-            {
-                db.Entry(UserToSave).CurrentValues.SetValues(Entity);
-                db.SaveChanges();
-                return UserToSave;
-            }
         }
 
         public IList<User> FindAll()
         {
-            return db.Users.Where(item => item.UserStatus.Status != Enums.UserStatusType.Deleted).ToList();
+            IQueryable<User> query = db.Users.Where(u => u.UserStatus.Status != UserStatusType.Deleted);
+            IList<User> users = null;
+            if (query.Any())
+            {
+                users = query.ToList();
+            }
+            return users;
         }
 
-        public IList<User> FindAllDeleted()
+        public User FindById(int Id)
         {
-            throw new NotImplementedException();
-        }
-
-        public User Find(int Id)
-        {
-            return db.Users.Find(Id);
+            IQueryable<User> query = db.Users.Where(u => u.Id == Id);
+            User user = null;
+            if (query.Any())
+            {
+                user = query.First();
+            }
+            return user;
         }
 
         public bool Delete(int Id)
         {
-            User user = db.Users.Find(Id);
-            if (user == null)
+            if (Id < 1)
             {
-                return true;
+                return false;
             }
+            IQueryable<User> query = db.Users.Where(u => u.Id == Id);
+            if (!query.Any())
+            {
+                return false;
+            }
+            User user = query.First();
             db.Users.Remove(user);
             db.SaveChanges();
             return true;
         }
 
-        public bool MarkDelete(int Id)
+        public override bool Delete(User Entity)
         {
-            User user = db.Users.Find(Id);
-            if (user == null)
-            {
-                return false;
-            }
-            user.UserStatus.Status = Enums.UserStatusType.Deleted;
-            db.SaveChanges();
-            return true;
-        }
-
-        public User FindOneByEmail(string Email)
-        {
-            IQueryable<User> query = db.Users.Where(item => item.UserName == Email);
-            if (!query.Any())
-            {
-                return null;
-            }
-            else
-            {
-                return query.First();
-            }
-        }
-
-        public List<User> FindAllByEmail(string email)
-        {
-            List<User> users = db.Users.Where(item => item.UserName == email).ToList();
-            int count = users.Count;
-            if (count == 0)
-            {
-                return null;
-            }
-            return users;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Dispose()
-        {
-            db.Dispose();
+            return this.Delete(Entity.Id);
         }
     }
 }

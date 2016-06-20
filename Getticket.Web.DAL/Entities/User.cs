@@ -1,16 +1,27 @@
 ﻿using Microsoft.AspNet.Identity;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Getticket.Web.DAL.Entities
 {
     public class User : BaseEntity, IUser<int>
     {
+        public User(){}
+
         /// <summary>
         /// Уникальное поле для IUser интерфейса
         /// фактически логин для пользователя
         /// хранится как Email в бд
         /// </summary>
+        [Column("Email")]
         public string UserName { get; set; }
+      
+        /// <summary>
+        /// Хеш пароля пользователя
+        /// </summary>
         public string PasswordHash { get; set; }
+
 
         /// <summary>
         /// Информация о пользователе
@@ -21,6 +32,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Роль доступа пользователя к API
         /// </summary>
+        public int AccessRoleId { get; set; }
         public virtual AccessRole AccessRole { get; set; }
 
         /// <summary>
