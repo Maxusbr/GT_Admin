@@ -63,6 +63,7 @@
     <Compile Include="Enums\AccessRoleType.cs" />
     <Compile Include="Enums\UserStatusType.cs" />
     <Compile Include="Exeptions\InternallProgrammErrorException.cs" />
+    <Compile Include="Helpers\UserStatusHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccessRoleRepository.cs" />

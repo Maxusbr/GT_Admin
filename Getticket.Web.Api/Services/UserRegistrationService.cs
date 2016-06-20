@@ -15,12 +15,12 @@ namespace Getticket.Web.API.Services
 
         public User GetById(int Id)
         {
-            return UserRep.Find(Id);
+            return UserRep.FindById(Id);
         }
 
         public IList<User> GetAll()
         {
-            return UserRep.FindAll();
+            return UserRep.FindAllNotDeleted();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Getticket.Web.API.Services
   
                // user.UserStatus = UserStatusHelper.None(DateTime.Now);
                // user.RoleId = registerUserModel.RoleId;
-                return UserRep.Add(user);
+                return UserRep.Save(user);
             }
             return null;
         }
@@ -64,7 +64,7 @@ namespace Getticket.Web.API.Services
             {
                 return null;
             }
-            return UserRep.Update(user);
+            return UserRep.Save(user);
         }
 
         public bool MarkDelete(int Id)

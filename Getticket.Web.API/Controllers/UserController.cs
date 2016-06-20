@@ -2,6 +2,7 @@
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace Getticket.Web.API.Controllers
@@ -9,11 +10,11 @@ namespace Getticket.Web.API.Controllers
     [RoutePrefix("users")]
     public class UserController : ApiController
     {
-        private UserRegistrationService UserRegServ = new UserRegistrationService();
+        private UserRegistrationService UserRegServ;
 
         public UserController()
         {
-        
+            this.UserRegServ = new UserRegistrationService();
         }
 
         //TODO сделать авторизацию
@@ -21,10 +22,7 @@ namespace Getticket.Web.API.Controllers
         [Route("")]
         public IHttpActionResult GetAll([FromBody] QueryModel<string> model)
         {
-          /*  if (model == null) return BadRequest();
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            Credentails.CheckAuthorization(model.Credentails, AccessRole.Registered); */
-            return Ok(UserRegServ.GetAll()); 
+            return Ok<IList<User>>(UserRegServ.GetAll()); 
         }
 
         [HttpPost]
@@ -36,7 +34,7 @@ namespace Getticket.Web.API.Controllers
             {
                 return Json<string>("User with id = " + id + " not found");
             }
-            return Ok(user);
+            return Ok<User>(user);
         }
 
         [HttpPost]

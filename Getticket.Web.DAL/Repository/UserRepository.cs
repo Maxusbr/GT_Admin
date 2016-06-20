@@ -1,4 +1,5 @@
-﻿using Getticket.Web.DAL.Entities;
+﻿using Getticket.Web.API.Helpers;
+using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Getticket.Web.DAL.Repository
         {
         }
 
-        public IList<User> FindAll()
+        public IList<User> FindAllNotDeleted()
         {
             IQueryable<User> query = db.Users.Where(u => u.UserStatus.Status != UserStatusType.Deleted);
             IList<User> users = null;
@@ -32,6 +33,29 @@ namespace Getticket.Web.DAL.Repository
                 user = query.First();
             }
             return user;
+        }
+
+        public IList<User> FindAllByEmail(string email)
+        {
+            IQueryable<User> query = db.Users.Where(u => u.UserName.Equals(email));
+            IList<User> users = null;
+            if (query.Any())
+            {
+                users = query.ToList();
+            }
+            return users;
+        }
+
+        public bool MarkDelete(int Id)
+        {
+            User user = this.FindById(Id);
+            if (user == null)
+            {
+                return false;
+            }
+            user.UserStatus = UserStatusHelper.Deleted();
+            db.SaveChanges();
+            return true;
         }
 
         public bool Delete(int Id)
