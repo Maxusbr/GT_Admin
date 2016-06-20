@@ -10,7 +10,7 @@ namespace Getticket.Web.DAL.Entities
         /// хранится как Email в бд
         /// </summary>
         public string UserName { get; set; }
-
+        public string PasswordHash { get; set; }
 
         /// <summary>
         /// Информация о пользователе
@@ -21,11 +21,11 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Роль доступа пользователя к API
         /// </summary>
-  //      public virtual AccessRole AccessRole { get; set; }
+        public virtual AccessRole AccessRole { get; set; }
 
         /// <summary>
         /// Статус пользователя в системе
         /// </summary>
- //       public virtual UserStatus UserStatus { get; set; }
+        public virtual UserStatus UserStatus { get; set; }
     }
 }

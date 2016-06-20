@@ -50,7 +50,12 @@ namespace Getticket.Web.DAL.Repository
 
         public IList<User> FindAll()
         {
-            return db.Users.ToList();
+            return db.Users.Where(item => item.UserStatus.Status != Enums.UserStatusType.Deleted).ToList();
+        }
+
+        public IList<User> FindAllDeleted()
+        {
+            throw new NotImplementedException();
         }
 
         public User Find(int Id)
@@ -70,6 +75,41 @@ namespace Getticket.Web.DAL.Repository
             return true;
         }
 
+        public bool MarkDelete(int Id)
+        {
+            User user = db.Users.Find(Id);
+            if (user == null)
+            {
+                return false;
+            }
+            user.UserStatus.Status = Enums.UserStatusType.Deleted;
+            db.SaveChanges();
+            return true;
+        }
+
+        public User FindOneByEmail(string Email)
+        {
+            IQueryable<User> query = db.Users.Where(item => item.UserName == Email);
+            if (!query.Any())
+            {
+                return null;
+            }
+            else
+            {
+                return query.First();
+            }
+        }
+
+        public List<User> FindAllByEmail(string email)
+        {
+            List<User> users = db.Users.Where(item => item.UserName == email).ToList();
+            int count = users.Count;
+            if (count == 0)
+            {
+                return null;
+            }
+            return users;
+        }
         /// <summary>
         /// 
         /// </summary>

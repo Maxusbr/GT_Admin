@@ -18,6 +18,18 @@ namespace Getticket.Web.DAL.Entities
                .HasRequired(u => u.UserInfo)
                .WithRequiredPrincipal()
                .WillCascadeOnDelete(true);
+
+            modelBuilder
+               .Entity<User>()
+               .HasRequired(u => u.AccessRole)
+               .WithRequiredPrincipal()
+               .WillCascadeOnDelete(true);
+
+            modelBuilder
+               .Entity<User>()
+               .HasRequired(u => u.UserStatus)
+               .WithRequiredPrincipal()
+               .WillCascadeOnDelete(true);
         }
     }
 }
