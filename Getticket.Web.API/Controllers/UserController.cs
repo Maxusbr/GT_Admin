@@ -19,7 +19,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         [HttpPost]
-        [Route("/{id}")]
+        [Route("{id}")]
         public IHttpActionResult GetOne()
         {
             throw new NotImplementedException();

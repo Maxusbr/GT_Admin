@@ -5,7 +5,7 @@ namespace Getticket.Web.DAL.Entities
     /// <summary>
     /// Роли доступа пользователя к методам контроллера 
     /// </summary>
-    class AccessRole : BaseEntity
+    public class AccessRole : BaseEntity
     {
         /// <summary>
         /// Список всех ролей котоые имеет пользователь

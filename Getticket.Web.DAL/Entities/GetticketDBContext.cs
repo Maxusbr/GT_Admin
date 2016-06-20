@@ -2,7 +2,7 @@
 
 namespace Getticket.Web.DAL.Entities
 {
-    class GetticketDBContext : DbContext
+    public class GetticketDBContext : DbContext
     {
         public GetticketDBContext() : base("name=Getticket.Web.API.Properties.Settings.GetticketConection")
         {

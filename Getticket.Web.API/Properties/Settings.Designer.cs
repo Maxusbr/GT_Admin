@@ -25,17 +25,6 @@ namespace Getticket.Web.API.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-V2NNC9Q\\SQLEXPRESS;Initial Catalog=Getticket;Integrated Secur" +
-            "ity=True")]
-        public string GetticketConection {
-            get {
-                return ((string)(this["GetticketConection"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int DaysForInviteToLive {
             get {
@@ -67,6 +56,17 @@ namespace Getticket.Web.API.Properties {
         public string PasswordAcceptableSymbols {
             get {
                 return ((string)(this["PasswordAcceptableSymbols"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SADKNIGHT-PC\\SQLEXPRESS;Initial Catalog=Getticket;Integrated Security" +
+            "=True")]
+        public string GetticketConection {
+            get {
+                return ((string)(this["GetticketConection"]));
             }
         }
     }

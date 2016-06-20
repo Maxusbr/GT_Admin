@@ -2,7 +2,7 @@
 
 namespace Getticket.Web.DAL.Entities
 {
-    class UserInfo : BaseEntity
+    public class UserInfo : BaseEntity
     {
         public UserInfo() { }
 

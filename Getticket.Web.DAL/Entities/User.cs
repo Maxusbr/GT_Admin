@@ -2,7 +2,7 @@
 
 namespace Getticket.Web.DAL.Entities
 {
-    class User : BaseEntity, IUser<int>
+    public class User : BaseEntity, IUser<int>
     {
         /// <summary>
         /// Уникальное поле для IUser интерфейса
@@ -21,11 +21,11 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Роль доступа пользователя к API
         /// </summary>
-        public virtual AccessRole AccessRole { get; set; }
+  //      public virtual AccessRole AccessRole { get; set; }
 
         /// <summary>
         /// Статус пользователя в системе
         /// </summary>
-        public virtual UserStatus UserStatus { get; set; }
+ //       public virtual UserStatus UserStatus { get; set; }
     }
 }
