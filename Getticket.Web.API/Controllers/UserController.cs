@@ -1,15 +1,13 @@
-﻿using Getticket.Web.API.Attributes;
-using Getticket.Web.API.Models;
+﻿using Getticket.Web.API.Models;
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
-using Getticket.Web.DAL.Enums;
-using System;
 using System.Collections.Generic;
 using System.Web.Http;
 
 namespace Getticket.Web.API.Controllers
 {
     [RoutePrefix("users")]
+    [Authorize(Roles = "Admin")]
     public class UserController : ApiController
     {
         private UserRegistrationService UserRegServ;
@@ -21,25 +19,17 @@ namespace Getticket.Web.API.Controllers
             this.Credentails = new CredentailsService();
         }
 
-        //TODO сделать авторизацию
         [HttpPost]
         [Route("")]
-       
-        public IHttpActionResult GetAll([FromBody] QueryModel<string> model)
+        public IHttpActionResult GetAll()
         {
-            if (!Credentails.IsAuthorized(model.Credentails, AccessRoleType.Admin)) return Unauthorized();
-
-
             return Ok<IList<User>>(UserRegServ.GetAll()); 
         }
 
         [HttpPost]
         [Route("{id}")]
-        public IHttpActionResult GetOne(int id, [FromBody] QueryModel<string> model)
+        public IHttpActionResult GetOne(int id)
         {
-            if (!Credentails.IsAuthorized(model.Credentails, AccessRoleType.Admin)) return Unauthorized();
-
-
             User user = UserRegServ.GetById(id);
             if (user == null)
             {
@@ -50,12 +40,9 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("register")]
-        public IHttpActionResult Register([FromBody] QueryModel<RegisterUserModel> model)
+        public IHttpActionResult Register([FromBody] RegisterUserModel model)
         {
-            if (!Credentails.IsAuthorized(model.Credentails, AccessRoleType.Admin)) return Unauthorized();
-
-
-            User user = UserRegServ.CreateActiveUser(model.Payload);
+            User user = UserRegServ.CreateActiveUser(model);
             if (user == null)
             {
                 return Json<string>("user allready exists");
@@ -65,12 +52,9 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("update")]
-        public IHttpActionResult Update([FromBody] QueryModel<UpdateUserModel> model)
+        public IHttpActionResult Update([FromBody] UpdateUserModel model)
         {
-            if (!Credentails.IsAuthorized(model.Credentails, AccessRoleType.Admin)) return Unauthorized();
-
-
-            User user = UserRegServ.UpdateUser(model.Payload);
+            User user = UserRegServ.UpdateUser(model);
             if (user == null)
             {
                 return Json<string>("User id not found");
@@ -81,13 +65,9 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("delete/{id}")]
-        public IHttpActionResult MarkDeleted(int id, [FromBody] QueryModel<string> model)
+        public IHttpActionResult MarkDeleted(int id)
         {
-            if (!Credentails.IsAuthorized(model.Credentails, AccessRoleType.Admin)) return Unauthorized();
-
-
-
-            if (!UserRegServ.MarkDelete(1))
+            if (!UserRegServ.MarkDelete(id))
             {
                 return Json<string>("User with id = " + id + " not found");
             }

@@ -3,6 +3,7 @@ using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.Repository;
 using System;
+using System.Threading.Tasks;
 
 namespace Getticket.Web.API.Services
 {
@@ -90,6 +91,22 @@ namespace Getticket.Web.API.Services
         public void Dispose()
         {
             UserRep.Dispose();
+        }
+
+        public Task<User> Authenticate(string UserName, string Password)
+        {
+            string PasswordHash = PasswordService.GeneratePasswordHash(Password);
+            User user = UserRep.FindOneByEmailAndPassword(UserName, PasswordHash);
+            if (user != null)
+            {
+                this.UpdateUserVisitAsync(user);
+                if (user.UserStatus.Status == UserStatusType.Locked)
+                {
+                    user = null;
+                }
+            }
+            
+            return Task.FromResult<User>(user);
         }
     }
 }

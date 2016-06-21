@@ -8,6 +8,7 @@ namespace Getticket.Web.API.Controllers
     /// Контроллер исключительно для отладки приложения
     /// </summary>
     [RoutePrefix("debug")]
+    [Authorize(Roles = "Admin")]
     public class DebugController : ApiController
     {
         private UserRepository UserRep { get; set; }
