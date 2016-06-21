@@ -87,7 +87,7 @@ namespace Getticket.Web.API.Controllers
 
 
 
-            if (!UserRegServ.MarkDelete(1))
+            if (!UserRegServ.MarkDelete(id))
             {
                 return Json<string>("User with id = " + id + " not found");
             }
