@@ -10,12 +10,13 @@ namespace Getticket.Web.API.Attributes
     {
         public override bool IsValid(object value)
         {
-            bool result = false;
-            if (PhoneService.PhoneValidate((string)value))
+            if (value == null)
             {
-                result = true;
+                // Если поле пусто говорим что поле прошло проверку,
+                // т.к. на пустоту должен проверять [Required]
+                return true;
             }
-            return result;
+            return PhoneService.IsPhoneValid((string) value);
         }
     }
 }

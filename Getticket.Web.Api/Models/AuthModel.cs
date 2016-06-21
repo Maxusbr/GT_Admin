@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Getticket.Web.API.Attributes;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Getticket.Web.API.Models
 {
+
+    /// <summary>
+    /// Модель для предоставления пользователю 
+    /// логина и пароля для доступа на контроллер
+    /// </summary>
     public class AuthModel
     {
         public AuthModel() { }
@@ -16,9 +19,9 @@ namespace Getticket.Web.API.Models
             this.Password = Password;
         }
 
-
+        [EmailAddress]
         public string Email { get; set; }
-        [Required]
+        [CustomPassword]
         public string Password { get; set; }
     }
 }

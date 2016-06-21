@@ -94,7 +94,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\CheckModelForNullAttribute.cs" />
+    <Compile Include="Attributes\CustomPasswordAttribute.cs" />
     <Compile Include="Attributes\CustomPhoneAttribute.cs" />
+    <Compile Include="Attributes\ValidateModelStateAttribute.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\InviteController.cs" />
     <Compile Include="Controllers\LogonController.cs" />
@@ -103,6 +106,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthModel.cs" />
+    <Compile Include="Models\LogonModel.cs" />
     <Compile Include="Models\QueryModel.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\UpdateUserModel.cs" />
@@ -112,6 +116,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Services\CredentailsService.cs" />
     <Compile Include="Services\PasswordService.cs" />
     <Compile Include="Services\PhoneService.cs" />
     <Compile Include="Services\UserRegistrationService.cs" />

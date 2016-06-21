@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Getticket.Web.API.Attributes;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace Getticket.Web.API
 {
@@ -11,6 +7,10 @@ namespace Getticket.Web.API
     {
         protected void Application_Start()
         {
+            // Проверяем состояние модели на каждом контроллере
+            GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
+
+            // Настраиваем маппинг Web.Api
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

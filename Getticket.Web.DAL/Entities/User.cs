@@ -23,6 +23,11 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         public string PasswordHash { get; set; }
 
+        /// <summary>
+        /// Дата последнего вызова 
+        /// методов контроллера
+        /// </summary>
+        public DateTime? LastEnter { get; set; }
 
         /// <summary>
         /// Информация о пользователе
