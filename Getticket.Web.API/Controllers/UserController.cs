@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.API.Models;
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
+
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -20,6 +21,7 @@ namespace Getticket.Web.API.Controllers
         //TODO сделать авторизацию
         [HttpPost]
         [Route("")]
+       
         public IHttpActionResult GetAll([FromBody] QueryModel<string> model)
         {
             return Ok<IList<User>>(UserRegServ.GetAll()); 
@@ -51,7 +53,7 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("update")]
-        public IHttpActionResult Update([FromBody] QueryModel<User> model)
+        public IHttpActionResult Update([FromBody] QueryModel<UpdateUserModel> model)
         {
             User user = UserRegServ.UpdateUser(model.Payload);
             if (user == null)
@@ -63,10 +65,10 @@ namespace Getticket.Web.API.Controllers
         }
 
         [HttpPost]
-        [Route("delete")]
+        [Route("delete/{id}")]
         public IHttpActionResult MarkDeleted(int id, [FromBody] QueryModel<string> model)
         {
-            if (!UserRegServ.MarkDelete(1))
+            if (!UserRegServ.MarkDelete(id))
             {
                 return Json<string>("User with id = " + id + " not found");
             }

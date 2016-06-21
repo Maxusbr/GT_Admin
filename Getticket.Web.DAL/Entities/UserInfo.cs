@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -31,6 +32,7 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         public string Phone { get; set; }
 
+        [JsonIgnore]
         public User User { get; set; }
     }
 }

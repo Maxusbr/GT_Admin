@@ -53,7 +53,7 @@ namespace Getticket.Web.DAL.Repository
             {
                 return false;
             }
-            user.UserStatus = UserStatusHelper.Deleted();
+            user.UserStatus = UserStatusHelper.Deleted(user.UserStatus.Id);
             db.SaveChanges();
             return true;
         }

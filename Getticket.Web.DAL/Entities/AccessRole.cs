@@ -1,5 +1,10 @@
 ﻿using Getticket.Web.DAL.Enums;
 using System.Collections.Generic;
+using Microsoft.AspNet.Identity;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -32,6 +37,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Ссылка на пользователей
         /// </summary>
+        [JsonIgnore]
         public ICollection<User> Users { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Getticket.Web.DAL.Enums;
+using Newtonsoft.Json;
 using System;
 
 namespace Getticket.Web.DAL.Entities
@@ -11,7 +12,7 @@ namespace Getticket.Web.DAL.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime? UpdateTime { get; set; }
-
+        [JsonIgnore]
         public User User { get; set; }
     }
 

@@ -1,4 +1,5 @@
 ﻿using Getticket.Web.API.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,5 +25,7 @@ namespace Getticket.Web.API.Models
         public bool GeneratePassword { get; set; }
         public bool NotSendWelcome { get; set; }
         [Required]public int RoleId { get; set; }
+        
+
     }
 }

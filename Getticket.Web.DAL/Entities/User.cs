@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -25,19 +26,22 @@ namespace Getticket.Web.DAL.Entities
 
         /// <summary>
         /// Информация о пользователе
-        /// Имя, Фамилия, Телефон, Компания и т.д.
+        /// Имя, Фамилия, Телефон, Компания и т.д.virtual
         /// </summary>
+        
         public virtual UserInfo UserInfo { get; set; }
 
         /// <summary>
         /// Роль доступа пользователя к API
         /// </summary>
         public int AccessRoleId { get; set; }
+        
         public virtual AccessRole AccessRole { get; set; }
 
         /// <summary>
         /// Статус пользователя в системе
         /// </summary>
+       
         public virtual UserStatus UserStatus { get; set; }
     }
 }

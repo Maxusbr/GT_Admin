@@ -1,4 +1,5 @@
-﻿using Getticket.Web.API.Models;
+﻿using Getticket.Web.API.Helpers;
+using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Repository;
 using System;
@@ -50,19 +51,37 @@ namespace Getticket.Web.API.Services
                 user.UserInfo.Company = registerUserModel.Company;
                 user.UserInfo.Position = registerUserModel.Position;
                 user.UserInfo.Phone = registerUserModel.Phone;
-  
-               // user.UserStatus = UserStatusHelper.None(DateTime.Now);
-               // user.RoleId = registerUserModel.RoleId;
+
+                user.UserStatus = UserStatusHelper.SystemSeed();
+                user.AccessRoleId = registerUserModel.RoleId;
                 return UserRep.Save(user);
             }
             return null;
         }
 
-        public User UpdateUser(User user)
+        public User UpdateUser(UpdateUserModel updateUserModel)
         {
-            if (user.Id == 0)
+            if (updateUserModel.Id == 0)
             {
                 return null;
+            }
+            User user = this.GetById(updateUserModel.Id);
+            if (updateUserModel.PasswordChanged == true)
+            {
+                user.PasswordHash = PasswordService.GeneratePasswordHash(updateUserModel.NewPassword);
+
+            }
+          
+            user.UserName = updateUserModel.Email;
+            user.UserInfo.Name = updateUserModel.Name;
+            user.UserInfo.LastName = updateUserModel.LastName;
+            user.UserInfo.Company = updateUserModel.Company;
+            user.UserInfo.Position = updateUserModel.Position;
+            user.UserInfo.Phone = updateUserModel.Phone;
+                                    
+            if(updateUserModel.Locked)
+            {
+                user.UserStatus = UserStatusHelper.SystemSeed();
             }
             return UserRep.Save(user);
         }

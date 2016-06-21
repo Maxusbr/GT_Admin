@@ -5,14 +5,19 @@ namespace Getticket.Web.API.Helpers
 {
     public class UserStatusHelper
     {
-        public static UserStatus Deleted()
+        public static UserStatus Deleted(int Id = 0)
         {
-            return new UserStatus() { Name = "Deleted", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Deleted };
+            return new UserStatus() {Id = Id, Name = "Deleted", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Deleted };
         }
 
         public static UserStatus SystemSeed()
         {
             return new UserStatus() { Name = "Seed", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.System };
+        }
+
+        public static UserStatus Locked()
+        {
+            return new UserStatus() { Name = "Locked", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Locked };
         }
     }
 }
