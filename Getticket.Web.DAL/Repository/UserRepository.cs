@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
+using Getticket.Web.DAL.IRepositories;
 
 namespace Getticket.Web.DAL.Repository
 {
-    public class UserRepository : BaseRepository<User>
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
 
         public UserRepository()
@@ -39,13 +40,22 @@ namespace Getticket.Web.DAL.Repository
 
         public IList<User> FindAllByEmail(string email)
         {
-            IQueryable<User> query = db.Users.Where(u => u.UserName.Equals(email));
+
+            /* IQueryable<User> query = FindAllNotDeleted().Where(u => u.UserName.Equals(email));
+             IList<User> users = null;
+             if (query.Any())
+             {
+                 users = query.ToList();
+             }
+             return users; */
+            IQueryable<User> query = db.Users.Where(u => u.UserStatus.Status != UserStatusType.Deleted && u.UserName.Equals(email));
             IList<User> users = null;
             if (query.Any())
             {
                 users = query.ToList();
             }
-            return users;
+            return users; 
+
         }
 
         public bool MarkDelete(int Id)
@@ -123,5 +133,6 @@ namespace Getticket.Web.DAL.Repository
             User UserToSave = this.Save(user);
             return Task.FromResult(UserToSave);
         }
+
     }
 }

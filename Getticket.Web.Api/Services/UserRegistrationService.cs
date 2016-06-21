@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.IRepositories;
 using Getticket.Web.DAL.Repository;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,12 @@ namespace Getticket.Web.API.Services
 {
     public class UserRegistrationService
     {
-        private UserRepository UserRep = new UserRepository();
+        private IUserRepository UserRep;
 
+        public UserRegistrationService()
+        {
+            this.UserRep = new UserRepository();
+        }
 
         public User GetById(int Id)
         {
@@ -66,29 +71,40 @@ namespace Getticket.Web.API.Services
                 return null;
             }
             User user = this.GetById(updateUserModel.Id);
-            if (updateUserModel.PasswordChanged == true)
+            if (user != null)
             {
-                user.PasswordHash = PasswordService.GeneratePasswordHash(updateUserModel.NewPassword);
+                if (updateUserModel.PasswordChanged == true)
+                {
+                    user.PasswordHash = PasswordService.GeneratePasswordHash(updateUserModel.NewPassword);
 
+                }
+
+                user.UserName = updateUserModel.Email;
+                user.UserInfo.Name = updateUserModel.Name;
+                user.UserInfo.LastName = updateUserModel.LastName;
+                user.UserInfo.Company = updateUserModel.Company;
+                user.UserInfo.Position = updateUserModel.Position;
+                user.UserInfo.Phone = updateUserModel.Phone;
+
+                if (updateUserModel.Locked)
+                {
+                    user.UserStatus = UserStatusHelper.SystemSeed();
+                }
+                return UserRep.Save(user);
             }
-          
-            user.UserName = updateUserModel.Email;
-            user.UserInfo.Name = updateUserModel.Name;
-            user.UserInfo.LastName = updateUserModel.LastName;
-            user.UserInfo.Company = updateUserModel.Company;
-            user.UserInfo.Position = updateUserModel.Position;
-            user.UserInfo.Phone = updateUserModel.Phone;
-                                    
-            if(updateUserModel.Locked)
-            {
-                user.UserStatus = UserStatusHelper.SystemSeed();
-            }
-            return UserRep.Save(user);
+            return null;
         }
 
         public bool MarkDelete(int Id)
         {
-            return UserRep.MarkDelete(Id);
+            User user = UserRep.FindById(Id);
+            if (user == null)
+            {
+                return false;
+            }
+            user.UserStatus = UserStatusHelper.Deleted(user.UserStatus.Id);
+            UserRep.Save(user);
+            return true;
         }
     }
 }
