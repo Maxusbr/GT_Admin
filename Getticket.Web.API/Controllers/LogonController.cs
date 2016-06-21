@@ -16,7 +16,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         [HttpPost]
-        [Route("")]
+        [Route("credentails")]
         public IHttpActionResult Logon([FromBody] LogonModel model)
         {
             AuthModel credentails = Credentails.Authenticate(model);
