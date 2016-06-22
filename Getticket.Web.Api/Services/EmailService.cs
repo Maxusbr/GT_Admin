@@ -8,6 +8,7 @@ namespace Getticket.Web.API.Services
 {
     /// <summary>
     /// Служба отправки сообщений электронной почтой
+    /// Существует баг(?): https://habrahabr.ru/post/237899/
     /// </summary>
     public class EmailService
     {
@@ -23,17 +24,17 @@ namespace Getticket.Web.API.Services
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress(Settings.Default.from);
+                mail.From = new MailAddress(Settings.Default.MailFrom);
                 mail.To.Add(new MailAddress(mailto));
                 mail.Subject = caption;
                 mail.Body = message;
                 if (!string.IsNullOrEmpty(attachFile))
                     mail.Attachments.Add(new Attachment(attachFile));
                 SmtpClient client = new SmtpClient();
-                client.Host = Settings.Default.host;
-                client.Port = Settings.Default.port;
-                client.EnableSsl = Settings.Default.EnableSsl;
-                client.Credentials = new NetworkCredential(Settings.Default.from.Split('@')[0], Settings.Default.password);
+                client.Host = Settings.Default.MailHost;
+                client.Port = Settings.Default.MailPort;
+                client.EnableSsl = Settings.Default.MailEnableSsl;
+                client.Credentials = new NetworkCredential(Settings.Default.MailFrom.Split('@')[0], Settings.Default.MailPassword);
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.Send(mail);
                 mail.Dispose();
@@ -56,7 +57,7 @@ namespace Getticket.Web.API.Services
             try
             {
                 MailMessage mail = new MailMessage();
-                mail.From = new MailAddress(Settings.Default.from);
+                mail.From = new MailAddress(Settings.Default.MailFrom);
                 foreach (string s in mailto)
                 {
                     mail.To.Add(new MailAddress(s));
@@ -66,10 +67,10 @@ namespace Getticket.Web.API.Services
                 if (!string.IsNullOrEmpty(attachFile))
                     mail.Attachments.Add(new Attachment(attachFile));
                 SmtpClient client = new SmtpClient();
-                client.Host = Settings.Default.host;
-                client.Port = Settings.Default.port;
-                client.EnableSsl = Settings.Default.EnableSsl;
-                client.Credentials = new NetworkCredential(Settings.Default.from.Split('@')[0], Settings.Default.password);
+                client.Host = Settings.Default.MailHost;
+                client.Port = Settings.Default.MailPort;
+                client.EnableSsl = Settings.Default.MailEnableSsl;
+                client.Credentials = new NetworkCredential(Settings.Default.MailFrom.Split('@')[0], Settings.Default.MailPassword);
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.Send(mail);
                 mail.Dispose();

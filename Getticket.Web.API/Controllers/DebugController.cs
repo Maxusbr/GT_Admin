@@ -32,6 +32,16 @@ namespace Getticket.Web.API.Controllers
         }
 
         [HttpPost]
+        [Route("mail")]
+        public IHttpActionResult SendMailTo()
+        {
+            string From = this.User.Identity.Name != null ? this.User.Identity.Name : "Uknown";
+            string To = "maria.s@sunrise-r.ru";
+            EmailService.SendMailToOne(To, "Тест отправки письма", "Hello from " + From);
+            return Ok("sended");
+        }
+
+        [HttpPost]
         [Route("test")]
         public IHttpActionResult Test()
         {

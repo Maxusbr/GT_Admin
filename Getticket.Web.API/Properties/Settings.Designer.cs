@@ -71,46 +71,46 @@ namespace Getticket.Web.API.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string from {
+        [global::System.Configuration.DefaultSettingValueAttribute("test-ticket@rambler.ru")]
+        public string MailFrom {
             get {
-                return ((string)(this["from"]));
+                return ((string)(this["MailFrom"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string password {
+        [global::System.Configuration.DefaultSettingValueAttribute("SadKnight")]
+        public string MailPassword {
             get {
-                return ((string)(this["password"]));
+                return ((string)(this["MailPassword"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("smtp.gmail.com")]
-        public string host {
+        [global::System.Configuration.DefaultSettingValueAttribute("smtp.rambler.ru")]
+        public string MailHost {
             get {
-                return ((string)(this["host"]));
+                return ((string)(this["MailHost"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("587")]
-        public int port {
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int MailPort {
             get {
-                return ((int)(this["port"]));
+                return ((int)(this["MailPort"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool EnableSsl {
+        public bool MailEnableSsl {
             get {
-                return ((bool)(this["EnableSsl"]));
+                return ((bool)(this["MailEnableSsl"]));
             }
         }
     }
