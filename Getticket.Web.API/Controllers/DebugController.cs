@@ -37,7 +37,7 @@ namespace Getticket.Web.API.Controllers
         {
             string From = this.User.Identity.Name != null ? this.User.Identity.Name : "Uknown";
             string To = "maria.s@sunrise-r.ru";
-            EmailService.SendMailToOne(To, "Тест отправки письма", "Hello from " + From);
+            EmailService.SendMail(To, "Тест отправки письма", "Hello from " + From);
             return Ok("sended");
         }
 
@@ -117,7 +117,7 @@ namespace Getticket.Web.API.Controllers
             emails.Add("petr-marial@yandex.ru");
             emails.Add("maria.s@sunrise-r.ru");
             string body = "Здравствуйте! <br/><br/> Перейдите по ссылке  <a href='http://{1}/User/Activate/{0}'>http://{1}/User/Activate/{0}</a>, чтобы подтвертить свой почтовый ящик.<br/>-----<br/>С уважением, команда <a href='http://{1}'>{1}</a>";
-            EmailService.SendMailToList(emails, "Это письмо для всех", body);
+            EmailService.SendMail(emails, "Это письмо для всех", body);
             return Json<string>("send email");
         }
     }
