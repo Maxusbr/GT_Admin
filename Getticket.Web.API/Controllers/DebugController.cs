@@ -1,6 +1,8 @@
 ﻿using System.Web.Http;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Repository;
+using Getticket.Web.API.Services;
+using System.Collections.Generic;
 
 namespace Getticket.Web.API.Controllers
 {
@@ -83,6 +85,19 @@ namespace Getticket.Web.API.Controllers
             }
 
             return Json<string>("Error!!!!");
+        }
+
+        [HttpPost]
+        [Route("test4")]
+        public IHttpActionResult Test4()
+        {
+            List<string> emails = new List<string>();
+            emails.Add("mari_yar@inbox.ru");
+            emails.Add("petr-marial@yandex.ru");
+            emails.Add("maria.s@sunrise-r.ru");
+            string body = "Здравствуйте! <br/><br/> Перейдите по ссылке  <a href='http://{1}/User/Activate/{0}'>http://{1}/User/Activate/{0}</a>, чтобы подтвертить свой почтовый ящик.<br/>-----<br/>С уважением, команда <a href='http://{1}'>{1}</a>";
+            EmailService.SendMailToList(emails, "Это письмо для всех", body);
+            return Json<string>("send email");
         }
     }
 }
