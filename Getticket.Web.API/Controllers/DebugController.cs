@@ -13,11 +13,22 @@ namespace Getticket.Web.API.Controllers
     [Authorize(Roles = "Admin")]
     public class DebugController : ApiController
     {
-        private UserRepository UserRep { get; set; }
+        private UserRepository UserRep;
+        private UserRegistrationService UserRegServ;
 
         public DebugController()
         {
             this.UserRep = new UserRepository();
+            this.UserRegServ = new UserRegistrationService();
+        }
+
+        [HttpPost]
+        [Route("users/seed")]
+        [AllowAnonymous]
+        public IHttpActionResult UsersSeed()
+        {
+            
+            return Ok();
         }
 
         [HttpPost]
@@ -62,7 +73,7 @@ namespace Getticket.Web.API.Controllers
         [Route("test2")]
         public IHttpActionResult Test2()
         {
-            User user = UserRep.FindById(1);
+            User user = UserRep.FindOneById(1);
             if (user != null)
             {
                 user.UserName = "werwwtt@yaetd.ru";

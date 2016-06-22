@@ -13,9 +13,8 @@ namespace Getticket.Web.API
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureFilters();
-
             HttpConfiguration config = new HttpConfiguration();
+            ConfigureFilters(config);
             ConfigureOAuth(app);
             // Настраиваем маппинг Web.Api для owin
             WebApiConfig.Register(config);
@@ -44,10 +43,10 @@ namespace Getticket.Web.API
 
         }
 
-        public void ConfigureFilters()
+        public void ConfigureFilters(HttpConfiguration config)
         {
             // Проверяем состояние модели на каждом контроллере
-            GlobalConfiguration.Configuration.Filters.Add(new ValidateModelStateAttribute());
+            config.Filters.Add(new ValidateModelStateAttribute());
         }
     }
 }

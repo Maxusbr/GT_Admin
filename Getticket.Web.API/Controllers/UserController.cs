@@ -11,12 +11,13 @@ namespace Getticket.Web.API.Controllers
     public class UserController : ApiController
     {
         private UserRegistrationService UserRegServ;
-        private CredentailsService Credentails;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public UserController()
         {
             this.UserRegServ = new UserRegistrationService();
-            this.Credentails = new CredentailsService();
         }
 
         [HttpPost]
@@ -38,41 +39,30 @@ namespace Getticket.Web.API.Controllers
             return Ok<User>(user);
         }
 
+        /// <summary>
+        /// Регестрирует пользователя в системе
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("register")]
         public IHttpActionResult Register([FromBody] RegisterUserModel model)
         {
-            User user = UserRegServ.CreateActiveUser(model);
-            if (user == null)
-            {
-                return Json<string>("user allready exists");
-            }
-            return Ok(user);
+            return Ok(UserRegServ.CreateSystemUser(model).Result());
         }
 
         [HttpPost]
         [Route("update")]
         public IHttpActionResult Update([FromBody] UpdateUserModel model)
         {
-            User user = UserRegServ.UpdateUser(model);
-            if (user == null)
-            {
-                return Json<string>("User id not found");
-            }
-
-            return Ok(user);
+            return Ok(UserRegServ.UpdateUser(model).Result());
         }
 
         [HttpPost]
         [Route("delete/{id}")]
         public IHttpActionResult MarkDeleted(int id)
         {
-            if (!UserRegServ.MarkDelete(id))
-            {
-                return Json<string>("User with id = " + id + " not found");
-            }
-
-            return Json<string>("User with id = " + id + " deleted");
+            return Ok(UserRegServ.MarkDeleted(id).Result());
         }
     }
 }

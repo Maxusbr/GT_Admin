@@ -20,7 +20,7 @@ namespace Getticket.Web.API.Services
         public AuthModel Authenticate(LogonModel model)
         {
             string PasswordHash = PasswordService.GeneratePasswordHash(model.Password);
-            string ClearPhone = PhoneService.PhoneConvert(model.Phone);
+            string ClearPhone = PhoneCheckService.PhoneConvert(model.Phone);
 
             User user = null;
             if (String.IsNullOrEmpty(model.Email))
@@ -99,7 +99,6 @@ namespace Getticket.Web.API.Services
             User user = UserRep.FindOneByEmailAndPassword(UserName, PasswordHash);
             if (user != null)
             {
-                this.UpdateUserVisitAsync(user);
                 if (user.UserStatus.Status == UserStatusType.Locked)
                 {
                     user = null;

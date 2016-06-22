@@ -1,13 +1,17 @@
 ﻿using Microsoft.AspNet.Identity;
-using Newtonsoft.Json;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Getticket.Web.DAL.Entities
 {
+    /// <summary>
+    /// User
+    /// </summary>
     public class User : BaseEntity, IUser<int>
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public User(){}
 
         /// <summary>
@@ -37,16 +41,17 @@ namespace Getticket.Web.DAL.Entities
         public virtual UserInfo UserInfo { get; set; }
 
         /// <summary>
-        /// Роль доступа пользователя к API
+        /// Внешний ключ для роли пользователя
         /// </summary>
         public int AccessRoleId { get; set; }
-        
+        /// <summary>
+        /// Роль доступа пользователя к API
+        /// </summary>
         public virtual AccessRole AccessRole { get; set; }
 
         /// <summary>
         /// Статус пользователя в системе
         /// </summary>
-       
         public virtual UserStatus UserStatus { get; set; }
     }
 }

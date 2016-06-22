@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Getticket.Web.DAL.IRepositories
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IUserRepository
     {
         /// <summary>
@@ -10,18 +13,17 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        User FindById(int id);
+        User FindOneById(int id);
 
         /// <summary>
-        /// Проверяем есть ли среди неудаленных пользователей, пользователь с таким email,
-        /// если нашли - возвращаем пользователя.
+        /// Находим всех(неудаленных) пользователей по email
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="email"><see cref="User.UserName" /></param>
         /// <returns></returns>
         IList<User> FindAllByEmail(string email);
         
         /// <summary>
-        /// Находим всех пользователей, непомеченных как удаленные.
+        /// Находим всех(неудаленных) пользователей.
         /// </summary>
         /// <returns></returns>
         IList<User> FindAllNotDeleted();

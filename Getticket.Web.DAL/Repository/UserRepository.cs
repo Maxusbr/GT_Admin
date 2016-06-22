@@ -1,73 +1,48 @@
-﻿using Getticket.Web.API.Helpers;
-using Getticket.Web.DAL.Entities;
+﻿using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
 using Getticket.Web.DAL.IRepositories;
+using System.Linq.Expressions;
 
 namespace Getticket.Web.DAL.Repository
 {
+    /// <summary>
+    /// <see cref="IUserRepository" />
+    /// </summary>
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
+        private Expression<Func<User, bool>> UserNotDeleted = (u =>u.UserStatus.Status != UserStatusType.Deleted);
 
-        public UserRepository()
-        {
-        }
-
+        /// <see cref="IUserRepository.FindAllNotDeleted" />
         public IList<User> FindAllNotDeleted()
         {
-            IQueryable<User> query = db.Users.Where(u => u.UserStatus.Status != UserStatusType.Deleted);
-            IList<User> users = null;
-            if (query.Any())
-            {
-                users = query.ToList();
-            }
-            return users;
+            IQueryable<User> query = db.Users.Where(UserNotDeleted);
+            return GetAll(query);
         }
 
-        public User FindById(int Id)
+        /// <see cref="IUserRepository.FindOneById(int)" />
+        public User FindOneById(int Id)
         {
             IQueryable<User> query = db.Users.Where(u => u.Id == Id);
-            User user = null;
-            if (query.Any())
-            {
-                user = query.First();
-            }
-            return user;
+            return GetOne(query);
         }
 
+        /// <see cref="IUserRepository.FindAllByEmail(string)" />
         public IList<User> FindAllByEmail(string email)
         {
-
-            /* IQueryable<User> query = FindAllNotDeleted().Where(u => u.UserName.Equals(email));
-             IList<User> users = null;
-             if (query.Any())
-             {
-                 users = query.ToList();
-             }
-             return users; */
-            IQueryable<User> query = db.Users.Where(u => u.UserStatus.Status != UserStatusType.Deleted && u.UserName.Equals(email));
-            IList<User> users = null;
-            if (query.Any())
-            {
-                users = query.ToList();
-            }
-            return users; 
-
+            IQueryable<User> query = db.Users
+                .Where(UserNotDeleted)
+                .Where(u => u.UserName.Equals(email));
+            return GetAll(query);
         }
 
-        public bool MarkDelete(int Id)
+        /// <see cref="IUserRepository.Save(User)" />
+        public override User Save(User Entity)
         {
-            User user = this.FindById(Id);
-            if (user == null)
-            {
-                return false;
-            }
-            user.UserStatus = UserStatusHelper.Deleted(user.UserStatus.Id);
-            db.SaveChanges();
-            return true;
+            return base.Save(Entity);
         }
 
         public bool Delete(int Id)
@@ -133,6 +108,5 @@ namespace Getticket.Web.DAL.Repository
             User UserToSave = this.Save(user);
             return Task.FromResult(UserToSave);
         }
-
     }
 }

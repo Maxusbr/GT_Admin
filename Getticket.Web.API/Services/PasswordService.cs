@@ -6,31 +6,44 @@ using System.Text.RegularExpressions;
 
 namespace Getticket.Web.API.Services
 {
+    /// <summary>
+    /// Сервис создания, проверки и хеширования паролей
+    /// </summary>
     public class PasswordService
     {
 
         /// <summary>
-        /// Генерирует пароль длиной maxSize(PasswordMaxLength)
+        /// Генерирует пароль длиной PasswordMaxLength
         /// используя набор PasswordAcceptableSymbols
         /// </summary>
-        /// <param name="maxSize"></param>
-        /// <returns>пароль</returns>
+        /// <returns>Сгенерированный пароль</returns>
         public static string GeneratePasswordString()
         {
             return GeneratePasswordString(Settings.Default.PasswordMaxLength);
         }
-        public static string GeneratePasswordString(int maxSize)
+
+        /// <summary>
+        /// Генерирует пароль длиной <paramref name="size"/>
+        /// используя набор PasswordAcceptableSymbols
+        /// </summary>
+        /// <param name="size">кол-во символов не менее PasswordMinLength</param>
+        /// <returns>Сгенерированный пароль</returns>
+        public static string GeneratePasswordString(int size)
         {
+            if (size < Settings.Default.PasswordMinLength)
+            {
+                size = Settings.Default.PasswordMinLength;
+            }
             char[] chars = new char[62];
             chars = Settings.Default.PasswordAcceptableSymbols.ToCharArray();
             byte[] data = new byte[1];
             using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
             {
                 crypto.GetNonZeroBytes(data);
-                data = new byte[maxSize];
+                data = new byte[size];
                 crypto.GetNonZeroBytes(data);
             }
-            StringBuilder result = new StringBuilder(maxSize);
+            StringBuilder result = new StringBuilder(size);
             foreach (byte b in data)
             {
                 result.Append(chars[b % (chars.Length)]);
@@ -39,17 +52,17 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
-        /// Генерирует MD5 Hash для пароля OriginalPas, если
-        /// переданная строка пустая или null используется
+        /// Генерирует MD5 Hash для пароля <paramref name="OriginalPass"/>, если
+        /// переданная строка <c>null</c> сгенерируется хеш от пустой строки
         /// GeneratePasswordString
         /// </summary>
         /// <param name="OriginalPass">строка в кодировке UTF8</param>
         /// <returns>возвращает MD5 от пароля</returns>
         public static string GeneratePasswordHash(string OriginalPass)
         {
-            if (String.IsNullOrEmpty(OriginalPass))
+            if (OriginalPass == null)
             {
-                return OriginalPass;
+                OriginalPass = String.Empty;
             }
             MD5 md5 = MD5.Create();
             byte[] inputBytes = Encoding.UTF8.GetBytes(OriginalPass);
@@ -69,25 +82,14 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public static bool IsPasswordAcceptable(string Password)
         {
+            if (Password == null)
+            {
+                return false;
+            }
             string regex = "[" + Settings.Default.PasswordAcceptableSymbols + "]{"
                 + Settings.Default.PasswordMinLength + "," + Settings.Default.PasswordMaxLength + "}$";
             Regex testPass = new Regex(regex);
             return testPass.IsMatch(Password);
-        }
-
-
-
-        [Obsolete]
-        // Метод больше не используется
-        // TODO удалить метод после очисти ссылок на него
-        public static string CheckPassAndHashIt(string OriginalPass = null, int maxSize = 20)
-        {
-            if (String.IsNullOrEmpty(OriginalPass))
-            {
-                OriginalPass = GeneratePasswordString(maxSize);
-            }
-
-            return GeneratePasswordHash(OriginalPass);
         }
     }
 }

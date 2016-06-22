@@ -2,7 +2,10 @@
 
 namespace Getticket.Web.API.Services
 {
-    public class PhoneService
+    /// <summary>
+    /// Сервис проверки и конвертации телефонного номера
+    /// </summary>
+    public class PhoneCheckService
     {
         public static bool IsPhoneValid(string phone)
         {

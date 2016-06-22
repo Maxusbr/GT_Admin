@@ -4,19 +4,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Getticket.Web.API.Attributes
 {
+    /// <summary>
+    /// Проверяет поле на соответствие формату
+    /// Российского номера мобильного телефона;
+    /// Для проверки на то что поле не пусто использовать [Required]
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property |
      AttributeTargets.Field, AllowMultiple = false)]
-    sealed public class CustomPhoneAttribute : ValidationAttribute
+    public class CustomPhoneAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)
         {
-            if (value == null)
+            if (String.IsNullOrEmpty((string) value))
             {
-                // Если поле пусто говорим что поле прошло проверку,
-                // т.к. на пустоту должен проверять [Required]
                 return true;
             }
-            return PhoneService.IsPhoneValid((string) value);
+            return PhoneCheckService.IsPhoneValid((string) value);
         }
     }
 }

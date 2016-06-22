@@ -1,21 +1,19 @@
 ﻿using Getticket.Web.API.Properties;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Web;
 
 namespace Getticket.Web.API.Services
 {
+    /// <summary>
+    /// Служба отправки сообщений электронной почтой
+    /// </summary>
     public class EmailService
     {
         /// <summary>
-        /// Отправка письма на почтовый ящик C# mail send
+        /// Отправка email
         /// </summary>
-        /// <param name="smtpServer">Имя SMTP-сервера</param>
-        /// <param name="from">Адрес отправителя</param>
-        /// <param name="password">пароль к почтовому ящику отправителя</param>
         /// <param name="mailto">Адрес получателя</param>
         /// <param name="caption">Тема письма</param>
         /// <param name="message">Сообщение</param>
@@ -42,17 +40,14 @@ namespace Getticket.Web.API.Services
             }
             catch (Exception e)
             {
-                throw new Exception("Mail.Send: " + e.Message);
+                throw new Exception("EmailService: " + e.Message);
             }
         }
 
         /// <summary>
-        /// Отправка письма на почтовый ящик C# mail send
+        /// Отправка email
         /// </summary>
-        /// <param name="smtpServer">Имя SMTP-сервера</param>
-        /// <param name="from">Адрес отправителя</param>
-        /// <param name="password">пароль к почтовому ящику отправителя</param>
-        /// <param name="mailto">Адрес получателя</param>
+        /// <param name="mailto">Адреса получателей</param>
         /// <param name="caption">Тема письма</param>
         /// <param name="message">Сообщение</param>
         /// <param name="attachFile">Присоединенный файл</param>
@@ -81,9 +76,8 @@ namespace Getticket.Web.API.Services
             }
             catch (Exception e)
             {
-                throw new Exception("Mail.Send: " + e.Message);
+                throw new Exception("EmailService: " + e.Message);
             }
         }
-
     }
 }

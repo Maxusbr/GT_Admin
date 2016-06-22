@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Getticket.Web.API.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -150,6 +151,8 @@
     <Compile Include="Controllers\InviteController.cs" />
     <Compile Include="Controllers\LogonController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Helpers\RegisterUserModelHelper.cs" />
+    <Compile Include="Helpers\UpdateUserModelHelper.cs" />
     <Compile Include="Models\AuthModel.cs" />
     <Compile Include="Models\LogonModel.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
@@ -164,6 +167,7 @@
     <Compile Include="Services\EmailService.cs" />
     <Compile Include="Services\PasswordService.cs" />
     <Compile Include="Services\PhoneService.cs" />
+    <Compile Include="Services\ServiceResponce.cs" />
     <Compile Include="Services\UserRegistrationService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

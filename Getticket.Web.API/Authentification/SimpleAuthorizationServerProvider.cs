@@ -1,7 +1,6 @@
 ﻿using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
