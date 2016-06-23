@@ -26,6 +26,7 @@ namespace Getticket.Web.API.Services
                 mail.From = new MailAddress(Settings.Default.from);
                 mail.To.Add(new MailAddress(mailto));
                 mail.Subject = caption;
+                mail.IsBodyHtml = true;
                 mail.Body = message;
                 if (!string.IsNullOrEmpty(attachFile))
                     mail.Attachments.Add(new Attachment(attachFile));

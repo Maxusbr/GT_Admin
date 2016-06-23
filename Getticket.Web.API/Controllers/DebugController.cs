@@ -102,12 +102,14 @@ namespace Getticket.Web.API.Controllers
         [Route("test4")]
         public IHttpActionResult Test4()
         {
-            List<string> emails = new List<string>();
-            emails.Add("mari_yar@inbox.ru");
-            emails.Add("petr-marial@yandex.ru");
-            emails.Add("maria.s@sunrise-r.ru");
-            string body = "Здравствуйте! <br/><br/> Перейдите по ссылке  <a href='http://{1}/User/Activate/{0}'>http://{1}/User/Activate/{0}</a>, чтобы подтвертить свой почтовый ящик.<br/>-----<br/>С уважением, команда <a href='http://{1}'>{1}</a>";
-            EmailService.SendMailToList(emails, "Это письмо для всех", body);
+            /* List<string> emails = new List<string>();
+             emails.Add("mari_yar@inbox.ru");
+             emails.Add("petr-marial@yandex.ru");
+             emails.Add("maria.s@sunrise-r.ru"); */
+            string email = "mari_yar@inbox.ru";
+            string Body = System.IO.File.ReadAllText("Invite.htm");
+            Body = Body.Replace("#DealerCompanyName#", "It is my company");
+            EmailService.SendMailToOne(email, "Это письмо для всех", Body);
             return Json<string>("send email");
         }
     }

@@ -71,7 +71,7 @@ namespace Getticket.Web.API.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("maristoral@gmail.ru")]
         public string from {
             get {
                 return ((string)(this["from"]));
@@ -80,7 +80,7 @@ namespace Getticket.Web.API.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Destro82")]
         public string password {
             get {
                 return ((string)(this["password"]));
