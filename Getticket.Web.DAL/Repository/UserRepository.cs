@@ -14,12 +14,30 @@ namespace Getticket.Web.DAL.Repository
     /// </summary>
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        private Expression<Func<User, bool>> UserNotDeleted = (u =>u.UserStatus.Status != UserStatusType.Deleted);
+        /// <summary>
+        /// Пользователь НЕ помечен как удаленный
+        /// </summary>
+        private Expression<Func<User, bool>> UserNotDeleted 
+            = (u =>u.UserStatus.Status != UserStatusType.Deleted);
+
+        /// <summary>
+        /// Приглашенный пользователь
+        /// </summary>
+        private Expression<Func<User, bool>> UserInvited 
+            = (u => (u.UserStatus.Status == UserStatusType.Invite 
+                    || u.UserStatus.Status == UserStatusType.AcceptInvite));
 
         /// <see cref="IUserRepository.FindAllNotDeleted" />
         public IList<User> FindAllNotDeleted()
         {
             IQueryable<User> query = db.Users.Where(UserNotDeleted);
+            return GetAll(query);
+        }
+
+        /// <see cref="IUserRepository.FindAllInvited" />
+        public IList<User> FindAllInvited()
+        {
+            IQueryable<User> query = db.Users.Where(UserInvited);
             return GetAll(query);
         }
 
@@ -107,6 +125,12 @@ namespace Getticket.Web.DAL.Repository
         {
             User UserToSave = this.Save(user);
             return Task.FromResult(UserToSave);
+        }
+
+        /// <see cref="IUserRepository.DeleteUserByEmail(string)" />
+        public bool DeleteUserByEmail(string userName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

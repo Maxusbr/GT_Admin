@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Getticket.Web.API.Models;
+using Getticket.Web.API.Services;
+using Getticket.Web.DAL.Entities;
+using System;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace Getticket.Web.API.Controllers
@@ -10,6 +14,16 @@ namespace Getticket.Web.API.Controllers
     [Authorize(Roles = "Admin")]
     public class InviteController : ApiController
     {
+        private UserInviteService InviteServ;
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public InviteController()
+        {
+            this.InviteServ = new UserInviteService();
+        }
+
         /// <summary>
         /// Возвращает всех пользователей которые:
         /// 1.получили приглашение и еще не ответили на него,
@@ -20,7 +34,7 @@ namespace Getticket.Web.API.Controllers
         [Route("")]
         public IHttpActionResult GetAllInvitedUsers()
         {
-            throw new NotImplementedException();
+            return Ok<IList<User>>(InviteServ.GetAllInvited());
         }
 
         /// <summary>
@@ -29,16 +43,16 @@ namespace Getticket.Web.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("send")]
-        public IHttpActionResult SendInvite()
+        public IHttpActionResult SendInvite([FromBody] SendInviteModel model)
         {
-            throw new NotImplementedException();
+            return Ok(InviteServ.SendInvite(model).Response());
         }
 
         /// <summary>
         /// Проверяет есть ли активный инвайт по коду
-        /// и возвращает Id роли и Email приглашенного
+        /// и возвращает Email приглашенного
         /// пользователя для использования при обновлении
-        /// информации приглашенного пользователя
+        /// информации
         /// </summary>
         /// <param name="code">Код приглашения</param>
         /// <returns></returns>
@@ -46,7 +60,7 @@ namespace Getticket.Web.API.Controllers
         [Route("accept/{code}")]
         public IHttpActionResult AcceptInvite(string code)
         {
-            throw new NotImplementedException();
+            return Ok(InviteServ.CheckInviteExist(code).Response());
         }
 
         /// <summary>
@@ -54,11 +68,12 @@ namespace Getticket.Web.API.Controllers
         /// и переводит статус приглашения в статус ожидающий
         /// "Акцепта(ТЗ стр.8)"
         /// </summary>
-        /// <param name="code"></param>
+        /// <param name="code">Код приглашения</param>
+        /// <param name="model">Модель с данными для обновления</param>
         /// <returns></returns>
         [HttpPost]
         [Route("update/{code}")]
-        public IHttpActionResult UpdateAcceptedInvite(string code)
+        public IHttpActionResult UpdateAcceptedInvite(string code, [FromBody] UpdateAcceptedInviteModel model)
         {
             throw new NotImplementedException();
         }
