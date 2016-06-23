@@ -14,12 +14,12 @@ namespace Getticket.Web.API.Controllers
     public class DebugController : ApiController
     {
         private UserRepository UserRep;
-        private UserRegistrationService UserRegServ;
+        private UserService UserRegServ;
 
         public DebugController()
         {
             this.UserRep = new UserRepository();
-            this.UserRegServ = new UserRegistrationService();
+            this.UserRegServ = new UserService();
         }
 
         [HttpPost]

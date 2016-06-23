@@ -1,12 +1,13 @@
 ﻿using Getticket.Web.DAL.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace Getticket.Web.DAL.IRepositories
 {
     /// <summary>
-    /// 
+    /// Интерфейс для работы с сущностью <see cref="User" />
     /// </summary>
-    public interface IUserRepository
+    public interface IUserRepository : IDisposable
     {
         /// <summary>
         /// Находим пользователя с Id = id 
@@ -35,5 +36,20 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="user"></param>
         /// <returns></returns>
         User Save(User user);
+
+        /// <summary>
+        /// Возвращает всех приглашенных, 
+        /// но пока еще не зарегестрированных пользователей
+        /// </summary>
+        /// <returns></returns>
+        IList<User> FindAllInvited();
+
+        /// <summary>
+        /// Удаляет пользователя из БД по Email,
+        /// также удаляет все зависимые сущности
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        bool DeleteUserByEmail(string userName);
     }
 }
