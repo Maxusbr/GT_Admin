@@ -112,15 +112,15 @@ namespace Getticket.Web.API.Controllers
         [Route("test4")]
         public IHttpActionResult Test4()
         {
-             List<string> emails = new List<string>();
-             emails.Add("mari_yar@inbox.ru");
-             emails.Add("petr-marial@yandex.ru");
-             emails.Add("maria.s@sunrise-r.ru"); 
-          
-            string Body = System.IO.File.ReadAllText("Invite.htm");
-            Body = Body.Replace("#DealerCompanyName#", "It is my company");
-            EmailService.SendMail(emails, "Это письмо для всех", Body);
-            return Json<string>("send email");
+            string Body = Properties.Resources.Invite;
+
+            // string Body = System.IO.File.ReadAllText("Templates.Email.Invite.htm");
+            Body = Body.Replace("@DealerCompanyName", "It is my company");
+            if (EmailService.SendMail("maria.s@sunrise", "Это письмо с шаблоном", Body))
+            {
+                return Ok("send email");
+            }
+            return Ok("not send email");
         }
     }
 }

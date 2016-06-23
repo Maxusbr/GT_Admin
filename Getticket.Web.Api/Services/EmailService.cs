@@ -19,7 +19,7 @@ namespace Getticket.Web.API.Services
         /// <param name="caption">Тема письма</param>
         /// <param name="message">Сообщение</param>
         /// <param name="attachFile">Присоединенный файл</param>
-        public static void SendMail(List<string> mailto, string caption, string message, string attachFile = null)
+        public static bool SendMail(List<string> mailto, string caption, string message, string attachFile = null)
         {
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(Settings.Default.MailFrom);
@@ -34,8 +34,9 @@ namespace Getticket.Web.API.Services
             {
                 mail.Attachments.Add(new Attachment(attachFile));
             }
-            Send(mail);
+            bool rez = Send(mail);
             mail.Dispose();
+            return rez;
         }
 
         /// <summary>
@@ -45,16 +46,16 @@ namespace Getticket.Web.API.Services
         /// <param name="caption">Тема письма</param>
         /// <param name="message">Сообщение</param>
         /// <param name="attachFile">Присоединенный файл</param>
-        public static void SendMail(string mailto, string caption, string message, string attachFile = null)
+        public static bool SendMail(string mailto, string caption, string message, string attachFile = null)
         {
-            SendMail(new List<string>() { mailto }, caption, message, attachFile);
+            return SendMail(new List<string>() { mailto }, caption, message, attachFile);
         }
 
         /// <summary>
         /// Инициализирует SmtpClient и отправляет почту
         /// </summary>
         /// <param name="mail"></param>
-        private static void Send(MailMessage mail)
+        private static bool Send(MailMessage mail)
         {
             try
             {
@@ -66,10 +67,11 @@ namespace Getticket.Web.API.Services
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.Send(mail);
                 client.Dispose();
+                return true;
             }
             catch (Exception e)
             {
-                throw new Exception("EmailService: " + e.Message);
+                return false;
             }
         }
     }
