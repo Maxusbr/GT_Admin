@@ -71,7 +71,7 @@ namespace Getticket.Web.API.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("test-ticket@rambler.ru")]
         public string MailFrom {
             get {
                 return ((string)(this["MailFrom"]));
@@ -80,7 +80,7 @@ namespace Getticket.Web.API.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SadKnight")]
         public string MailPassword {
             get {
                 return ((string)(this["MailPassword"]));
@@ -89,7 +89,7 @@ namespace Getticket.Web.API.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("smtp.rambler.ru")]
         public string MailHost {
             get {
                 return ((string)(this["MailHost"]));
@@ -98,6 +98,7 @@ namespace Getticket.Web.API.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("587")]
         public int MailPort {
             get {
                 return ((int)(this["MailPort"]));
