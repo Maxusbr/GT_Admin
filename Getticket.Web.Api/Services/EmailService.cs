@@ -25,24 +25,10 @@ namespace Getticket.Web.API.Services
             mail.From = new MailAddress(Settings.Default.MailFrom);
             foreach (string s in mailto)
             {
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress(Settings.Default.from);
-                mail.To.Add(new MailAddress(mailto));
-                mail.Subject = caption;
-                mail.IsBodyHtml = true;
-                mail.Body = message;
-                if (!string.IsNullOrEmpty(attachFile))
-                    mail.Attachments.Add(new Attachment(attachFile));
-                SmtpClient client = new SmtpClient();
-                client.Host = Settings.Default.host;
-                client.Port = Settings.Default.port;
-                client.EnableSsl = Settings.Default.EnableSsl;
-                client.Credentials = new NetworkCredential(Settings.Default.from.Split('@')[0], Settings.Default.password);
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.Send(mail);
-                mail.Dispose();
+                 mail.To.Add(new MailAddress(s));
             }
             mail.Subject = caption;
+            mail.IsBodyHtml = true;
             mail.Body = message;
             if (!string.IsNullOrEmpty(attachFile))
             {
