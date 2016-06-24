@@ -5,8 +5,14 @@ namespace Getticket.Web.API.Services
     /// <summary>
     /// Сервис проверки и конвертации телефонного номера
     /// </summary>
-    public class PhoneCheckService
+    public static class PhoneCheckService
     {
+        /// <summary>
+        /// Проверяет номер телефона на соответствие 
+        /// Российскому мобильному номеру телефона
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
         public static bool IsPhoneValid(string phone)
         {
             if (string.IsNullOrEmpty(phone))
@@ -17,6 +23,12 @@ namespace Getticket.Web.API.Services
             return regEx.Match(phone).Success;
         }
 
+        /// <summary>
+        /// Преобразует Российский мобильный номер телефона
+        /// к виду +7[0-9]{10}
+        /// </summary>
+        /// <param name="phone"></param>
+        /// <returns></returns>
         public static string PhoneConvert(string phone)
         {
             if (string.IsNullOrEmpty(phone))
@@ -33,7 +45,6 @@ namespace Getticket.Web.API.Services
             {
                 return phone.Insert(0, "+7");
             }
-
             return Regex.Replace(phone, "^8", "+7");
         }
     }

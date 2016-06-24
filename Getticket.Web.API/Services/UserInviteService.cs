@@ -2,7 +2,6 @@
 using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
-using Getticket.Web.DAL.Repository;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +12,7 @@ namespace Getticket.Web.API.Services
     /// отправки им писем, подтверждения приглашений
     /// и регистрации по приглашению
     /// </summary>
-    public class UserInviteService : IDisposable
+    public class UserInviteService
     {
         private IInviteCodeRepository InviteRep;
         private IUserRepository UserRep;
@@ -21,19 +20,10 @@ namespace Getticket.Web.API.Services
         /// <summary>
         /// Конструктор
         /// </summary>
-        public UserInviteService()
+        public UserInviteService(IInviteCodeRepository InviteRep, IUserRepository UserRep)
         {
-            this.InviteRep = new InviteCodeRepository();
-            this.UserRep = new UserRepository();
-        }
-
-        /// <summary>
-        /// Деструктор
-        /// </summary>
-        public void Dispose()
-        {
-            this.InviteRep.Dispose();
-            this.UserRep.Dispose();
+            this.InviteRep = InviteRep;
+            this.UserRep = UserRep;
         }
 
         /// <summary>

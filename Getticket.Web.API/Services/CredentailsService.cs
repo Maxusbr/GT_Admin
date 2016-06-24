@@ -1,19 +1,22 @@
 ﻿using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
+using Getticket.Web.DAL.IRepositories;
 using Getticket.Web.DAL.Repository;
 using System;
 using System.Threading.Tasks;
 
 namespace Getticket.Web.API.Services
 {
-    public class CredentailsService : IDisposable
+    // TODO refactor this
+    // TODO document this
+    public class CredentailsService
     {
-        private UserRepository UserRep;
+        private IUserRepository UserRep;
 
-        public CredentailsService()
+        public CredentailsService(IUserRepository UserRep)
         {
-            this.UserRep = new UserRepository();
+            this.UserRep = UserRep;
         }
 
         // TODO refactor this
@@ -86,11 +89,6 @@ namespace Getticket.Web.API.Services
         {
             user.LastEnter = DateTime.Now;
             await UserRep.UpdateTask(user);
-        }
-
-        public void Dispose()
-        {
-            UserRep.Dispose();
         }
 
         public Task<User> Authenticate(string UserName, string Password)

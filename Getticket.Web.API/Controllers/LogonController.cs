@@ -10,9 +10,9 @@ namespace Getticket.Web.API.Controllers
     {
         private CredentailsService Credentails;
 
-        public LogonController()
+        public LogonController(CredentailsService Credentails)
         {
-            this.Credentails = new CredentailsService();
+            this.Credentails = Credentails;
         }
 
         [HttpPost]

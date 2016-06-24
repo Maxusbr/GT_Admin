@@ -8,9 +8,9 @@ namespace Getticket.Web.API.Services
     public class ServiceResponce
     {
         private Dictionary<string, object> _response;
-        private static string _prefix = "add_";
-        private static string _status = "status";
-        private static string _result = "result";
+        private readonly string _prefix = "add_";
+        private readonly string _status = "status";
+        private readonly string _result = "result";
 
         /// <summary>
         /// Сервис успешно выполнил свою работу

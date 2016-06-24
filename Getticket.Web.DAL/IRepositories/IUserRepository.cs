@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Getticket.Web.DAL.IRepositories
 {
@@ -43,7 +44,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <returns></returns>
         IList<User> FindAllInvited();
-
+        
         /// <summary>
         /// Удаляет пользователя из БД по Email,
         /// также удаляет все зависимые сущности
@@ -51,5 +52,18 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="userName"></param>
         /// <returns></returns>
         bool DeleteUserByEmail(string userName);
+
+
+
+
+
+        // TODO re-implement this
+        // TODO document this
+        User FindOneByPhoneAndPassword(string clearPhone, string passwordHash);
+        User FindOneByEmailAndPassword(string email, string passwordHash);
+        User FindOneByEmailOrPhoneAndPassword(string email, string clearPhone, string passwordHash);
+        Task<User> UpdateTask(User user);
+        bool Delete(User Entity);
+        bool Delete(int Id);
     }
 }

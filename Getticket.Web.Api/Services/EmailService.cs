@@ -10,7 +10,7 @@ namespace Getticket.Web.API.Services
     /// Служба отправки сообщений электронной почты
     /// Существует баг(?): https://habrahabr.ru/post/237899/
     /// </summary>
-    public class EmailService
+    public static class EmailService
     {
         /// <summary>
         /// Отправка email

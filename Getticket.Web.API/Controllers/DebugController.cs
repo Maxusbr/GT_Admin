@@ -3,6 +3,7 @@ using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Repository;
 using Getticket.Web.API.Services;
 using System.Collections.Generic;
+using Getticket.Web.DAL.IRepositories;
 
 namespace Getticket.Web.API.Controllers
 {
@@ -13,13 +14,17 @@ namespace Getticket.Web.API.Controllers
     [Authorize(Roles = "Admin")]
     public class DebugController : ApiController
     {
-        private UserRepository UserRep;
+        private IUserRepository UserRep;
         private UserService UserRegServ;
 
-        public DebugController()
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="UserRep"></param>
+        public DebugController(IUserRepository UserRep, UserService UserRegServ)
         {
-            this.UserRep = new UserRepository();
-            this.UserRegServ = new UserService();
+            this.UserRep = UserRep;
+            this.UserRegServ = UserRegServ;
         }
 
         [HttpPost]
@@ -43,8 +48,10 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("test")]
+        [AllowAnonymous]
         public IHttpActionResult Test()
         {
+            string temp = GlobalConfiguration.Configuration.DependencyResolver.ToString();
             UserInfo ui = new UserInfo() { Phone = "+79159998877" };
             AccessRole ar = new AccessRole() { Name = "ar1" };
             User user = new User { UserName = "Вася", AccessRole = ar, UserInfo = ui };
@@ -63,6 +70,7 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("test1")]
+        [AllowAnonymous]
         public IHttpActionResult Test1()
         {
             User user = new User() {
@@ -81,6 +89,7 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("test2")]
+        [AllowAnonymous]
         public IHttpActionResult Test2()
         {
             User user = UserRep.FindOneById(1);
@@ -98,6 +107,7 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("test3")]
+        [AllowAnonymous]
         public IHttpActionResult Test3()
         {
             if (UserRep.Delete(1))
@@ -107,6 +117,17 @@ namespace Getticket.Web.API.Controllers
 
             return Json<string>("Error!!!!");
         }
+
+        [HttpPost]
+        [Route("test4")]
+        [AllowAnonymous]
+        public IHttpActionResult Test4()
+        {
+            return Ok(UserRegServ.MarkDeleted(1).Response());
+        }
+
+
+
         /*
         [HttpPost]
         [Route("test4")]

@@ -1,52 +1,30 @@
-﻿using Getticket.Web.API.Attributes;
-using Getticket.Web.API.Authentification;
+﻿using Getticket.Web.API.App_Start;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.OAuth;
 using Owin;
-using System;
+using SimpleInjector;
 using System.Web.Http;
 
 [assembly: OwinStartup(typeof(Getticket.Web.API.Startup))]
 namespace Getticket.Web.API
 {
+    /// <summary>
+    /// Точка входа приложения
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Настройки приложения
+        /// </summary>
+        /// <param name="app"></param>
         public void Configuration(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
-            ConfigureFilters(config);
-            ConfigureOAuth(app);
-            // Настраиваем маппинг Web.Api для owin
+            // Настройка инжектора
+            SimpleInjectorConfig.Register(app, config);
+            // Настраиваем маппинг Web.Api путей для контроллера и фильтры
             WebApiConfig.Register(config);
-            // Разрешаем запросы с других источников
-            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
-            app.UseWebApi(config);
-        }
-
-        public void ConfigureOAuth(IAppBuilder app)
-        {
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
-            {
-                // На продакшн = false
-                AllowInsecureHttp = true,
-                // Путь по которому получаем токен
-                TokenEndpointPath = new PathString("/logon"),
-                // Время жизни токена
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                // Кто выдает токены
-                Provider = new SimpleAuthorizationServerProvider()
-            };
-
-            // Token Generation
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
-
-        }
-
-        public void ConfigureFilters(HttpConfiguration config)
-        {
-            // Проверяем состояние модели на каждом контроллере
-            config.Filters.Add(new ValidateModelStateAttribute());
+            // Настраиваем авторизацию и выдачу токенов
+            OAuthConfig.Register(app, config);
         }
     }
 }

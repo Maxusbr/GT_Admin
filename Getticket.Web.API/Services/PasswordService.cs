@@ -9,7 +9,7 @@ namespace Getticket.Web.API.Services
     /// <summary>
     /// Сервис создания, проверки и хеширования паролей
     /// </summary>
-    public class PasswordService
+    public static class PasswordService
     {
 
         /// <summary>
@@ -51,6 +51,7 @@ namespace Getticket.Web.API.Services
             return result.ToString();
         }
 
+        // TODO заменить хэш на что-нибуть понадежнее
         /// <summary>
         /// Генерирует MD5 Hash для пароля <paramref name="OriginalPass"/>, если
         /// переданная строка <c>null</c> сгенерируется хеш от пустой строки

@@ -2,8 +2,6 @@
 using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
-using Getticket.Web.DAL.Repository;
-using System;
 using System.Collections.Generic;
 
 namespace Getticket.Web.API.Services
@@ -12,16 +10,16 @@ namespace Getticket.Web.API.Services
     /// Сервис для управления пользователями
     /// (обновление, регистрация, удаление и т.п.)
     /// </summary>
-    public class UserService : IDisposable
+    public class UserService
     {
         private IUserRepository UserRep;
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        public UserService()
+        public UserService(IUserRepository UserRep)
         {
-            this.UserRep = new UserRepository();
+            this.UserRep = UserRep;
         }
 
         /// <summary>
@@ -203,14 +201,6 @@ namespace Getticket.Web.API.Services
             user.UserStatus = UserStatusHelper.Deleted(user.UserStatus.Id);
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
-        }
-
-        /// <summary>
-        /// Деструктор
-        /// </summary>
-        public void Dispose()
-        {
-            this.UserRep.Dispose();
         }
     }
 }

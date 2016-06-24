@@ -19,9 +19,9 @@ namespace Getticket.Web.API.Controllers
         /// <summary>
         /// Конструктор
         /// </summary>
-        public InviteController()
+        public InviteController(UserInviteService InviteServ)
         {
-            this.InviteServ = new UserInviteService();
+            this.InviteServ = InviteServ;
         }
 
         /// <summary>

@@ -19,9 +19,9 @@ namespace Getticket.Web.API.Controllers
         /// <summary>
         /// Конструктор
         /// </summary>
-        public UserController()
+        public UserController(UserService UserServ)
         {
-            this.UserServ = new UserService();
+            this.UserServ = UserServ;
         }
 
         [HttpPost]
