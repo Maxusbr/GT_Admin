@@ -1,4 +1,5 @@
-﻿using Getticket.Web.API.Models;
+﻿using Getticket.Web.API.Attributes;
+using Getticket.Web.API.Models;
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Getticket.Web.API.Controllers
         [Route("")]
         public IHttpActionResult GetAll()
         {
-            return Ok<IList<User>>(UserServ.GetAll()); 
+            return Ok<IList<User>>(UserServ.GetAll());
         }
 
         [HttpPost]
@@ -54,11 +55,47 @@ namespace Getticket.Web.API.Controllers
             return Ok(UserServ.CreateSystemUser(model).Response());
         }
 
+
+        /// <summary>
+        /// Обновляет информацию пользователя
+        /// имя = model.Name 
+        /// фамилия = model.LastName 
+        /// компания = model.Company  
+        /// должность = model.Position 
+        /// электронная почта = model.Email 
+        /// телефон = model.Phone 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        [Route("update")]
-        public IHttpActionResult Update([FromBody] UpdateUserModel model)
+        [Route("update/{id}")]
+        [CheckModelForNull]
+        public IHttpActionResult Update(int id,[FromBody] UpdateUserModel model)
         {
-            return Ok(UserServ.UpdateUser(model).Response());
+            return Ok(UserServ.UpdateUser(id, model).Response());
+        }
+
+        /// <summary>
+        /// Изменяет пароль пользователю.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("changepass/{id}")]
+        public IHttpActionResult ChangePassword(int id,[FromBody] ChangePasswordModel model)
+        {
+            //TODO сделать метод для изменения пароля   
+            string nameUserIn = this.User.Identity.Name;
+            return Ok(UserServ.ChangePassword(id, nameUserIn, model).Response());
+        }
+
+        [HttpPost]
+        [Route("lock/{id}")]
+        public IHttpActionResult Lock(int id)
+        {
+            return Ok(UserServ.Lock(id).Response());
         }
 
         [HttpPost]

@@ -8,9 +8,6 @@ namespace Getticket.Web.API.Models
     /// </summary>
     public class UpdateUserModel
     {
-        [Required]
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string LastName { get; set; }
@@ -25,18 +22,5 @@ namespace Getticket.Web.API.Models
         [CustomPhone]
         public string Phone { get; set; }
 
-        public bool? SendPassword { get; set; }
-
-        public bool? PasswordChanged { get; set; }
-
-        public string OldPassword { get; set; }
-
-        [CustomPassword]
-        public string NewPassword { get; set; }
-
-        [Compare("NewPassword")]
-        public string ConfirmPassword { get; set; }
-
-        public bool? Lock { get; set; }
     }
 }

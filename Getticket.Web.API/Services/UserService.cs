@@ -92,19 +92,56 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
-        /// Обновляет уже существующего пользователя
+        /// Изменение пароля пользователя
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="mailIn"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateUser(UpdateUserModel model)
+        public ServiceResponce ChangePassword(int id, string mailIn, ChangePasswordModel model)
         {
-            if (model.Id == 0)
+            if (id <= 0)
             {
                 return ServiceResponce
                     .FromFailed()
                     .Add("error", "Id must be specified and must be gte 1");
             }
-            User user = UserRep.FindOneById(model.Id);
+            User user = UserRep.FindOneById(id);
+            if (user == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "User with specified Id was not found");
+            }
+            if ((user.UserName.Equals(mailIn))
+                && (!user.PasswordHash.Equals(PasswordService.GeneratePasswordHash(model.OldPassword))))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "Incorrect OldPassword");
+            }
+            user.PasswordHash = PasswordService.GeneratePasswordHash(model.NewPassword);
+            UserRep.Save(user);
+
+            return ServiceResponce.FromSuccess()
+               .Result("Password was changed");
+        }
+
+        /// <summary>
+        /// Устанавливает статус пользователя  равным Locked,
+        /// если он был заблокирован ранее или удален - выдается сообщение.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ServiceResponce Lock(int id)
+        {
+            if (id <= 0)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "Id must be specified and must be gte 1");
+            }
+            User user = UserRep.FindOneById(id);
             if (user == null)
             {
                 return ServiceResponce
@@ -112,16 +149,57 @@ namespace Getticket.Web.API.Services
                     .Add("error", "User with specified Id was not found");
             }
 
-            if (model.PasswordChanged == true)
+            if (user.UserStatus.Status == DAL.Enums.UserStatusType.Locked)
             {
-                user.PasswordHash = PasswordService.GeneratePasswordHash(model.NewPassword);
+                return ServiceResponce
+                .FromFailed()
+                .Add("error", "User is already locked");
+            }
 
+            if (user.UserStatus.Status == DAL.Enums.UserStatusType.Deleted)
+            {
+                return ServiceResponce
+                .FromFailed()
+                .Add("error", "User was deleted, can not be blocked");
+            }
+
+            user.UserStatus = UserStatusHelper.Locked(user.UserStatus.Id);
+            UserRep.Save(user);
+
+            return ServiceResponce.FromSuccess()
+                .Result("User was locked");
+           
+        }
+
+
+        /// <summary>
+        /// Обновляет уже существующего пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ServiceResponce UpdateUser(int id, UpdateUserModel model)
+        {
+            if (id <= 0)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "Id must be specified and must be gte 1");
+            }
+            User user = UserRep.FindOneById(id);
+            if (user == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "User with specified Id was not found");
             }
 
             user = UpdateUserModelHelper.UpdateUser(user, model);
             UserRep.Save(user);
 
-            return ServiceResponce.FromSuccess();
+            return ServiceResponce.FromSuccess()
+                .Result("User updated");
+               
         }
 
 

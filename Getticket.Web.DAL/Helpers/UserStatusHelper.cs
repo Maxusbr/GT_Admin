@@ -32,14 +32,24 @@ namespace Getticket.Web.API.Helpers
             return new UserStatus() { Name = Name, Description = Description, UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Invite };
         }
 
+        /// <summary>
+        /// Устанавливает статус Deleted для пользователя с Id = <param name="Id"></param>;
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public static UserStatus Deleted(int Id = 0)
         {
             return new UserStatus() {Id = Id, Name = "Deleted", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Deleted };
         }
 
-        public static UserStatus Locked()
+        /// <summary>
+        /// Устанавливает статус Locked для пользователя с Id = <param name="Id"></param>;
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public static UserStatus Locked(int Id = 0)
         {
-            return new UserStatus() { Name = "Locked", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Locked };
+            return new UserStatus() { Id = Id, Name = "Locked", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Locked };
         }
 
         /// <summary>

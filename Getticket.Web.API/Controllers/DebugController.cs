@@ -107,7 +107,7 @@ namespace Getticket.Web.API.Controllers
 
             return Json<string>("Error!!!!");
         }
-
+        /*
         [HttpPost]
         [Route("test4")]
         public IHttpActionResult Test4()
@@ -121,6 +121,6 @@ namespace Getticket.Web.API.Controllers
                 return Ok("send email");
             }
             return Ok("not send email");
-        }
+        }*/
     }
 }

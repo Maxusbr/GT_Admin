@@ -1,4 +1,5 @@
 ﻿using Getticket.Web.API.Models;
+using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using System;
 
@@ -19,23 +20,37 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static User UpdateUser(User user, UpdateUserModel model)
         {
-            throw new NotImplementedException();
-        }
-
-        /*
-            user.UserName = model.Email;
-            user.UserInfo.Name = model.Name;
-            user.UserInfo.LastName = model.LastName;
-            user.UserInfo.Company = model.Company;
-            user.UserInfo.Position = model.Position;
-            user.UserInfo.Phone = model.Phone;
-
-            if (model.Locked)
+            if (model.Email != null)
             {
-                user.UserStatus = UserStatusHelper.SystemSeed();
+                user.UserName = model.Email;
             }
-         
-         
-         */
+
+            if (model.Name != null)
+            {
+                user.UserInfo.Name = model.Name;
+            }
+
+            if (model.LastName != null)
+            {
+                user.UserInfo.LastName = model.LastName;
+            }
+
+            if (model.Company != null)
+            {
+                user.UserInfo.Company = model.Company;
+            }
+
+            if (model.Position != null)
+            {
+                user.UserInfo.Position = model.Position;
+            }
+
+            if (model.Phone != null)
+            {
+                user.UserInfo.Phone = model.Phone;
+            }
+
+            return user;
+        }
     }
 }
