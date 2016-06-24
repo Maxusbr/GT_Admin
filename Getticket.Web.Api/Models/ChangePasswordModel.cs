@@ -17,7 +17,8 @@ namespace Getticket.Web.API.Models
         [Required]
         [CustomPassword]
         public string NewPassword { get; set; }
+
         [Required]
-        bool SendCopyPassword { get; set; }
+        public bool SendCopyPassword { get; set; }
     }
 }

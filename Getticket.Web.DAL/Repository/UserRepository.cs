@@ -44,6 +44,10 @@ namespace Getticket.Web.DAL.Repository
         /// <see cref="IUserRepository.FindOneById(int)" />
         public User FindOneById(int Id)
         {
+            if (Id <= 0)
+            {
+                return null;
+            }
             IQueryable<User> query = db.Users.Where(u => u.Id == Id);
             return GetOne(query);
         }

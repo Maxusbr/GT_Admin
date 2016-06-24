@@ -86,7 +86,6 @@ namespace Getticket.Web.API.Controllers
         [Route("changepass/{id}")]
         public IHttpActionResult ChangePassword(int id,[FromBody] ChangePasswordModel model)
         {
-            //TODO сделать метод для изменения пароля   
             string nameUserIn = this.User.Identity.Name;
             return Ok(UserServ.ChangePassword(id, nameUserIn, model).Response());
         }

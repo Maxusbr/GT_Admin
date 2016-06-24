@@ -100,12 +100,6 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce ChangePassword(int id, string mailIn, ChangePasswordModel model)
         {
-            if (id <= 0)
-            {
-                return ServiceResponce
-                    .FromFailed()
-                    .Add("error", "Id must be specified and must be gte 1");
-            }
             User user = UserRep.FindOneById(id);
             if (user == null)
             {
@@ -135,12 +129,6 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce Lock(int id)
         {
-            if (id <= 0)
-            {
-                return ServiceResponce
-                    .FromFailed()
-                    .Add("error", "Id must be specified and must be gte 1");
-            }
             User user = UserRep.FindOneById(id);
             if (user == null)
             {
@@ -180,12 +168,6 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce UpdateUser(int id, UpdateUserModel model)
         {
-            if (id <= 0)
-            {
-                return ServiceResponce
-                    .FromFailed()
-                    .Add("error", "Id must be specified and must be gte 1");
-            }
             User user = UserRep.FindOneById(id);
             if (user == null)
             {
