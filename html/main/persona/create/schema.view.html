@@ -1,0 +1,323 @@
+<div class="col-md-24">
+    <div class="row persona-info__small-block">
+        <div class="col-md-24">
+            <div class="col-md-2">
+                <img src="http://placehold.it/50x50" alt="Placeholder">
+            </div>
+
+            <div class="col-md-20 persona-info__name-row">
+                <div class="row">
+                    {{ person.name.lastName }} {{ person.name.firstName }} <span class="separator"></span>
+                    <strong>Описание</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-24">
+            <ul class="nav nav-tabs">
+                <li class="green">
+                    <a data-target="#description" data-toggle="tab"> <span class="glyphicon glyphicon-plus"></span>
+                        Описание</a>
+                </li>
+                <li class="green">
+                    <a data-target="#facts" data-toggle="tab"> <span class="glyphicon glyphicon-plus"></span> Факты</a>
+                </li>
+                <li>
+                    <a data-target="#connections" data-toggle="tab">Связи</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-24">
+            <ul class="progress-wizard col-md-18" style="margin-top: 20px;">
+                <li class="pre">
+                    ШАГИ
+                </li>
+                <li class="passed"><span>1/ Источник</span></li>
+                <li class="passed active"><span>2/ Схема</span></li>
+                <li><span>3/ Превью</span></li>
+                <li><span>4/ Публикация</span></li>
+            </ul>
+
+            <div class="col-md-4">
+                <div class="row">
+                    <button class="btn btn-blue btn-lg col-md-18">
+                        далее
+                    </button>
+                </div>
+
+                <div class="row">
+                    <p class="extra-small blue">Сохранить и перейти на следующий шаг</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-24 persona-create">
+            <div class="row persona-create__block">
+                <div class="col-md-5">
+                    <div class="persona-create__title">
+                        / Тизер <span class="required"></span>
+                    </div>
+
+
+                    <div>
+                        <select class="form-control" id="persona__teaser">
+                            <option style="color: green;"> + Новый</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-11">
+                    <div>
+                        Текст
+                    </div>
+
+                    <div style="padding-top: 5px;">
+                        <textarea class="standard">Турнир в Тулузе не только профессиональный вызов для Серены Уильямс, но и серьезная заявка со стороны стройных и длинных ног конкурент</textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div>
+                        Ключи (от 3 до 10 штук)
+
+                        <div class="checkbox-input-container">
+                            <div class="checkbox-input">
+                                <input type="checkbox" value="None" id="squaredFour" name="check" checked/>
+                                <label for="squaredFour"></label>
+                            </div>
+
+                            <span>Склонять ключи</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="tags">
+                            <span>Ноги</span>
+                            <span>Длинные</span>
+                            <span>Теннис</span>
+                            <span>Ноги</span>
+                            <span>Длинные</span>
+                            <span class="yellow">Руки</span>
+                            <span class="green">Сет</span>
+                            <span class="red">Родители</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row persona-create__block">
+                <div class="col-md-24 persona-create__title">
+                    / Описание статичное (общий текст)
+                </div>
+                <label>&nbsp;</label>
+                <div class="col-md-24">
+                    <div class="row">
+                        <div class="col-md-14">
+                            <textarea class="standard">Спортсменка, которая вместе с Прививковой Людмилой вызвала заметный подъем интереса зрителей и болельщиков к керлингу и нашей сборной в этом виде спорта|</textarea>
+                        </div>
+
+                        <div class="col-md-10">
+                            <div class="checkbox-input-container">
+                                <div class="checkbox-input">
+                                    <input type="checkbox" value="None" name="check" checked id="no-need-2"/>
+                                    <label for="no-need-2"></label>
+                                </div>
+
+                                <span>Статичное описание не требуется</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row persona-create__block">
+                <div class="col-md-24 persona-create__title">
+                    / Описание адаптивное (набор связанных фактов) <span class="required"></span>
+                </div>
+
+                <div class="col-md-24">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <td class="text-center"><strong>Позиция #</strong></td>
+                                    <td class="col-md-4"></td>
+                                    <td>
+                                        <strong>Ключи (от 3 до 10 штук)</strong>
+
+                                        <div class="checkbox-input-container">
+                                            <div class="checkbox-input">
+                                                <input type="checkbox" value="None" id="squaredFour" name="check"
+                                                       checked/>
+                                                <label for="squaredFour"></label>
+                                            </div>
+
+                                            <span>Склонять ключи</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </thead>
+
+                                <tr>
+                                    <td class="text-center">
+                                        1
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <div class="tags">
+                                            <span>Ноги</span>
+                                            <span>Длинные</span>
+                                            <span>Теннис</span>
+                                            <span>Ноги</span>
+                                            <span>Длинные</span>
+                                            <span class="yellow">Руки</span>
+                                            <span class="green">Сет</span>
+                                            <span class="red">Родители</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-center">
+                                        2
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <div class="tags">
+                                            <span>Ноги</span>
+                                            <span>Длинные</span>
+                                            <span>Теннис</span>
+                                            <span>Ноги</span>
+                                            <span>Длинные</span>
+                                            <span class="yellow">Руки</span>
+                                            <span class="green">Сет</span>
+                                            <span class="red">Родители</span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-center">
+                                        3
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <div class="tags">
+                                            <span>Ноги</span>
+                                            <span>Длинные</span>
+                                            <span>Теннис</span>
+                                            <span>Ноги</span>
+                                            <span>Длинные</span>
+                                            <span class="yellow">Руки</span>
+                                            <span class="green">Сет</span>
+                                            <span class="red">Родители</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="col-md-5">
+                            <strong>Связи факта</strong>
+
+                            <div class="fact-connections__container">
+                                <label for="connection">Связь</label>
+                                <select class="form-control" id="connection">
+                                    <option>Персона</option>
+                                </select>
+
+                                <label for="char">Характеристика связи</label>
+                                <select class="form-control" id="char">
+                                    <option>Антропометрия</option>
+                                </select>
+
+                                <label for="data">Данные</label>
+                                <select class="form-control" id="data">
+                                    <option>Длина ноги</option>
+                                </select>
+
+                                <label for="type">Условие на значение данных</label>
+
+                                <div class="form-inline">
+                                    <select class="form-control" id="type">
+                                        <option> ></option>
+                                    </select>
+
+                                    <input type="text" class="input form-control" value="120">
+
+                                    <select class="form-control">
+                                        <option>См</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                            <strong>Подходящие факты (3 лучших)</strong>
+
+                            <label>&nbsp;</label>
+
+                            <div>
+                                <div class="radio-input-container">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="radio-input generated">
+                                                <input type="radio" value="None" id="fact1" checked name="check">
+                                                <label for="fact1"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-20">
+                                        <div class="row">
+                                            <span class="smaller">Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="radio-input-container">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="radio-input generated">
+                                                <input type="radio" value="None" id="fact2" checked name="check">
+                                                <label for="fact2"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-20">
+                                        <div class="row">
+                                            <span class="smaller">Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="radio-input-container">
+                                    <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="radio-input generated">
+                                                <input type="radio" value="None" id="fact3" checked name="check">
+                                                <label for="fact3"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-20">
+                                        <div class="row">
+                                            <span class="smaller">Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

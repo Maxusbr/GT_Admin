@@ -17,16 +17,31 @@
         $urlRouterProvider.otherwise("/main/event-is/detail/1");
 
         $stateProvider
+            .state('main.persona.schema', {
+                url: '/create/schema',
+                templateUrl: '/main/persona/create/schema.view.html',
+                controller: 'MainPersonaCreateSchemaController'
+            })
+            .state('main.persona.overview', {
+                url: '/create/overview',
+                templateUrl: '/main/persona/create/overview.view.html',
+                controller: 'MainPersonaCreateOverviewController'
+            })
+            .state('main.persona.create', {
+                url: '/create',
+                templateUrl: '/main/persona/create.view.html',
+                controller: 'MainPersonaCreateController'
+            })
             .state('main.persona.index', {
                 url: '/:id',
                 templateUrl: '/main/persona/index.view.html',
                 controller: 'MainPersonaIndexController'
-            })
+            });
     }
 
-    MainPersonaController.$inject = ['$scope', '$rootScope', '$stateParams'];
+    MainPersonaController.$inject = ['$scope', '$rootScope', '$stateParams', '$location'];
 
-    function MainPersonaController($scope, $rootScope, $stateParams) {
+    function MainPersonaController($scope, $rootScope, $stateParams, $location) {
         $rootScope.id = $stateParams.id;
 
         $rootScope.HidePersonaMenu = function () {
@@ -151,5 +166,9 @@
                 middleName: 'Vladimirova'
             }
         };
+
+        $scope.CreatePersona = function () {
+            $location.path("/main/persona/create");
+        }
     }
 })();
