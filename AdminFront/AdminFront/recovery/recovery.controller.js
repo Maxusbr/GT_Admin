@@ -1,28 +1,28 @@
 (function () {
-	'use strict';
+    'use strict';
 
-	angular
-		.module('app')
-		.controller('RecoveryController', RecoveryController);
+    angular
+        .module('app')
+        .controller('RecoveryController', RecoveryController);
 
-	RecoveryController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
-	function RecoveryController(UserService, $location, $rootScope) {
-		var vm = this;
+    RecoveryController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
+    function RecoveryController(UserService, $location, $rootScope) {
+        var vm = this;
 
-		vm.email = '';
-		vm.emailCheck = false;
+        vm.email = '';
+        vm.emailCheck = false;
 
-		vm.checkCode = function () {
+        vm.checkCode = function () {
 
-			console.log(vm.email);
-			if (vm.email.length > 4) {
-				UserService.RecoveryPassword(vm.email)
-					.success(function (data, status) {
-						vm.emailCheck = true;
-					});
-			}
+            console.log(vm.email);
+            if (vm.email.length > 4) {
+                UserService.RecoveryPassword(vm.email)
+                    .success(function (data, status) {
+                        vm.emailCheck = true;
+                    });
+            }
 
-		};
-	}
+        };
+    }
 
 })();

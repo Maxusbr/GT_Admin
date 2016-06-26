@@ -1,8 +1,8 @@
 /**
- * angular-recaptcha build:2016-02-18 
- * https://github.com/vividcortex/angular-recaptcha 
- * Copyright (c) 2016 VividCortex 
-**/
+ * angular-recaptcha build:2016-02-18
+ * https://github.com/vividcortex/angular-recaptcha
+ * Copyright (c) 2016 VividCortex
+ **/
 
 /*global angular, Recaptcha */
 (function (ng) {
@@ -35,7 +35,7 @@
         $window.vcRecaptchaApiLoadedCallback.push(callback);
 
         $window.vcRecaptchaApiLoaded = function () {
-            $window.vcRecaptchaApiLoadedCallback.forEach(function(callback) {
+            $window.vcRecaptchaApiLoadedCallback.forEach(function (callback) {
                 callback();
             });
         };
@@ -146,7 +146,7 @@
 
                 scope.widgetId = null;
 
-                if(ctrl && angular.isDefined(attrs.required)){
+                if (ctrl && angular.isDefined(attrs.required)) {
                     scope.$watch('required', validate);
                 }
 
@@ -194,15 +194,15 @@
                 });
 
                 function destroy() {
-                  if (ctrl) {
-                    // reset the validity of the form if we were removed
-                    ctrl.$setValidity('recaptcha', null);
-                  }
+                    if (ctrl) {
+                        // reset the validity of the form if we were removed
+                        ctrl.$setValidity('recaptcha', null);
+                    }
 
-                  cleanup();
+                    cleanup();
                 }
 
-                function expired(){
+                function expired() {
                     scope.response = "";
                     validate();
 
@@ -210,15 +210,15 @@
                     scope.onExpire({widgetId: scope.widgetId});
                 }
 
-                function validate(){
-                    if(ctrl){
+                function validate() {
+                    if (ctrl) {
                         ctrl.$setValidity('recaptcha', scope.required === false ? null : Boolean(scope.response));
                     }
                 }
 
-                function cleanup(){
-                  // removes elements reCaptcha added.
-                  angular.element($document[0].querySelectorAll('.pls-container')).parent().remove();
+                function cleanup() {
+                    // removes elements reCaptcha added.
+                    angular.element($document[0].querySelectorAll('.pls-container')).parent().remove();
                 }
             }
         };

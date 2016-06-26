@@ -9,15 +9,14 @@
     MainEventsIsDetailController.$inject = ['$rootScope', '$stateParams', '$filter', '$location'];
     function MainEventsIsDetailController($rootScope, $stateParams, $filter, $location) {
         var vm = this;
-	
-	$rootScope.$watch(function () {
-		return $location.path()
-	}, function (params) {
-		console.log(params);
-		$rootScope.id = $stateParams.id;
-	});
 
-	
+        $rootScope.$watch(function () {
+            return $location.path()
+        }, function (params) {
+            console.log(params);
+            $rootScope.id = $stateParams.id;
+        });
+
         $rootScope.eventslist = [
             {
                 "fname": "Хан",
@@ -101,8 +100,9 @@
                 "button": "Акцепт регистрации",
                 "id": "6"
 
-            },
-        ]
+            }
+        ];
+
         var filtered = $filter('filter')($rootScope.eventslist, {id: $stateParams.id});
         $rootScope.event = filtered.length ? filtered[0] : null;
 

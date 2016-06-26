@@ -1,35 +1,35 @@
 (function () {
-	'use strict';
+    'use strict';
 
-	angular
-		.module('app')
-		.controller('ConfirmController', ConfirmController);
+    angular
+        .module('app')
+        .controller('ConfirmController', ConfirmController);
 
-	ConfirmController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
-	function ConfirmController(UserService, $location, $rootScope) {
-		var vm = this;
+    ConfirmController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
+    function ConfirmController(UserService, $location, $rootScope) {
+        var vm = this;
 
-		vm.code = '';
+        vm.code = '';
 
-		vm.checkCode = function () {
+        vm.checkCode = function () {
 
-			console.log(vm.code);
+            console.log(vm.code);
 
-		};
+        };
 
-		//function register() {
-		//	vm.dataLoading = true;
-		//	UserService.Create(vm.user)
-		//		.then(function (response) {
-		//			if (response.success) {
-		//				FlashService.Success('Регистрация успешно произведена.', true);
-		//				$location.path('/login');
-		//			} else {
-		//				FlashService.Error(response.message);
-		//				vm.dataLoading = false;
-		//			}
-		//		});
-		//}
-	}
+        //function register() {
+        //	vm.dataLoading = true;
+        //	UserService.Create(vm.user)
+        //		.then(function (response) {
+        //			if (response.success) {
+        //				FlashService.Success('Регистрация успешно произведена.', true);
+        //				$location.path('/login');
+        //			} else {
+        //				FlashService.Error(response.message);
+        //				vm.dataLoading = false;
+        //			}
+        //		});
+        //}
+    }
 
 })();
