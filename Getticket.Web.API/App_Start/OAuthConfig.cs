@@ -1,4 +1,4 @@
-﻿using Getticket.Web.API.Authentification;
+﻿using Getticket.Web.API.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
