@@ -24,6 +24,10 @@ namespace Getticket.Web.API.Controllers
             this.UserServ = UserServ;
         }
 
+        /// <summary>
+        /// Воозвращает всех(неудаленных пользователей)
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [Route("")]
         public IHttpActionResult GetAll()
@@ -31,6 +35,11 @@ namespace Getticket.Web.API.Controllers
             return Ok<IList<User>>(UserServ.GetAll());
         }
 
+        /// <summary>
+        /// Возвращаем пользователя по его id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("{id}")]
         public IHttpActionResult GetOne(int id)
@@ -90,6 +99,12 @@ namespace Getticket.Web.API.Controllers
             return Ok(UserServ.ChangePassword(id, nameUserIn, model).Response());
         }
 
+        /// <summary>
+        /// Устанавливает статус пользователя равным Locked,
+        /// если он был заблокирован ранее или удален - выдается сообщение.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("lock/{id}")]
         public IHttpActionResult Lock(int id)
@@ -97,6 +112,11 @@ namespace Getticket.Web.API.Controllers
             return Ok(UserServ.Lock(id).Response());
         }
 
+        /// <summary>
+        /// Помечает пользователя с <paramref name="id"/> как удаленного;
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("delete/{id}")]
         public IHttpActionResult MarkDeleted(int id)
