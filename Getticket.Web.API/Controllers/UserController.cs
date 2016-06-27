@@ -36,7 +36,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <summary>
-        /// Возвращаем пользователя по его id
+        /// Возвращаем пользователя по его <paramref name="id"/>
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -48,7 +48,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <summary>
-        /// Регестрирует пользователя в системе
+        /// Регестрирует пользователя в системе, информация берется из <paramref name="model"/> 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -61,7 +61,8 @@ namespace Getticket.Web.API.Controllers
 
 
         /// <summary>
-        /// Обновляет информацию пользователя
+        /// Обновляет информацию пользователя <paramref name="id"/>, 
+        /// информация для обновления берется из <paramref name="model"/>
         /// имя = model.Name 
         /// фамилия = model.LastName 
         /// компания = model.Company  
@@ -108,6 +109,18 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <summary>
+        /// Меняет статус Locked пользователя с <paramref name="id"> </paramref>на System;
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("unlock/{id}")]
+        public IHttpActionResult UnLock(int id)
+        {
+            return Ok(UserServ.Unlock(id).Response());
+        }
+
+        /// <summary>
         /// Помечает пользователя с <paramref name="id"/> как удаленного;
         /// </summary>
         /// <param name="id"></param>
@@ -117,6 +130,18 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult MarkDeleted(int id)
         {
             return Ok(UserServ.MarkDeleted(id).Response());
+        }
+
+        /// <summary>
+        /// Снимает метку "delete" пользователя с <paramref name="id"/> устанавливает статус System;
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("undelete/{id}")]
+        public IHttpActionResult UnDeleted(int id)
+        {
+            return Ok(UserServ.UnDeleted(id).Response());
         }
     }
 }

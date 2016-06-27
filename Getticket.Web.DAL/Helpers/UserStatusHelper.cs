@@ -17,7 +17,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static UserStatus System(string Name, string Description, int Id = 0)
         {
-            return new UserStatus() { Name = Name, Description = Description, UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.System };
+            return new UserStatus() { Id = Id, Name = Name, Description = Description, UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.System };
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Getticket.Web.API.Helpers
         }
 
         /// <summary>
-        /// Устанавливает статус Deleted для пользователя с Id = <param name="Id"></param>;
+        /// Устанавливает статус Deleted для пользователя с Id = <paramref name="Id"/>;
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
@@ -43,7 +43,7 @@ namespace Getticket.Web.API.Helpers
         }
 
         /// <summary>
-        /// Устанавливает статус Locked для пользователя с Id = <param name="Id"></param>;
+        /// Устанавливает статус Locked для пользователя с Id = <paramref name="Id"/>;
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>

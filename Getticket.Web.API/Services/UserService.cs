@@ -3,6 +3,7 @@ using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
 using System.Collections.Generic;
+using System;
 
 namespace Getticket.Web.API.Services
 {
@@ -121,6 +122,8 @@ namespace Getticket.Web.API.Services
                .Result("Password was changed");
         }
 
+     
+
         /// <summary>
         /// Устанавливает статус пользователя  равным Locked,
         /// если он был заблокирован ранее или удален - выдается сообщение.
@@ -159,6 +162,43 @@ namespace Getticket.Web.API.Services
            
         }
 
+        /// <summary>
+        /// Меняет статус Locked пользователя с <paramref name="id"> </paramref>на System;
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ServiceResponce Unlock(int id)
+        {
+            User user = UserRep.FindOneById(id);
+            if (user == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "User with specified Id was not found");
+            }
+
+            if (user.UserStatus.Status != DAL.Enums.UserStatusType.Locked)
+            {
+                return ServiceResponce
+                .FromFailed()
+                .Add("error", "User is not locked");
+            }
+
+            if (user.UserStatus.Status == DAL.Enums.UserStatusType.Deleted)
+            {
+                return ServiceResponce
+                .FromFailed()
+                .Add("error", "User was deleted, can not be unlocked");
+            }
+
+            user.UserStatus = UserStatusHelper.System("", "", user.UserStatus.Id);
+            UserRep.Save(user);
+
+            return ServiceResponce.FromSuccess()
+                .Result("User was unlocked");
+
+        }
+
 
         /// <summary>
         /// Обновляет уже существующего пользователя
@@ -187,13 +227,13 @@ namespace Getticket.Web.API.Services
 
 
         /// <summary>
-        /// Помечает пользователя с <paramref name="Id"/> как удаленного;
+        /// Помечает пользователя с <paramref name="id"/> как удаленного;
         /// </summary>
-        /// <param name="Id"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public ServiceResponce MarkDeleted(int Id)
+        public ServiceResponce MarkDeleted(int id)
         {
-            User user = UserRep.FindOneById(Id);
+            User user = UserRep.FindOneById(id);
             if (user == null)
             {
                 return ServiceResponce
@@ -204,5 +244,27 @@ namespace Getticket.Web.API.Services
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
         }
+
+        /// <summary>
+        /// Снимает метку "delete" пользователя с <paramref name="id"/> устанавливает статус System;
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ServiceResponce UnDeleted(int id)
+        {
+            User user = UserRep.FindOneById(id);
+            if (user == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "Can't delete user because he do not exist");
+            }
+            user.UserStatus = UserStatusHelper.System("","",user.UserStatus.Id);
+            UserRep.Save(user);
+            return ServiceResponce.FromSuccess();
+        }
+
     }
 }
+        
+
