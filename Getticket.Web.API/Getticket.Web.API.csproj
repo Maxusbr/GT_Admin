@@ -188,6 +188,8 @@
     <Compile Include="Attributes\CustomPasswordAttribute.cs" />
     <Compile Include="Attributes\CustomPhoneAttribute.cs" />
     <Compile Include="Attributes\ValidateModelStateAttribute.cs" />
+    <Compile Include="Helpers\InviteEmailModelHelper.cs" />
+    <Compile Include="Models\Emails\BaseEmailModel.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\InviteController.cs" />

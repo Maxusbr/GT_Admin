@@ -1,6 +1,9 @@
 ﻿namespace Getticket.Web.API.Models.Emails
 {
-    public class InviteEmailModel
+    /// <summary>
+    /// Модель для отправки письма приглашения
+    /// </summary>
+    public class InviteEmailModel : BaseEmailModel
     {
         public string Title { get; set; }
         public string Link { get; set; }

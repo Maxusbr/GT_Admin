@@ -6,7 +6,7 @@ namespace Getticket.Web.API.Helpers
     /// <summary>
     /// Helper
     /// </summary>
-    public class RegisterUserModelHelper
+    public static class RegisterUserModelHelper
     {
         /// <summary>
         /// Получает Сущность из <paramref name="model"/>

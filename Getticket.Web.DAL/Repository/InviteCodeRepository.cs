@@ -31,6 +31,18 @@ namespace Getticket.Web.DAL.Repository
             return true;
         }
 
+        /// <see cref="IInviteCodeRepository.Update(InviteCode)" />
+        public bool Update(InviteCode invite)
+        {
+            if (invite.Id == 0 || invite.User.Id == 0)
+            {
+                return false;
+            }
+            db.Entry(invite).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return true;
+        }
+
         /// <see cref="IInviteCodeRepository.FindOneByCode(string)" />
         public InviteCode FindOneByCode(string code)
         {

@@ -3,6 +3,7 @@ using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Getticket.Web.API.Controllers
