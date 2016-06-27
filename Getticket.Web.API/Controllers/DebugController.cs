@@ -1,9 +1,11 @@
 ﻿using System.Web.Http;
 using Getticket.Web.DAL.Entities;
-using Getticket.Web.DAL.Repository;
 using Getticket.Web.API.Services;
 using System.Collections.Generic;
 using Getticket.Web.DAL.IRepositories;
+using Getticket.Web.API.Providers;
+using RazorEngine.Templating;
+using Getticket.Web.API.Models.Emails;
 
 namespace Getticket.Web.API.Controllers
 {
@@ -16,15 +18,17 @@ namespace Getticket.Web.API.Controllers
     {
         private IUserRepository UserRep;
         private UserService UserRegServ;
+        private IRazorEngineService TemplateServ;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="UserRep"></param>
-        public DebugController(IUserRepository UserRep, UserService UserRegServ)
+        public DebugController(IUserRepository UserRep, UserService UserRegServ, IRazorEngineService TemplateServ)
         {
             this.UserRep = UserRep;
             this.UserRegServ = UserRegServ;
+            this.TemplateServ = TemplateServ;
         }
 
         [HttpPost]
@@ -42,7 +46,7 @@ namespace Getticket.Web.API.Controllers
         {
             string From = this.User.Identity.Name != null ? this.User.Identity.Name : "Uknown";
             List<string> To = new List<string>() { "maria.s@sunrise-r.ru"};
-            EmailService.SendMail(To, "Тест отправки письма", "Hello from " + From);
+            EmailService.SendMailAsync(To, "Тест отправки письма", "Hello from " + From).RunSynchronously();
             return Ok("sended");
         }
 
@@ -123,7 +127,9 @@ namespace Getticket.Web.API.Controllers
         [AllowAnonymous]
         public IHttpActionResult Test4()
         {
-            return Ok(UserRegServ.MarkDeleted(1).Response());
+            string result1 = TemplateServ.Run("Emails/Invite", typeof(InviteEmailModel), new InviteEmailModel() { Title = "T1", Link = "dsfdsgsdg" });
+            string result2 = TemplateServ.Run("Emails/Invite", typeof(InviteEmailModel), new InviteEmailModel() { Title = "T2", Link = "qwertyu" });
+            return Ok(result1 + " " + result2);
         }
 
 

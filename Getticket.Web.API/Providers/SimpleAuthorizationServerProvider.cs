@@ -4,17 +4,19 @@ using Getticket.Web.DAL.Enums;
 using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Getticket.Web.API.Authentification
+namespace Getticket.Web.API.Providers
 {
     // gets idea from StackOveflow
     // http://stackoverflow.com/questions/33398961/db-first-authentication-confusion-with-asp-net-web-api-2-ef6
+    /// <summary>
+    /// Проверяет аутонтификацию и авторизацию пользователя.
+    /// </summary>
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
 
@@ -23,6 +25,12 @@ namespace Getticket.Web.API.Authentification
             context.Validated();
         }
 
+        /// <summary>
+        /// Предоставляет авторизацию на доступ к ресурсам
+        /// используя identity.AddClaim
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });

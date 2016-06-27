@@ -1,8 +1,10 @@
-﻿using Getticket.Web.API.Services;
+﻿using Getticket.Web.API.Providers;
+using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
 using Getticket.Web.DAL.Repository;
 using Owin;
+using RazorEngine.Templating;
 using SimpleInjector;
 using SimpleInjector.Extensions.ExecutionContextScoping;
 using SimpleInjector.Integration.WebApi;
@@ -29,6 +31,7 @@ namespace Getticket.Web.API.App_Start
             container.Register<IUserRepository, UserRepository>(Lifestyle.Scoped);
             container.Register<IInviteCodeRepository, InviteCodeRepository>(Lifestyle.Scoped);
 
+            container.RegisterSingleton<IRazorEngineService>(RazorTemplateProvider.Get());
             container.Register<CredentailsService>(Lifestyle.Scoped);
 
             container.RegisterWebApiControllers(config);

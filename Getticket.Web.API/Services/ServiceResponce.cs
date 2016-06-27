@@ -54,7 +54,6 @@ namespace Getticket.Web.API.Services
         /// <summary>
         /// Добавляет ответ result к ответу сервиса;
         /// </summary>
-        /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
         public ServiceResponce Result(object value)

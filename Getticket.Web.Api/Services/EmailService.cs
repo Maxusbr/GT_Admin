@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace Getticket.Web.API.Services
 {
@@ -19,7 +20,7 @@ namespace Getticket.Web.API.Services
         /// <param name="caption">Тема письма</param>
         /// <param name="message">Сообщение</param>
         /// <param name="attachFile">Присоединенный файл</param>
-        public static bool SendMail(List<string> mailto, string caption, string message, string attachFile = null)
+        public static async Task<bool> SendMailAsync(List<string> mailto, string caption, string message, string attachFile = null)
         {
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(Settings.Default.MailFrom);
@@ -34,7 +35,7 @@ namespace Getticket.Web.API.Services
             {
                 mail.Attachments.Add(new Attachment(attachFile));
             }
-            bool rez = Send(mail);
+            bool rez = await SendTask(mail);
             mail.Dispose();
             return rez;
         }
@@ -46,16 +47,16 @@ namespace Getticket.Web.API.Services
         /// <param name="caption">Тема письма</param>
         /// <param name="message">Сообщение</param>
         /// <param name="attachFile">Присоединенный файл</param>
-        public static bool SendMail(string mailto, string caption, string message, string attachFile = null)
+        public static async Task<bool> SendMailAsync(string mailto, string caption, string message, string attachFile = null)
         {
-            return SendMail(new List<string>() { mailto }, caption, message, attachFile);
+            return await SendMailAsync(new List<string>() { mailto }, caption, message, attachFile);
         }
 
         /// <summary>
         /// Инициализирует SmtpClient и отправляет почту
         /// </summary>
         /// <param name="mail"></param>
-        private static bool Send(MailMessage mail)
+        private static Task<bool> SendTask(MailMessage mail)
         {
             try
             {
@@ -67,11 +68,11 @@ namespace Getticket.Web.API.Services
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.Send(mail);
                 client.Dispose();
-                return true;
+                return Task.FromResult(true);
             }
             catch (Exception e)
             {
-                return false;
+                return Task.FromResult(false);
             }
         }
     }
