@@ -188,6 +188,8 @@
     <Compile Include="Attributes\CustomPasswordAttribute.cs" />
     <Compile Include="Attributes\CustomPhoneAttribute.cs" />
     <Compile Include="Attributes\ValidateModelStateAttribute.cs" />
+    <Compile Include="Helpers\UserModelHelper.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\InviteController.cs" />
@@ -236,7 +238,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Temp\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Getticket.Web.DAL\Getticket.Web.DAL.csproj">

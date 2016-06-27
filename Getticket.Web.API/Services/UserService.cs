@@ -27,18 +27,20 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public User GetById(int Id)
+        public UserModel GetById(int Id)
         {
-            return UserRep.FindOneById(Id);
+            User user = UserRep.FindOneById(Id);
+            return UserModelHelper.GetUserModel(user);
         }
 
         /// <summary>
         /// Воозвращает всех(неудаленных пользователей)
         /// </summary>
         /// <returns></returns>
-        public IList<User> GetAll()
+        public IList<UserModel> GetAll()
         {
-            return UserRep.FindAllNotDeleted();
+            IList<User> users = UserRep.FindAllNotDeleted();
+            return UserModelHelper.GetUserModel(users);
         }
 
         /// <summary>

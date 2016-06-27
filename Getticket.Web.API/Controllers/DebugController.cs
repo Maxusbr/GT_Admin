@@ -132,22 +132,5 @@ namespace Getticket.Web.API.Controllers
             return Ok(result1 + " " + result2);
         }
 
-
-
-        /*
-        [HttpPost]
-        [Route("test4")]
-        public IHttpActionResult Test4()
-        {
-            string Body = Properties.Resources.Invite;
-
-            // string Body = System.IO.File.ReadAllText("Templates.Email.Invite.htm");
-            Body = Body.Replace("@DealerCompanyName", "It is my company");
-            if (EmailService.SendMail("maria.s@sunrise", "Это письмо с шаблоном", Body))
-            {
-                return Ok("send email");
-            }
-            return Ok("not send email");
-        }*/
     }
 }

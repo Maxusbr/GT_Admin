@@ -31,9 +31,10 @@ namespace Getticket.Web.API.Services
         /// но пока еще не зарегестрированных пользователей
         /// </summary>
         /// <returns></returns>
-        public IList<User> GetAllInvited()
+        public IList<UserModel> GetAllInvited()
         {
-            return UserRep.FindAllInvited();
+            IList<User> users = UserRep.FindAllInvited();
+            return UserModelHelper.GetUserModel(users);
         }
 
 

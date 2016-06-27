@@ -32,7 +32,7 @@ namespace Getticket.Web.API.Controllers
         [Route("")]
         public IHttpActionResult GetAll()
         {
-            return Ok<IList<User>>(UserServ.GetAll());
+            return Ok<IList<UserModel>>(UserServ.GetAll());
         }
 
         /// <summary>
@@ -44,12 +44,7 @@ namespace Getticket.Web.API.Controllers
         [Route("{id}")]
         public IHttpActionResult GetOne(int id)
         {
-            User user = UserServ.GetById(id);
-            if (user == null)
-            {
-                return Json<string>("User with id = " + id + " not found");
-            }
-            return Ok<User>(user);
+           return Ok(UserServ.GetById(id));
         }
 
         /// <summary>

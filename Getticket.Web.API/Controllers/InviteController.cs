@@ -34,7 +34,7 @@ namespace Getticket.Web.API.Controllers
         [Route("")]
         public IHttpActionResult GetAllInvitedUsers()
         {
-            return Ok<IList<User>>(InviteServ.GetAllInvited());
+            return Ok(InviteServ.GetAllInvited());
         }
 
         /// <summary>
