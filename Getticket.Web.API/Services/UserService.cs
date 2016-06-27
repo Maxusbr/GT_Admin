@@ -118,9 +118,8 @@ namespace Getticket.Web.API.Services
             user.PasswordHash = PasswordService.GeneratePasswordHash(model.NewPassword);
             UserRep.Save(user);
 
-            return ServiceResponce.FromSuccess()
-               .Result("Password was changed");
-        }
+            return ServiceResponce.FromSuccess();
+         }
 
      
 
@@ -157,9 +156,7 @@ namespace Getticket.Web.API.Services
             user.UserStatus = UserStatusHelper.Locked(user.UserStatus.Id);
             UserRep.Save(user);
 
-            return ServiceResponce.FromSuccess()
-                .Result("User was locked");
-           
+            return ServiceResponce.FromSuccess();
         }
 
         /// <summary>
@@ -194,9 +191,7 @@ namespace Getticket.Web.API.Services
             user.UserStatus = UserStatusHelper.System("", "", user.UserStatus.Id);
             UserRep.Save(user);
 
-            return ServiceResponce.FromSuccess()
-                .Result("User was unlocked");
-
+            return ServiceResponce.FromSuccess();
         }
 
 
@@ -219,9 +214,7 @@ namespace Getticket.Web.API.Services
             user = UpdateUserModelHelper.UpdateUser(user, model);
             UserRep.Save(user);
 
-            return ServiceResponce.FromSuccess()
-                .Result("User updated");
-               
+            return ServiceResponce.FromSuccess();
         }
 
 
@@ -238,8 +231,16 @@ namespace Getticket.Web.API.Services
             {
                 return ServiceResponce
                     .FromFailed()
-                    .Add("error", "Can't delete user because he do not exist");
+                    .Add("error", "Can't delete user because he doesn't exist");
             }
+
+            if (user.UserStatus.Status == DAL.Enums.UserStatusType.Deleted)
+            {
+                return ServiceResponce
+                .FromFailed()
+                .Add("error", "User already deleted");
+            }
+
             user.UserStatus = UserStatusHelper.Deleted(user.UserStatus.Id);
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
@@ -257,8 +258,25 @@ namespace Getticket.Web.API.Services
             {
                 return ServiceResponce
                     .FromFailed()
-                    .Add("error", "Can't delete user because he do not exist");
+                    .Add("error", "user doesn't exist");
             }
+
+            if (user.UserStatus.Status != DAL.Enums.UserStatusType.Deleted)
+            {
+                return ServiceResponce
+                .FromFailed()
+                .Add("error", "User is not deleted");
+            }
+
+            if  (UserRep.FindAllByEmail(user.UserName)!= null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "user with such email already exists");
+            }
+
+         
+
             user.UserStatus = UserStatusHelper.System("","",user.UserStatus.Id);
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
