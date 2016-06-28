@@ -130,15 +130,12 @@ namespace Getticket.Web.API.Services
             }
 
             User user = UserRep.FindOneById(invite.User.Id);
-            IList<User> users = UserRep.FindAllByCredentails(model.Email, model.Phone);
-            if (users != null)
+       
+            if(!UserService.CanUpdateUserCredentails(user.Id, model.Email, model.Phone, UserRep))
             {
-                if ((users.Count > 1)||((users.Count == 1) && (users[0].Id != user.Id)))
-                {
-                    return ServiceResponce
-                      .FromFailed()
-                      .Add("error", "user already exists");
-                }
+                return ServiceResponce
+                   .FromFailed()
+                   .Add("error", "user with such Email or Phone already exists");
             }
 
             // Генерируем и хэшируем пароль

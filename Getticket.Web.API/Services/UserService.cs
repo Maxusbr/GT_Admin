@@ -316,7 +316,7 @@ namespace Getticket.Web.API.Services
         public static bool CanUpdateUserCredentails(int UserId, string UpdatedName, string UpdatedPhone, IUserRepository repository)
         {
             IList<User> users = repository.FindAllByCredentails(UpdatedName, UpdatedPhone);
-            if (users.Count == 0)
+            if (users == null)
             {
                 return true;
             }
