@@ -2,6 +2,9 @@
 
 namespace Getticket.Web.DAL.Entities
 {
+    /// <summary>
+    /// Базовый класс сущности содержащий идентификатор
+    /// </summary>
     public class BaseEntity
     {
         /// <summary>

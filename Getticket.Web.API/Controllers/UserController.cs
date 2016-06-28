@@ -61,14 +61,8 @@ namespace Getticket.Web.API.Controllers
 
 
         /// <summary>
-        /// Обновляет информацию пользователя <paramref name="id"/>, 
+        /// Обновляет информацию пользователя с <paramref name="id"/>, 
         /// информация для обновления берется из <paramref name="model"/>
-        /// имя = model.Name 
-        /// фамилия = model.LastName 
-        /// компания = model.Company  
-        /// должность = model.Position 
-        /// электронная почта = model.Email 
-        /// телефон = model.Phone 
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
@@ -82,7 +76,8 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <summary>
-        /// Изменяет пароль пользователю.
+        /// Изменяет пароль пользователю и 
+        /// (опционально) отправляет ему письмо с новым паролем
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
@@ -96,8 +91,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <summary>
-        /// Устанавливает статус пользователя равным Locked,
-        /// если он был заблокирован ранее или удален - выдается сообщение.
+        /// Устанавливает статус пользователя с <paramref name="id" /> как "заблокированный"
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -109,7 +103,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <summary>
-        /// Меняет статус Locked пользователя с <paramref name="id"> </paramref>на System;
+        /// Разблокирует пользователя с <paramref name="id"/>
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -133,7 +127,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <summary>
-        /// Снимает метку "delete" пользователя с <paramref name="id"/> устанавливает статус System;
+        /// Снимает метку "Удаленный" с пользователя
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

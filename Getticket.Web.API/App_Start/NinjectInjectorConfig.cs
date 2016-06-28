@@ -17,7 +17,6 @@ namespace Getticket.Web.API.App_Start
         /// <summary>
         /// Регистрация настроек
         /// </summary>
-        /// <param name="app"></param>
         /// <param name="config"></param>
         public static IKernel Register(HttpConfiguration config)
         {
@@ -27,6 +26,10 @@ namespace Getticket.Web.API.App_Start
             return kernel;
         }
 
+        /// <summary>
+        /// Настройка классов для инжекта
+        /// </summary>
+        /// <param name="kernel"></param>
         private static void InjectConfig(IKernel kernel)
         {
             // Bindings for startup
