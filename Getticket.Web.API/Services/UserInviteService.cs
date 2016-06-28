@@ -67,7 +67,7 @@ namespace Getticket.Web.API.Services
                     model, 
                     PasswordService.GeneratePasswordString(30), 
                     "Invited", 
-                    "Invite sended at " + DateTime.Now,
+                    "Invite created at " + DateTime.Now,
                     DateTime.Now.AddDays(Properties.Settings.Default.DaysForInviteToLive)
                 );
 
@@ -81,11 +81,16 @@ namespace Getticket.Web.API.Services
                         .Run("Emails/Invite", typeof(InviteEmailModel), InviteEmailModel);
                     if (!EmailService.SendMail(InviteEmailModel, inviteText))
                     {
-                        IInviteCodeRepository repository 
-                            = (IInviteCodeRepository) GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IInviteCodeRepository));
                         Invite.User.UserStatus.Description = "Invite Email was not delivered";
-                        repository.Update(Invite);
+                        Invite.User.UserStatus.UpdateTime = DateTime.Now;
                     }
+                    else
+                    {
+                        Invite.User.UserStatus.Description = "Invite Email was delivered at " + DateTime.Now;
+                        Invite.User.UserStatus.UpdateTime = DateTime.Now;
+                    }
+                    InviteRep.Update(Invite);
+
                 }).Start();
 
                 return ServiceResponce

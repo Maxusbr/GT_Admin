@@ -1,4 +1,5 @@
 ﻿using Getticket.Web.API.Attributes;
+using Ninject;
 using System.Web.Http;
 
 namespace Getticket.Web.API
@@ -12,13 +13,13 @@ namespace Getticket.Web.API
         /// Регистрация настроек
         /// </summary>
         /// <param name="config"></param>
-        public static void Register(HttpConfiguration config)
+        public static void Register(HttpConfiguration config, IKernel kernel)
         {
             // Маршруты веб-API основанные на атрибутах
             config.MapHttpAttributeRoutes();
 
             // Проверяем состояние модели на каждом контроллере
-            config.Filters.Add(new ValidateModelStateAttribute());
+            config.Filters.Add(kernel.Get<ValidateModelStateAttribute>());
         }
     }
 }
