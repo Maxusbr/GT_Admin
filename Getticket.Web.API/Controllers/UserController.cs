@@ -86,8 +86,8 @@ namespace Getticket.Web.API.Controllers
         [Route("changepass/{id}")]
         public IHttpActionResult ChangePassword(int id,[FromBody] ChangePasswordModel model)
         {
-            string nameUserIn = this.User.Identity.Name;
-            return Ok(UserServ.ChangePassword(id, nameUserIn, model).Response());
+            string currentUser = this.User.Identity.Name;
+            return Ok(UserServ.ChangePassword(id, currentUser, model).Response());
         }
 
         /// <summary>

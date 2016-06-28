@@ -110,13 +110,15 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
-        /// Изменение пароля пользователя
+        /// Изменение пароля пользователя с идентификатором <paramref name="id" /> 
+        /// пользователем с Email <paramref name="currentUserEmail" />;
+        /// В случае если пользователь меняет пароль самому себе он должен указать старый пароль
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="mailIn"></param>
+        /// <param name="id">Идентификатор пользователя для которого меняется пароль</param>
+        /// <param name="currentUserEmail">Email польозователя который меняет пароль</param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ServiceResponce ChangePassword(int id, string mailIn, ChangePasswordModel model)
+        public ServiceResponce ChangePassword(int id, string currentUserEmail, ChangePasswordModel model)
         {
             User user = UserRep.FindOneById(id);
             if (user == null)
@@ -125,15 +127,34 @@ namespace Getticket.Web.API.Services
                     .FromFailed()
                     .Add("error", "User with specified Id was not found");
             }
-            if ((user.UserName.Equals(mailIn))
-                && (!user.PasswordHash.Equals(PasswordService.GeneratePasswordHash(model.OldPassword))))
+
+            bool SelfChangePassword = false;
+            if (user.UserName.Equals(currentUserEmail))
             {
-                return ServiceResponce
-                    .FromFailed()
-                    .Add("error", "Incorrect OldPassword");
+                SelfChangePassword = true;
+                if (!user.PasswordHash.Equals(PasswordService.GeneratePasswordHash(model.OldPassword)))
+                {
+                    return ServiceResponce
+                        .FromFailed()
+                        .Add("error", "Incorrect OldPassword");
+                }
             }
+
             user.PasswordHash = PasswordService.GeneratePasswordHash(model.NewPassword);
             UserRep.Save(user);
+
+            if (model.SendCopyPassword)
+            {
+                // Создаем задачу отправки сообщения в фоне и запускаем ее
+                new Thread(send =>
+                {
+                    ChangePasswordEmailModel ChangePasswordEmailModel 
+                        = ChangePasswordEmailModelHelper.GetChangePasswordEmailModel(user.UserName, model.NewPassword, SelfChangePassword);
+                    string ChangePasswordText = TemplateServ
+                        .Run("Emails/ChangePassword", typeof(ChangePasswordEmailModel), ChangePasswordEmailModel);
+                    EmailService.SendMail(ChangePasswordEmailModel, ChangePasswordText);
+                }).Start();
+            }
 
             return ServiceResponce.FromSuccess();
          }

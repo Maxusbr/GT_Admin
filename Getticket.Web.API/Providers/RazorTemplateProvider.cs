@@ -32,6 +32,7 @@ namespace Getticket.Web.API.Providers
         {
             service.Compile("Emails/Invite", typeof(InviteEmailModel));
             service.Compile("Emails/Registered", typeof(RegisteredEmailModel));
+            service.Compile("Emails/ChangePassword", typeof(ChangePasswordEmailModel));
         }
     }
 }
