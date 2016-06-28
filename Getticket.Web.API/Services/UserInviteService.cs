@@ -123,8 +123,10 @@ namespace Getticket.Web.API.Services
                    .FromFailed()
                    .Add("error", "invite not found");
             }
+            
+            /*
             invite = UpdateAcceptedInviteModelHelper.UpdateInviteCode(invite, model);
-            InviteRep.Save(invite);
+            InviteRep.Save(invite);*/
                 return ServiceResponce
                    .FromSuccess()
                    .Result("invite for user updated");

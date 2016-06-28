@@ -206,7 +206,6 @@
     <Compile Include="Attributes\CustomPasswordAttribute.cs" />
     <Compile Include="Attributes\CustomPhoneAttribute.cs" />
     <Compile Include="Attributes\ValidateModelStateAttribute.cs" />
-    <Compile Include="Helpers\UpdateAcceptedInviteModelHelper.cs" />
     <Compile Include="Helpers\UserModelHelper.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
