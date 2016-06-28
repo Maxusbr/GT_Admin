@@ -21,16 +21,7 @@ namespace Getticket.Web.API.Helpers
             user.UserInfo.LastName = model.LastName;
             user.UserInfo.Company = model.Company;
             user.UserInfo.Position = model.Position;
-            user.UserInfo.Phone = model.Phone;
-
-            if (model.GeneratePassword)
-            {
-                user.PasswordHash = PasswordService.GeneratePasswordHash(PasswordService.GeneratePasswordString());
-            }
-            else
-            {
-                user.PasswordHash = PasswordService.GeneratePasswordHash(model.Password);
-            }
+            user.UserInfo.Phone = PhoneCheckService.PhoneConvert(model.Phone);
 
             return user;
         }

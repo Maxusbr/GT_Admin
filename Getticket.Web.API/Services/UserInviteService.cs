@@ -25,8 +25,8 @@ namespace Getticket.Web.API.Services
         /// Конструктор
         /// </summary>
         public UserInviteService(
-            IInviteCodeRepository InviteRep, 
-            IUserRepository UserRep, 
+            IInviteCodeRepository InviteRep,
+            IUserRepository UserRep,
             IRazorEngineService TemplateServ)
         {
             this.InviteRep = InviteRep;
@@ -63,9 +63,9 @@ namespace Getticket.Web.API.Services
             InviteCode Invite = SendInviteModelHelper
                 .CreateInviteCode
                 (
-                    model, 
-                    PasswordService.GeneratePasswordString(30), 
-                    "Invited", 
+                    model,
+                    PasswordService.GeneratePasswordString(30),
+                    "Invited",
                     "Invite created at " + DateTime.Now,
                     DateTime.Now.AddDays(Properties.Settings.Default.DaysForInviteToLive)
                 );
@@ -73,7 +73,7 @@ namespace Getticket.Web.API.Services
             if (InviteRep.Add(Invite))
             {
                 // Создаем задачу отправки сообщения в фоне и запускаем ее
-                new Thread(send => 
+                new Thread(send =>
                 {
                     InviteEmailModel InviteEmailModel = InviteEmailModelHelper.GetInviteEmailModel(Invite);
                     string inviteText = TemplateServ
@@ -123,19 +123,35 @@ namespace Getticket.Web.API.Services
             }
 
             User user = UserRep.FindOneById(invite.User.Id);
-    /*        if(UserRep.FindAllByCredentails(model.Email) != null)
+            IList<User> users = UserRep.FindAllByCredentails(model.Email, model.Phone);
+            if (users != null)
             {
-                return ServiceResponce
-                  .FromFailed()
-                  .Add("error", "user already exists");
-            } */
+                if ((users.Count > 1)||((users.Count == 1) && (users[0].Id != user.Id)))
+                {
+                    return ServiceResponce
+                      .FromFailed()
+                      .Add("error", "user already exists");
+                }
+            }
+
+            // Генерируем и хэшируем пароль
+            string UnHashedPassword = model.Password;
+            if (model.GeneratePassword)
+            {
+                UnHashedPassword = PasswordService.GeneratePasswordString();
+            }
+           
+            model.Password = PasswordService.GeneratePasswordHash(UnHashedPassword);
+
             user = UpdateInviteModelHelper.UpdateInviteUser(user, model);
+
+
             user.UserStatus = UserStatusHelper.AcceptInvite(user.UserStatus.Id);
             UserRep.Save(user);
-            bool InviteDel = InviteRep.Delete(invite.Id);
-                return ServiceResponce
-                   .FromSuccess()
-                   .Result("invite for user updated");
+            InviteRep.Delete(invite.Id);
+            return ServiceResponce
+               .FromSuccess()
+               .Result("invite accepted");
         }
 
         /// <summary>
