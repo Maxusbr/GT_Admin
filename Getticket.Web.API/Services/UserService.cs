@@ -177,18 +177,11 @@ namespace Getticket.Web.API.Services
                     .Add("error", "User with specified Id was not found");
             }
 
-            if (user.UserStatus.Status == DAL.Enums.UserStatusType.Locked)
+            if (user.UserStatus.Status != DAL.Enums.UserStatusType.System)
             {
                 return ServiceResponce
                 .FromFailed()
-                .Add("error", "User is already locked");
-            }
-
-            if (user.UserStatus.Status == DAL.Enums.UserStatusType.Deleted)
-            {
-                return ServiceResponce
-                .FromFailed()
-                .Add("error", "User was deleted, can not be blocked");
+                .Add("error", "Only active user can be locked");
             }
 
             user.UserStatus = UserStatusHelper.Locked(user.UserStatus.Id);
@@ -217,13 +210,6 @@ namespace Getticket.Web.API.Services
                 return ServiceResponce
                 .FromFailed()
                 .Add("error", "User is not locked");
-            }
-
-            if (user.UserStatus.Status == DAL.Enums.UserStatusType.Deleted)
-            {
-                return ServiceResponce
-                .FromFailed()
-                .Add("error", "User was deleted, can not be unlocked");
             }
 
             user.UserStatus = UserStatusHelper.System("", "", user.UserStatus.Id);
