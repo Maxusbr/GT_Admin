@@ -334,5 +334,3 @@ namespace Getticket.Web.API.Services
 
     }
 }
-        
-

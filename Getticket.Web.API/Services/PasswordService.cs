@@ -87,7 +87,7 @@ namespace Getticket.Web.API.Services
             {
                 return false;
             }
-            string regex = "[" + Settings.Default.PasswordAcceptableSymbols + "]{"
+            string regex = "^[" + Settings.Default.PasswordAcceptableSymbols + "]{"
                 + Settings.Default.PasswordMinLength + "," + Settings.Default.PasswordMaxLength + "}$";
             Regex testPass = new Regex(regex);
             return testPass.IsMatch(Password);
