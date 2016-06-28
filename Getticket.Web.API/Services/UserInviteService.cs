@@ -123,7 +123,7 @@ namespace Getticket.Web.API.Services
             }
 
             User user = UserRep.FindOneById(invite.User.Id);
-        /*    if(UserRep.FindAllByEmail(user.UserName) != null)
+    /*        if(UserRep.FindAllByCredentails(model.Email) != null)
             {
                 return ServiceResponce
                   .FromFailed()

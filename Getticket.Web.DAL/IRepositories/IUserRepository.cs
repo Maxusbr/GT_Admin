@@ -27,7 +27,18 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="phone">телефонный номер в формате +7[0-9]{10}</param>
         /// <returns></returns>
         int CountByCredentails(string email, string phone);
-        
+
+        /// <summary>
+        /// Возвращает список всех(неудаленных) пользователей 
+        /// по <paramref name="email" /> и <paramref name="phone" />;
+        /// Если <paramref name="phone" /> == <c>null</c> искать будет
+        /// только по <paramref name="email" />;
+        /// </summary>
+        /// <param name="email"><see cref="User.UserName" /></param>
+        /// <param name="phone">телефонный номер в формате +7[0-9]{10}</param>
+        /// <returns></returns>
+        IList<User> FindAllByCredentails(string email, string phone);
+
         /// <summary>
         /// Находим всех(неудаленных) пользователей.
         /// </summary>

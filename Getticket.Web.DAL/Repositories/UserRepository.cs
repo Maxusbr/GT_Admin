@@ -70,6 +70,24 @@ namespace Getticket.Web.DAL.Repositories
             return query.Count();
         }
 
+        /// <see cref="IUserRepository.FindAllByCredentails(string, string)" />
+        public IList<User> FindAllByCredentails(string email, string phone)
+        {
+            IQueryable<User> query = db.Users
+              .Where(UserNotDeleted);
+
+            if (phone == null)
+            {
+                query = query.Where(u => u.UserName.Equals(email));
+            }
+            else
+            {
+                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserInfo.Phone.Equals(phone)));
+            }
+
+            return GetAll(query);
+        }
+
         /// <see cref="IUserRepository.Save(User)" />
         public override User Save(User Entity)
         {
@@ -145,5 +163,7 @@ namespace Getticket.Web.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
