@@ -17,6 +17,13 @@ namespace Getticket.Web.DAL.IRepositories
         bool Add(InviteCode invite);
 
         /// <summary>
+        /// Обновляет приглашение и пользователя 
+        /// указанных в <paramref name="invite" />
+        /// </summary>
+        /// <param name="invite"></param>
+        bool Update(InviteCode invite);
+
+        /// <summary>
         /// Находит InviteCode и достает
         /// по ссылке ТОЛЬКО пользователя
         /// без статуса и информации
@@ -24,5 +31,6 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="code"></param>
         /// <returns></returns>
         InviteCode FindOneByCode(string code);
+        
     }
 }

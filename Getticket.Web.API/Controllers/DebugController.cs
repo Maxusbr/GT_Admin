@@ -3,7 +3,6 @@ using Getticket.Web.DAL.Entities;
 using Getticket.Web.API.Services;
 using System.Collections.Generic;
 using Getticket.Web.DAL.IRepositories;
-using Getticket.Web.API.Providers;
 using RazorEngine.Templating;
 using Getticket.Web.API.Models.Emails;
 
@@ -46,7 +45,7 @@ namespace Getticket.Web.API.Controllers
         {
             string From = this.User.Identity.Name != null ? this.User.Identity.Name : "Uknown";
             List<string> To = new List<string>() { "maria.s@sunrise-r.ru"};
-            EmailService.SendMailAsync(To, "Тест отправки письма", "Hello from " + From).RunSynchronously();
+            EmailService.SendMail(To, "Тест отправки письма", "Hello from " + From);
             return Ok("sended");
         }
 

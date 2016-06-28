@@ -8,7 +8,7 @@ namespace Getticket.Web.API.Helpers
     /// <summary>
     /// Helper
     /// </summary>
-    public class UpdateUserModelHelper
+    public static class UpdateUserModelHelper
     {
         // TODO implement neded
         /// <summary>
