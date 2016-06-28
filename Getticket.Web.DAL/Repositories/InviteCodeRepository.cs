@@ -54,10 +54,23 @@ namespace Getticket.Web.DAL.Repositories
             }
             return invite;
         }
-        /// <see cref="IInviteCodeRepository.Save(InviteCode)" />
-        public override InviteCode Save(InviteCode Entity)
+
+        /// <see cref="IInviteCodeRepository.Delete(int)" />
+        public bool Delete(int Id)
         {
-            return base.Save(Entity);
+            if (Id < 1)
+            {
+                return false;
+            }
+            IQueryable<InviteCode> query = db.InviteCodes.Where(i => i.Id == Id);
+            if (!query.Any())
+            {
+                return false;
+            }
+            InviteCode invite = query.First();
+            db.InviteCodes.Remove(invite);
+            db.SaveChanges();
+            return true;
         }
     }
 }

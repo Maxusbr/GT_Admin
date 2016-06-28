@@ -31,6 +31,13 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="code"></param>
         /// <returns></returns>
         InviteCode FindOneByCode(string code);
-        
+
+        /// <summary>
+        /// Удаляет запись InviteCode по <paramref name="Id"/>.
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        bool Delete(int Id);
+
     }
 }

@@ -123,10 +123,18 @@ namespace Getticket.Web.API.Services
                    .FromFailed()
                    .Add("error", "invite not found");
             }
-            
-            /*
-            invite = UpdateAcceptedInviteModelHelper.UpdateInviteCode(invite, model);
-            InviteRep.Save(invite);*/
+
+            User user = UserRep.FindOneById(invite.User.Id);
+            if(UserRep.FindAllByEmail(user.UserName) != null)
+            {
+                return ServiceResponce
+                  .FromFailed()
+                  .Add("error", "user already exists");
+            }
+            user = UpdateInviteModelHelper.UpdateInviteUser(user, model);
+            user.UserStatus = UserStatusHelper.AcceptInvite(user.UserStatus.Id);
+            UserRep.Save(user);
+            bool InviteDel = InviteRep.Delete(invite.Id);
                 return ServiceResponce
                    .FromSuccess()
                    .Result("invite for user updated");

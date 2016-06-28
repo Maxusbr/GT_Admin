@@ -199,6 +199,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectInjectorConfig.cs" />
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
+    <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
     <Compile Include="Models\Emails\BaseEmailModel.cs" />
     <Compile Include="Providers\OAuthAuthorizationServerOptionsProvider.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
