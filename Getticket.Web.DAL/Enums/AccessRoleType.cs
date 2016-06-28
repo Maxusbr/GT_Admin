@@ -9,6 +9,9 @@ namespace Getticket.Web.DAL.Enums
     [Flags]
     public enum AccessRoleType
     {
+        /// <summary>
+        /// Пустая роль, не должна присатствовать ни у одного пользователя
+        /// </summary>
         None = 0,
         Admin = 1
     }

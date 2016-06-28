@@ -200,7 +200,9 @@
     <Compile Include="App_Start\NinjectInjectorConfig.cs" />
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
     <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
+    <Compile Include="Helpers\RegisteredEmailModelHelper.cs" />
     <Compile Include="Models\Emails\BaseEmailModel.cs" />
+    <Compile Include="Models\Emails\RegisteredEmailModel.cs" />
     <Compile Include="Providers\OAuthAuthorizationServerOptionsProvider.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\CheckModelForNullAttribute.cs" />
@@ -248,6 +250,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Content Include="Templates\Emails\Invite.cshtml" />
+    <Content Include="Templates\Emails\Registered.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

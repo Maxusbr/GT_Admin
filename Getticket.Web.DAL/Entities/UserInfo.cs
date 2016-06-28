@@ -1,10 +1,15 @@
 ﻿using Newtonsoft.Json;
-using System;
 
 namespace Getticket.Web.DAL.Entities
 {
+    /// <summary>
+    /// Информация о пользователе
+    /// </summary>
     public class UserInfo : BaseEntity
     {
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public UserInfo(){}
 
         /// <summary>
@@ -32,6 +37,9 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         public string Phone { get; set; }
 
+        /// <summary>
+        /// Ссылка на пользователя
+        /// </summary>
         [JsonIgnore]
         public User User { get; set; }
     }

@@ -11,6 +11,9 @@ namespace Getticket.Web.DAL.Repositories
     /// <typeparam name="T"></typeparam>
     public class BaseRepository<T> : IDisposable where T : BaseEntity
     {
+        /// <summary>
+        /// Контекст базы данных
+        /// </summary>
         protected GetticketDBContext db;
 
         /// <summary>

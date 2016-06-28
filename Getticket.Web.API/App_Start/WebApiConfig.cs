@@ -9,10 +9,12 @@ namespace Getticket.Web.API
     /// </summary>
     public static class WebApiConfig
     {
+
         /// <summary>
         /// Регистрация настроек
         /// </summary>
         /// <param name="config"></param>
+        /// <param name="kernel"></param>
         public static void Register(HttpConfiguration config, IKernel kernel)
         {
             // Маршруты веб-API основанные на атрибутах

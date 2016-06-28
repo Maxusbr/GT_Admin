@@ -20,10 +20,18 @@ namespace Getticket.Web.API.Providers
             string temlatesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates");
             config.TemplateManager = new ResolvePathTemplateManager(new List<string>() { temlatesPath });
             var service = RazorEngineService.Create(config);
-
-            service.Compile("Emails/Invite", typeof(InviteEmailModel));
-
+            PrepareTemplates(service);
             return service;
+        }
+
+        /// <summary>
+        /// Компиляция и кеширование шаблонов для последующего использования
+        /// </summary>
+        /// <param name="service"></param>
+        private static void PrepareTemplates(IRazorEngineService service)
+        {
+            service.Compile("Emails/Invite", typeof(InviteEmailModel));
+            service.Compile("Emails/Registered", typeof(RegisteredEmailModel));
         }
     }
 }

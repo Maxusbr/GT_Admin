@@ -28,7 +28,6 @@ namespace Getticket.Web.API
             // Настраиваем маппинг Web.Api путей для контроллера и фильтры
             WebApiConfig.Register(config, kernel);
 
-
             // Token and authorization roles provider
             app.UseOAuthAuthorizationServer(kernel.Get<OAuthAuthorizationServerOptionsProvider>());
             // Authentication provider

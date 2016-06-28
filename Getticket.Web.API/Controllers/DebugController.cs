@@ -126,8 +126,8 @@ namespace Getticket.Web.API.Controllers
         [AllowAnonymous]
         public IHttpActionResult Test4()
         {
-            string result1 = TemplateServ.Run("Emails/Invite", typeof(InviteEmailModel), new InviteEmailModel() { Title = "T1", Link = "dsfdsgsdg" });
-            string result2 = TemplateServ.Run("Emails/Invite", typeof(InviteEmailModel), new InviteEmailModel() { Title = "T2", Link = "qwertyu" });
+            string result1 = TemplateServ.Run("Emails/Invite", typeof(InviteEmailModel), new InviteEmailModel() { Link = "dsfdsgsdg" });
+            string result2 = TemplateServ.Run("Emails/Invite", typeof(InviteEmailModel), new InviteEmailModel() { Link = "qwertyu" });
             return Ok(result1 + " " + result2);
         }
 

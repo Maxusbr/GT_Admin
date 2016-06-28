@@ -1,9 +1,11 @@
 ﻿using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Emails;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
+using RazorEngine.Templating;
 using System.Collections.Generic;
-using System;
+using System.Threading;
 
 namespace Getticket.Web.API.Services
 {
@@ -14,13 +16,25 @@ namespace Getticket.Web.API.Services
     public class UserService
     {
         private IUserRepository UserRep;
+        private IRazorEngineService TemplateServ;
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        public UserService(IUserRepository UserRep)
+        public UserService(IUserRepository UserRep, IRazorEngineService TemplateServ)
         {
             this.UserRep = UserRep;
+            this.TemplateServ = TemplateServ;
+        }
+
+        /// <summary>
+        /// Воозвращает всех(неудаленных пользователей)
+        /// </summary>
+        /// <returns></returns>
+        public IList<UserModel> GetAll()
+        {
+            IList<User> users = UserRep.FindAllNotDeleted();
+            return UserModelHelper.GetUserModel(users);
         }
 
         /// <summary>
@@ -32,16 +46,6 @@ namespace Getticket.Web.API.Services
         {
             User user = UserRep.FindOneById(Id);
             return UserModelHelper.GetUserModel(user);
-        }
-
-        /// <summary>
-        /// Воозвращает всех(неудаленных пользователей)
-        /// </summary>
-        /// <returns></returns>
-        public IList<UserModel> GetAll()
-        {
-            IList<User> users = UserRep.FindAllNotDeleted();
-            return UserModelHelper.GetUserModel(users);
         }
 
         /// <summary>
@@ -57,19 +61,18 @@ namespace Getticket.Web.API.Services
                     .FromFailed()
                     .Add("error", "Password not acceptable");
             }
+
             model.Phone = PhoneCheckService.PhoneConvert(model.Phone);
-            if (UserRep.FindAllByEmail(model.Email) == null)
+            if (UserRep.CountByCredentails(model.Email, model.Phone) == 0)
             {
-                string GeneratedPassword = null;
+                // Генерируем и хэшируем пароль
+                string UnHashedPassword = model.Password;
                 if (model.GeneratePassword)
                 {
-                    GeneratedPassword = PasswordService.GeneratePasswordString();
-                    model.Password = PasswordService.GeneratePasswordHash(GeneratedPassword);
+                    UnHashedPassword = PasswordService.GeneratePasswordString();  
                 }
-                else
-                {
-                    model.Password = PasswordService.GeneratePasswordHash(model.Password);
-                }
+                model.Password = PasswordService.GeneratePasswordHash(UnHashedPassword);
+
                 User user = RegisterUserModelHelper.CreateUser(model);
                 UserRep.Save(user);
                 ServiceResponce response = ServiceResponce
@@ -79,16 +82,30 @@ namespace Getticket.Web.API.Services
 
                 if (model.GeneratePassword)
                 {
-                    response.Add("GeneratedPassword", GeneratedPassword);
+                    response.Add("GeneratedPassword", UnHashedPassword);
                 }
 
+                if (model.NotSendWelcome == false)
+                {
+                    // Создаем задачу отправки сообщения в фоне и запускаем ее
+                    new Thread(send =>
+                    {
+                        RegisteredEmailModel RegisteredEmailModel
+                            = RegisteredEmailModelHelper.GetRegisteredEmailModel(model, UnHashedPassword);
+                        string RegisteredText = TemplateServ
+                            .Run("Emails/Registered", typeof(RegisteredEmailModel), RegisteredEmailModel);
+                        EmailService.SendMail(RegisteredEmailModel, RegisteredText);
+
+                    }).Start();
+                }
+                
                 return response;
             }
             else
             {
                 return ServiceResponce
                     .FromFailed()
-                    .Add("error", "User with email " + model.Email + " already exist");
+                    .Add("error", "User with this Email or Phone already exist");
             }
         }
 
@@ -268,14 +285,12 @@ namespace Getticket.Web.API.Services
                 .Add("error", "User is not deleted");
             }
 
-            if  (UserRep.FindAllByEmail(user.UserName)!= null)
+            if  (UserRep.CountByCredentails(user.UserName, user.UserInfo.Phone) != 0)
             {
                 return ServiceResponce
                     .FromFailed()
-                    .Add("error", "user with such email already exists");
+                    .Add("error", "user with such email or phone already exists");
             }
-
-         
 
             user.UserStatus = UserStatusHelper.System("","",user.UserStatus.Id);
             UserRep.Save(user);
