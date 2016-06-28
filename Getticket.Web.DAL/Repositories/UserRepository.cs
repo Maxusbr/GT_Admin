@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Getticket.Web.DAL.IRepositories;
 using System.Linq.Expressions;
 
-namespace Getticket.Web.DAL.Repository
+namespace Getticket.Web.DAL.Repositories
 {
     /// <summary>
     /// <see cref="IUserRepository" />

@@ -1,14 +1,11 @@
 ﻿using Getticket.Web.API.Providers;
 using Getticket.Web.DAL.IRepositories;
-using Getticket.Web.DAL.Repository;
 using Ninject;
-using Owin;
 using RazorEngine.Templating;
 using System.Web.Http;
-using Ninject.Web.Common.OwinHost;
-using Ninject.Web.WebApi.OwinHost;
 using Microsoft.Owin.Security.OAuth;
 using System.Reflection;
+using Getticket.Web.DAL.Repositories;
 
 namespace Getticket.Web.API.App_Start
 {

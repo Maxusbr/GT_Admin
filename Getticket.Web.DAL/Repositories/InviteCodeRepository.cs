@@ -3,7 +3,7 @@ using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
 using System.Linq;
 
-namespace Getticket.Web.DAL.Repository
+namespace Getticket.Web.DAL.Repositories
 {
     /// <summary>
     /// <see cref="IInviteCodeRepository" />
