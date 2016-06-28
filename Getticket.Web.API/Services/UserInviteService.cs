@@ -77,6 +77,30 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
+        /// Обновляет данные приглашения пользователя
+        /// и переводит статус приглашения в статус ожидающий
+        /// "Акцепта(ТЗ стр.8)"
+        /// </summary>
+        /// <param name="code">Код приглашения</param>
+        /// <param name="model">Модель с данными для обновления</param>
+        /// <returns></returns>
+        public ServiceResponce UpdateInvite(string code, UpdateInviteModel model)
+        {
+            InviteCode invite = InviteRep.FindOneByCode(code);
+            if (invite == null)
+            {
+                return ServiceResponce
+                   .FromFailed()
+                   .Add("error", "invite not found");
+            }
+            invite = UpdateAcceptedInviteModelHelper.UpdateInviteCode(invite, model);
+            InviteRep.Save(invite);
+                return ServiceResponce
+                   .FromSuccess()
+                   .Result("invite for user updated");
+        }
+
+        /// <summary>
         /// Проверяет есть ли активный, непринятый инвайт по коду,
         /// Если есть: возвращает Email приглашенного пользователя для использования при обновлении информации;
         /// Если он есть но просрочен: удаляет приглашенного пользователя и инвайт для него;

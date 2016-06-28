@@ -139,9 +139,9 @@ namespace Getticket.Web.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("undelete/{id}")]
-        public IHttpActionResult UnDeleted(int id)
+        public IHttpActionResult MarkNotDeleted(int id)
         {
-            return Ok(UserServ.UnDeleted(id).Response());
+            return Ok(UserServ.MarkNotDeleted(id).Response());
         }
     }
 }

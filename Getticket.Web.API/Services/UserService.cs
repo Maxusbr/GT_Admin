@@ -251,7 +251,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ServiceResponce UnDeleted(int id)
+        public ServiceResponce MarkNotDeleted(int id)
         {
             User user = UserRep.FindOneById(id);
             if (user == null)

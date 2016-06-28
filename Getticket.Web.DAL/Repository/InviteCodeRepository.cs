@@ -42,5 +42,10 @@ namespace Getticket.Web.DAL.Repository
             }
             return invite;
         }
+        /// <see cref="IInviteCodeRepository.Save(InviteCode)" />
+        public override InviteCode Save(InviteCode Entity)
+        {
+            return base.Save(Entity);
+        }
     }
 }

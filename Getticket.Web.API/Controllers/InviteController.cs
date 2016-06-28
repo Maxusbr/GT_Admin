@@ -77,9 +77,9 @@ namespace Getticket.Web.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("update/{code}")]
-        public IHttpActionResult UpdateAcceptedInvite(string code, [FromBody] UpdateAcceptedInviteModel model)
+        public IHttpActionResult UpdateAcceptedInvite(string code, [FromBody] UpdateInviteModel model)
         {
-            throw new NotImplementedException();
+            return Ok(InviteServ.UpdateInvite(code, model).Response());
         }
 
         /// <summary>

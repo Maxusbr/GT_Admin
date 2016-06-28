@@ -7,7 +7,7 @@ namespace Getticket.Web.API.Models
     /// Модель для обновления информации приглашения
     /// при принятии приглашения пользователем
     /// </summary>
-    public class UpdateAcceptedInviteModel
+    public class UpdateInviteModel
     {
         [Required]
         public string Name { get; set; }

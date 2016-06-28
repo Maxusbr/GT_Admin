@@ -7,7 +7,7 @@ using System.Web;
 namespace Getticket.Web.API.Models
 {
     /// <summary>
-    /// Модель пользователя (используется в контроллере)
+    /// Модель пользователя (используется для ответов API)
     /// </summary>
     public class UserModel
     {

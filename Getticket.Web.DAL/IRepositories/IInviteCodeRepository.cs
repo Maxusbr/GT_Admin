@@ -24,5 +24,12 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="code"></param>
         /// <returns></returns>
         InviteCode FindOneByCode(string code);
+
+        /// <summary>
+        /// Cохраняем изменения записи <paramref name="invite"/>
+        /// </summary>
+        /// <param name="invite"></param>
+        /// <returns></returns>
+        InviteCode Save(InviteCode invite);
     }
 }
