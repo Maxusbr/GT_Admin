@@ -1,7 +1,6 @@
 ﻿using Getticket.Web.API.Models;
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
-using System;
 
 namespace Getticket.Web.API.Helpers
 {
@@ -47,7 +46,7 @@ namespace Getticket.Web.API.Helpers
 
             if (model.Phone != null)
             {
-                user.UserInfo.Phone = model.Phone;
+                user.UserInfo.Phone = PhoneService.PhoneConvert(model.Phone);
             }
 
             return user;

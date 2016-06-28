@@ -22,7 +22,7 @@ namespace Getticket.Web.API.Services
         public AuthModel Authenticate(LogonModel model)
         {
             string PasswordHash = PasswordService.GeneratePasswordHash(model.Password);
-            string ClearPhone = PhoneCheckService.PhoneConvert(model.Phone);
+            string ClearPhone = PhoneService.PhoneConvert(model.Phone);
 
             User user = null;
             if (String.IsNullOrEmpty(model.Email))

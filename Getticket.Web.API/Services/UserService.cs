@@ -62,7 +62,7 @@ namespace Getticket.Web.API.Services
                     .Add("error", "Password not acceptable");
             }
 
-            model.Phone = PhoneCheckService.PhoneConvert(model.Phone);
+            model.Phone = PhoneService.PhoneConvert(model.Phone);
             if (UserRep.CountByCredentails(model.Email, model.Phone) == 0)
             {
                 // Генерируем и хэшируем пароль
@@ -229,9 +229,16 @@ namespace Getticket.Web.API.Services
             }
 
             user = UpdateUserModelHelper.UpdateUser(user, model);
-            UserRep.Save(user);
 
-            return ServiceResponce.FromSuccess();
+            if (CanUpdateUserCredentails(user.Id, user.UserName, user.UserInfo.Phone, UserRep))
+            {
+                UserRep.Save(user);
+                return ServiceResponce.FromSuccess();
+            }
+            else
+            {
+                return ServiceResponce.FromFailed().Add("error", "Cant update to specified email or phone");
+            } 
         }
 
 
@@ -297,7 +304,33 @@ namespace Getticket.Web.API.Services
             return ServiceResponce.FromSuccess();
         }
 
+        /// <summary>
+        /// Проверяет возможно ли изменить пользователю с идентификатором <paramref name="UserId" />
+        /// его учетные данные (емаил и телефон) на <paramref name="UpdatedName" /> и <paramref name="UpdatedPhone" />
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="UpdatedName"></param>
+        /// <param name="UpdatedPhone"></param>
+        /// <param name="repository">Ссылка на IUserRepository</param>
+        /// <returns></returns>
+        public static bool CanUpdateUserCredentails(int UserId, string UpdatedName, string UpdatedPhone, IUserRepository repository)
+        {
+            IList<User> users = repository.FindAllByCredentails(UpdatedName, UpdatedPhone);
+            if (users.Count == 0)
+            {
+                return true;
+            }
+
+            if (users.Count == 1)
+            {
+                foreach(User u in users)
+                {
+                    return u.Id.Equals(UserId);
+                }
+            }
+
+            return false;
+        }
+
     }
 }
-        
-

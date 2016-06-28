@@ -5,7 +5,7 @@ namespace Getticket.Web.API.Services
     /// <summary>
     /// Сервис проверки и конвертации телефонного номера
     /// </summary>
-    public static class PhoneCheckService
+    public static class PhoneService
     {
         /// <summary>
         /// Проверяет номер телефона на соответствие 
