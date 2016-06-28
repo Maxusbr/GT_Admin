@@ -216,7 +216,6 @@
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="Controllers\InviteController.cs" />
-    <Compile Include="Controllers\LogonController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helpers\RegisterUserModelHelper.cs" />
     <Compile Include="Helpers\SendInviteModelHelper.cs" />
