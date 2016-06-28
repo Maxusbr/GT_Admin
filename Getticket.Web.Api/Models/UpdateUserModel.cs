@@ -21,6 +21,5 @@ namespace Getticket.Web.API.Models
 
         [CustomPhone]
         public string Phone { get; set; }
-
     }
 }

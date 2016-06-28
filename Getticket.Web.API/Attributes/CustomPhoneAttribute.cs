@@ -19,7 +19,7 @@ namespace Getticket.Web.API.Attributes
             {
                 return true;
             }
-            return PhoneCheckService.IsPhoneValid((string) value);
+            return PhoneService.IsPhoneValid((string) value);
         }
     }
 }
