@@ -1,8 +1,10 @@
-﻿using Getticket.Web.API.Properties;
+﻿using Getticket.Web.API.Models.Emails;
+using Getticket.Web.API.Properties;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Getticket.Web.API.Services
@@ -16,11 +18,23 @@ namespace Getticket.Web.API.Services
         /// <summary>
         /// Отправка email
         /// </summary>
+        /// <param name="mailto">Адрес получателя</param>
+        /// <param name="caption">Тема письма</param>
+        /// <param name="message">Сообщение</param>
+        /// <param name="attachFile">Присоединенный файл</param>
+        public static bool SendMail(string mailto, string caption, string message, string attachFile = null)
+        {
+            return SendMail(new List<string>() { mailto }, caption, message, attachFile);
+        }
+
+        /// <summary>
+        /// Отправка email
+        /// </summary>
         /// <param name="mailto">Адреса получателей</param>
         /// <param name="caption">Тема письма</param>
         /// <param name="message">Сообщение</param>
         /// <param name="attachFile">Присоединенный файл</param>
-        public static async Task<bool> SendMailAsync(List<string> mailto, string caption, string message, string attachFile = null)
+        public static bool SendMail(List<string> mailto, string caption, string message, string attachFile = null)
         {
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(Settings.Default.MailFrom);
@@ -35,28 +49,28 @@ namespace Getticket.Web.API.Services
             {
                 mail.Attachments.Add(new Attachment(attachFile));
             }
-            bool rez = await SendTask(mail);
+            bool rez = Send(mail);
             mail.Dispose();
             return rez;
         }
 
         /// <summary>
-        /// Отправка email
+        /// Отправляет письмо используя Базовую модель письма <paramref name="model" />
+        /// и опработаный шаблон письма <paramref name="HtmlString" />
         /// </summary>
-        /// <param name="mailto">Адрес получателя</param>
-        /// <param name="caption">Тема письма</param>
-        /// <param name="message">Сообщение</param>
-        /// <param name="attachFile">Присоединенный файл</param>
-        public static async Task<bool> SendMailAsync(string mailto, string caption, string message, string attachFile = null)
+        /// <param name="model"></param>
+        /// <param name="HtmlString"></param>
+        /// <returns></returns>
+        public static bool SendMail(BaseEmailModel model, string HtmlString)
         {
-            return await SendMailAsync(new List<string>() { mailto }, caption, message, attachFile);
+            return SendMail(model.MailTo, model.Caption, HtmlString, null);
         }
 
         /// <summary>
         /// Инициализирует SmtpClient и отправляет почту
         /// </summary>
         /// <param name="mail"></param>
-        private static Task<bool> SendTask(MailMessage mail)
+        private static bool Send(MailMessage mail)
         {
             try
             {
@@ -68,11 +82,11 @@ namespace Getticket.Web.API.Services
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.Send(mail);
                 client.Dispose();
-                return Task.FromResult(true);
+                return true;
             }
             catch (Exception e)
             {
-                return Task.FromResult(false);
+                return false;
             }
         }
     }

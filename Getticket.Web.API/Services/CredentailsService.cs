@@ -2,7 +2,6 @@
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.IRepositories;
-using Getticket.Web.DAL.Repository;
 using System;
 using System.Threading.Tasks;
 

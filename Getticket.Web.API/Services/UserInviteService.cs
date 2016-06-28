@@ -1,9 +1,14 @@
 ﻿using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Emails;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
+using RazorEngine.Templating;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace Getticket.Web.API.Services
 {
@@ -16,14 +21,19 @@ namespace Getticket.Web.API.Services
     {
         private IInviteCodeRepository InviteRep;
         private IUserRepository UserRep;
+        private IRazorEngineService TemplateServ;
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        public UserInviteService(IInviteCodeRepository InviteRep, IUserRepository UserRep)
+        public UserInviteService(
+            IInviteCodeRepository InviteRep, 
+            IUserRepository UserRep, 
+            IRazorEngineService TemplateServ)
         {
             this.InviteRep = InviteRep;
             this.UserRep = UserRep;
+            this.TemplateServ = TemplateServ;
         }
 
         /// <summary>
@@ -58,15 +68,35 @@ namespace Getticket.Web.API.Services
                     model, 
                     PasswordService.GeneratePasswordString(30), 
                     "Invited", 
-                    "Invite created" + DateTime.Now,
+                    "Invite created at " + DateTime.Now,
                     DateTime.Now.AddDays(Properties.Settings.Default.DaysForInviteToLive)
                 );
 
             if (InviteRep.Add(Invite))
             {
+                // Создаем задачу отправки сообщения в фоне и запускаем ее
+                new Thread(send => 
+                {
+                    InviteEmailModel InviteEmailModel = InviteEmailModelHelper.GetInviteEmailModel(Invite);
+                    string inviteText = TemplateServ
+                        .Run("Emails/Invite", typeof(InviteEmailModel), InviteEmailModel);
+                    if (!EmailService.SendMail(InviteEmailModel, inviteText))
+                    {
+                        Invite.User.UserStatus.Description = "Invite Email was not delivered";
+                        Invite.User.UserStatus.UpdateTime = DateTime.Now;
+                    }
+                    else
+                    {
+                        Invite.User.UserStatus.Description = "Invite Email was delivered at " + DateTime.Now;
+                        Invite.User.UserStatus.UpdateTime = DateTime.Now;
+                    }
+                    InviteRep.Update(Invite);
+
+                }).Start();
+
                 return ServiceResponce
                     .FromSuccess()
-                    .Result("invite for user created");
+                    .Result("invite for user sended");
             }
             else
             {

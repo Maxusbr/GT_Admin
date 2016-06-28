@@ -8,7 +8,6 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Getticket.Web.API.Providers
 {
@@ -19,7 +18,21 @@ namespace Getticket.Web.API.Providers
     /// </summary>
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
+        private CredentailsService Credentails;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public SimpleAuthorizationServerProvider(CredentailsService Credentails)
+        {
+            this.Credentails = Credentails;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();
@@ -34,10 +47,6 @@ namespace Getticket.Web.API.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-
-            CredentailsService Credentails = (CredentailsService) 
-                GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(CredentailsService));
-
             User user = await Credentails.Authenticate(context.UserName, context.Password);
             if (user != null)
             {

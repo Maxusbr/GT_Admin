@@ -11,7 +11,7 @@ namespace Getticket.Web.API.Helpers
     /// <summary>
     /// Helper
     /// </summary>
-    public class SendInviteModelHelper
+    public static class SendInviteModelHelper
     {
         /// <summary>
         /// Создает код приглашения указывающий

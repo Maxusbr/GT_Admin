@@ -3,7 +3,7 @@ using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
 using System.Linq;
 
-namespace Getticket.Web.DAL.Repository
+namespace Getticket.Web.DAL.Repositories
 {
     /// <summary>
     /// <see cref="IInviteCodeRepository" />
@@ -27,6 +27,18 @@ namespace Getticket.Web.DAL.Repository
                 return false;
             }
             db.InviteCodes.Add(invite);
+            db.SaveChanges();
+            return true;
+        }
+
+        /// <see cref="IInviteCodeRepository.Update(InviteCode)" />
+        public bool Update(InviteCode invite)
+        {
+            if (invite.Id == 0 || invite.User.Id == 0)
+            {
+                return false;
+            }
+            db.Entry(invite).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             return true;
         }

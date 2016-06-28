@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Getticket.Web.DAL.Repository
+namespace Getticket.Web.DAL.Repositories
 {
     /// <summary>
     /// Базовый репозиторий
