@@ -21,7 +21,7 @@ namespace Getticket.Web.API.Helpers
             user.UserInfo.LastName = model.LastName;
             user.UserInfo.Company = model.Company;
             user.UserInfo.Position = model.Position;
-            user.UserInfo.Phone = PhoneCheckService.PhoneConvert(model.Phone);
+            user.UserInfo.Phone = PhoneService.PhoneConvert(model.Phone);
 
             return user;
         }

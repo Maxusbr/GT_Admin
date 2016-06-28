@@ -114,6 +114,13 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce UpdateInvite(string code, UpdateInviteModel model)
         {
+            if (!model.GeneratePassword && !PasswordService.IsPasswordAcceptable(model.Password))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "Password not acceptable");
+            }
+
             InviteCode invite = InviteRep.FindOneByCode(code);
             if (invite == null)
             {
@@ -142,16 +149,24 @@ namespace Getticket.Web.API.Services
             }
            
             model.Password = PasswordService.GeneratePasswordHash(UnHashedPassword);
+       
+                user = UpdateInviteModelHelper.UpdateInviteUser(user, model);
 
-            user = UpdateInviteModelHelper.UpdateInviteUser(user, model);
 
+                user.UserStatus = UserStatusHelper.AcceptInvite(user.UserStatus.Id);
+                UserRep.Save(user);
+                InviteRep.Delete(invite.Id);
+                     
+            ServiceResponce response = ServiceResponce
+                   .FromSuccess()
+                   .Result("invite accepted");
 
-            user.UserStatus = UserStatusHelper.AcceptInvite(user.UserStatus.Id);
-            UserRep.Save(user);
-            InviteRep.Delete(invite.Id);
-            return ServiceResponce
-               .FromSuccess()
-               .Result("invite accepted");
+            if (model.GeneratePassword)
+            {
+                response.Add("GeneratedPassword", UnHashedPassword);
+            }
+            return response;
+
         }
 
         /// <summary>
