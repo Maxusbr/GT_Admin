@@ -7,8 +7,6 @@ using RazorEngine.Templating;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace Getticket.Web.API.Services
 {
@@ -56,7 +54,7 @@ namespace Getticket.Web.API.Services
         public ServiceResponce SendInvite(SendInviteModel model)
         {
             // TODO mail invite
-            if (UserRep.FindAllByEmail(model.Email) != null)
+            if (UserRep.CountByCredentails(model.Email, null) != 0)
             {
                 return ServiceResponce
                     .FromFailed()

@@ -52,13 +52,22 @@ namespace Getticket.Web.DAL.Repositories
             return GetOne(query);
         }
 
-        /// <see cref="IUserRepository.FindAllByEmail(string)" />
-        public IList<User> FindAllByEmail(string email)
+        /// <see cref="IUserRepository.CountByCredentails(string, string)" />
+        public int CountByCredentails(string email, string phone)
         {
             IQueryable<User> query = db.Users
-                .Where(UserNotDeleted)
-                .Where(u => u.UserName.Equals(email));
-            return GetAll(query);
+                .Where(UserNotDeleted);
+
+            if (phone == null)
+            {
+                query = query.Where(u => u.UserName.Equals(email));
+            }
+            else
+            {
+                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserInfo.Phone.Equals(phone)));
+            }
+
+            return query.Count();
         }
 
         /// <see cref="IUserRepository.Save(User)" />

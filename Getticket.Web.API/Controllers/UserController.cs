@@ -32,7 +32,7 @@ namespace Getticket.Web.API.Controllers
         [Route("")]
         public IHttpActionResult GetAll()
         {
-            return Ok<IList<UserModel>>(UserServ.GetAll());
+            return Ok(UserServ.GetAll());
         }
 
         /// <summary>

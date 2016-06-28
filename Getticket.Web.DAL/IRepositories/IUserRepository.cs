@@ -18,11 +18,15 @@ namespace Getticket.Web.DAL.IRepositories
         User FindOneById(int id);
 
         /// <summary>
-        /// Находим всех(неудаленных) пользователей по email
+        /// Подсчитываем количество всех(неудаленных) пользователей 
+        /// по <paramref name="email" /> и <paramref name="phone" />;
+        /// Если <paramref name="phone" /> == <c>null</c> подсчет 
+        /// будет вестись только по <paramref name="email" />;
         /// </summary>
         /// <param name="email"><see cref="User.UserName" /></param>
+        /// <param name="phone">телефонный номер в формате +7[0-9]{10}</param>
         /// <returns></returns>
-        IList<User> FindAllByEmail(string email);
+        int CountByCredentails(string email, string phone);
         
         /// <summary>
         /// Находим всех(неудаленных) пользователей.
