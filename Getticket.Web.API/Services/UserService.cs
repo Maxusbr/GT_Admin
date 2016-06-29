@@ -177,14 +177,13 @@ namespace Getticket.Web.API.Services
                     .Add("error", "User with specified Id was not found");
             }
 
-            if (user.UserStatus.Status != DAL.Enums.UserStatusType.System)
+            if (!StatusService.ToLocked(user, ""))
             {
                 return ServiceResponce
-                .FromFailed()
-                .Add("error", "Only active user can be locked");
+                    .FromFailed()
+                    .Add("error", "it isn't possible to change the status to locked");
             }
 
-            user.UserStatus = StatusServiceHelper.Locked(user.UserStatus.Id);
             UserRep.Save(user);
 
             return ServiceResponce.FromSuccess();
@@ -205,14 +204,13 @@ namespace Getticket.Web.API.Services
                     .Add("error", "User with specified Id was not found");
             }
 
-            if (user.UserStatus.Status != DAL.Enums.UserStatusType.Locked)
+            if (!StatusService.FromLockToSystem(user, ""))
             {
                 return ServiceResponce
-                .FromFailed()
-                .Add("error", "User is not locked");
+                   .FromFailed()
+                   .Add("error", "it isn't possible to change the status to system");
             }
-
-            user.UserStatus = StatusServiceHelper.System("", "", user.UserStatus.Id);
+  
             UserRep.Save(user);
 
             return ServiceResponce.FromSuccess();
@@ -265,14 +263,13 @@ namespace Getticket.Web.API.Services
                     .Add("error", "Can't delete user because he doesn't exist");
             }
 
-            if (user.UserStatus.Status == DAL.Enums.UserStatusType.MarkDeleted)
+            if (StatusService.ToDeleted(user, ""))
             {
                 return ServiceResponce
                 .FromFailed()
-                .Add("error", "User already deleted");
+                .Add("error", "it isn't possible to change the status to deleted");
             }
 
-            user.UserStatus = StatusServiceHelper.Deleted(user.UserStatus.Id);
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
         }
@@ -292,13 +289,6 @@ namespace Getticket.Web.API.Services
                     .Add("error", "user doesn't exist");
             }
 
-            if (user.UserStatus.Status != DAL.Enums.UserStatusType.MarkDeleted)
-            {
-                return ServiceResponce
-                .FromFailed()
-                .Add("error", "User is not deleted");
-            }
-
             if  (UserRep.CountByCredentails(user.UserName, user.Phone) != 0)
             {
                 return ServiceResponce
@@ -306,7 +296,12 @@ namespace Getticket.Web.API.Services
                     .Add("error", "user with such email or phone already exists");
             }
 
-            user.UserStatus = StatusServiceHelper.System("","",user.UserStatus.Id);
+            if (!StatusService.FromMarkDeletedToSystem(user, ""))
+            {
+                return ServiceResponce
+                .FromFailed()
+                .Add("error", "it isn't possible to change the status to system");
+            }
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
         }

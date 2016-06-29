@@ -1,4 +1,5 @@
 ﻿using Getticket.Web.API.Models;
+using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 
 namespace Getticket.Web.API.Helpers
@@ -28,9 +29,9 @@ namespace Getticket.Web.API.Helpers
                     Company = model.Company,
                     Position = model.Position,
                 },
-                UserStatus = StatusServiceHelper.System(string.Empty, string.Empty)
             };
 
+            StatusService.FromNoneToSystem(user, "");
             return user;
         }
     }

@@ -29,10 +29,10 @@ namespace Getticket.Web.API.Helpers
             {
                 UserName = model.Email,
                 UserInfo = new UserInfo(),
-                UserStatus = StatusServiceHelper.Invited(StatusName, StatusDescription),
                 AccessRoleId = model.RoleId
             };
 
+            StatusService.ToInvite(user, "");
             InviteCode invite = new InviteCode()
             {
                 User = user,
