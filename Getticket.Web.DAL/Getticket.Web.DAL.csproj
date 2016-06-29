@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AccessRole.cs" />
+    <Compile Include="Entities\Event.cs" />
+    <Compile Include="Entities\EventLog.cs" />
     <Compile Include="Entities\GetticketDBContext.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\InviteCode.cs" />

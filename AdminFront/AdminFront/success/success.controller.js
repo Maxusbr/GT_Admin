@@ -1,13 +1,13 @@
 (function () {
-	'use strict';
+    'use strict';
 
-	angular
-		.module('app')
-		.controller('SuccessController', SuccessController);
+    angular
+        .module('app')
+        .controller('SuccessController', SuccessController);
 
-	SuccessController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
-	function SuccessController(UserService, $location, $rootScope, $cookies) {
-		var vm = this;
-	}
+    SuccessController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
+    function SuccessController(UserService, $location, $rootScope, $cookies) {
+        var vm = this;
+    }
 
 })();

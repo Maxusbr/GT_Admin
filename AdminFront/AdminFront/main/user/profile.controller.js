@@ -16,14 +16,14 @@
 
         $rootScope.user = {"email": "qwe@qwe.ru"};
 
-	$rootScope.$watch(function () {
-		return $location.path()
-	}, function (params) {
-		console.log(params);
-		$rootScope.id = $stateParams.id;
-	});
+        $rootScope.$watch(function () {
+            return $location.path()
+        }, function (params) {
+            console.log(params);
+            $rootScope.id = $stateParams.id;
+        });
 
-	
+
         $rootScope.eventslist = [
             {
                 "fname": "Хан",

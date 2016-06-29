@@ -14,6 +14,7 @@ namespace Getticket.Web.DAL.Entities
         public GetticketDBContext() : base("name=Getticket.Web.API.Properties.Settings.GetticketConection")
         {
             // For logging queries for db in Debug window
+            // PROD disable it
             this.Database.Log = (s => System.Diagnostics.Debug.WriteLine(s));
         }
 
@@ -28,7 +29,7 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<UserStatus> UserStatuses { get; set; }
 
         /// <summary>
-        /// Настройки сущности User
+        /// Настройки сущности <see cref="User"/>
         /// </summary>
         public class UserConfiguration : EntityTypeConfiguration<User>
         {
@@ -61,7 +62,7 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<InviteCode> InviteCodes { get; set; }
 
         /// <summary>
-        /// Настройки сущности InviteCode
+        /// Настройки сущности <see cref="InviteCode"/>
         /// </summary>
         public class InviteCodeConfiguration : EntityTypeConfiguration<InviteCode>
         {
@@ -78,6 +79,54 @@ namespace Getticket.Web.DAL.Entities
         }
         #endregion
 
+        #region Events Config
+        /// <see cref="Event"/>
+        public virtual DbSet<Event> Events { get; set; }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Event"/>
+        /// </summary>
+        public class EventConfiguration : EntityTypeConfiguration<Event>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public EventConfiguration()
+            {
+
+            }
+        }
+        #endregion
+
+        #region EventsLog Config
+        /// <see cref="EventLog"/>
+        public virtual DbSet<EventLog> EventLogs { get; set; }
+
+        /// <summary>
+        /// Настройка сущности <see cref="EventLog"/>
+        /// </summary>
+        public class EventLogConfiguration : EntityTypeConfiguration<EventLog>
+        {
+            /// <summary>
+            /// Конструктор
+            /// </summary>
+            public EventLogConfiguration()
+            {
+                this
+                    .HasRequired(e => e.Event)
+                    .WithMany()
+                    .HasForeignKey(e => e.EventId)
+                    .WillCascadeOnDelete(false);
+
+                this
+                    .HasRequired(e => e.User)
+                    .WithMany()
+                    .HasForeignKey(e => e.UserId)
+                    .WillCascadeOnDelete(true);
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Настройка БД через Fluent API
         /// Имеет приоритет над Code First
@@ -87,6 +136,8 @@ namespace Getticket.Web.DAL.Entities
         {
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new InviteCodeConfiguration());
+            modelBuilder.Configurations.Add(new EventConfiguration());
+            modelBuilder.Configurations.Add(new EventLogConfiguration());
         }
     }
 }

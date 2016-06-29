@@ -88,5 +88,10 @@
 
     MainController.$inject = ['$rootScope'];
     function MainController($rootScope) {
+
+            $('.checkbox-input-container span').click(function () {
+                console.log('click!');
+            })
+        
     }
 })();

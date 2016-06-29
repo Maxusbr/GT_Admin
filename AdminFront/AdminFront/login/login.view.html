@@ -8,8 +8,10 @@
         <div class="col-md-8 col-md-offset-2 space-lg reg">
             <form name="form" ng-submit="vm.login()" role="form" novalidate>
 
-                <div class="form-group" ng-class="{ 'has-error': form.username.$touched && form.username.$error.required }">
-                    <input type="email" name="username" id="username" class="form-control" ng-model="vm.user.username" ng-pattern="vm.emailpattern" placeholder="email" required/>
+                <div class="form-group"
+                     ng-class="{ 'has-error': form.username.$touched && form.username.$error.required }">
+                    <input type="email" name="username" id="username" class="form-control" ng-model="vm.user.username"
+                           ng-pattern="vm.emailpattern" placeholder="email" required/>
                     <span ng-show="form.username.$touched && form.username.$error.required" class="help-block">Email is required</span>
                     <span ng-show="form.username.$touched && form.username.$error.pattern" class="help-block">Email is invalid</span>
                 </div>
@@ -20,14 +22,17 @@
                           class="help-block">Phone is required</span>
                 </div>
 
-                <div class="form-group" ng-class="{ 'has-error': form.password.$touched && form.password.$error.required }">
-                    <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password"
+                <div class="form-group"
+                     ng-class="{ 'has-error': form.password.$touched && form.password.$error.required }">
+                    <input type="password" name="password" id="password" class="form-control"
+                           ng-model="vm.user.password"
                            placeholder="Пароль" required/>
                     <span ng-show="form.password.$touched && form.password.$error.required" class="help-block">Password is required</span>
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-success btn-block">
+                    <button type="submit" ng-disabled="form.$invalid || vm.dataLoading"
+                            class="btn btn-success btn-block">
                         Войти
                     </button>
                     <img ng-if="vm.dataLoading"
