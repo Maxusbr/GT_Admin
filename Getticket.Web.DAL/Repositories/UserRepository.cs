@@ -18,7 +18,7 @@ namespace Getticket.Web.DAL.Repositories
         /// Пользователь НЕ помечен как удаленный
         /// </summary>
         private Expression<Func<User, bool>> UserNotDeleted 
-            = (u =>u.UserStatus.Status != UserStatusType.Deleted);
+            = (u =>u.UserStatus.Status != UserStatusType.MarkDeleted);
 
         /// <summary>
         /// Приглашенный пользователь

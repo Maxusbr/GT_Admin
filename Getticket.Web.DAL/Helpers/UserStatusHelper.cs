@@ -39,7 +39,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static UserStatus Deleted(int Id = 0)
         {
-            return new UserStatus() {Id = Id, Name = "Deleted", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Deleted };
+            return new UserStatus() {Id = Id, Name = "Deleted", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.MarkDeleted };
         }
 
         /// <summary>

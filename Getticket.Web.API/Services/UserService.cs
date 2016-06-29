@@ -265,7 +265,7 @@ namespace Getticket.Web.API.Services
                     .Add("error", "Can't delete user because he doesn't exist");
             }
 
-            if (user.UserStatus.Status == DAL.Enums.UserStatusType.Deleted)
+            if (user.UserStatus.Status == DAL.Enums.UserStatusType.MarkDeleted)
             {
                 return ServiceResponce
                 .FromFailed()
@@ -292,7 +292,7 @@ namespace Getticket.Web.API.Services
                     .Add("error", "user doesn't exist");
             }
 
-            if (user.UserStatus.Status != DAL.Enums.UserStatusType.Deleted)
+            if (user.UserStatus.Status != DAL.Enums.UserStatusType.MarkDeleted)
             {
                 return ServiceResponce
                 .FromFailed()
