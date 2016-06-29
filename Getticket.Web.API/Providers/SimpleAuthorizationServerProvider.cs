@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
+using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,13 @@ namespace Getticket.Web.API.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            User user = Credentails.Authenticate(context.UserName, null, context.Password);
+
+            IFormCollection data = await context.Request.ReadFormAsync();
+            string UserName = context.UserName;
+            string UserPassword = context.Password;
+            string UserPhone = data.Get("phone");
+
+            User user = Credentails.Authenticate(UserName, UserPhone, UserPassword);
             if (user != null)
             {
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);

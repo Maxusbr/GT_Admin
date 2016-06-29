@@ -1,6 +1,8 @@
 ﻿using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.IRepositories;
+using System;
+using System.Collections.Generic;
 
 namespace Getticket.Web.API.Services
 {
@@ -9,22 +11,23 @@ namespace Getticket.Web.API.Services
     /// </summary>
     public class CredentailsService
     {
-        private IUserRepository UserRep;
+        private IAuthRepository AuthRep;
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="UserRep"></param>
-        public CredentailsService(IUserRepository UserRep)
+        /// <param name="AuthRep"></param>
+        public CredentailsService(IAuthRepository AuthRep)
         {
-            this.UserRep = UserRep;
+            this.AuthRep = AuthRep;
         }
-
 
         /// <summary>
         /// Проверяет аутентификацию пользователя по
         /// <paramref name="UserName" />, <paramref name="Phone" />, <paramref name="Password" />,
-        /// в случае успеха возвращает сущность пользователя
+        /// в случае успеха возвращает сущность пользователя;
+        /// При проверке <paramref name="Phone" /> преобразуется в формат <see cref="PhoneService.PhoneConvert(string)" />,
+        /// <paramref name="UserName" /> приводится в нижний регистр
         /// </summary>
         /// <param name="UserName"></param>
         /// <param name="Phone"></param>
@@ -32,17 +35,47 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public User Authenticate(string UserName, string Phone, string Password)
         {
-            string PasswordHash = PasswordService.GeneratePasswordHash(Password);
-            User user = UserRep.FindOneByEmailAndPassword(UserName, PasswordHash);
-            if (user != null)
+            Password = PasswordService.GeneratePasswordHash(Password);
+            Phone = PhoneService.IsPhoneValid(Phone) ? PhoneService.PhoneConvert(Phone) : null;
+            UserName = !string.IsNullOrEmpty(UserName) ? UserName.ToLower() : null;
+            UserStatusType AvailableStatus = UserStatusType.System;
+
+            if (UserName == null && Phone == null)
             {
-                if (user.UserStatus.Status == UserStatusType.Locked)
-                {
-                    user = null;
-                }
+                return null;
             }
 
-            return user;
+            IList<User> users = null;
+            if (UserName != null && Phone != null)
+            {
+                users = AuthRep.FindAllByNamePhone(UserName, Phone, Password, AvailableStatus);
+            }
+            else if (UserName != null)
+            {
+                users = AuthRep.FindAllByName(UserName, Password, AvailableStatus);
+            }
+            else
+            {
+                users = AuthRep.FindAllByPhone(Phone, Password, AvailableStatus);
+            }
+
+            if (users == null || users.Count == 0)
+            {
+                return null;
+            }
+            else if (users.Count == 1)
+            {
+                User toReturn = null;
+                foreach (User u in users)
+                {
+                    toReturn = u;
+                }
+                return toReturn;
+            }
+            else
+            {
+                throw new Exception("CredentailsService: found more than 1 user with specified credentails");
+            }
         }
     }
 }
