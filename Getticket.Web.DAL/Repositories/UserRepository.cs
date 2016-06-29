@@ -94,6 +94,7 @@ namespace Getticket.Web.DAL.Repositories
             return base.Save(Entity);
         }
 
+        /// <see cref="IUserRepository.Delete(int)">
         public bool Delete(int Id)
         {
             if (Id < 1)
@@ -111,51 +112,10 @@ namespace Getticket.Web.DAL.Repositories
             return true;
         }
 
-        public User FindOneByPhoneAndPassword(string Phone, string PasswordHash)
-        {
-            IQueryable<User> query = db.Users.Where(u => u.Phone.Equals(Phone) && u.PasswordHash.Equals(PasswordHash));
-            User user = null;
-            if (query.Any())
-            {
-                user = query.First();
-            }
-            return user;
-        }
-
-        public User FindOneByEmailAndPassword(string Email, string PasswordHash)
-        {
-            IQueryable<User> query = db.Users.Where(u => u.UserName.Equals(Email) && u.PasswordHash.Equals(PasswordHash));
-            User user = null;
-            if (query.Any())
-            {
-                user = query.First();
-            }
-            return user;
-        }
-
-        public User FindOneByEmailOrPhoneAndPassword(string Email, string Phone, string PasswordHash)
-        {
-            IQueryable<User> query = db.Users
-                .Where(u => (u.UserName.Equals(Email) || u.Phone.Equals(Phone)) 
-                            && u.PasswordHash.Equals(PasswordHash));
-
-            User user = null;
-            if (query.Any())
-            {
-                user = query.First();
-            }
-            return user;
-        }
-
+        /// <see cref="IUserRepository.Delete(User)" />
         public override bool Delete(User Entity)
         {
             return this.Delete(Entity.Id);
-        }
-
-        public Task<User> UpdateTask(User user)
-        {
-            User UserToSave = this.Save(user);
-            return Task.FromResult(UserToSave);
         }
 
         /// <see cref="IUserRepository.DeleteUserByEmail(string)" />
