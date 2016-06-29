@@ -202,6 +202,7 @@
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
     <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
     <Compile Include="Helpers\RegisteredEmailModelHelper.cs" />
+    <Compile Include="Helpers\StatusServiceHelper.cs" />
     <Compile Include="Models\Emails\BaseEmailModel.cs" />
     <Compile Include="Models\Emails\ChangePasswordEmailModel.cs" />
     <Compile Include="Models\Emails\RegisteredEmailModel.cs" />

@@ -150,7 +150,7 @@ namespace Getticket.Web.API.Services
                 user = UpdateInviteModelHelper.UpdateInviteUser(user, model);
 
 
-                user.UserStatus = UserStatusHelper.AcceptInvite(user.UserStatus.Id);
+                user.UserStatus = StatusServiceHelper.AcceptInvite(user.UserStatus.Id);
                 UserRep.Save(user);
                 InviteRep.Delete(invite.Id);
                      

@@ -1,7 +1,7 @@
 namespace Getticket.Web.DAL.Migrations
 {
-    using API.Helpers;
     using Entities;
+    using Enums;
     using System.Data.Entity.Migrations;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Getticket.Web.DAL.Entities.GetticketDBContext>
@@ -33,7 +33,7 @@ namespace Getticket.Web.DAL.Migrations
                 Phone = "+79063332211",
                 PasswordHash = "098f6bcd4621d373cade4e832627b4f6",
                 AccessRoleId = 1,
-                UserStatus = UserStatusHelper.SystemSeed(),
+                UserStatus = new UserStatus() { Name="seed", Description="", Status=UserStatusType.System},
                 UserInfo = new UserInfo() { Id = 1, Name = "Тест", LastName = "Админ"}
             };
 
@@ -43,7 +43,7 @@ namespace Getticket.Web.DAL.Migrations
                 Phone = "+79153332211",
                 PasswordHash = "da602f0b162fccbf6b150cfcfc7a7379",
                 AccessRoleId = 1,
-                UserStatus = UserStatusHelper.Deleted(),
+                UserStatus = new UserStatus() { Name = "seed", Description = "deleted", Status = UserStatusType.MarkDeleted },
                 UserInfo = new UserInfo() { Id = 2, Name = "deleted", LastName = "Админ"}
             };
 
@@ -53,7 +53,7 @@ namespace Getticket.Web.DAL.Migrations
                 Phone = "+79159998877",
                 PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
                 AccessRoleId = 1,
-                UserStatus = UserStatusHelper.SystemSeed(),
+                UserStatus = new UserStatus() { Name = "seed", Description = "", Status = UserStatusType.System },
                 UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ"}
             };
 

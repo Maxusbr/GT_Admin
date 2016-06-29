@@ -184,7 +184,7 @@ namespace Getticket.Web.API.Services
                 .Add("error", "Only active user can be locked");
             }
 
-            user.UserStatus = UserStatusHelper.Locked(user.UserStatus.Id);
+            user.UserStatus = StatusServiceHelper.Locked(user.UserStatus.Id);
             UserRep.Save(user);
 
             return ServiceResponce.FromSuccess();
@@ -212,7 +212,7 @@ namespace Getticket.Web.API.Services
                 .Add("error", "User is not locked");
             }
 
-            user.UserStatus = UserStatusHelper.System("", "", user.UserStatus.Id);
+            user.UserStatus = StatusServiceHelper.System("", "", user.UserStatus.Id);
             UserRep.Save(user);
 
             return ServiceResponce.FromSuccess();
@@ -272,7 +272,7 @@ namespace Getticket.Web.API.Services
                 .Add("error", "User already deleted");
             }
 
-            user.UserStatus = UserStatusHelper.Deleted(user.UserStatus.Id);
+            user.UserStatus = StatusServiceHelper.Deleted(user.UserStatus.Id);
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
         }
@@ -306,7 +306,7 @@ namespace Getticket.Web.API.Services
                     .Add("error", "user with such email or phone already exists");
             }
 
-            user.UserStatus = UserStatusHelper.System("","",user.UserStatus.Id);
+            user.UserStatus = StatusServiceHelper.System("","",user.UserStatus.Id);
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
         }

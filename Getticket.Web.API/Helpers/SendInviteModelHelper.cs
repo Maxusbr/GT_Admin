@@ -29,7 +29,7 @@ namespace Getticket.Web.API.Helpers
             {
                 UserName = model.Email,
                 UserInfo = new UserInfo(),
-                UserStatus = UserStatusHelper.Invited(StatusName, StatusDescription),
+                UserStatus = StatusServiceHelper.Invited(StatusName, StatusDescription),
                 AccessRoleId = model.RoleId
             };
 

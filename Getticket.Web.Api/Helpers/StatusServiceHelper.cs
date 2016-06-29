@@ -6,7 +6,7 @@ namespace Getticket.Web.API.Helpers
     /// <summary>
     /// Helper
     /// </summary>
-    public class UserStatusHelper
+    public class StatusServiceHelper
     {
         /// <summary>
         /// Создает статус System с указанными <paramref name="Name" /> и <paramref name="Description" />;

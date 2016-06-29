@@ -28,7 +28,7 @@ namespace Getticket.Web.API.Helpers
                     Company = model.Company,
                     Position = model.Position,
                 },
-                UserStatus = UserStatusHelper.System(string.Empty, string.Empty)
+                UserStatus = StatusServiceHelper.System(string.Empty, string.Empty)
             };
 
             return user;
