@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .controller('MainUserListController', MainUserListController)
+        .controller('MainUserListController', MainUserListController);
 
     MainUserListController.$inject = ['$rootScope'];
     function MainUserListController($rootScope) {

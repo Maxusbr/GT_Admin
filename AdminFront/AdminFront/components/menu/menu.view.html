@@ -1,13 +1,20 @@
-<div class="text-center mainlogo">
-    <img src="/app-content/images/logo.png" class="img-circle" alt="Logo">
+<div class="main-menu__logo text-center">
+    <img src="/app-content/images/logo-small.png" class="img-circle">
+
+    <p>Vitaly B. <i class="glyphicon glyphicon-pencil"></i></p>
 </div>
-<div class="text-center">Vitaliy B <span class="glyphicon glyphicon-pencil"></span></div>
-<div class="space-lg"></div>
-<ul class="nav nav-list" id="mainmenu">
-    <li ng-repeat="link in menu" ng-class="{ active: link.active }">
-        <a href="/#{{ link.href }}">{{ link.title }}<span ng-if="link.countAll" class="small">&nbsp;<span class="text-success">{{ link.countActive }}</span>&nbsp;/&nbsp;{{link.countAll}}</span></a>
-        <button ng-if="link.button&&link.active" ng-click="ShowMenu(link.menu,link.content)" type="button"
-                class="btn btn-info green-button"><span
-                class="glyphicon glyphicon-plus"></span></button>
-    </li>
-</ul>
+
+<div class="main-menu__list">
+    <div class="row">
+        <ul class="nav nav-list">
+            <li ng-repeat="item in menu" ng-class="{ active: item.active }" ng-click="{ active: true }">
+                <a href="/#{{ item.href }}">{{ item.title }} <span ng-if="item.countAll" class="small">&nbsp; <span class="text-success">{{ item.countActive }}</span> / {{item.countAll}}</span></a>
+
+                <button ng-if="item.customMenu && item.active"
+                        ng-click="ToggleCustomMenu(item.customMenu.expand, item.customMenu.toggle)">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
