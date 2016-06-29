@@ -149,8 +149,13 @@ namespace Getticket.Web.API.Services
        
                 user = UpdateInviteModelHelper.UpdateInviteUser(user, model);
 
+            if(!StatusService.ToAcceptInvite(user, ""))
+            {
+                return ServiceResponce
+                   .FromFailed()
+                   .Add("error", "it isn't possible to change the status to AcceptInvited");
+            }
 
-                user.UserStatus = StatusServiceHelper.AcceptInvite(user.UserStatus.Id);
                 UserRep.Save(user);
                 InviteRep.Delete(invite.Id);
                      

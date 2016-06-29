@@ -52,24 +52,6 @@ namespace Getticket.Web.API.Helpers
             return new UserStatus() { Id = Id, Name = "Locked", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.Locked };
         }
 
-        /// <summary>
-        /// Устанавливает статус AcceptInvite для пользователя с Id = <paramref name="Id"/>;
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public static UserStatus AcceptInvite(int Id = 0)
-        {
-            return new UserStatus() { Id = Id, Name = "AcceptInvite", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.AcceptInvite };
-        }
-
-        /// <summary>
-        /// For debug only
-        /// </summary>
-        /// <returns></returns>
-        // PROD delete it
-        public static UserStatus SystemSeed()
-        {
-            return new UserStatus() { Name = "Seed", Description = "", UpdateTime = DateTime.Now, Status = DAL.Enums.UserStatusType.System };
-        }
+          
     }
 }
