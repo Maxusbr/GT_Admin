@@ -33,11 +33,6 @@ namespace Getticket.Web.DAL.Entities
         public string Position { get; set; }
 
         /// <summary>
-        /// Мобильный телефон (+79*********)
-        /// </summary>
-        public string Phone { get; set; }
-
-        /// <summary>
         /// Ссылка на пользователя
         /// </summary>
         [JsonIgnore]

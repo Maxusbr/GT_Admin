@@ -18,6 +18,7 @@ namespace Getticket.Web.API.Helpers
             User user = new User()
             {
                 UserName = model.Email,
+                Phone = model.Phone,
                 PasswordHash = model.Password,
                 AccessRoleId = model.RoleId,
                 UserInfo = new UserInfo()
@@ -26,7 +27,6 @@ namespace Getticket.Web.API.Helpers
                     LastName = model.LastName,
                     Company = model.Company,
                     Position = model.Position,
-                    Phone = model.Phone
                 },
                 UserStatus = UserStatusHelper.System(string.Empty, string.Empty)
             };

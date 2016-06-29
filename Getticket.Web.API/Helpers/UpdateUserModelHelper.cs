@@ -12,7 +12,6 @@ namespace Getticket.Web.API.Helpers
         // TODO implement needed
         /// <summary>
         /// Обновляет сущность <paramref name="user" /> из <paramref name="model" />,
-        /// 
         /// </summary>
         /// <param name="user"></param>
         /// <param name="model"></param>
@@ -22,6 +21,11 @@ namespace Getticket.Web.API.Helpers
             if (model.Email != null)
             {
                 user.UserName = model.Email;
+            }
+
+            if (model.Phone != null)
+            {
+                user.Phone = PhoneService.PhoneConvert(model.Phone);
             }
 
             if (model.Name != null)
@@ -42,11 +46,6 @@ namespace Getticket.Web.API.Helpers
             if (model.Position != null)
             {
                 user.UserInfo.Position = model.Position;
-            }
-
-            if (model.Phone != null)
-            {
-                user.UserInfo.Phone = PhoneService.PhoneConvert(model.Phone);
             }
 
             return user;

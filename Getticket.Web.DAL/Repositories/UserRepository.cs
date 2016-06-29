@@ -64,7 +64,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else
             {
-                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserInfo.Phone.Equals(phone)));
+                query = query.Where(u => (u.UserName.Equals(email)) || (u.Phone.Equals(phone)));
             }
 
             return query.Count();
@@ -82,7 +82,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else
             {
-                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserInfo.Phone.Equals(phone)));
+                query = query.Where(u => (u.UserName.Equals(email)) || (u.Phone.Equals(phone)));
             }
 
             return GetAll(query);
@@ -113,7 +113,7 @@ namespace Getticket.Web.DAL.Repositories
 
         public User FindOneByPhoneAndPassword(string Phone, string PasswordHash)
         {
-            IQueryable<User> query = db.Users.Where(u => u.UserInfo.Phone.Equals(Phone) && u.PasswordHash.Equals(PasswordHash));
+            IQueryable<User> query = db.Users.Where(u => u.Phone.Equals(Phone) && u.PasswordHash.Equals(PasswordHash));
             User user = null;
             if (query.Any())
             {
@@ -136,7 +136,7 @@ namespace Getticket.Web.DAL.Repositories
         public User FindOneByEmailOrPhoneAndPassword(string Email, string Phone, string PasswordHash)
         {
             IQueryable<User> query = db.Users
-                .Where(u => (u.UserName.Equals(Email) || u.UserInfo.Phone.Equals(Phone)) 
+                .Where(u => (u.UserName.Equals(Email) || u.Phone.Equals(Phone)) 
                             && u.PasswordHash.Equals(PasswordHash));
 
             User user = null;
