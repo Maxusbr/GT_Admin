@@ -47,7 +47,7 @@ namespace Getticket.Web.API.Providers
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            User user = await Credentails.Authenticate(context.UserName, context.Password);
+            User user = Credentails.Authenticate(context.UserName, null, context.Password);
             if (user != null)
             {
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
