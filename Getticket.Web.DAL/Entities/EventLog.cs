@@ -10,12 +10,14 @@ namespace Getticket.Web.DAL.Entities
     {
         /// <summary>
         /// Содержание <see cref="Event" /> до изменения
+        /// Обязательное поле
         /// </summary>
         [Required]
         public string ChengeFrom;
 
         /// <summary>
-        /// Содержание <see cref="Event" /> после изменения
+        /// Содержание <see cref="Event" /> после изменения,
+        /// Обязательное поле
         /// </summary>
         [Required]
         public string ChangeTo;
