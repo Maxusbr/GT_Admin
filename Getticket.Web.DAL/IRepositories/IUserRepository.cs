@@ -1,7 +1,6 @@
 ﻿using Getticket.Web.DAL.Entities;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Getticket.Web.DAL.IRepositories
 {
@@ -68,17 +67,18 @@ namespace Getticket.Web.DAL.IRepositories
         /// <returns></returns>
         bool DeleteUserByEmail(string userName);
 
-
-
-
-
-        // TODO re-implement this
-        // TODO document this
-        User FindOneByPhoneAndPassword(string clearPhone, string passwordHash);
-        User FindOneByEmailAndPassword(string email, string passwordHash);
-        User FindOneByEmailOrPhoneAndPassword(string email, string clearPhone, string passwordHash);
-        Task<User> UpdateTask(User user);
-        bool Delete(User Entity);
+        /// <summary>
+        /// Удаляет пользователя из БД по его <paramref name="Id" />
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         bool Delete(int Id);
+
+        /// <summary>
+        /// Удаляет пользователя из БД по идентификатору в <paramref name="Entity" />
+        /// </summary>
+        /// <param name="Entity"></param>
+        /// <returns></returns>
+        bool Delete(User Entity);
     }
 }
