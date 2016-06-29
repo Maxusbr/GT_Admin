@@ -31,7 +31,7 @@ namespace Getticket.Web.DAL.Migrations
             {
                 UserName = "test@admin.su",
                 Phone = "+79063332211",
-                PasswordHash = "098f6bcd4621d373cade4e832627b4f6",
+                PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
                 AccessRoleId = 1,
                 UserStatus = new UserStatus() { Name="seed", Description="", Status=UserStatusType.System},
                 UserInfo = new UserInfo() { Id = 1, Name = "Тест", LastName = "Админ"}

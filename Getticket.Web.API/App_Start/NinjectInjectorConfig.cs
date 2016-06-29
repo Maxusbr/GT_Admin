@@ -38,6 +38,7 @@ namespace Getticket.Web.API.App_Start
             // Create the bindings for project
             kernel.Bind<IUserRepository>().To<UserRepository>();
             kernel.Bind<IInviteCodeRepository>().To<InviteCodeRepository>();
+            kernel.Bind<IAuthRepository>().To<AuthRepository>();
 
             kernel.Bind<IRazorEngineService>().ToConstant<IRazorEngineService>(RazorTemplateProvider.Get()).InSingletonScope();
         }
