@@ -184,10 +184,6 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public static bool FromNoneToSystem(User user, string Description)
         {
-            if (!IsNone(user))
-            {
-                return false;
-            }
             ChangeToSystem(user, Description, SYSTEM_STATUS_NAME);
             return true;
         }
