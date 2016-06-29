@@ -55,7 +55,7 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult Test()
         {
             string temp = GlobalConfiguration.Configuration.DependencyResolver.ToString();
-            UserInfo ui = new UserInfo() { Phone = "+79159998877" };
+            UserInfo ui = new UserInfo() { Company = "Home" };
             AccessRole ar = new AccessRole() { Name = "ar1" };
             User user = new User { UserName = "Вася", AccessRole = ar, UserInfo = ui };
             UserRep.Save(user);

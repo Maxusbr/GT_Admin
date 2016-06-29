@@ -30,28 +30,31 @@ namespace Getticket.Web.DAL.Migrations
             User user1 = new User()
             {
                 UserName = "test@admin.su",
+                Phone = "+79063332211",
                 PasswordHash = "098f6bcd4621d373cade4e832627b4f6",
                 AccessRoleId = 1,
                 UserStatus = UserStatusHelper.SystemSeed(),
-                UserInfo = new UserInfo() { Id = 1, Name = "Тест", LastName = "Админ", Phone = "+79063332211"}
+                UserInfo = new UserInfo() { Id = 1, Name = "Тест", LastName = "Админ"}
             };
 
             User user2 = new User()
             {
                 UserName = "deleted@admin.su",
+                Phone = "+79153332211",
                 PasswordHash = "da602f0b162fccbf6b150cfcfc7a7379",
                 AccessRoleId = 1,
                 UserStatus = UserStatusHelper.Deleted(),
-                UserInfo = new UserInfo() { Id = 2, Name = "deleted", LastName = "Админ", Phone = "+79153332211" }
+                UserInfo = new UserInfo() { Id = 2, Name = "deleted", LastName = "Админ"}
             };
 
             User user3 = new User()
             {
                 UserName = "admin@admin.su",
+                Phone = "+79159998877",
                 PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
                 AccessRoleId = 1,
                 UserStatus = UserStatusHelper.SystemSeed(),
-                UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ", Phone = "+79159998877" }
+                UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ"}
             };
 
             context.Users.AddOrUpdate(u => u.Id, user1);

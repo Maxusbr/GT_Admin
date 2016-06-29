@@ -26,7 +26,7 @@ namespace Getticket.Web.API.Helpers
             model.LastName = user.UserInfo.LastName;
             model.Company = user.UserInfo.Company;
             model.Position = user.UserInfo.Position;
-            model.Phone = user.UserInfo.Phone;
+            model.Phone = user.Phone;
             model.Email = user.UserName;
             model.Status = user.UserStatus.Status;
             model.StatusName = user.UserStatus.Name;

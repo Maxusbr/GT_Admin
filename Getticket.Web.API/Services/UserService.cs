@@ -237,7 +237,7 @@ namespace Getticket.Web.API.Services
 
             user = UpdateUserModelHelper.UpdateUser(user, model);
 
-            if (CanUpdateUserCredentails(user.Id, user.UserName, user.UserInfo.Phone, UserRep))
+            if (CanUpdateUserCredentails(user.Id, user.UserName, user.Phone, UserRep))
             {
                 UserRep.Save(user);
                 return ServiceResponce.FromSuccess();
@@ -299,7 +299,7 @@ namespace Getticket.Web.API.Services
                 .Add("error", "User is not deleted");
             }
 
-            if  (UserRep.CountByCredentails(user.UserName, user.UserInfo.Phone) != 0)
+            if  (UserRep.CountByCredentails(user.UserName, user.Phone) != 0)
             {
                 return ServiceResponce
                     .FromFailed()
