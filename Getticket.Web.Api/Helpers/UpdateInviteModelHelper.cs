@@ -7,7 +7,7 @@ namespace Getticket.Web.API.Helpers
     /// <summary>
     /// Helper
     /// </summary>
-    public class UpdateInviteModelHelper
+    public static class UpdateInviteModelHelper
     {
         /// <summary>
         /// Обновляет информацию <paramref name="user" /> из <paramref name="model" />

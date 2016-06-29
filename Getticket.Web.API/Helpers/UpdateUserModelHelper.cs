@@ -9,7 +9,6 @@ namespace Getticket.Web.API.Helpers
     /// </summary>
     public static class UpdateUserModelHelper
     {
-        // TODO implement needed
         /// <summary>
         /// Обновляет сущность <paramref name="user" /> из <paramref name="model" />,
         /// </summary>

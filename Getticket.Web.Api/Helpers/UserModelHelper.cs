@@ -7,7 +7,7 @@ namespace Getticket.Web.API.Helpers
     /// <summary>
     /// Helper
     /// </summary>
-    public class UserModelHelper
+    public static class UserModelHelper
     {
         /// <summary>
         /// Оборачивает <paramref name="user"/> в модель

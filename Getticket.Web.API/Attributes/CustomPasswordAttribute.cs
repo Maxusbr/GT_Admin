@@ -13,6 +13,12 @@ namespace Getticket.Web.API.Attributes
     {
         private string PasswordErrorMessage = "Password must be from 5 to 20 english characters with numbers";
 
+        /// <summary>
+        /// <see cref="CustomPasswordAttribute"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="validationContext"></param>
+        /// <returns></returns>
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (!String.IsNullOrEmpty((string) value) && !PasswordService.IsPasswordAcceptable((string) value))

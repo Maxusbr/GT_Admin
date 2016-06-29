@@ -198,10 +198,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectInjectorConfig.cs" />
+    <Compile Include="Controllers\SystemRolesController.cs" />
+    <Compile Include="Helpers\AccessRoleModelHelper.cs" />
     <Compile Include="Helpers\ChangePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
     <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
     <Compile Include="Helpers\RegisteredEmailModelHelper.cs" />
+    <Compile Include="Models\AccessRoleModel.cs" />
     <Compile Include="Models\Emails\BaseEmailModel.cs" />
     <Compile Include="Models\Emails\ChangePasswordEmailModel.cs" />
     <Compile Include="Models\Emails\RegisteredEmailModel.cs" />
@@ -223,6 +226,7 @@
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\Emails\InviteEmailModel.cs" />
     <Compile Include="Models\UpdateInviteModel.cs" />
+    <Compile Include="Services\AccessRolesService.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\UserInviteService.cs" />
     <Compile Include="Models\AuthModel.cs" />

@@ -53,7 +53,6 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce SendInvite(SendInviteModel model)
         {
-            // TODO mail invite
             if (UserRep.CountByCredentails(model.Email, null) != 0)
             {
                 return ServiceResponce

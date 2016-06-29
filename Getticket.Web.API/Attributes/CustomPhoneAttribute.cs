@@ -13,6 +13,11 @@ namespace Getticket.Web.API.Attributes
      AttributeTargets.Field, AllowMultiple = false)]
     public class CustomPhoneAttribute : ValidationAttribute
     {
+        /// <summary>
+        /// <see cref="CustomPhoneAttribute"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public override bool IsValid(object value)
         {
             if (String.IsNullOrEmpty((string) value))
