@@ -1,195 +1,103 @@
-﻿using Getticket.Web.API.Helpers;
-using Getticket.Web.DAL.Entities;
+﻿using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
 using System;
 
-namespace Getticket.Web.API.Services
-{
+namespace Getticket.Web.API.Services {
     /// <summary>
     /// Сервис для изменения и проверки статуса пользователя.
     /// </summary>
-    public static class StatusService
-    {
-        public static readonly string SYSTEM_STATUS_NAME = "System";
-        public static readonly string INVITE_STATUS_NAME = "Invite";
-        public static readonly string ACCEPTINVITE_STATUS_NAME = "AcceptInvite";
-        public static readonly string LOCKED_STATUS_NAME = "Locked";
-        public static readonly string MARKDELETE_STATUS_NAME = "MarkDelete";
+    public static class StatusService {
 
         /// <summary>
         /// Проверяет возможно ли полностью удалить пользователя  <paramref name="user"/> из системы.
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static bool CanBeRemovedFromDB(User user)
-        {
-            if (!(IsMarkDeleted(user) || IsInvite(user) || IsAcceptInvite(user)))
-            {
-                return false;
-            }
-            return true;
+        public static bool CanBeRemovedFromDB(User user) {
+            UserStatusType current = user.UserStatus.Status;
+
+            return (UserStatusType.Invite.Equals(current) 
+                || UserStatusType.AcceptInvite.Equals(current) 
+                || UserStatusType.MarkDeleted.Equals(current));
         }
 
 
         /// <summary>
-        /// Проверяет возможно ли изменение статуса <paramref name="user"/> на <paramref name="typeStatus"/>,
+        /// Проверяет возможно ли изменение статуса <paramref name="user"/> на <paramref name="changeTo"/>,
         /// если да, то меняет его.
         /// </summary>
-        /// <param name="typeStatus"></param>
-        /// <param name="user"></param>
-        /// <param name="unStatus"></param>
+        /// <param name="changeTo">Статус на который необходимо сменить</param>
+        /// <param name="user">пользователь, статус которого проверяем</param>
+        /// <param name="undo">Означает что необходимо снять статус <paramref name="changeTo"/></param>
         /// <returns></returns>
-        public static bool CanChangeStatus(UserStatusType typeStatus, User user, bool unStatus = false)
-        {
-            bool result = false;
-            if (!unStatus)
-            {
-                switch (typeStatus)
-                {
-                    case UserStatusType.Invite:
-                        if (IsNone(user) || IsInvite(user))
-                        {
-                            result = true;
-                        }
-
-                        break;
-
-                    case UserStatusType.AcceptInvite:
-                        if (IsInvite(user))
-                        {
-                            result = true;
-                        }
-                        break;
-
-                    case UserStatusType.Locked:
-                        if (IsSystem(user))
-                        {
-                            result = true;
-                        }
-                        break;
-
-                    case UserStatusType.MarkDeleted:
-                        if (IsSystem(user) || IsLocked(user) || !IsMarkDeleted(user))
-                        {
-                            result = true;
-                        }
-                        break;
-
-                    case UserStatusType.System:
-                        if (IsSystem(user) || IsAcceptInvite(user))
-                        {
-                            result = true;
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
+        public static bool CanChangeStatus(User user, UserStatusType changeTo, bool undo = false) {
+            UserStatusType currentStatus = user.UserStatus == null ? UserStatusType.None : user.UserStatus.Status;
+            if (undo) {
+                return CanRemoveStatus(currentStatus, changeTo);
+            } else {
+                return CanUpdateStatus(currentStatus, changeTo);
             }
-            else
-            {
-                switch (typeStatus)
-                {
-                    case UserStatusType.Locked:
-                        if (IsLocked(user))
-                        {
-                            result = true;
-                        }
-                        break;
-
-                    case UserStatusType.MarkDeleted:
-                        if (IsMarkDeleted(user))
-                        {
-                            result = true;
-                        }
-                        break;
-
-                    default:
-                        break;
-
-                }
-            }
-            return result;
         }
 
         /// <summary>
-        /// Изменяет статус <paramref name="user"/> на <paramref name="typeStatus"/>  />.
+        /// Изменяет <see cref="UserStatus"/> пользователя <paramref name="User"/> на <see cref="UserStatus"/> <paramref name="Status"/>.
+        /// Если не указан <paramref name="Name"/>, то задает его как <c>Status.ToString()</c>
         /// </summary>
-        /// <param name="typeStatus"></param>
-        /// <param name="user"></param>
+        /// <param name="Status"></param>
+        /// <param name="User"></param>
         /// <param name="Description"></param>
-        /// <param name="StatusName"></param>
-        public static void ChangeStatus(UserStatusType typeStatus, User user, string Description, string StatusName)
-        {
-            user.UserStatus = new UserStatus()
-            {
-                Id = user.Id,
-                Name = StatusName,
-                Description = Description,
-                UpdateTime = DateTime.Now,
-                Status = typeStatus
-            };
+        /// <param name="Name"></param>
+        public static void ChangeStatus(User User, UserStatusType Status, string Name = null,  string Description = "") {
 
+            UserStatus toChange = User.UserStatus != null ? User.UserStatus : new UserStatus();
+            if (Name == null) {
+                Name = Status.ToString();
+            }
+
+            toChange.Name = Name;
+            toChange.Description = Description;
+            toChange.Status = Status;
+            toChange.UpdateTime = DateTime.Now;
+
+            User.UserStatus = toChange;
         }
 
-        /// <summary>
-        /// Проверяет имеет ли  <paramref name="user"/> статус <see cref="UserStatusType.None" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public static bool IsNone(User user)
-        {
-            return user.UserStatus.Status.Equals(UserStatusType.None);
+        private static bool CanUpdateStatus(UserStatusType currentStatus, UserStatusType toSet) {
+            switch (toSet) {
+                case UserStatusType.Invite:
+                    return (UserStatusType.None.Equals(currentStatus) 
+                        || UserStatusType.Invite.Equals(currentStatus));
+
+                case UserStatusType.AcceptInvite:
+                    return (UserStatusType.Invite.Equals(currentStatus));
+
+                case UserStatusType.Locked:
+                    return (UserStatusType.System.Equals(currentStatus));
+
+                case UserStatusType.MarkDeleted:
+                    return (UserStatusType.System.Equals(currentStatus) 
+                        || UserStatusType.Locked.Equals(currentStatus));
+
+                case UserStatusType.System:
+                    return (UserStatusType.System.Equals(currentStatus) 
+                        || UserStatusType.None.Equals(currentStatus) 
+                        || UserStatusType.AcceptInvite.Equals(currentStatus));
+
+                default:
+                    return false;
+            }
         }
 
-        /// <summary>
-        /// Проверяет имеет ли  <paramref name="user"/> статус <see cref="UserStatusType.Invite" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public static bool IsInvite(User user)
-        {
-            return user.UserStatus.Status.Equals(UserStatusType.Invite);
+        private static bool CanRemoveStatus(UserStatusType currentStatus, UserStatusType toRemove) {
+            if (IsRemoveable(currentStatus)) {
+                return currentStatus.Equals(toRemove);
+            }
+            return false;
         }
 
-        /// <summary>
-        /// Проверяет имеет ли  <paramref name="user"/> статус <see cref="UserStatusType.AcceptInvite" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public static bool IsAcceptInvite(User user)
-        {
-            return user.UserStatus.Status.Equals(UserStatusType.AcceptInvite);
-        }
-
-        /// <summary>
-        /// Проверяет имеет ли  <paramref name="user"/> статус <see cref="UserStatusType.Locked" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public static bool IsLocked(User user)
-        {
-            return user.UserStatus.Status.Equals(UserStatusType.Locked);
-        }
-
-        /// <summary>
-        /// Проверяет имеет ли  <paramref name="user"/> статус <see cref="UserStatusType.MarkDeleted" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public static bool IsMarkDeleted(User user)
-        {
-            return user.UserStatus.Status.Equals(UserStatusType.MarkDeleted);
-        }
-
-        /// <summary>
-        /// Проверяет имеет ли  <paramref name="user"/> статус <see cref="UserStatusType.System" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public static bool IsSystem(User user)
-        {
-            return user.UserStatus.Status.Equals(UserStatusType.System);
+        private static bool IsRemoveable(UserStatusType status) {
+            return (status.Equals(UserStatusType.Locked)
+                || status.Equals(UserStatusType.MarkDeleted));
         }
 
     }

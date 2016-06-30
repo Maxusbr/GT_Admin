@@ -4,21 +4,18 @@ using Getticket.Web.DAL.IRepositories;
 using System;
 using System.Collections.Generic;
 
-namespace Getticket.Web.API.Services
-{
+namespace Getticket.Web.API.Services {
     /// <summary>
     /// Сервис аутентификации пользователей
     /// </summary>
-    public class CredentailsService
-    {
+    public class CredentailsService {
         private IAuthRepository AuthRep;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="AuthRep"></param>
-        public CredentailsService(IAuthRepository AuthRep)
-        {
+        public CredentailsService(IAuthRepository AuthRep) {
             this.AuthRep = AuthRep;
         }
 
@@ -33,47 +30,34 @@ namespace Getticket.Web.API.Services
         /// <param name="Phone"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
-        public User Authenticate(string UserName, string Phone, string Password)
-        {
+        public User Authenticate(string UserName, string Phone, string Password) {
             Password = PasswordService.GeneratePasswordHash(Password);
             Phone = PhoneService.IsPhoneValid(Phone) ? PhoneService.PhoneConvert(Phone) : null;
             UserName = !string.IsNullOrEmpty(UserName) ? UserName.ToLower() : null;
             UserStatusType AvailableStatus = UserStatusType.System;
 
-            if (UserName == null && Phone == null)
-            {
+            if (UserName == null && Phone == null) {
                 return null;
             }
 
             IList<User> users = null;
-            if (UserName != null && Phone != null)
-            {
+            if (UserName != null && Phone != null) {
                 users = AuthRep.FindAllByNamePhone(UserName, Phone, Password, AvailableStatus);
-            }
-            else if (UserName != null)
-            {
+            } else if (UserName != null) {
                 users = AuthRep.FindAllByName(UserName, Password, AvailableStatus);
-            }
-            else
-            {
+            } else {
                 users = AuthRep.FindAllByPhone(Phone, Password, AvailableStatus);
             }
 
-            if (users == null || users.Count == 0)
-            {
+            if (users == null || users.Count == 0) {
                 return null;
-            }
-            else if (users.Count == 1)
-            {
+            } else if (users.Count == 1) {
                 User toReturn = null;
-                foreach (User u in users)
-                {
+                foreach (User u in users) {
                     toReturn = u;
                 }
                 return toReturn;
-            }
-            else
-            {
+            } else {
                 throw new Exception("CredentailsService: found more than 1 user with specified credentails");
             }
         }

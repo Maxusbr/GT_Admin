@@ -60,15 +60,7 @@ namespace Getticket.Web.API.Services
                     .FromFailed()
                     .Add("error", "User with Email " + model.Email + " already exist in system");
             }
-            InviteCode Invite = SendInviteModelHelper
-                .CreateInviteCode
-                (
-                    model,
-                    PasswordService.GeneratePasswordString(30),
-                    "Invited",
-                    "Invite created at " + DateTime.Now,
-                    DateTime.Now.AddDays(Properties.Settings.Default.DaysForInviteToLive)
-                );
+            InviteCode Invite = SendInviteModelHelper.CreateInviteCode(model);
 
             if (InviteRep.Add(Invite))
             {
@@ -80,13 +72,11 @@ namespace Getticket.Web.API.Services
                         .Run("Emails/Invite", typeof(InviteEmailModel), InviteEmailModel);
                     if (!EmailService.SendMail(InviteEmailModel, inviteText))
                     {
-                        Invite.User.UserStatus.Description = "Invite Email was not delivered";
-                        Invite.User.UserStatus.UpdateTime = DateTime.Now;
+                        StatusService.ChangeStatus(Invite.User, UserStatusType.Invite, null, "Invite Email was not delivered");
                     }
                     else
                     {
-                        Invite.User.UserStatus.Description = "Invite Email was delivered at " + DateTime.Now;
-                        Invite.User.UserStatus.UpdateTime = DateTime.Now;
+                        StatusService.ChangeStatus(Invite.User, UserStatusType.Invite, null, "Invite Email was delivered");
                     }
                     InviteRep.Update(Invite);
 
@@ -134,7 +124,7 @@ namespace Getticket.Web.API.Services
 
             User user = UserRep.FindOneById(invite.User.Id);
 
-            if (!StatusService.CanChangeStatus(UserStatusType.AcceptInvite, user))
+            if (!StatusService.CanChangeStatus(user, UserStatusType.AcceptInvite))
             {
                 return ServiceResponce
                    .FromFailed()

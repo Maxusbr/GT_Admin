@@ -177,14 +177,14 @@ namespace Getticket.Web.API.Services
                     .Add("error", "User with specified Id was not found");
             }
 
-            if (!StatusService.CanChangeStatus(UserStatusType.Locked, user))
+            if (!StatusService.CanChangeStatus(user, UserStatusType.Locked))
             {
                 return ServiceResponce
                     .FromFailed()
                     .Add("error", "it isn't possible to change the status to locked");
             }
 
-            StatusService.ChangeStatus(UserStatusType.Locked, user, "", StatusService.LOCKED_STATUS_NAME);
+            StatusService.ChangeStatus(user, UserStatusType.Locked);
             UserRep.Save(user);
 
             return ServiceResponce.FromSuccess();
@@ -205,13 +205,13 @@ namespace Getticket.Web.API.Services
                     .Add("error", "User with specified Id was not found");
             }
 
-            if (!StatusService.CanChangeStatus(UserStatusType.Locked, user, true))
+            if (!StatusService.CanChangeStatus(user, UserStatusType.Locked, true))
             {
                 return ServiceResponce
                    .FromFailed()
                    .Add("error", "it is impossible to unlock because the user isn't locked");
             }
-            StatusService.ChangeStatus(UserStatusType.System, user, "", StatusService.SYSTEM_STATUS_NAME);
+            StatusService.ChangeStatus(user, UserStatusType.System);
             UserRep.Save(user);
 
             return ServiceResponce.FromSuccess();
@@ -262,15 +262,16 @@ namespace Getticket.Web.API.Services
                     .Add("error", "Can't delete user because he doesn't exist");
             }
 
-            if (!StatusService.CanChangeStatus(UserStatusType.MarkDeleted, user))
+            if (!StatusService.CanChangeStatus(user, UserStatusType.MarkDeleted))
             {
                 return ServiceResponce
                 .FromFailed()
                 .Add("error", "it isn't possible to change the status to deleted");
             }
 
-            StatusService.ChangeStatus(UserStatusType.MarkDeleted, user, "", StatusService.MARKDELETE_STATUS_NAME);
+            StatusService.ChangeStatus(user, UserStatusType.MarkDeleted);
             UserRep.Save(user);
+
             return ServiceResponce.FromSuccess();
         }
 
@@ -289,7 +290,7 @@ namespace Getticket.Web.API.Services
                     .Add("error", "user doesn't exist");
             }
 
-            if (!StatusService.CanChangeStatus(UserStatusType.MarkDeleted, user, true))
+            if (!StatusService.CanChangeStatus(user, UserStatusType.MarkDeleted, true))
             {
                 return ServiceResponce
                 .FromFailed()
@@ -303,7 +304,7 @@ namespace Getticket.Web.API.Services
                     .Add("error", "user with such email or phone already exists");
             }
 
-            StatusService.ChangeStatus(UserStatusType.System, user, "", StatusService.SYSTEM_STATUS_NAME);
+            StatusService.ChangeStatus(user, UserStatusType.System);
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
         }

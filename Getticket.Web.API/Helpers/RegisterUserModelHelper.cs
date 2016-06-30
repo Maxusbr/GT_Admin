@@ -32,7 +32,7 @@ namespace Getticket.Web.API.Helpers
                 },
             };
 
-            StatusService.ChangeStatus(UserStatusType.System, user, "", StatusService.SYSTEM_STATUS_NAME);
+            StatusService.ChangeStatus(user, UserStatusType.System);
             return user;
         }
     }
