@@ -26,7 +26,7 @@ namespace Getticket.Web.API.Helpers
                 Id = role.Id,
                 Name = role.Name,
                 Desciption = role.Desciption,
-                Role = role.Role
+                Roles = role.Role.ToString()
             };
         }
 

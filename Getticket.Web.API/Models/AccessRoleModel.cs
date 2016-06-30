@@ -1,5 +1,4 @@
 ﻿using Getticket.Web.DAL.Entities;
-using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.API.Models
 {
@@ -8,12 +7,24 @@ namespace Getticket.Web.API.Models
     /// </summary>
     public class AccessRoleModel
     {
+        /// <summary>
+        /// Идентификатор сущности
+        /// </summary>
         public int Id { get; set; }
 
-        public AccessRoleType Role { get; set; }
+        /// <summary>
+        /// Список системных ролей через ";"
+        /// </summary>
+        public string Roles { get; set; }
 
+        /// <summary>
+        /// Имя роли
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Описание роли
+        /// </summary>
         public string Desciption { get; set; }
     }
 }

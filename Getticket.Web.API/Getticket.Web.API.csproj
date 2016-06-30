@@ -198,6 +198,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectInjectorConfig.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\SystemRolesController.cs" />
     <Compile Include="Helpers\AccessRoleModelHelper.cs" />
     <Compile Include="Helpers\ChangePasswordEmailModelHelper.cs" />

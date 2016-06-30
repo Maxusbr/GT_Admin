@@ -10,7 +10,7 @@ namespace Getticket.Web.DAL.Entities
     public class AccessRole : BaseEntity
     {
         /// <summary>
-        /// Констпуктор
+        /// Конструктор
         /// </summary>
         public AccessRole()
         {

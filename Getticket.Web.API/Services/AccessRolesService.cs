@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Getticket.Web.API.Models;
 using Getticket.Web.DAL.IRepositories;
 using Getticket.Web.API.Helpers;
+using Getticket.Web.DAL.Enums;
+using System;
 
 namespace Getticket.Web.API.Services
 {
@@ -41,6 +43,36 @@ namespace Getticket.Web.API.Services
         {
             IList<User> users = AccessRep.GetAllByRole(id);
             return UserModelHelper.GetUserModel(users);
+        }
+
+        /// <summary>
+        /// Сохраняет, обновляет <see cref="AccessRole"/> роль пользователя в БД
+        /// </summary>
+        /// <returns></returns>
+        public ServiceResponce SaveRole()
+        {
+
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Предоставляет карту ключ -> значение для доступных типов <see cref="AccessRoleType"/>
+        /// </summary>
+        /// <returns></returns>
+        public IDictionary<int, string> GetAvailableRoleTypes()
+        {
+            IDictionary<int, string> rolesNames = new Dictionary<int, string>();
+
+            foreach (AccessRoleType role in Enum.GetValues(typeof(AccessRoleType)))
+            {
+                if (role != AccessRoleType.None)
+                {
+                    rolesNames.Add((int) role, role.ToString());
+                }
+            }
+
+            return rolesNames;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Getticket.Web.API.Models;
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Web.Http;
 
@@ -88,6 +89,19 @@ namespace Getticket.Web.API.Controllers
         {
             string currentUser = this.User.Identity.Name;
             return Ok(UserServ.ChangePassword(id, currentUser, model).Response());
+        }
+
+        /// <summary>
+        /// Отсылает пользователю новый сгенерированный пароль по Email,
+        /// если, конечно он зарегестрирован в системе
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("restorepass")]
+        public IHttpActionResult RestorePassword()
+        {
+            // TODO implement this
+            throw new NotImplementedException();
         }
 
         /// <summary>
