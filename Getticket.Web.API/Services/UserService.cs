@@ -2,6 +2,7 @@
 using Getticket.Web.API.Models;
 using Getticket.Web.API.Models.Emails;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.IRepositories;
 using RazorEngine.Templating;
 using System.Collections.Generic;
@@ -107,231 +108,233 @@ namespace Getticket.Web.API.Services
             return response;
         }
 
-    
-    /// <summary>
-    /// Изменение пароля пользователя с идентификатором <paramref name="id" /> 
-    /// пользователем с Email <paramref name="currentUserEmail" />;
-    /// В случае если пользователь меняет пароль самому себе он должен указать старый пароль
-    /// </summary>
-    /// <param name="id">Идентификатор пользователя для которого меняется пароль</param>
-    /// <param name="currentUserEmail">Email польозователя который меняет пароль</param>
-    /// <param name="model"></param>
-    /// <returns></returns>
-    public ServiceResponce ChangePassword(int id, string currentUserEmail, ChangePasswordModel model)
-    {
-        User user = UserRep.FindOneById(id);
-        if (user == null)
-        {
-            return ServiceResponce
-                .FromFailed()
-                .Add("error", "User with specified Id was not found");
-        }
 
-        bool SelfChangePassword = false;
-        if (user.UserName.Equals(currentUserEmail))
+        /// <summary>
+        /// Изменение пароля пользователя с идентификатором <paramref name="id" /> 
+        /// пользователем с Email <paramref name="currentUserEmail" />;
+        /// В случае если пользователь меняет пароль самому себе он должен указать старый пароль
+        /// </summary>
+        /// <param name="id">Идентификатор пользователя для которого меняется пароль</param>
+        /// <param name="currentUserEmail">Email польозователя который меняет пароль</param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ServiceResponce ChangePassword(int id, string currentUserEmail, ChangePasswordModel model)
         {
-            SelfChangePassword = true;
-            if (!user.PasswordHash.Equals(PasswordService.GeneratePasswordHash(model.OldPassword)))
+            User user = UserRep.FindOneById(id);
+            if (user == null)
             {
                 return ServiceResponce
                     .FromFailed()
-                    .Add("error", "Incorrect OldPassword");
+                    .Add("error", "User with specified Id was not found");
             }
-        }
 
-        user.PasswordHash = PasswordService.GeneratePasswordHash(model.NewPassword);
-        UserRep.Save(user);
-
-        if (model.SendCopyPassword)
-        {
-            // Создаем задачу отправки сообщения в фоне и запускаем ее
-            new Thread(send =>
+            bool SelfChangePassword = false;
+            if (user.UserName.Equals(currentUserEmail))
             {
-                ChangePasswordEmailModel ChangePasswordEmailModel
-                    = ChangePasswordEmailModelHelper.GetChangePasswordEmailModel(user.UserName, model.NewPassword, SelfChangePassword);
-                string ChangePasswordText = TemplateServ
-                    .Run("Emails/ChangePassword", typeof(ChangePasswordEmailModel), ChangePasswordEmailModel);
-                EmailService.SendMail(ChangePasswordEmailModel, ChangePasswordText);
-            }).Start();
+                SelfChangePassword = true;
+                if (!user.PasswordHash.Equals(PasswordService.GeneratePasswordHash(model.OldPassword)))
+                {
+                    return ServiceResponce
+                        .FromFailed()
+                        .Add("error", "Incorrect OldPassword");
+                }
+            }
+
+            user.PasswordHash = PasswordService.GeneratePasswordHash(model.NewPassword);
+            UserRep.Save(user);
+
+            if (model.SendCopyPassword)
+            {
+                // Создаем задачу отправки сообщения в фоне и запускаем ее
+                new Thread(send =>
+                {
+                    ChangePasswordEmailModel ChangePasswordEmailModel
+                        = ChangePasswordEmailModelHelper.GetChangePasswordEmailModel(user.UserName, model.NewPassword, SelfChangePassword);
+                    string ChangePasswordText = TemplateServ
+                        .Run("Emails/ChangePassword", typeof(ChangePasswordEmailModel), ChangePasswordEmailModel);
+                    EmailService.SendMail(ChangePasswordEmailModel, ChangePasswordText);
+                }).Start();
+            }
+
+            return ServiceResponce.FromSuccess();
         }
 
-        return ServiceResponce.FromSuccess();
-    }
 
 
-
-    /// <summary>
-    /// Устанавливает статус пользователя  равным Locked,
-    /// если он был заблокирован ранее или удален - выдается сообщение.
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public ServiceResponce Lock(int id)
-    {
-        User user = UserRep.FindOneById(id);
-        if (user == null)
+        /// <summary>
+        /// Устанавливает статус пользователя  равным Locked,
+        /// если он был заблокирован ранее или удален - выдается сообщение.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ServiceResponce Lock(int id)
         {
-            return ServiceResponce
+            User user = UserRep.FindOneById(id);
+            if (user == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "User with specified Id was not found");
+            }
+
+            if (!StatusService.CanChangeStatus(UserStatusType.Locked, user))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "it isn't possible to change the status to locked");
+            }
+
+            StatusService.ChangeStatus(UserStatusType.Locked, user, "", StatusService.LOCKED_STATUS_NAME);
+            UserRep.Save(user);
+
+            return ServiceResponce.FromSuccess();
+        }
+
+        /// <summary>
+        /// Меняет статус Locked пользователя с <paramref name="id"> </paramref>на System;
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ServiceResponce Unlock(int id)
+        {
+            User user = UserRep.FindOneById(id);
+            if (user == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "User with specified Id was not found");
+            }
+
+            if (!StatusService.CanChangeStatus(UserStatusType.Locked, user, true))
+            {
+                return ServiceResponce
+                   .FromFailed()
+                   .Add("error", "it is impossible to unlock because the user isn't locked");
+            }
+            StatusService.ChangeStatus(UserStatusType.System, user, "", StatusService.SYSTEM_STATUS_NAME);
+            UserRep.Save(user);
+
+            return ServiceResponce.FromSuccess();
+        }
+
+
+        /// <summary>
+        /// Обновляет уже существующего пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ServiceResponce UpdateUser(int id, UpdateUserModel model)
+        {
+            User user = UserRep.FindOneById(id);
+            if (user == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "User with specified Id was not found");
+            }
+
+            user = UpdateUserModelHelper.UpdateUser(user, model);
+
+            if (!CanUpdateUserCredentails(user.Id, model.Email, model.Phone, UserRep))
+            {
+                return ServiceResponce.FromFailed().Add("error", "Can't update to specified email or phone");
+            }
+            UserRep.Save(user);
+            return ServiceResponce.FromSuccess();
+
+        }
+
+
+
+        /// <summary>
+        /// Помечает пользователя с <paramref name="id"/> как удаленного;
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ServiceResponce MarkDeleted(int id)
+        {
+            User user = UserRep.FindOneById(id);
+            if (user == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "Can't delete user because he doesn't exist");
+            }
+
+            if (!StatusService.CanChangeStatus(UserStatusType.MarkDeleted, user))
+            {
+                return ServiceResponce
                 .FromFailed()
-                .Add("error", "User with specified Id was not found");
-        }
+                .Add("error", "it isn't possible to change the status to deleted");
+            }
 
-        if (!StatusService.ToLocked(user, ""))
-        {
-            return ServiceResponce
-                .FromFailed()
-                .Add("error", "it isn't possible to change the status to locked");
-        }
-
-        UserRep.Save(user);
-
-        return ServiceResponce.FromSuccess();
-    }
-
-    /// <summary>
-    /// Меняет статус Locked пользователя с <paramref name="id"> </paramref>на System;
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public ServiceResponce Unlock(int id)
-    {
-        User user = UserRep.FindOneById(id);
-        if (user == null)
-        {
-            return ServiceResponce
-                .FromFailed()
-                .Add("error", "User with specified Id was not found");
-        }
-
-        if (!StatusService.FromLockToSystem(user, ""))
-        {
-            return ServiceResponce
-               .FromFailed()
-               .Add("error", "it isn't possible to change the status to system");
-        }
-
-        UserRep.Save(user);
-
-        return ServiceResponce.FromSuccess();
-    }
-
-
-    /// <summary>
-    /// Обновляет уже существующего пользователя
-    /// </summary>
-    /// <param name="id"></param>
-    /// <param name="model"></param>
-    /// <returns></returns>
-    public ServiceResponce UpdateUser(int id, UpdateUserModel model)
-    {
-        User user = UserRep.FindOneById(id);
-        if (user == null)
-        {
-            return ServiceResponce
-                .FromFailed()
-                .Add("error", "User with specified Id was not found");
-        }
-
-        user = UpdateUserModelHelper.UpdateUser(user, model);
-
-        if (CanUpdateUserCredentails(user.Id, user.UserName, user.Phone, UserRep))
-        {
+            StatusService.ChangeStatus(UserStatusType.MarkDeleted, user, "", StatusService.MARKDELETE_STATUS_NAME);
             UserRep.Save(user);
             return ServiceResponce.FromSuccess();
         }
-        else
+
+        /// <summary>
+        /// Снимает метку "delete" пользователя с <paramref name="id"/> устанавливает статус System;
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ServiceResponce MarkNotDeleted(int id)
         {
-            return ServiceResponce.FromFailed().Add("error", "Cant update to specified email or phone");
-        }
-    }
-
-
-
-    /// <summary>
-    /// Помечает пользователя с <paramref name="id"/> как удаленного;
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public ServiceResponce MarkDeleted(int id)
-    {
-        User user = UserRep.FindOneById(id);
-        if (user == null)
-        {
-            return ServiceResponce
-                .FromFailed()
-                .Add("error", "Can't delete user because he doesn't exist");
-        }
-
-        if (StatusService.ToDeleted(user, ""))
-        {
-            return ServiceResponce
-            .FromFailed()
-            .Add("error", "it isn't possible to change the status to deleted");
-        }
-
-        UserRep.Save(user);
-        return ServiceResponce.FromSuccess();
-    }
-
-    /// <summary>
-    /// Снимает метку "delete" пользователя с <paramref name="id"/> устанавливает статус System;
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    public ServiceResponce MarkNotDeleted(int id)
-    {
-        User user = UserRep.FindOneById(id);
-        if (user == null)
-        {
-            return ServiceResponce
-                .FromFailed()
-                .Add("error", "user doesn't exist");
-        }
-
-        if (UserRep.CountByCredentails(user.UserName, user.Phone) != 0)
-        {
-            return ServiceResponce
-                .FromFailed()
-                .Add("error", "user with such email or phone already exists");
-        }
-
-        if (!StatusService.FromMarkDeletedToSystem(user, ""))
-        {
-            return ServiceResponce
-            .FromFailed()
-            .Add("error", "it isn't possible to change the status to system");
-        }
-        UserRep.Save(user);
-        return ServiceResponce.FromSuccess();
-    }
-
-    /// <summary>
-    /// Проверяет возможно ли изменить пользователю с идентификатором <paramref name="UserId" />
-    /// его учетные данные (емаил и телефон) на <paramref name="UpdatedName" /> и <paramref name="UpdatedPhone" />
-    /// </summary>
-    /// <param name="UserId"></param>
-    /// <param name="UpdatedName"></param>
-    /// <param name="UpdatedPhone"></param>
-    /// <param name="repository">Ссылка на IUserRepository</param>
-    /// <returns></returns>
-    public static bool CanUpdateUserCredentails(int UserId, string UpdatedName, string UpdatedPhone, IUserRepository repository)
-    {
-        IList<User> users = repository.FindAllByCredentails(UpdatedName, UpdatedPhone);
-        if (users == null)
-        {
-            return true;
-        }
-
-        if (users.Count == 1)
-        {
-            foreach (User u in users)
+            User user = UserRep.FindOneById(id);
+            if (user == null)
             {
-                return u.Id.Equals(UserId);
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "user doesn't exist");
             }
+
+            if (!StatusService.CanChangeStatus(UserStatusType.MarkDeleted, user, true))
+            {
+                return ServiceResponce
+                .FromFailed()
+                .Add("error", "the user isn't deleted");
+            }
+
+            if (UserRep.CountByCredentails(user.UserName, user.Phone) != 0)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "user with such email or phone already exists");
+            }
+
+            StatusService.ChangeStatus(UserStatusType.System, user, "", StatusService.SYSTEM_STATUS_NAME);
+            UserRep.Save(user);
+            return ServiceResponce.FromSuccess();
         }
 
-        return false;
-    }
+        /// <summary>
+        /// Проверяет возможно ли изменить пользователю с идентификатором <paramref name="UserId" />
+        /// его учетные данные (емаил и телефон) на <paramref name="UpdatedName" /> и <paramref name="UpdatedPhone" />
+        /// </summary>
+        /// <param name="UserId"></param>
+        /// <param name="UpdatedName"></param>
+        /// <param name="UpdatedPhone"></param>
+        /// <param name="repository">Ссылка на IUserRepository</param>
+        /// <returns></returns>
+        public static bool CanUpdateUserCredentails(int UserId, string UpdatedName, string UpdatedPhone, IUserRepository repository)
+        {
+            IList<User> users = repository.FindAllByCredentails(UpdatedName, UpdatedPhone);
+            if (users == null)
+            {
+                return true;
+            }
 
-}
+            if (users.Count == 1)
+            {
+                foreach (User u in users)
+                {
+                    return u.Id.Equals(UserId);
+                }
+            }
+
+            return false;
+        }
+
+    }
 }

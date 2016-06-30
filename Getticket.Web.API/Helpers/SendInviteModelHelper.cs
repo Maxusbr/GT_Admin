@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.API.Models;
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,8 @@ namespace Getticket.Web.API.Helpers
                 UserInfo = new UserInfo(),
                 AccessRoleId = model.RoleId
             };
-
-            StatusService.ToInvite(user, "");
+                        
+            StatusService.ChangeStatus(UserStatusType.Invite, user, "", StatusService.INVITE_STATUS_NAME);
             InviteCode invite = new InviteCode()
             {
                 User = user,

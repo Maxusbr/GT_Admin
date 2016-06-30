@@ -10,8 +10,12 @@ namespace Getticket.Web.API.Services
     /// </summary>
     public static class StatusService
     {
-        private static readonly string SYSTEM_STATUS_NAME = "System";
-        
+        public static readonly string SYSTEM_STATUS_NAME = "System";
+        public static readonly string INVITE_STATUS_NAME = "Invite";
+        public static readonly string ACCEPTINVITE_STATUS_NAME = "AcceptInvite";
+        public static readonly string LOCKED_STATUS_NAME = "Locked";
+        public static readonly string MARKDELETE_STATUS_NAME = "MarkDelete";
+
         /// <summary>
         /// Проверяет возможно ли полностью удалить пользователя  <paramref name="user"/> из системы.
         /// </summary>
@@ -19,212 +23,114 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public static bool CanBeRemovedFromDB(User user)
         {
-            if ( !(IsMarkDeleted(user) || IsInvite(user) || IsAcceptInvite(user)) )
+            if (!(IsMarkDeleted(user) || IsInvite(user) || IsAcceptInvite(user)))
             {
                 return false;
             }
             return true;
         }
 
-    
+
         /// <summary>
-        /// Проверяет возможно ли изменение статуса <paramref name="user"/> на <see cref="UserStatusType.Invite" />,
+        /// Проверяет возможно ли изменение статуса <paramref name="user"/> на <paramref name="typeStatus"/>,
         /// если да, то меняет его.
         /// </summary>
+        /// <param name="typeStatus"></param>
+        /// <param name="user"></param>
+        /// <param name="unStatus"></param>
+        /// <returns></returns>
+        public static bool CanChangeStatus(UserStatusType typeStatus, User user, bool unStatus = false)
+        {
+            bool result = false;
+            if (!unStatus)
+            {
+                switch (typeStatus)
+                {
+                    case UserStatusType.Invite:
+                        if (IsNone(user) || IsInvite(user))
+                        {
+                            result = true;
+                        }
+
+                        break;
+
+                    case UserStatusType.AcceptInvite:
+                        if (IsInvite(user))
+                        {
+                            result = true;
+                        }
+                        break;
+
+                    case UserStatusType.Locked:
+                        if (IsSystem(user))
+                        {
+                            result = true;
+                        }
+                        break;
+
+                    case UserStatusType.MarkDeleted:
+                        if (IsSystem(user) || IsLocked(user) || !IsMarkDeleted(user))
+                        {
+                            result = true;
+                        }
+                        break;
+
+                    case UserStatusType.System:
+                        if (IsSystem(user) || IsAcceptInvite(user))
+                        {
+                            result = true;
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (typeStatus)
+                {
+                    case UserStatusType.Locked:
+                        if (IsLocked(user))
+                        {
+                            result = true;
+                        }
+                        break;
+
+                    case UserStatusType.MarkDeleted:
+                        if (IsMarkDeleted(user))
+                        {
+                            result = true;
+                        }
+                        break;
+
+                    default:
+                        break;
+
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Изменяет статус <paramref name="user"/> на <paramref name="typeStatus"/>  />.
+        /// </summary>
+        /// <param name="typeStatus"></param>
         /// <param name="user"></param>
         /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool ToInvite(User user, string Description)
+        /// <param name="StatusName"></param>
+        public static void ChangeStatus(UserStatusType typeStatus, User user, string Description, string StatusName)
         {
-            string StatusName = "Invite";
-
-            if( !(IsNone(user) || IsInvite(user)) )
-            {
-                return false;
-            }
-
             user.UserStatus = new UserStatus()
             {
                 Id = user.Id,
                 Name = StatusName,
                 Description = Description,
                 UpdateTime = DateTime.Now,
-                Status = UserStatusType.Invite
+                Status = typeStatus
             };
 
-            return true;
         }
-
-
-        /// <summary>
-        /// Проверяет возможно ли изменение статуса <paramref name="user"/> на <see cref="UserStatusType.AcceptInvite" />,
-        /// если да, то меняет его.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool ToAcceptInvite(User user, string Description)
-        {
-            string StatusName = "Accept Invite";
-
-            if (!IsInvite(user))
-            {
-                return false;
-            }
-
-            user.UserStatus = new UserStatus()
-            {
-                Id = user.Id, 
-                Name = StatusName, 
-                Description = Description, 
-                UpdateTime = DateTime.Now, 
-                Status = UserStatusType.AcceptInvite
-            };
-
-            return true;
-        }
-
-
-        /// <summary>
-        /// Проверяет возможно ли изменение статуса <paramref name="user"/> на <see cref="UserStatusType.Locked" />,
-        /// если да, то меняет его.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool ToLocked(User user, string Description)
-        {
-            string StatusName = "Locked";
-
-            if (!IsSystem(user))
-            {
-                return false;
-            }
-
-            user.UserStatus = new UserStatus()
-            {
-                Id = user.Id,
-                Name = StatusName,
-                Description = Description,
-                UpdateTime = DateTime.Now,
-                Status = UserStatusType.Locked
-            };
-
-            return true;
-        }
-
-        /// <summary>
-        /// Проверяет возможно ли изменение статуса <paramref name="user"/> на <see cref="UserStatusType.MarkDeleted" />,
-        /// если да, то меняет его.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool ToDeleted(User user, string Description)
-        {
-            string StatusName = "Mark Deleted";
-
-            if ( !(IsSystem(user)||IsLocked(user)) )
-            {
-                return false;
-            }
-
-            user.UserStatus = new UserStatus()
-            {
-                Id = user.Id,
-                Name = StatusName,
-                Description = Description,
-                UpdateTime = DateTime.Now,
-                Status = UserStatusType.MarkDeleted
-            };
-
-            return true;
-        }
-
-        /// <summary>
-        /// Проверяет имеет ли <paramref name="user"/> статус <see cref="UserStatusType.Locked" />,
-        /// если да, то меняет его на <see cref="UserStatusType.System" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool FromLockToSystem(User user, string Description)
-        {
-            if (!IsLocked(user))
-            {
-                return false;
-            }
-            ChangeToSystem(user, Description, SYSTEM_STATUS_NAME);
-            return true;
-        }
-
-        /// <summary>
-        /// Проверяет имеет ли <paramref name="user"/> статус <see cref="UserStatusType.MarkDeleted" />,
-        /// если да, то меняет его на <see cref="UserStatusType.System" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool FromMarkDeletedToSystem(User user, string Description)
-        {
-            if (!IsMarkDeleted(user))
-            {
-                return false;
-            }
-            ChangeToSystem(user, Description, SYSTEM_STATUS_NAME);
-            return true;
-        }
-
-        /// <summary>
-        /// Проверяет имеет ли <paramref name="user"/> статус <see cref="UserStatusType.None" />,
-        /// если да, то меняет его на <see cref="UserStatusType.System" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool FromNoneToSystem(User user, string Description)
-        {
-            ChangeToSystem(user, Description, SYSTEM_STATUS_NAME);
-            return true;
-        }
-
-        /// <summary>
-        /// Проверяет имеет ли <paramref name="user"/> статус <see cref="UserStatusType.AcceptInvite" />,
-        /// если да, то меняет его на <see cref="UserStatusType.System" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool FromAcceptInviteToSystem(User user, string Description)
-        {
-            if (!IsAcceptInvite(user))
-            {
-                return false;
-            }
-            ChangeToSystem(user, Description, SYSTEM_STATUS_NAME);
-            return true;
-        }
-
-        /// <summary>
-        /// Проверяет имеет ли <paramref name="user"/> статус <see cref="UserStatusType.System" />,
-        /// если да, то меняет его на <see cref="UserStatusType.System" /> с указанными параметрами
-        /// <paramref name="Name"/> и <paramref name="Description"/>
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Name"></param>
-        /// <param name="Description"></param>
-        /// <returns></returns>
-        public static bool FromSystemToSystem(User user, string Name, string Description)
-        {
-            if (!IsSystem(user))
-            {
-                return false;
-            }
-            ChangeToSystem(user, Description, Name);
-            return true;
-        }
-
-
 
         /// <summary>
         /// Проверяет имеет ли  <paramref name="user"/> статус <see cref="UserStatusType.None" />.
@@ -245,7 +151,7 @@ namespace Getticket.Web.API.Services
         {
             return user.UserStatus.Status.Equals(UserStatusType.Invite);
         }
-    
+
         /// <summary>
         /// Проверяет имеет ли  <paramref name="user"/> статус <see cref="UserStatusType.AcceptInvite" />.
         /// </summary>
@@ -286,27 +192,5 @@ namespace Getticket.Web.API.Services
             return user.UserStatus.Status.Equals(UserStatusType.System);
         }
 
-        /// <summary>
-        /// Изменяет статус <paramref name="user"/> на <see cref="UserStatusType.System" />.
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="Description"></param>
-        /// <param name="StatusName"></param>
-        private static void ChangeToSystem(User user, string Description, string StatusName = null)
-        {
-            if (StatusName == null)
-            {
-                StatusName = "System";
-            }
-
-            user.UserStatus = new UserStatus()
-            {
-                Id = user.Id,
-                Name = StatusName,
-                Description = Description,
-                UpdateTime = DateTime.Now,
-                Status = UserStatusType.System
-            };
-        }
     }
 }

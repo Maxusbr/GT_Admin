@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.API.Models;
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.API.Helpers
 {
@@ -24,6 +25,7 @@ namespace Getticket.Web.API.Helpers
             user.UserInfo.LastName = model.LastName;
             user.UserInfo.Company = model.Company;
             user.UserInfo.Position = model.Position;
+            StatusService.ChangeStatus(UserStatusType.AcceptInvite, user, "", StatusService.ACCEPTINVITE_STATUS_NAME);
             return user;
         }
 

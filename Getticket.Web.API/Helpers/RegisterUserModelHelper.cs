@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.API.Models;
 using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.API.Helpers
 {
@@ -31,7 +32,7 @@ namespace Getticket.Web.API.Helpers
                 },
             };
 
-            StatusService.FromNoneToSystem(user, "");
+            StatusService.ChangeStatus(UserStatusType.System, user, "", StatusService.SYSTEM_STATUS_NAME);
             return user;
         }
     }

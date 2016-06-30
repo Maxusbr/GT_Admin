@@ -2,6 +2,7 @@
 using Getticket.Web.API.Models;
 using Getticket.Web.API.Models.Emails;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.IRepositories;
 using RazorEngine.Templating;
 using System;
@@ -103,6 +104,16 @@ namespace Getticket.Web.API.Services
             }
         }
 
+        internal object DeleteInvite(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal object AcceptedInvite(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Обновляет данные приглашения пользователя
         /// и переводит статус приглашения в статус ожидающий
@@ -113,13 +124,6 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce UpdateInvite(string code, UpdateInviteModel model)
         {
-            if (!model.GeneratePassword && !PasswordService.IsPasswordAcceptable(model.Password))
-            {
-                return ServiceResponce
-                    .FromFailed()
-                    .Add("error", "Password not acceptable");
-            }
-
             InviteCode invite = InviteRep.FindOneByCode(code);
             if (invite == null)
             {
@@ -129,31 +133,40 @@ namespace Getticket.Web.API.Services
             }
 
             User user = UserRep.FindOneById(invite.User.Id);
-       
-            if(!UserService.CanUpdateUserCredentails(user.Id, model.Email, model.Phone, UserRep))
+
+            if (!StatusService.CanChangeStatus(UserStatusType.AcceptInvite, user))
+            {
+                return ServiceResponce
+                   .FromFailed()
+                   .Add("error", "it isn't possible to change the status to AcceptInvited");
+            }
+
+
+            if (!UserService.CanUpdateUserCredentails(user.Id, model.Email, model.Phone, UserRep))
             {
                 return ServiceResponce
                    .FromFailed()
                    .Add("error", "user with such Email or Phone already exists");
             }
 
-            // Генерируем и хэшируем пароль
-            string UnHashedPassword = model.Password;
-            if (model.GeneratePassword)
-            {
-                UnHashedPassword = PasswordService.GeneratePasswordString();
-            }
-           
-            model.Password = PasswordService.GeneratePasswordHash(UnHashedPassword);
-       
-                user = UpdateInviteModelHelper.UpdateInviteUser(user, model);
-
-            if(!StatusService.ToAcceptInvite(user, ""))
+            if (!model.GeneratePassword && !PasswordService.IsPasswordAcceptable(model.Password))
             {
                 return ServiceResponce
-                   .FromFailed()
-                   .Add("error", "it isn't possible to change the status to AcceptInvited");
+                    .FromFailed()
+                    .Add("error", "Password not acceptable");
             }
+
+            // Генерируем и хэшируем пароль
+            string Password = model.Password;
+            if (model.GeneratePassword)
+            {
+                Password = PasswordService.GeneratePasswordString();
+            }
+            model.Password = PasswordService.GeneratePasswordHash(Password);
+            
+                user = UpdateInviteModelHelper.UpdateInviteUser(user, model);
+
+
 
                 UserRep.Save(user);
                 InviteRep.Delete(invite.Id);
@@ -164,7 +177,7 @@ namespace Getticket.Web.API.Services
 
             if (model.GeneratePassword)
             {
-                response.Add("GeneratedPassword", UnHashedPassword);
+                response.Add("GeneratedPassword", Password);
             }
             return response;
 
