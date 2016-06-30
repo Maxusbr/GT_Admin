@@ -52,6 +52,15 @@ namespace Getticket.Web.DAL.Repositories
             return GetOne(query);
         }
 
+        /// <see cref="IUserRepository.FindOneByEmail(string)"/>
+        public User FindOneByEmail(string Email) {
+            if (Email == null) {
+                return null;
+            }
+            IQueryable<User> query = db.Users.Where(u => u.UserName.Equals(Email));
+            return GetOne(query);
+        }
+
         /// <see cref="IUserRepository.CountByCredentails(string, string)" />
         public int CountByCredentails(string email, string phone)
         {

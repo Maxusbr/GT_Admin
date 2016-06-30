@@ -2,6 +2,7 @@
 using Getticket.Web.DAL.IRepositories;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Getticket.Web.DAL.Repositories
 {
@@ -41,6 +42,13 @@ namespace Getticket.Web.DAL.Repositories
             {
                 return role.Users.ToList();
             }
+        }
+
+        /// <see cref="IAccessRoleRepository.GetOneById(int)"/>
+        public AccessRole GetOneById(int id) {
+            IQueryable<AccessRole> query = db.AccessRoles
+                .Where(ar => ar.Id == id);
+            return GetOne(query);
         }
     }
 }

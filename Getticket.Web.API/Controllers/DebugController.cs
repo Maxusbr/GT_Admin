@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using Getticket.Web.DAL.IRepositories;
 using RazorEngine.Templating;
 using Getticket.Web.API.Models.Emails;
+using Getticket.Web.API.Models;
+using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.API.Controllers
 {
@@ -18,24 +20,76 @@ namespace Getticket.Web.API.Controllers
         private IUserRepository UserRep;
         private UserService UserRegServ;
         private IRazorEngineService TemplateServ;
+        private AccessRolesService AccessRolesServ;
 
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        /// <param name="UserRep"></param>
-        public DebugController(IUserRepository UserRep, UserService UserRegServ, IRazorEngineService TemplateServ)
+        public DebugController(IUserRepository UserRep, UserService UserRegServ, IRazorEngineService TemplateServ, AccessRolesService AccessRolesServ)
         {
             this.UserRep = UserRep;
             this.UserRegServ = UserRegServ;
             this.TemplateServ = TemplateServ;
+            this.AccessRolesServ = AccessRolesServ;
         }
 
         [HttpPost]
-        [Route("users/seed")]
+        [Route("seed")]
         [AllowAnonymous]
         public IHttpActionResult UsersSeed()
         {
-            
+            AccessRolesServ.SaveRole(new AccessRoleModel() {
+                Id = 0,
+                Name = "Admin",
+                Desciption = "Test admin role, can do averething",
+                Roles = (AccessRoleType.Admin | AccessRoleType.AccessRoleManager).ToString()
+            });
+
+            AccessRolesServ.SaveRole(new AccessRoleModel() {
+                Id = 0,
+                Name = "new role",
+                Desciption = "Test role",
+                Roles = AccessRoleType.Admin.ToString()
+            });
+
+            UserRegServ.CreateSystemUser(new RegisterUserModel() {
+                Name = "admin",
+                Email = "admin@admin.su",
+                Phone = "89159998877",
+                LastName = "admin",
+                Company = "none",
+                Position = "none",
+                GeneratePassword = false,
+                NotSendWelcome = true,
+                Password = "admin",
+                RoleId = 1
+            });
+
+            UserRegServ.CreateSystemUser(new RegisterUserModel() {
+                Name = "teest",
+                Email = "teest@admin.su",
+                Phone = "89151234455",
+                LastName = "admin",
+                Company = "none",
+                Position = "none",
+                GeneratePassword = false,
+                NotSendWelcome = true,
+                Password = "teest",
+                RoleId = 2
+            });
+
+            UserRegServ.CreateSystemUser(new RegisterUserModel() {
+                Name = "deleted",
+                Email = "deleted@admin.su",
+                Phone = "89155558822",
+                LastName = "admin",
+                Company = "none",
+                Position = "none",
+                GeneratePassword = false,
+                NotSendWelcome = true,
+                Password = "deleted",
+                RoleId = 2
+            });
+
+            UserRegServ.MarkDeleted(UserRep.FindOneByEmail("deleted@admin.su").Id);
+
             return Ok();
         }
 

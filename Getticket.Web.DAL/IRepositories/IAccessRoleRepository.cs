@@ -19,5 +19,19 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <returns></returns>
         IList<User> GetAllByRole(int Id);
+
+        /// <summary>
+        /// Получает <see cref="AccessRole"/> по <paramref name="id"/>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        AccessRole GetOneById(int id);
+
+        /// <summary>
+        /// Добавляет новую или обновляет существующую <see cref="AccessRole"/>
+        /// </summary>
+        /// <param name="toSave"></param>
+        /// <returns></returns>
+        AccessRole Save(AccessRole toSave);
     }
 }
