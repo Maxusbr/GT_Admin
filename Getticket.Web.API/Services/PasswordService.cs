@@ -65,9 +65,9 @@ namespace Getticket.Web.API.Services
             {
                 OriginalPass = String.Empty;
             }
-            MD5 md5 = MD5.Create();
+            SHA256 sha = SHA256.Create();
             byte[] inputBytes = Encoding.UTF8.GetBytes(OriginalPass);
-            byte[] hash = md5.ComputeHash(inputBytes);
+            byte[] hash = sha.ComputeHash(inputBytes);
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
             {

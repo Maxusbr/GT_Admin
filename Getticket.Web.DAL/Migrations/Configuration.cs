@@ -4,7 +4,7 @@ namespace Getticket.Web.DAL.Migrations
     using Enums;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Getticket.Web.DAL.Entities.GetticketDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<GetticketDBContext>
     {
         public Configuration()
         {
@@ -23,15 +23,15 @@ namespace Getticket.Web.DAL.Migrations
             context.SaveChanges();
 
             // md5 are:
-            // test:    098f6bcd4621d373cade4e832627b4f6
-            // deleted: da602f0b162fccbf6b150cfcfc7a7379
-            // admin:   21232f297a57a5a743894a0e4a801fc3
+            // teest:    ccfcb5961cb870496289a62c2a6f728c78feb49f448972daf0a6f098a903be08
+            // deleted:  1185f37d33b0f89e331f101a51bb8e51165c7efda15950b86a3ebcbb363f898e
+            // admin:    8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
 
             User user1 = new User()
             {
-                UserName = "test@admin.su",
+                UserName = "teest@admin.su",
                 Phone = "+79063332211",
-                PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
+                PasswordHash = "ccfcb5961cb870496289a62c2a6f728c78feb49f448972daf0a6f098a903be08",
                 AccessRoleId = 1,
                 UserStatus = new UserStatus() { Name="seed", Description="", Status=UserStatusType.System},
                 UserInfo = new UserInfo() { Id = 1, Name = "Тест", LastName = "Админ"}
@@ -41,7 +41,7 @@ namespace Getticket.Web.DAL.Migrations
             {
                 UserName = "deleted@admin.su",
                 Phone = "+79153332211",
-                PasswordHash = "da602f0b162fccbf6b150cfcfc7a7379",
+                PasswordHash = "1185f37d33b0f89e331f101a51bb8e51165c7efda15950b86a3ebcbb363f898e",
                 AccessRoleId = 1,
                 UserStatus = new UserStatus() { Name = "seed", Description = "deleted", Status = UserStatusType.MarkDeleted },
                 UserInfo = new UserInfo() { Id = 2, Name = "deleted", LastName = "Админ"}
@@ -51,7 +51,7 @@ namespace Getticket.Web.DAL.Migrations
             {
                 UserName = "admin@admin.su",
                 Phone = "+79159998877",
-                PasswordHash = "21232f297a57a5a743894a0e4a801fc3",
+                PasswordHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                 AccessRoleId = 1,
                 UserStatus = new UserStatus() { Name = "seed", Description = "", Status = UserStatusType.System },
                 UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ"}
