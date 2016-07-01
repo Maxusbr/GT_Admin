@@ -1,4 +1,5 @@
 ﻿using Getticket.Web.DAL.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Getticket.Web.API.Models
 {
@@ -10,16 +11,19 @@ namespace Getticket.Web.API.Models
         /// <summary>
         /// Идентификатор сущности
         /// </summary>
+        [Required]
         public int Id { get; set; }
 
         /// <summary>
         /// Список системных ролей через ";"
         /// </summary>
+        [Required]
         public string Roles { get; set; }
 
         /// <summary>
         /// Имя роли
         /// </summary>
+        [Required]
         public string Name { get; set; }
 
         /// <summary>

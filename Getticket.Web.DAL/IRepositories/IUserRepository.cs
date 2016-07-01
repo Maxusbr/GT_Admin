@@ -17,6 +17,13 @@ namespace Getticket.Web.DAL.IRepositories
         User FindOneById(int id);
 
         /// <summary>
+        /// Находим пользователя с <see cref="User.UserName"/> == <paramref name="Email"/>
+        /// </summary>
+        /// <param name="Email"></param>
+        /// <returns></returns>
+        User FindOneByEmail(string Email);
+
+        /// <summary>
         /// Подсчитываем количество всех(неудаленных) пользователей 
         /// по <paramref name="email" /> и <paramref name="phone" />;
         /// Если <paramref name="phone" /> == <c>null</c> подсчет 

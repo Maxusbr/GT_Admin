@@ -3,12 +3,8 @@ using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace Getticket.Web.API.Helpers
-{
+namespace Getticket.Web.API.Helpers {
     /// <summary>
     /// Helper
     /// </summary>
@@ -19,12 +15,8 @@ namespace Getticket.Web.API.Helpers
         /// на нового пользователя из <paramref name="model" />
         /// </summary>
         /// <param name="model"></param>
-        /// <param name="InviteCode">Код для доступа к приглашению</param>
-        /// <param name="StatusName">Имя статуса</param>
-        /// <param name="StatusDescription">Описание статуса</param>
-        /// <param name="ActiveTo">Время до которого будет активен инвайт</param>
         /// <returns></returns>
-        public static InviteCode CreateInviteCode(SendInviteModel model, string InviteCode, string StatusName, string StatusDescription, DateTime ActiveTo)
+        public static InviteCode CreateInviteCode(SendInviteModel model)
         {
             User user = new User()
             {
@@ -32,13 +24,13 @@ namespace Getticket.Web.API.Helpers
                 UserInfo = new UserInfo(),
                 AccessRoleId = model.RoleId
             };
-                        
-            StatusService.ChangeStatus(UserStatusType.Invite, user, "", StatusService.INVITE_STATUS_NAME);
+            StatusService.ChangeStatus(user, UserStatusType.Invite, null, "Invite created");
+
             InviteCode invite = new InviteCode()
             {
                 User = user,
-                Code = InviteCode,
-                ActiveTo = ActiveTo
+                Code = PasswordService.GeneratePasswordString(30),
+                ActiveTo = DateTime.Now.AddDays(Properties.Settings.Default.DaysForInviteToLive)
             };
 
             return invite;
