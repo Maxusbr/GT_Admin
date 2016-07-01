@@ -203,9 +203,12 @@
     <Compile Include="Helpers\AccessRoleModelHelper.cs" />
     <Compile Include="Helpers\ChangePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
+    <Compile Include="Helpers\RestorePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
     <Compile Include="Helpers\RegisteredEmailModelHelper.cs" />
     <Compile Include="Models\AccessRoleModel.cs" />
+    <Compile Include="Models\Emails\RestorePasswordEmailModel.cs" />
+    <Compile Include="Models\RestorePasswordModel.cs" />
     <Compile Include="Models\Emails\BaseEmailModel.cs" />
     <Compile Include="Models\Emails\ChangePasswordEmailModel.cs" />
     <Compile Include="Models\Emails\RegisteredEmailModel.cs" />
@@ -259,6 +262,7 @@
     <Content Include="Templates\Emails\Invite.cshtml" />
     <Content Include="Templates\Emails\Registered.cshtml" />
     <Content Include="Templates\Emails\ChangePassword.cshtml" />
+    <Content Include="Templates\Emails\RestorePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

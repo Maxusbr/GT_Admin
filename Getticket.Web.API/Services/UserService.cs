@@ -7,6 +7,7 @@ using Getticket.Web.DAL.IRepositories;
 using RazorEngine.Templating;
 using System.Collections.Generic;
 using System.Threading;
+using System;
 
 namespace Getticket.Web.API.Services
 {
@@ -106,6 +107,63 @@ namespace Getticket.Web.API.Services
             }
 
             return response;
+        }
+
+        /// <summary>
+        /// Отсылает пользователю новый сгенерированный пароль по Email,
+        /// если, конечно он зарегестрирован в системе
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ServiceResponce RestorePassword(RestorePasswordModel model)
+        {
+            IList<User> users = UserRep.FindAllByCredentails(model.Email, model.Phone);
+            if (users == null)
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Add("error", "user doesn't exist");
+            }
+
+            /*       if (users.Count > 1)
+                   {
+                       return ServiceResponce
+                           .FromFailed()
+                           .Add("error", "user doesn't exist");
+                   } */
+
+            User user = new User();
+            if (users.Count == 1)
+            {
+                foreach (User u in users)
+                {
+                    user = u;
+                }
+            }
+
+            string Password = PasswordService.GeneratePasswordString();
+            user.PasswordHash = PasswordService.GeneratePasswordHash(Password);
+            UserRep.Save(user);
+
+            new Thread(send =>
+            {
+                RestorePasswordEmailModel RestorePasswordEmailModel = RestorePasswordEmailModelHelper.GetRestorePasswordEmailModel(user.UserName, Password);
+                string RestoreText = TemplateServ
+                    .Run("Emails/RestorePassword", typeof(RestorePasswordEmailModel), RestorePasswordEmailModel);
+                if (!EmailService.SendMail(RestorePasswordEmailModel, RestoreText))
+                {
+                    user.UserStatus.Description = "Restore password Email was not delivered";
+                    user.UserStatus.UpdateTime = DateTime.Now;
+                }
+                else
+                {
+                    user.UserStatus.Description = "Restore password Email was delivered at " + DateTime.Now;
+                    user.UserStatus.UpdateTime = DateTime.Now;
+                }
+
+            }).Start();
+
+            return ServiceResponce.FromSuccess();
         }
 
 

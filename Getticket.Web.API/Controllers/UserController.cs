@@ -98,10 +98,9 @@ namespace Getticket.Web.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("restorepass")]
-        public IHttpActionResult RestorePassword()
+        public IHttpActionResult RestorePassword([FromBody] RestorePasswordModel model)
         {
-            // TODO implement this
-            throw new NotImplementedException();
+            return Ok(UserServ.RestorePassword(model).Response());
         }
 
         /// <summary>
