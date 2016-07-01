@@ -66,10 +66,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app-content\images\logo-fullsize.png" />
+    <Content Include="app-content\images\logo-small.png" />
     <Content Include="main\events-is\detail.controller.js" />
     <Content Include="main\events-is\detail.view.html" />
     <Content Include="main\events-is\list.controller.js" />
     <Content Include="main\events-is\list.view.html" />
+    <Content Include="main\persona\create.controller.js" />
+    <Content Include="main\persona\create.view.html" />
+    <Content Include="main\persona\create\overview.controller.js" />
+    <Content Include="main\persona\create\overview.view.html" />
+    <Content Include="main\persona\create\schema.controller.js" />
+    <Content Include="main\persona\create\schema.view.html" />
+    <Content Include="main\persona\index.controller.js" />
+    <Content Include="main\persona\index.view.html" />
+    <Content Include="main\persona\persona.controller.js" />
+    <Content Include="main\persona\persona.view.html" />
     <Content Include="main\user\invite.view.html" />
     <Content Include="main\user\profile.view.html" />
     <Content Include="main\user\register.view.html" />
