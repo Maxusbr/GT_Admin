@@ -128,6 +128,100 @@ namespace Getticket.Web.DAL.Entities
         #endregion
 
         /// <summary>
+        /// <see cref="Entities.Country"/>
+        /// </summary>
+        public virtual DbSet<Country> Country { get; set; }
+
+        /// <summary>
+        /// <see cref="CountryPlace"/>
+        /// </summary>
+        public virtual DbSet<CountryPlace> CountryPlaces { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.Sex"/>
+        /// </summary>
+        public virtual DbSet<Sex> Sex { get; set; }
+
+
+        #region Person Config
+
+        /// <summary>
+        /// <see cref="Entities.Person"/>
+        /// </summary>
+        public virtual DbSet<Person> Person { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.PersonAntro"/>
+        /// </summary>
+        public virtual DbSet<PersonAntro> PersonAntro { get; set; }
+
+        /// <summary>
+        /// <see cref="PersonAntroName"/>
+        /// </summary>
+        public virtual DbSet<PersonAntroName> PersonAntroNames { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.PersonChangeParam"/>
+        /// </summary>
+        public virtual DbSet<PersonChangeParam> PersonChangeParam { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.PersonChangeLog"/>
+        /// </summary>
+        public virtual DbSet<PersonChangeLog> PersonChangeLog { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.PersonConnectionType"/>
+        /// </summary>
+        public virtual DbSet<PersonConnectionType> PersonConnectionType { get; set; }
+
+        /// <summary>
+        /// <see cref="PersonConnection"/>
+        /// </summary>
+        public virtual DbSet<PersonConnection> PersonConnections { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.PersonDescriptionType"/>
+        /// </summary>
+        public virtual DbSet<PersonDescriptionType> PersonDescriptionType { get; set; }
+
+        /// <summary>
+        /// <see cref="PersonDescription"/>
+        /// </summary>
+        public virtual DbSet<PersonDescription> PersonDescriptions { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.PersonMedia"/>
+        /// </summary>
+        public virtual DbSet<PersonMedia> PersonMedia { get; set; }
+
+        /// <summary>
+        /// <see cref="PersonSocialLinkType"/>
+        /// </summary>
+        public virtual DbSet<PersonSocialLinkType> PersonSocialLinkTypes { get; set; }
+
+        /// <summary>
+        /// <see cref="PersonSocialLink"/>
+        /// </summary>
+        public virtual DbSet<PersonSocialLink> PersonSocialLinks { get; set; }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.Person"/>
+        /// </summary>
+        public class PersonConfiguration : EntityTypeConfiguration<Person>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public PersonConfiguration()
+            {
+
+            }
+        }
+        #endregion
+
+
+        /// <summary>
         /// Настройка БД через Fluent API
         /// Имеет приоритет над Code First
         /// </summary>

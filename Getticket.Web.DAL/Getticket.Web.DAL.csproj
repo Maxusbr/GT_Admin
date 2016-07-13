@@ -60,11 +60,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AccessRole.cs" />
+    <Compile Include="Entities\PersonSocialLink.cs" />
+    <Compile Include="Entities\PersonSocialLinkType.cs" />
+    <Compile Include="Entities\PersonMedia.cs" />
+    <Compile Include="Entities\PersonDescription.cs" />
+    <Compile Include="Entities\PersonConnection.cs" />
+    <Compile Include="Entities\PersonChangeLog.cs" />
+    <Compile Include="Entities\PersonAntro.cs" />
+    <Compile Include="Entities\PersonChangeParam.cs" />
+    <Compile Include="Entities\PersonAntroNames.cs" />
+    <Compile Include="Entities\PersonDescriptionType.cs" />
+    <Compile Include="Entities\PersonConnectionType.cs" />
+    <Compile Include="Entities\Sex.cs" />
+    <Compile Include="Entities\CountryPlaces.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\EventLog.cs" />
     <Compile Include="Entities\GetticketDBContext.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\InviteCode.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInfo.cs" />
     <Compile Include="Entities\UserStatus.cs" />
@@ -73,6 +88,7 @@
     <Compile Include="IRepositories\IAccessRoleRepository.cs" />
     <Compile Include="IRepositories\IAuthRepository.cs" />
     <Compile Include="IRepositories\IInviteCodeRepository.cs" />
+    <Compile Include="IRepositories\IPersonRepository.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +96,7 @@
     <Compile Include="Repositories\AuthRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\InviteCodeRepository.cs" />
+    <Compile Include="Repositories\PersonRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup />
