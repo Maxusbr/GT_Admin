@@ -22,6 +22,7 @@ namespace Getticket.Web.API
         /// <param name="app"></param>
         public void Configuration(IAppBuilder app)
         {
+
             HttpConfiguration config = new HttpConfiguration();
             // Настройка инжектора
             IKernel kernel = NinjectInjectorConfig.Register(config);
