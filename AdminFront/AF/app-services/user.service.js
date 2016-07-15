@@ -19,7 +19,7 @@
         return service;
 
         function GetAll() {
-            return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
+            return $http.get('http://webapiadmin.azurewebsites.net').then(handleSuccess, handleError('Error getting all users'));
         }
 
         function GetById(id) {
@@ -28,6 +28,10 @@
 
         function GetByUsername(username) {
             return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
+        }
+
+        function AuthUser(login, password) {
+            return $http.get('http://webapiadmin.azurewebsites.net/User/Auth?login=' + login + '&password=' + password).then(handleSuccess, handleError('Error login user'));
         }
 
         function Create(user) {

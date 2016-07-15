@@ -6,7 +6,7 @@
         .controller('LoginController', LoginController);
 
     LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
-    function LoginController($location, AuthenticationService, FlashService) {
+    function LoginController($location, AuthenticationService, FlashService, $http) {
         var vm = this;
 
         vm.login = login;
@@ -17,8 +17,14 @@
             AuthenticationService.ClearCredentials();
         })();
 
+        //$scope.clickLogin = login();
+        
+
         function login() {
+            console.log('click login');
             vm.dataLoading = true;
+            var result = $http.post('http://webapiadmin.azurewebsites.net/Debug/UsersSeed').then(handleSuccess, handleError('error'));
+            consol.log(result);
             AuthenticationService.Login(vm.user.username, vm.user.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(vm.user.username, vm.user.password);
@@ -29,6 +35,16 @@
                 }
             });
         };
+
+        function handleSuccess(res) {
+            return res.data;
+        }
+
+        function handleError(error) {
+            return function () {
+                return { success: false, message: error };
+            };
+        }
     }
 
 })();

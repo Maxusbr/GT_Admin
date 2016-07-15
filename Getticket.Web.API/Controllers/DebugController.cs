@@ -30,7 +30,7 @@ namespace Getticket.Web.API.Controllers
             this.AccessRolesServ = AccessRolesServ;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("seed")]
         [AllowAnonymous]
         public IHttpActionResult UsersSeed()

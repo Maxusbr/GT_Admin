@@ -21,9 +21,9 @@
              ----------------------------------------------*/
             $timeout(function () {
                 var response;
-                UserService.GetByUsername(username)
-                    .then(function (user) {
-                        if (user !== null && user.password === password) {
+                UserService.AuthUser(username, password)
+                    .then(function (result) {
+                        if (result===true) {
                             response = {success: true};
                         } else {
                             response = {success: false, message: 'Username or password is incorrect'};
