@@ -18,16 +18,19 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Внешний ключ для <see cref="Entities.Person"/>
         /// </summary>
+        [Required]
         public int id_Person { get; set; }
 
         /// <summary>
         /// Внешний ключ для <see cref="PersonAntroName"/>
         /// </summary>
+        [Required]
         public int id_Antro { get; set; }
 
         /// <summary>
         /// Значение характеристики
         /// </summary>
+        [Required]
         public string Value { get; set; }
 
         /// <summary>

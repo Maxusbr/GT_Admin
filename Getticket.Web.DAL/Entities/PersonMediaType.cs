@@ -6,20 +6,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Getticket.Web.DAL.Entities
 {
     /// <summary>
-    /// Название антропометрической характеристики
+    /// Тип медиа
     /// </summary>
-    public class PersonAntroName : BaseEntity
+    public class PersonMediaType : BaseEntity
     {
         /// <summary>
         /// Конструктор
         /// </summary>
-        public PersonAntroName(){}
+        public PersonMediaType(){}
 
         /// <summary>
-        /// Наименование
+        /// Имя
         /// </summary>
-        [MaxLength(500)]
         [Required]
         public string Name { get; set; }
+
     }
 }

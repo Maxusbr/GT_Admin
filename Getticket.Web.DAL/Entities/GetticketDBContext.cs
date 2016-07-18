@@ -196,6 +196,11 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<PersonMedia> PersonMedia { get; set; }
 
         /// <summary>
+        /// <see cref="Entities.PersonMediaType"/>
+        /// </summary>
+        public virtual DbSet<PersonMediaType> PersonMediaType { get; set; }
+
+        /// <summary>
         /// <see cref="PersonSocialLinkType"/>
         /// </summary>
         public virtual DbSet<PersonSocialLinkType> PersonSocialLinkTypes { get; set; }

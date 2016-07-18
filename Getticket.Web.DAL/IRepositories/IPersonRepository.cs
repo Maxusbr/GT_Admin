@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using Getticket.Web.DAL.Infrastructure;
 
 namespace Getticket.Web.DAL.IRepositories
 {
@@ -29,6 +30,15 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <returns></returns>
         IList<Person> FindAllPerson();
+
+        /// <summary>
+        /// Постраничный вывод <see cref="Person"/> с условиями сортировки
+        /// </summary>
+        /// <param name="page">Информация о странице (номер страницы, количество записей на странице)</param>
+        /// <param name="alphabetically">Сортировка по алфавиту (А-Я или A-Z)</param>
+        /// <param name="sexId"></param>
+        /// <returns></returns>
+        IList<Person> FindPerson(PageInfo page, string alphabetically, int? sexId = null);
 
         /// <summary>
         /// Удаляет <see cref="Person"/> из БД по его <paramref name="id" />
@@ -171,7 +181,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="connection"></param>
         /// <returns></returns>
-        PersonConnection UpdateConnection(PersonConnection connection);
+        PersonConnection SaveConnection(PersonConnection connection);
 
         /// <summary>
         /// Удаляет записи связей <see cref="PersonConnection"/>
@@ -219,9 +229,9 @@ namespace Getticket.Web.DAL.IRepositories
         /// <summary>
         /// Удаляет описание <see cref="PersonDescription"/>
         /// </summary>
-        /// <param name="description"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        bool DeleteDescription(PersonDescription description);
+        bool DeleteDescription(int id);
 
         /// <summary>
         /// Возвращает список описаний <see cref="PersonMedia"/> для <see cref="Person"/> по ее <paramref name="id" />
@@ -241,9 +251,30 @@ namespace Getticket.Web.DAL.IRepositories
         /// <summary>
         /// Удаляет Media <see cref="PersonMedia"/>
         /// </summary>
-        /// <param name="media"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        bool DeleteMedia(PersonMedia media);
+        bool DeleteMedia(int id);
+
+        /// <summary>
+        /// Возвращает список <see cref="PersonMediaType"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<PersonMediaType> GetMediaTipes();
+
+        /// <summary>
+        /// Если <see cref="PersonMediaType"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="PersonMediaType"/> уже существует - сохраняем изменения записи.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        PersonMediaType UpdateMediaType(PersonMediaType type);
+
+        /// <summary>
+        /// Удаляет Media <see cref="PersonMediaType"/>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool DeleteMediaType(int id);
 
         /// <summary>
         /// Возвращает список <see cref="PersonSocialLinkType"/>
@@ -289,10 +320,73 @@ namespace Getticket.Web.DAL.IRepositories
         PersonSocialLink UpdateSocialLink(PersonSocialLink link);
 
         /// <summary>
-        /// Удаляет ссылки <see cref="PersonSocialLink"/>
+        /// Удаляет ссылки <see cref="PersonSocialLink"/> по <paramref name="id" />
         /// </summary>
-        /// <param name="links"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        bool DeleteSocialLinks(PersonSocialLink links);
+        bool DeleteSocialLink(int id);
+
+        /// <summary>
+        /// Возвращает список <see cref="Country"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<Country> GetCountries();
+
+        /// <summary>
+        /// Если <see cref="Country"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="Country"/> уже существует - сохраняем изменения записи.
+        /// </summary>
+        /// <param name="country"></param>
+        /// <returns></returns>
+        Country SaveCountry(Country country);
+
+        /// <summary>
+        /// Удалить тип <see cref="Country"/> по ее <paramref name="id" />
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool DeleteCountry(int id);
+
+        /// <summary>
+        /// Возвращает список <see cref="CountryPlace"/> для страны <see cref="Country"/> с Id = <paramref name="id" />
+        /// </summary>
+        /// <returns></returns>
+        IList<CountryPlace> GetCountryPlaces(int id);
+
+        /// <summary>
+        /// Если <see cref="CountryPlace"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="CountryPlace"/> уже существует - сохраняем изменения записи.
+        /// </summary>
+        /// <param name="place"></param>
+        /// <returns></returns>
+        CountryPlace SaveCountryPlace(CountryPlace place);
+
+        /// <summary>
+        /// Удалить тип <see cref="CountryPlace"/> по ее <paramref name="id" />
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool DeleteCountryPlace(int id);
+
+        /// <summary>
+        /// Возвращает список <see cref="Sex"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<Sex> GetSexes();
+
+        /// <summary>
+        /// Если <see cref="Sex"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="Sex"/> уже существует - сохраняем изменения записи.
+        /// </summary>
+        /// <param name="sex"></param>
+        /// <returns></returns>
+        Sex SaveSex(Sex sex);
+
+        /// <summary>
+        /// Удалить тип <see cref="Sex"/> по ее <paramref name="id" />
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool DeleteSex(int id);
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Getticket.Web.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Getticket.Web.DAL.Repositories
 {
@@ -40,7 +42,14 @@ namespace Getticket.Web.DAL.Repositories
             {
                 db.Entry(Entity).State = System.Data.Entity.EntityState.Modified;
             }
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
             return Entity;
         }
 
@@ -102,6 +111,28 @@ namespace Getticket.Web.DAL.Repositories
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Get many Entity
+        /// </summary>
+        /// <param name="where"></param>
+        /// <param name="order"></param>
+        /// <param name="includes"></param>
+        /// <returns></returns>
+        public IList<T> GetMany<TOrder>(Expression<Func<T, bool>> where, Expression<Func<T, TOrder>> order, 
+            params Expression<Func<T, object>>[] includes)
+        {
+            var dbset = db.Set<T>();
+            var query = dbset.OrderBy(order).Where(where);
+            query = this.AppendIncludes(query, includes);
+
+            return query.ToList();
+        }
+
+        private IQueryable<T> AppendIncludes(IQueryable<T> query, IEnumerable<Expression<Func<T, object>>> includes)
+        {
+            return includes.Aggregate(query, (current, inc) => current.Include(inc));
         }
     }
 }

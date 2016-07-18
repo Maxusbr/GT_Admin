@@ -18,11 +18,13 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Внешний ключ для <see cref="Entities.Person"/>
         /// </summary>
+        [Required]
         public int id_Person { get; set; }
 
         /// <summary>
         /// Внешний ключ для <see cref="Entities.PersonChangeParam"/>
         /// </summary>
+        [Required]
         public int id_ChangeParam { get; set; }
 
         /// <summary>
@@ -33,7 +35,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Значение характеристики после
         /// </summary>
-        public string ChangeTo { get; set; }
+        [Required]public string ChangeTo { get; set; }
 
         /// <summary>
         /// Внешний ключ для <see cref="Entities.User"/>
