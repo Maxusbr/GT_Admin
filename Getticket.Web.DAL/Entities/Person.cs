@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Getticket.Web.DAL.Entities
@@ -17,12 +18,12 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Имя
         /// </summary>
-        public string Name { get; set; }
+        [Required]public string Name { get; set; }
 
         /// <summary>
         /// Фамилия
         /// </summary>
-        public string LastName { get; set; }
+        [Required]public string LastName { get; set; }
 
         /// <summary>
         /// Отчество

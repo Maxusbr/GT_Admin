@@ -19,6 +19,7 @@ namespace Getticket.Web.DAL.Entities
         /// Название
         /// </summary>
         [MaxLength(200)]
+        [Required]
         public string Name { get; set; }
     }
 }

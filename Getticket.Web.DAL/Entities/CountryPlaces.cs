@@ -19,11 +19,13 @@ namespace Getticket.Web.DAL.Entities
         /// Название
         /// </summary>
         [MaxLength(500)]
+        [Required]
         public string Name { get; set; }
 
         /// <summary>
         /// Внешний ключ для <see cref="Country"/>
         /// </summary>
+        [Required]
         public int id_Country { get; set; }
 
         /// <summary>

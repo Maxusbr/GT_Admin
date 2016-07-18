@@ -18,11 +18,13 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Внешний ключ для <see cref="Entities.Person"/>
         /// </summary>
+        [Required]
         public int id_Person { get; set; }
 
         /// <summary>
         /// Внешний ключ для <see cref="Entities.PersonConnectionType"/>
         /// </summary>
+        [Required]
         public int id_ConnectionType { get; set; }
 
         /// <summary>
@@ -33,6 +35,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Внешний ключ для связи между сущностями <see cref="Entities.Person"/> и <see cref="Entities.Event"/>
         /// </summary>
+        [Required]
         public int id_Event { get; set; }        
 
         /// <summary>
