@@ -1,0 +1,32 @@
+<div class="custom-menu__close" ng-click="HideCustomMenu()">
+    <button type="button" class="close">&times;</button>
+</div>
+
+<input type="search" class="custom-menu__search form-control"
+       placeholder="(быстрый поиск) email, телефон, имя, фамилия, компания, событие, роль"
+       ng-model="searchUserMenu">
+
+<ul class="nav nav-list shorter">
+    <li ng-repeat="item in userMenuList | filter: searchUserMenu" ng-class="{ active: item.id == id }">
+        <a href="/#/main/user/profile/{{ item.id }}">{{ item.title }}</a>
+    </li>
+</ul>
+
+
+<div class="custom-menu__fixed_button_splitted" ng-mouseleave="Show()">
+    <button class="btn btn-block" ng-click="UserInvite()">Пригласить</button>
+
+    <div class="delimiter"></div>
+
+    <button class="btn btn-block" ng-click="UserAdd()">Зарегистрировать</button>
+</div>
+
+<div class="custom-menu__fixed_button" ng-mouseover="Hide()">
+    <button class="fixed">
+        <span class="glyphicon glyphicon-plus"></span> Добавить
+    </button>
+</div>
+
+<!--<button class="fixed" ng-mouseover="">-->
+<!--<span class="glyphicon glyphicon-plus"></span> Добавить-->
+<!--</button>-->

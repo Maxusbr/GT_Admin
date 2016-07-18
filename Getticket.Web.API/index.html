@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8"/>
+    <title>getticket.ru</title>
+    <link rel="stylesheet" href="html/app-content/bootstrap/css/bootstrap.min.css"/>
+    <link href="html/app-content/app.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="full-height">
+    <!--<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>-->
+    <!--<div ng-view class="view"></div>-->
+    <div class="full-height" ui-view></div>
+</div>
+
+<script src="html/app-content/jquery-2.2.1.min.js"></script>
+<!--<script src="app-content/angular.min.js"></script>-->
+<script src="html/app-content/angular.js"></script>
+<!--<script src="app-content/angular-route.js"></script>-->
+
+<script src="html/app-content/angular-ui-router.js"></script>
+<script src="html/app-content/angular-messages.js"></script>
+
+<script src="html/app-content/angular-cookies.js"></script>
+<!--<script src="app-content/angular-cookies.js"></script>-->
+<script src="html/app-content/angular-recaptcha.js"></script>
+<script src="html/app-content/angular-resource.min.js"></script>
+<!--<script src="app-content/angular-resource.min.js"></script>-->
+
+<script src="html/app-content/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="app.js"></script>
+<script src="html/app-services/authentication.service.js"></script>
+<script src="html/app-services/flash.service.js"></script>
+
+<!-- Real user service that uses an api -->
+<!-- <script src="app-services/user.service.js"></script> -->
+
+<!-- Fake user service for demo that uses local storage -->
+<script src="html/app-services/user.service.local-storage.js"></script>
+
+<script src="html/home/home.controller.js"></script>
+<script src="html/login/login.controller.js"></script>
+<script src="html/register/register.controller.js"></script>
+<script src="html/confirm/confirm.controller.js"></script>
+<script src="html/recovery/recovery.controller.js"></script>
+<!--<script src="components/lang/lang.controller.js"></script>-->
+<script src="html/components/menu/menu.controller.js"></script>
+<script src="html/components/usermenu/usermenu.controller.js"></script>
+<script src="html/success/success.controller.js"></script>
+<script src="html/change_password/change_password.controller.js"></script>
+<script src="html/recovery_confirm/recovery_confirm.controller.js"></script>
+
+<script src="html/main/main.controller.js"></script>
+<script src="html/main/events/events.controller.js"></script>
+
+<script src="html/main/events-is/events-is.controller.js"></script>
+<script src="html/main/events-is/list.controller.js"></script>
+<script src="html/main/events-is/detail.controller.js"></script>
+
+<script src="html/main/halls/halls.controller.js"></script>
+<script src="html/main/platform/platform.controller.js"></script>
+<script src="html/main/role/role.controller.js"></script>
+
+
+<script src="html/main/user/user.controller.js"></script>
+<script src="html/main/user/invite.controller.js"></script>
+<script src="html/main/user/list.controller.js"></script>
+<script src="html/main/user/profile.controller.js"></script>
+<script src="html/main/user/register.controller.js"></script>
+
+<script src="html/main/persona/create/schema.controller.js"></script>
+<script src="html/main/persona/create/overview.controller.js"></script>
+<script src="html/main/persona/persona.controller.js"></script>
+<script src="html/main/persona/create.controller.js"></script>
+<script src="html/main/persona/index.controller.js"></script>
+
+</body>
+</html>
