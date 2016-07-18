@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.API.Attributes;
 using Ninject;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Getticket.Web.API
 {
@@ -17,6 +18,9 @@ namespace Getticket.Web.API
         /// <param name="kernel"></param>
         public static void Register(HttpConfiguration config, IKernel kernel)
         {
+            var cors = new EnableCorsAttribute("http://getticket.azurewebsites.net", "*", "*");
+            config.EnableCors();
+
             // Маршруты веб-API основанные на атрибутах
             config.MapHttpAttributeRoutes();
 
