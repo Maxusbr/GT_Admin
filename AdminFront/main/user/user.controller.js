@@ -18,7 +18,7 @@
             .state('main.user.list', {
                 url: '/list',
                 // loaded into ui-view of parent's template
-                templateUrl: '/html/main/user/list.view.html',
+                templateUrl: ' /main/user/list.view.html',
                 controller: 'MainUserListController',
                 onEnter: function () {
                     console.log("enter main.user.list");

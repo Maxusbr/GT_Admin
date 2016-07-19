@@ -1,4 +1,8 @@
-﻿(function () {
+﻿//set api adress
+var apiUrl = 'http://localhost:35162/';
+
+
+(function () {
     'use strict';
 
     angular
@@ -29,8 +33,7 @@
         $urlRouterProvider.when("", "/main");
         $urlRouterProvider.when("/", "/main");
         
-        //set api adress
-        $rootScope.config.apiUrl = 'http://localhost:35162/';
+        
 
         // For any unmatched url, send to /route1
         //$urlRouterProvider.otherwise("/login");

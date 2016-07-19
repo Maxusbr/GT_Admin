@@ -31,7 +31,10 @@
         }
 
         function AuthUser(login, password) {
-            return $http.get('http://webapiadmin.azurewebsites.net/User/Auth?login=' + login + '&password=' + password).then(handleSuccess, handleError('Error login user'));
+            var adress = apiUrl + '/User/Auth?login=' + login + '&password=' + password;
+            //debug
+            console.log(adress);
+            return $http.get(adress).then(handleSuccess, handleError('Error login user'));
         }
 
         function Create(user) {
