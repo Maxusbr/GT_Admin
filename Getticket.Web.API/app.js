@@ -30,13 +30,13 @@
         $urlRouterProvider.when("/", "/main");
 
         // For any unmatched url, send to /route1
-        $urlRouterProvider.otherwise("/login");
+        //$urlRouterProvider.otherwise("/login");
 
         $stateProvider
             .state('main', {
                 abstract: true,
                 url: '/main',
-                templateUrl: '/html/main/main.view.html',
+                templateUrl: '/main/main.view.html',
                 controller: 'MainController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -45,7 +45,7 @@
             })
             .state('home', {
                 url: '/',
-                templateUrl: '/html/home/home.view.html',
+                templateUrl: '/home/home.view.html',
                 controller: 'HomeController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -54,7 +54,7 @@
             })
             .state('login', {
                 url: '/sign-in',
-                templateUrl: '/html/login/login.view.html',
+                templateUrl: '/login/login.view.html',
                 controller: 'LoginController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -63,7 +63,7 @@
             })
             .state('registration', {
                 url: '/registration',
-                templateUrl: '/html/register/register.view.html',
+                templateUrl: '/register/register.view.html',
                 controller: 'RegisterController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -72,7 +72,7 @@
             })
             .state('registration.confirm', {
                 url: '/confirm',
-                templateUrl: '/html/confirm/confirm.view.html',
+                templateUrl: '/confirm/confirm.view.html',
                 controller: 'ConfirmController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -81,7 +81,7 @@
             })
             .state('recovery', {
                 url: '/recovery',
-                templateUrl: '/html/recovery/recovery.view.html',
+                templateUrl: '/recovery/recovery.view.html',
                 controller: 'RecoveryController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -90,7 +90,7 @@
             })
             .state('recovery.congirm', {
                 url: '/:key',
-                templateUrl: '/html/recovery_confirm/recovery_confirm.view.html',
+                templateUrl: '/recovery_confirm/recovery_confirm.view.html',
                 controller: 'RecoveryConfirmController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -99,7 +99,7 @@
             })
             .state('change_password', {
                 url: '/change_password',
-                templateUrl: '/html/change_password/change_password.view.html',
+                templateUrl: '/change_password/change_password.view.html',
                 controller: 'ChangePasswordController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -108,7 +108,7 @@
             })
             .state('success', {
                 url: '/success',
-                templateUrl: '/html/success/success.view.html',
+                templateUrl: '/success/success.view.html',
                 controller: 'SuccessController',
                 controllerAs: 'vm',
                 onEnter: function () {
