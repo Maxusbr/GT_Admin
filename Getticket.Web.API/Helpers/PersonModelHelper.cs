@@ -35,7 +35,8 @@ namespace Getticket.Web.API.Helpers
                 LastNameLatin = person.LastNameLatin,
                 PatronymicLatin = person.PatronymicLatin,
                 IdBithplace = person.id_Bithplace,
-                Place = person.Place.Name
+                Place = person.Place?.Name,
+                Country = person.Place?.Country?.Name
             };
 
             return model;

@@ -14,7 +14,7 @@ namespace Getticket.Web.API.Services
     /// Сервис для управления Person
     /// (обновление, регистрация, удаление и т.п.)
     /// </summary>
-    public class PersonService
+    public class PersonService: IPersonService
     {
         private readonly IPersonRepository _personRepository;
 

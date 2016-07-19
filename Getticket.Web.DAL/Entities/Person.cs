@@ -33,12 +33,12 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// День рождения
         /// </summary>
-        public DateTime Bithday { get; set; }
+        [Required]public DateTime Bithday { get; set; }
 
         /// <summary>
         /// Внешний ключ для место рождения
         /// </summary>
-        public int id_Bithplace { get; set; }
+        public int? id_Bithplace { get; set; }
 
         /// <summary>
         /// Внешний ключ для пола

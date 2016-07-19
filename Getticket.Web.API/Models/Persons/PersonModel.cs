@@ -46,9 +46,10 @@ namespace Getticket.Web.API.Models.Persons
         /// Отчество (латинское)
         /// </summary>
         public string PatronymicLatin { get; set; }
-        [Required]
-        public int IdBithplace { get; set; }
+
+        public int? IdBithplace { get; set; }
         public string Place { get; set; }
+        public string Country { get; set; }
         [Required]
         public int IdSex { get; set; }
         public string Sex { get; set; }

@@ -13,16 +13,16 @@ namespace Getticket.Web.API.Controllers
     /// Контроллер для работы с Person
     /// </summary>
     [RoutePrefix("persons")]
-    [Authorize]
+    [AllowAnonymous]
     public class PersonController : ApiController
     {
-        private readonly PersonService _personService;
+        private readonly IPersonService _personService;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="personService"></param>
-        public PersonController(PersonService personService)
+        public PersonController(IPersonService personService)
         {
             _personService = personService;
         }
@@ -44,9 +44,9 @@ namespace Getticket.Web.API.Controllers
         /// <param name="pageSize"></param>
         /// <param name="searchParams"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Route("{pageNumber}/{pageSize}")]
-        public IHttpActionResult Get(int pageNumber, int pageSize, [FromBody] PersonSearchParams searchParams = null)
+        public IHttpActionResult Get(int pageNumber, int pageSize, [FromBody] PersonSearchParams searchParams)
         {
             return Ok(_personService.GetPersons(pageNumber, pageSize, searchParams));
         }
