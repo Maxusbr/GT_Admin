@@ -259,7 +259,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// Возвращает список <see cref="PersonMediaType"/>
         /// </summary>
         /// <returns></returns>
-        IList<PersonMediaType> GetMediaTipes();
+        IList<PersonMediaType> GetMediaTypes();
 
         /// <summary>
         /// Если <see cref="PersonMediaType"/> новый - добавляем новую запись в БД.

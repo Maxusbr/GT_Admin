@@ -71,6 +71,16 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
+        /// Возвращает список названий антропометрических характеристик 
+        /// </summary>
+        /// <returns></returns>
+        public IList<PersonAntroNameModel> GetAntroNames()
+        {
+            var result = _personRepository.GetAntroNames();
+            return PersonModelHelper.GetPersonAntroNameModels(result);
+        }
+
+        /// <summary>
         /// Возвращает список моделей антропометрических характеристик 
         /// </summary>
         /// <param name="id"></param>
@@ -250,6 +260,16 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
+        /// Возвращает список типов связи
+        /// </summary>
+        /// <returns></returns>
+        public IList<PersonConnectionTypeModel> GetConnectionTypes()
+        {
+            var result = _personRepository.GetConnectionTypes();
+            return PersonModelHelper.GetConnectionTypeModels(result);
+        }
+
+        /// <summary>
         /// Добавить/Изменить типы связи
         /// </summary>
         /// <param name="models"></param>
@@ -339,6 +359,17 @@ namespace Getticket.Web.API.Services
                 .Result($"Error delete connections");
         }
 
+
+        /// <summary>
+        /// Возвращает список типов ссылок
+        /// </summary>
+        /// <returns></returns>
+        public IList<PersonSocialLinkTypeModel> GetSocialLinkTipes()
+        {
+            var result = _personRepository.GetLinkTypes();
+            return PersonModelHelper.GetSocialLinkTypeModels(result);
+        }
+
         /// <summary>
         /// Добавить/Изменить типы ссылок
         /// </summary>
@@ -418,6 +449,16 @@ namespace Getticket.Web.API.Services
             return ServiceResponce
                 .FromSuccess()
                 .Result("SocialLink delete complete");
+        }
+
+        /// <summary>
+        /// Возвращает список типов медиа
+        /// </summary>
+        /// <returns></returns>
+        public IList<PersonMediaTypeModel> GetMediaTypes()
+        {
+            var result = _personRepository.GetMediaTypes();
+            return PersonModelHelper.GetMediaTypeModels(result);
         }
 
         /// <summary>
@@ -505,6 +546,16 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
+        /// Возвращает список типов описаний
+        /// </summary>
+        /// <returns></returns>
+        public IList<PersonDescriptionTypeModel> GetDescriptionTypes()
+        {
+            var result = _personRepository.GetDescriptionTypes();
+            return PersonModelHelper.GetDescriptionTypeModels(result);
+        }
+
+        /// <summary>
         /// Добавить/Изменить типы описаний
         /// </summary>
         /// <param name="models"></param>
@@ -588,6 +639,8 @@ namespace Getticket.Web.API.Services
                 .FromSuccess()
                 .Result("Descriptions delete complete");
         }
+
+
     }
 
 }

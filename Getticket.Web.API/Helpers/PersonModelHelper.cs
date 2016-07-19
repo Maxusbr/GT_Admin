@@ -111,15 +111,15 @@ namespace Getticket.Web.API.Helpers
             return list.ToList();
         }
 
-        private static PersonAntroModel GetPersonAntroModel(PersonAntro antro)
+        private static PersonAntroModel GetPersonAntroModel(PersonAntro antroEntity)
         {
-            return antro != null ? new PersonAntroModel
+            return antroEntity != null ? new PersonAntroModel
             {
-                Id = antro.Id,
-                IdPerson = antro.id_Person,
-                IdAntro = antro.id_Antro,
-                Value = antro.Value,
-                AntroName = antro.AntroName.Name
+                Id = antroEntity.Id,
+                IdPerson = antroEntity.id_Person,
+                IdAntro = antroEntity.id_Antro,
+                Value = antroEntity.Value,
+                AntroName = antroEntity.AntroName.Name
             } : new PersonAntroModel();
         }
 
@@ -217,6 +217,56 @@ namespace Getticket.Web.API.Helpers
                 id_Bithplace = model.IdBithplace,
             };
             return person;
+        }
+
+        /// <summary>
+        /// Get Antro names
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<PersonAntroNameModel> GetPersonAntroNameModels(IList<PersonAntroName> result)
+        {
+            return result.Select(o => new PersonAntroNameModel {Id = o.Id, Name = o.Name}).ToList();
+        }
+
+        /// <summary>
+        /// Get connection type models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<PersonConnectionTypeModel> GetConnectionTypeModels(IList<PersonConnectionType> result)
+        {
+            return result.Select(o => new PersonConnectionTypeModel {Id = o.Id, Name = o.Name}).ToList();
+        }
+
+        /// <summary>
+        /// Get social link type models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<PersonSocialLinkTypeModel> GetSocialLinkTypeModels(IList<PersonSocialLinkType> result)
+        {
+            return result.Select(o => new PersonSocialLinkTypeModel {Id = o.Id, Name = o.Name}).ToList();
+        }
+
+        /// <summary>
+        /// Get media type models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<PersonMediaTypeModel> GetMediaTypeModels(IList<PersonMediaType> result)
+        {
+            return result.Select(o => new PersonMediaTypeModel { Id = o.Id, Name = o.Name}).ToList();
+        }
+
+        /// <summary>
+        /// Get description type models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<PersonDescriptionTypeModel> GetDescriptionTypeModels(IList<PersonDescriptionType> result)
+        {
+            return result.Select(o => new PersonDescriptionTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
     }
 }

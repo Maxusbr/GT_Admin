@@ -113,6 +113,14 @@ namespace Getticket.Web.API.Controllers
 
         #region Antro
 
+        /// <see cref="PersonService.GetAntroNames" />
+        [HttpGet]
+        [Route("antro/names")]
+        public IHttpActionResult GetAntroNames()
+        {
+            return Ok(_personService.GetAntroNames());
+        }
+
         /// <see cref="PersonService.GetPersonAntros" />
         [HttpGet]
         [Route("antro/{id}")]
@@ -167,6 +175,15 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.GetConnection(id));
         }
 
+        /// <see cref="PersonService.GetConnectionTypes" />
+        [HttpGet]
+        [Route("connection/types")]
+        public IHttpActionResult GetConnectionTypes()
+        {
+            return Ok(_personService.GetConnectionTypes());
+        }
+
+
         /// <see cref="PersonService.UpdateConnectionTypes" />
         [HttpPost]
         [Route("connection/updatetypes")]
@@ -205,6 +222,14 @@ namespace Getticket.Web.API.Controllers
 
 
         #region SocialLinks
+
+        /// <see cref="PersonService.GetSocialLinkTipes" />
+        [HttpGet]
+        [Route("social/types")]
+        public IHttpActionResult GetSocialLinkTipes()
+        {
+            return Ok(_personService.GetSocialLinkTipes());
+        }
 
         /// <see cref="PersonService.GetSocialLinks" />
         [HttpGet]
@@ -251,6 +276,14 @@ namespace Getticket.Web.API.Controllers
 
 
         #region Media
+
+        /// <see cref="PersonService.GetMediaTypes" />
+        [HttpGet]
+        [Route("media/types")]
+        public IHttpActionResult GetMediaTypes()
+        {
+            return Ok(_personService.GetMediaTypes());
+        }
 
         /// <see cref="PersonService.GetMedia" />
         [HttpGet]
@@ -304,6 +337,14 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult GetDescriptions(int id)
         {
             return Ok(_personService.GetDescriptions(id));
+        }
+
+        /// <see cref="PersonService.GetDescriptionTypes" />
+        [HttpGet]
+        [Route("description/types")]
+        public IHttpActionResult GetDescriptionTypes()
+        {
+            return Ok(_personService.GetDescriptionTypes());
         }
 
         /// <see cref="PersonService.UpdateDescriptionTypes" />
