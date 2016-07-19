@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using PagedList;
+
 
 namespace Getticket.Web.API.Models.Persons
 {

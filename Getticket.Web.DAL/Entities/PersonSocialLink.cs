@@ -41,7 +41,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// <see cref="Entities.PersonSocialLinkType"/>
         /// </summary>
-        [ForeignKey("id_SocialMedia")]
+        [ForeignKey("id_SocialLinkType")]
         public virtual PersonSocialLinkType PersonSocialLinkType { get; set; }
     }
 }

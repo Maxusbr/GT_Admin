@@ -427,8 +427,8 @@ namespace Getticket.Web.DAL.Repositories
             return true;
         }
 
-        /// <see cref="IPersonRepository.GetMediaTipes" />
-        public IList<PersonMediaType> GetMediaTipes()
+        /// <see cref="IPersonRepository.GetMediaTypes" />
+        public IList<PersonMediaType> GetMediaTypes()
         {
             return db.PersonMediaType.ToList();
         }
