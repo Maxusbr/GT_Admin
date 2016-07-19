@@ -9,3 +9,4 @@ obj/
 packages/
 DOCS/~$BModel.docx
 /Getticket.Web.DAL/Migrations
+.vs

@@ -5,7 +5,9 @@ using RazorEngine.Templating;
 using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using System.Reflection;
+using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Repositories;
+using Ninject.Web.Common;
 
 namespace Getticket.Web.API.App_Start
 {
@@ -41,6 +43,8 @@ namespace Getticket.Web.API.App_Start
             kernel.Bind<IAuthRepository>().To<AuthRepository>();
             kernel.Bind<IAccessRoleRepository>().To<AccessRoleRepository>();
             kernel.Bind<IPersonRepository>().To<PersonRepository>();
+
+            kernel.Bind<IPersonService>().To<PersonService>().InRequestScope();
 
             kernel.Bind<IRazorEngineService>().ToConstant<IRazorEngineService>(RazorTemplateProvider.Get()).InSingletonScope();
         }

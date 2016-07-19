@@ -1,3 +1,5 @@
+using System;
+
 namespace Getticket.Web.DAL.Migrations
 {
     using Entities;
@@ -60,6 +62,31 @@ namespace Getticket.Web.DAL.Migrations
             context.Users.AddOrUpdate(u => u.Id, user1);
             context.Users.AddOrUpdate(u => u.Id, user2);
             context.Users.AddOrUpdate(u => u.Id, user3);
+
+            context.Sex.AddOrUpdate(o => o.Id, new Sex {Id=1, Name = "мужской"});
+            context.Sex.AddOrUpdate(o => o.Id, new Sex {Id=2,  Name = "женский" });
+
+            var country1 = new Country { Id = 1, Name = "Россия" };
+            var country2 = new Country { Id = 2, Name = "США" };
+            var place1 = new CountryPlace { Id = 1, Name = "Москва", id_Country = 1 };
+            var place2 = new CountryPlace { Id = 2, Name = "Санкт-Петербург", id_Country = 1 };
+            var place3 = new CountryPlace { Id = 3, Name = "Теннесси", id_Country = 2 };
+
+            context.Country.AddOrUpdate(country1);
+            context.Country.AddOrUpdate(country2);
+            context.CountryPlaces.AddOrUpdate(place1);
+            context.CountryPlaces.AddOrUpdate(place2);
+            context.CountryPlaces.AddOrUpdate(place3);
+
+            var pers1 = new Person { Name = "Светлана", LastName = "Абакачева", id_Sex  = 2, Id = 1, Bithday = new DateTime(1990, 5, 16), id_Bithplace = 1};
+            var pers2 = new Person { Name = "Джастин", LastName = "Тимберлейк", NameLatin = "Justin", LastNameLatin = "Timberlake", id_Sex = 1, Id = 2, Bithday = new DateTime(1985, 11, 5), id_Bithplace = 3};
+            var pers3 = new Person { Name = "Анна", LastName = "Сидорова", Patronymic = "Владимировна", NameLatin = "Anna", LastNameLatin = "Sidorova", PatronymicLatin = "Vladimirova", id_Sex  = 2, Id = 3, Bithday = new DateTime(1995, 3, 14), id_Bithplace = 2};
+
+            context.Person.AddOrUpdate(pers1);
+            context.Person.AddOrUpdate(pers2);
+            context.Person.AddOrUpdate(pers3);
+
+
 
             context.SaveChanges();
         }

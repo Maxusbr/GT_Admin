@@ -220,7 +220,7 @@ namespace Getticket.Web.DAL.Entities
             /// </summary>
             public PersonConfiguration()
             {
-
+                
             }
         }
         #endregion

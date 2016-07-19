@@ -39,9 +39,9 @@
             });
     }
 
-    MainPersonaController.$inject = ['$scope', '$rootScope', '$stateParams', '$location'];
+    MainPersonaController.$inject = ['$scope', '$rootScope', '$stateParams', '$location', '$http'];
 
-    function MainPersonaController($scope, $rootScope, $stateParams, $location) {
+    function MainPersonaController($scope, $rootScope, $stateParams, $location, $http) {
         $rootScope.id = $stateParams.id;
 
         $rootScope.HidePersonaMenu = function () {
@@ -52,98 +52,115 @@
         $rootScope.personaMenuFilter = '';
 
         $scope.menuScope = [
-            {
-                id: 1,
-                name: 'Абакачева Светлана',
-                type: 'Театр',
-                event: 'Современник'
-            },
-            {
-                id: 2,
-                name: 'Абакачева Светлана',
-                type: 'Театр',
-                event: 'Современник'
-            },
-            {
-                id: 3,
-                name: 'Абакачева Светлана',
-                type: 'Театр',
-                event: 'Современник'
-            },
-            {
-                id: 4,
-                name: 'Абакачева Светлана',
-                type: 'Театр',
-                event: 'Современник'
-            },
-            {
-                id: 5,
-                name: 'Абакачева Светлана',
-                type: 'Театр',
-                event: 'Современник'
-            },
-            {
-                id: 6,
-                name: 'Абакачева Светлана',
-                type: 'Театр',
-                event: 'Современник'
-            },
-            {
-                id: 7,
-                name: 'Абакачева Светлана',
-                type: 'Театр',
-                event: 'Современник'
-            },
-            {
-                id: 8,
-                name: 'Тимберлейк Джастин',
-                nameTranslated: 'Timberlake Justin',
-                type: 'Музыка',
-                event: 'Justify'
-            },
-            {
-                id: 9,
-                name: 'Тимберлейк Джастин',
-                nameTranslated: 'Timberlake Justin',
-                type: 'Музыка',
-                event: 'Justify'
-            },
-            {
-                id: 10,
-                name: 'Тимберлейк Джастин',
-                nameTranslated: 'Timberlake Justin',
-                type: 'Музыка',
-                event: 'Justify'
-            },
-            {
-                id: 11,
-                name: 'Тимберлейк Джастин',
-                nameTranslated: 'Timberlake Justin',
-                type: 'Музыка',
-                event: 'Justify'
-            },
-            {
-                id: 12,
-                name: 'Тимберлейк Джастин',
-                nameTranslated: 'Timberlake Justin',
-                type: 'Музыка',
-                event: 'Justify'
-            },
-            {
-                id: 13,
-                name: 'Тимберлейк Джастин',
-                nameTranslated: 'Timberlake Justin',
-                type: 'Музыка',
-                event: 'Justify'
-            },
-            {
-                id: 14,
-                name: 'Тимберлейк Джастин',
-                nameTranslated: 'Timberlake Justin',
-                type: 'Музыка',
-                event: 'Justify'
-            }
+            //{
+            //    id: 1,
+            //    name: 'Абакачева Светлана',
+            //    type: 'Театр',
+            //    event: 'Современник'
+            //},
+            //{
+            //    id: 2,
+            //    name: 'Абакачева Светлана',
+            //    type: 'Театр',
+            //    event: 'Современник'
+            //},
+            //{
+            //    id: 3,
+            //    name: 'Абакачева Светлана',
+            //    type: 'Театр',
+            //    event: 'Современник'
+            //},
+            //{
+            //    id: 4,
+            //    name: 'Абакачева Светлана',
+            //    type: 'Театр',
+            //    event: 'Современник'
+            //},
+            //{
+            //    id: 5,
+            //    name: 'Абакачева Светлана',
+            //    type: 'Театр',
+            //    event: 'Современник'
+            //},
+            //{
+            //    id: 6,
+            //    name: 'Абакачева Светлана',
+            //    type: 'Театр',
+            //    event: 'Современник'
+            //},
+            //{
+            //    id: 7,
+            //    name: 'Абакачева Светлана',
+            //    type: 'Театр',
+            //    event: 'Современник'
+            //},
+            //{
+            //    id: 8,
+            //    name: 'Тимберлейк Джастин',
+            //    nameTranslated: 'Timberlake Justin',
+            //    type: 'Музыка',
+            //    event: 'Justify'
+            //},
+            //{
+            //    id: 9,
+            //    name: 'Тимберлейк Джастин',
+            //    nameTranslated: 'Timberlake Justin',
+            //    type: 'Музыка',
+            //    event: 'Justify'
+            //},
+            //{
+            //    id: 10,
+            //    name: 'Тимберлейк Джастин',
+            //    nameTranslated: 'Timberlake Justin',
+            //    type: 'Музыка',
+            //    event: 'Justify'
+            //},
+            //{
+            //    id: 11,
+            //    name: 'Тимберлейк Джастин',
+            //    nameTranslated: 'Timberlake Justin',
+            //    type: 'Музыка',
+            //    event: 'Justify'
+            //},
+            //{
+            //    id: 12,
+            //    name: 'Тимберлейк Джастин',
+            //    nameTranslated: 'Timberlake Justin',
+            //    type: 'Музыка',
+            //    event: 'Justify'
+            //},
+            //{
+            //    id: 13,
+            //    name: 'Тимберлейк Джастин',
+            //    nameTranslated: 'Timberlake Justin',
+            //    type: 'Музыка',
+            //    event: 'Justify'
+            //},
+            //{
+            //    id: 14,
+            //    name: 'Тимберлейк Джастин',
+            //    nameTranslated: 'Timberlake Justin',
+            //    type: 'Музыка',
+            //    event: 'Justify'
+            //}
         ];
+
+        $http({
+            url: '/persons/1/20',
+            method: "POST",
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        }).success(function (data) {
+            $rootScope.persons = data;
+            $rootScope.persons.forEach(function (item) {
+                $scope.menuScope.push({
+                    id: item.Id,
+                    name: item.Name + ' ' + item.LastName,
+                    type: item.FirstConnection,
+                    event: item.FirstConnection
+                });
+            });
+        });
+
 
         $scope.predicate = 'name';
         $scope.reverse = false;
