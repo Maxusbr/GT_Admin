@@ -30,12 +30,6 @@
             return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
         }
 
-        function AuthUser(login, password) {
-            var adress = apiUrl + '/User/Auth?login=' + login + '&password=' + password;
-            //debug
-            console.log(adress);
-            return $http.get(adress).then(handleSuccess, handleError('Error login user'));
-        }
 
         function Create(user) {
             return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));

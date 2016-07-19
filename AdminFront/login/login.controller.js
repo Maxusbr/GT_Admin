@@ -23,8 +23,6 @@
         function login() {
             console.log('click login');
             vm.dataLoading = true;
-            var result = $http.post('http://webapiadmin.azurewebsites.net/Debug/UsersSeed').then(handleSuccess, handleError('error'));
-            consol.log(result);
             AuthenticationService.Login(vm.user.username, vm.user.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(vm.user.username, vm.user.password);

@@ -16,28 +16,15 @@
         return service;
 
         function Login(username, password, callback) {
-
-            /* Dummy authentication for testing, uses $timeout to simulate api call
-             ----------------------------------------------*/
-            $timeout(function () {
-                var response;
-                UserService.AuthUser(username, password)
-                    .then(function (result) {
-                        if (result===true) {
-                            response = {success: true};
-                        } else {
-                            response = {success: false, message: 'Username or password is incorrect'};
-                        }
-                        callback(response);
-                    });
-            }, 1000);
-
-            /* Use this for real authentication
-             ----------------------------------------------*/
+            var adress = apiUrl + '/User/Auth?login=' + username + '&password=' + password;
+            //debug
+            console.log(adress);
+            //return $http.get(adress).then(handleSuccess, handleError('Error login user'));
             //$http.post('/api/authenticate', { username: username, password: password })
-            //    .success(function (response) {
-            //        callback(response);
-            //    });
+            $http.post(adress)
+                .success(function (response) {
+                    callback(response);
+                });
 
         }
 
