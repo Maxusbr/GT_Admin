@@ -62,14 +62,14 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IList<PersonSocialLinkModel> GetSocialLinks(int id);
+        IEnumerable<EntityCollection<PersonSocialLinkModel>> GetSocialLinks(int id);
 
         /// <summary>
         /// Возвращает список моделей интернет-ссылок
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IList<PersonMediaModel> GetMedia(int id);
+        IEnumerable<EntityCollection<PersonMediaModel>> GetMedia(int id);
 
         /// <summary>
         /// Возвращает список моделей описаний

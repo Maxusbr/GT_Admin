@@ -83,6 +83,7 @@ namespace Getticket.Web.DAL.Migrations
             var pers3 = new Person { Name = "Анна", LastName = "Сидорова", Patronymic = "Владимировна", NameLatin = "Anna", LastNameLatin = "Sidorova", PatronymicLatin = "Vladimirova", id_Sex = 2, Id = 3, Bithday = new DateTime(1995, 3, 14), id_Bithplace = 2 };
             var pers4 = new Person { Name = "Вероника", LastName = "Абасова", id_Sex = 2, Id = 4, Bithday = new DateTime(1989, 8, 12), id_Bithplace = 2 };
             var pers5 = new Person { Name = "Алена", LastName = "Бабенко", id_Sex = 2, Id = 5, Bithday = new DateTime(1986, 7, 10), id_Bithplace = 2 };
+            var pers6 = new Person { Name = "Алена", LastName = "Бабенко", id_Sex = 2, Id = 5, Bithday = new DateTime(1986, 7, 10), id_Bithplace = 2 };
 
             context.Person.AddOrUpdate(pers1);
             context.Person.AddOrUpdate(pers2);
@@ -114,6 +115,43 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 5, id_ConnectionType = 3, id_Person = 5, id_Event = 6, Description = "Артист (Граф Орлов)" });
             context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 6, id_ConnectionType = 1, id_Person = 5, id_PersonConnectTo = 4, Description = "Подруга" });
             context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 7, id_ConnectionType = 1, id_Person = 5, id_PersonConnectTo = 3, Description = "Подруга" });
+
+            context.PersonDescriptionType.AddOrUpdate(new PersonDescriptionType { Id = 1, Name = "Тизер" });
+            context.PersonDescriptionType.AddOrUpdate(new PersonDescriptionType { Id = 2, Name = "Описание" });
+
+            context.PersonDescriptions.AddOrUpdate(new PersonDescription { Id = 1, id_DescriptionType = 1, id_Person = 1, DescriptionText = "С 2008 в составе международных команд, 3 олимпийских бронзы.С 2011 основной скип сборной России." });
+            context.PersonDescriptions.AddOrUpdate(new PersonDescription { Id = 2, id_DescriptionType = 1, id_Person = 1, DescriptionText = "Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью." });
+            context.PersonDescriptions.AddOrUpdate(new PersonDescription { Id = 3, id_DescriptionType = 2, id_Person = 1, DescriptionText = "Родилась в Москве 6 февраля 1991 года. В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на стадионе «Юных Пионеров», где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания у нее не было и не будет отличников. По словам Анны, это ее очень закалило. Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни..." });
+            context.PersonDescriptions.AddOrUpdate(new PersonDescription { Id = 4, id_DescriptionType = 2, id_Person = 1, DescriptionText = "Занималась фигурным катанием. Каталась на стадионе “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна.Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304.К концу учебы стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни." });
+
+            context.PersonAntroNames.AddOrUpdate(new PersonAntroName { Id = 1, Name = "Глаза \\ Цвет" });
+            context.PersonAntroNames.AddOrUpdate(new PersonAntroName { Id = 2, Name = "Стопа \\ Размер" });
+            context.PersonAntroNames.AddOrUpdate(new PersonAntroName { Id = 3, Name = "Рост" });
+            context.PersonAntroNames.AddOrUpdate(new PersonAntroName { Id = 4, Name = "Вес" });
+
+            context.PersonAntro.AddOrUpdate(new PersonAntro { Id = 1, id_Person = 1, id_Antro = 1, Value = "Зеленые" });
+            context.PersonAntro.AddOrUpdate(new PersonAntro { Id = 2, id_Person = 1, id_Antro = 2, Value = "39" });
+            context.PersonAntro.AddOrUpdate(new PersonAntro { Id = 3, id_Person = 1, id_Antro = 3, Value = "170" });
+            context.PersonAntro.AddOrUpdate(new PersonAntro { Id = 4, id_Person = 1, id_Antro = 4, Value = "72" });
+
+            context.PersonAntro.AddOrUpdate(new PersonAntro { Id = 5, id_Person = 2, id_Antro = 1, Value = "Карие" });
+            context.PersonAntro.AddOrUpdate(new PersonAntro { Id = 6, id_Person = 2, id_Antro = 2, Value = "41" });
+            context.PersonAntro.AddOrUpdate(new PersonAntro { Id = 7, id_Person = 3, id_Antro = 3, Value = "175" });
+            context.PersonAntro.AddOrUpdate(new PersonAntro { Id = 8, id_Person = 3, id_Antro = 4, Value = "65" });
+
+            context.PersonMediaType.AddOrUpdate(new PersonMediaType { Id = 1, Name = "Видео" });
+            context.PersonMediaType.AddOrUpdate(new PersonMediaType { Id = 2, Name = "Фото" });
+
+            context.PersonMedia.AddOrUpdate(new PersonMedia { Id = 1, id_Person = 1, id_MediaType = 1, MediaLink = "http://localhost:36049/app-content/images/flag_ru.gif" });
+            context.PersonMedia.AddOrUpdate(new PersonMedia { Id = 2, id_Person = 1, id_MediaType = 1, MediaLink = "http://localhost:36049/app-content/images/flag_ru.jpg" });
+            context.PersonMedia.AddOrUpdate(new PersonMedia { Id = 3, id_Person = 1, id_MediaType = 2, MediaLink = "http://localhost:36049/app-content/images/logo-fullsize.png" });
+            context.PersonMedia.AddOrUpdate(new PersonMedia { Id = 4, id_Person = 1, id_MediaType = 2, MediaLink = "http://localhost:36049/app-content/images/logo-small.png" });
+
+            context.PersonSocialLinkTypes.AddOrUpdate(new PersonSocialLinkType { Id = 1, Name = "instagram" });
+            context.PersonSocialLinkTypes.AddOrUpdate(new PersonSocialLinkType { Id = 2, Name = "facebook" });
+
+            context.PersonSocialLinks.AddOrUpdate(new PersonSocialLink { id_Person = 1, id_SocialLinkType = 1, Link = "https://instagram.com/curlme_anna", Description = "instagram.com/curlme_anna" });
+            context.PersonSocialLinks.AddOrUpdate(new PersonSocialLink { id_Person = 1, id_SocialLinkType = 2, Link = "https://www.facebook.com/fakeacc_curl", Description = "https://www.facebook.com/fakeacc_curl" });
 
             context.SaveChanges();
         }

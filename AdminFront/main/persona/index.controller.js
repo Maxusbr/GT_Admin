@@ -8,22 +8,37 @@
     MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$http'];
 
     function MainPersonaIndexController($scope, $stateParams, $http) {
+        function getLinks(id) {
+            $http.get(`${apiUrl}persons/social/${id}`).success(function (data) {
+                $scope.links = [];
+                $scope.linklist = [];
+                data.forEach(function (item) {
+                    if (item.List.length > 0)
+                        $scope.links.push({
+                            type: item.List[0].PersonSocialLinkType,
+                            value: item.List[0].Link,
+                            descript: item.List[0].Description,
+                            count: item.Count - 1
+                        });
+                    $scope.linklist.push.apply($scope.linklist, item.List);
+                });
+            });
+        };
         function getMedia(id) {
             $http.get(`${apiUrl}persons/media/${id}`).success(function (data) {
                 $scope.medias = [];
                 $scope.medialist = [];
                 data.forEach(function (item) {
                     if (item.List.length > 0)
-                        $scope.dmedias.push({
-                            type: item.List[0].PersonDescriptionType,
-                            value: item.List[0].DescriptionText,
+                        $scope.medias.push({
+                            type: item.List[0].MediaType,
+                            value: item.List[0].MediaLink,
                             count: item.Count - 1
                         });
-                    $scope.medialist.push(item.List);
+                    $scope.medialist.push.apply($scope.medialist, item.List);
                 });
             });
         };
-
         function getDescript(id) {
             $http.get(`${apiUrl}persons/description/${id}`).success(function (data) {
                 $scope.descriptions = [];
@@ -70,17 +85,36 @@
             });
         };
         $scope.id = $stateParams.id;
-        $scope.persons.forEach(function (item) {
-            if (item.Id == $scope.id) {
-                $scope.person = item;
-                getDescript($scope.id);
+        if ($scope.persons !== undefined)
+            $scope.persons.forEach(function (item) {
+                if (item.Id == $scope.id) {
+                    $scope.person = item;
+                    getDescript($scope.id);
 
-                getConnection($scope.id);
-                //getMedia($scope.id);
-                getAntro($scope.id);
-                return;
-            }
-        });
+                    getConnection($scope.id);
+                    getMedia($scope.id);
+                    getLinks($scope.id);
+                    getAntro($scope.id);
+                    return;
+                }
+            });
+        else {
+            $http({
+                url: `${apiUrl}persons/${pageNumber}/${pageSize}`,
+                method: "POST",
+                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+            }).success(function (data) {
+                $rootScope.persons = data;
+                $rootScope.persons.forEach(function (item) {
+                    $scope.menuScope.push({
+                        id: item.Id,
+                        name: item.Name + ' ' + item.LastName,
+                        type: item.EventType,
+                        event: item.EventName
+                    });
+                });
+            });
+        }
 
         $scope.SwitchElements = function () {
             $('.persona-main__container').hide();

@@ -110,21 +110,24 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<PersonSocialLinkModel> GetSocialLinks(int id)
+        public IEnumerable<EntityCollection<PersonSocialLinkModel>> GetSocialLinks(int id)
         {
-            var result = _personRepository.GetSocialLinks(id);
-            return PersonModelHelper.GetSocialLinkModels(result);
+            var list = PersonModelHelper.GetSocialLinkModels(_personRepository.GetSocialLinks(id));
+            var types = list.GroupBy(o => o.IdSocialLinkType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonSocialLinkModel> { List = list.Where(o => o.IdSocialLinkType == tp), Type = tp });
+
         }
 
         /// <summary>
-        /// Возвращает список моделей интернет-ссылок
+        /// Возвращает список моделей медиа
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<PersonMediaModel> GetMedia(int id)
+        public IEnumerable<EntityCollection<PersonMediaModel>> GetMedia(int id)
         {
-            var result = _personRepository.GetMedia(id);
-            return PersonModelHelper.GetMediaModels(result);
+            var list = PersonModelHelper.GetMediaModels(_personRepository.GetMedia(id));
+            var types = list.GroupBy(o => o.id_MediaType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonMediaModel> { List = list.Where(o => o.id_MediaType == tp), Type = tp });
         }
 
         /// <summary>

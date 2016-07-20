@@ -1,6 +1,7 @@
 ﻿//set api adress
 var apiUrl = 'http://localhost:35162/';
-
+var pageNumber = 1;
+var pageSize = 20;
 
 (function () {
     'use strict';

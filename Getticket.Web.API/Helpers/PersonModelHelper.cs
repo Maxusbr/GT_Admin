@@ -146,7 +146,8 @@ namespace Getticket.Web.API.Helpers
                 id_Person = link.id_Person,
                 IdSocialLinkType = link.id_SocialLinkType,
                 Link = link.Link,
-                PersonSocialLinkType = link.PersonSocialLinkType.Name
+                PersonSocialLinkType = link.PersonSocialLinkType?.Name,
+                Description = link.Description
             } : new PersonSocialLinkModel();
         }
 
@@ -168,7 +169,8 @@ namespace Getticket.Web.API.Helpers
                 Id = media.Id,
                 id_Person = media.id_Person,
                 id_MediaType = media.id_MediaType,
-                MediaLink = media.MediaLink
+                MediaLink = media.MediaLink,
+                MediaType = media.MediaType?.Name
             } : new PersonMediaModel();
         }
 

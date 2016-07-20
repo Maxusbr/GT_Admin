@@ -26,7 +26,7 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [Required]
         public int id_SocialLinkType { get; set; }
-
+        public string Description { get; set; }
         /// <summary>
         /// Ссылка
         /// </summary>

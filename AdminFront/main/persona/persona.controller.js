@@ -43,8 +43,7 @@
 
     function MainPersonaController($scope, $rootScope, $stateParams, $location, $http) {
         $rootScope.id = $stateParams.id;
-        var pageNumber = 1;
-        var pageSize = 20;
+        
         $rootScope.HidePersonaMenu = function () {
             $('#persona-menu').hide();
             $('#personacontent').addClass('col-md-24').removeClass('col-md-18');
