@@ -20,12 +20,14 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [MaxLength(500)]
         [Required]
+        [Index("CountryPlaceNameIndex", 1, IsUnique = true)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Внешний ключ для <see cref="Country"/>
+        /// Внешний ключ для <see cref="Entities.Country"/>
         /// </summary>
         [Required]
+        [Index("CountryPlaceNameIndex", 2, IsUnique = true)]
         public int id_Country { get; set; }
 
         /// <summary>

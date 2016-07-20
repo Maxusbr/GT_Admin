@@ -19,21 +19,26 @@ namespace Getticket.Web.API.Models
         /// <summary>
         /// Дата начала продаж (билетов?)
         /// </summary>
-        public DateTime DateStartSold { get; set; }
+        public DateTime? DateStartSold { get; set; }
 
         /// <summary>
         /// Дата окончания продаж (билетов?)
         /// </summary>
-        public DateTime DateStopSold { get; set; }
+        public DateTime? DateStopSold { get; set; }
 
         /// <summary>
         /// Дата события
         /// </summary>
-        public DateTime EventDate { get; set; }
+        public DateTime? EventDate { get; set; }
 
         /// <summary>
         /// Дата до которой можно вернуть билет
         /// </summary>
-        public DateTime TicketReturn { get; set; }
+        public DateTime? TicketReturn { get; set; }
+
+        /// <summary>
+        /// Тип события
+        /// </summary>
+        public string EventType { get; set; }
     }
 }

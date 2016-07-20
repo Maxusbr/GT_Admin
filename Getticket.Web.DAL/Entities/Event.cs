@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -10,7 +12,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Имя события
         /// </summary>
-        public string Name { get; set; }
+        [Required]public string Name { get; set; }
 
         /// <summary>
         /// Описание мероприятия
@@ -20,21 +22,31 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Дата начала продаж (билетов?)
         /// </summary>
-        public DateTime DateStartSold { get; set; }
+        public DateTime? DateStartSold { get; set; }
 
         /// <summary>
         /// Дата окончания продаж (билетов?)
         /// </summary>
-        public DateTime DateStopSold { get; set; }
+        public DateTime? DateStopSold { get; set; }
 
         /// <summary>
         /// Дата события
         /// </summary>
-        public DateTime EventDate { get; set; }
+        public DateTime? EventDate { get; set; }
 
         /// <summary>
         /// Дата до которой можно вернуть билет
         /// </summary>
-        public DateTime TicketReturn { get; set; }
+        public DateTime? TicketReturn { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="Entities.EventType"/>
+        /// </summary>
+        [Required]public int id_EventType { get; set; }
+        /// <summary>
+        /// Тип события
+        /// </summary>
+        [ForeignKey("id_EventType")]
+        public virtual EventType EventType { get; set; }
     }
 }

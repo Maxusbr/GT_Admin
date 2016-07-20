@@ -8,26 +8,26 @@
 
         <div class="col-md-4">
             <div class="persona-info__name-row">
-                {{ person.name.lastName }}
+                {{ person.LastName }}
             </div>
             <div class="persona-info__name-row">
-                {{ person.name.firstName }}
+                {{ person.Name }}
             </div>
             <div class="persona-info__name-row">
-                {{ person.name.middleName }}
+                {{ person.Patronymic }}
             </div>
 
         </div>
 
         <div class="col-md-4 col-md-offset-2">
             <div class="persona-info__name-row">
-                <span class="text-generated">{{ person.nameTranslated.lastName }}</span>
+                <span class="text-generated">{{ person.LastNameLatin }}</span>
             </div>
             <div class="persona-info__name-row">
-                <span class="text-generated">{{ person.nameTranslated.firstName }}</span>
+                <span class="text-generated">{{ person.NameLatin }}</span>
             </div>
             <div class="persona-info__name-row">
-                <span class="text-generated">{{ person.nameTranslated.middleName }}</span>
+                <span class="text-generated">{{ person.PatronymicLatin }}</span>
             </div>
         </div>
 
@@ -104,7 +104,7 @@
 
         <div class="col-md-3 persona-info__name-row">
             <div class="row">
-                {{ person.name.lastName }} {{ person.name.firstName }}
+                {{ person.LastName }} {{ person.Name }}
             </div>
         </div>
 
@@ -159,7 +159,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr ng-repeat="item in descriptionlist">
+                            <td class="persona-main__table_text">
+                                {{item.DescriptionText}}
+                                <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
+                            </td>
+                            <td>{{item.PersonDescriptionType}}</td>
+                            <td class="text-danger">
+                                <strong>КA</strong>: Нужно ранжировать награды по степени
+                                важности
+                            </td>
+                            <td>Джульетта С. <br> сегодня, 19:02</td>
+                            <td><a href="#">Ссылка (Сохраненная копия)</a></td>
+                            <td>
+                                Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                / <a href="#">подробнее, статистика</a>
+                            </td>
+                        </tr>
+                        <!--<tr>
                             <td class="persona-main__table_text">
                                 С 2008 в составе международных команд,
                                 3 олимпийских бронзы. С 2011 основной скип сборной России.
@@ -257,7 +274,7 @@
                                 (Sports.ru)
                             </td>
                             <td>Персона (Поиск)</td>
-                        </tr>
+                        </tr>-->
                         </tbody>
                     </table>
 
@@ -412,7 +429,25 @@
                         </thead>
 
                         <tbody>
-                        <tr>
+                            <tr ng-repeat="item in connectionList">
+                                <td ng-show="item.id_ConnectionType > 1">
+                                    {{item.Event.Name}}
+                                </td>
+                                <td ng-show="item.id_ConnectionType === 1">
+                                    {{item.PersonConnectTo.LastName}} {{item.PersonConnectTo.Name}}
+                                </td>
+                                <td class="text-danger">
+                                    {{item.PersonConnectionType}}
+                                </td>
+                                <td>
+                                    {{item.Description}}
+                                </td>
+                                <td>
+                                    Джульетта С.<br>
+                                    сегодня, 19:02
+                                </td>
+                            </tr>
+                        <!--<tr>
                             <td>
                                 Чемпионат мира по керлингу
                             </td>
@@ -509,7 +544,7 @@
                                 Карина Т. <br>
                                 22 июля
                             </td>
-                        </tr>
+                        </tr>-->
                         </tbody>
                     </table>
 
@@ -821,6 +856,11 @@
 
             <div class="persona-main__container">
                 <div class="col-md-5">
+                    <p ng-repeat="item in descriptions">
+                        <span class="title">{{item.name}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
+                        {{item.value}} <br>
+                        {{item.descript}}
+                    </p>
                     <p>
                         <span class="title">Тизер (еще 7)</span> <br>
                         Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей
@@ -864,7 +904,12 @@
                 </div>
 
                 <div class="col-md-3">
-                    <p>
+                    <p ng-repeat="item in connections">
+                        <span class="title">{{item.name}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
+                        {{item.value}} <br>
+                        {{item.descript}}
+                    </p>
+                    <!--<p>
                         <span class="title">Персона (еще 3)</span> <br>
                         Ольга Андриянова <br>
                         Тренер (для Персоны)
@@ -879,10 +924,14 @@
                         <span class="title">Событие (еще 19)</span> <br>
                         Чемпионат мира по керлингу
                         в Германии 2016
-                    </p>
+                    </p>-->
                 </div>
 
                 <div class="col-md-4">
+                    <div class="persona-main__container_media" ng-repeat="item in medies">
+                        <span class="title">{{item.name}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
+                        {{item.value}}
+                    </div>
                     <div class="persona-main__container_media">
                         <span style="">Фото (еще 71)</span>
                     </div>
@@ -893,6 +942,10 @@
                 </div>
 
                 <div class="col-md-4">
+                    <p ng-repeat="item in links">
+                        <span class="title">{{item.name}} </span> <br>
+                        <a href="{{item.value}}">{{item.descript}}</a>
+                    </p>
                     <p>
                         <span class="title">instagram</span> <br>
                         <a href="https://instagram.com/curlme_anna">instagram.com/curlme_anna</a>
@@ -905,9 +958,17 @@
                 </div>
 
                 <div class="col-md-4">
-                    <table class="table">
-                        <tr>
+                    <table class="table" ng-show="antro">
+                        <tr ng-repeat="row in antro">
+                            <td>{{row.name}}</td>
+                            <td>{{row.value}}</td>
+                        </tr>
+                        <!--<tr>
+                            <td>Рост</td>
                             <td>170 см</td>
+                        </tr>
+                        <tr>
+                            <td>Вес</td>
                             <td>55 кг</td>
                         </tr>
                         <tr>
@@ -921,7 +982,7 @@
                         <tr>
                             <td>Длина ноги</td>
                             <td>120 см</td>
-                        </tr>
+                        </tr>-->
                     </table>
                 </div>
             </div>

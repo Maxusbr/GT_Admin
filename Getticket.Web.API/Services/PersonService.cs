@@ -54,7 +54,9 @@ namespace Getticket.Web.API.Services
             {
                 var models = _personRepository.GetConnections(item.Id);
                 item.Connections = PersonModelHelper.GetConnectionModels(models);
-                item.FirstConnection = item.Connections.FirstOrDefault();
+                var con = item.Connections.FirstOrDefault(o => o.Event != null);
+                item.EventName = con?.Event?.Name;
+                item.EventType = con?.Event?.EventType;                
             }
             return listPerson;
         }
@@ -96,10 +98,11 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<PersonConnectionModel> GetConnection(int id)
+        public IEnumerable<EntityCollection<PersonConnectionModel>> GetConnection(int id)
         {
-            var models = _personRepository.GetConnections(id);
-            return PersonModelHelper.GetConnectionModels(models);
+            var list = PersonModelHelper.GetConnectionModels(_personRepository.GetConnections(id));
+            var types = list.GroupBy(o => o.id_ConnectionType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonConnectionModel> { List = list.Where(o => o.id_ConnectionType == tp), Type = tp});
         }
 
         /// <summary>
@@ -129,10 +132,11 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<PersonDescriptionModel> GetDescriptions(int id)
+        public IEnumerable<EntityCollection<PersonDescriptionModel>> GetDescriptions(int id)
         {
-            var result = _personRepository.GetDescriptions(id);
-            return PersonModelHelper.GetDescriptionModels(result);
+            var list = PersonModelHelper.GetDescriptionModels(_personRepository.GetDescriptions(id));
+            var types = list.GroupBy(o => o.id_DescriptionType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonDescriptionModel> {List = list.Where(o => o.id_DescriptionType == tp)});
         }
 
         /// <summary>

@@ -82,7 +82,8 @@ namespace Getticket.Web.DAL.Entities
         #region Events Config
         /// <see cref="Event"/>
         public virtual DbSet<Event> Events { get; set; }
-
+        /// <see cref="EventType"/>
+        public virtual DbSet<EventType> EventTypes { get; set; }
         /// <summary>
         /// Настройка сущности <see cref="Event"/>
         /// </summary>

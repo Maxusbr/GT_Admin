@@ -55,7 +55,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IList<PersonConnectionModel> GetConnection(int id);
+        IEnumerable<EntityCollection<PersonConnectionModel>> GetConnection(int id);
 
         /// <summary>
         /// Возвращает список моделей интернет-ссылок
@@ -76,7 +76,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IList<PersonDescriptionModel> GetDescriptions(int id);
+        IEnumerable<EntityCollection<PersonDescriptionModel>> GetDescriptions(int id);
 
         /// <summary>
         /// Add or Update Person entity

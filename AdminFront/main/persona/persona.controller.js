@@ -43,7 +43,8 @@
 
     function MainPersonaController($scope, $rootScope, $stateParams, $location, $http) {
         $rootScope.id = $stateParams.id;
-
+        var pageNumber = 1;
+        var pageSize = 20;
         $rootScope.HidePersonaMenu = function () {
             $('#persona-menu').hide();
             $('#personacontent').addClass('col-md-24').removeClass('col-md-18');
@@ -146,7 +147,7 @@
         ];
 
         $http({
-            url: '/persons/1/20',
+            url: `${apiUrl}persons/${pageNumber}/${pageSize}`,
             method: "POST",
             headers: { 'Content-Type': 'application/json; charset=UTF-8' }
         }).success(function (data) {
@@ -155,8 +156,8 @@
                 $scope.menuScope.push({
                     id: item.Id,
                     name: item.Name + ' ' + item.LastName,
-                    type: item.FirstConnection,
-                    event: item.FirstConnection
+                    type: item.EventType,
+                    event: item.EventName
                 });
             });
         });
@@ -170,19 +171,19 @@
             $scope.predicate = predicate;
         };
 
-        $rootScope.person = {
-            id: 1,
-            name: {
-                firstName: 'Анна',
-                lastName: 'Сидорова',
-                middleName: 'Владимировна'
-            },
-            nameTranslated: {
-                firstName: 'Anna',
-                lastName: 'Sidorova',
-                middleName: 'Vladimirova'
-            }
-        };
+        //$rootScope.person = {
+        //    id: 1,
+        //    name: {
+        //        firstName: 'Анна',
+        //        lastName: 'Сидорова',
+        //        middleName: 'Владимировна'
+        //    },
+        //    nameTranslated: {
+        //        firstName: 'Anna',
+        //        lastName: 'Sidorova',
+        //        middleName: 'Vladimirova'
+        //    }
+        //};
 
         $scope.CreatePersona = function () {
             $location.path("/main/persona/create");

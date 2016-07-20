@@ -48,10 +48,6 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -64,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AccessRole.cs" />
+    <Compile Include="Entities\EventType.cs" />
     <Compile Include="Entities\PersonMediaType.cs" />
     <Compile Include="Entities\PersonSocialLink.cs" />
     <Compile Include="Entities\PersonSocialLinkType.cs" />

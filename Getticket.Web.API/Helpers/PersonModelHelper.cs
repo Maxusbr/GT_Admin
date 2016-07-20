@@ -77,8 +77,10 @@ namespace Getticket.Web.API.Helpers
                 id_Event = connection.id_Event,
                 id_Person = connection.id_Person,
                 id_PersonConnectTo = connection.id_PersonConnectTo,
+                PersonConnectTo = GetPersonModel(connection.PersonConnectTo),
                 Event = GetEventModel(connection.Event),
-                PersonConnectionType = connection.PersonConnectionType.Name
+                PersonConnectionType = connection.PersonConnectionType.Name,
+                Description = connection.Description
             } : new PersonConnectionModel();
         }
 
@@ -97,7 +99,8 @@ namespace Getticket.Web.API.Helpers
                 DateStopSold = entity.DateStopSold,
                 Description = entity.Description,
                 EventDate = entity.EventDate,
-                TicketReturn = entity.TicketReturn
+                TicketReturn = entity.TicketReturn,
+                EventType = entity.EventType?.Name
             } : new EventModel();
         }
 
@@ -188,7 +191,7 @@ namespace Getticket.Web.API.Helpers
                 Id = description.Id,
                 id_Person = description.id_Person,
                 id_DescriptionType = description.id_DescriptionType,
-                PersonDescriptionType = description.PersonDescriptionType.Name,
+                PersonDescriptionType = description.PersonDescriptionType?.Name,
                 DescriptionText = description.DescriptionText
             } : new PersonDescriptionModel();
         }

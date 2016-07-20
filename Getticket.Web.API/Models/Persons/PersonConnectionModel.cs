@@ -15,8 +15,8 @@ namespace Getticket.Web.API.Models.Persons
         [Required]
         public int id_ConnectionType { get; set; }
         public string PersonConnectionType { get; set; }
-        [Required]
-        public int id_Event { get; set; }
+        public string Description { get; set; }
+        public int? id_Event { get; set; }
         public EventModel Event { get; set; }
 
     }

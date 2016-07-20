@@ -35,8 +35,8 @@ namespace Getticket.Web.DAL.Migrations
                 Phone = "+79063332211",
                 PasswordHash = "ccfcb5961cb870496289a62c2a6f728c78feb49f448972daf0a6f098a903be08",
                 AccessRoleId = 1,
-                UserStatus = new UserStatus() { Name="seed", Description="", Status=UserStatusType.System},
-                UserInfo = new UserInfo() { Id = 1, Name = "Тест", LastName = "Админ"}
+                UserStatus = new UserStatus() { Name = "seed", Description = "", Status = UserStatusType.System },
+                UserInfo = new UserInfo() { Id = 1, Name = "Тест", LastName = "Админ" }
             };
 
             User user2 = new User()
@@ -46,7 +46,7 @@ namespace Getticket.Web.DAL.Migrations
                 PasswordHash = "1185f37d33b0f89e331f101a51bb8e51165c7efda15950b86a3ebcbb363f898e",
                 AccessRoleId = 1,
                 UserStatus = new UserStatus() { Name = "seed", Description = "deleted", Status = UserStatusType.MarkDeleted },
-                UserInfo = new UserInfo() { Id = 2, Name = "deleted", LastName = "Админ"}
+                UserInfo = new UserInfo() { Id = 2, Name = "deleted", LastName = "Админ" }
             };
 
             User user3 = new User()
@@ -56,15 +56,15 @@ namespace Getticket.Web.DAL.Migrations
                 PasswordHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                 AccessRoleId = 1,
                 UserStatus = new UserStatus() { Name = "seed", Description = "", Status = UserStatusType.System },
-                UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ"}
+                UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ" }
             };
 
             context.Users.AddOrUpdate(u => u.Id, user1);
             context.Users.AddOrUpdate(u => u.Id, user2);
             context.Users.AddOrUpdate(u => u.Id, user3);
 
-            context.Sex.AddOrUpdate(o => o.Id, new Sex {Id=1, Name = "мужской"});
-            context.Sex.AddOrUpdate(o => o.Id, new Sex {Id=2,  Name = "женский" });
+            context.Sex.AddOrUpdate(o => o.Id, new Sex { Id = 1, Name = "мужской" });
+            context.Sex.AddOrUpdate(o => o.Id, new Sex { Id = 2, Name = "женский" });
 
             var country1 = new Country { Id = 1, Name = "Россия" };
             var country2 = new Country { Id = 2, Name = "США" };
@@ -78,15 +78,42 @@ namespace Getticket.Web.DAL.Migrations
             context.CountryPlaces.AddOrUpdate(place2);
             context.CountryPlaces.AddOrUpdate(place3);
 
-            var pers1 = new Person { Name = "Светлана", LastName = "Абакачева", id_Sex  = 2, Id = 1, Bithday = new DateTime(1990, 5, 16), id_Bithplace = 1};
-            var pers2 = new Person { Name = "Джастин", LastName = "Тимберлейк", NameLatin = "Justin", LastNameLatin = "Timberlake", id_Sex = 1, Id = 2, Bithday = new DateTime(1985, 11, 5), id_Bithplace = 3};
-            var pers3 = new Person { Name = "Анна", LastName = "Сидорова", Patronymic = "Владимировна", NameLatin = "Anna", LastNameLatin = "Sidorova", PatronymicLatin = "Vladimirova", id_Sex  = 2, Id = 3, Bithday = new DateTime(1995, 3, 14), id_Bithplace = 2};
+            var pers1 = new Person { Name = "Светлана", LastName = "Абакачева", id_Sex = 2, Id = 1, Bithday = new DateTime(1990, 5, 16), id_Bithplace = 1 };
+            var pers2 = new Person { Name = "Джастин", LastName = "Тимберлейк", NameLatin = "Justin", LastNameLatin = "Timberlake", id_Sex = 1, Id = 2, Bithday = new DateTime(1985, 11, 5), id_Bithplace = 3 };
+            var pers3 = new Person { Name = "Анна", LastName = "Сидорова", Patronymic = "Владимировна", NameLatin = "Anna", LastNameLatin = "Sidorova", PatronymicLatin = "Vladimirova", id_Sex = 2, Id = 3, Bithday = new DateTime(1995, 3, 14), id_Bithplace = 2 };
+            var pers4 = new Person { Name = "Вероника", LastName = "Абасова", id_Sex = 2, Id = 4, Bithday = new DateTime(1989, 8, 12), id_Bithplace = 2 };
+            var pers5 = new Person { Name = "Алена", LastName = "Бабенко", id_Sex = 2, Id = 5, Bithday = new DateTime(1986, 7, 10), id_Bithplace = 2 };
 
             context.Person.AddOrUpdate(pers1);
             context.Person.AddOrUpdate(pers2);
             context.Person.AddOrUpdate(pers3);
+            context.Person.AddOrUpdate(pers4);
+            context.Person.AddOrUpdate(pers5);
 
+            context.EventTypes.AddOrUpdate(new EventType { Id = 1, Name = "Спорт" });
+            context.EventTypes.AddOrUpdate(new EventType { Id = 2, Name = "Театр" });
+            context.EventTypes.AddOrUpdate(new EventType { Id = 3, Name = "Музыка" });
 
+            context.Events.AddOrUpdate(new Event { Id = 1, Name = "Бокс", Description = "1/5 Бой за звание чемпиона мира по боксу в супертяжелом весе по версии WBA Лукас Браун...", id_EventType = 1 });
+            context.Events.AddOrUpdate(new Event { Id = 2, Name = "Фигурное катание", Description = "3 Чемпионат мира по фигурному катанию", id_EventType = 1 });
+            context.Events.AddOrUpdate(new Event { Id = 3, Name = "Весёлые бабури", Description = "1/2 Петр Налич и биг-бенд \"Песни Утесова и не только...\"", id_EventType = 3 });
+            context.Events.AddOrUpdate(new Event { Id = 4, Name = "Джаз", Description = "8 А.Кролл, Л.Ролл, М. Волл День джаза в Доме музыки. \"Все цвета московского джаза\"", id_EventType = 3 });
+            context.Events.AddOrUpdate(new Event { Id = 5, Name = "Вишневый сад", id_EventType = 2 });
+            context.Events.AddOrUpdate(new Event { Id = 6, Name = "Лебединое озеро", id_EventType = 2 });
+            context.Events.AddOrUpdate(new Event { Id = 7, Name = "Современник", id_EventType = 2 });
+            context.Events.AddOrUpdate(new Event { Id = 8, Name = "Justified", id_EventType = 3 });
+
+            context.PersonConnectionType.AddOrUpdate(new PersonConnectionType { Id = 1, Name = "Персона" });
+            context.PersonConnectionType.AddOrUpdate(new PersonConnectionType { Id = 2, Name = "Мероприятие" });
+            context.PersonConnectionType.AddOrUpdate(new PersonConnectionType { Id = 3, Name = "Событие" });
+
+            context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 1, id_ConnectionType = 3, id_Person = 1, id_Event = 7, Description = "Артист" });
+            context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 2, id_ConnectionType = 3, id_Person = 2, id_Event = 8, Description = "Певец(соло)" });
+            context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 3, id_ConnectionType = 3, id_Person = 3, id_Event = 2, Description = "Член команды (основной скип)" });
+            context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 4, id_ConnectionType = 3, id_Person = 4, id_Event = 5, Description = "Артист" });
+            context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 5, id_ConnectionType = 3, id_Person = 5, id_Event = 6, Description = "Артист (Граф Орлов)" });
+            context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 6, id_ConnectionType = 1, id_Person = 5, id_PersonConnectTo = 4, Description = "Подруга" });
+            context.PersonConnections.AddOrUpdate(new PersonConnection { Id = 7, id_ConnectionType = 1, id_Person = 5, id_PersonConnectTo = 3, Description = "Подруга" });
 
             context.SaveChanges();
         }

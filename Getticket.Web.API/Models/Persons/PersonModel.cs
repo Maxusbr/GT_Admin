@@ -54,7 +54,15 @@ namespace Getticket.Web.API.Models.Persons
         public int IdSex { get; set; }
         public string Sex { get; set; }
 
-        public PersonConnectionModel FirstConnection { get; set; }
+        /// <summary>
+        /// Тип события
+        /// </summary>
+        public string EventType { get; set; }
+
+        /// <summary>
+        /// Название события
+        /// </summary>
+        public string EventName { get; set; }
         public IList<PersonConnectionModel> Connections { get; set; }
     }
 }

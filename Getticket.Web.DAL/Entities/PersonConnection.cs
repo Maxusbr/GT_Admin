@@ -14,7 +14,10 @@ namespace Getticket.Web.DAL.Entities
         /// Конструктор
         /// </summary>
         public PersonConnection(){}
-
+        /// <summary>
+        /// Характеристика связи
+        /// </summary>
+        public string Description { get; set; }
         /// <summary>
         /// Внешний ключ для <see cref="Entities.Person"/>
         /// </summary>
@@ -35,8 +38,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Внешний ключ для связи между сущностями <see cref="Entities.Person"/> и <see cref="Entities.Event"/>
         /// </summary>
-        [Required]
-        public int id_Event { get; set; }        
+        public int? id_Event { get; set; }        
 
         /// <summary>
         /// <see cref="Entities.Person"/>
