@@ -153,6 +153,15 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonSocialLinks.AddOrUpdate(new PersonSocialLink { id_Person = 1, id_SocialLinkType = 1, Link = "https://instagram.com/curlme_anna", Description = "instagram.com/curlme_anna" });
             context.PersonSocialLinks.AddOrUpdate(new PersonSocialLink { id_Person = 1, id_SocialLinkType = 2, Link = "https://www.facebook.com/fakeacc_curl", Description = "https://www.facebook.com/fakeacc_curl" });
 
+            context.PersonFactTypes.AddOrUpdate(new PersonFactType { Id = 1, Name = "БИО", Descript = "ФИО"});
+            context.PersonFactTypes.AddOrUpdate(new PersonFactType { Id = 2, Name = "Событие", Descript = " Место рождения"});
+            context.PersonFactTypes.AddOrUpdate(new PersonFactType { Id = 3, Name = "Событие" });
+
+            context.PersonFacts.AddOrUpdate(new PersonFact {Id = 1, id_FactType = 1, id_Person = 1, FactText = "Родилась в Москве 6 февраля 1991 года. В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на стадионе «Юных Пионеров», где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания у нее не было и не будет отличников. По словам Анны, это ее очень закалило. Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни..." });
+            context.PersonFacts.AddOrUpdate(new PersonFact {Id = 2, id_FactType = 2, id_Person = 1, FactText = "Занималась фигурным катанием. Каталась на стадионе “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. К концу учебы стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни." });
+            context.PersonFacts.AddOrUpdate(new PersonFact {Id = 3, id_FactType = 3, id_Person = 1, FactText = "С 2008 в составе международных команд, 3 олимпийских бронзы.С 2011 основной скип сборной России." });
+            context.PersonFacts.AddOrUpdate(new PersonFact {Id = 4, id_FactType = 3, id_Person = 1, FactText = "Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью." });
+
             context.SaveChanges();
         }
     }

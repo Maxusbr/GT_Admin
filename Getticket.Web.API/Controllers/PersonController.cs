@@ -383,6 +383,57 @@ namespace Getticket.Web.API.Controllers
         #endregion
 
 
+        #region Facts
 
+        /// <see cref="IPersonService.GetFacts" />
+        [HttpGet]
+        [Route("fact/{id}")]
+        public IHttpActionResult GetFacts(int id)
+        {
+            return Ok(_personService.GetFacts(id));
+        }
+
+        /// <see cref="IPersonService.GetFactsTypes" />
+        [HttpGet]
+        [Route("fact/types")]
+        public IHttpActionResult GetFactsTypes()
+        {
+            return Ok(_personService.GetFactsTypes());
+        }
+
+        /// <see cref="IPersonService.UpdateFactTypes" />
+        [HttpPost]
+        [Route("fact/updatetypes")]
+        public IHttpActionResult UpdateFactTypes([FromBody] IEnumerable<PersonFactTypeModel> models)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            return Ok(_personService.UpdateFactTypes(models).Response());
+        }
+
+        /// <see cref="IPersonService.DeleteFactTypes" />
+        [HttpDelete]
+        [Route("fact/deltypes")]
+        public IHttpActionResult DeleteFactTypes([FromBody] IEnumerable<PersonFactTypeModel> models)
+        {
+            return Ok(_personService.DeleteFactTypes(models).Response());
+        }
+
+        /// <see cref="IPersonService.UpdateFacts" />
+        [HttpPost]
+        [Route("fact/update/{id}")]
+        public IHttpActionResult UpdateFacts(int id, [FromBody] IEnumerable<PersonFactModel> models)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            return Ok(_personService.UpdateFacts(id, models).Response());
+        }
+
+        /// <see cref="IPersonService.DeleteFacts" />
+        [HttpDelete]
+        [Route("fact/delete")]
+        public IHttpActionResult DeleteFacts([FromBody] IEnumerable<PersonFactModel> models)
+        {
+            return Ok(_personService.DeleteFacts(models).Response());
+        }
+        #endregion
     }
 }

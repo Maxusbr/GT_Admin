@@ -212,6 +212,16 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<PersonSocialLink> PersonSocialLinks { get; set; }
 
         /// <summary>
+        /// <see cref="PersonFactType"/>
+        /// </summary>
+        public virtual DbSet<PersonFactType> PersonFactTypes { get; set; }
+
+        /// <summary>
+        /// <see cref="PersonFact"/>
+        /// </summary>
+        public virtual DbSet<PersonFact> PersonFacts { get; set; }
+
+        /// <summary>
         /// Настройка сущности <see cref="Entities.Person"/>
         /// </summary>
         public class PersonConfiguration : EntityTypeConfiguration<Person>

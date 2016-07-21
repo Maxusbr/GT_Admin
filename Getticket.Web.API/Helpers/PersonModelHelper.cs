@@ -294,6 +294,29 @@ namespace Getticket.Web.API.Helpers
         }
 
         /// <summary>
+        /// Оборачивает <paramref name="facts"/> в модели
+        /// </summary>
+        /// <param name="facts"></param>
+        /// <returns></returns>
+        public static IList<PersonFactModel> GetFactModels(IList<PersonFact> facts)
+        {
+            var list = facts.Select(GetFactModel);
+            return list.ToList();
+        }
+
+        private static PersonFactModel GetFactModel(PersonFact fact)
+        {
+            return fact != null ? new PersonFactModel
+            {
+                Id = fact.Id,
+                id_Person = fact.id_Person,
+                id_FactType = fact.id_FactType,
+                FactType = new PersonFactTypeModel {Id = fact.FactType.Id, Name = fact.FactType.Name, Descript = fact.FactType.Descript},
+                FactText = fact.FactText
+            } : new PersonFactModel();
+        }
+
+        /// <summary>
         /// Get Person entity
         /// </summary>
         /// <param name="model"></param>
@@ -368,6 +391,16 @@ namespace Getticket.Web.API.Helpers
         public static IList<PersonDescriptionTypeModel> GetDescriptionTypeModels(IList<PersonDescriptionType> result)
         {
             return result.Select(o => new PersonDescriptionTypeModel { Id = o.Id, Name = o.Name }).ToList();
+        }
+
+        /// <summary>
+        /// Get fact type models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<PersonFactTypeModel> GetFactTypeModels(IList<PersonFactType> result)
+        {
+            return result.Select(o => new PersonFactTypeModel { Id = o.Id, Name = o.Name, Descript = o.Descript}).ToList();
         }
     }
 }

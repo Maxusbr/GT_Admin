@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Entities\AccessRole.cs" />
     <Compile Include="Entities\EventType.cs" />
+    <Compile Include="Entities\PersonFactType.cs" />
+    <Compile Include="Entities\PersonFact.cs" />
     <Compile Include="Entities\PersonMediaType.cs" />
     <Compile Include="Entities\PersonSocialLink.cs" />
     <Compile Include="Entities\PersonSocialLinkType.cs" />

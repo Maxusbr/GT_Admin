@@ -15,6 +15,8 @@
             $scope.medialist = [];
             $scope.descriptions = [];
             $scope.descriptionlist = [];
+            $scope.facts = [];
+            $scope.factlist = [];
             $scope.connections = [];
             $scope.connectionList = [];
             $scope.antro = [];
@@ -57,6 +59,19 @@
                             count: item.Count - 1
                         });
                     $scope.descriptionlist.push.apply($scope.descriptionlist, item.List);
+                });
+            });
+        };
+        function getFact(id) {
+            $http.get(`${apiUrl}persons/fact/${id}`).success(function (data) {
+                data.forEach(function (item) {
+                    //if (item.List.length > 0)
+                    //    $scope.facts.push({
+                    //        type: item.List[0].FactType,
+                    //        value: item.List[0].FactText,
+                    //        count: item.Count - 1
+                    //    });
+                    $scope.factlist.push.apply($scope.factlist, item.List);
                 });
             });
         };
@@ -113,7 +128,7 @@
                     $scope.yearText = getYearText(item.Age);
                     clearValues();
                     getDescript($scope.id);
-
+                    getFact($scope.id);
                     getConnection($scope.id);
                     getMedia($scope.id);
                     getLinks($scope.id);

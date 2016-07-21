@@ -277,11 +277,61 @@ namespace Getticket.Web.DAL.IRepositories
         bool DeleteMediaType(int id);
 
         /// <summary>
+        /// Возвращает список <see cref="PersonFactType"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<PersonFactType> GetPersonFactTypes();
+
+        /// <summary>
+        /// Если <see cref="PersonFactType"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="PersonFactType"/> уже существует - сохраняем изменения записи.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        PersonFactType UpdateFactType(PersonFactType type);
+
+        /// <summary>
+        /// Удалить тип <see cref="PersonFactType"/> по ее <paramref name="id" />
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool DeleteFactType(int id);
+
+        /// <summary>
+        /// Возвращает список ссылок <see cref="PersonFact"/> для <see cref="Person"/> по ее <paramref name="id" />
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<PersonFact> GetPersonFacts(int id);
+
+        /// <summary>
+        /// Если <see cref="PersonFact"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="PersonFact"/> уже существует - сохраняем изменения записи.
+        /// </summary>
+        /// <param name="facts"></param>
+        /// <returns></returns>
+        bool UpdatePersonFacts(IList<PersonFact> facts);
+
+        /// <summary>
+        /// Обновляет/добавляет <see cref="PersonFact"/> в БД.
+        /// </summary>
+        /// <param name="fact"></param>
+        /// <returns></returns>
+        PersonFact UpdatePersonFact(PersonFact fact);
+
+        /// <summary>
+        /// Удаляет факты <see cref="PersonFact"/> по <paramref name="id" />
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool DeletePersonFact(int id);
+
+        /// <summary>
         /// Возвращает список <see cref="PersonSocialLinkType"/>
         /// </summary>
         /// <returns></returns>
         IList<PersonSocialLinkType> GetLinkTypes();
-        
+
         /// <summary>
         /// Если <see cref="PersonSocialLinkType"/> новый - добавляем новую запись в БД.
         /// Если <see cref="PersonSocialLinkType"/> уже существует - сохраняем изменения записи.

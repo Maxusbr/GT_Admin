@@ -309,7 +309,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr  ng-repeat="item in factlist">
+                                <td class="persona-main__table_text">
+                                    {{item.FactText}}
+
+                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
+                                </td>
+                                <td class="text-danger">
+                                    <strong>КA</strong>: Нужно ранжировать награды по степени
+                                    важности
+                                </td>
+                                <td>Джульетта С. <br> сегодня, 19:02</td>
+                                <td>
+                                    {{item.FactType.Name}} / {{item.FactType.Descript}}
+                                </td>
+                                <td><a href="#">Ссылка (Сохраненная копия)</a></td>
+                                <td>
+                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                    / <a href="#">подробнее, статистика</a>
+                                </td>
+                            </tr>                        
+                            <!--<tr>
                                 <td class="persona-main__table_text">
                                     С 2008 в составе международных команд,
                                     3 олимпийских бронзы. С 2011 основной скип сборной России.
@@ -432,7 +452,7 @@
                                     (Sports.ru)
                                 </td>
                                 <td>Персона (Поиск)</td>
-                            </tr>
+                            </tr>-->
                         </tbody>
                     </table>
 
@@ -980,20 +1000,23 @@
                     </div>-->
                 </div>
                 <div class="col-md-4">
-                    <p>
-                        <span class="title">Био</span> <br>
-                        С 6 до 13 лет занималась фигурным катанием,
-                        но после травмы ноги вынуждена была прекратить занятия. В 2006 году пришла ...
+                    <p ng-show="factlist[0]">
+                        <span class="title">{{factlist[0].FactType.Name}}</span> <br>
+                        {{factlist[0].FactText}}
+                    </p>
+                    <p ng-show="factlist[1]">
+                        <span class="title">{{factlist[1].FactType.Name}}</span> <br>
+                        {{factlist[1].FactText}}
                     </p>
 
-                    <p>
+                    <!--<p>
                         <span class="title">Био</span> <br>
                         Анна училась в школах №73
                         и №1304, в 2013 году закончила факультет истории политологии и права в Российском ...
-                    </p>
+                    </p>-->
 
-                    <p>
-                        <span class="title">еще 28</span> <br>
+                    <p ng-show="factlist.length - 2 > 0">
+                        <span class="title">еще {{factlist.length - 2}}</span> <br>
                     </p>
                 </div>
 

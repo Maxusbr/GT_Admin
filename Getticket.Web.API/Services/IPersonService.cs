@@ -79,6 +79,13 @@ namespace Getticket.Web.API.Services
         IEnumerable<EntityCollection<PersonDescriptionModel>> GetDescriptions(int id);
 
         /// <summary>
+        /// Возвращает список моделей фактов
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IEnumerable<EntityCollection<PersonFactModel>> GetFacts(int id);
+
+        /// <summary>
         /// Add or Update Person entity
         /// </summary>
         /// <param name="model"></param>
@@ -91,7 +98,6 @@ namespace Getticket.Web.API.Services
         /// <param name="id"></param>
         /// <returns></returns>
         ServiceResponce DeletePerson(int id);
-
 
         /// <summary>
         /// Добавить/Изменить имена антропометрических характеристик
@@ -267,6 +273,41 @@ namespace Getticket.Web.API.Services
         /// <param name="models"></param>
         /// <returns></returns>
         ServiceResponce DeleteDescriptions(IEnumerable<PersonDescriptionModel> models);
+
+        /// <summary>
+        /// Возвращает список типов фактов
+        /// </summary>
+        /// <returns></returns>
+        IList<PersonFactTypeModel> GetFactsTypes();
+
+        /// <summary>
+        /// Добавить/Изменить типы фактов
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce UpdateFactTypes(IEnumerable<PersonFactTypeModel> models);
+
+        /// <summary>
+        /// Удалить типы фактов
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce DeleteFactTypes(IEnumerable<PersonFactTypeModel> models);
+
+        /// <summary>
+        /// Добавить/Изменить список фактов для Person c Id = <paramref name="pesonId"/>
+        /// </summary>
+        /// <param name="pesonId"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models);
+
+        /// <summary>
+        /// Удалить факты
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce DeleteFacts(IEnumerable<PersonFactModel> models);
     }
 
 }

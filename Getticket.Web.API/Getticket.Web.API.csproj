@@ -217,6 +217,8 @@
     <Compile Include="Models\Persons\CountryModel.cs" />
     <Compile Include="Models\Persons\CountryPlaceModel.cs" />
     <Compile Include="Models\Persons\EntityCollection.cs" />
+    <Compile Include="Models\Persons\PersonFactModel.cs" />
+    <Compile Include="Models\Persons\PersonFactTypeModel.cs" />
     <Compile Include="Models\Persons\PersonDetailModel.cs" />
     <Compile Include="Models\Persons\PersonMediaTypeModel.cs" />
     <Compile Include="Models\Persons\PersonModel.cs" />
