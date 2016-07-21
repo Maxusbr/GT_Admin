@@ -12,8 +12,11 @@
             <ul class="nav nav-list shorter">
                 <li ng-repeat="persona in menuScope | filter:personaMenuFilter | orderBy:predicate:reverse"
                     ng-class="{ active: persona.id == id }" class="persona-menu-container">
-                    <a ng-href="/#/main/persona/{{ persona.id }}">{{ persona.name }} <span
-                            ng-show="persona.nameTranslated">/ {{ persona.nameTranslated }} </span>
+                    <a ng-href="/#/main/persona/{{ persona.id }}">
+                        {{ persona.name.lastName }} {{ persona.name.firstName }}
+                        <span ng-show="persona.nameTranslated.firstName || 
+                              persona.nameTranslated.lastName "> / {{ persona.nameTranslated.firstName }} 
+                        {{ persona.nameTranslated.lastName }}</span>
 
                         <p class="persona-menu-container__event">
                             <span class="type">{{ persona.type }}</span>

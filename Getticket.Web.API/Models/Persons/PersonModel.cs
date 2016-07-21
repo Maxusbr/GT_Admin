@@ -31,7 +31,8 @@ namespace Getticket.Web.API.Models.Persons
         /// </summary>
         [Required]
         public DateTime Bithday { get; set; }
-
+        public string BirthdayTxt { get; set; }
+        public int Age { get; set; }
         /// <summary>
         /// Имя (латинское)
         /// </summary>
@@ -46,6 +47,9 @@ namespace Getticket.Web.API.Models.Persons
         /// Отчество (латинское)
         /// </summary>
         public string PatronymicLatin { get; set; }
+
+        public string ZodiacYear { get; set; }
+        public string ZodiacMonth { get; set; }
 
         public int? IdBithplace { get; set; }
         public string Place { get; set; }

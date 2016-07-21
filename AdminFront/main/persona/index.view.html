@@ -34,23 +34,23 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="row">
                 <select class="form-control">
-                    <option>9 февраля 1991 (25 лет)</option>
+                    <option>{{person.BirthdayTxt}} ({{person.Age}} {{yearText}})</option>
                 </select>
                 <p>
                     <span class="text-muted">(зодиак)</span>
-                    Водолей /
+                    {{person.ZodiacMonth}} /
                     <span class="text-muted">(восточный)</span>
-                    Коза
+                    {{person.ZodiacYear}}
                 </p>
             </div>
 
             <div class="row">
                 <select class="form-control">
-                    <option>Ленинград, СССР</option>
+                    <option>{{person.Place}}, {{person.Country}}</option>
                 </select>
-                <p>
+                <!--<p>
                     (Санкт-Петербург, Россия)
-                </p>
+                </p>-->
             </div>
         </div>
     </div>
@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="radio-input-container">
                     <div class="radio-input">
-                        <input type="radio" value="None" id="sexM" name="check">
+                        <input type="radio" value="None" id="sexM" ng-checked="person.IdSex == 1" name="check">
                         <label for="sexM"></label>
                     </div>
 
@@ -70,7 +70,7 @@
 
                 <div class="radio-input-container">
                     <div class="radio-input">
-                        <input type="radio" value="None" id="sexF" checked name="check">
+                        <input type="radio" value="None" id="sexF" ng-checked="person.IdSex == 2" name="check">
                         <label for="sexF"></label>
                     </div>
 
@@ -79,7 +79,6 @@
             </div>
         </div>
         <!-- End Sex Switches -->
-
         <!-- Last Changes -->
         <div class="col-md-20 persona-info-block">
             <p>
@@ -596,7 +595,7 @@
                         </thead>
 
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="item in medialist">
                                 <td>
                                     Чемпионат Европы по керлингу <br>
                                     Россия, Москва, ДС Мегаспорт <br>
@@ -604,8 +603,9 @@
                                     // Прививкова Людмила, Сидорова Анна <br> + описание
                                 </td>
                                 <td>
-                                    Фото
+                                    {{item.MediaType}}
                                     <div class="persona-main__container_media small">
+                                        <img ng-src="{{item.MediaLink}}" alt="Placeholder" style="width: 80px; ">
                                     </div>
                                 </td>
                                 <td>
@@ -621,61 +621,88 @@
                                     Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
                                     / <a href="#">подробнее</a>, <a href="#">статистика</a>
                                 </td>
-                            </tr>
+                            </tr>                        
+                        <!--<tr>
+                            <td>
+                                Чемпионат Европы по керлингу <br>
+                                Россия, Москва, ДС Мегаспорт <br>
+                                3 декабря 2011 <br>
+                                // Прививкова Людмила, Сидорова Анна <br> + описание
+                            </td>
+                            <td>
+                                Фото
+                                <div class="persona-main__container_media small">
+                                    <img ng-src="{{item.value}}" alt="Placeholder" style="width: 100px; margin-top: 8px; height: 100px;">
+                                </div>
+                            </td>
+                            <td>
+                                Связи <br>
+                                * Мероприятие (1) <br>
+                                * Персона (1)
+                            </td>
+                            <td>Джульетта С. <br> сегодня, 19:02</td>
+                            <td>
+                                10: керлинг, чемпионат, девушки, ...
+                            </td>
+                            <td>
+                                Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                / <a href="#">подробнее</a>, <a href="#">статистика</a>
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>
-                                    Чемпионат Европы по керлингу <br>
-                                    Россия, Москва, ДС Мегаспорт <br>
-                                    3 декабря 2011 <br>
-                                    // Прививкова Людмила, Сидорова Анна <br>
-                                    <span class="text-danger">! описания нет</span>
-                                </td>
-                                <td>
-                                    Фото
-                                    <div class="persona-main__container_media small">
-                                    </div>
-                                </td>
-                                <td>
-                                    Связи <br>
-                                    * Мероприятие (1) <br>
-                                    * Персона (1)
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    10: керлинг, чемпионат, девушки, ...
-                                </td>
-                                <td>
-                                    Главная (2 мероприятия), Персона (Поиск)
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                Чемпионат Европы по керлингу <br>
+                                Россия, Москва, ДС Мегаспорт <br>
+                                3 декабря 2011 <br>
+                                // Прививкова Людмила, Сидорова Анна <br>
+                                <span class="text-danger">! описания нет</span>
+                            </td>
+                            <td>
+                                Фото
+                                <div class="persona-main__container_media small">
+                                </div>
+                            </td>
+                            <td>
+                                Связи <br>
+                                * Мероприятие (1) <br>
+                                * Персона (1)
+                            </td>
+                            <td>Джульетта С. <br> сегодня, 19:02</td>
+                            <td>
+                                10: керлинг, чемпионат, девушки, ...
+                            </td>
+                            <td>
+                                Главная (2 мероприятия), Персона (Поиск)
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>
-                                    Чемпионат Европы по керлингу <br>
-                                    Россия, Москва, ДС Мегаспорт <br>
-                                    3 декабря 2011 <br>
-                                    // Прививкова Людмила, <span class="text-danger">Неизвестный М</span> <br>
-                                    + описание
-                                </td>
-                                <td>
-                                    Видео
-                                    <div class="persona-main__container_media small">
-                                    </div>
-                                </td>
-                                <td>
-                                    Связи <br>
-                                    * Мероприятие (1) <br>
-                                    * Персона (1)
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    10: керлинг, чемпионат, девушки, ...
-                                </td>
-                                <td>
-                                    Главная, Персона (Поиск)
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                Чемпионат Европы по керлингу <br>
+                                Россия, Москва, ДС Мегаспорт <br>
+                                3 декабря 2011 <br>
+                                // Прививкова Людмила, <span class="text-danger">Неизвестный М</span> <br>
+                                + описание
+                            </td>
+                            <td>
+                                Видео
+                                <div class="persona-main__container_media small">
+                                </div>
+                            </td>
+                            <td>
+                                Связи <br>
+                                * Мероприятие (1) <br>
+                                * Персона (1)
+                            </td>
+                            <td>Джульетта С. <br> сегодня, 19:02</td>
+                            <td>
+                                10: керлинг, чемпионат, девушки, ...
+                            </td>
+                            <td>
+                                Главная, Персона (Поиск)
+                            </td>
+                        </tr>-->
 
                         </tbody>
                     </table>
@@ -697,10 +724,10 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>Личный twitter</td>
+                            <tr ng-repeat="item in linklist">
+                                <td>{{item.PersonSocialLinkType}}</td>
                                 <td>
-                                    <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
+                                    <a href="{{item.Link}}">{{item.Description}}</a>
                                 </td>
                                 <td></td>
                                 <td>5 твитов\сутки</td>
@@ -709,93 +736,106 @@
                                     Джульетта С. <br>
                                     сегодня, 19:02
                                 </td>
-                            </tr>
+                            </tr>                 
+                        <!--<tr>
+                            <td>Личный twitter</td>
+                            <td>
+                                <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
+                            </td>
+                            <td></td>
+                            <td>5 твитов\сутки</td>
+                            <td>Публично (Персона\Полная)</td>
+                            <td>
+                                Джульетта С. <br>
+                                сегодня, 19:02
+                            </td>
+                        </tr>
 
 
-                            <tr>
-                                <td>Фан twitter</td>
-                                <td>
-                                    <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
-                                </td>
-                                <td>Довольно активное сообщество. <br> Причем преимущественно женское(!)</td>
-                                <td></td>
-                                <td>Внутренее</td>
-                                <td>
-                                    Карина Т. <br>
-                                    сегодня, 19:02
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>Фан twitter</td>
+                            <td>
+                                <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
+                            </td>
+                            <td>Довольно активное сообщество. <br> Причем преимущественно женское(!)</td>
+                            <td></td>
+                            <td>Внутренее</td>
+                            <td>
+                                Карина Т. <br>
+                                сегодня, 19:02
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>Официальный twitter</td>
-                                <td>
-                                    <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                        <tr>
+                            <td>Официальный twitter</td>
+                            <td>
+                                <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
 
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>Личный instagram</td>
+                            <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
+                            <td></td>
+                            <td></td>
+                            <td>Публично (Поиск\По активности персоны)</td>
+                            <td>
+                                Джульетта С. <br>
+                                24 июля
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>Личный instagram</td>
+                            <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
+                            <td></td>
+                            <td></td>
+                            <td>Публично (Поиск\По активности персоны)</td>
+                            <td>
+                                Джульетта С. <br>
+                                24 июля
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td>То же, что и в твиттере и инстаграмме, сайт но зато с подписями что и где</td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>Личный instagram</td>
+                            <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
+                            <td>То же, что и в твиттере и инстаграмме, сайт но зато с подписями что и где</td>
+                            <td></td>
+                            <td>Публично (Поиск\По активности персоны)</td>
+                            <td>
+                                Джульетта С. <br>
+                                24 июля
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>Личный instagram</td>
+                            <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
+                            <td></td>
+                            <td></td>
+                            <td>Публично (Поиск\По активности персоны)</td>
+                            <td>
+                                Джульетта С. <br>
+                                24 июля
+                            </td>
+                        </tr>
 
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>Личный instagram</td>
+                            <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
+                            <td></td>
+                            <td></td>
+                            <td>Публично (Поиск\По активности персоны)</td>
+                            <td>
+                                Джульетта С. <br>
+                                24 июля
+                            </td>
+                        </tr>-->
                         </tbody>
                     </table>
                 </div>
@@ -815,10 +855,10 @@
                             </thead>
 
                             <tbody>
-                                <tr>
+                                <tr ng-repeat="item in antro">
                                     <td>
-                                        Глаза \ Цвет <br>
-                                        Зеленые
+                                        {{item.name}} <br>
+                                        {{item.value}}
                                     </td>
 
                                     <td>
@@ -836,51 +876,73 @@
                                         Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
                                         / <a href="#">подробнее</a>, <a href="#">статистика</a>
                                     </td>
-                                </tr>
+                                </tr>                            
+                            <!--<tr>
+                                <td>
+                                    Глаза \ Цвет <br>
+                                    Зеленые
+                                </td>
 
-                                <tr>
-                                    <td>
-                                        Стопа \ Размер <br>
-                                        39
-                                    </td>
+                                <td>
+                                    Связи <br>
+                                    * Мероприятие (1) <br>
+                                    * Персона (1) <br>
+                                </td>
 
-                                    <td>
-                                        Связи <br>
-                                        * Событие (1) <br>
-                                        * Персона (2) <br>
-                                    </td>
+                                <td>
+                                    Джульетта С. <br>
+                                    сегодня, 19:02
+                                </td>
 
-                                    <td>
-                                        Карина Т. <br>
-                                        20.08.2016
-                                    </td>
+                                <td>
+                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                    / <a href="#">подробнее</a>, <a href="#">статистика</a>
+                                </td>
+                            </tr>
 
-                                    <td>
-                                        Главная (2 мероприятия), Персона (Поиск)
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    Стопа \ Размер <br>
+                                    39
+                                </td>
 
-                                <tr>
-                                    <td>
-                                        Рост <br>
-                                        170
-                                    </td>
+                                <td>
+                                    Связи <br>
+                                    * Событие (1) <br>
+                                    * Персона (2) <br>
+                                </td>
 
-                                    <td>
-                                        Связи <br>
-                                        * Событие (1) <br>
-                                        * Персона (2) <br>
-                                    </td>
+                                <td>
+                                    Карина Т. <br>
+                                    20.08.2016
+                                </td>
 
-                                    <td>
-                                        Джульетта С. <br>
-                                        24 июля
-                                    </td>
+                                <td>
+                                    Главная (2 мероприятия), Персона (Поиск)
+                                </td>
+                            </tr>
 
-                                    <td>
-                                        Главная, Персона (Поиск)
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    Рост <br>
+                                    170
+                                </td>
+
+                                <td>
+                                    Связи <br>
+                                    * Событие (1) <br>
+                                    * Персона (2) <br>
+                                </td>
+
+                                <td>
+                                    Джульетта С. <br>
+                                    24 июля
+                                </td>
+
+                                <td>
+                                    Главная, Персона (Поиск)
+                                </td>
+                            </tr>-->
                             </tbody>
                         </table>
                     </div>
@@ -916,111 +978,111 @@
                         тех пор, пока спорт не стал занимать все большее место в ее жизни...
                     </p>
                     </div>-->
-
-                    <div class="col-md-4">
-                        <p>
-                            <span class="title">Био</span> <br>
-                            С 6 до 13 лет занималась фигурным катанием,
-                            но после травмы ноги вынуждена была прекратить занятия. В 2006 году пришла ...
-                        </p>
-
-                        <p>
-                            <span class="title">Био</span> <br>
-                            Анна училась в школах №73
-                            и №1304, в 2013 году закончила факультет истории политологии и права в Российском ...
-                        </p>
-
-                        <p>
-                            <span class="title">еще 28</span> <br>
-                        </p>
-                    </div>
-
-                    <div class="col-md-3">
-                        <p ng-repeat="item in connections">
-                            <span class="title">{{item.name}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
-                            {{item.value}} <br>
-                            {{item.descript}}
-                        </p>
-                        <!--<p>
-                            <span class="title">Персона (еще 3)</span> <br>
-                            Ольга Андриянова <br>
-                            Тренер (для Персоны)
-                        </p>
-
-                        <p>
-                            <span class="title">Мероприятия (еще 14)</span> <br>
-                            Чемпионат мира по керлингу
-                        </p>
-
-                        <p>
-                            <span class="title">Событие (еще 19)</span> <br>
-                            Чемпионат мира по керлингу
-                            в Германии 2016
-                        </p>-->
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="persona-main__container_media" ng-repeat="item in medias">
-                            <span class="title">{{item.type}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
-                            <img src="{{item.value}}" alt="Placeholder" style="width: 100px; margin-top: 8px; height: 100px;">
-                        </div>
-                        <!--<div class="persona-main__container_media">
-                            <span style="">Фото (еще 71)</span>
-                        </div>
-
-                        <div class="persona-main__container_media" style="margin-top: 20px;">
-                            <span>Видео (еще 28)</span>
-                        </div>-->
-                    </div>
-
-                    <div class="col-md-4">
-                        <p ng-repeat="item in links">
-                            <span class="title">{{item.type}} </span> <br>
-                            <a href="{{item.value}}">
-                                <span ng-show="item.descript">{{item.descript}}</span>
-                                <span ng-show="!item.descript">ссылка</span>
-                            </a>
-                        </p>
-                        <!--<p>
-                            <span class="title">instagram</span> <br>
-                            <a href="https://instagram.com/curlme_anna">instagram.com/curlme_anna</a>
-                        </p>
-
-                        <p>
-                            <span class="title">facebook</span> <br>
-                            <a href="https://www.facebook.com/fakeacc_curl">https://www.facebook.com/fakeacc_curl</a>
-                        </p>-->
-                    </div>
-
-                    <div class="col-md-4">
-                        <table class="table" ng-show="antro">
-                            <tr ng-repeat="row in antro">
-                                <td>{{row.name}}</td>
-                                <td>{{row.value}}</td>
-                            </tr>
-                            <!--<tr>
-                                <td>Рост</td>
-                                <td>170 см</td>
-                            </tr>
-                            <tr>
-                                <td>Вес</td>
-                                <td>55 кг</td>
-                            </tr>
-                            <tr>
-                                <td>Глаза</td>
-                                <td>Зеленые (фото)</td>
-                            </tr>
-                            <tr>
-                                <td>Размер стопы</td>
-                                <td>39</td>
-                            </tr>
-                            <tr>
-                                <td>Длина ноги</td>
-                                <td>120 см</td>
-                            </tr>-->
-                        </table>
-                    </div>
                 </div>
+                <div class="col-md-4">
+                    <p>
+                        <span class="title">Био</span> <br>
+                        С 6 до 13 лет занималась фигурным катанием,
+                        но после травмы ноги вынуждена была прекратить занятия. В 2006 году пришла ...
+                    </p>
+
+                    <p>
+                        <span class="title">Био</span> <br>
+                        Анна училась в школах №73
+                        и №1304, в 2013 году закончила факультет истории политологии и права в Российском ...
+                    </p>
+
+                    <p>
+                        <span class="title">еще 28</span> <br>
+                    </p>
+                </div>
+
+                <div class="col-md-3">
+                    <p ng-repeat="item in connections">
+                        <span class="title">{{item.name}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
+                        {{item.value}} <br>
+                        {{item.descript}}
+                    </p>
+                    <!--<p>
+                        <span class="title">Персона (еще 3)</span> <br>
+                        Ольга Андриянова <br>
+                        Тренер (для Персоны)
+                    </p>
+
+                    <p>
+                        <span class="title">Мероприятия (еще 14)</span> <br>
+                        Чемпионат мира по керлингу
+                    </p>
+
+                    <p>
+                        <span class="title">Событие (еще 19)</span> <br>
+                        Чемпионат мира по керлингу
+                        в Германии 2016
+                    </p>-->
+                </div>
+
+                <div class="col-md-4">
+                    <div class="persona-main__container_media" ng-repeat="item in medias">
+                        <span class="title">{{item.type}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
+                        <img ng-src="{{item.value}}" alt="Placeholder" style="width: 100px; margin-top: 8px; height: 100px;">
+                    </div>
+                    <!--<div class="persona-main__container_media">
+                        <span style="">Фото (еще 71)</span>
+                    </div>
+
+                    <div class="persona-main__container_media" style="margin-top: 20px;">
+                        <span>Видео (еще 28)</span>
+                    </div>-->
+                </div>
+
+                <div class="col-md-4">
+                    <p ng-repeat="item in links">
+                        <span class="title">{{item.type}} </span> <br>
+                        <a href="{{item.value}}">
+                            <span ng-show="item.descript">{{item.descript}}</span>
+                            <span ng-show="!item.descript">ссылка</span>
+                        </a>
+                    </p>
+                    <!--<p>
+                        <span class="title">instagram</span> <br>
+                        <a href="https://instagram.com/curlme_anna">instagram.com/curlme_anna</a>
+                    </p>
+
+                    <p>
+                        <span class="title">facebook</span> <br>
+                        <a href="https://www.facebook.com/fakeacc_curl">https://www.facebook.com/fakeacc_curl</a>
+                    </p>-->
+                </div>
+
+                <div class="col-md-4">
+                    <table class="table" ng-show="antro">
+                        <tr ng-repeat="row in antro">
+                            <td>{{row.name}}</td>
+                            <td>{{row.value}}</td>
+                        </tr>
+                        <!--<tr>
+                            <td>Рост</td>
+                            <td>170 см</td>
+                        </tr>
+                        <tr>
+                            <td>Вес</td>
+                            <td>55 кг</td>
+                        </tr>
+                        <tr>
+                            <td>Глаза</td>
+                            <td>Зеленые (фото)</td>
+                        </tr>
+                        <tr>
+                            <td>Размер стопы</td>
+                            <td>39</td>
+                        </tr>
+                        <tr>
+                            <td>Длина ноги</td>
+                            <td>120 см</td>
+                        </tr>-->
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>

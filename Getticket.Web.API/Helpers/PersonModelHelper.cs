@@ -1,4 +1,5 @@
-﻿using Getticket.Web.API.Models;
+﻿using System;
+using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,10 +37,104 @@ namespace Getticket.Web.API.Helpers
                 PatronymicLatin = person.PatronymicLatin,
                 IdBithplace = person.id_Bithplace,
                 Place = person.Place?.Name,
-                Country = person.Place?.Country?.Name
+                Country = person.Place?.Country?.Name,
+                ZodiacYear = GetZodiacYears(person.Bithday),
+                ZodiacMonth = GetZodiacMonth(person.Bithday),
+                BirthdayTxt = person.Bithday.ToLongDateString(),
+                Age = (DateTime.Now - person.Bithday).GetYears()
             };
 
             return model;
+        }
+
+        private static string GetZodiacMonth(DateTime birthday)
+        {
+            var y = birthday.Year;
+            if (birthday <= new DateTime(y, 1, 20))
+            {
+                return "Козерог";
+            }
+            else if (birthday <= new DateTime(y, 2, 20))
+            {
+                return "Водолей";
+            }
+            else if (birthday <= new DateTime(y, 3, 20))
+            {
+                return "Рыбы";
+            }
+            else if (birthday <= new DateTime(y, 4, 20))
+            {
+                return "Овен";
+            }
+            else if (birthday <= new DateTime(y, 5, 20))
+            {
+                return "Телец";
+            }
+            else if (birthday <= new DateTime(y, 6, 21))
+            {
+                return "Близнецы";
+            }
+            else if (birthday <= new DateTime(y, 7, 22))
+            {
+                return "Рак";
+            }
+            else if (birthday <= new DateTime(y, 8, 23))
+            {
+                return "Лев";
+            }
+            else if (birthday <= new DateTime(y, 9, 23))
+            {
+                return "Дева";
+            }
+            else if (birthday <= new DateTime(y, 10, 23))
+            {
+                return "Весы";
+            }
+            else if (birthday <= new DateTime(y, 11, 22))
+            {
+                return "Скорпион";
+            }
+            else if (birthday <= new DateTime(y, 12, 21))
+            {
+                return "Стрелец";
+            }
+            else
+            {
+                return "Козерог";
+            }
+        }
+
+        private static string GetZodiacYears(DateTime bithday)
+        {
+            switch (bithday.Year % 12)
+            {
+                case 0:
+                    return "Обезьяна";
+                case 1:
+                    return "Петух";
+                case 2:
+                    return "Собака";
+                case 3:
+                    return "Свинья";
+                case 4:
+                    return "Крыса";
+                case 5:
+                    return "Бык";
+                case 6:
+                    return "Тигр";
+                case 7:
+                    return "Кролик";
+                case 8:
+                    return "Дракон";
+                case 9:
+                    return "Змея";
+                case 10:
+                    return "Лошадь";
+                case 11:
+                    return "Коза";
+                default:
+                    return "";
+            }
         }
 
         /// <summary>
@@ -232,7 +327,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<PersonAntroNameModel> GetPersonAntroNameModels(IList<PersonAntroName> result)
         {
-            return result.Select(o => new PersonAntroNameModel {Id = o.Id, Name = o.Name}).ToList();
+            return result.Select(o => new PersonAntroNameModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         /// <summary>
@@ -242,7 +337,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<PersonConnectionTypeModel> GetConnectionTypeModels(IList<PersonConnectionType> result)
         {
-            return result.Select(o => new PersonConnectionTypeModel {Id = o.Id, Name = o.Name}).ToList();
+            return result.Select(o => new PersonConnectionTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         /// <summary>
@@ -252,7 +347,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<PersonSocialLinkTypeModel> GetSocialLinkTypeModels(IList<PersonSocialLinkType> result)
         {
-            return result.Select(o => new PersonSocialLinkTypeModel {Id = o.Id, Name = o.Name}).ToList();
+            return result.Select(o => new PersonSocialLinkTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         /// <summary>
@@ -262,7 +357,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<PersonMediaTypeModel> GetMediaTypeModels(IList<PersonMediaType> result)
         {
-            return result.Select(o => new PersonMediaTypeModel { Id = o.Id, Name = o.Name}).ToList();
+            return result.Select(o => new PersonMediaTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         /// <summary>

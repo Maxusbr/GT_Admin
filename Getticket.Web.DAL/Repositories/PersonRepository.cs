@@ -36,8 +36,8 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IPersonRepository.FindAllPerson" />
         public IList<Person> FindAllPerson()
         {
-            var query = db.Person.Where(o => true);
-            return GetAll(query);
+            Expression<Func<Person, bool>> where = x => true;
+            return GetMany(where, x => x.LastName, x => x.Sex, x => x.Place);
         }
 
         /// <see cref="IPersonRepository.FindPerson" />

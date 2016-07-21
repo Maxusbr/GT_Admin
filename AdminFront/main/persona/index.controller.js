@@ -1,17 +1,27 @@
-(function () {
+﻿(function () {
     'use strict';
 
-    angular
+    var app = angular
         .module('app')
         .controller('MainPersonaIndexController', MainPersonaIndexController);
 
-    MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$http'];
+    MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$http', '$rootScope'];
 
-    function MainPersonaIndexController($scope, $stateParams, $http) {
+    function MainPersonaIndexController($scope, $stateParams, $http, $rootScope) {
+        function clearValues() {
+            $scope.links = [];
+            $scope.linklist = [];
+            $scope.medias = [];
+            $scope.medialist = [];
+            $scope.descriptions = [];
+            $scope.descriptionlist = [];
+            $scope.connections = [];
+            $scope.connectionList = [];
+            $scope.antro = [];
+        };
+
         function getLinks(id) {
             $http.get(`${apiUrl}persons/social/${id}`).success(function (data) {
-                $scope.links = [];
-                $scope.linklist = [];
                 data.forEach(function (item) {
                     if (item.List.length > 0)
                         $scope.links.push({
@@ -26,8 +36,6 @@
         };
         function getMedia(id) {
             $http.get(`${apiUrl}persons/media/${id}`).success(function (data) {
-                $scope.medias = [];
-                $scope.medialist = [];
                 data.forEach(function (item) {
                     if (item.List.length > 0)
                         $scope.medias.push({
@@ -41,8 +49,6 @@
         };
         function getDescript(id) {
             $http.get(`${apiUrl}persons/description/${id}`).success(function (data) {
-                $scope.descriptions = [];
-                $scope.descriptionlist = [];
                 data.forEach(function (item) {
                     if (item.List.length > 0)
                         $scope.descriptions.push({
@@ -56,8 +62,6 @@
         };
         function getConnection(id) {
             $http.get(`${apiUrl}persons/connection/${id}`).success(function (data) {
-                $scope.connections = [];
-                $scope.connectionList = [];
                 data.forEach(function (item) {
                     if (item.List.length > 0)
                         var connection = item.Type > 1 ? {
@@ -78,17 +82,36 @@
         };
         function getAntro(id) {
             $http.get(`${apiUrl}persons/antro/${id}`).success(function (data) {
-                $scope.antro = [];
                 data.forEach(function (item) {
                     $scope.antro.push({ name: item.AntroName, value: item.Value });
                 });
             });
         };
+
+        function getYearText(age) {
+            var year = age;
+            while (year > 10) {
+                year = year % 10;
+            }
+            if (year === 1) {
+                return "год";
+            }
+            else {
+                if (year > 1 && year < 5) {
+                    return "года";
+                }
+                else {
+                    return "лет";
+                }
+            }
+        }
         $scope.id = $stateParams.id;
-        if ($scope.persons !== undefined)
-            $scope.persons.forEach(function (item) {
+        if ($rootScope.persons !== undefined)
+            $rootScope.persons.forEach(function (item) {
                 if (item.Id == $scope.id) {
                     $scope.person = item;
+                    $scope.yearText = getYearText(item.Age);
+                    clearValues();
                     getDescript($scope.id);
 
                     getConnection($scope.id);

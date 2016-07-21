@@ -43,7 +43,7 @@
 
     function MainPersonaController($scope, $rootScope, $stateParams, $location, $http) {
         $rootScope.id = $stateParams.id;
-        
+        var indx = 0;
         $rootScope.HidePersonaMenu = function () {
             $('#persona-menu').hide();
             $('#personacontent').addClass('col-md-24').removeClass('col-md-18');
@@ -145,24 +145,54 @@
             //}
         ];
 
-        $http({
-            url: `${apiUrl}persons/${pageNumber}/${pageSize}`,
-            method: "POST",
-            headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-        }).success(function (data) {
+        //$http({
+        //    url: `${apiUrl}persons`,///${pageNumber}/${pageSize}
+        //    method: "POST",
+        //    headers: { 'Content-Type': 'application/json; charset=UTF-8' }
+        //}).success(function (data) {
+        //    $rootScope.persons = data;
+        //    $rootScope.persons.forEach(function (item) {
+        //        $scope.menuScope.push({
+        //            id: item.Id,
+        //            name: {
+        //                firstName: item.Name,
+        //                lastName: item.LastName,
+        //                middleName: item.Patronymic
+        //            },
+        //            nameTranslated: {
+        //                firstName: item.NameLatin,
+        //                lastName: item.LastNameLatin,
+        //                middleName: item.PatronymicLatin
+        //            },
+        //            type: item.EventType,
+        //            event: item.EventName
+        //        });
+        //    });
+        //});
+        $http.get(`${apiUrl}persons`).success(function (data) {
             $rootScope.persons = data;
             $rootScope.persons.forEach(function (item) {
-                $scope.menuScope.push({
-                    id: item.Id,
-                    name: item.Name + ' ' + item.LastName,
-                    type: item.EventType,
-                    event: item.EventName
+                if (indx > 20) return ;
+                    $scope.menuScope.push({
+                        id: item.Id,
+                        name: {
+                            firstName: item.Name,
+                            lastName: item.LastName,
+                            middleName: item.Patronymic
+                        },
+                        nameTranslated: {
+                            firstName: item.NameLatin,
+                            lastName: item.LastNameLatin,
+                            middleName: item.PatronymicLatin
+                        },
+                        type: item.EventType,
+                        event: item.EventName
+                    });
+                    indx++;
                 });
-            });
         });
 
-
-        $scope.predicate = 'name';
+        $scope.predicate = 'name.lastName';
         $scope.reverse = false;
 
         $scope.order = function (predicate) {

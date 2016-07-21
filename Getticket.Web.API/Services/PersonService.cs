@@ -34,7 +34,16 @@ namespace Getticket.Web.API.Services
         public IList<PersonModel> GetAll()
         {
             var persons = _personRepository.FindAllPerson();
-            return PersonModelHelper.GetPersonModels(persons);
+            var listPerson = PersonModelHelper.GetPersonModels(persons);
+            foreach (var item in listPerson)
+            {
+                var models = _personRepository.GetConnections(item.Id);
+                item.Connections = PersonModelHelper.GetConnectionModels(models);
+                var con = item.Connections.FirstOrDefault(o => o.Event != null);
+                item.EventName = con?.Event?.Name;
+                item.EventType = con?.Event?.EventType;
+            }
+            return listPerson;
         }
 
         /// <summary>

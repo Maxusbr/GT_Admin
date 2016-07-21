@@ -206,6 +206,7 @@
     <Compile Include="Helpers\ChangePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
     <Compile Include="Helpers\RestorePasswordEmailModelHelper.cs" />
+    <Compile Include="Helpers\TimeSpanExtensions.cs" />
     <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
     <Compile Include="Helpers\RegisteredEmailModelHelper.cs" />
     <Compile Include="Helpers\PersonModelHelper.cs" />
