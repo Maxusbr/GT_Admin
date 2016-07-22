@@ -14,7 +14,7 @@ namespace Getticket.Web.API.Services
     /// Сервис для управления Person
     /// (обновление, регистрация, удаление и т.п.)
     /// </summary>
-    public class PersonService: IPersonService
+    public class PersonService : IPersonService
     {
         private readonly IPersonRepository _personRepository;
 
@@ -34,7 +34,16 @@ namespace Getticket.Web.API.Services
         public IList<PersonModel> GetAll()
         {
             var persons = _personRepository.FindAllPerson();
-            return PersonModelHelper.GetPersonModels(persons);
+            var listPerson = PersonModelHelper.GetPersonModels(persons);
+            foreach (var item in listPerson)
+            {
+                var models = _personRepository.GetConnections(item.Id);
+                item.Connections = PersonModelHelper.GetConnectionModels(models);
+                var con = item.Connections.FirstOrDefault(o => o.Event != null);
+                item.EventName = con?.Event?.Name;
+                item.EventType = con?.Event?.EventType;
+            }
+            return listPerson;
         }
 
         /// <summary>
@@ -54,7 +63,9 @@ namespace Getticket.Web.API.Services
             {
                 var models = _personRepository.GetConnections(item.Id);
                 item.Connections = PersonModelHelper.GetConnectionModels(models);
-                item.FirstConnection = item.Connections.FirstOrDefault();
+                var con = item.Connections.FirstOrDefault(o => o.Event != null);
+                item.EventName = con?.Event?.Name;
+                item.EventType = con?.Event?.EventType;
             }
             return listPerson;
         }
@@ -96,10 +107,11 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<PersonConnectionModel> GetConnection(int id)
+        public IEnumerable<EntityCollection<PersonConnectionModel>> GetConnection(int id)
         {
-            var models = _personRepository.GetConnections(id);
-            return PersonModelHelper.GetConnectionModels(models);
+            var list = PersonModelHelper.GetConnectionModels(_personRepository.GetConnections(id));
+            var types = list.GroupBy(o => o.id_ConnectionType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonConnectionModel> { List = list.Where(o => o.id_ConnectionType == tp), Type = tp });
         }
 
         /// <summary>
@@ -107,21 +119,24 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<PersonSocialLinkModel> GetSocialLinks(int id)
+        public IEnumerable<EntityCollection<PersonSocialLinkModel>> GetSocialLinks(int id)
         {
-            var result = _personRepository.GetSocialLinks(id);
-            return PersonModelHelper.GetSocialLinkModels(result);
+            var list = PersonModelHelper.GetSocialLinkModels(_personRepository.GetSocialLinks(id));
+            var types = list.GroupBy(o => o.IdSocialLinkType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonSocialLinkModel> { List = list.Where(o => o.IdSocialLinkType == tp), Type = tp });
+
         }
 
         /// <summary>
-        /// Возвращает список моделей интернет-ссылок
+        /// Возвращает список моделей медиа
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<PersonMediaModel> GetMedia(int id)
+        public IEnumerable<EntityCollection<PersonMediaModel>> GetMedia(int id)
         {
-            var result = _personRepository.GetMedia(id);
-            return PersonModelHelper.GetMediaModels(result);
+            var list = PersonModelHelper.GetMediaModels(_personRepository.GetMedia(id));
+            var types = list.GroupBy(o => o.id_MediaType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonMediaModel> { List = list.Where(o => o.id_MediaType == tp), Type = tp });
         }
 
         /// <summary>
@@ -129,10 +144,19 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IList<PersonDescriptionModel> GetDescriptions(int id)
+        public IEnumerable<EntityCollection<PersonDescriptionModel>> GetDescriptions(int id)
         {
-            var result = _personRepository.GetDescriptions(id);
-            return PersonModelHelper.GetDescriptionModels(result);
+            var list = PersonModelHelper.GetDescriptionModels(_personRepository.GetDescriptions(id));
+            var types = list.GroupBy(o => o.id_DescriptionType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp) });
+        }
+
+        /// <see cref="IPersonService.GetFacts" />
+        public IEnumerable<EntityCollection<PersonFactModel>> GetFacts(int id)
+        {
+            var list = PersonModelHelper.GetFactModels(_personRepository.GetPersonFacts(id));
+            var types = list.GroupBy(o => o.id_FactType).Select(o => o.Key);
+            return types.Select(tp => new EntityCollection<PersonFactModel> { List = list.Where(o => o.id_FactType == tp) });
         }
 
         /// <summary>
@@ -640,7 +664,79 @@ namespace Getticket.Web.API.Services
                 .Result("Descriptions delete complete");
         }
 
+        /// <see cref="IPersonService.GetFactsTypes"/>
+        public IList<PersonFactTypeModel> GetFactsTypes()
+        {
+            var result = _personRepository.GetPersonFactTypes();
+            return PersonModelHelper.GetFactTypeModels(result);
+        }
 
+        /// <see cref="IPersonService.UpdateFactTypes"/>
+        public ServiceResponce UpdateFactTypes(IEnumerable<PersonFactTypeModel> models)
+        {
+            foreach (var item in models)
+            {
+                var result = _personRepository.UpdateFactType(new PersonFactType { Id = item.Id, Name = item.Name });
+                if (result == null) return ServiceResponce
+                 .FromFailed()
+                 .Result($"Error save fact type");
+            }
+
+            return ServiceResponce
+                .FromSuccess()
+                .Result("Fatc type save complete");
+        }
+
+        /// <see cref="IPersonService.DeleteFactTypes"/>
+        public ServiceResponce DeleteFactTypes(IEnumerable<PersonFactTypeModel> models)
+        {
+            if (models.Any(item => !_personRepository.DeleteFactType(item.Id)))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Result($"Error delete fact type");
+            }
+
+            return ServiceResponce
+                .FromSuccess()
+                .Result("Fact type delete complete");
+        }
+
+        /// <see cref="IPersonService.UpdateFacts"/>
+        public ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models)
+        {
+            if (models.Select(item => _personRepository.UpdatePersonFact(new PersonFact
+            {
+                Id = item.Id,
+                id_Person = pesonId,
+                id_FactType = item.id_FactType,
+                FactText = item.FactText
+            })).Any(result => result == null))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Result($"Error save fact");
+            }
+
+            return ServiceResponce
+                .FromSuccess()
+                .Result("Facts save complete");
+        }
+
+        /// <see cref="IPersonService.DeleteFacts"/>
+        public ServiceResponce DeleteFacts(IEnumerable<PersonFactModel> models)
+        {
+            if (models.Any(item => !_personRepository.DeletePersonFact(item.Id)))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Result($"Error delete fact");
+            }
+
+            return ServiceResponce
+                .FromSuccess()
+                .Result("Facts delete complete");
+        }
     }
 
 }

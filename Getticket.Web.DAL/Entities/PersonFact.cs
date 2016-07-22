@@ -6,34 +6,31 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Getticket.Web.DAL.Entities
 {
     /// <summary>
-    /// Антропометрические характеристики
+    /// Факты
     /// </summary>
-    public class PersonAntro : BaseEntity
+    public class PersonFact : BaseEntity
     {
         /// <summary>
         /// Конструктор
         /// </summary>
-        public PersonAntro(){}
+        public PersonFact(){}
 
         /// <summary>
         /// Внешний ключ для <see cref="Entities.Person"/>
         /// </summary>
         [Required]
-        [Index("PersonAntroIndex", 1, IsUnique = true)]
         public int id_Person { get; set; }
 
         /// <summary>
-        /// Внешний ключ для <see cref="PersonAntroName"/>
+        /// Внешний ключ для <see cref="Entities.PersonDescriptionType"/>
         /// </summary>
         [Required]
-        [Index("PersonAntroIndex", 2, IsUnique = true)]
-        public int id_Antro { get; set; }
+        public int id_FactType { get; set; }
 
         /// <summary>
-        /// Значение характеристики
+        /// Текст факта
         /// </summary>
-        [Required]
-        public string Value { get; set; }
+        public string FactText { get; set; }
 
         /// <summary>
         /// <see cref="Entities.Person"/>
@@ -42,9 +39,9 @@ namespace Getticket.Web.DAL.Entities
         public virtual Person Person { get; set; }
 
         /// <summary>
-        /// Наименование характеристики <see cref="PersonAntroName"/>
+        /// <see cref="PersonFactType"/>
         /// </summary>
-        [ForeignKey("id_Antro")]
-        public virtual PersonAntroName AntroName { get; set; }
+        [ForeignKey("id_FactType")]
+        public virtual PersonFactType FactType { get; set; }
     }
 }

@@ -9,7 +9,7 @@
     function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
         var service = {};
 
-        service.Login = Login;
+        service.Login = _login;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
 
@@ -27,6 +27,31 @@
                 });
 
         }
+
+        function _login(username, password, callback) {
+
+            var data = "grant_type=password&username=" + username + "&password=" + password;
+
+            //var deferred = $q.defer();
+
+            $http.post(apiUrl + 'logon', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+
+                //AuthenticationService.set('authorizationData', { token: response.access_token, userName: username });
+
+                //_authentication.isAuth = true;
+                //_authentication.userName = loginData.userName;
+                callback(response);
+                //deferred.resolve(response);
+                
+
+            }).error(function (err, status) {
+                //_logOut();
+                //deferred.reject(err);
+            });
+
+            //return deferred.promise;
+
+        };
 
         function SetCredentials(username, password) {
             var authdata = Base64.encode(username + ':' + password);

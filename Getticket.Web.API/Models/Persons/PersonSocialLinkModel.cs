@@ -11,6 +11,7 @@ namespace Getticket.Web.API.Models.Persons
         /// Ссылка
         /// </summary>
         [Required]public string Link { get; set; }
+        public string Description { get; set; }
 
         public int id_Person { get; set; }
 

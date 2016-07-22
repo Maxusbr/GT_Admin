@@ -36,8 +36,8 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IPersonRepository.FindAllPerson" />
         public IList<Person> FindAllPerson()
         {
-            var query = db.Person.Where(o => true);
-            return GetAll(query);
+            Expression<Func<Person, bool>> where = x => true;
+            return GetMany(where, x => x.LastName, x => x.Sex, x => x.Place);
         }
 
         /// <see cref="IPersonRepository.FindPerson" />
@@ -265,6 +265,7 @@ namespace Getticket.Web.DAL.Repositories
         {
             return db.PersonConnections.Where(o => o.id_Person == id)
                 .Include(o => o.Event)
+                .Include(o => o.Event.EventType)
                 .Include(o => o.PersonConnectionType)
                 .Include(o => o.PersonConnectTo)
                 .ToList();
@@ -463,6 +464,91 @@ namespace Getticket.Web.DAL.Repositories
             var item = db.PersonMediaType.FirstOrDefault(u => u.Id == id);
             if (item == null) return false;
             db.PersonMediaType.Remove(item);
+            db.SaveChanges();
+            return true;
+        }
+
+        /// <see cref="IPersonRepository.GetPersonFactTypes" />
+        public IList<PersonFactType> GetPersonFactTypes()
+        {
+            return db.PersonFactTypes.ToList();
+        }
+
+        /// <see cref="IPersonRepository.UpdateFactType" />
+        public PersonFactType UpdateFactType(PersonFactType type)
+        {
+            if (type.Id == 0)
+            {
+                db.Entry(type).State = System.Data.Entity.EntityState.Added;
+            }
+            else if (type.Id > 0)
+            {
+                db.Entry(type).State = System.Data.Entity.EntityState.Modified;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return type;
+        }
+
+        /// <see cref="IPersonRepository.DeleteFactType" />
+        public bool DeleteFactType(int id)
+        {
+            if (id <= 0) return false;
+            var item = db.PersonFactTypes.FirstOrDefault(u => u.Id == id);
+            if (item == null) return false;
+            db.PersonFactTypes.Remove(item);
+            db.SaveChanges();
+            return true;
+        }
+
+        /// <see cref="IPersonRepository.GetPersonFacts" />
+        public IList<PersonFact> GetPersonFacts(int id)
+        {
+            return db.PersonFacts.Where(o => o.id_Person == id)
+                .Include(o => o.FactType).ToList();
+        }
+
+        /// <see cref="IPersonRepository.UpdatePersonFacts" />
+        public bool UpdatePersonFacts(IList<PersonFact> facts)
+        {
+            return facts.All(fact => UpdatePersonFact(fact) != null);
+        }
+
+        /// <see cref="IPersonRepository.UpdatePersonFact" />
+        public PersonFact UpdatePersonFact(PersonFact fact)
+        {
+            if (fact.Id == 0)
+            {
+                db.Entry(fact).State = System.Data.Entity.EntityState.Added;
+            }
+            else if (fact.Id > 0)
+            {
+                db.Entry(fact).State = System.Data.Entity.EntityState.Modified;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return fact;
+        }
+
+        /// <see cref="IPersonRepository.DeletePersonFact" />
+        public bool DeletePersonFact(int id)
+        {
+            if (id <= 0) return false;
+            var item = db.PersonFacts.FirstOrDefault(u => u.Id == id);
+            if (item == null) return false;
+            db.PersonFacts.Remove(item);
             db.SaveChanges();
             return true;
         }

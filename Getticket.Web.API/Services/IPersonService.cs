@@ -55,28 +55,35 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IList<PersonConnectionModel> GetConnection(int id);
+        IEnumerable<EntityCollection<PersonConnectionModel>> GetConnection(int id);
 
         /// <summary>
         /// Возвращает список моделей интернет-ссылок
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IList<PersonSocialLinkModel> GetSocialLinks(int id);
+        IEnumerable<EntityCollection<PersonSocialLinkModel>> GetSocialLinks(int id);
 
         /// <summary>
         /// Возвращает список моделей интернет-ссылок
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IList<PersonMediaModel> GetMedia(int id);
+        IEnumerable<EntityCollection<PersonMediaModel>> GetMedia(int id);
 
         /// <summary>
         /// Возвращает список моделей описаний
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IList<PersonDescriptionModel> GetDescriptions(int id);
+        IEnumerable<EntityCollection<PersonDescriptionModel>> GetDescriptions(int id);
+
+        /// <summary>
+        /// Возвращает список моделей фактов
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IEnumerable<EntityCollection<PersonFactModel>> GetFacts(int id);
 
         /// <summary>
         /// Add or Update Person entity
@@ -91,7 +98,6 @@ namespace Getticket.Web.API.Services
         /// <param name="id"></param>
         /// <returns></returns>
         ServiceResponce DeletePerson(int id);
-
 
         /// <summary>
         /// Добавить/Изменить имена антропометрических характеристик
@@ -267,6 +273,41 @@ namespace Getticket.Web.API.Services
         /// <param name="models"></param>
         /// <returns></returns>
         ServiceResponce DeleteDescriptions(IEnumerable<PersonDescriptionModel> models);
+
+        /// <summary>
+        /// Возвращает список типов фактов
+        /// </summary>
+        /// <returns></returns>
+        IList<PersonFactTypeModel> GetFactsTypes();
+
+        /// <summary>
+        /// Добавить/Изменить типы фактов
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce UpdateFactTypes(IEnumerable<PersonFactTypeModel> models);
+
+        /// <summary>
+        /// Удалить типы фактов
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce DeleteFactTypes(IEnumerable<PersonFactTypeModel> models);
+
+        /// <summary>
+        /// Добавить/Изменить список фактов для Person c Id = <paramref name="pesonId"/>
+        /// </summary>
+        /// <param name="pesonId"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models);
+
+        /// <summary>
+        /// Удалить факты
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce DeleteFacts(IEnumerable<PersonFactModel> models);
     }
 
 }

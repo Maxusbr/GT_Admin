@@ -6,21 +6,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Getticket.Web.DAL.Entities
 {
     /// <summary>
-    /// Название изменяемой характеристики
+    /// Тип описания
     /// </summary>
-    public class PersonChangeParam : BaseEntity
+    public class PersonFactType : BaseEntity
     {
         /// <summary>
         /// Конструктор
         /// </summary>
-        public PersonChangeParam(){}
+        public PersonFactType(){}
 
         /// <summary>
-        /// Название
+        /// Наименование
         /// </summary>
         [MaxLength(300)]
         [Required]
-        [Index("NameIndex", IsUnique = true)]
         public string Name { get; set; }
+        public string Descript { get; set; }
     }
 }
