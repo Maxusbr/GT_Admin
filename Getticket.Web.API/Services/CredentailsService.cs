@@ -52,6 +52,7 @@ namespace Getticket.Web.API.Services {
             if (users == null || users.Count == 0) {
                 return null;
             } else if (users.Count == 1) {
+                //TODO это зачем?
                 User toReturn = null;
                 foreach (User u in users) {
                     toReturn = u;

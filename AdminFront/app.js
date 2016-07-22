@@ -19,12 +19,21 @@ var pageSize = 20;
         .config(config)
         .run(run);
 
-    run.$inject = ['$rootScope', '$templateCache'];
+    run.$inject = ['$rootScope', '$templateCache', '$cookieStore', '$location'];
 
-    function run($rootScope, $templateCache) {
-        $rootScope.$on('$viewContentLoaded', function () {
+    function run($rootScope, $templateCache, $cookieStore, $location) {
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentUser) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        }
+        $rootScope.$on('$viewContentLoaded', function() {
             $templateCache.removeAll();
-        })
+            var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/sign-in']) === -1;
+            var loggedIn = $rootScope.globals.currentUser;
+            if (restrictedPage && !loggedIn) {
+                $location.path('/sign-in');
+            }
+        });
     }
 
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];

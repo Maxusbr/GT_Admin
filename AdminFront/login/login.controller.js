@@ -25,6 +25,7 @@
             vm.dataLoading = true;
             AuthenticationService.Login(vm.user.username, vm.user.password, function (response) {
                 if (response.success) {
+                    AuthenticationService.set('authorizationData', { token: response.access_token, userName: username });
                     AuthenticationService.SetCredentials(vm.user.username, vm.user.password);
                     $location.path('/');
                 } else {
