@@ -12,7 +12,7 @@
         service.Login = _login;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
-
+        service.isAuth = false;
         return service;
 
         function Login(username, password, callback) {
@@ -38,24 +38,25 @@
                 //withCredentials: true,
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (response) {
-
-                //AuthenticationService.set('authorizationData', { token: response.access_token, userName: username });
-
-                //_authentication.isAuth = true;
-                //_authentication.userName = loginData.userName;
+                service.isAuth = true;
                 callback(response);
                 deferred.resolve(response);
                 
 
             }).error(function (err, status) {
-                //_logOut();
+                _logOut();
+                callback(false);
                 deferred.reject(err);
             });
 
             return deferred.promise;
 
         };
+        function _logOut() {
 
+            ClearCredentials();
+            service.isAuth = false;
+        };
         function SetCredentials(username, password, token) {
             var authdata = Base64.encode(username + ':' + password);
 
@@ -74,7 +75,7 @@
         function ClearCredentials() {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic';
+            $http.defaults.headers.common.Authorization = 'Bearer';
         }
     }
 

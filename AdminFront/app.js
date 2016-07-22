@@ -19,12 +19,12 @@ var pageSize = 20;
         .config(config)
         .run(run);
 
-    run.$inject = ['$rootScope', '$templateCache', '$cookieStore', '$location'];
+    run.$inject = ['$rootScope', '$templateCache', '$cookieStore', '$location', '$http'];
 
-    function run($rootScope, $templateCache, $cookieStore, $location) {
+    function run($rootScope, $templateCache, $cookieStore, $location, $http) {
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.globals.currentUser.token; // jshint ignore:line
         }
         $rootScope.$on('$viewContentLoaded', function() {
             $templateCache.removeAll();
