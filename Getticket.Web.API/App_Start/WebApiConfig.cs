@@ -20,7 +20,10 @@ namespace Getticket.Web.API
         {
             // Маршруты веб-API основанные на атрибутах
             config.MapHttpAttributeRoutes();
-
+            var enableCorsAttribute = new EnableCorsAttribute("http://localhost:36049",
+                                                  "Origin, Content-Type, Accept",
+                                                  "GET, PUT, POST, DELETE, OPTIONS");
+            config.EnableCors(enableCorsAttribute);
             // Проверяем состояние модели на каждом контроллере
             config.Filters.Add(kernel.Get<ValidateModelStateAttribute>());
         }

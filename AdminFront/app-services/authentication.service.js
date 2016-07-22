@@ -5,8 +5,8 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
-    function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+    AuthenticationService.$inject = ['$http', '$q', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
+    function AuthenticationService($http, $q, $cookieStore, $rootScope, $timeout, UserService) {
         var service = {};
 
         service.Login = _login;
@@ -32,38 +32,42 @@
 
             var data = "grant_type=password&username=" + username + "&password=" + password;
 
-            //var deferred = $q.defer();
+            var deferred = $q.defer();
 
-            $http.post(apiUrl + 'logon', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+            $http.post(apiUrl + 'logon', data, {
+                //withCredentials: true,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }).success(function (response) {
 
                 //AuthenticationService.set('authorizationData', { token: response.access_token, userName: username });
 
                 //_authentication.isAuth = true;
                 //_authentication.userName = loginData.userName;
                 callback(response);
-                //deferred.resolve(response);
+                deferred.resolve(response);
                 
 
             }).error(function (err, status) {
                 //_logOut();
-                //deferred.reject(err);
+                deferred.reject(err);
             });
 
-            //return deferred.promise;
+            return deferred.promise;
 
         };
 
-        function SetCredentials(username, password) {
+        function SetCredentials(username, password, token) {
             var authdata = Base64.encode(username + ':' + password);
 
             $rootScope.globals = {
                 currentUser: {
                     username: username,
-                    authdata: authdata
+                    authdata: authdata,
+                    token: token
                 }
             };
 
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
+            $http.defaults.headers.common['Authorization'] = 'Bearer ' + token; // jshint ignore:line
             $cookieStore.put('globals', $rootScope.globals);
         }
 
