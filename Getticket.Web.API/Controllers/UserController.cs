@@ -150,5 +150,12 @@ namespace Getticket.Web.API.Controllers
         {
             return Ok(UserServ.MarkNotDeleted(id).Response());
         }
+
+        [HttpPost]
+        [Route("")]
+        public IHttpActionResult Auth(string login, string password)
+        {
+            return Ok(UserServ.MarkNotDeleted(1).Response());
+        }
     }
 }
