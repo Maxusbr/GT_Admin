@@ -16,7 +16,7 @@
         return service;
 
         function Login(username, password, callback) {
-            var adress = apiUrl + '/User/Auth?login=' + username + '&password=' + password;
+            var adress = apiUrl + 'User/Auth?login=' + username + '&password=' + password;
             //debug
             console.log(adress);
             //return $http.get(adress).then(handleSuccess, handleError('Error login user'));
