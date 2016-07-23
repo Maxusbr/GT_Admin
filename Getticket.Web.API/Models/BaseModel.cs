@@ -8,5 +8,6 @@ namespace Getticket.Web.API.Models
     public class BaseModel
     {
         public int Id { get; set; }
+        public bool Changed { get; set; }
     }
 }

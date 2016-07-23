@@ -1,4 +1,5 @@
 ﻿(function () {
+
     'use strict';
 
     var app = angular
@@ -6,6 +7,8 @@
         .controller('MainPersonaIndexController', MainPersonaIndexController);
 
     MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$http', '$rootScope'];
+
+
 
     function MainPersonaIndexController($scope, $stateParams, $http, $rootScope) {
         function clearValues() {
@@ -60,6 +63,7 @@
                         });
                     $scope.descriptionlist.push.apply($scope.descriptionlist, item.List);
                 });
+
             });
         };
         function getFact(id) {
@@ -154,6 +158,34 @@
             });
         }
 
+        $scope.IsChanged = false;
+        $scope.Changed = function (list) {
+            $scope.IsChanged = list.filter(function (item) { return item.Changed; }).length > 0;
+        }
+
+        function saveEntities(list, link, callback) {
+            $http.post(`${apiUrl}persons/${link}/update/${$scope.id}`, list).success(function (data) {
+                callback(list);
+            });
+        }
+
+        function continueSaveDescription(list) {
+            list.forEach(function (item) {
+                item.Changed = item.isEdit = item.isTypeEdit = false;
+                item.PersonDescriptionType = $rootScope.descriptiontypes.filter(function (type) {
+                    return type.Id == item.id_DescriptionType;
+                })[0].Name;
+            });
+            $scope.Changed(list);
+        }
+        $scope.saveDescription = function (item) {
+            var list = [item];
+            saveEntities(list, 'description', continueSaveDescription);
+        }
+        $scope.saveDescriptions = function () {
+            var list = $scope.descriptionlist.filter(function (item) { return item.Changed; });
+            saveEntities(list, 'description', continueSaveDescription);
+        }
         $scope.SwitchElements = function () {
             $('.persona-main__container').hide();
 

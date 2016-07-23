@@ -367,7 +367,7 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="PersonService.UpdateDescriptions" />
         [HttpPost]
         [Route("description/update/{id}")]
-        public IHttpActionResult UpdateDescriptions(int id, [FromBody] IEnumerable<PersonDescriptionModel> models)
+        public IHttpActionResult UpdateDescriptions(int id,[FromBody] IEnumerable<PersonDescriptionModel> models)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             return Ok(_personService.UpdateDescriptions(id, models).Response());

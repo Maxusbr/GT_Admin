@@ -627,7 +627,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce UpdateDescriptions(int pesonId, IEnumerable<PersonDescriptionModel> models)
         {
-            if (models.Select(item => _personRepository.UpdateDescription(new PersonDescription
+            if (models == null || models.Select(item => _personRepository.UpdateDescription(new PersonDescription
             {
                 Id = item.Id,
                 id_Person = pesonId,

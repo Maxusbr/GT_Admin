@@ -39,6 +39,8 @@
             });
     }
 
+    
+
     MainPersonaController.$inject = ['$scope', '$rootScope', '$stateParams', '$location', '$http'];
 
     function MainPersonaController($scope, $rootScope, $stateParams, $location, $http) {
@@ -199,6 +201,45 @@
             $scope.reverse = ($scope.predicate == predicate) ? !$scope.reverse : false;
             $scope.predicate = predicate;
         };
+        function getTypes() {
+            if (!$rootScope.descriptiontypes) {
+                $rootScope.descriptiontypes = [];
+                $http.get(`${apiUrl}persons/description/types`).success(function (data) {
+                    $rootScope.descriptiontypes.push.apply($rootScope.descriptiontypes, data);
+                });
+            }
+            if (!$rootScope.facttypes) {
+                $rootScope.facttypes = [];
+                $http.get(`${apiUrl}persons/fact/types`).success(function (data) {
+                    $rootScope.facttypes.push.apply($rootScope.facttypes, data);
+                });
+            }
+            if (!$rootScope.connectiontypes) {
+                $rootScope.connectiontypes = [];
+                $http.get(`${apiUrl}persons/connection/types`).success(function (data) {
+                    $rootScope.connectiontypes.push.apply($rootScope.connectiontypes, data);
+                });
+            }
+            if (!$rootScope.mediatypes) {
+                $rootScope.mediatypes = [];
+                $http.get(`${apiUrl}persons/media/types`).success(function (data) {
+                    $rootScope.mediatypes.push.apply($rootScope.mediatypes, data);
+                });
+            }
+            if (!$rootScope.socialtypes) {
+                $rootScope.socialtypes = [];
+                $http.get(`${apiUrl}persons/social/types`).success(function (data) {
+                    $rootScope.socialtypes.push.apply($rootScope.socialtypes, data);
+                });
+            }
+            if (!$rootScope.antronames) {
+                $rootScope.antronames = [];
+                $http.get(`${apiUrl}persons/antro/names`).success(function (data) {
+                    $rootScope.antronames.push.apply($rootScope.antronames, data);
+                });
+            }
+        };
+        getTypes();
 
         //$rootScope.person = {
         //    id: 1,
