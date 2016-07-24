@@ -133,15 +133,12 @@
 <div class="row">
     <div class="col-md-24">
         <ul class="nav nav-tabs" ng-click="SwitchElements()">
-            <li role="presentation" class="col-md-5 text-center">
-                <a data-target="#description" data-toggle="tab">Описание</a>
-            </li>
+            <li role="presentation" class="col-md-5 text-center"><a data-target="#description" data-toggle="tab">Описание</a></li>
             <li role="presentation" class="col-md-4"><a data-target="#facts" data-toggle="tab">Факты</a></li>
             <li role="presentation" class="col-md-3"><a data-target="#connections" data-toggle="tab">Связи</a></li>
             <li role="presentation" class="col-md-4"><a data-target="#media" data-toggle="tab">Медиа и файлы</a></li>
             <li role="presentation" class="col-md-4"><a data-target="#internet" data-toggle="tab">Интернет</a></li>
-            <li role="presentation" class="col-md-4">
-                <a data-target="#anthropometry" data-toggle="tab">Антропометрия</a>
+            <li role="presentation" class="col-md-4"><a data-target="#anthropometry" data-toggle="tab">Антропометрия</a>
             </li>
         </ul>
 
@@ -166,21 +163,20 @@
                                     <span ng-show="!item.isEdit">{{item.DescriptionText}}</span>
                                     <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.DescriptionText"
                                               ng-show="item.isEdit" ng-change="item.Changed = true; Changed(descriptionlist)"></textarea>
-                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit" />
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
                                 </td>
                                 <td>
                                     <span ng-show="!item.isTypeEdit">{{item.PersonDescriptionType}}</span>
                                     <select ng-model="item.id_DescriptionType" class="form-control" ng-show="item.isTypeEdit"
                                             ng-change="item.Changed = true; Changed(descriptionlist)" ng-options="type.Id as type.Name for type in descriptiontypes">
-                                        <!--<option ng-repeat="x in descriptiontypes" value="{{x}}">{{x.Name}}</option>-->
-
                                     </select>
-                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isTypeEdit = !item.isTypeEdit" />
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isTypeEdit = !item.isTypeEdit"></a>
                                 </td>
                                 <td class="text-danger">
-                                    <strong>КA</strong>: Нужно ранжировать награды по степени
-                                    важности
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil" />
+                                    <span ng-show="!item.isDescriptionEdit">{{item.Status}}</span>
+                                    <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.Status"
+                                              ng-show="item.isDescriptionEdit" ng-change="item.Changed = true; Changed(descriptionlist)"></textarea>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isDescriptionEdit = !item.isDescriptionEdit"></a>
                                 </td>
                                 <td>Джульетта С. <br> сегодня, 19:02</td>
                                 <td><a href="#">Ссылка (Сохраненная копия)</a></td>
@@ -188,8 +184,12 @@
                                     Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
                                     / <a href="#">подробнее, статистика</a>
                                 </td>
-                                <td><a href="" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed" 
-                                       ng-click="saveDescription(item);"/></td>
+                                <td>
+                                    <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed" 
+                                       ng-click="saveDescription(item);"/>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteDescription($index)" 
+                                       ng-confirm-click="Удалить это описание?"/>
+                                </td>
                             </tr>
                             <!--<tr>
                                 <td class="persona-main__table_text">
@@ -304,8 +304,8 @@
                     </table>
 
                     <div class="pull-right">
-                        <button class="btn btn-primary btn-lg" ng-show="IsChanged" ng-click="saveDescriptions();"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить все</button>
-                        <button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Перейти в конструктор</button>
+                        <button class="btn btn-primary btn-lg" ng-show="IsChanged" ng-click="saveAll();"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить все</button>
+                        <button class="btn btn-primary btn-lg" ng-click="addDescription()"><span class="glyphicon glyphicon-plus"></span> Добавить описание</button>
                     </div>
                 </div>
             </div>
@@ -321,28 +321,40 @@
                                 <td class="col-md-3">Связь</td>
                                 <td class="col-md-3">Источник</td>
                                 <td class="col-md-4">Использование</td>
+                                <td/>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in factlist">
-                                <td class="persona-main__table_text">
-                                    {{item.FactText}}
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td class="text-danger">
-                                    <strong>КA</strong>: Нужно ранжировать награды по степени
-                                    важности
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    {{item.FactType.Name}} / {{item.FactType.Descript}}
-                                </td>
-                                <td><a href="#">Ссылка (Сохраненная копия)</a></td>
-                                <td>
-                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                    / <a href="#">подробнее, статистика</a>
-                                </td>
-                            </tr>
+                        <tr ng-repeat="item in factlist">
+                            <td class="persona-main__table_text">
+                                <span ng-show="!item.isEdit">{{item.FactText}}</span>
+                                <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.FactText"
+                                          ng-show="item.isEdit" ng-change="item.Changed = true; Changed(factlist)"></textarea>
+                                <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
+                            </td>
+                            <td class="text-danger">
+                                <strong>КA</strong>: Нужно ранжировать награды по степени
+                                важности
+                            </td>
+                            <td>Джульетта С. <br> сегодня, 19:02</td>
+                            <td>
+                                <span ng-show="!item.isTypeEdit">{{item.FactType.Name}} / {{item.FactType.Descript}}</span>
+                                <select ng-model="item.id_FactType" class="form-control" ng-show="item.isTypeEdit"
+                                        ng-change="changedFact(item); Changed(factlist)" ng-options="type.Id as type.Name + ' / ' + type.Descript for type in facttypes"></select>
+                                <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isTypeEdit = !item.isTypeEdit"></a>
+                            </td>
+                            <td><a href="#">Ссылка (Сохраненная копия)</a></td>
+                            <td>
+                                Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                / <a href="#">подробнее, статистика</a>
+                            </td>
+                            <td>
+                                <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
+                                   ng-click="saveFact(item);"></a>
+                                <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteFact($index)"
+                                   ng-confirm-click="Удалить этот факт?"></a>
+                            </td>
+                        </tr>
                             <!--<tr>
                                 <td class="persona-main__table_text">
                                     С 2008 в составе международных команд,
@@ -471,7 +483,8 @@
                     </table>
 
                     <div class="pull-right">
-                        <button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Добавить факт</button>
+                        <button class="btn btn-primary btn-lg" ng-show="IsChanged" ng-click="saveAll();"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить все</button>
+                        <button class="btn btn-primary btn-lg" ng-click="addFact()"><span class="glyphicon glyphicon-plus"></span> Добавить факт</button>
                     </div>
                 </div>
             </div>
@@ -609,7 +622,8 @@
                     </table>
 
                     <div class="pull-right">
-                        <button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Добавить связь</button>
+                        <button class="btn btn-primary btn-lg" ng-show="IsChanged" ng-click="saveAll();"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить все</button>
+                        <button class="btn btn-primary btn-lg" ng-click="addConnection()"><span class="glyphicon glyphicon-plus"></span> Добавить связь</button>
                     </div>
                 </div>
             </div>
@@ -625,22 +639,28 @@
                                 <td class="col-md-3">Изменен</td>
                                 <td class="col-md-2">Теги</td>
                                 <td class="col-md-5">Использование</td>
+                                <td />
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="item in medialist">
                                 <td>
-                                    Чемпионат Европы по керлингу <br>
-                                    Россия, Москва, ДС Мегаспорт <br>
-                                    3 декабря 2011 <br>
-                                    // Прививкова Людмила, Сидорова Анна <br> + описание
+                                    <span ng-show="!item.isDescriptionEdit">{{item.Description}}</span>
+                                    <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.Description"
+                                              ng-show="item.isDescriptionEdit" ng-change="item.Changed = true; Changed(medialist)"></textarea>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isDescriptionEdit = !item.isDescriptionEdit"></a>
                                 </td>
                                 <td>
-                                    {{item.MediaType}}
-                                    <div class="persona-main__container_media small">
+                                    <span ng-show="!item.isEdit">{{item.MediaType}}</span>
+                                    <select ng-model="item.id_MediaType" class="form-control" ng-show="item.isEdit"
+                                            ng-change="item.Changed = true; Changed(medialist)" ng-options="type.Id as type.Name for type in mediatypes"></select>
+                                    <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.MediaLink"
+                                              ng-show="item.isEdit" ng-change="item.Changed = true; Changed(medialist)"></textarea>
+                                    <div class="persona-main__container_media small" ng-show="!item.isEdit">
                                         <img ng-src="{{item.MediaLink}}" alt="Placeholder" style="width: 80px;">
                                     </div>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
                                 </td>
                                 <td>
                                     Связи <br>
@@ -654,6 +674,12 @@
                                 <td>
                                     Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
                                     / <a href="#">подробнее</a>, <a href="#">статистика</a>
+                                </td>
+                                <td>
+                                    <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
+                                       ng-click="saveMedia(item);"></a>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteMedia($index)"
+                                       ng-confirm-click="Удалить этот файл?"></a>
                                 </td>
                             </tr>
                             <!--<tr>
@@ -741,7 +767,8 @@
                         </tbody>
                     </table>
                     <div class="pull-right">
-                        <button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Добавить медиа</button>
+                        <button class="btn btn-primary btn-lg" ng-show="IsChanged" ng-click="saveAll();"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить все</button>
+                        <button class="btn btn-primary btn-lg" ng-click="addMedia()"><span class="glyphicon glyphicon-plus"></span> Добавить медиа</button>
                     </div>
                 </div>
             </div>
@@ -751,27 +778,47 @@
                     <table class="table persona-main__table">
                         <thead>
                             <tr>
-                                <td class="col-md-1">Тип</td>
+                                <td class="col-md-3">Тип</td>
                                 <td>Ссылка</td>
                                 <td>Комментарий</td>
                                 <td>Активность</td>
                                 <td>Назначение</td>
                                 <td>Изменен</td>
+                                <td/>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="item in linklist">
-                                <td>{{item.PersonSocialLinkType}}</td>
                                 <td>
-                                    <a href="{{item.Link}}">{{item.Description}}</a>
+                                    <span ng-show="!item.isTypeEdit">{{item.PersonSocialLinkType}}</span>
+                                    <select ng-model="item.IdSocialLinkType" class="form-control" ng-show="item.isTypeEdit"
+                                            ng-change="item.Changed = true; Changed(linklist)" ng-options="type.Id as type.Name for type in socialtypes"></select>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isTypeEdit = !item.isTypeEdit"></a>
                                 </td>
-                                <td></td>
+                                <td>
+                                    <a ng-show="!item.isEdit" href="{{item.Link}}">{{item.Link}}</a>
+                                    <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.Link"
+                                              ng-show="item.isEdit" ng-change="item.Changed = true; Changed(linklist)"></textarea>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
+                                </td>
+                                <td>
+                                    <span ng-show="!item.isDescriptionEdit">{{item.Description}}</span>
+                                    <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.Description"
+                                              ng-show="item.isDescriptionEdit" ng-change="item.Changed = true; Changed(linklist)"></textarea>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isDescriptionEdit = !item.isDescriptionEdit"></a>
+                                </td>
                                 <td>5 твитов\сутки</td>
                                 <td>Публично (Персона\Полная)</td>
                                 <td>
                                     Джульетта С. <br>
                                     сегодня, 19:02
+                                </td>
+                                <td>
+                                    <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
+                                       ng-click="saveLink(item);"></a>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteLink($index)"
+                                       ng-confirm-click="Удалить эту ссылку?"></a>
                                 </td>
                             </tr>
                             <!--<tr>
@@ -876,7 +923,8 @@
                         </tbody>
                     </table>
                     <div class="pull-right">
-                        <button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Добавить ссылку</button>
+                        <button class="btn btn-primary btn-lg" ng-show="IsChanged" ng-click="saveAll();"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить все</button>
+                        <button class="btn btn-primary btn-lg" ng-click="addLink()"><span class="glyphicon glyphicon-plus"></span> Добавить ссылку</button>
                     </div>
                 </div>
             </div>
@@ -891,14 +939,21 @@
                                     <td>Ассоциация</td>
                                     <td>Изменен</td>
                                     <td>Использование</td>
+                                    <td/>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <tr ng-repeat="item in antro">
                                     <td>
-                                        {{item.name}} <br>
-                                        {{item.value}}
+                                        <span ng-show="!item.isEdit">{{item.AntroName}}</span>
+                                        <select ng-model="item.IdAntro" class="form-control" ng-show="item.isEdit"
+                                                ng-change="item.Changed = true; Changed(antro)" ng-options="type.Id as type.Name for type in antronames"></select>
+                                        <textarea type="text" class="form-control" ng-model="item.Value"
+                                                  ng-show="item.isEdit" ng-change="item.Changed = true; Changed(antro)"></textarea>
+                                        <br>
+                                        <span ng-show="!item.isEdit">{{item.Value}}</span>
+                                        <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
                                     </td>
 
                                     <td>
@@ -915,6 +970,12 @@
                                     <td>
                                         Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
                                         / <a href="#">подробнее</a>, <a href="#">статистика</a>
+                                    </td>
+                                    <td>
+                                        <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
+                                           ng-click="saveAntro(item);"></a>
+                                        <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteAntro($index)"
+                                           ng-confirm-click="Удалить эту характеристику?"></a>
                                     </td>
                                 </tr>
                                 <!--<tr>
@@ -986,7 +1047,8 @@
                             </tbody>
                         </table>
                         <div class="pull-right">
-                            <button class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-plus"></span> Добавить характеристику</button>
+                            <button class="btn btn-primary btn-lg" ng-show="IsChanged" ng-click="saveAll();"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить все</button>
+                            <button class="btn btn-primary btn-lg" ng-click="addAntro()"><span class="glyphicon glyphicon-plus"></span> Добавить характеристику</button>
                         </div>
                     </div>
                 </div>
@@ -1070,7 +1132,7 @@
                 <div class="col-md-4">
                     <div class="persona-main__container_media" ng-repeat="item in medias">
                         <span class="title">{{item.type}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
-                        <img ng-src="{{item.value}}" alt="Placeholder" style="width: 100px; margin-top: 8px; height: 100px;">
+                        <img ng-src="{{item.value}}" alt="Placeholder" style="width: 100px; margin-top: 8px;">
                     </div>
                     <!--<div class="persona-main__container_media">
                         <span style="">Фото (еще 71)</span>
@@ -1103,8 +1165,8 @@
                 <div class="col-md-4">
                     <table class="table" ng-show="antro">
                         <tr ng-repeat="row in antro">
-                            <td>{{row.name}}</td>
-                            <td>{{row.value}}</td>
+                            <td>{{row.AntroName}}</td>
+                            <td>{{row.Value}}</td>
                         </tr>
                         <!--<tr>
                             <td>Рост</td>

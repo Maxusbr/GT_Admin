@@ -33,6 +33,11 @@ namespace Getticket.Web.DAL.Entities
         public string DescriptionText { get; set; }
 
         /// <summary>
+        /// Статус
+        /// </summary>
+        public string Status { get; set; }
+
+        /// <summary>
         /// <see cref="Entities.Person"/>
         /// </summary>
         [ForeignKey("id_Person")]
@@ -43,5 +48,6 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [ForeignKey("id_DescriptionType")]
         public virtual PersonDescriptionType PersonDescriptionType { get; set; }
+
     }
 }

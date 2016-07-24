@@ -537,7 +537,8 @@ namespace Getticket.Web.API.Services
                 Id = item.Id,
                 id_Person = pesonId,
                 id_MediaType = item.id_MediaType,
-                MediaLink = item.MediaLink
+                MediaLink = item.MediaLink,
+                Description = item.Description
             })).Any(result => result == null))
             {
                 return ServiceResponce
@@ -632,7 +633,8 @@ namespace Getticket.Web.API.Services
                 Id = item.Id,
                 id_Person = pesonId,
                 id_DescriptionType = item.id_DescriptionType,
-                DescriptionText = item.DescriptionText
+                DescriptionText = item.DescriptionText,
+                Status = item.Status
             })).Any(result => result == null))
             {
                 return ServiceResponce

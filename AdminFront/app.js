@@ -6,7 +6,7 @@ var pageSize = 20;
 (function () {
     'use strict';
 
-    angular
+    var app = angular
         .module('app', [
             // 'ngRoute',
             'ui.router',
@@ -146,5 +146,19 @@ var pageSize = 20;
         // $locationProvider.html5Mode(true).hashPrefix('#');
     }
 
-
+    app.directive('ngConfirmClick', [
+        function () {
+            return {
+                link: function (scope, element, attr) {
+                    var msg = attr.ngConfirmClick || "Вы уверены?";
+                    var clickAction = attr.confirmedClick;
+                    element.bind('click', function (event) {
+                        if (window.confirm(msg)) {
+                            scope.$eval(clickAction);
+                        }
+                    });
+                }
+            };
+        }
+    ]);
 })();

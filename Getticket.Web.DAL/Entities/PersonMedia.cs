@@ -32,6 +32,10 @@ namespace Getticket.Web.DAL.Entities
         [Required]
         public int id_MediaType { get; set; }
 
+        /// <summary>
+        /// Описание медиа
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// <see cref="Entities.Person"/>
@@ -44,5 +48,6 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [ForeignKey("id_MediaType")]
         public virtual PersonMediaType MediaType { get; set; }
+
     }
 }

@@ -101,7 +101,7 @@ namespace Getticket.Web.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPost]
         [Route("delete/{id}")]
         public IHttpActionResult Delete(int id)
         {
@@ -139,7 +139,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteAntroNames" />
-        [HttpDelete]
+        [HttpPost]
         [Route("antro/delnames/{id}")]
         public IHttpActionResult DeleteAntroNames(int id)
         {
@@ -156,7 +156,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteAntros" />
-        [HttpDelete]
+        [HttpPost]
         [Route("antro/delete/{id}")]
         public IHttpActionResult DeleteAntro(int id, [FromBody] IEnumerable<PersonAntroModel> models)
         {
@@ -194,7 +194,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteConnectionTypes" />
-        [HttpDelete]
+        [HttpPost]
         [Route("connection/deltypes")]
         public IHttpActionResult DeleteConnectionTypes([FromBody] IEnumerable<PersonConnectionTypeModel> models)
         {
@@ -211,7 +211,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteConnection" />
-        [HttpDelete]
+        [HttpPost]
         [Route("connection/delete/{id}")]
         public IHttpActionResult DeleteConnection(int id, [FromBody] IEnumerable<PersonConnectionModel> models)
         {
@@ -249,7 +249,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteSocialLinkTypes" />
-        [HttpDelete]
+        [HttpPost]
         [Route("social/deltypes")]
         public IHttpActionResult DeleteSocialLinkTypes([FromBody] IEnumerable<PersonSocialLinkTypeModel> models)
         {
@@ -266,7 +266,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteSocialLink" />
-        [HttpDelete]
+        [HttpPost]
         [Route("social/delete")]
         public IHttpActionResult DeleteSocialLink([FromBody] IEnumerable<PersonSocialLinkModel> models)
         {
@@ -303,7 +303,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteMediaTypes" />
-        [HttpDelete]
+        [HttpPost]
         [Route("media/deltypes")]
         public IHttpActionResult DeleteMediaTypes([FromBody] IEnumerable<PersonMediaTypeModel> models)
         {
@@ -320,7 +320,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteMedia" />
-        [HttpDelete]
+        [HttpPost]
         [Route("media/delete")]
         public IHttpActionResult DeleteMedia([FromBody] IEnumerable<PersonMediaModel> models)
         {
@@ -357,7 +357,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteDescriptionTypes" />
-        [HttpDelete]
+        [HttpPost]
         [Route("description/deltypes")]
         public IHttpActionResult DeleteDescriptionTypes([FromBody] IEnumerable<PersonDescriptionTypeModel> models)
         {
@@ -374,7 +374,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="PersonService.DeleteDescriptions" />
-        [HttpDelete]
+        [HttpPost]
         [Route("description/delete")]
         public IHttpActionResult DeleteDescriptions([FromBody] IEnumerable<PersonDescriptionModel> models)
         {
@@ -411,7 +411,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="IPersonService.DeleteFactTypes" />
-        [HttpDelete]
+        [HttpPost]
         [Route("fact/deltypes")]
         public IHttpActionResult DeleteFactTypes([FromBody] IEnumerable<PersonFactTypeModel> models)
         {
@@ -428,7 +428,7 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="IPersonService.DeleteFacts" />
-        [HttpDelete]
+        [HttpPost]
         [Route("fact/delete")]
         public IHttpActionResult DeleteFacts([FromBody] IEnumerable<PersonFactModel> models)
         {

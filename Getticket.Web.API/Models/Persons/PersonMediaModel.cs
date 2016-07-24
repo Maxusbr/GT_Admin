@@ -14,5 +14,6 @@ namespace Getticket.Web.API.Models.Persons
         /// </summary>
         [Required]public string MediaLink { get; set; }
         public string MediaType { get; set; }
+        public string Description { get; set; }
     }
 }
