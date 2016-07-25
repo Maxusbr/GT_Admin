@@ -62,7 +62,11 @@ function mainMenuCtrl($scope, $location, $timeout) {
                 expand: '.custom-menu__container',
                 toggle: '#persona__container'
             }
-        }
+        },
+        {
+            "title": "Загрузка",
+            "href": "/main/download"
+        },
 
     ];
 

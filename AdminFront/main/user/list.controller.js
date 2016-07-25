@@ -24,7 +24,7 @@
         $rootScope.searchUser = '';     // set the default search/filter term
 
         $rootScope.userlist = [
-            {
+            /*{
                 "fname": "Хан",
                 "sname": "Cоло",
                 "email": "anni@forceiscomming.com",
@@ -106,7 +106,7 @@
                 "button": "Акцепт регистрации",
                 "id": "6"
 
-            },
+            },*/
         ]
 
     }
