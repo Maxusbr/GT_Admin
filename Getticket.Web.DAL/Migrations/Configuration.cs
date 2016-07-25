@@ -61,10 +61,10 @@ namespace Getticket.Web.DAL.Migrations
             var user4 = new User()
             {
                 UserName = "max_73@inbox.ru",
-                Phone = "+79788701877",
-                PasswordHash = "65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5",
+                UserPhone = "+79788701877",
+                Password = "65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5",
                 AccessRoleId = 1,
-                UserStatus = new UserStatus() { Name = "seed", Description = "", Status = UserStatusType.System },
+                UserStatuses = new UserStatuses() { Name = "seed", Description = "", Status = UserStatusType.System },
                 UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ" }
             };
             context.Users.AddOrUpdate(u => u.Id, user1);
