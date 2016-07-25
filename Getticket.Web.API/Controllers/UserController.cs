@@ -29,7 +29,7 @@ namespace Getticket.Web.API.Controllers
         /// Воозвращает всех(неудаленных пользователей)
         /// </summary>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("")]
         public IHttpActionResult GetAll()
         {
@@ -41,7 +41,7 @@ namespace Getticket.Web.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Route("{id}")]
         public IHttpActionResult GetOne(int id)
         {

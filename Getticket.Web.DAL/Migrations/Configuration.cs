@@ -58,10 +58,19 @@ namespace Getticket.Web.DAL.Migrations
                 UserStatuses = new UserStatuses() { Name = "seed", Description = "", Status = UserStatusType.System },
                 UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ" }
             };
-
+            var user4 = new User()
+            {
+                UserName = "max_73@inbox.ru",
+                Phone = "+79788701877",
+                PasswordHash = "65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5",
+                AccessRoleId = 1,
+                UserStatus = new UserStatus() { Name = "seed", Description = "", Status = UserStatusType.System },
+                UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ" }
+            };
             context.Users.AddOrUpdate(u => u.Id, user1);
             context.Users.AddOrUpdate(u => u.Id, user2);
             context.Users.AddOrUpdate(u => u.Id, user3);
+            context.Users.AddOrUpdate(u => u.Id, user4);
 
             context.Sex.AddOrUpdate(o => o.Id, new Sex { Id = 1, Name = "мужской" });
             context.Sex.AddOrUpdate(o => o.Id, new Sex { Id = 2, Name = "женский" });
