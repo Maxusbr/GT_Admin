@@ -24,7 +24,7 @@ namespace Getticket.Web.API.Helpers
 
             if (model.Phone != null)
             {
-                user.Phone = PhoneService.PhoneConvert(model.Phone);
+                user.UserPhone = PhoneService.PhoneConvert(model.Phone);
             }
 
             if (model.Name != null)

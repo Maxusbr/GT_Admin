@@ -26,7 +26,7 @@ namespace Getticket.Web.DAL.Repositories
             IQueryable<User> query = db.Users
                 .Include("AccessRole")
                 .Where(u => (u.PasswordHash.Equals(PasswordHash)
-                              && u.UserStatus.Status == Status
+                              && u.UserStatuses.Status == Status
                               && u.UserName.Equals(UserName)));
             return GetAll(query);
         }
@@ -37,9 +37,9 @@ namespace Getticket.Web.DAL.Repositories
             IQueryable<User> query = db.Users
                 .Include("AccessRole")
                 .Where(u => (u.PasswordHash.Equals(PasswordHash)
-                              && u.UserStatus.Status == Status
+                              && u.UserStatuses.Status == Status
                               && (u.UserName.Equals(UserName)
-                                   || u.Phone.Equals(Phone))));
+                                   || u.UserPhone.Equals(Phone))));
             return GetAll(query);
         }
 
@@ -49,8 +49,8 @@ namespace Getticket.Web.DAL.Repositories
             IQueryable<User> query = db.Users
                 .Include("AccessRole")
                 .Where(u => (u.PasswordHash.Equals(PasswordHash)
-                              && u.UserStatus.Status == Status
-                              && u.Phone.Equals(Phone)));
+                              && u.UserStatuses.Status == Status
+                              && u.UserPhone.Equals(Phone)));
             return GetAll(query);
         }
     }

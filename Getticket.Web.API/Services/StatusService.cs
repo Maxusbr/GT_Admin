@@ -14,7 +14,7 @@ namespace Getticket.Web.API.Services {
         /// <param name="user"></param>
         /// <returns></returns>
         public static bool CanBeRemovedFromDB(User user) {
-            UserStatusType current = user.UserStatus.Status;
+            UserStatusType current = user.UserStatuses.Status;
 
             return (UserStatusType.Invite.Equals(current) 
                 || UserStatusType.AcceptInvite.Equals(current) 
@@ -31,7 +31,7 @@ namespace Getticket.Web.API.Services {
         /// <param name="undo">Означает что необходимо снять статус <paramref name="changeTo"/></param>
         /// <returns></returns>
         public static bool CanChangeStatus(User user, UserStatusType changeTo, bool undo = false) {
-            UserStatusType currentStatus = user.UserStatus == null ? UserStatusType.None : user.UserStatus.Status;
+            UserStatusType currentStatus = user.UserStatuses == null ? UserStatusType.None : user.UserStatuses.Status;
             if (undo) {
                 return CanRemoveStatus(currentStatus, changeTo);
             } else {
@@ -49,7 +49,7 @@ namespace Getticket.Web.API.Services {
         /// <param name="Name"></param>
         public static void ChangeStatus(User User, UserStatusType Status, string Name = null,  string Description = "") {
 
-            UserStatus toChange = User.UserStatus != null ? User.UserStatus : new UserStatus();
+            UserStatuses toChange = User.UserStatuses != null ? User.UserStatuses : new UserStatuses();
             if (Name == null) {
                 Name = Status.ToString();
             }
@@ -59,7 +59,7 @@ namespace Getticket.Web.API.Services {
             toChange.Status = Status;
             toChange.UpdateTime = DateTime.Now;
 
-            User.UserStatus = toChange;
+            User.UserStatuses = toChange;
         }
 
         private static bool CanUpdateStatus(UserStatusType currentStatus, UserStatusType toSet) {

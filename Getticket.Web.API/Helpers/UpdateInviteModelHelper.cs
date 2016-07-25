@@ -19,7 +19,7 @@ namespace Getticket.Web.API.Helpers
         public static User UpdateInviteUser(User user, UpdateInviteModel model)
         {
             user.UserName = model.Email;
-            user.Phone = PhoneService.PhoneConvert(model.Phone);
+            user.UserPhone = PhoneService.PhoneConvert(model.Phone);
 
             user.UserInfo.Name = model.Name;
             user.UserInfo.LastName = model.LastName;

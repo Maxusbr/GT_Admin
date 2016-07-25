@@ -26,7 +26,7 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="AccessRole" />
         public virtual DbSet<AccessRole> AccessRoles { get; set; }
         /// <see cref="UserStatus" />
-        public virtual DbSet<UserStatus> UserStatuses { get; set; }
+        public virtual DbSet<UserStatuses> UserStatuses { get; set; }
 
         /// <summary>
         /// Настройки сущности <see cref="User"/>
@@ -44,7 +44,7 @@ namespace Getticket.Web.DAL.Entities
                     .WillCascadeOnDelete(true);
 
                 this
-                    .HasRequired(u => u.UserStatus)
+                    .HasRequired(u => u.UserStatuses)
                     .WithRequiredPrincipal(us => us.User)
                     .WillCascadeOnDelete(true);
 

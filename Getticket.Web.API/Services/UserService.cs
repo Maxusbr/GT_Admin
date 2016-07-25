@@ -152,13 +152,13 @@ namespace Getticket.Web.API.Services
                     .Run("Emails/RestorePassword", typeof(RestorePasswordEmailModel), RestorePasswordEmailModel);
                 if (!EmailService.SendMail(RestorePasswordEmailModel, RestoreText))
                 {
-                    user.UserStatus.Description = "Restore password Email was not delivered";
-                    user.UserStatus.UpdateTime = DateTime.Now;
+                    user.UserStatuses.Description = "Restore password Email was not delivered";
+                    user.UserStatuses.UpdateTime = DateTime.Now;
                 }
                 else
                 {
-                    user.UserStatus.Description = "Restore password Email was delivered at " + DateTime.Now;
-                    user.UserStatus.UpdateTime = DateTime.Now;
+                    user.UserStatuses.Description = "Restore password Email was delivered at " + DateTime.Now;
+                    user.UserStatuses.UpdateTime = DateTime.Now;
                 }
 
             }).Start();
@@ -355,7 +355,7 @@ namespace Getticket.Web.API.Services
                 .Add("error", "the user isn't deleted");
             }
 
-            if (UserRep.CountByCredentails(user.UserName, user.Phone) != 0)
+            if (UserRep.CountByCredentails(user.UserName, user.UserPhone) != 0)
             {
                 return ServiceResponce
                     .FromFailed()

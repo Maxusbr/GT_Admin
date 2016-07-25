@@ -287,8 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Properties\PublishProfiles\GTAdmin20160429064857 - Web Deploy %282%29.pubxml" />
-    <None Include="Properties\PublishProfiles\GTAdmin20160429064857 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\getticketwebapi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\webapiadmin - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
