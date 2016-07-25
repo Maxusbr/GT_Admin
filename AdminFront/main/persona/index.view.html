@@ -185,10 +185,10 @@
                                     / <a href="#">подробнее, статистика</a>
                                 </td>
                                 <td>
-                                    <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed" 
-                                       ng-click="saveDescription(item);"/>
-                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteDescription($index)" 
-                                       ng-confirm-click="Удалить это описание?"/>
+                                    <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
+                                       ng-click="saveDescription(item);"></a>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteDescription($index)"
+                                       ng-confirm-click="Удалить это описание?"></a>
                                 </td>
                             </tr>
                             <!--<tr>
@@ -305,7 +305,7 @@
 
                     <div class="pull-right">
                         <button class="btn btn-primary btn-lg" ng-show="IsChanged" ng-click="saveAll();"><span class="glyphicon glyphicon-floppy-disk"></span> Сохранить все</button>
-                        <button class="btn btn-primary btn-lg" ng-click="addDescription()"><span class="glyphicon glyphicon-plus"></span> Добавить описание</button>
+                        <a class="btn btn-primary btn-lg" href="#/main/persona/create" type="button"><span class="glyphicon glyphicon-plus"></span> Перейти в конструктор</a>
                     </div>
                 </div>
             </div>
@@ -494,30 +494,46 @@
                     <table class="table persona-main__table col-md-18">
                         <thead>
                             <tr>
-                                <td class="col-md-3">Объект\Вид связи (15)</td>
-                                <td class="col-md-2">Тип связи</td>
-                                <td class="col-md-2">Характеристика связи</td>
-                                <td class="col-md-3">Изменен</td>
+                                <td class="col-md-4">Объект\Вид связи (15)</td>
+                                <td class="col-md-4">Тип связи</td>
+                                <td class="col-md-4">Характеристика связи</td>
+                                <td class="col-md-4">Изменен</td>
+                                <td/>
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="item in connectionList">
-                                <td ng-show="item.id_ConnectionType > 1">
-                                    {{item.Event.Name}}
-                                </td>
-                                <td ng-show="item.id_ConnectionType === 1">
-                                    {{item.PersonConnectTo.LastName}} {{item.PersonConnectTo.Name}}
+                                <td>
+                                    <span ng-show="!item.isEdit && item.id_ConnectionType > 1" >{{item.Event.Name}}</span>
+                                    <span ng-show="!item.isEdit && item.id_ConnectionType === 1">{{item.PersonConnectTo.LastName}} {{item.PersonConnectTo.Name}}</span>
+                                    <select ng-model="item.id_Event" class="form-control" ng-show="item.isEdit && item.id_ConnectionType > 1"
+                                            ng-change="changedConnectionEvent(item); Changed(connectionList)" ng-options="type.Id as type.Name for type in eventlist"></select>
+                                    <select ng-model="item.id_PersonConnectTo" class="form-control" ng-show="item.isEdit && item.id_ConnectionType === 1"
+                                            ng-change="changedConnectionPerson(item); Changed(connectionList)" ng-options="type.Id as type.LastName + ' ' + type.Name for type in persons"></select>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
                                 </td>
                                 <td class="text-danger">
-                                    {{item.PersonConnectionType}}
+                                    <span ng-show="!item.isEdit">{{item.PersonConnectionType}}</span>
+                                    <select ng-model="item.id_ConnectionType" class="form-control" ng-show="item.isEdit"
+                                            ng-change="item.Changed = true; Changed(connectionList)" ng-options="type.Id as type.Name for type in connectiontypes"></select>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
                                 </td>
                                 <td>
-                                    {{item.Description}}
+                                    <span ng-show="!item.isDescriptionEdit">{{item.Description}}</span>
+                                    <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.Description"
+                                              ng-show="item.isDescriptionEdit" ng-change="item.Changed = true; Changed(descriptionlist)"></textarea>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isDescriptionEdit = !item.isDescriptionEdit"></a>
                                 </td>
                                 <td>
                                     Джульетта С.<br>
                                     сегодня, 19:02
+                                </td>
+                                <td>
+                                    <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
+                                       ng-click="saveConnection(item);"></a>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteConnection($index)"
+                                       ng-confirm-click="Удалить эту связь?"></a>
                                 </td>
                             </tr>
                             <!--<tr>

@@ -238,6 +238,12 @@
                     $rootScope.antronames.push.apply($rootScope.antronames, data);
                 });
             }
+            if (!$rootScope.eventlist) {
+                $rootScope.eventlist = [];
+                $http.get(`${apiUrl}events`).success(function (data) {
+                    $rootScope.eventlist.push.apply($rootScope.eventlist, data);
+                });
+            }
         };
         getTypes();
 

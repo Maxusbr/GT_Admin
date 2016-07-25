@@ -260,19 +260,18 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
-        /// Удалить антропометрические характеристики для Person c Id = <paramref name="pesonId"/>
+        /// Удалить антропометрические характеристики
         /// </summary>
-        /// <param name="pesonId"></param>
         /// <param name="models"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public ServiceResponce DeleteAntros(int pesonId, IEnumerable<PersonAntroModel> models)
+        public ServiceResponce DeleteAntros(IEnumerable<PersonAntroModel> models)
         {
             var result = _personRepository.DeletePersonAntros(models.Select(o => new PersonAntro
             {
                 Id = o.Id,
                 id_Antro = o.IdAntro,
-                id_Person = pesonId,
+                id_Person = o.IdPerson,
                 Value = o.Value
             }).ToList());
             return result ? ServiceResponce
@@ -360,17 +359,16 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
-        /// Удалить связи для Person c Id = <paramref name="pesonId"/>
+        /// Удалить связи
         /// </summary>
-        /// <param name="pesonId"></param>
         /// <param name="models"></param>
         /// <returns></returns>
-        public ServiceResponce DeleteConnection(int pesonId, IEnumerable<PersonConnectionModel> models)
+        public ServiceResponce DeleteConnection(IEnumerable<PersonConnectionModel> models)
         {
             var result = _personRepository.DeleteConnections(models.Select(o => new PersonConnection
             {
                 Id = o.Id,
-                id_Person = pesonId,
+                id_Person = o.id_Person,
                 id_ConnectionType = o.id_ConnectionType,
                 id_Event = o.id_Event,
                 id_PersonConnectTo = o.id_PersonConnectTo

@@ -173,30 +173,10 @@ namespace Getticket.Web.API.Helpers
                 id_Person = connection.id_Person,
                 id_PersonConnectTo = connection.id_PersonConnectTo,
                 PersonConnectTo = GetPersonModel(connection.PersonConnectTo),
-                Event = GetEventModel(connection.Event),
+                Event = EventModelHelper.GetEventModel(connection.Event),
                 PersonConnectionType = connection.PersonConnectionType.Name,
                 Description = connection.Description
             } : new PersonConnectionModel();
-        }
-
-        /// <summary>
-        /// Оборачивает <paramref name="entity"/> в модель
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public static EventModel GetEventModel(Event entity)
-        {
-            return entity != null ? new EventModel
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                DateStartSold = entity.DateStartSold,
-                DateStopSold = entity.DateStopSold,
-                Description = entity.Description,
-                EventDate = entity.EventDate,
-                TicketReturn = entity.TicketReturn,
-                EventType = entity.EventType?.Name
-            } : new EventModel();
         }
 
         /// <summary>
@@ -403,5 +383,7 @@ namespace Getticket.Web.API.Helpers
         {
             return result.Select(o => new PersonFactTypeModel { Id = o.Id, Name = o.Name, Descript = o.Descript ?? ""}).ToList();
         }
+
+        
     }
 }

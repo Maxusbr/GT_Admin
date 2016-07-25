@@ -260,6 +260,16 @@
             getConnection($scope.id);
         }
 
+        $scope.changedConnectionEvent = function (item) {
+            item.Changed = true;
+            item.id_PersonConnectTo = null;
+            item.Event = $rootScope.eventlist.filter(function (type) { return type.Id === item.id_Event; })[0];
+        }
+        $scope.changedConnectionPerson = function (item) {
+            item.Changed = true;
+            item.id_Event = null;
+            item.PersonConnectTo = $rootScope.persons.filter(function (type) { return type.Id === item.id_PersonConnectTo; })[0];
+        }
         $scope.saveConnection = function (item) {
             var list = [item];
             saveEntities(list, 'connection', continueSaveConnection);

@@ -1,17 +1,34 @@
 ﻿using System;
 using System.Web.Http;
+using Getticket.Web.API.Services;
 
 namespace Getticket.Web.API.Controllers
 {
+    /// <summary>
+    /// Контроллер для работы с Event
+    /// </summary>
     [RoutePrefix("events")]
     [Authorize(Roles = "Admin")]
     public class EventController : ApiController
     {
+        private readonly IEventService _eventService;
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="eventService"></param>
+        public EventController(IEventService eventService)
+        {
+            _eventService = eventService;
+        }
+
+        /// <see cref="IEventService.GetEvents" />
         [Route("")]
-        [HttpPost]
+        [HttpGet]
         public IHttpActionResult GetAll()
         {
-            throw new NotImplementedException();
+
+            return Ok(_eventService.GetEvents());
         }
 
         [Route("{Id}")]

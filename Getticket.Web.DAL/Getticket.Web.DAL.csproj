@@ -94,6 +94,7 @@
     <Compile Include="IRepositories\IAccessRoleRepository.cs" />
     <Compile Include="IRepositories\IAuthRepository.cs" />
     <Compile Include="IRepositories\IBaseRepository.cs" />
+    <Compile Include="IRepositories\IEventRepository.cs" />
     <Compile Include="IRepositories\IInviteCodeRepository.cs" />
     <Compile Include="IRepositories\IPersonRepository.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Repositories\AccessRoleRepository.cs" />
     <Compile Include="Repositories\AuthRepository.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\InviteCodeRepository.cs" />
     <Compile Include="Repositories\PersonRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />

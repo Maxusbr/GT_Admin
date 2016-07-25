@@ -157,10 +157,10 @@ namespace Getticket.Web.API.Controllers
 
         /// <see cref="PersonService.DeleteAntros" />
         [HttpPost]
-        [Route("antro/delete/{id}")]
-        public IHttpActionResult DeleteAntro(int id, [FromBody] IEnumerable<PersonAntroModel> models)
+        [Route("antro/delete")]
+        public IHttpActionResult DeleteAntro( [FromBody] IEnumerable<PersonAntroModel> models)
         {
-            return Ok(_personService.DeleteAntros(id, models).Response());
+            return Ok(_personService.DeleteAntros(models).Response());
         }
         #endregion
 
@@ -212,10 +212,10 @@ namespace Getticket.Web.API.Controllers
 
         /// <see cref="PersonService.DeleteConnection" />
         [HttpPost]
-        [Route("connection/delete/{id}")]
-        public IHttpActionResult DeleteConnection(int id, [FromBody] IEnumerable<PersonConnectionModel> models)
+        [Route("connection/delete")]
+        public IHttpActionResult DeleteConnection([FromBody] IEnumerable<PersonConnectionModel> models)
         {
-            return Ok(_personService.DeleteConnection(id, models).Response());
+            return Ok(_personService.DeleteConnection(models).Response());
         }
 
         #endregion

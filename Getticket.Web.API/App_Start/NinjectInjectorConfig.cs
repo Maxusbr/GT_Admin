@@ -43,8 +43,10 @@ namespace Getticket.Web.API.App_Start
             kernel.Bind<IAuthRepository>().To<AuthRepository>();
             kernel.Bind<IAccessRoleRepository>().To<AccessRoleRepository>();
             kernel.Bind<IPersonRepository>().To<PersonRepository>();
+            kernel.Bind<IEventRepository>().To<EventRepository>();
 
             kernel.Bind<IPersonService>().To<PersonService>().InRequestScope();
+            kernel.Bind<IEventService>().To<EventService>().InRequestScope();
 
             kernel.Bind<IRazorEngineService>().ToConstant<IRazorEngineService>(RazorTemplateProvider.Get()).InSingletonScope();
         }

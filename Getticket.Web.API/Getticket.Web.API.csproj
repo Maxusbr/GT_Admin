@@ -205,6 +205,7 @@
     <Compile Include="Helpers\AccessRoleModelHelper.cs" />
     <Compile Include="Helpers\ChangePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
+    <Compile Include="Helpers\EventModelHelper.cs" />
     <Compile Include="Helpers\RestorePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\TimeSpanExtensions.cs" />
     <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
@@ -258,7 +259,9 @@
     <Compile Include="Models\Emails\InviteEmailModel.cs" />
     <Compile Include="Models\UpdateInviteModel.cs" />
     <Compile Include="Services\AccessRolesService.cs" />
+    <Compile Include="Services\IEventService.cs" />
     <Compile Include="Services\IPersonService.cs" />
+    <Compile Include="Services\EventService.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\UserInviteService.cs" />

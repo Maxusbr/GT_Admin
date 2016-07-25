@@ -124,13 +124,12 @@ namespace Getticket.Web.API.Services
         ServiceResponce UpdateAntros(int pesonId, IEnumerable<PersonAntroModel> models);
 
         /// <summary>
-        /// Удалить антропометрические характеристики для Person c Id = <paramref name="pesonId"/>
+        /// Удалить антропометрические характеристики
         /// </summary>
-        /// <param name="pesonId"></param>
         /// <param name="models"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        ServiceResponce DeleteAntros(int pesonId, IEnumerable<PersonAntroModel> models);
+        ServiceResponce DeleteAntros(IEnumerable<PersonAntroModel> models);
 
         /// <summary>
         /// Возвращает список типов связи
@@ -161,12 +160,11 @@ namespace Getticket.Web.API.Services
         ServiceResponce UpdateConnection(int pesonId, IEnumerable<PersonConnectionModel> models);
 
         /// <summary>
-        /// Удалить связи для Person c Id = <paramref name="pesonId"/>
+        /// Удалить связи
         /// </summary>
-        /// <param name="pesonId"></param>
         /// <param name="models"></param>
         /// <returns></returns>
-        ServiceResponce DeleteConnection(int pesonId, IEnumerable<PersonConnectionModel> models);
+        ServiceResponce DeleteConnection(IEnumerable<PersonConnectionModel> models);
 
         /// <summary>
         /// Возвращает список типов ссылок
