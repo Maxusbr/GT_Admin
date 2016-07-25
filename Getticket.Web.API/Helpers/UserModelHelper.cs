@@ -26,11 +26,11 @@ namespace Getticket.Web.API.Helpers
             model.LastName = user.UserInfo.LastName;
             model.Company = user.UserInfo.Company;
             model.Position = user.UserInfo.Position;
-            model.Phone = user.Phone;
+            model.Phone = user.UserPhone;
             model.Email = user.UserName;
-            model.Status = user.UserStatus.Status;
-            model.StatusName = user.UserStatus.Name;
-            model.StatusDescription = user.UserStatus.Description;
+            model.Status = user.UserStatuses.Status;
+            model.StatusName = user.UserStatuses.Name;
+            model.StatusDescription = user.UserStatuses.Description;
 
             return model;
         }

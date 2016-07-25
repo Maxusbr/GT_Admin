@@ -133,7 +133,7 @@ namespace Getticket.Web.API.Controllers
             User user = new User() {
                 UserName = "test@test.ru",
                 UserInfo = new UserInfo(),
-                UserStatus = new UserStatus(),
+                UserStatuses = new UserStatuses(),
                 AccessRole = new AccessRole()
             };
 

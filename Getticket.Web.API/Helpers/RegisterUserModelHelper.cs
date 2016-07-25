@@ -20,7 +20,7 @@ namespace Getticket.Web.API.Helpers
             User user = new User()
             {
                 UserName = model.Email,
-                Phone = model.Phone,
+                UserPhone = model.Phone,
                 PasswordHash = model.Password,
                 AccessRoleId = model.RoleId,
                 UserInfo = new UserInfo()

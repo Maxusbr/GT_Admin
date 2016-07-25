@@ -7,12 +7,12 @@ namespace Getticket.Web.DAL.Entities
     /// <summary>
     /// Статус пользователя в системе
     /// </summary>
-    public class UserStatus : BaseEntity
+    public class UserStatuses : BaseEntity
     {
         /// <summary>
         /// Конструктор
         /// </summary>
-        public UserStatus(){}
+        public UserStatuses(){}
 
         /// <summary>
         /// Код статуса

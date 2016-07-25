@@ -19,7 +19,7 @@ namespace Getticket.Web.DAL.Entities
         /// фактически логин для пользователя
         /// хранится как Email в бд
         /// </summary>
-        [Column("Email")]
+        [Column("UserMail")]
         public string UserName { get; set; }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Getticket.Web.DAL.Entities
         /// Второе уникальное поле для пользователя,
         /// также является логином
         /// </summary>
-        public string Phone { get; set; }
+        public string UserPhone { get; set; }
 
         /// <summary>
         /// Хеш пароля пользователя
@@ -58,6 +58,6 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Статус пользователя в системе
         /// </summary>
-        public virtual UserStatus UserStatus { get; set; }
+        public virtual UserStatuses UserStatuses { get; set; }
     }
 }

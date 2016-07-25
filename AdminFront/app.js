@@ -1,5 +1,6 @@
 ﻿//set api adress
 var apiUrl = 'http://localhost:35162/';
+//var apiUrl = 'http://getticketwebapi.azurewebsites.net/';
 var pageNumber = 1;
 var pageSize = 20;
 

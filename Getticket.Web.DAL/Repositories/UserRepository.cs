@@ -18,14 +18,14 @@ namespace Getticket.Web.DAL.Repositories
         /// Пользователь НЕ помечен как удаленный
         /// </summary>
         private Expression<Func<User, bool>> UserNotDeleted 
-            = (u =>u.UserStatus.Status != UserStatusType.MarkDeleted);
+            = (u =>u.UserStatuses.Status != UserStatusType.MarkDeleted);
 
         /// <summary>
         /// Приглашенный пользователь
         /// </summary>
         private Expression<Func<User, bool>> UserInvited 
-            = (u => (u.UserStatus.Status == UserStatusType.Invite 
-                    || u.UserStatus.Status == UserStatusType.AcceptInvite));
+            = (u => (u.UserStatuses.Status == UserStatusType.Invite 
+                    || u.UserStatuses.Status == UserStatusType.AcceptInvite));
 
         /// <see cref="IUserRepository.FindAllNotDeleted" />
         public IList<User> FindAllNotDeleted()
@@ -73,7 +73,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else
             {
-                query = query.Where(u => (u.UserName.Equals(email)) || (u.Phone.Equals(phone)));
+                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserPhone.Equals(phone)));
             }
 
             return query.Count();
@@ -91,7 +91,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else
             {
-                query = query.Where(u => (u.UserName.Equals(email)) || (u.Phone.Equals(phone)));
+                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserPhone.Equals(phone)));
             }
 
             return GetAll(query);
