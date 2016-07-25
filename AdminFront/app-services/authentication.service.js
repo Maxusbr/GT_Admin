@@ -15,19 +15,6 @@
         service.isAuth = false;
         return service;
 
-        function Login(username, password, callback) {
-            var adress = apiUrl + 'User/Auth?login=' + username + '&password=' + password;
-            //debug
-            console.log(adress);
-            //return $http.get(adress).then(handleSuccess, handleError('Error login user'));
-            //$http.post('/api/authenticate', { username: username, password: password })
-            $http.post(adress)
-                .success(function (response) {
-                    callback(response);
-                });
-
-        }
-
         function _login(username, password, callback) {
 
             var data = "grant_type=password&username=" + username + "&password=" + password;

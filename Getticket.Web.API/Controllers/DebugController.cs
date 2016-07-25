@@ -110,15 +110,15 @@ namespace Getticket.Web.API.Controllers
         {
             string temp = GlobalConfiguration.Configuration.DependencyResolver.ToString();
             UserInfo ui = new UserInfo() { Company = "Home" };
-            AccessRole ar = new AccessRole() { Name = "ar1" };
-            User user = new User { UserName = "Вася", AccessRole = ar, UserInfo = ui };
+            AccessRoles ar = new AccessRoles() { Name = "ar1" };
+            User user = new User { UserName = "Вася", AccessRoles = ar, UserInfo = ui };
             UserRep.Save(user);
 
             user.UserInfo.Name = "Василий";
             UserRep.Save(user);
 
-            AccessRole ar2 = new AccessRole() { Name = "ar2" };
-            user.AccessRole = ar2;
+            AccessRoles ar2 = new AccessRoles() { Name = "ar2" };
+            user.AccessRoles = ar2;
             UserRep.Save(user);
 
             UserRep.Delete(user);
@@ -134,7 +134,7 @@ namespace Getticket.Web.API.Controllers
                 UserName = "test@test.ru",
                 UserInfo = new UserInfo(),
                 UserStatuses = new UserStatuses(),
-                AccessRole = new AccessRole()
+                AccessRoles = new AccessRoles()
             };
 
             if (UserRep.Save(user) != null)

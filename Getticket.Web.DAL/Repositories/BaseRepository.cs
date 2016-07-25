@@ -86,12 +86,19 @@ namespace Getticket.Web.DAL.Repositories
         /// <returns></returns>
         protected IList<T> GetAll(IQueryable<T> query)
         {
-            if (query.Any())
+            try {
+                if (query.Any())
+                {
+                    return query.ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch(Exception ex)
             {
-                return query.ToList();
-            } 
-            else
-            {
+                Console.Write(ex.Message);
                 return null;
             }
         }

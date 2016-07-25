@@ -24,8 +24,8 @@ namespace Getticket.Web.DAL.Repositories
         public IList<User> FindAllByName(string UserName, string PasswordHash, UserStatusType Status)
         {
             IQueryable<User> query = db.Users
-                .Include("AccessRole")
-                .Where(u => (u.PasswordHash.Equals(PasswordHash)
+                .Include("AccessRoles")
+                .Where(u => (u.Password.Equals(PasswordHash)
                               && u.UserStatuses.Status == Status
                               && u.UserName.Equals(UserName)));
             return GetAll(query);
@@ -35,8 +35,8 @@ namespace Getticket.Web.DAL.Repositories
         public IList<User> FindAllByNamePhone(string UserName, string Phone, string PasswordHash, UserStatusType Status)
         {
             IQueryable<User> query = db.Users
-                .Include("AccessRole")
-                .Where(u => (u.PasswordHash.Equals(PasswordHash)
+                .Include("AccessRoles")
+                .Where(u => (u.Password.Equals(PasswordHash)
                               && u.UserStatuses.Status == Status
                               && (u.UserName.Equals(UserName)
                                    || u.UserPhone.Equals(Phone))));
@@ -47,8 +47,8 @@ namespace Getticket.Web.DAL.Repositories
         public IList<User> FindAllByPhone(string Phone, string PasswordHash, UserStatusType Status)
         {
             IQueryable<User> query = db.Users
-                .Include("AccessRole")
-                .Where(u => (u.PasswordHash.Equals(PasswordHash)
+                .Include("AccessRoles")
+                .Where(u => (u.Password.Equals(PasswordHash)
                               && u.UserStatuses.Status == Status
                               && u.UserPhone.Equals(Phone)));
             return GetAll(query);

@@ -20,7 +20,7 @@ namespace Getticket.Web.DAL.Migrations
             //  This method will be called after migrating to the latest version.
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            AccessRole admin = new AccessRole() { Name = "Admin", Desciption = "Full access", Id = 1, Role = Enums.AccessRoleType.Admin };
+            AccessRoles admin = new AccessRoles() { Name = "Admin", Desciption = "Full access", Id = 1, Role = Enums.AccessRoleType.Admin };
             context.AccessRoles.AddOrUpdate(ar => ar.Id, admin);
             context.SaveChanges();
 
@@ -33,7 +33,7 @@ namespace Getticket.Web.DAL.Migrations
             {
                 UserName = "teest@admin.su",
                 UserPhone = "+79063332211",
-                PasswordHash = "ccfcb5961cb870496289a62c2a6f728c78feb49f448972daf0a6f098a903be08",
+                Password = "ccfcb5961cb870496289a62c2a6f728c78feb49f448972daf0a6f098a903be08",
                 AccessRoleId = 1,
                 UserStatuses = new UserStatuses() { Name = "seed", Description = "", Status = UserStatusType.System },
                 UserInfo = new UserInfo() { Id = 1, Name = "Тест", LastName = "Админ" }
@@ -43,7 +43,7 @@ namespace Getticket.Web.DAL.Migrations
             {
                 UserName = "deleted@admin.su",
                 UserPhone = "+79153332211",
-                PasswordHash = "1185f37d33b0f89e331f101a51bb8e51165c7efda15950b86a3ebcbb363f898e",
+                Password = "1185f37d33b0f89e331f101a51bb8e51165c7efda15950b86a3ebcbb363f898e",
                 AccessRoleId = 1,
                 UserStatuses = new UserStatuses() { Name = "seed", Description = "deleted", Status = UserStatusType.MarkDeleted },
                 UserInfo = new UserInfo() { Id = 2, Name = "deleted", LastName = "Админ" }
@@ -53,7 +53,7 @@ namespace Getticket.Web.DAL.Migrations
             {
                 UserName = "admin@admin.su",
                 UserPhone = "+79159998877",
-                PasswordHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+                Password = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                 AccessRoleId = 1,
                 UserStatuses = new UserStatuses() { Name = "seed", Description = "", Status = UserStatusType.System },
                 UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ" }

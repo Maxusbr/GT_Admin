@@ -142,7 +142,7 @@ namespace Getticket.Web.API.Services
             }
 
             string Password = PasswordService.GeneratePasswordString();
-            user.PasswordHash = PasswordService.GeneratePasswordHash(Password);
+            user.Password = PasswordService.GeneratePasswordHash(Password);
             UserRep.Save(user);
 
             new Thread(send =>
@@ -190,7 +190,7 @@ namespace Getticket.Web.API.Services
             if (user.UserName.Equals(currentUserEmail))
             {
                 SelfChangePassword = true;
-                if (!user.PasswordHash.Equals(PasswordService.GeneratePasswordHash(model.OldPassword)))
+                if (!user.Password.Equals(PasswordService.GeneratePasswordHash(model.OldPassword)))
                 {
                     return ServiceResponce
                         .FromFailed()
@@ -198,7 +198,7 @@ namespace Getticket.Web.API.Services
                 }
             }
 
-            user.PasswordHash = PasswordService.GeneratePasswordHash(model.NewPassword);
+            user.Password = PasswordService.GeneratePasswordHash(model.NewPassword);
             UserRep.Save(user);
 
             if (model.SendCopyPassword)

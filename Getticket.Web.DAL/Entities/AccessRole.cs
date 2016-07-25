@@ -7,12 +7,12 @@ namespace Getticket.Web.DAL.Entities
     /// <summary>
     /// Роли доступа пользователя к методам контроллера 
     /// </summary>
-    public class AccessRole : BaseEntity
+    public class AccessRoles : BaseEntity
     {
         /// <summary>
         /// Конструктор
         /// </summary>
-        public AccessRole()
+        public AccessRoles()
         {
             this.Users = new HashSet<User>();
         }

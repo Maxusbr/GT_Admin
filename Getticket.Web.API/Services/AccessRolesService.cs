@@ -27,7 +27,7 @@ namespace Getticket.Web.API.Services {
         /// </summary>
         /// <returns></returns>
         public IList<AccessRoleModel> GetAllRoles() {
-            IList<AccessRole> roles = AccessRep.GetAll();
+            IList<AccessRoles> roles = AccessRep.GetAll();
             return AccessRoleModelHelper.GetAccessRoleModel(roles);
         }
 
@@ -38,7 +38,7 @@ namespace Getticket.Web.API.Services {
         /// <param name="id"></param>
         /// <returns></returns>
         public AccessRoleModel GetRole(int id) {
-            AccessRole role = AccessRep.GetOneById(id);
+            AccessRoles role = AccessRep.GetOneById(id);
             return AccessRoleModelHelper.GetAccessRoleModel(role);
         }
 
@@ -59,9 +59,9 @@ namespace Getticket.Web.API.Services {
         /// </summary>
         /// <returns></returns>
         public ServiceResponce SaveRole(AccessRoleModel model) {
-            AccessRole toSave = null;
+            AccessRoles toSave = null;
             if (model.Id == 0) {
-                toSave = new AccessRole();
+                toSave = new AccessRoles();
             } else {
                 toSave = AccessRep.GetOneById(model.Id);
                 if (toSave == null) {

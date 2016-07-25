@@ -65,7 +65,7 @@ namespace Getticket.Web.API.Providers
                 List<string> rolesNames = new List<string>();
                 foreach (AccessRoleType role in Enum.GetValues(typeof(AccessRoleType)))
                 {
-                    if (user.AccessRole.Role.HasFlag(role) && (role != AccessRoleType.None))
+                    if (user.AccessRoles.Role.HasFlag(role) && (role != AccessRoleType.None))
                     {
                         rolesNames.Add(role.ToString());
                         identity.AddClaim(new Claim(ClaimTypes.Role, role.ToString()));

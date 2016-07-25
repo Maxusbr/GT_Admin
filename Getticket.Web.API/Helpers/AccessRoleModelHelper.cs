@@ -18,7 +18,7 @@ namespace Getticket.Web.API.Helpers
         /// <param name="toUpdate"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static AccessRole UpdateAccessRole(AccessRole toUpdate, AccessRoleModel model) {
+        public static AccessRoles UpdateAccessRole(AccessRoles toUpdate, AccessRoleModel model) {
             try {
                 toUpdate.Name = model.Name;
                 toUpdate.Desciption = model.Desciption;
@@ -34,7 +34,7 @@ namespace Getticket.Web.API.Helpers
         /// </summary>
         /// <param name="role"></param>
         /// <returns></returns>
-        public static AccessRoleModel GetAccessRoleModel(AccessRole role)
+        public static AccessRoleModel GetAccessRoleModel(AccessRoles role)
         {
             if (role == null)
             {
@@ -55,7 +55,7 @@ namespace Getticket.Web.API.Helpers
         /// </summary>
         /// <param name="roles"></param>
         /// <returns></returns>
-        public static IList<AccessRoleModel> GetAccessRoleModel(IList<AccessRole> roles)
+        public static IList<AccessRoleModel> GetAccessRoleModel(IList<AccessRoles> roles)
         {
             if (roles == null)
             {
@@ -63,7 +63,7 @@ namespace Getticket.Web.API.Helpers
             }
 
             IList<AccessRoleModel> toReturn = new List<AccessRoleModel>(roles.Count);
-            foreach(AccessRole rol in roles)
+            foreach(AccessRoles rol in roles)
             {
                 toReturn.Add(GetAccessRoleModel(rol));
             }

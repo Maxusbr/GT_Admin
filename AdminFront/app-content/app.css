@@ -613,7 +613,8 @@ ui-view {
 
 .custom-menu__container {
     background-color: #6b6a75;
-    overflow-x: scroll;
+    overflow-x:hidden;
+    overflow-y:hidden;
 }
 
 .custom-menu__close {

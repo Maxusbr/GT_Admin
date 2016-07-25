@@ -23,8 +23,8 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<User> Users { get; set; }
         /// <see cref="UserInfo" />
         public virtual DbSet<UserInfo> UserInfos { get; set; }
-        /// <see cref="AccessRole" />
-        public virtual DbSet<AccessRole> AccessRoles { get; set; }
+        /// <see cref="AccessRoles" />
+        public virtual DbSet<AccessRoles> AccessRoles { get; set; }
         /// <see cref="UserStatus" />
         public virtual DbSet<UserStatuses> UserStatuses { get; set; }
 
@@ -49,7 +49,7 @@ namespace Getticket.Web.DAL.Entities
                     .WillCascadeOnDelete(true);
 
                 this
-                    .HasRequired(u => u.AccessRole)
+                    .HasRequired(u => u.AccessRoles)
                     .WithMany(ar => ar.Users)
                     .HasForeignKey(u => u.AccessRoleId)
                     .WillCascadeOnDelete(false);

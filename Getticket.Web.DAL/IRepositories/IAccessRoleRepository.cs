@@ -12,7 +12,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// Получает все доступные системные роли из бд
         /// </summary>
         /// <returns></returns>
-        IList<AccessRole> GetAll();
+        IList<AccessRoles> GetAll();
 
         /// <summary>
         /// Получает список всех пользователей, у которых присутствует данная роль
@@ -25,13 +25,13 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        AccessRole GetOneById(int id);
+        AccessRoles GetOneById(int id);
 
         /// <summary>
-        /// Добавляет новую или обновляет существующую <see cref="AccessRole"/>
+        /// Добавляет новую или обновляет существующую <see cref="AccessRoles"/>
         /// </summary>
         /// <param name="toSave"></param>
         /// <returns></returns>
-        AccessRole Save(AccessRole toSave);
+        AccessRoles Save(AccessRoles toSave);
     }
 }

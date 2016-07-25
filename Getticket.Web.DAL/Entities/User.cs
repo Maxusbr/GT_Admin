@@ -32,7 +32,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Хеш пароля пользователя
         /// </summary>
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
 
         /// <summary>
         /// ???
@@ -53,7 +53,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Роль доступа пользователя к API
         /// </summary>
-        public virtual AccessRole AccessRole { get; set; }
+        public virtual AccessRoles AccessRoles { get; set; }
 
         /// <summary>
         /// Статус пользователя в системе
