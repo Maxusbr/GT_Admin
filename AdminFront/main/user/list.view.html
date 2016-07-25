@@ -17,26 +17,26 @@
     <thead>
     <tr class="bg-gray">
         <th class="text-nowrap col-md-4">
-            <a href="" ng-click="sortFName==''?sortFName = 'fname':sortFName = '';">
+            <a href="" ng-click="sortFName==''?sortFName = 'LastName':sortFName = '';">
                 Имя
                 <span ng-show="sortFName" class="glyphicon glyphicon-chevron-down"></span></a>
 
             <a href="" ng-click="sortReverseFName = !sortReverseFName">
-                <span style="display: block;float: right;" ng-show="sortFName == 'fname' && !sortReverseFName"
+                <span style="display: block;float: right;" ng-show="sortFName == 'LastName' && !sortReverseFName"
                       class="glyphicon glyphicon-sort-by-attributes"></span>
-                <span style="display: block;float: right;" ng-show="sortFName == 'fname' && sortReverseFName"
+                <span style="display: block;float: right;" ng-show="sortFName == 'LastName' && sortReverseFName"
                       class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
 
         </th>
         <th class="text-nowrap col-md-4">
-            <a href="" ng-click="sortCompany==''?sortCompany = 'company':sortCompany = '';">
+            <a href="" ng-click="sortCompany==''?sortCompany = 'Company':sortCompany = '';">
                 Компания
                 <span ng-show="sortCompany" class="glyphicon glyphicon-chevron-down"></span></a>
             <a href="" ng-click="sortReverseCompany = !sortReverseCompany">
-                <span style="display: block;float: right;" ng-show="sortCompany == 'company' && !sortReverseCompany"
+                <span style="display: block;float: right;" ng-show="sortCompany == 'Company' && !sortReverseCompany"
                       class="glyphicon glyphicon-sort-by-attributes"></span>
-                <span style="display: block;float: right;" ng-show="sortCompany == 'company' && sortReverseCompany"
+                <span style="display: block;float: right;" ng-show="sortCompany == 'Company' && sortReverseCompany"
                       class="glyphicon glyphicon-sort-by-attributes-alt"></span>
             </a>
         </th>
@@ -78,15 +78,15 @@
     <tbody>
     <tr ng-repeat="row in userlist | filter:searchUser | orderBy:sortFName:sortReverseFName | orderBy:sortCompany:sortReverseCompany | orderBy:sortEvent:sortReverseEvent | orderBy:sortRole:sortReverseRole | orderBy:sortStatus:sortReverseStatus ">
         <td class="td-username">
-            <div class="head" ng-if="row.fname||row.sname">{{ row.fname }} {{ row.sname }}</div>
+            <div class="head" ng-if="row.LastName||row.Name">{{ row.LastName }} {{ row.Name }}</div>
             <div class="head" ng-if="row.invite">Приглашение</div>
-            <div class="text small">{{ row.email }}<br>{{ row.phone }}</div>
-            <a href="/#/main/user/profile/{{row.id}}">перейти в профиль</a></td>
-        <td>{{ row.company }}</td>
+            <div class="text small">{{ row.Email }}<br>{{ row.phone }}</div>
+            <a href="/#/main/user/profile/{{row.Id}}">перейти в профиль</a></td>
+        <td>{{ row.Company }}</td>
         <td ng-class="row.active === true?'text-success':''">{{ row.event }}</td>
         <td>{{ row.role }}</td>
-        <td class="{{row.statusclass}}">
-            {{ row.status }}
+        <td class="{{row.StatusName}}">
+            {{ row.StatusDescription }}
             <button ng-if="row.button" class="btn btn-success">{{ row.button }}</button>
         </td>
     </tr>

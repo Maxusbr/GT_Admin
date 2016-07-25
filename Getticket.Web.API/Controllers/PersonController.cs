@@ -13,7 +13,7 @@ namespace Getticket.Web.API.Controllers
     /// Контроллер для работы с Person
     /// </summary>
     [RoutePrefix("persons")]
-    [AllowAnonymous]
+    [Authorize]
     public class PersonController : ApiController
     {
         private readonly IPersonService _personService;

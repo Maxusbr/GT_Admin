@@ -23,9 +23,9 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<User> Users { get; set; }
         /// <see cref="UserInfo" />
         public virtual DbSet<UserInfo> UserInfos { get; set; }
-        /// <see cref="AccessRoles" />
+        /// <see cref="Entities.AccessRoles" />
         public virtual DbSet<AccessRoles> AccessRoles { get; set; }
-        /// <see cref="UserStatus" />
+        /// <see cref="Entities.UserStatuses" />
         public virtual DbSet<UserStatuses> UserStatuses { get; set; }
 
         /// <summary>

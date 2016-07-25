@@ -15,7 +15,7 @@
         $urlRouterProvider.otherwise("/main/user");
 
         // $rootScope.menuActive = '';
-
+        
         $stateProvider
             .state('main.user', {
                 abstract: true,
@@ -86,12 +86,15 @@
             });
     }
 
-    MainController.$inject = ['$rootScope'];
-    function MainController($rootScope) {
+    MainController.$inject = ['$rootScope', 'AuthenticationService', '$location', '$http'];
+    function MainController($rootScope, AuthenticationService, $location, $http) {
 
-            $('.checkbox-input-container span').click(function () {
-                console.log('click!');
-            })
-        
+        $('.checkbox-input-container span').click(function() {
+            console.log('click!');
+        });
+        $rootScope.Logout = function() {
+            AuthenticationService.Logout();
+            $location.path('/sign-in');
+        }
     }
 })();

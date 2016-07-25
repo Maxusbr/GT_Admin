@@ -5,20 +5,20 @@
         .module('app')
         .controller('MainUserRegisterController', MainUserRegisterController);
 
-    MainUserRegisterController.$inject = ['UserService', '$scope'];
-    function MainUserRegisterController(UserService, $scope) {
+    MainUserRegisterController.$inject = ['UserService', '$scope', '$http', '$location'];
+    function MainUserRegisterController(UserService, $scope, $http, $location) {
         var vm = this;
 
         $scope.emailpattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
-
+        $scope.response = {};
         $scope.submitted = false;
         $scope.passtype = 'password';
         $scope.user = {};
         $scope.roles = [
-            {id: 1, name: 'R1'},
-            {id: 2, name: 'R2'},
-            {id: 3, name: 'R3'},
-            {id: 4, name: 'R4'},
+            { id: 1, name: 'R1' },
+            { id: 2, name: 'R2' },
+            { id: 3, name: 'R3' },
+            { id: 4, name: 'R4' },
         ];
 
         $scope.register = register;
@@ -43,19 +43,25 @@
                 // $('#password').attr('type', 'text');
                 // $('#password').attr('value', str_rand());
                 $scope.passtype = 'text';
-                $scope.user.password = str_rand();
+                $scope.user.Password = str_rand();
             }
             else {
                 // $('#password').attr('type', 'password');
                 // $('#password').attr('value', '');
                 $scope.passtype = 'password';
-                $scope.user.password = '';
+                $scope.user.Password = '';
             }
         };
         function register(user) {
             $scope.user = angular.copy(user);
             $scope.submitted = true;
-
+            if ($scope.form.$valid)
+                $http.post(`${apiUrl}users/register`, $scope.user).success(function (response) {
+                    $scope.response = response;
+                    if (response.status === 'success') {
+                        $location.path('/main/user');
+                    }
+                });
             console.log(user);
         };
 

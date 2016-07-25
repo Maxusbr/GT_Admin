@@ -171,8 +171,10 @@
                 "id": "7"
             },
         ];
-        var filtered = $filter('filter')($rootScope.users, {id: $stateParams.id});
-        $rootScope.person = filtered.length ? filtered[0] : null;
+        if($rootScope.userlist) {
+            var filtered = $filter('filter')($rootScope.userlist, { Id: $stateParams.id });
+            $rootScope.person = filtered.length ? filtered[0] : null;
+        }
 
         // $rootScope.person = $rootScope.users[$stateParams.id];
     }

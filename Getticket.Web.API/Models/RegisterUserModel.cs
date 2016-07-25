@@ -33,10 +33,8 @@ namespace Getticket.Web.API.Models
         // GeneratePassword = true
         public string Password { get; set; }
 
-        [Required]
         public bool GeneratePassword { get; set; }
 
-        [Required]
         public bool NotSendWelcome { get; set; }
 
         [Required]

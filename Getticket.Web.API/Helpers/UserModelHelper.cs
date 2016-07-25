@@ -20,17 +20,19 @@ namespace Getticket.Web.API.Helpers
             {
                 return null;
             }
-            UserModel model = new UserModel();
-            model.Id = user.Id;
-            model.Name = user.UserInfo.Name;
-            model.LastName = user.UserInfo.LastName;
-            model.Company = user.UserInfo.Company;
-            model.Position = user.UserInfo.Position;
-            model.Phone = user.UserPhone;
-            model.Email = user.UserName;
-            model.Status = user.UserStatuses.Status;
-            model.StatusName = user.UserStatuses.Name;
-            model.StatusDescription = user.UserStatuses.Description;
+            UserModel model = new UserModel
+            {
+                Id = user.Id,
+                Name = user.UserInfo?.Name,
+                LastName = user.UserInfo?.LastName,
+                Company = user.UserInfo?.Company,
+                Position = user.UserInfo?.Position,
+                Phone = user.UserPhone,
+                Email = user.UserName,
+                Status = user.UserStatuses.Status,
+                StatusName = user.UserStatuses.Name,
+                StatusDescription = user.UserStatuses.Description
+            };
 
             return model;
         }

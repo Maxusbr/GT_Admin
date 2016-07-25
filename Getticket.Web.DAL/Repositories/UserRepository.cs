@@ -3,6 +3,7 @@ using Getticket.Web.DAL.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using Getticket.Web.DAL.IRepositories;
 using System.Linq.Expressions;
@@ -17,27 +18,33 @@ namespace Getticket.Web.DAL.Repositories
         /// <summary>
         /// Пользователь НЕ помечен как удаленный
         /// </summary>
-        private Expression<Func<User, bool>> UserNotDeleted 
-            = (u =>u.UserStatuses.Status != UserStatusType.MarkDeleted);
+        private Expression<Func<User, bool>> UserNotDeleted
+            = (u => u.UserStatuses.Status != UserStatusType.MarkDeleted);
 
         /// <summary>
         /// Приглашенный пользователь
         /// </summary>
-        private Expression<Func<User, bool>> UserInvited 
-            = (u => (u.UserStatuses.Status == UserStatusType.Invite 
+        private Expression<Func<User, bool>> UserInvited
+            = (u => (u.UserStatuses.Status == UserStatusType.Invite
                     || u.UserStatuses.Status == UserStatusType.AcceptInvite));
 
         /// <see cref="IUserRepository.FindAllNotDeleted" />
         public IList<User> FindAllNotDeleted()
         {
-            IQueryable<User> query = db.Users.Where(UserNotDeleted);
+            IQueryable<User> query = db.Users.Where(UserNotDeleted)
+                .Include(o => o.UserInfo)
+                .Include(o => o.UserStatuses)
+                .Include(o => o.AccessRoles);
             return GetAll(query);
         }
 
         /// <see cref="IUserRepository.FindAllInvited" />
         public IList<User> FindAllInvited()
         {
-            IQueryable<User> query = db.Users.Where(UserInvited);
+            IQueryable<User> query = db.Users.Where(UserInvited)
+                .Include(o => o.UserInfo)
+                .Include(o => o.UserStatuses)
+                .Include(o => o.AccessRoles);
             return GetAll(query);
         }
 
@@ -48,16 +55,24 @@ namespace Getticket.Web.DAL.Repositories
             {
                 return null;
             }
-            IQueryable<User> query = db.Users.Where(u => u.Id == Id);
+            IQueryable<User> query = db.Users.Where(u => u.Id == Id)
+                .Include(o => o.UserInfo)
+                .Include(o => o.UserStatuses)
+                .Include(o => o.AccessRoles);
             return GetOne(query);
         }
 
         /// <see cref="IUserRepository.FindOneByEmail(string)"/>
-        public User FindOneByEmail(string Email) {
-            if (Email == null) {
+        public User FindOneByEmail(string Email)
+        {
+            if (Email == null)
+            {
                 return null;
             }
-            IQueryable<User> query = db.Users.Where(u => u.UserName.Equals(Email));
+            IQueryable<User> query = db.Users.Where(u => u.UserName.Equals(Email))
+                .Include(o => o.UserInfo)
+                .Include(o => o.UserStatuses)
+                .Include(o => o.AccessRoles);
             return GetOne(query);
         }
 
@@ -69,11 +84,17 @@ namespace Getticket.Web.DAL.Repositories
 
             if (phone == null)
             {
-                query = query.Where(u => u.UserName.Equals(email));
+                query = query.Where(u => u.UserName.Equals(email))
+                    .Include(o => o.UserInfo)
+                .Include(o => o.UserStatuses)
+                .Include(o => o.AccessRoles);
             }
             else
             {
-                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserPhone.Equals(phone)));
+                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserPhone.Equals(phone)))
+                    .Include(o => o.UserInfo)
+                .Include(o => o.UserStatuses)
+                .Include(o => o.AccessRoles);
             }
 
             return query.Count();
@@ -87,11 +108,17 @@ namespace Getticket.Web.DAL.Repositories
 
             if (phone == null)
             {
-                query = query.Where(u => u.UserName.Equals(email));
+                query = query.Where(u => u.UserName.Equals(email))
+                    .Include(o => o.UserInfo)
+                .Include(o => o.UserStatuses)
+                .Include(o => o.AccessRoles);
             }
             else
             {
-                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserPhone.Equals(phone)));
+                query = query.Where(u => (u.UserName.Equals(email)) || (u.UserPhone.Equals(phone)))
+                    .Include(o => o.UserInfo)
+                .Include(o => o.UserStatuses)
+                .Include(o => o.AccessRoles);
             }
 
             return GetAll(query);
