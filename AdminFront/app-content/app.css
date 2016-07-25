@@ -127,10 +127,9 @@ select.form-control {
     border-bottom: 0;
     text-decoration: underline;
 }
-
 .mycheckbox {
     color: #9595a2;
-    padding: 6px 12px;
+    padding: 1px 12px;
 }
 
 .my-profile-checkbox {
@@ -323,10 +322,12 @@ ui-view {
 }
 
 .register__container input.form-control {
-    border: 0;
+    border-top:0;
+    border-left:0;
+    border-right:0;
     box-shadow: none;
     color: #6b6a75;
-    font-size: 130%;
+    font-size: 120%;
     border-radius: 0;
 }
 
