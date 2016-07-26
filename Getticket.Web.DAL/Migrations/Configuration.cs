@@ -31,7 +31,7 @@ namespace Getticket.Web.DAL.Migrations
             // admin:    8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
 
             User user1 = new User()
-            {
+            {Id = 1,
                 UserName = "teest@admin.su",
                 UserPhone = "+79063332211",
                 Password = "ccfcb5961cb870496289a62c2a6f728c78feb49f448972daf0a6f098a903be08",
@@ -42,6 +42,7 @@ namespace Getticket.Web.DAL.Migrations
 
             User user2 = new User()
             {
+                Id = 2,
                 UserName = "deleted@admin.su",
                 UserPhone = "+79153332211",
                 Password = "1185f37d33b0f89e331f101a51bb8e51165c7efda15950b86a3ebcbb363f898e",
@@ -52,6 +53,7 @@ namespace Getticket.Web.DAL.Migrations
 
             User user3 = new User()
             {
+                Id = 3,
                 UserName = "admin@admin.su",
                 UserPhone = "+79159998877",
                 Password = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
@@ -61,6 +63,7 @@ namespace Getticket.Web.DAL.Migrations
             };
             var user4 = new User()
             {
+                Id = 4,
                 UserName = "max_73@inbox.ru",
                 UserPhone = "+79788701877",
                 Password = "65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5",
@@ -160,8 +163,8 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonSocialLinkTypes.AddOrUpdate(o => o.Id, new PersonSocialLinkType { Id = 1, Name = "instagram" });
             context.PersonSocialLinkTypes.AddOrUpdate(o => o.Id, new PersonSocialLinkType { Id = 2, Name = "facebook" });
 
-            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { id_Person = 1, id_SocialLinkType = 1, Link = "https://instagram.com/curlme_anna", Description = "instagram.com/curlme_anna" });
-            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { id_Person = 1, id_SocialLinkType = 2, Link = "https://www.facebook.com/fakeacc_curl", Description = "https://www.facebook.com/fakeacc_curl" });
+            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 1, id_Person = 1, id_SocialLinkType = 1, Link = "https://instagram.com/curlme_anna", Description = "instagram.com/curlme_anna" });
+            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 2, id_Person = 1, id_SocialLinkType = 2, Link = "https://www.facebook.com/fakeacc_curl", Description = "https://www.facebook.com/fakeacc_curl" });
 
             context.PersonFactTypes.AddOrUpdate(o => o.Id, new PersonFactType { Id = 1, Name = "БИО", Descript = "ФИО"});
             context.PersonFactTypes.AddOrUpdate(o => o.Id, new PersonFactType { Id = 2, Name = "Событие", Descript = " Место рождения"});

@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using Getticket.Web.DAL.Enums;
 
@@ -27,7 +28,10 @@ namespace Getticket.Web.DAL.Repositories
                 .Include("AccessRoles")
                 .Where(u => (u.Password.Equals(PasswordHash)
                               && u.UserStatuses.Status == Status
-                              && u.UserName.Equals(UserName)));
+                              && u.UserName.Equals(UserName)))
+                              .Include(o => o.UserInfo)
+                              .Include(o => o.UserStatuses)
+                              .Include(o => o.AccessRoles);
             return GetAll(query);
         }
 
@@ -39,7 +43,10 @@ namespace Getticket.Web.DAL.Repositories
                 .Where(u => (u.Password.Equals(PasswordHash)
                               && u.UserStatuses.Status == Status
                               && (u.UserName.Equals(UserName)
-                                   || u.UserPhone.Equals(Phone))));
+                                   || u.UserPhone.Equals(Phone))))
+                                   .Include(o => o.UserInfo)
+                              .Include(o => o.UserStatuses)
+                              .Include(o => o.AccessRoles);
             return GetAll(query);
         }
 
@@ -50,7 +57,10 @@ namespace Getticket.Web.DAL.Repositories
                 .Include("AccessRoles")
                 .Where(u => (u.Password.Equals(PasswordHash)
                               && u.UserStatuses.Status == Status
-                              && u.UserPhone.Equals(Phone)));
+                              && u.UserPhone.Equals(Phone)))
+                              .Include(o => o.UserInfo)
+                              .Include(o => o.UserStatuses)
+                              .Include(o => o.AccessRoles);
             return GetAll(query);
         }
     }

@@ -14,15 +14,16 @@ var pageSize = 20;
             'ngCookies',
             'vcRecaptcha',
             'ngMessages',
-            'ngResource'
+            'ngResource', 'angularMoment'
             // 'webix'
         ])
         .config(config)
         .run(run);
 
-    run.$inject = ['$rootScope', '$templateCache', '$cookieStore', '$location', '$http'];
+    run.$inject = ['$rootScope', '$templateCache', '$cookieStore', '$location', '$http', 'amMoment'];
 
-    function run($rootScope, $templateCache, $cookieStore, $location, $http) {
+    function run($rootScope, $templateCache, $cookieStore, $location, $http, amMoment) {
+        amMoment.changeLocale('ru');
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
             $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.globals.currentUser.token; // jshint ignore:line

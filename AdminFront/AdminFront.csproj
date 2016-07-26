@@ -110,6 +110,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\angular-moment.js" />
+    <Content Include="scripts\angular-moment.min.js" />
+    <Content Include="scripts\moment-with-locales.js" />
+    <Content Include="scripts\moment-with-locales.min.js" />
+    <Content Include="scripts\moment.js" />
+    <Content Include="scripts\moment.min.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="app-content\bootstrap\config.json" />
     <Content Include="app-content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -118,6 +124,7 @@
     <Content Include="app-content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="App_Data\Debug.7z" />
     <None Include="Properties\PublishProfiles\getticket - Web Deploy.pubxml" />
+    <Content Include="scripts\angular-moment.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

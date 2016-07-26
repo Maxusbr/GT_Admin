@@ -87,5 +87,13 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="Entity"></param>
         /// <returns></returns>
         bool Delete(User Entity);
+
+        /// <summary>
+        /// Обновить вермя последнего входа
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        bool UpdateLastEnter(int id, DateTime dt);
     }
 }
