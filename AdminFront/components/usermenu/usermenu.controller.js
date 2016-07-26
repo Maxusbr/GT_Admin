@@ -8,8 +8,8 @@ angular.module('app')
         };
     });
 
-userMenuCtrl.$inject = ['$rootScope', '$scope', '$location', '$stateParams'];
-function userMenuCtrl($rootScope, $scope, $location, $stateParams) {
+userMenuCtrl.$inject = ['$rootScope', '$scope', '$location', '$stateParams', '$filter'];
+function userMenuCtrl($rootScope, $scope, $location, $stateParams, $filter) {
 
     $scope.searchUserMenu = '';
     $rootScope.id = $stateParams.id;
@@ -117,6 +117,12 @@ function userMenuCtrl($rootScope, $scope, $location, $stateParams) {
     //        "id": "7"
     //    }
     //];
+    $rootScope.$watch('userMenuList', function (params) {
+        if (!$rootScope.userMenuList) return;
+        var filtered = $filter('filter')($rootScope.userMenuList, { id: $stateParams.id });
+        if(filtered.length)
+            filtered[0].active = true;
+    });
 
     $scope.UserAdd = UserAdd;
     $scope.UserInvite = UserInvite;

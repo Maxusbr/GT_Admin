@@ -5,8 +5,8 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$inject = ['$http'];
-    function UserService($http) {
+    UserService.$inject = ['$http', '$rootScope'];
+    function UserService($http, $rootScope) {
         var service = {};
 
         service.GetAll = GetAll;
@@ -16,6 +16,7 @@
         service.Update = Update;
         service.Delete = Delete;
 
+        service.updateListUsers = updateListUsers;
         return service;
 
         function GetAll() {
@@ -43,6 +44,27 @@
             return $http.delete('/api/users/' + id).then(handleSuccess, handleError('Error deleting user'));
         }
 
+        function getUsers() {
+            return $http.get(`${apiUrl}users`)
+                .success(function (data) { return data })
+                .error(function (data) {
+                    return { success: false, message: data };
+                });
+        }
+
+        function updateListUsers() {
+            getUsers().success(function (data) {
+                $rootScope.userlist = data;
+                $rootScope.userMenuList = [];
+                $rootScope.userlist.forEach(function (item) {
+                    $rootScope.userMenuList.push({
+                        "title": `${item.LastName} ${item.Name}`,
+                        "id": item.Id
+                    });
+                });
+            });
+        }
+
         // private functions
 
         function handleSuccess(res) {
@@ -51,7 +73,7 @@
 
         function handleError(error) {
             return function () {
-                return {success: false, message: error};
+                return { success: false, message: error };
             };
         }
     }
