@@ -15,12 +15,16 @@
         $scope.passtype = 'password';
         $scope.user = {};
         $scope.roles = [
-            { id: 1, name: 'R1' },
-            { id: 2, name: 'R2' },
-            { id: 3, name: 'R3' },
-            { id: 4, name: 'R4' },
+            //{ id: 1, name: 'R1' },
+            //{ id: 2, name: 'R2' },
+            //{ id: 3, name: 'R3' },
+            //{ id: 4, name: 'R4' },
         ];
-
+        UserService.getListRoles().success(function (data) {
+            data.forEach(function (item) {
+                $scope.roles.push({ id: item.Id, name: item.Name });
+            });
+        });
         $scope.register = register;
         $scope.generatePassword = generatePassword;
 
@@ -56,12 +60,14 @@
             $scope.user = angular.copy(user);
             $scope.submitted = true;
             if ($scope.form.$valid)
-                $http.post(`${apiUrl}users/register`, $scope.user).success(function (response) {
-                    $scope.response = response;
-                    if (response.status === 'success') {
-                        $location.path('/main/user');
-                    }
-                });
+                UserService.registerUser($scope.user)
+                    .success(function (response) {
+                        $scope.response = response;
+                        if (response.status === 'success') {
+                            $location.path('/main/user');
+                        }
+                    })
+            .error(function (response) { $scope.response = response; });
             console.log(user);
         };
 

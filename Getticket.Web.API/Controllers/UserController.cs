@@ -55,6 +55,7 @@ namespace Getticket.Web.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("register")]
+        [AllowAnonymous]
         public IHttpActionResult Register([FromBody] RegisterUserModel model)
         {
             return Ok(UserServ.CreateSystemUser(model).Response());

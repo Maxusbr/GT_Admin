@@ -5,8 +5,8 @@
         .module('app')
         .controller('MainUserListController', MainUserListController);
 
-    MainUserListController.$inject = ['$rootScope', '$http'];
-    function MainUserListController($rootScope, $http) {
+    MainUserListController.$inject = ['$rootScope', 'UserService'];
+    function MainUserListController($rootScope, UserService) {
         var vm = this;
 
         $rootScope.sortType = 'event'; // set the default sort type
@@ -103,18 +103,8 @@
         //        "id": "6"
         //    },
         //]
-        $http.get(`${apiUrl}users`).success(function (data) {
-            $rootScope.userlist = data;
-            $rootScope.userMenuList = [];
-            $rootScope.person = data.length ? data[0] : null;
-            $rootScope.userlist.forEach(function (item) {
-                $rootScope.userMenuList.push({
-                    "title": `${item.LastName} ${item.Name}`,
-                    "id": item.Id
-                });
-            });
-            $rootScope.userMenuList[0].active = true;
-        });
+
+        if (!$rootScope.userlist) UserService.getListUsers();
     }
 
 })();

@@ -6,8 +6,8 @@
         .module('app')
         .controller('MainUserProfileController', MainUserProfileController);
 
-    MainUserProfileController.$inject = ['$rootScope', '$stateParams', '$filter', '$location'];
-    function MainUserProfileController($rootScope, $stateParams, $filter, $location) {
+    MainUserProfileController.$inject = ['$rootScope', '$stateParams', '$filter', '$location', 'UserService'];
+    function MainUserProfileController($rootScope, $stateParams, $filter, $location, UserService) {
         var vm = this;
         $rootScope.peSortType = 'date'; // set the default sort type
         $rootScope.peSortReverse = false;  // set the default sort order
@@ -17,12 +17,17 @@
         $rootScope.user = {"email": "qwe@qwe.ru"};
 
         $rootScope.$watch(function () {
-            return $location.path()
+            return $location.path();
         }, function (params) {
             console.log(params);
             $rootScope.id = $stateParams.id;
         });
-
+        if (!$rootScope.userlist) UserService.getListUsers();
+        $rootScope.$watch('userlist', function (params) {
+            if (!$rootScope.userlist) return;
+            var filtered = $filter('filter')($rootScope.userlist, { Id: $stateParams.id });
+            $rootScope.person = filtered.length ? filtered[0] : null;
+        });
 
         $rootScope.eventslist = [
             {
@@ -171,10 +176,6 @@
                 "id": "7"
             },
         ];
-        if($rootScope.userlist) {
-            var filtered = $filter('filter')($rootScope.userlist, { Id: $stateParams.id });
-            $rootScope.person = filtered.length ? filtered[0] : null;
-        }
 
         // $rootScope.person = $rootScope.users[$stateParams.id];
     }

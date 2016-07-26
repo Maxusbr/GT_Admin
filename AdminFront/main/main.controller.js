@@ -95,8 +95,8 @@
         });
     }
 
-    MainController.$inject = ['$rootScope', 'AuthenticationService', '$location', '$http'];
-    function MainController($rootScope, AuthenticationService, $location, $http) {
+    MainController.$inject = ['$rootScope', 'AuthenticationService', '$location'];
+    function MainController($rootScope, AuthenticationService, $location) {
 
         $('.checkbox-input-container span').click(function() {
             console.log('click!');

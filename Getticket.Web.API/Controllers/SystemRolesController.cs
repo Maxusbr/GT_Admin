@@ -10,7 +10,7 @@ namespace Getticket.Web.API.Controllers {
     /// и кому они принадлежат.
     /// Доступ имеют только пользователи с ролью <see cref="AccessRoleType.AccessRoleManager"/>
     /// </summary>
-    [Authorize(Roles = "AccessRoleManager")]
+    [Authorize(Roles = "AccessRoleManager, Admin")]
     [RoutePrefix("sysroles")]
     public class SystemRolesController : ApiController {
 
@@ -28,7 +28,7 @@ namespace Getticket.Web.API.Controllers {
         /// </summary>
         /// <returns></returns>
         [Route("")]
-        [HttpPost]
+        [HttpGet]
         public IHttpActionResult GetAll() {
             return Ok(RoleServ.GetAllRoles());
         }

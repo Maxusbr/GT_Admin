@@ -15,7 +15,7 @@
 
         vm.register = register;
         vm.generatePassword = generatePassword;
-
+        vm.response = {};
 
         function str_rand() {
             var result = '';
@@ -43,16 +43,37 @@
 
         function register() {
             vm.dataLoading = true;
-            UserService.Create(vm.user)
-                .then(function (response) {
-                    if (response.success) {
-                        FlashService.Success('Registration successful', true);
-                        $location.path('/login');
-                    } else {
-                        FlashService.Error(response.message);
+            //if ($scope.form.$valid) {
+                var user = {
+                    Name: vm.user.first_name,
+                    LastName: vm.user.last_name,
+                    Company: vm.user.company,
+                    Position: vm.user.post,
+                    Email: vm.user.username,
+                    Phone: vm.user.phone,
+                    Password: vm.user.password,
+                    RoleId: 2
+                }
+                UserService.registerUser(user)
+                    .success(function (response) {
                         vm.dataLoading = false;
-                    }
-                });
+                        vm.response = response;
+                        if (response.status === 'success') {
+                            $location.path('/login');
+                        }
+                    })
+                    .error(function (response) { vm.dataLoading = false; vm.response = response;  });
+            //}
+            //UserService.Create(vm.user)
+            //    .then(function (response) {
+            //        if (response.success) {
+            //            FlashService.Success('Registration successful', true);
+            //            $location.path('/login');
+            //        } else {
+            //            FlashService.Error(response.message);
+            //            vm.dataLoading = false;
+            //        }
+            //    });
         }
     }
 

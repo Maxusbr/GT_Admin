@@ -1,17 +1,21 @@
 ﻿<div class="container">
-    <div class="col-md-4 col-md-offset-4 text-center space-lg logo">
-        <img src="/app-content/images/logo.png">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center space-lg logo">
+            <img src="/app-content/images/logo-fullsize.png">
+        </div>
     </div>
-    <div class="col-md-8 col-md-offset-2">
-        <div class="col-md-10 col-md-offset-1 reg">
-            <h2><span class="glyphicon glyphicon-envelope"></span> Регистрация</h2>
+    <div class="row">
+        <div class="col-md-12 col-md-offset-3 text-center space-lg">
+            <h2>
+                <span class="glyphicon glyphicon-envelope"></span> Регистрация
+            </h2>
             <form name="form" ng-submit="vm.register()" role="form" novalidate>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group"
                              ng-class="{ 'has-error': form.firstName.$touched && form.firstName.$error.required }">
                             <input type="text" name="firstName" id="firstName" class="form-control"
-                                   ng-model="vm.user.first_name" placeholder="Имя" required/>
+                                   ng-model="vm.user.first_name" placeholder="Имя" required />
                             <span ng-show="form.firstName.$touched && form.firstName.$error.required"
                                   class="help-block">First name is required</span>
                         </div>
@@ -19,27 +23,27 @@
                              ng-class="{ 'has-error': form.lastName.$touched && form.lastName.$error.required }">
                             <input type="text" name="lastName" id="Text1" class="form-control"
                                    ng-model="vm.user.last_name"
-                                   placeholder="Фамилия" required/>
+                                   placeholder="Фамилия" required />
                             <span ng-show="form.lastName.$touched && form.lastName.$error.required" class="help-block">Last name is required</span>
                         </div>
                         <div class="form-group"
                              ng-class="{ 'has-error': form.password.$touched && form.password.$error.required }">
                             <input id="company" type="text" name="company" class="form-control"
                                    ng-model="vm.user.company"
-                                   placeholder="Компания"/>
+                                   placeholder="Компания" />
                             <span ng-show="form.password.$touched && form.company.$error.required"
                                   class="help-block"></span>
                         </div>
                         <div class="form-group"
                              ng-class="{ 'has-error': form.lastName.$touched && form.lastName.$error.required }">
                             <input type="text" name="post" id="post" class="form-control" ng-model="vm.user.post"
-                                   placeholder="Должность" required/>
-                    <span ng-show="form.post.$touched && form.post.$error.required"
-                          class="help-block">Post is required</span>
+                                   placeholder="Должность" required />
+                            <span ng-show="form.post.$touched && form.post.$error.required"
+                                  class="help-block">Post is required</span>
                         </div>
 
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
 
 
                         <div class="form-group"
@@ -85,11 +89,10 @@
                         </div>
 
                     </div>
-
-
-                </div>
-
-
+                    <div class="col-md-24">
+                        <span ng-show="vm.response.error" class="help-block">{{vm.response.error}}</span>
+                    </div>
+                    </div>
             </form>
         </div>
     </div>
