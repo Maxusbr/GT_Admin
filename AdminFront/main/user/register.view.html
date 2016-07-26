@@ -1,6 +1,6 @@
 ﻿<div class="col-md-24">
     <h3>
-        <strong>Регистрация</strong> нового пользователя</span>
+        <strong>Регистрация</strong> нового пользователя
     </h3>
 </div>
 
@@ -10,29 +10,28 @@
         <form name="form" novalidate>
             <div class="col-md-6">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Имя" name="fname"
-                           ng-model="user.fname"
-                           required>
+                    <input type="text" class="form-control" placeholder="Имя" name="Name"
+                           ng-model="user.Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Фамилия" name="sname"
-                           ng-model="user.sname" required>
+                    <input type="text" class="form-control" placeholder="Фамилия" name="LastName"
+                           ng-model="user.LastName" required>
                 </div>
                 <div class="space"></div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Компания">
+                    <input type="text" class="form-control" placeholder="Компания" ng-model="user.Company" required name="Company">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Должность">
+                    <input type="text" class="form-control" placeholder="Должность" ng-model="user.Position" required name="Position">
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Email" name="email" ng-model="user.email"
+                    <input type="email" class="form-control" placeholder="Email" name="Email" ng-model="user.Email"
                            ng-pattern="emailpattern" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Телефон">
+                    <input type="text" class="form-control" placeholder="Телефон" ng-model="user.Phone" required name="Phone">
                 </div>
                 <div class="form-group mycheckbox">
                     <label>
@@ -44,22 +43,22 @@
                 </div>
                 <div class="form-group">
                     <input type="{{passtype}}" class="form-control" placeholder="Пароль" name="password"
-                           ng-model="user.password" ng-minlength="5" required>
+                           ng-model="user.Password" ng-minlength="5" required>
                 </div>
             </div>
             <div class="col-md-7">
                 <div class="form-group mycheckbox text-nowrap" style="padding-left: 0;">
                     <label>
-                        <input type="checkbox" value="" name="noletter" ng-model="user.noletter">
-                        <span ng-if="user.noletter" class="glyphicon glyphicon-ok"></span>
-                        <span ng-if="!user.noletter" class="glyphicon"></span>
+                        <input type="checkbox" value="" name="noletter" ng-model="user.NotSendWelcome">
+                        <span ng-if="user.NotSendWelcome" class="glyphicon glyphicon-ok"></span>
+                        <span ng-if="!user.NotSendWelcome" class="glyphicon"></span>
                         Не отправлять Welcome Letter и др. письма
                     </label>
                 </div>
                 <div class="space"></div>
                 <div class="form-group">
                     <select name="role" id="role"
-                            ng-model="user.role" class="form-control"
+                            ng-model="user.RoleId" class="form-control"
                             ng-options="role.id as role.name for role in roles"
                             required>
                         <option value="">Выберите роль</option>
@@ -76,17 +75,26 @@
     </div>
 </div>
 <div>
-    <div class="help-block" ng-messages="form.fname.$error" ng-if="submitted">
+    <div class="help-block" ng-messages="form.Name.$error" ng-if="submitted">
         <div ng-message="required">Имя обязательно для заполнения</div>
     </div>
-    <div class="help-block" ng-messages="form.sname.$error" ng-if="submitted">
+    <div class="help-block" ng-messages="form.LastName.$error" ng-if="submitted">
         <div ng-message="required">Фамилия обязательно для заполнения</div>
 
     </div>
-    <div class="help-block" ng-messages="form.email.$error" ng-if="submitted">
+    <div class="help-block" ng-messages="form.Email.$error" ng-if="submitted">
         <div ng-message="required">Email обязательно для заполнения</div>
         <div ng-message="email">Неверный формат Email</div>
         <div ng-message="pattern">Неверный формат Email</div>
+    </div>
+    <div class="help-block" ng-messages="form.Company.$error" ng-if="submitted">
+        <div ng-message="required">Компания обязательна для заполнения</div>
+    </div>
+    <div class="help-block" ng-messages="form.Position.$error" ng-if="submitted">
+        <div ng-message="required">Должность обязательна для заполнения</div>
+    </div>
+    <div class="help-block" ng-messages="form.Phone.$error" ng-if="submitted">
+        <div ng-message="required">Телефон обязателен для заполнения</div>
     </div>
     <div class="help-block" ng-messages="form.role.$error" ng-if="submitted">
         <div ng-message="required">Не выбрано значение Роли</div>
@@ -94,6 +102,10 @@
     <div class="help-block" ng-messages="form.password.$error" ng-if="submitted">
         <div ng-message="required">Пароль обязателен для заполнения</div>
         <div ng-message="minlength">Пароль не менее 5 символов</div>
+    </div>
+    <div class="help-block" ng-if="response.error">
+        <div >{{response.error}}</div>
+
     </div>
 </div>
 <!--</div>-->

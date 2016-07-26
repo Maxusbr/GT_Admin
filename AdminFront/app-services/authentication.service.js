@@ -9,13 +9,14 @@
     function AuthenticationService($http, $q, $cookieStore, $rootScope, $timeout, UserService) {
         var service = {};
 
-        service.Login = _login;
+        service.Login = login;
+        service.Logout = logOut;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
         service.isAuth = false;
         return service;
 
-        function _login(username, password, callback) {
+        function login(username, password, callback) {
 
             var data = "grant_type=password&username=" + username + "&password=" + password;
 
@@ -31,7 +32,7 @@
                 
 
             }).error(function (err, status) {
-                _logOut();
+                logOut();
                 callback(false);
                 deferred.reject(err);
             });
@@ -39,7 +40,7 @@
             return deferred.promise;
 
         };
-        function _logOut() {
+        function logOut() {
 
             ClearCredentials();
             service.isAuth = false;

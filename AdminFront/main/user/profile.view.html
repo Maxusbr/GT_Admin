@@ -3,7 +3,7 @@
 <!--перейти в профиль-->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8"><h2>{{person.name}}</h2></div>
+        <div class="col-md-8"><h2>{{person.LastName}} {{person.Name}}</h2></div>
         <div class="col-md-8 text-muted" style="font-size:130%;">4 события, Представитель
             организатора<br>
             <small>Последний вход 27.07.2016 18.08.44 (22 мин.)</small>
@@ -17,10 +17,12 @@
         <div class="col-md-22">
             <div class="col-md-8">
                 <div class="form-group form-mytext">
-                    Имя
+                    <!--Имя--> 
+                    {{person.Name}}
                 </div>
                 <div class="form-group form-mytext">
-                    Фамилия
+                    <!--Фамилия--> 
+                    {{person.LastName}}
                 </div>
                 <div class="form-group form-mytext">
                     <div class="form-group my-profile-checkbox text-info">
@@ -39,10 +41,12 @@
             </div>
             <div class="col-md-8">
                 <div class="form-group form-mytext">
-                    Компания
+                    <!--Компания--> 
+                    {{person.Company}}
                 </div>
                 <div class="form-group form-mytext">
-                    Должность
+                    <!--Должность--> 
+                    {{person.Position}}
                 </div>
                 <div class="form-group form-mytext">
                 </div>
@@ -54,10 +58,12 @@
             </div>
             <div class="col-md-8">
                 <div class="form-group form-mytext">
-                    email
+                    <!--email--> 
+                    {{person.Email}}
                 </div>
                 <div class="form-group form-mytext">
-                    Телефон
+                    <!--Телефон-->
+                     {{person.Phone}}
                 </div>
 
             </div>
