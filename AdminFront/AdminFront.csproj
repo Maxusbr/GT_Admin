@@ -100,6 +100,12 @@
     <Content Include="main\download\download.view.html" />
     <Content Include="main\events-is\events-add.controller.js" />
     <Content Include="main\events-is\events-add.view.html" />
+    <Content Include="main\events\create.controller.js" />
+    <Content Include="main\events\create.view.html" />
+    <Content Include="main\events\create\overview.controller.js" />
+    <Content Include="main\events\create\overview.view.html" />
+    <Content Include="main\events\create\schema.controller.js" />
+    <Content Include="main\events\create\schema.view.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

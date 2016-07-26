@@ -7,7 +7,7 @@
 
             <input type="search" class="custom-menu__search form-control"
                    placeholder="Название, тег, описание, медиа"
-                   ng-model="personaMenuFilter">
+                   ng-model="eventsMenuFilter">
 
             <ul class="nav nav-list shorter">
                 <li ng-repeat="persona in menuScope | filter:personaMenuFilter | orderBy:predicate:reverse"
@@ -33,7 +33,7 @@
             </p>
 
             <div class="custom-menu__fixed_button">
-                <button class="fixed btn" ng-click="CreatePersona()">
+                <button class="fixed btn" ng-click="CreateEvent()">
                     <span class="glyphicon glyphicon-plus"></span> Добавить
                 </button>
             </div>
