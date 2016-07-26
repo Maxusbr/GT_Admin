@@ -9,6 +9,10 @@
     MainUserProfileController.$inject = ['$rootScope', '$stateParams', '$filter', '$location', 'UserService'];
     function MainUserProfileController($rootScope, $stateParams, $filter, $location, UserService) {
         var vm = this;
+
+        function save() {
+            UserService.Update($rootScope.person);
+        };
         $rootScope.peSortType = 'date'; // set the default sort type
         $rootScope.peSortReverse = false;  // set the default sort order
         $rootScope.paSortType = 'date'; // set the default sort type
@@ -27,6 +31,7 @@
             if (!$rootScope.userlist) return;
             var filtered = $filter('filter')($rootScope.userlist, { Id: $stateParams.id });
             $rootScope.person = filtered.length ? filtered[0] : null;
+            
         });
 
         $rootScope.eventslist = [
@@ -178,6 +183,8 @@
         ];
 
         // $rootScope.person = $rootScope.users[$stateParams.id];
+
+        $rootScope.Save = save;
     }
 
 })();

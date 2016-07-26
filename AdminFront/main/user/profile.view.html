@@ -6,10 +6,10 @@
         <div class="col-md-8"><h2>{{person.LastName}} {{person.Name}}</h2></div>
         <div class="col-md-8 text-muted" style="font-size:130%;">4 события, Представитель
             организатора<br>
-            <small>Последний вход 27.07.2016 18.08.44 (22 мин.)</small>
+            <small ng-show="person.LastEnter">Последний вход: {{person.LastEnter | date : 'dd.MM.yyyy HH:mm'}} (<span am-time-ago="person.LastEnter"></span>)</small>
         </div>
         <div class="form-group col-md-8">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">Сохранить изменения</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="!person.Changed" ng-click="Save()">Сохранить изменения</button>
             <div class="text-primary">Все изменения сохранены 27.07.2016 18.08.44</div>
         </div>
     </div>
@@ -17,12 +17,30 @@
         <div class="col-md-22">
             <div class="col-md-8">
                 <div class="form-group form-mytext">
-                    <!--Имя--> 
-                    {{person.Name}}
+                    <table class="table">
+                        <tr>
+                            <td class="col-md-22">
+                                <span ng-show="!person.isNameEdit">{{person.Name}}</span>
+                                <textarea ng-show="person.isNameEdit" type="text" class="form-control" ng-model="person.Name" style="height: 35px"
+                                          ng-change="person.Changed = true;"></textarea>
+                            </td>
+                            <td><a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="person.isNameEdit = !person.isNameEdit"></a></td>
+                        </tr>
+                    </table>
+                    <!--Имя-->
                 </div>
                 <div class="form-group form-mytext">
-                    <!--Фамилия--> 
-                    {{person.LastName}}
+                    <!--Фамилия-->
+                    <table class="table">
+                        <tr>
+                            <td class="col-md-22">
+                                <span ng-show="!person.isEdit">{{person.LastName}}</span>
+                                <textarea ng-show="person.isEdit" type="text" class="form-control" ng-model="person.LastName"  style="height: 35px"
+                                          ng-change="person.Changed = true;"></textarea>
+                            </td>
+                            <td><a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="person.isEdit = !person.isEdit"></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="form-group form-mytext">
                     <div class="form-group my-profile-checkbox text-info">
@@ -41,12 +59,12 @@
             </div>
             <div class="col-md-8">
                 <div class="form-group form-mytext">
-                    <!--Компания--> 
-                    {{person.Company}}
+                    <!--Компания-->
+                    <span >{{person.Company}}</span>
                 </div>
                 <div class="form-group form-mytext">
-                    <!--Должность--> 
-                    {{person.Position}}
+                    <!--Должность-->
+                    <span >{{person.Position}}</span>
                 </div>
                 <div class="form-group form-mytext">
                 </div>
@@ -58,12 +76,12 @@
             </div>
             <div class="col-md-8">
                 <div class="form-group form-mytext">
-                    <!--email--> 
-                    {{person.Email}}
+                    <!--email-->
+                    <span >{{person.Email}}</span>
                 </div>
                 <div class="form-group form-mytext">
                     <!--Телефон-->
-                     {{person.Phone}}
+                    <span >{{person.Phone}}</span>
                 </div>
 
             </div>

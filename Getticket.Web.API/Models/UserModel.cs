@@ -22,5 +22,6 @@ namespace Getticket.Web.API.Models
         public UserStatusType Status { get; set; }
         public string StatusName { get; set; }
         public string StatusDescription { get; set; }
+        public DateTime? LastEnter { get; set; }
     }
 }

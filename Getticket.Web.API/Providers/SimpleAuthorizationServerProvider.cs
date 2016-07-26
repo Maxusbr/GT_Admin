@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
+using Getticket.Web.DAL.IRepositories;
 
 namespace Getticket.Web.API.Providers
 {
@@ -20,13 +21,15 @@ namespace Getticket.Web.API.Providers
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
         private CredentailsService Credentails;
+        private readonly IUserRepository _userRepository;
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        public SimpleAuthorizationServerProvider(CredentailsService Credentails)
+        public SimpleAuthorizationServerProvider(CredentailsService Credentails, IUserRepository userRepository)
         {
             this.Credentails = Credentails;
+            _userRepository = userRepository;
         }
 
         /// <summary>
@@ -74,6 +77,7 @@ namespace Getticket.Web.API.Providers
                 var principal = new GenericPrincipal(identity, rolesNames.ToArray());
                 Thread.CurrentPrincipal = principal;
                 context.Validated(identity);
+                _userRepository.UpdateLastEnter(user.Id, DateTime.Now);
                 return;
             }
             context.SetError("invalid_grant", "User name or password were not recognized");

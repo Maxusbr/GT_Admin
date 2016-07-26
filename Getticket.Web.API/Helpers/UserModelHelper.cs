@@ -23,6 +23,7 @@ namespace Getticket.Web.API.Helpers
             UserModel model = new UserModel
             {
                 Id = user.Id,
+                LastEnter = user.LastEnter,
                 Name = user.UserInfo?.Name,
                 LastName = user.UserInfo?.LastName,
                 Company = user.UserInfo?.Company,

@@ -154,6 +154,16 @@ namespace Getticket.Web.DAL.Repositories
             return this.Delete(Entity.Id);
         }
 
+        /// <see cref="IUserRepository.UpdateLastEnter" />
+        public bool UpdateLastEnter(int id, DateTime dt)
+        {
+            var user = FindOneById(id);
+            if (user == null) return false;
+            user.LastEnter = dt;
+            db.SaveChanges();
+            return true;
+        }
+
         /// <see cref="IUserRepository.DeleteUserByEmail(string)" />
         public bool DeleteUserByEmail(string userName)
         {

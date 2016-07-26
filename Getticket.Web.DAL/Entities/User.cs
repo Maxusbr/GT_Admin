@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Getticket.Web.DAL.Entities
@@ -20,6 +21,9 @@ namespace Getticket.Web.DAL.Entities
         /// хранится как Email в бд
         /// </summary>
         [Column("UserMail")]
+        [Required]
+        [Index("UserNameIndex", IsUnique = true)]
+        [MaxLength(100)]
         public string UserName { get; set; }
 
         /// <summary>
@@ -27,6 +31,9 @@ namespace Getticket.Web.DAL.Entities
         /// Второе уникальное поле для пользователя,
         /// также является логином
         /// </summary>
+        [Required]
+        [Index("UserPhoneIndex", IsUnique = true)]
+        [MaxLength(50)]
         public string UserPhone { get; set; }
 
         /// <summary>
