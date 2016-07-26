@@ -22,7 +22,7 @@
             console.log(params);
             $rootScope.id = $stateParams.id;
         });
-        if (!$rootScope.userlist) UserService.updateListUsers();
+        if (!$rootScope.userlist) UserService.getListUsers();
         $rootScope.$watch('userlist', function (params) {
             if (!$rootScope.userlist) return;
             var filtered = $filter('filter')($rootScope.userlist, { Id: $stateParams.id });

@@ -29,7 +29,7 @@ var pageSize = 20;
         }
         $rootScope.$on('$viewContentLoaded', function() {
             $templateCache.removeAll();
-            var restrictedPage = $.inArray($location.path(), ['/login', '/register', '/sign-in']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login', '/registration', '/sign-in']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/sign-in');

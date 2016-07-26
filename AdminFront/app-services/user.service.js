@@ -16,7 +16,9 @@
         service.Update = Update;
         service.Delete = Delete;
 
-        service.updateListUsers = updateListUsers;
+        service.getListUsers = getListUsers;
+        service.getListRoles = getListRoles;
+        service.registerUser = registerUser;
         return service;
 
         function GetAll() {
@@ -52,19 +54,36 @@
                 });
         }
 
-        function updateListUsers() {
-            getUsers().success(function (data) {
-                $rootScope.userlist = data;
-                $rootScope.userMenuList = [];
-                $rootScope.userlist.forEach(function (item) {
-                    $rootScope.userMenuList.push({
-                        "title": `${item.LastName} ${item.Name}`,
-                        "id": item.Id
+        function getListUsers() {
+            $http.get(`${apiUrl}users`)
+                .success(function (data) {
+                    $rootScope.userlist = data;
+                    $rootScope.userMenuList = [];
+                    $rootScope.userlist.forEach(function (item) {
+                        $rootScope.userMenuList.push({
+                            "title": `${item.LastName} ${item.Name}`,
+                            "id": item.Id
+                        });
                     });
+                })
+                .error(function (data) {
+                    return { success: false, message: data };
                 });
-            });
         }
 
+        function getListRoles() {
+            return $http.get(`${apiUrl}sysroles`)
+                .success(function (data) { return data })
+                .error(function (data) {
+                    return { success: false, message: data };
+                });
+        }
+
+        function registerUser(user) {
+            return $http.post(`${apiUrl}users/register`, user)
+                .success(function (data) { return data })
+                .error(function (data) { return data; });
+        }
         // private functions
 
         function handleSuccess(res) {

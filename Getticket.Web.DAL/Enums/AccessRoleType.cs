@@ -30,6 +30,11 @@ namespace Getticket.Web.DAL.Enums {
         /// <summary>
         /// Role for debug pupose only
         /// </summary>
-        Admin =             1 << 1
+        Admin =             1 << 1,
+
+        /// <summary>
+        /// Роль пользователя
+        /// </summary>
+        User =             1 << 2,
     }
 }

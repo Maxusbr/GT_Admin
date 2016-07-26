@@ -104,7 +104,7 @@
         //    },
         //]
 
-        if (!$rootScope.userlist) UserService.updateListUsers();
+        if (!$rootScope.userlist) UserService.getListUsers();
     }
 
 })();
