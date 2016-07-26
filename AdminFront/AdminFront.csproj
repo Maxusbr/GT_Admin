@@ -96,6 +96,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="main\download\download.controller.js" />
+    <Content Include="main\download\download.view.html" />
+    <Content Include="main\events-is\events-add.controller.js" />
+    <Content Include="main\events-is\events-add.view.html" />
+    <Content Include="main\events\create.controller.js" />
+    <Content Include="main\events\create.view.html" />
+    <Content Include="main\events\create\overview.controller.js" />
+    <Content Include="main\events\create\overview.view.html" />
+    <Content Include="main\events\create\schema.controller.js" />
+    <Content Include="main\events\create\schema.view.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -112,6 +122,7 @@
     <Content Include="app-content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="app-content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="app-content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="App_Data\Debug.7z" />
     <None Include="Properties\PublishProfiles\getticket - Web Deploy.pubxml" />
     <Content Include="scripts\angular-moment.min.js.map" />
     <None Include="Web.Debug.config">
@@ -225,6 +236,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

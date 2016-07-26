@@ -1,7 +1,48 @@
-﻿<!--Body content-->
-мероприятия
-<br>
-<br>
-<br>
-<br>
-<br>
+﻿<div class="row full-height">
+    <div class="col-md-5 custom-menu__container full-height">
+        <div class="row full-height">
+            <div class="custom-menu__close" ng-click="HideCustomMenu()">
+                <button type="button" class="close">&times;</button>
+            </div>
+
+            <input type="search" class="custom-menu__search form-control"
+                   placeholder="Название, тег, описание, медиа"
+                   ng-model="eventsMenuFilter">
+
+            <ul class="nav nav-list shorter">
+                <li ng-repeat="persona in menuScope | filter:personaMenuFilter | orderBy:predicate:reverse"
+                    ng-class="{ active: persona.id == id }" class="persona-menu-container">
+                    <a ng-href="/#/main/persona/{{ persona.id }}">
+                        {{ persona.name.lastName }} {{ persona.name.firstName }}
+                        <span ng-show="persona.nameTranslated.firstName ||
+                              persona.nameTranslated.lastName ">
+                            / {{ persona.nameTranslated.firstName }}
+                            {{ persona.nameTranslated.lastName }}
+                        </span>
+
+                        <p class="persona-menu-container__event">
+                            <span class="type">{{ persona.type }}</span>
+                            <span class="event">{{ persona.event }}</span>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+
+            <p class="load-more">
+                <a href="#" class="load-more"> + ещё 20...</a>
+            </p>
+
+            <div class="custom-menu__fixed_button">
+                <button class="fixed btn" ng-click="CreateEvent()">
+                    <span class="glyphicon glyphicon-plus"></span> Добавить
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-19 full-height" id="persona__container" style="overflow-x: scroll">
+        <div ui-view>
+
+        </div>
+    </div>
+</div>

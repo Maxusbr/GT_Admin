@@ -639,9 +639,9 @@ ui-view {
     box-shadow: none;
     display: block;
     color: #8b8c8d;
-    font-size: 16px;
-    height: 40px;
-    margin-bottom: 10px;
+    font-size: 14px;
+    height: 36px;
+    margin-bottom: 8px;
 }
 
 .custom-menu__container .nav li > a span {
@@ -649,7 +649,7 @@ ui-view {
 }
 
 .custom-menu__container .nav li {
-    font-size: 120%;
+    font-size: 14px;
 }
 
 .custom-menu__container .nav li > a {
@@ -662,7 +662,7 @@ ui-view {
     bottom: 0;
     outline: none;
     height: 150px;
-    font-size: 250%;
+    font-size: 200%;
     width: 100%;
     background-color: #799379;
     color: #fff;
@@ -671,7 +671,7 @@ ui-view {
 
 .custom-menu__container .nav.shorter {
     max-height: 60%;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
 
 .custom-menu__container .nav li > a:hover,

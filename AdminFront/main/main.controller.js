@@ -83,7 +83,16 @@
                 onEnter: function () {
 
                 }
-            });
+            })
+        .state('main.download', {
+            url: '/download',
+            // loaded into ui-view of parent's template
+            templateUrl: '/main/download/download.view.html',
+            controller: 'MainDownloadController',
+            onEnter: function () {
+                console.log("enter main.download");
+            }
+        });
     }
 
     MainController.$inject = ['$rootScope', 'AuthenticationService', '$location'];
