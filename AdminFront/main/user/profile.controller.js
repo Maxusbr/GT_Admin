@@ -11,7 +11,11 @@
         var vm = this;
 
         function save() {
-            UserService.Update($rootScope.person);
+            UserService.Update($rootScope.person).then(function(data) {
+                if (data.success)
+                    UserService.getListUsers();
+            });
+            
         };
         $rootScope.peSortType = 'date'; // set the default sort type
         $rootScope.peSortReverse = false;  // set the default sort order
@@ -185,6 +189,7 @@
         // $rootScope.person = $rootScope.users[$stateParams.id];
 
         $rootScope.Save = save;
+
     }
 
 })();

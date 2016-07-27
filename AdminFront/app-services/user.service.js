@@ -39,7 +39,7 @@
         }
 
         function Update(user) {
-            return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));
+            return $http.post(`${apiUrl}users/update/${user.Id}`, user).then(handleSuccess, handleError('Error updating user'));
         }
 
         function Delete(id) {
@@ -87,7 +87,7 @@
         // private functions
 
         function handleSuccess(res) {
-            return res.data;
+            return { success: true, data: res.data };
         }
 
         function handleError(error) {

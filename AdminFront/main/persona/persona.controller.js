@@ -14,7 +14,7 @@
         $urlRouterProvider.when("/main/persona", "/main/persona/1");
 
         // For any unmatched url, send to /route1
-        $urlRouterProvider.otherwise("/main/event-is/detail/1");
+        $urlRouterProvider.otherwise("/main/persona");
 
         $stateProvider
             .state('main.persona.schema', {

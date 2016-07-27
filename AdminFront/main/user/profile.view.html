@@ -17,28 +17,28 @@
         <div class="col-md-22">
             <div class="col-md-8">
                 <div class="form-group form-mytext">
-                    <table class="table">
+                    <table class="table user-main__table">
                         <tr>
                             <td class="col-md-22">
                                 <span ng-show="!person.isNameEdit">{{person.Name}}</span>
-                                <textarea ng-show="person.isNameEdit" type="text" class="form-control" ng-model="person.Name" style="height: 35px"
-                                          ng-change="person.Changed = true;"></textarea>
+                                <textarea ng-show="person.isNameEdit || !person.Name" type="text" class="form-control" ng-model="person.Name" style="height: 35px"
+                                          ng-change="person.Changed = person.isNameEdit = true;" placeholder="Имя"></textarea>
                             </td>
-                            <td><a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="person.isNameEdit = !person.isNameEdit"></a></td>
+                            <td><a href="" class="user-table__edit glyphicon glyphicon-pencil" ng-click="person.isNameEdit = !person.isNameEdit"></a></td>
                         </tr>
                     </table>
                     <!--Имя-->
                 </div>
                 <div class="form-group form-mytext">
                     <!--Фамилия-->
-                    <table class="table">
+                    <table class="table user-main__table">
                         <tr>
                             <td class="col-md-22">
                                 <span ng-show="!person.isEdit">{{person.LastName}}</span>
-                                <textarea ng-show="person.isEdit" type="text" class="form-control" ng-model="person.LastName"  style="height: 35px"
-                                          ng-change="person.Changed = true;"></textarea>
+                                <textarea ng-show="person.isEdit || !person.LastName" type="text" class="form-control" ng-model="person.LastName"  style="height: 35px"
+                                          ng-change="person.Changed = person.isEdit = true;" placeholder="Фамилия"></textarea>
                             </td>
-                            <td><a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="person.isEdit = !person.isEdit"></a></td>
+                            <td><a href="" class="user-table__edit glyphicon glyphicon-pencil" ng-click="person.isEdit = !person.isEdit"></a></td>
                         </tr>
                     </table>
                 </div>
@@ -60,11 +60,29 @@
             <div class="col-md-8">
                 <div class="form-group form-mytext">
                     <!--Компания-->
-                    <span >{{person.Company}}</span>
+                    <table class="table user-main__table">
+                        <tr>
+                            <td class="col-md-22">
+                                <span ng-show="!person.isCompanyEdit">{{person.Company}}</span>
+                                <textarea ng-show="person.isCompanyEdit || !person.Company" type="text" class="form-control" ng-model="person.Company" style="height: 35px"
+                                          ng-change="person.Changed = person.isCompanyEdit = true;" placeholder="Компания"></textarea>
+                            </td>
+                            <td><a href="" class="user-table__edit glyphicon glyphicon-pencil" ng-click="person.isCompanyEdit = !person.isCompanyEdit"></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="form-group form-mytext">
                     <!--Должность-->
-                    <span >{{person.Position}}</span>
+                    <table class="table user-main__table">
+                        <tr>
+                            <td class="col-md-22">
+                                <span ng-show="!person.isPositionEdit">{{person.Position}}</span>
+                                <textarea ng-show="person.isPositionEdit || !person.Position" type="text" class="form-control" ng-model="person.Position" style="height: 35px"
+                                          ng-change="person.Changed = person.isPositionEdit = true;" placeholder="Должность"></textarea>
+                            </td>
+                            <td><a href="" class="user-table__edit glyphicon glyphicon-pencil" ng-click="person.isPositionEdit = !person.isPositionEdit"></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="form-group form-mytext">
                 </div>

@@ -782,6 +782,23 @@ ui-view {
     background-color: #ebecf2;
 }
 
+.user-main__table td {
+    border: 1px !important;
+}
+.user-main__table tbody tr:hover a.user-table__edit {
+    display: inline;
+}
+
+.user-main__table tbody tr a.user-table__edit {
+    /*font-size: 150%;
+    position: absolute;
+    right: 10px;
+    text-decoration: none;*/
+    top: 5px;
+    float: right;
+    display: none;
+}
+
 .persona-main__table tbody tr:hover a.persona-table__edit {
     display: inline;
 }
