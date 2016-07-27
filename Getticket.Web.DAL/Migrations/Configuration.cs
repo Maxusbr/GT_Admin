@@ -17,10 +17,15 @@ namespace Getticket.Web.DAL.Migrations
         // Update-Database -ProjectName Getticket.Web.DAL -StartUpProjectName Getticket.Web.API -Force -Verbose
         protected override void Seed(GetticketDBContext context)
         {
-            //  This method will be called after migrating to the latest version.
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
-            AccessRoles admin = new AccessRoles() { Name = "Admin", Desciption = "Full access", Id = 1, Role = Enums.AccessRoleType.Admin };
+            TempDb(context);
+        }
+
+        void TempDb(GetticketDBContext context)
+        {
+                //  This method will be called after migrating to the latest version.
+                //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+                //  to avoid creating duplicate seed data.
+                AccessRoles admin = new AccessRoles() { Name = "Admin", Desciption = "Full access", Id = 1, Role = Enums.AccessRoleType.Admin };
             context.AccessRoles.AddOrUpdate(ar => ar.Id, admin);
             context.AccessRoles.AddOrUpdate(ar => ar.Id, new AccessRoles {Desciption = "Default role", Id = 2, Name = "User", Role = AccessRoleType.User});
             context.SaveChanges();
