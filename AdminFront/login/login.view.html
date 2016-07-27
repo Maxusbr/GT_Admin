@@ -1,13 +1,18 @@
 ﻿<div class="container">
+    <br />
+    <br />
     <div class="row">
-        <div class="col-md-4 col-md-offset-4 text-center space-lg logo">
+        <div class="col-md-8 col-md-offset-7 text-center space-lg logo">
             <img src="/app-content/images/logo-fullsize.png">
         </div>
+        <br/>
     </div>
     <div class="row">
-        <div class="col-md-6 col-md-offset-6 text-center space-lg">
-            <h2>Вход в панель управления</h2>
-            <div class="space-lg reg">
+        <div class="col-md-7 col-md-offset-9 text-center space-lg">
+            <h4>Вход в панель управления</h4>
+            <br/>
+            <br/>
+            <div class="space-lg reg  register__container">
                 <form name="form" ng-submit="vm.login()" role="form" novalidate>
 
                     <div class="form-group"
@@ -17,12 +22,12 @@
                         <span ng-show="form.username.$touched && form.username.$error.required" class="help-block">Email is required</span>
                         <span ng-show="form.username.$touched && form.username.$error.pattern" class="help-block">Email is invalid</span>
                     </div>
-                    <div class="form-group" ng-class="{ 'has-error': form.phone.$touched && form.phone.$error.required }">
+                    <!--<div class="form-group" ng-class="{ 'has-error': form.phone.$touched && form.phone.$error.required }">
                         <input type="text" name="phone" id="phone" class="form-control" ng-model="vm.user.phone"
                                placeholder="Телефон" required />
                         <span ng-show="form.phone.$touched && form.phone.$error.required"
                               class="help-block">Phone is required</span>
-                    </div>
+                    </div>-->
 
                     <div class="form-group"
                          ng-class="{ 'has-error': form.password.$touched && form.password.$error.required }">
@@ -43,8 +48,6 @@
 
                 <div class="text-center">
                     <a href="#/recovery" class="my-link">Восстановить пароль?</a>
-                    <br>
-                    <a href="#/registration" class="my-link">Регистрация</a>
                 </div>
 
 
