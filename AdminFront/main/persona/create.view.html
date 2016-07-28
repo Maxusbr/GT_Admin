@@ -1,3 +1,4 @@
+<script src="/scripts/isteven-multi-select.js"></script>
 <div class="col-md-24">
     <div class="row persona-info__small-block">
         <div class="col-md-24">
@@ -6,8 +7,8 @@
             </div>
 
             <div class="col-md-6 persona-info__name-row">
-                <div class="row">
-                    {{ person.name.lastName }} {{ person.name.firstName }} <span class="separator"></span>
+                <div class="row" ng-show="person.LastName || person.Name">
+                    {{ person.LastName }} {{ person.Name }} <span class="separator"></span>
                     <strong>Описание</strong>
                 </div>
             </div>
@@ -44,9 +45,9 @@
 
             <div class="col-md-4">
                 <div class="row">
-                    <button class="btn btn-blue btn-lg col-md-18">
+                    <a type="button" href="#/main/persona/create/schema" class="btn btn-blue btn-lg col-md-18" >
                         далее
-                    </button>
+                    </a>
                 </div>
 
                 <div class="row">
@@ -88,10 +89,11 @@
                         </div>
                         <div class="col-md-5">
                             <label for="persona__concrete">Уточнение</label>
-                            <select class="form-control" id="persona__concrete">
-                                <option>Серена Уильямс</option>
-                            </select>
-
+                            <!--<select >
+                                <option>Серена Уильямс</option> ng-change="selectedPerson(person.Id)" 
+                            </select>-->
+                            <select class="form-control" id="persona__concrete" ng-model="person" 
+                                    ng-options="type as type.LastName + ' ' + type.Name for type in persons"></select>
                         </div>
                     </div>
                 </div>
@@ -101,17 +103,18 @@
                 <div class="col-md-24 persona-create__title">
                     / Блок (Подборка и т.п.)
                 </div>
-
-                <div class="col-md-24">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <label for="persona__block"></label>
-                            <select class="form-control" id="persona__block">
-                                <option>Другие персоны подборки</option>
-                            </select>
-                        </div>
+                <div class="col-md-24" ng-show="morePerson">
+                    <!--<label for="persona__block"></label>-->
+                    <!--<select class="form-control" id="persona__block">
+                        <option>Другие персоны подборки</option>
+                    </select>-->
+                    <div isteven-multi-select input-model="morePerson" output-model="otherPerson" helper-elements="" translation="localLang"
+                         button-label="name" item-label="name" tick-property="ticked">
                     </div>
+                    <!--<select class="form-control" id="persona__block" ng-model="otherPerson"
+                        ng-options="type as type.LastName + ' ' + type.Name for type in persons | filter : { Id: '!' + person.Id}"></select>-->
                 </div>
+
             </div>
 
             <div class="row persona-create__block">

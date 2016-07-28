@@ -6,10 +6,10 @@
         .module('app')
         .controller('MainPersonaIndexController', MainPersonaIndexController);
 
-    MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$http', '$rootScope'];
+    MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$http', '$rootScope', '$location'];
 
 
-    function MainPersonaIndexController($scope, $stateParams, $http, $rootScope) {
+    function MainPersonaIndexController($scope, $stateParams, $http, $rootScope, $location) {
 
         function getLinks(id) {
             $http.get(`${apiUrl}persons/social/${id}`).success(function (data) {
@@ -425,6 +425,11 @@
             list = $scope.antro.filter(function (item) { return item.Changed; });
             if (list.length > 0)
                 saveEntities(list, 'antro', continueSaveAntro);
+        }
+
+        $scope.createDescription = function () {
+            $rootScope.person = $scope.person;
+            $location.path("/main/persona/create");
         }
 
         $scope.SwitchElements = function () {

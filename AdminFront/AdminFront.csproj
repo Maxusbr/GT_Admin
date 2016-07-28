@@ -95,6 +95,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app-content\isteven-multi-select.css" />
+    <Content Include="app-services\person.service.js" />
+    <Content Include="Content\isteven-multi-select.css" />
     <Content Include="Global.asax" />
     <Content Include="main\download\download.controller.js" />
     <Content Include="main\download\download.view.html" />
@@ -112,6 +115,8 @@
     </Content>
     <Content Include="scripts\angular-moment.js" />
     <Content Include="scripts\angular-moment.min.js" />
+    <Content Include="scripts\isteven-multi-select.htm" />
+    <Content Include="scripts\isteven-multi-select.js" />
     <Content Include="scripts\moment-with-locales.js" />
     <Content Include="scripts\moment-with-locales.min.js" />
     <Content Include="scripts\moment.js" />
