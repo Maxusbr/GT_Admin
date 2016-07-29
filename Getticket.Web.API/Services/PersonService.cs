@@ -148,7 +148,7 @@ namespace Getticket.Web.API.Services
         {
             var list = PersonModelHelper.GetDescriptionModels(_personRepository.GetDescriptions(id));
             var types = list.GroupBy(o => o.id_DescriptionType).Select(o => o.Key);
-            return types.Select(tp => new EntityCollection<PersonDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp) });
+            return types.Select(tp => new EntityCollection<PersonDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp});
         }
 
         /// <see cref="IPersonService.GetFacts" />
@@ -156,7 +156,7 @@ namespace Getticket.Web.API.Services
         {
             var list = PersonModelHelper.GetFactModels(_personRepository.GetPersonFacts(id));
             var types = list.GroupBy(o => o.id_FactType).Select(o => o.Key);
-            return types.Select(tp => new EntityCollection<PersonFactModel> { List = list.Where(o => o.id_FactType == tp) });
+            return types.Select(tp => new EntityCollection<PersonFactModel> { List = list.Where(o => o.id_FactType == tp), Type = tp });
         }
 
         /// <summary>

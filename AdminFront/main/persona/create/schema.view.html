@@ -44,7 +44,7 @@
 
             <div class="col-md-4">
                 <div class="row">
-                    <a type="button" href="#/main/persona/create/overview" class="btn btn-blue btn-lg col-md-18">
+                    <a type="button" href="" ng-click="showOverwiew()" class="btn btn-blue btn-lg col-md-18">
                         далее
                     </a>
                 </div>
@@ -64,9 +64,13 @@
 
 
                     <div>
-                        <select class="form-control" id="persona__teaser">
-                            <option style="color: green;"> + Новый</option>
+                        <select class="form-control" id="persona__concrete" ng-model="tizer"
+                                     ng-options="item as item.Name for item in tizerlist">
+                            <option style="color: green;" value=""> + Новый</option>
                         </select>
+                        <!--<select class="form-control" id="persona__teaser">
+                            <option style="color: green;"> + Новый</option>
+                        </select>-->
                     </div>
                 </div>
 
@@ -76,7 +80,7 @@
                     </div>
 
                     <div style="padding-top: 5px;">
-                        <textarea class="standard">Турнир в Тулузе не только профессиональный вызов для Серены Уильямс, но и серьезная заявка со стороны стройных и длинных ног конкурент</textarea>
+                        <textarea class="standard" ng-model="tizer.DescriptionText">Турнир в Тулузе не только профессиональный вызов для Серены Уильямс, но и серьезная заявка со стороны стройных и длинных ног конкурент</textarea>
                     </div>
                 </div>
 
@@ -117,13 +121,13 @@
                 <div class="col-md-24">
                     <div class="row">
                         <div class="col-md-14">
-                            <textarea class="standard">Спортсменка, которая вместе с Прививковой Людмилой вызвала заметный подъем интереса зрителей и болельщиков к керлингу и нашей сборной в этом виде спорта|</textarea>
+                            <textarea ng-model="staticDescription" class="standard">Спортсменка, которая вместе с Прививковой Людмилой вызвала заметный подъем интереса зрителей и болельщиков к керлингу и нашей сборной в этом виде спорта|</textarea>
                         </div>
 
                         <div class="col-md-10">
                             <div class="checkbox-input-container">
                                 <div class="checkbox-input">
-                                    <input type="checkbox" value="None" name="check" checked id="no-need-2"/>
+                                    <input type="checkbox" value="None" name="check" checked id="no-need-2" ng-checked="!staticDescription" ng-model="existDescription"/>
                                     <label for="no-need-2"></label>
                                 </div>
 

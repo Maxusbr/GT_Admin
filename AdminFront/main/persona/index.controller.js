@@ -6,97 +6,81 @@
         .module('app')
         .controller('MainPersonaIndexController', MainPersonaIndexController);
 
-    MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$http', '$rootScope', '$location'];
+    MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$rootScope', '$location', 'personService'];
 
 
-    function MainPersonaIndexController($scope, $stateParams, $http, $rootScope, $location) {
+    function MainPersonaIndexController($scope, $stateParams, $rootScope, $location, personService) {
 
-        function getLinks(id) {
-            $http.get(`${apiUrl}persons/social/${id}`).success(function (data) {
-                $scope.links = [];
-                $scope.linklist = [];
-                data.forEach(function (item) {
-                    if (item.List.length > 0)
-                        $scope.links.push({
-                            type: item.List[0].PersonSocialLinkType,
-                            value: item.List[0].Link,
-                            descript: item.List[0].Description,
-                            count: item.Count - 1
-                        });
-                    $scope.linklist.push.apply($scope.linklist, item.List);
-                });
+        function getLinks(data) {
+            $scope.links = [];
+            $scope.linklist = [];
+            data.forEach(function (item) {
+                if (item.List.length > 0)
+                    $scope.links.push({
+                        type: item.List[0].PersonSocialLinkType,
+                        value: item.List[0].Link,
+                        descript: item.List[0].Description,
+                        count: item.Count - 1
+                    });
+                $scope.linklist.push.apply($scope.linklist, item.List);
             });
         };
-        function getMedia(id) {
-            $http.get(`${apiUrl}persons/media/${id}`).success(function (data) {
-                $scope.medias = [];
-                $scope.medialist = [];
-                data.forEach(function (item) {
-                    if (item.List.length > 0)
-                        $scope.medias.push({
-                            type: item.List[0].MediaType,
-                            value: item.List[0].MediaLink,
-                            count: item.Count - 1
-                        });
-                    $scope.medialist.push.apply($scope.medialist, item.List);
-                });
+        function getMedia(data) {
+            $scope.medias = [];
+            $scope.medialist = [];
+            data.forEach(function (item) {
+                if (item.List.length > 0)
+                    $scope.medias.push({
+                        type: item.List[0].MediaType,
+                        value: item.List[0].MediaLink,
+                        count: item.Count - 1
+                    });
+                $scope.medialist.push.apply($scope.medialist, item.List);
             });
         };
-        function getDescript(id) {
-            $http.get(`${apiUrl}persons/description/${id}`).success(function (data) {
-                $scope.descriptions = [];
-                $scope.descriptionlist = [];
-                data.forEach(function (item) {
-                    if (item.List.length > 0)
-                        $scope.descriptions.push({
-                            type: item.List[0].PersonDescriptionType,
-                            value: item.List[0].DescriptionText,
-                            count: item.Count - 1
-                        });
-                    $scope.descriptionlist.push.apply($scope.descriptionlist, item.List);
-                });
-
+        function getDescript(data) {
+            $scope.descriptions = [];
+            $scope.descriptionlist = [];
+            data.forEach(function (item) {
+                if (item.List.length > 0)
+                    $scope.descriptions.push({
+                        type: item.List[0].PersonDescriptionType,
+                        value: item.List[0].DescriptionText,
+                        count: item.Count - 1
+                    });
+                $scope.descriptionlist.push.apply($scope.descriptionlist, item.List);
             });
         };
-        function getFact(id) {
-            $http.get(`${apiUrl}persons/fact/${id}`).success(function (data) {
-                $scope.factlist = [];
-                data.forEach(function (item) {
-                    $scope.factlist.push.apply($scope.factlist, item.List);
-                });
+        function getFact(data) {
+            $scope.factlist = [];
+            data.forEach(function (item) {
+                $scope.factlist.push.apply($scope.factlist, item.List);
             });
         };
-        function getConnection(id) {
-            $http.get(`${apiUrl}persons/connection/${id}`).success(function (data) {
-                $scope.connections = [];
-                $scope.connectionList = [];
-                data.forEach(function (item) {
-                    if (item.List.length > 0) {
-                        var connection = item.Type > 1 ? {
-                            name: item.List[0].PersonConnectionType,
-                            descript: item.List[0].Description,
-                            value: item.List[0].Event.Name,
-                            count: item.Count - 1
-                        } : {
-                            name: item.List[0].PersonConnectionType,
-                            descript: item.List[0].Description,
-                            value: `${item.List[0].PersonConnectTo.LastName} ${item.List[0].PersonConnectTo.Name}`,
-                            count: item.Count - 1
-                        };
-                        $scope.connectionList.push.apply($scope.connectionList, item.List);
-                        $scope.connections.push(connection);
-                    }
-                });
+        function getConnection(data) {
+            $scope.connections = [];
+            $scope.connectionList = [];
+            data.forEach(function (item) {
+                if (item.List.length > 0) {
+                    var connection = item.Type > 1 ? {
+                        name: item.List[0].PersonConnectionType,
+                        descript: item.List[0].Description,
+                        value: item.List[0].Event.Name,
+                        count: item.Count - 1
+                    } : {
+                        name: item.List[0].PersonConnectionType,
+                        descript: item.List[0].Description,
+                        value: `${item.List[0].PersonConnectTo.LastName} ${item.List[0].PersonConnectTo.Name}`,
+                        count: item.Count - 1
+                    };
+                    $scope.connectionList.push.apply($scope.connectionList, item.List);
+                    $scope.connections.push(connection);
+                }
             });
         };
-        function getAntro(id) {
-            $http.get(`${apiUrl}persons/antro/${id}`).success(function (data) {
-                $scope.antro = [];
-                $scope.antro.push.apply($scope.antro, data);
-                //data.forEach(function (item) {
-                //    $scope.antro.push({ name: item.AntroName, value: item.Value });
-                //});
-            });
+        function getAntro(data) {
+            $scope.antro = [];
+            $scope.antro.push.apply($scope.antro, data);
         };
 
         function getYearText(age) {
@@ -122,31 +106,17 @@
                 if (item.Id == $scope.id) {
                     $scope.person = item;
                     $scope.yearText = getYearText(item.Age);
-                    getDescript($scope.id);
-                    getFact($scope.id);
-                    getConnection($scope.id);
-                    getMedia($scope.id);
-                    getLinks($scope.id);
-                    getAntro($scope.id);
+                    personService.getDescript($scope.id, getDescript);
+                    personService.getFact($scope.id, getFact);
+                    personService.getConnection($scope.id, getConnection);
+                    personService.getMedia($scope.id, getMedia);
+                    personService.getLinks($scope.id, getLinks);
+                    personService.getAntro($scope.id, getAntro);
                     return;
                 }
             });
         else {
-            $http({
-                url: `${apiUrl}persons/${pageNumber}/${pageSize}`,
-                method: "POST",
-                headers: { 'Content-Type': 'application/json; charset=UTF-8' }
-            }).success(function (data) {
-                $rootScope.persons = data;
-                $rootScope.persons.forEach(function (item) {
-                    $scope.menuScope.push({
-                        id: item.Id,
-                        name: item.Name + ' ' + item.LastName,
-                        type: item.EventType,
-                        event: item.EventName
-                    });
-                });
-            });
+            personService.getPersons();
         }
 
         $scope.IsChanged = false;
@@ -154,19 +124,6 @@
             $scope.IsChanged = list.filter(function (item) { return item.Changed; }).length > 0;
         }
 
-        function saveEntities(list, entity, callback) {
-            $http.post(`${apiUrl}persons/${entity}/update/${$scope.id}`, list).success(function (response) {
-                if (response.status === 'success')
-                    callback(list);
-            });
-        }
-
-        function deleteEntities(list, entity, callback) {
-            $http.post(`${apiUrl}persons/${entity}/delete`, list).success(function (response) {
-                if (response.status === 'success')
-                    callback(list);
-            });
-        }
 
         // Description metods
         function continueSaveDescription(list) {
@@ -179,19 +136,19 @@
             $scope.Changed(list);
         }
         function continueDeleteDescription(list) {
-            getDescript($scope.id);
+            personService.getDescript($scope.id, getDescript);
         }
 
         $scope.saveDescription = function (item) {
             var list = [item];
-            saveEntities(list, 'description', continueSaveDescription);
+            personService.saveEntities($scope.id, list, 'description', continueSaveDescription);
         }
         $scope.deleteDescription = function ($index) {
             var item = $scope.descriptionlist[$index];
             $scope.descriptionlist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities(list, 'description', continueDeleteDescription);
+                deleteEntities($scope.id, list, 'description', continueDeleteDescription);
             }
             $scope.Changed($scope.descriptionlist);
             $scope.$apply();
@@ -216,7 +173,7 @@
             $scope.Changed(list);
         }
         function continueDeleteFact(list) {
-            getFact($scope.id);
+            personService.getFact($scope.id, getFact);
         }
 
         $scope.changedFact = function (item) {
@@ -225,14 +182,14 @@
         }
         $scope.saveFact = function (item) {
             var list = [item];
-            saveEntities(list, 'fact', continueSaveFact);
+            saveEntities($scope.id, list, 'fact', continueSaveFact);
         }
         $scope.deleteFact = function ($index) {
             var item = $scope.factlist[$index];
             $scope.factlist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities(list, 'fact', continueDeleteFact);
+                deleteEntities($scope.id, list, 'fact', continueDeleteFact);
             }
             $scope.Changed($scope.factlist);
             $scope.$apply();
@@ -257,7 +214,7 @@
             $scope.Changed(list);
         }
         function continueDeleteConnection(list) {
-            getConnection($scope.id);
+            personService.getConnection($scope.id, getConnection);
         }
 
         $scope.changedConnectionEvent = function (item) {
@@ -272,14 +229,14 @@
         }
         $scope.saveConnection = function (item) {
             var list = [item];
-            saveEntities(list, 'connection', continueSaveConnection);
+            saveEntities($scope.id, list, 'connection', continueSaveConnection);
         }
         $scope.deleteConnection = function ($index) {
             var item = $scope.connectionList[$index];
             $scope.connectionList.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities(list, 'connection', continueDeleteConnection);
+                deleteEntities($scope.id, list, 'connection', continueDeleteConnection);
             }
             $scope.Changed($scope.connectionList);
             $scope.$apply();
@@ -304,19 +261,19 @@
             $scope.Changed(list);
         }
         function continueDeleteMedia(list) {
-            getMedia($scope.id);
+            personService.getMedia($scope.id, getMedia);
         }
 
         $scope.saveMedia = function (item) {
             var list = [item];
-            saveEntities(list, 'media', continueSaveMedia);
+            saveEntities($scope.id, list, 'media', continueSaveMedia);
         }
         $scope.deleteMedia = function ($index) {
             var item = $scope.medialist[$index];
             $scope.medialist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities(list, 'media', continueDeleteMedia);
+                deleteEntities($scope.id, list, 'media', continueDeleteMedia);
             }
             $scope.Changed($scope.medialist);
             $scope.$apply();
@@ -341,19 +298,19 @@
             $scope.Changed(list);
         }
         function continueDeleteLink(list) {
-            getLinks($scope.id);
+            personService.getLinks($scope.id, getLinks);
         }
 
         $scope.saveLink = function (item) {
             var list = [item];
-            saveEntities(list, 'social', continueSaveLink);
+            saveEntities($scope.id, list, 'social', continueSaveLink);
         }
         $scope.deleteLink = function ($index) {
             var item = $scope.linklist[$index];
             $scope.linklist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities(list, 'social', continueDeleteLink);
+                deleteEntities($scope.id, list, 'social', continueDeleteLink);
             }
             $scope.Changed($scope.linklist);
             $scope.$apply();
@@ -378,19 +335,19 @@
             $scope.Changed(list);
         }
         function continueDeleteAntro(list) {
-            getAntro($scope.id);
+            personService.getAntro($scope.id, getAntro);
         }
 
         $scope.saveAntro = function (item) {
             var list = [item];
-            saveEntities(list, 'antro', continueSaveAntro);
+            saveEntities($scope.id, list, 'antro', continueSaveAntro);
         }
         $scope.deleteAntro = function ($index) {
             var item = $scope.antro[$index];
             $scope.antro.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities(list, 'antro', continueDeleteAntro);
+                deleteEntities($scope.id, list, 'antro', continueDeleteAntro);
             }
             $scope.Changed($scope.antro);
             $scope.$apply();
@@ -409,22 +366,22 @@
         $scope.saveAll = function () {
             var list = $scope.descriptionlist.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities(list, 'description', continueSaveDescription);
+                saveEntities($scope.id, list, 'description', continueSaveDescription);
             list = $scope.factlist.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities(list, 'fact', continueSaveFact);
+                saveEntities($scope.id, list, 'fact', continueSaveFact);
             list = $scope.connectionList.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities(list, 'connection', continueSaveConnection);
+                saveEntities($scope.id, list, 'connection', continueSaveConnection);
             list = $scope.medialist.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities(list, 'media', continueSaveMedia);
+                saveEntities($scope.id, list, 'media', continueSaveMedia);
             list = $scope.linklist.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities(list, 'social', continueSaveLink);
+                saveEntities($scope.id, list, 'social', continueSaveLink);
             list = $scope.antro.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities(list, 'antro', continueSaveAntro);
+                saveEntities($scope.id, list, 'antro', continueSaveAntro);
         }
 
         $scope.createDescription = function () {

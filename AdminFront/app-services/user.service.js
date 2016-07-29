@@ -65,6 +65,7 @@
                             "id": item.Id
                         });
                     });
+                    console.log("load users");
                 })
                 .error(function (data) {
                     return { success: false, message: data };

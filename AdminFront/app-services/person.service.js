@@ -70,11 +70,72 @@
                         event: item.EventName
                     });
                 });
+                console.log("load persons");
+            });
+        }
+
+        function getLinks(id, callback) {
+            $http.get(`${apiUrl}persons/social/${id}`).success(function(data) {
+                callback(data);
+            });
+        }
+
+        function getMedia(id, callback) {
+            $http.get(`${apiUrl}persons/media/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
+
+        function getDescript(id, callback) {
+            $http.get(`${apiUrl}persons/description/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
+
+        function getFact(id, callback) {
+            $http.get(`${apiUrl}persons/fact/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
+
+        function getConnection(id, callback) {
+            $http.get(`${apiUrl}persons/connection/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
+
+        function getAntro(id, callback) {
+            $http.get(`${apiUrl}persons/antro/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
+
+        function saveEntities(id, list, entity, callback) {
+            $http.post(`${apiUrl}persons/${entity}/update/${id}`, list).success(function (response) {
+                if (response.status === 'success')
+                    callback(list);
+            });
+        }
+
+        function deleteEntities(list, entity, callback) {
+            $http.post(`${apiUrl}persons/${entity}/delete`, list).success(function (response) {
+                if (response.status === 'success')
+                    callback(list);
             });
         }
 
         service.getTypes = getTypes;
         service.getPersons = getPersons;
+
+        service.getLinks = getLinks;
+        service.getMedia = getMedia;
+        service.getDescript = getDescript;
+        service.getFact = getFact;
+        service.getConnection = getConnection;
+        service.getAntro = getAntro;
+
+        service.saveEntities = saveEntities;
+        service.deleteEntities = deleteEntities;
 
         return service;;
     }

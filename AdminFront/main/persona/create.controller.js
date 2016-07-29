@@ -9,14 +9,12 @@
     config.$inject = ['$stateProvider'];
 
     function config($stateProvider) {
-        $stateProvider
-
+        
     }
 
     MainPersonaCreateController.$inject = ['$scope', '$stateParams', '$rootScope', '$filter'];
 
     function MainPersonaCreateController($scope, $stateParams, $rootScope, $filter) {
-        $scope.person = $rootScope.person;
         $scope.localLang = {
             "nothingSelected": "Другие персоны подборки",
             "selectAll": "Выбрать все",
@@ -25,31 +23,35 @@
             "search": "Поиск"
         };
 
-        //$scope.selectedPerson = function (id) {
-        //    $rootScope.person = $filter('filter')($rootScope.persons, { Id: id })[0];
-        //}
+        $scope.person = $rootScope.person;
+        $scope.otherPerson = $rootScope.otherPerson;
+
         function reloadPersons() {
             var persons = $filter('filter')($rootScope.persons, { Id: '!' + $rootScope.person.Id });
 
             var morePerson = [];
             persons.forEach(function (item) {
-                morePerson.push({ id: item.Id, name: item.LastName + ' ' + item.Name, ticked: false });
+                var el = $filter('filter')($scope.otherPerson, { id: item.Id });
+                var ticked = el && el.length > 0;
+                morePerson.push({ id: item.Id, name: item.LastName + ' ' + item.Name, ticked: ticked === true });
             });
             $scope.morePerson = morePerson;
-            $rootScope.otherPerson = [];
+            console.log("reload other Persons");
         }
-
-        if ($rootScope.person && $rootScope.persons)
-            reloadPersons();
 
         function watchPersons() {
             if ($rootScope.persons && $rootScope.person)
                 reloadPersons();
         }
+
         $rootScope.$watch('persons', watchPersons);
-        $scope.$watch('person', function(item) {
+        $scope.$watch('person', function (item) {
+            if($rootScope.person == item) return;
             $rootScope.person = item;
             watchPersons();
+        });
+        $scope.$watch('otherPerson', function (items) {
+            $rootScope.otherPerson = items;
         });
     }
 })();
