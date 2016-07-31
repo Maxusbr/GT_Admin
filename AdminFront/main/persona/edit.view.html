@@ -1,0 +1,147 @@
+<div class="row persona-info__full-block">
+    <div class="col-md-24  register__container">
+        <div class="col-md-3">
+            <div class="row">
+                <img src="http://placehold.it/120x120" alt="Placeholder">
+            </div>
+            <div class="row">
+                <div class="radio-input-container">
+                    <div class="radio-input">
+                        <input type="radio" value="None" id="sexM" ng-checked="person.IdSex == 1" name="check">
+                        <label for="sexM"></label>
+                    </div>
+                    <span>M</span>
+                </div>
+                <div class="radio-input-container">
+                    <div class="radio-input">
+                        <input type="radio" value="None" id="sexF" ng-checked="person.IdSex == 2" name="check">
+                        <label for="sexF"></label>
+                    </div>
+                    <span>Ж</span>
+                </div>
+            </div>
+        </div>
+
+        <form name="form" class="css-form" novalidate>
+            <div class="col-md-6">
+                <div class="form-group">
+                    
+                    <input type="text" class="form-control" placeholder="Имя" name="Name"
+                           ng-model="person.Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Фамилия" name="LastName"
+                           ng-model="person.LastName" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Отчество" name="Patronymic"
+                           ng-model="person.Patronymic" required>
+                </div>
+                <div class="space"></div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Компания" ng-model="person.Company" name="Company">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Должность" ng-model="person.Position" name="Position">
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Имя (латинское)" name="NameLatin"
+                           ng-model="person.NameLatin" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Фамилия (латинское)" name="LastNameLatin"
+                           ng-model="person.LastNameLatin" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Отчество (латинское)" name="PatronymicLatin"
+                           ng-model="person.PatronymicLatin" required>
+                </div>
+            </div>
+            <div class="col-md-7">
+
+                <div class="space"></div>
+                <div class="form-actions">
+                    <button type="button" ng-click="register(person)" class="btn btn-primary btn-lg">
+                        Зарегистрировать
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="col-md-4">
+            <div class="persona-info__name-row">
+                {{ person.LastName }}
+            </div>
+            <div class="persona-info__name-row">
+                {{ person.Name }}
+            </div>
+            <div class="persona-info__name-row">
+                {{ person.Patronymic }}
+            </div>
+
+        </div>
+
+        <div class="col-md-4 col-md-offset-2">
+            <div class="persona-info__name-row">
+                <span class="text-generated">{{ person.LastNameLatin }}</span>
+            </div>
+            <div class="persona-info__name-row">
+                <span class="text-generated">{{ person.NameLatin }}</span>
+            </div>
+            <div class="persona-info__name-row">
+                <span class="text-generated">{{ person.PatronymicLatin }}</span>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <select class="form-control">
+                    <option>{{person.BirthdayTxt}} ({{person.Age}} {{yearText}})</option>
+                </select>
+                <p>
+                    <span class="text-muted">(зодиак)</span>
+                    {{person.ZodiacMonth}} /
+                    <span class="text-muted">(восточный)</span>
+                    {{person.ZodiacYear}}
+                </p>
+            </div>
+
+            <div class="row">
+                <select class="form-control">
+                    <option>{{person.Place}}, {{person.Country}}</option>
+                </select>
+                <!--<p>
+                    (Санкт-Петербург, Россия)
+                </p>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-24">
+        <!-- Sex Switches -->
+        <div class="col-md-3">
+            
+        </div>
+        <!-- End Sex Switches -->
+
+    </div>
+</div>
+<div class="col-md-24 register__container">
+    <div class="row">
+        
+    </div>
+</div>
+<div>
+    <div class="help-block" ng-messages="form.Name.$error" ng-if="submitted">
+        <div ng-message="required">Имя обязательно для заполнения</div>
+    </div>
+    <div class="help-block" ng-messages="form.LastName.$error" ng-if="submitted">
+        <div ng-message="required">Фамилия обязательно для заполнения</div>
+    </div>
+    <div class="help-block" ng-if="response.error">
+        <div>{{response.error}}</div>
+
+    </div>
+</div>

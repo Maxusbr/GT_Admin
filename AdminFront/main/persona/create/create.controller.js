@@ -22,7 +22,8 @@
             "reset": "Сброс",
             "search": "Поиск"
         };
-
+        if (!$rootScope.person && $rootScope.persons)
+            $rootScope.person = $rootScope.persons.filter(function (item) { return item.Id === $rootScope.id; })[0];
         $scope.person = $rootScope.person;
         $scope.otherPerson = $rootScope.otherPerson;
 

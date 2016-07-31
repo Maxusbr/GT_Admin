@@ -9,5 +9,6 @@ namespace Getticket.Web.API.Models.Persons
     public class CountryModel: BaseModel
     {
         public IList<CountryPlaceModel> Places { get; set; }
+        public string Name { get; set; }
     }
 }

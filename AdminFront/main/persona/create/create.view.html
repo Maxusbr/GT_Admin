@@ -20,8 +20,10 @@
         <div class="col-md-24">
             <ul class="nav nav-tabs">
                 <li class="green">
-                    <a data-target="#description" data-toggle="tab"> <span class="glyphicon glyphicon-plus"></span>
-                        Описание</a>
+                    <a data-target="#description" data-toggle="tab">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Описание
+                    </a>
                 </li>
                 <li class="green">
                     <a data-target="#facts" data-toggle="tab"> <span class="glyphicon glyphicon-plus"></span> Факты</a>
@@ -45,7 +47,7 @@
 
             <div class="col-md-4">
                 <div class="row">
-                    <a type="button" href="#/main/persona/create/schema" class="btn btn-blue btn-lg col-md-18" >
+                    <a type="button" href="#/main/persona/create/schema" class="btn btn-blue btn-lg col-md-18">
                         далее
                     </a>
                 </div>
@@ -90,9 +92,9 @@
                         <div class="col-md-5">
                             <label for="persona__concrete">Уточнение</label>
                             <!--<select >
-                                <option>Серена Уильямс</option> ng-change="selectedPerson(person.Id)" 
+                                <option>Серена Уильямс</option> ng-change="selectedPerson(person.Id)"
                             </select>-->
-                            <select class="form-control" id="persona__concrete" ng-model="person" 
+                            <select class="form-control" id="persona__concrete" ng-model="person"
                                     ng-options="type as type.LastName + ' ' + type.Name for type in persons"></select>
                         </div>
                     </div>
@@ -103,14 +105,18 @@
                 <div class="col-md-24 persona-create__title">
                     / Блок (Подборка и т.п.)
                 </div>
-                <div class="col-md-24" ng-show="morePerson">
-                    <!--<label for="persona__block"></label>-->
-                    <!--<select class="form-control" id="persona__block">
-                        <option>Другие персоны подборки</option>
-                    </select>-->
-                    <div isteven-multi-select input-model="morePerson" output-model="otherPerson" helper-elements="" translation="localLang"
-                         button-label="name" item-label="name" tick-property="ticked">
+                <div class="col-md-22">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!--<label for="persona__block"></label>-->
+                            <select class="form-control" id="persona__block">
+                                <option>Другие персоны подборки</option>
+                            </select>
+                        </div>
                     </div>
+                    <!--<div ng-show="morePerson" isteven-multi-select input-model="morePerson" output-model="otherPerson" helper-elements="" translation="localLang"
+                         button-label="name" item-label="name" tick-property="ticked">
+                    </div>-->
                     <!--<select class="form-control" id="persona__block" ng-model="otherPerson"
                         ng-options="type as type.LastName + ' ' + type.Name for type in persons | filter : { Id: '!' + person.Id}"></select>-->
                 </div>

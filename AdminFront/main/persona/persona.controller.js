@@ -29,11 +29,21 @@
             })
             .state('main.persona.create', {
                 url: '/create',
-                templateUrl: '/main/persona/create.view.html',
+                templateUrl: '/main/persona/create/create.view.html',
                 controller: 'MainPersonaCreateController'
+            })
+            .state('main.persona.edit', {
+                url: '/edit',
+                templateUrl: '/main/persona/edit.view.html',
+                controller: 'mainPersonaEditController'
             })
             .state('main.persona.index', {
                 url: '/:id',
+                templateUrl: '/main/persona/index.view.html',
+                controller: 'MainPersonaIndexController'
+            })
+            .state('main.persona.add', {
+                url: '/add',
                 templateUrl: '/main/persona/index.view.html',
                 controller: 'MainPersonaIndexController'
             });
@@ -197,7 +207,7 @@
         //};
 
         $scope.CreatePersona = function () {
-            $location.path("/main/persona/create");
+            $location.path("/main/persona/add");
         }
     }
 })();

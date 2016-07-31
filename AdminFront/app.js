@@ -15,7 +15,7 @@ var pageSize = 20;
             'vcRecaptcha',
             'ngMessages',
             'ngResource',
-            'angularMoment', 'isteven-multi-select'
+            'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap'
             // 'webix'
         ])
         .config(config)
@@ -30,8 +30,8 @@ var pageSize = 20;
             $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.globals.currentUser.token; // jshint ignore:line
         }
         $rootScope.$on('$viewContentLoaded', function() {
-            $templateCache.removeAll();
-            addThemplates($templateCache);
+            //$templateCache.removeAll();
+            //addThemplates($templateCache);
             var restrictedPage = $.inArray($location.path(), ['/login', '/registration', '/sign-in']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
