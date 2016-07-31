@@ -17,7 +17,7 @@ namespace Getticket.Web.DAL.Migrations
         // Update-Database -ProjectName Getticket.Web.DAL -StartUpProjectName Getticket.Web.API -Force -Verbose
         protected override void Seed(GetticketDBContext context)
         {
-            TempDb(context);
+            //TempDb(context);
         }
 
         void TempDb(GetticketDBContext context)
