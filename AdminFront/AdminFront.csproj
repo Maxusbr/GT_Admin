@@ -115,7 +115,6 @@
     </Content>
     <Content Include="scripts\angular-moment.js" />
     <Content Include="scripts\angular-moment.min.js" />
-    <Content Include="scripts\isteven-multi-select.htm" />
     <Content Include="scripts\isteven-multi-select.js" />
     <Content Include="scripts\moment-with-locales.js" />
     <Content Include="scripts\moment-with-locales.min.js" />
