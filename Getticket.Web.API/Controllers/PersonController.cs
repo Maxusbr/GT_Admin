@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using Getticket.Web.API.Models;
 using Getticket.Web.API.Models.Persons;
 using Getticket.Web.API.Services;
 
@@ -18,14 +19,16 @@ namespace Getticket.Web.API.Controllers
     public class PersonController : ApiController
     {
         private readonly IPersonService _personService;
+        private readonly ITagService _tagService;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="personService"></param>
-        public PersonController(IPersonService personService)
+        public PersonController(IPersonService personService, ITagService tagService)
         {
             _personService = personService;
+            _tagService = tagService;
         }
 
         #region Person
@@ -476,6 +479,30 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult GetPlaces()
         {
             return Ok(_personService.GetCountryPlaces(string.Empty));
+        }
+
+        /// <see cref="ITagService.GeTagLinkTypes" />
+        [HttpGet]
+        [Route("tags/gettype")]
+        public IHttpActionResult GeTagLinkTypes()
+        {
+            return Ok(_tagService.GeTagLinkTypes());
+        }
+
+        /// <see cref="ITagService.GeTagLinkTypes" />
+        [HttpGet]
+        [Route("tags")]
+        public IHttpActionResult GeTags()
+        {
+            return Ok(_tagService.GeTags());
+        }
+
+        /// <see cref="ITagService.AddTagLinks" />
+        [HttpPost]
+        [Route("tags/add")]
+        public IHttpActionResult AddTagLinks([FromBody] IList<TagLinkModel> list)
+        {
+            return Ok(_tagService.AddTagLinks(list).Response());
         }
     }
 }
