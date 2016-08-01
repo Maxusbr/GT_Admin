@@ -63,9 +63,6 @@
     <Compile Include="Entities\EventType.cs" />
     <Compile Include="Entities\PersonFactType.cs" />
     <Compile Include="Entities\PersonFact.cs" />
-    <Compile Include="Entities\TagLink.cs" />
-    <Compile Include="Entities\Tag.cs" />
-    <Compile Include="Entities\TagLinkType.cs" />
     <Compile Include="Entities\PersonMediaType.cs" />
     <Compile Include="Entities\PersonSocialLink.cs" />
     <Compile Include="Entities\PersonSocialLinkType.cs" />
@@ -99,7 +96,6 @@
     <Compile Include="IRepositories\IBaseRepository.cs" />
     <Compile Include="IRepositories\IEventRepository.cs" />
     <Compile Include="IRepositories\IInviteCodeRepository.cs" />
-    <Compile Include="IRepositories\ITagRepository.cs" />
     <Compile Include="IRepositories\IPersonRepository.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -109,7 +105,6 @@
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\InviteCodeRepository.cs" />
-    <Compile Include="Repositories\TagRepository.cs" />
     <Compile Include="Repositories\PersonRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
