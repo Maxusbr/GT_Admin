@@ -49,7 +49,16 @@
             $scope.tags = [];
             $scope.tags.push.apply($scope.tags, data);
         });
-        $scope.personTags = [];
+
+        function getPersonTags() {
+            personService.getPersonTags($rootScope.person.Id, function (data) {
+                $scope.personTags = [];
+                $scope.personTags.push.apply($scope.personTags, data);
+            });
+        }
+
+        if ($rootScope.person)
+            getPersonTags();
 
         $scope.loadTags = function (query) {
             var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
@@ -64,6 +73,7 @@
             if($rootScope.person == item) return;
             $rootScope.person = item;
             watchPersons();
+            getPersonTags();
         });
         $scope.$watch('otherPerson', function (items) {
             $rootScope.otherPerson = items;

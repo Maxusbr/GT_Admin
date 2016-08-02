@@ -167,6 +167,12 @@
             });
         }
 
+        function getPersonTags(id, callback) {
+            $http.get(`${apiUrl}persons/tags/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
+
         function saveDescriptions(model, callback) {
             return $http.post(`${apiUrl}persons/tags/save`, model).success(function (data) {
                 callback(data);
@@ -183,6 +189,7 @@
             });
         }
         service.getTags = getTags;
+        service.getPersonTags = getPersonTags;
 
         service.getTypes = getTypes;
         service.getPersons = getPersons;

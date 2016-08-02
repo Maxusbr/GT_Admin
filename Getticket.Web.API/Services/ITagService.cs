@@ -16,6 +16,12 @@ namespace Getticket.Web.API.Services
         IList<TagModel> GeTags();
 
         /// <summary>
+        /// Возвращает список <see cref="TagModel"/> для <see cref="PersonModel"/> с Id = <paramref name="personId"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<TagModel> GeTags(int personId);
+
+        /// <summary>
         /// Добавляет связь <see cref="TagModel"/> c <see cref="TagAntroModel"/>
         /// </summary>
         /// <param name="model"></param>

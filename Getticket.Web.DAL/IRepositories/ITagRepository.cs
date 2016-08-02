@@ -17,6 +17,12 @@ namespace Getticket.Web.DAL.IRepositories
         IList<Tag> GeTags();
 
         /// <summary>
+        /// Возвращает список <see cref="Tag"/> для <see cref="Person"/> с Id = <paramref name="personId"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<Tag> GeTags(int personId);
+
+        /// <summary>
         /// Добавляет  <see cref="Tag"/>
         /// </summary>
         /// <param name="model"></param>
