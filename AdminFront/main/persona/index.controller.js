@@ -282,7 +282,7 @@
             $scope.descriptionlist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                personService.deleteEntities($scope.id, list, 'description', continueDeleteDescription);
+                personService.deleteEntities(list, 'description', continueDeleteDescription);
             }
             $scope.Changed($scope.descriptionlist);
             $scope.$apply();
@@ -323,7 +323,7 @@
             $scope.factlist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                personService.deleteEntities($scope.id, list, 'fact', continueDeleteFact);
+                personService.deleteEntities(list, 'fact', continueDeleteFact);
             }
             $scope.Changed($scope.factlist);
             $scope.$apply();
@@ -370,7 +370,7 @@
             $scope.connectionList.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                personService.deleteEntities($scope.id, list, 'connection', continueDeleteConnection);
+                personService.deleteEntities(list, 'connection', continueDeleteConnection);
             }
             $scope.Changed($scope.connectionList);
             $scope.$apply();
@@ -407,7 +407,7 @@
             $scope.medialist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                personService.deleteEntities($scope.id, list, 'media', continueDeleteMedia);
+                personService.deleteEntities(list, 'media', continueDeleteMedia);
             }
             $scope.Changed($scope.medialist);
             $scope.$apply();
@@ -444,7 +444,7 @@
             $scope.linklist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                personService.deleteEntities($scope.id, list, 'social', continueDeleteLink);
+                personService.deleteEntities(list, 'social', continueDeleteLink);
             }
             $scope.Changed($scope.linklist);
             $scope.$apply();
@@ -481,7 +481,7 @@
             $scope.antro.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                personService.deleteEntities($scope.id, list, 'antro', continueDeleteAntro);
+                personService.deleteEntities(list, 'antro', continueDeleteAntro);
             }
             $scope.Changed($scope.antro);
             $scope.$apply();
