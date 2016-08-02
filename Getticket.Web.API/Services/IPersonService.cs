@@ -256,7 +256,6 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         ServiceResponce DeleteDescriptionTypes(IEnumerable<PersonDescriptionTypeModel> models);
-
         /// <summary>
         /// Добавить/Изменить список описаний для Person c Id = <paramref name="pesonId"/>
         /// </summary>
@@ -264,6 +263,13 @@ namespace Getticket.Web.API.Services
         /// <param name="models"></param>
         /// <returns></returns>
         ServiceResponce UpdateDescriptions(int pesonId, IEnumerable<PersonDescriptionModel> models);
+
+        /// <summary>
+        /// Добавить/Изменить описание
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        int UpdateDescriptions(PersonDescriptionModel model);
 
         /// <summary>
         /// Удалить список описаний

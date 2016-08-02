@@ -240,7 +240,11 @@
             personService.Save($scope.person, function (data) {
                 if (data.Message)
                     $scope.response = data.Message;
-                else personService.getPersons();
+                else {
+                    personService.getPersons();
+                    $scope.person.IsChange = false;
+                    $scope.isEdit = false;
+                }
             });
         }
         $scope.register = function () {
@@ -278,7 +282,7 @@
             $scope.descriptionlist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities($scope.id, list, 'description', continueDeleteDescription);
+                personService.deleteEntities($scope.id, list, 'description', continueDeleteDescription);
             }
             $scope.Changed($scope.descriptionlist);
             $scope.$apply();
@@ -312,14 +316,14 @@
         }
         $scope.saveFact = function (item) {
             var list = [item];
-            saveEntities($scope.id, list, 'fact', continueSaveFact);
+            personService.saveEntities($scope.id, list, 'fact', continueSaveFact);
         }
         $scope.deleteFact = function ($index) {
             var item = $scope.factlist[$index];
             $scope.factlist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities($scope.id, list, 'fact', continueDeleteFact);
+                personService.deleteEntities($scope.id, list, 'fact', continueDeleteFact);
             }
             $scope.Changed($scope.factlist);
             $scope.$apply();
@@ -359,14 +363,14 @@
         }
         $scope.saveConnection = function (item) {
             var list = [item];
-            saveEntities($scope.id, list, 'connection', continueSaveConnection);
+            personService.saveEntities($scope.id, list, 'connection', continueSaveConnection);
         }
         $scope.deleteConnection = function ($index) {
             var item = $scope.connectionList[$index];
             $scope.connectionList.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities($scope.id, list, 'connection', continueDeleteConnection);
+                personService.deleteEntities($scope.id, list, 'connection', continueDeleteConnection);
             }
             $scope.Changed($scope.connectionList);
             $scope.$apply();
@@ -396,14 +400,14 @@
 
         $scope.saveMedia = function (item) {
             var list = [item];
-            saveEntities($scope.id, list, 'media', continueSaveMedia);
+            personService.saveEntities($scope.id, list, 'media', continueSaveMedia);
         }
         $scope.deleteMedia = function ($index) {
             var item = $scope.medialist[$index];
             $scope.medialist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities($scope.id, list, 'media', continueDeleteMedia);
+                personService.deleteEntities($scope.id, list, 'media', continueDeleteMedia);
             }
             $scope.Changed($scope.medialist);
             $scope.$apply();
@@ -433,14 +437,14 @@
 
         $scope.saveLink = function (item) {
             var list = [item];
-            saveEntities($scope.id, list, 'social', continueSaveLink);
+            personService.saveEntities($scope.id, list, 'social', continueSaveLink);
         }
         $scope.deleteLink = function ($index) {
             var item = $scope.linklist[$index];
             $scope.linklist.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities($scope.id, list, 'social', continueDeleteLink);
+                personService.deleteEntities($scope.id, list, 'social', continueDeleteLink);
             }
             $scope.Changed($scope.linklist);
             $scope.$apply();
@@ -470,14 +474,14 @@
 
         $scope.saveAntro = function (item) {
             var list = [item];
-            saveEntities($scope.id, list, 'antro', continueSaveAntro);
+            personService.saveEntities($scope.id, list, 'antro', continueSaveAntro);
         }
         $scope.deleteAntro = function ($index) {
             var item = $scope.antro[$index];
             $scope.antro.splice($index, 1);
             if (item.Id > 0) {
                 var list = [item];
-                deleteEntities($scope.id, list, 'antro', continueDeleteAntro);
+                personService.deleteEntities($scope.id, list, 'antro', continueDeleteAntro);
             }
             $scope.Changed($scope.antro);
             $scope.$apply();
@@ -496,22 +500,22 @@
         $scope.saveAll = function () {
             var list = $scope.descriptionlist.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities($scope.id, list, 'description', continueSaveDescription);
+                personService.saveEntities($scope.id, list, 'description', continueSaveDescription);
             list = $scope.factlist.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities($scope.id, list, 'fact', continueSaveFact);
+                personService.saveEntities($scope.id, list, 'fact', continueSaveFact);
             list = $scope.connectionList.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities($scope.id, list, 'connection', continueSaveConnection);
+                personService.saveEntities($scope.id, list, 'connection', continueSaveConnection);
             list = $scope.medialist.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities($scope.id, list, 'media', continueSaveMedia);
+                personService.saveEntities($scope.id, list, 'media', continueSaveMedia);
             list = $scope.linklist.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities($scope.id, list, 'social', continueSaveLink);
+                personService.saveEntities($scope.id, list, 'social', continueSaveLink);
             list = $scope.antro.filter(function (item) { return item.Changed; });
             if (list.length > 0)
-                saveEntities($scope.id, list, 'antro', continueSaveAntro);
+                personService.saveEntities($scope.id, list, 'antro', continueSaveAntro);
         }
 
         $scope.createDescription = function () {

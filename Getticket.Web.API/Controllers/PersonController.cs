@@ -377,7 +377,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteDescriptionTypes(models).Response());
         }
 
-        /// <see cref="PersonService.UpdateDescriptions" />
+        /// <see cref="PersonService.UpdateDescriptions()" />
         [HttpPost]
         [Route("description/update/{id}")]
         public IHttpActionResult UpdateDescriptions(int id, [FromBody] IEnumerable<PersonDescriptionModel> models)
@@ -481,15 +481,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.GetCountryPlaces(string.Empty));
         }
 
-        /// <see cref="ITagService.GeTagLinkTypes" />
-        [HttpGet]
-        [Route("tags/gettype")]
-        public IHttpActionResult GeTagLinkTypes()
-        {
-            return Ok(_tagService.GeTagLinkTypes());
-        }
-
-        /// <see cref="ITagService.GeTagLinkTypes" />
+        /// <see cref="ITagService.GeTags" />
         [HttpGet]
         [Route("tags")]
         public IHttpActionResult GeTags()
@@ -497,12 +489,49 @@ namespace Getticket.Web.API.Controllers
             return Ok(_tagService.GeTags());
         }
 
-        /// <see cref="ITagService.AddTagLinks" />
+        /// <summary>
+        /// Сохранить описания и теги
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        [Route("tags/add")]
-        public IHttpActionResult AddTagLinks([FromBody] IList<TagLinkModel> list)
+        [Route("tags/save")]
+        public IHttpActionResult SaveDescriptions([FromBody] CreateDescriptionModel model)
         {
-            return Ok(_tagService.AddTagLinks(list).Response());
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save description");
+            var succes = ServiceResponce.FromSuccess().Result("All save complete");
+            var id = _personService.UpdateDescriptions(model.TagDescription.Tizer);
+            if (id < 1) return Ok(error.Response());
+            model.TagDescription.Tizer.Id = id;
+            if (!_tagService.AddTagLinks(model.TagDescription))
+            {
+                error.Result("Error save tags");
+                return Ok(error.Response());
+            }
+            if (model.TagDescription.ExistDescription)
+            {
+                if (_personService.UpdateDescriptions(new PersonDescriptionModel
+                {
+                    id_DescriptionType = 2,
+                    id_Person = model.IdPerson,
+                    DescriptionText = model.TagDescription.StaticDescription
+                }) < 1)
+                {
+                    error.Result("Error save description");
+                    return Ok(error.Response());
+                }
+            }
+            if (model.TagAntroList.Any(item => !_tagService.AddTagLinks(item)))
+            {
+                error.Result("Error save tags");
+                return Ok(error.Response());
+            }
+
+            return Ok(succes.Response());
         }
     }
 }

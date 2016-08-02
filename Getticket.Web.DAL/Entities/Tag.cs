@@ -27,6 +27,6 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Где используется
         /// </summary>
-        public virtual IList<string> UsesType { get; set; }
+        public virtual IList<string> UsesType { get; set; } = new List<string>();
     }
 }

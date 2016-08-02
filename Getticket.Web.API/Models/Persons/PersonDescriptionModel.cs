@@ -1,4 +1,6 @@
-﻿namespace Getticket.Web.API.Models.Persons
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Getticket.Web.API.Models.Persons
 {
     /// <summary>
     /// Описание
@@ -8,6 +10,7 @@
         /// <summary>
         /// Текст описания
         /// </summary>
+        [Required]
         public string DescriptionText { get; set; }
 
         public int id_Person { get; set; }

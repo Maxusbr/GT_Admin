@@ -84,9 +84,10 @@
     <Compile Include="Entities\InviteCode.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\TagAntro.cs" />
     <Compile Include="Entities\Tag.cs" />
-    <Compile Include="Entities\TagLink.cs" />
-    <Compile Include="Entities\TagLinkType.cs" />
+    <Compile Include="Entities\TagAntroLink.cs" />
+    <Compile Include="Entities\TagDescriptionLink.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInfo.cs" />
     <Compile Include="Entities\UserStatus.cs" />

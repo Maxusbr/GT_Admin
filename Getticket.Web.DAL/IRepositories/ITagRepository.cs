@@ -11,12 +11,6 @@ namespace Getticket.Web.DAL.IRepositories
     public interface ITagRepository : IDisposable
     {
         /// <summary>
-        /// Возвращает список <see cref="TagLinkType"/>
-        /// </summary>
-        /// <returns></returns>
-        IList<TagLinkType> GeTagLinkTypes();
-
-        /// <summary>
         /// Возвращает список <see cref="Tag"/>
         /// </summary>
         /// <returns></returns>
@@ -34,6 +28,13 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        TagLink AddTagLink(TagLink model);
+        TagDescriptionLink AddTagLink(TagDescriptionLink model);
+
+        /// <summary>
+        /// Добавляет связь <see cref="Tag"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        TagAntroLink AddTagLink(TagAntroLink model);
     }
 }

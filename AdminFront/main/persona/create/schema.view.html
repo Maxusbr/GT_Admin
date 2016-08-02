@@ -100,14 +100,17 @@
 
                     <div>
                         <div class="tags">
-                            <span>Ноги</span>
+                            <tags-input ng-model="TizerTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0"/>
+                            </tags-input>
+                            <!--<span>Ноги</span>
                             <span>Длинные</span>
                             <span>Теннис</span>
                             <span>Ноги</span>
                             <span>Длинные</span>
                             <span class="yellow">Руки</span>
                             <span class="green">Сет</span>
-                            <span class="red">Родители</span>
+                            <span class="red">Родители</span>-->
                         </div>
                     </div>
                 </div>
@@ -121,13 +124,13 @@
                 <div class="col-md-24">
                     <div class="row">
                         <div class="col-md-14">
-                            <textarea ng-model="staticDescription" class="standard">Спортсменка, которая вместе с Прививковой Людмилой вызвала заметный подъем интереса зрителей и болельщиков к керлингу и нашей сборной в этом виде спорта|</textarea>
+                            <textarea ng-change="existDescription = !staticDescription" ng-model="staticDescription" class="standard">Спортсменка, которая вместе с Прививковой Людмилой вызвала заметный подъем интереса зрителей и болельщиков к керлингу и нашей сборной в этом виде спорта|</textarea>
                         </div>
 
                         <div class="col-md-10">
                             <div class="checkbox-input-container">
                                 <div class="checkbox-input">
-                                    <input type="checkbox" value="None" name="check" checked id="no-need-2" ng-checked="!staticDescription" ng-model="existDescription"/>
+                                    <input type="checkbox" value="None" name="check" id="no-need-2" ng-model="existDescription"/>
                                     <label for="no-need-2"></label>
                                 </div>
 
@@ -166,8 +169,30 @@
                                     </td>
                                 </tr>
                                 </thead>
-
-                                <tr>
+                                <tr ng-repeat="item in factlist">
+                                    <td class="text-center">
+                                        {{item.id}}
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <div class="tags">
+                                            <tags-input ng-model="item.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи" >
+                                                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0"/>
+                                            </tags-input>
+                                            <!--<input type="text" class="form-control" placeholder="Tags"
+                                                   ng-model="item.Tags" uib-typeahead="el.Name as el.Name for el in tags | filter:$viewValue">-->
+                                            <!--<span>Ноги</span>
+                                            <span>Длинные</span>
+                                            <span>Теннис</span>
+                                            <span>Ноги</span>
+                                            <span>Длинные</span>
+                                            <span class="yellow">Руки</span>
+                                            <span class="green">Сет</span>
+                                            <span class="red">Родители</span>-->
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!--<tr>
                                     <td class="text-center">
                                         1
                                     </td>
@@ -222,7 +247,7 @@
                                             <span class="red">Родители</span>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr>-->
                             </table>
                         </div>
 
@@ -236,23 +261,24 @@
                                 </select>
 
                                 <label for="char">Характеристика связи</label>
-                                <select class="form-control" id="char">
+                                <select class="form-control" id="char" >
                                     <option>Антропометрия</option>
                                 </select>
 
                                 <label for="data">Данные</label>
-                                <select class="form-control" id="data">
-                                    <option>Длина ноги</option>
+                                <select class="form-control" id="data" ng-model="IdAntroName" ng-options="item.Id as item.Name for item in antronames">
+                                    <!--<option>Длина ноги</option>-->
                                 </select>
 
                                 <label for="type">Условие на значение данных</label>
 
                                 <div class="form-inline">
-                                    <select class="form-control" id="type">
-                                        <option> ></option>
+                                    <select class="form-control" id="type" ng-model="IsMoreThan">
+                                        <option value="true"> ></option>
+                                        <option value="false"> <</option>
                                     </select>
 
-                                    <input type="text" class="input form-control" value="120">
+                                    <input type="text" class="input form-control" value="120" ng-model="FeatureValue">
 
                                     <select class="form-control">
                                         <option>См</option>

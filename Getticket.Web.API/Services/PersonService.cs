@@ -655,6 +655,24 @@ namespace Getticket.Web.API.Services
                 .Result("Descriptions save complete");
         }
 
+
+        public int UpdateDescriptions(PersonDescriptionModel model)
+        {
+            var result = _personRepository.UpdateDescription(new PersonDescription
+            {
+                Id = model.Id,
+                id_Person = model.id_Person,
+                id_DescriptionType = model.id_DescriptionType,
+                DescriptionText = model.DescriptionText,
+                Status = model.Status
+            });
+            if (result == null)
+            {
+                return -1;
+            }
+            return result.Id;
+        }
+
         /// <summary>
         /// Удалить список описаний
         /// </summary>
