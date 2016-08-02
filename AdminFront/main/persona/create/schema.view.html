@@ -13,7 +13,12 @@
             </div>
         </div>
     </div>
-
+    <script type="text/ng-template" id="my-custom-template">
+        <div class="right-panel">
+            <span ng-bind-html="$highlight($getDisplayText())"></span>
+            <span ng-show="data.UsesType.length">({{data.UsesType|join:','}})</span>
+        </div>
+    </script>
 
     <div class="row">
         <div class="col-md-24">
@@ -101,7 +106,7 @@
                     <div>
                         <div class="tags">
                             <tags-input ng-model="TizerTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
-                                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0"/>
+                                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template"/>
                             </tags-input>
                             <!--<span>Ноги</span>
                             <span>Длинные</span>
@@ -177,7 +182,7 @@
                                     <td>
                                         <div class="tags">
                                             <tags-input ng-model="item.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи" >
-                                                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0"/>
+                                                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template"/>
                                             </tags-input>
                                             <!--<input type="text" class="form-control" placeholder="Tags"
                                                    ng-model="item.Tags" uib-typeahead="el.Name as el.Name for el in tags | filter:$viewValue">-->
@@ -266,7 +271,7 @@
                                 </select>
 
                                 <label for="data">Данные</label>
-                                <select class="form-control" id="data" ng-model="IdAntroName" ng-options="item.Id as item.Name for item in antronames">
+                                <select class="form-control" id="data" ng-model="antro" ng-options="item as item.Name for item in antronames">
                                     <!--<option>Длина ноги</option>-->
                                 </select>
 
@@ -280,8 +285,10 @@
 
                                     <input type="text" class="input form-control" value="120" ng-model="FeatureValue">
 
-                                    <select class="form-control">
-                                        <option>См</option>
+                                    <select class="form-control" ng-model="dimension">
+                                        <option selected="selected" value="см">см</option>
+                                        <option value="кг">кг</option>
+                                        <option value="мм">мм</option>
                                     </select>
                                 </div>
                             </div>

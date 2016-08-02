@@ -55,14 +55,15 @@
                 <div class="col-md-7">
                     <p>Ключи (от 3 до 10 штук)</p>
                     <div class="tags">
-                        <span>Ноги</span>
+                        <span ng-repeat="tag in tizerTags">{{tag.Name}}</span>
+                        <!--<span>Ноги</span>
                         <span>Длинные</span>
                         <span>Теннис</span>
                         <span>Ноги</span>
                         <span>Длинные</span>
                         <span class="yellow">Руки</span>
                         <span class="green">Сет</span>
-                        <span class="red">Родители</span>
+                        <span class="red">Родители</span>-->
                     </div>
                 </div>
 
@@ -96,8 +97,15 @@
             <div class="row">
                 <div class="col-md-7">
                     <strong>Ключи (от 3 до 10 штук)</strong>
-
-                    <div class="tags">
+                    <div class="tags" ng-repeat="item in factlist">
+                        <span  ng-repeat="tag in item.Tags">{{tag.Name}}</span>
+                        <!--<span>Длинные</span>
+                        <span>Теннис</span>
+                        <span>Ноги</span>
+                        <span>Длинные</span>
+                        <span class="green">Сет</span>-->
+                    </div>
+                    <!--<div class="tags">
                         <span>Ноги</span>
                         <span>Длинные</span>
                         <span>Теннис</span>
@@ -119,13 +127,18 @@
                         <span class="red">Образование</span>
                         <span class="red">Коньки</span>
                         <span class="red">Родители</span>
-                    </div>
+                    </div>-->
                 </div>
 
                 <div class="col-md-5">
                     <strong>Связи факта</strong>
 
-                    <p>
+                    <p  ng-repeat="item in factlist">
+                        Персона / Антропометрия <br>
+                        / {{item.AntroName}} <span ng-show="item.IsMoreThan">></span> <span ng-show="!item.IsMoreThan"><</span> {{item.Value}} {{item.dimension}}
+                    </p>
+
+                    <!--<p>
                         Персона /Антропометрия <br>
                         /Длина ноги > 120 См
                     </p>
@@ -133,12 +146,7 @@
                     <p>
                         Персона /Антропометрия <br>
                         /Длина ноги > 120 См
-                    </p>
-
-                    <p>
-                        Персона /Антропометрия <br>
-                        /Длина ноги > 120 См
-                    </p>
+                    </p>-->
                 </div>
 
                 <div class="col-md-7">
