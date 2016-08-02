@@ -107,6 +107,10 @@
     <Compile Include="Migrations\201608011356100_db3.Designer.cs">
       <DependentUpon>201608011356100_db3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608020948562_db4.cs" />
+    <Compile Include="Migrations\201608020948562_db4.Designer.cs">
+      <DependentUpon>201608020948562_db4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccessRoleRepository.cs" />
@@ -127,6 +131,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201608011356100_db3.resx">
       <DependentUpon>201608011356100_db3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608020948562_db4.resx">
+      <DependentUpon>201608020948562_db4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
