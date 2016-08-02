@@ -379,8 +379,9 @@ namespace Getticket.Web.DAL.IRepositories
         /// <summary>
         /// Возвращает список <see cref="Country"/>
         /// </summary>
+        /// <param name="foundName"></param>
         /// <returns></returns>
-        IList<Country> GetCountries();
+        IList<Country> GetCountries(string foundName);
 
         /// <summary>
         /// Если <see cref="Country"/> новый - добавляем новую запись в БД.
@@ -402,6 +403,12 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <returns></returns>
         IList<CountryPlace> GetCountryPlaces(int id);
+
+        /// <summary>
+        /// Возвращает список <see cref="CountryPlace"/> 
+        /// </summary>
+        /// <returns></returns>
+        IList<CountryPlace> GetCountryPlaces(string foundName);
 
         /// <summary>
         /// Если <see cref="CountryPlace"/> новый - добавляем новую запись в БД.
@@ -438,5 +445,13 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="id"></param>
         /// <returns></returns>
         bool DeleteSex(int id);
+
+        /// <summary>
+        /// Добавить город
+        /// </summary>
+        /// <param name="country"></param>
+        /// <param name="place"></param>
+        /// <returns></returns>
+        int UpdatePlace(string country, string place);
     }
 }

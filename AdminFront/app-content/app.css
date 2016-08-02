@@ -811,7 +811,18 @@ ui-view {
     top: 10px;
     display: none;
 }
+.register__container:hover a.persona__edit {
+    display: inline;
+}
 
+.register__container a.persona__edit {
+    font-size: 150%;
+    position: absolute;
+    right: 10px;
+    text-decoration: none;
+    top: 10px;
+    display: none;
+}
 .persona-main__container, .tab-pane {
     padding-top: 30px;
     font-size: 11px;

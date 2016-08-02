@@ -236,6 +236,18 @@ namespace Getticket.Web.DAL.Entities
         }
         #endregion
 
+        #region Tags
+
+        /// <see cref="TagLinkType"/>
+        public virtual DbSet<TagLinkType> TagLinkTypes { get; set; }
+
+        /// <see cref="Tag"/>
+        public virtual DbSet<Tag> Tags { get; set; }
+
+        /// <see cref="TagLink"/>
+        public virtual DbSet<TagLink> TagLinks { get; set; }
+
+        #endregion
 
         /// <summary>
         /// Настройка БД через Fluent API

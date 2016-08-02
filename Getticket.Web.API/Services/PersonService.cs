@@ -148,7 +148,7 @@ namespace Getticket.Web.API.Services
         {
             var list = PersonModelHelper.GetDescriptionModels(_personRepository.GetDescriptions(id));
             var types = list.GroupBy(o => o.id_DescriptionType).Select(o => o.Key);
-            return types.Select(tp => new EntityCollection<PersonDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp});
+            return types.Select(tp => new EntityCollection<PersonDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp });
         }
 
         /// <see cref="IPersonService.GetFacts" />
@@ -166,14 +166,24 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce SavePerson(PersonModel model)
         {
-            var person = _personRepository.FindPersonById(model.Id);
+            var person = model.Id > 0 ? _personRepository.FindPersonById(model.Id) : PersonModelHelper.GetPerson(model);
             if (person == null)
             {
                 return ServiceResponce
                     .FromFailed()
                     .Add("error", "Person with specified Id was not found");
             }
-            person = PersonModelHelper.GetPerson(model);
+            if (model.Id > 0)
+            {
+                person.Bithday = model.Bithday;
+                person.Name = model.Name;
+                person.NameLatin = model.NameLatin;
+                person.Patronymic = model.Patronymic;
+                person.LastName = model.LastName;
+                person.LastNameLatin = model.LastNameLatin;
+                person.id_Bithplace = model.IdBithplace;
+                person.id_Sex = model.IdSex;
+            }
             var res = _personRepository.SavePerson(person);
             var response = res != null ? ServiceResponce
                 .FromSuccess()
@@ -736,6 +746,26 @@ namespace Getticket.Web.API.Services
             return ServiceResponce
                 .FromSuccess()
                 .Result("Facts delete complete");
+        }
+
+        /// <see cref="IPersonService.GetCountries"/>
+        public IList<CountryModel> GetCountries(string foundName)
+        {
+            var result = _personRepository.GetCountries(foundName);
+            return PersonModelHelper.GetCountryModels(result);
+        }
+
+        /// <see cref="IPersonService.GetCountryPlaces"/>
+        public IList<CountryPlaceModel> GetCountryPlaces(string foundName)
+        {
+            var result = _personRepository.GetCountryPlaces(foundName);
+            return PersonModelHelper.GetCountryPlaceModels(result);
+        }
+
+        /// <see cref="IPersonService.UpdatePlace"/>
+        public int UpdatePlace(string country, string place)
+        {
+            return _personRepository.UpdatePlace(country, place);
         }
     }
 

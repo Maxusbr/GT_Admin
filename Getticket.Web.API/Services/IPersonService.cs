@@ -306,6 +306,28 @@ namespace Getticket.Web.API.Services
         /// <param name="models"></param>
         /// <returns></returns>
         ServiceResponce DeleteFacts(IEnumerable<PersonFactModel> models);
+
+        /// <summary>
+        /// Возвращает список <see cref="CountryModel"/> 
+        /// </summary>
+        /// <param name="foundName"></param>
+        /// <returns></returns>
+        IList<CountryModel> GetCountries(string foundName);
+
+        /// <summary>
+        /// Возвращает список <see cref="CountryPlaceModel"/> 
+        /// </summary>
+        /// <param name="foundName"></param>
+        /// <returns></returns>
+        IList<CountryPlaceModel> GetCountryPlaces(string foundName);
+
+        /// <summary>
+        /// Добавить город
+        /// </summary>
+        /// <param name="country"></param>
+        /// <param name="place"></param>
+        /// <returns></returns>
+        int UpdatePlace(string country, string place);
     }
 
 }

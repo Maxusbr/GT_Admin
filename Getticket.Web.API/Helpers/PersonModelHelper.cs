@@ -384,6 +384,26 @@ namespace Getticket.Web.API.Helpers
             return result.Select(o => new PersonFactTypeModel { Id = o.Id, Name = o.Name, Descript = o.Descript ?? ""}).ToList();
         }
 
-        
+
+        /// <summary>
+        /// Get country models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static IList<CountryModel> GetCountryModels(IList<Country> result)
+        {
+            return result.Select(o => new CountryModel {Id = o.Id, Name = o.Name}).ToList();
+        }
+
+        /// <summary>
+        /// Get country place models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<CountryPlaceModel> GetCountryPlaceModels(IList<CountryPlace> result)
+        {
+            return result.Select(o => new CountryPlaceModel { Id = o.Id, Name = o.Name, IdCountry = o.id_Country, CountryName = o.Country.Name}).ToList();
+        }
     }
 }

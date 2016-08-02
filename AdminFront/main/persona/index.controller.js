@@ -10,6 +10,14 @@
 
 
     function MainPersonaIndexController($scope, $stateParams, $rootScope, $location, personService) {
+        if ($stateParams.id > 0)
+            $rootScope.id = $scope.id = $stateParams.id;
+        else {
+            $scope.isCreate = $scope.isEdit = true;
+            $rootScope.id = $scope.id = -1;
+            $scope.person = {Country:"", Place:"", IdSex: 1}
+        }
+        
 
         function getLinks(data) {
             $scope.links = [];
@@ -89,23 +97,113 @@
                 year = year % 10;
             }
             if (year === 1) {
-                return "год";
+                return " год";
             }
             else {
                 if (year > 1 && year < 5) {
-                    return "года";
+                    return " года";
                 }
                 else {
-                    return "лет";
+                    return " лет";
                 }
             }
         }
-        $scope.id = $stateParams.id;
+        function calculateAge(birthday) {
+            if (birthday == undefined) return "";
+            var ageDifMs = Date.now() - new Date(birthday).getTime();
+            var ageDate = new Date(ageDifMs);
+            var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+            return age + getYearText(age);
+        }
+
+        function zodiacYear(date) {
+            var year = date.getFullYear();
+            switch (year % 12) {
+                case 0:
+                    return "Обезьяна";
+                case 1:
+                    return "Петух";
+                case 2:
+                    return "Собака";
+                case 3:
+                    return "Свинья";
+                case 4:
+                    return "Крыса";
+                case 5:
+                    return "Бык";
+                case 6:
+                    return "Тигр";
+                case 7:
+                    return "Кролик";
+                case 8:
+                    return "Дракон";
+                case 9:
+                    return "Змея";
+                case 10:
+                    return "Лошадь";
+                case 11:
+                    return "Коза";
+                default:
+                    return "";
+            }
+        }
+        function zodiacMonth(birthday) {
+            var y = birthday.getFullYear();
+            if (birthday <= new Date(y, 0, 20)) {
+                return "Козерог";
+            }
+            else if (birthday <= new Date(y, 1, 20)) {
+                return "Водолей";
+            }
+            else if (birthday <= new Date(y, 2, 20)) {
+                return "Рыбы";
+            }
+            else if (birthday <= new Date(y, 3, 20)) {
+                return "Овен";
+            }
+            else if (birthday <= new Date(y, 4, 20)) {
+                return "Телец";
+            }
+            else if (birthday <= new Date(y, 5, 21)) {
+                return "Близнецы";
+            }
+            else if (birthday <= new Date(y, 6, 22)) {
+                return "Рак";
+            }
+            else if (birthday <= new Date(y, 7, 23)) {
+                return "Лев";
+            }
+            else if (birthday <= new Date(y, 8, 23)) {
+                return "Дева";
+            }
+            else if (birthday <= new Date(y, 9, 23)) {
+                return "Весы";
+            }
+            else if (birthday <= new Date(y, 10, 22)) {
+                return "Скорпион";
+            }
+            else if (birthday <= new Date(y, 11, 21)) {
+                return "Стрелец";
+            }
+            else {
+                return "Козерог";
+            }
+        }
+        $scope.changeDate = function () {
+            $scope.person.Bithday = new Date($scope.person.birthday);
+            $scope.person.txtBirthday = $scope.person.Bithday;
+            $scope.person.Age = calculateAge($scope.person.Bithday);
+            $scope.person.ZodiacYear = zodiacYear($scope.person.Bithday);
+            $scope.person.ZodiacMonth = zodiacMonth($scope.person.Bithday);
+            $scope.person.IsChange = true;
+        }
         if ($rootScope.persons !== undefined)
             $rootScope.persons.forEach(function (item) {
                 if (item.Id == $scope.id) {
                     $scope.person = item;
-                    $scope.yearText = getYearText(item.Age);
+                    $scope.person.birthday = new Date($scope.person.Bithday);
+                    $scope.changeDate();
+                    $scope.person.IsChange = false;
                     personService.getDescript($scope.id, getDescript);
                     personService.getFact($scope.id, getFact);
                     personService.getConnection($scope.id, getConnection);
@@ -124,7 +222,39 @@
             $scope.IsChanged = list.filter(function (item) { return item.Changed; }).length > 0;
         }
 
-
+        $scope.countries = [];
+        personService.getCountries("", function (data) {
+            $scope.countries.push.apply($scope.countries, data);
+        });
+        $scope.places = [];
+        personService.getPlaces("", function (data) {
+            $scope.places.push.apply($scope.places, data);
+        });
+        $scope.$watch('person.Place', function(data) {
+            var place = $scope.places.filter(function (item) { return item.Name === data; })[0];
+            if (place === undefined || place === null) return;
+            $scope.person.IdBithplace = place.Id;
+            $scope.person.Country = place.CountryName;
+        });
+        $scope.save = function() {
+            personService.Save($scope.person, function (data) {
+                if (data.Message)
+                    $scope.response = data.Message;
+                else personService.getPersons();
+            });
+        }
+        $scope.register = function () {
+            personService.Save($scope.person, function (data) {
+                if (data.Message)
+                    $scope.response = data.Message;
+                else {
+                    $rootScope.id = data.personid;
+                    personService.getPersons(function() {
+                        $location.path("/main/persona/create");
+                    });
+                }
+            });
+        }
         // Description metods
         function continueSaveDescription(list) {
             list.forEach(function (item) {

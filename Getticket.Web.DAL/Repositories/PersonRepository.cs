@@ -639,9 +639,10 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.GetCountries" />
-        public IList<Country> GetCountries()
+        public IList<Country> GetCountries(string foundName)
         {
-            return db.Country.ToList();
+            return string.IsNullOrEmpty(foundName) ? db.Country.ToList(): 
+                db.Country.Where(o => o.Name.ToLower().Contains(foundName.ToLower())).ToList();
         }
 
         /// <see cref="IPersonRepository.SaveCountry" />
@@ -677,11 +678,18 @@ namespace Getticket.Web.DAL.Repositories
             return true;
         }
 
-        /// <see cref="IPersonRepository.GetCountryPlaces" />
+        /// <see cref="IPersonRepository.GetCountryPlaces(int)" />
         public IList<CountryPlace> GetCountryPlaces(int id)
         {
             return db.CountryPlaces.Where(o => o.id_Country == id)
                 .Include(o => o.Country).ToList();
+        }
+
+        /// <see cref="IPersonRepository.GetCountryPlaces(string)" />
+        public IList<CountryPlace> GetCountryPlaces(string foundName)
+        {
+            return string.IsNullOrEmpty(foundName) ? db.CountryPlaces.Where(o => true).Include(o => o.Country).ToList():
+                db.CountryPlaces.Where(o => o.Name.ToLower().Contains(foundName.ToLower())).Include(o => o.Country).ToList();
         }
 
         /// <see cref="IPersonRepository.SaveCountryPlace" />
@@ -754,6 +762,22 @@ namespace Getticket.Web.DAL.Repositories
             db.Sex.Remove(item);
             db.SaveChanges();
             return true;
+        }
+
+        /// <see cref="IPersonRepository.UpdatePlace" />
+        public int UpdatePlace(string country, string place)
+        {
+            var cnt = db.Country.FirstOrDefault(o => o.Name.ToLower().Equals(country));
+            if (cnt == null)
+            {
+                cnt =db.Country.Add(new Country {Name = country});
+                db.SaveChanges();
+            }
+            var pls = db.CountryPlaces.FirstOrDefault(o => o.Name.ToLower().Equals(place));
+            if (pls != null) return pls.Id;
+            pls = db.CountryPlaces.Add(new CountryPlace {Name = place, id_Country = cnt.Id});
+            db.SaveChanges();
+            return pls.Id;
         }
     }
 }

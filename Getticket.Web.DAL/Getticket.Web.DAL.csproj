@@ -84,6 +84,9 @@
     <Compile Include="Entities\InviteCode.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\Tag.cs" />
+    <Compile Include="Entities\TagLink.cs" />
+    <Compile Include="Entities\TagLinkType.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInfo.cs" />
     <Compile Include="Entities\UserStatus.cs" />
@@ -97,10 +100,11 @@
     <Compile Include="IRepositories\IEventRepository.cs" />
     <Compile Include="IRepositories\IInviteCodeRepository.cs" />
     <Compile Include="IRepositories\IPersonRepository.cs" />
+    <Compile Include="IRepositories\ITagRepository.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
-    <Compile Include="Migrations\201607291021116_db2.cs" />
-    <Compile Include="Migrations\201607291021116_db2.Designer.cs">
-      <DependentUpon>201607291021116_db2.cs</DependentUpon>
+    <Compile Include="Migrations\201608011356100_db3.cs" />
+    <Compile Include="Migrations\201608011356100_db3.Designer.cs">
+      <DependentUpon>201608011356100_db3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,15 +114,18 @@
     <Compile Include="Repositories\EventRepository.cs" />
     <Compile Include="Repositories\InviteCodeRepository.cs" />
     <Compile Include="Repositories\PersonRepository.cs" />
+    <Compile Include="Repositories\TagRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607291021116_db2.resx">
-      <DependentUpon>201607291021116_db2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608011356100_db3.resx">
+      <DependentUpon>201608011356100_db3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

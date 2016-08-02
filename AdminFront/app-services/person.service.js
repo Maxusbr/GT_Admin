@@ -49,7 +49,7 @@
             }
         }
 
-        function getPersons() {
+        function getPersons(callback) {
             $http.get(`${apiUrl}persons`).success(function (data) {
                 $rootScope.menuScope = [];
                 $rootScope.persons = data;
@@ -71,6 +71,9 @@
                     });
                 });
                 console.log("load persons");
+                if (callback) callback();
+            }).error(function(data) {
+                if (callback) callback(data);
             });
         }
 
@@ -124,6 +127,40 @@
             });
         }
 
+        function getCountries(name, callback) {
+            $http.get(`${apiUrl}persons/country/${name}`).success(function (data) {
+                callback(data);
+            });
+        }
+
+        function getPlaces(name, callback) {
+            $http.get(`${apiUrl}persons/place/${name}`).success(function (data) {
+                callback(data);
+            });
+        }
+
+        function save(person, callback) {
+            var model = {
+                Id: person.Id,
+                Name: person.Name,
+                LastName: person.LastName,
+                Patronymic: person.Patronymic,
+                Bithday: `${person.Bithday.getFullYear()}-${person.Bithday.getMonth()+1}-${person.Bithday.getDate()}`,
+                NameLatin: person.NameLatin,
+                LastNameLatin: person.LastNameLatin,
+                PatronymicLatin: person.PatronymicLatin,
+                IdBithplace: person.IdBithplace,
+                Place: person.Place,
+                Country: person.Country,
+                IdSex: person.IdSex
+            }
+            return $http.post(`${apiUrl}persons/add`, model).success(function (data) {
+                callback(data);
+            }).error(function (data) {
+                callback(data);
+            });
+        }
+
         service.getTypes = getTypes;
         service.getPersons = getPersons;
 
@@ -136,6 +173,10 @@
 
         service.saveEntities = saveEntities;
         service.deleteEntities = deleteEntities;
+
+        service.getCountries = getCountries;
+        service.getPlaces = getPlaces;
+        service.Save = save;
 
         return service;;
     }

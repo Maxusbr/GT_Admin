@@ -95,9 +95,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app-content\angular-datepicker.css" />
     <Content Include="app-content\isteven-multi-select.css" />
     <Content Include="app-services\person.service.js" />
-    <Content Include="Content\isteven-multi-select.css" />
+    <Content Include="app-content\ui-bootstrap-csp.css" />
     <Content Include="Global.asax" />
     <Content Include="main\download\download.controller.js" />
     <Content Include="main\download\download.view.html" />
@@ -109,12 +110,23 @@
     <Content Include="main\events\create\overview.view.html" />
     <Content Include="main\events\create\schema.controller.js" />
     <Content Include="main\events\create\schema.view.html" />
+    <Content Include="main\persona\edit.controller.js" />
+    <Content Include="main\persona\edit.view.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\angular-datepicker.js" />
+    <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular-moment.js" />
     <Content Include="scripts\angular-moment.min.js" />
+    <Content Include="app-content\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="app-content\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="app-content\angular-ui\ui-bootstrap.js" />
+    <Content Include="app-content\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="scripts\angular.min.js" />
+    <Content Include="app-content\i18n\angular-locale_ru-ru.js" />
+    <Content Include="app-content\i18n\angular-locale_ru.js" />
     <Content Include="scripts\isteven-multi-select.js" />
     <Content Include="scripts\moment-with-locales.js" />
     <Content Include="scripts\moment-with-locales.min.js" />
@@ -129,6 +141,7 @@
     <Content Include="App_Data\Debug.7z" />
     <None Include="Properties\PublishProfiles\getticket - Web Deploy.pubxml" />
     <Content Include="scripts\angular-moment.min.js.map" />
+    <Content Include="scripts\angular.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -194,8 +207,8 @@
     <Content Include="main\halls\halls.view.html" />
     <Content Include="main\main.controller.js" />
     <Content Include="main\main.view.html" />
-    <Content Include="main\persona\create.controller.js" />
-    <Content Include="main\persona\create.view.html" />
+    <Content Include="main\persona\create\create.controller.js" />
+    <Content Include="main\persona\create\create.view.html" />
     <Content Include="main\persona\create\overview.controller.js" />
     <Content Include="main\persona\create\overview.view.html" />
     <Content Include="main\persona\create\schema.controller.js" />

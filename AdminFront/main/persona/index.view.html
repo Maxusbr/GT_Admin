@@ -1,101 +1,179 @@
 <div class="row persona-info__full-block">
-    <div class="col-md-24">
-        <div class="col-md-3">
-            <div class="row">
-                <img src="http://placehold.it/120x120" alt="Placeholder">
+
+    <div class="col-md-24 register__container">
+        <div class="col-md-24 row">
+            <form name="form" class="css-form" novalidate>
+                <div class="col-md-3">
+                    <div class="row">
+                        <img src="http://placehold.it/120x120" alt="Placeholder">
+                    </div>
+                    <!-- Sex Switches -->
+                    <div class="row">
+                        <div class="radio-input-container">
+                            <div class="radio-input">
+                                <input type="radio" value="None" id="sexM" ng-checked="person.IdSex == 1" ng-click="person.IsChange = true" name="check">
+                                <label for="sexM"></label>
+                            </div>
+
+                            <span>M</span>
+                        </div>
+
+                        <div class="radio-input-container">
+                            <div class="radio-input">
+                                <input type="radio" value="None" id="sexF" ng-checked="person.IdSex == 2" ng-click="person.IsChange = true" name="check">
+                                <label for="sexF"></label>
+                            </div>
+
+                            <span>Ж</span>
+                        </div>
+                    </div>
+                    <!-- End Sex Switches -->
+                </div>
+
+                <div class="col-md-4">
+                    <div class="persona-info__name-row" ng-show="!isEdit">
+                        {{ person.LastName }}
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input type="text" class="form-control" placeholder="Фамилия*" name="LastName"
+                               ng-model="person.LastName" ng-change="person.IsChange = true" required>
+                    </div>
+                    <div class="persona-info__name-row" ng-show="!isEdit">
+                        {{ person.Name }}
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input type="text" class="form-control" placeholder="Имя*" name="Name"
+                               ng-model="person.Name" ng-change="person.IsChange = true" required>
+                    </div>
+                    <div class="persona-info__name-row" ng-show="!isEdit">
+                        {{ person.Patronymic }}
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input type="text" class="form-control" placeholder="Отчество" name="Patronymic"
+                               ng-model="person.Patronymic" ng-change="person.IsChange = true">
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input date-time ng-model="person.birthday" required format="D MMMM YYYY" class="form-control" view="date" min-view="date"
+                               date-change="changeDate" placeholder="День рождения*"/>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-md-offset-2">
+                    <div class="persona-info__name-row" ng-show="!isEdit">
+                        <span class="text-generated">{{ person.LastNameLatin }}</span>
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input type="text" class="form-control" placeholder="Имя (латинское)" name="NameLatin"
+                               ng-model="person.NameLatin" ng-change="person.IsChange = true">
+                    </div>
+                    <div class="persona-info__name-row" ng-show="!isEdit">
+                        <span class="text-generated">{{ person.NameLatin }}</span>
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input type="text" class="form-control" placeholder="Фамилия (латинское)" name="LastNameLatin"
+                               ng-model="person.LastNameLatin" ng-change="person.IsChange = true">
+                    </div>
+                    <div class="persona-info__name-row" ng-show="!isEdit">
+                        <span class="text-generated">{{ person.PatronymicLatin }}</span>
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input type="text" class="form-control" placeholder="Отчество (латинское)" name="PatronymicLatin"
+                               ng-model="person.PatronymicLatin" ng-change="person.IsChange = true">
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input type="text" placeholder="Страна" name="Country" class="form-control" ng-change="person.IsChange = true"
+                               ng-model="person.Country" uib-typeahead="item.Name as item.Name for item in countries | filter:$viewValue">
+                    </div>
+                    <div class="form-group" ng-show="isEdit">
+                        <input type="text" class="form-control" placeholder="Город" name="Place"
+                               ng-model="person.Place" uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="row">
+                        <select class="form-control" disabled="disabled">
+                            <option>{{person.txtBirthday | date : 'd MMMM yyyy'}} ({{person.Age}})</option>
+                        </select>
+                        <p>
+                            <span class="text-muted">(зодиак)</span>
+                            {{person.ZodiacMonth}} /
+                            <span class="text-muted">(восточный)</span>
+                            {{person.ZodiacYear}}
+                        </p>
+                    </div>
+
+                    <div class="row">
+                        <select class="form-control" disabled="disabled">
+                            <option>{{person.Place}}, {{person.Country}}</option>
+                        </select>
+                        <!--<p>
+                            (Санкт-Петербург, Россия)
+                        </p>-->
+                    </div>
+                    <div class="space"></div>
+
+                </div>
+
+
+            </form>
+            <div class="col-md-24">
+                <div class="help-block" ng-messages="form.Name.$error" ng-if="submitted">
+                    <div ng-message="required">Имя обязательно для заполнения</div>
+                </div>
+                <div class="help-block" ng-messages="form.LastName.$error" ng-if="submitted">
+                    <div ng-message="required">Фамилия обязательно для заполнения</div>
+                </div>
+                <div class="help-block" ng-messages="form.Country.$error" ng-if="submitted">
+                    <div ng-message="required">Укажите название страны</div>
+                </div>
+                <div class="help-block col-md-4 col-md-offset-9" ng-if="response">
+                    <div>{{response}}</div>
+
+                </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="persona-info__name-row">
-                {{ person.LastName }}
-            </div>
-            <div class="persona-info__name-row">
-                {{ person.Name }}
-            </div>
-            <div class="persona-info__name-row">
-                {{ person.Patronymic }}
-            </div>
-
-        </div>
-
-        <div class="col-md-4 col-md-offset-2">
-            <div class="persona-info__name-row">
-                <span class="text-generated">{{ person.LastNameLatin }}</span>
-            </div>
-            <div class="persona-info__name-row">
-                <span class="text-generated">{{ person.NameLatin }}</span>
-            </div>
-            <div class="persona-info__name-row">
-                <span class="text-generated">{{ person.PatronymicLatin }}</span>
-            </div>
-        </div>
-
-        <div class="col-md-8 col-md-offset-2">
-            <div class="row">
-                <select class="form-control">
-                    <option>{{person.BirthdayTxt}} ({{person.Age}} {{yearText}})</option>
-                </select>
+        <div class="col-md-24 row">
+            <!-- Last Changes -->
+            <div class="col-md-19 persona-info-block">
                 <p>
-                    <span class="text-muted">(зодиак)</span>
-                    {{person.ZodiacMonth}} /
-                    <span class="text-muted">(восточный)</span>
-                    {{person.ZodiacYear}}
+                    <span class="text-muted">Последние изменение персоны / </span>
+                    <span>Фото, 25 августа, Дарья Редактор</span>
+                    <span>(все изменения)</span>
+                </p>
+                <p>
+                    Рейтинг просмотров 71% (Подробнее - недельный, месячный) <br>
+                    В избраном 136
                 </p>
             </div>
-
-            <div class="row">
-                <select class="form-control">
-                    <option>{{person.Place}}, {{person.Country}}</option>
-                </select>
-                <!--<p>
-                    (Санкт-Петербург, Россия)
-                </p>-->
+            <!-- End Last Changes -->
+            <div class="col-md-5">
+                <div class="form-actions col-md-20">
+                    <button type="button" ng-click="save()" class="btn btn-primary btn-lg" ng-show="isEdit && person.IsChange && !isCreate">
+                        Сохранить
+                    </button>
+                    <div class="row">
+                        <button type="button" ng-click="register()" ng-disabled="form.$invalid" class="btn btn-primary btn-lg" ng-show="isCreate">
+                            далее
+                        </button>
+                    </div>
+                    <div class="row" ng-show="isCreate">
+                        <p class="extra-small blue">Сохранить и перейти на следующий шаг</p>
+                    </div>
+                </div>
+                <div class="col-md-4" ng-show="!isCreate">
+                    <a href="" class="persona__edit glyphicon glyphicon-pencil" ng-click="isEdit = !isEdit"></a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-md-24">
-        <!-- Sex Switches -->
-        <div class="col-md-3">
-            <div class="row">
-                <div class="radio-input-container">
-                    <div class="radio-input">
-                        <input type="radio" value="None" id="sexM" ng-checked="person.IdSex == 1" name="check">
-                        <label for="sexM"></label>
-                    </div>
 
-                    <span>M</span>
-                </div>
 
-                <div class="radio-input-container">
-                    <div class="radio-input">
-                        <input type="radio" value="None" id="sexF" ng-checked="person.IdSex == 2" name="check">
-                        <label for="sexF"></label>
-                    </div>
 
-                    <span>Ж</span>
-                </div>
-            </div>
-        </div>
-        <!-- End Sex Switches -->
-        <!-- Last Changes -->
-        <div class="col-md-20 persona-info-block">
-            <p>
-                <span class="text-muted">Последние изменение персоны / </span>
-                <span>Фото, 25 августа, Дарья Редактор</span>
-                <span>(все изменения)</span>
-            </p>
-            <p>
-                Рейтинг просмотров 71% (Подробнее - недельный, месячный) <br>
-                В избраном 136
-            </p>
-        </div>
-        <!-- End Last Changes -->
-    </div>
 </div>
 
-<div class="row collapse persona-info__small-block">
+<!--<div class="row collapse persona-info__small-block">
     <div class="col-md-24">
         <div class="col-md-2">
             <img src="http://placehold.it/50x50" alt="Placeholder">
@@ -127,10 +205,10 @@
             </p>
         </div>
     </div>
-</div>
+</div>-->
 
 
-<div class="row">
+<div class="row" ng-show="!isCreate">
     <div class="col-md-24">
         <ul class="nav nav-tabs" ng-click="SwitchElements()">
             <li role="presentation" class="col-md-5 text-center"><a data-target="#description" data-toggle="tab">Описание</a></li>
@@ -138,7 +216,8 @@
             <li role="presentation" class="col-md-3"><a data-target="#connections" data-toggle="tab">Связи</a></li>
             <li role="presentation" class="col-md-4"><a data-target="#media" data-toggle="tab">Медиа и файлы</a></li>
             <li role="presentation" class="col-md-4"><a data-target="#internet" data-toggle="tab">Интернет</a></li>
-            <li role="presentation" class="col-md-4"><a data-target="#anthropometry" data-toggle="tab">Антропометрия</a>
+            <li role="presentation" class="col-md-4">
+                <a data-target="#anthropometry" data-toggle="tab">Антропометрия</a>
             </li>
         </ul>
 
@@ -168,8 +247,7 @@
                                 <td>
                                     <span ng-show="!item.isTypeEdit">{{item.PersonDescriptionType}}</span>
                                     <select ng-model="item.id_DescriptionType" class="form-control" ng-show="item.isTypeEdit"
-                                            ng-change="item.Changed = true; Changed(descriptionlist)" ng-options="type.Id as type.Name for type in descriptiontypes">
-                                    </select>
+                                            ng-change="item.Changed = true; Changed(descriptionlist)" ng-options="type.Id as type.Name for type in descriptiontypes"></select>
                                     <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isTypeEdit = !item.isTypeEdit"></a>
                                 </td>
                                 <td class="text-danger">
@@ -321,40 +399,40 @@
                                 <td class="col-md-3">Связь</td>
                                 <td class="col-md-3">Источник</td>
                                 <td class="col-md-4">Использование</td>
-                                <td/>
+                                <td />
                             </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in factlist">
-                            <td class="persona-main__table_text">
-                                <span ng-show="!item.isEdit">{{item.FactText}}</span>
-                                <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.FactText"
-                                          ng-show="item.isEdit" ng-change="item.Changed = true; Changed(factlist)"></textarea>
-                                <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
-                            </td>
-                            <td class="text-danger">
-                                <strong>КA</strong>: Нужно ранжировать награды по степени
-                                важности
-                            </td>
-                            <td>Джульетта С. <br> сегодня, 19:02</td>
-                            <td>
-                                <span ng-show="!item.isTypeEdit">{{item.FactType.Name}} / {{item.FactType.Descript}}</span>
-                                <select ng-model="item.id_FactType" class="form-control" ng-show="item.isTypeEdit"
-                                        ng-change="changedFact(item); Changed(factlist)" ng-options="type.Id as type.Name + ' / ' + type.Descript for type in facttypes"></select>
-                                <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isTypeEdit = !item.isTypeEdit"></a>
-                            </td>
-                            <td><a href="#">Ссылка (Сохраненная копия)</a></td>
-                            <td>
-                                Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                / <a href="#">подробнее, статистика</a>
-                            </td>
-                            <td>
-                                <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
-                                   ng-click="saveFact(item);"></a>
-                                <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteFact($index)"
-                                   ng-confirm-click="Удалить этот факт?"></a>
-                            </td>
-                        </tr>
+                            <tr ng-repeat="item in factlist">
+                                <td class="persona-main__table_text">
+                                    <span ng-show="!item.isEdit">{{item.FactText}}</span>
+                                    <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.FactText"
+                                              ng-show="item.isEdit" ng-change="item.Changed = true; Changed(factlist)"></textarea>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
+                                </td>
+                                <td class="text-danger">
+                                    <strong>КA</strong>: Нужно ранжировать награды по степени
+                                    важности
+                                </td>
+                                <td>Джульетта С. <br> сегодня, 19:02</td>
+                                <td>
+                                    <span ng-show="!item.isTypeEdit">{{item.FactType.Name}} / {{item.FactType.Descript}}</span>
+                                    <select ng-model="item.id_FactType" class="form-control" ng-show="item.isTypeEdit"
+                                            ng-change="changedFact(item); Changed(factlist)" ng-options="type.Id as type.Name + ' / ' + type.Descript for type in facttypes"></select>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isTypeEdit = !item.isTypeEdit"></a>
+                                </td>
+                                <td><a href="#">Ссылка (Сохраненная копия)</a></td>
+                                <td>
+                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                    / <a href="#">подробнее, статистика</a>
+                                </td>
+                                <td>
+                                    <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
+                                       ng-click="saveFact(item);"></a>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteFact($index)"
+                                       ng-confirm-click="Удалить этот факт?"></a>
+                                </td>
+                            </tr>
                             <!--<tr>
                                 <td class="persona-main__table_text">
                                     С 2008 в составе международных команд,
@@ -498,14 +576,14 @@
                                 <td class="col-md-4">Тип связи</td>
                                 <td class="col-md-4">Характеристика связи</td>
                                 <td class="col-md-4">Изменен</td>
-                                <td/>
+                                <td />
                             </tr>
                         </thead>
 
                         <tbody>
                             <tr ng-repeat="item in connectionList">
                                 <td>
-                                    <span ng-show="!item.isEdit && item.id_ConnectionType > 1" >{{item.Event.Name}}</span>
+                                    <span ng-show="!item.isEdit && item.id_ConnectionType > 1">{{item.Event.Name}}</span>
                                     <span ng-show="!item.isEdit && item.id_ConnectionType === 1">{{item.PersonConnectTo.LastName}} {{item.PersonConnectTo.Name}}</span>
                                     <select ng-model="item.id_Event" class="form-control" ng-show="item.isEdit && item.id_ConnectionType > 1"
                                             ng-change="changedConnectionEvent(item); Changed(connectionList)" ng-options="type.Id as type.Name for type in eventlist"></select>
@@ -800,7 +878,7 @@
                                 <td>Активность</td>
                                 <td>Назначение</td>
                                 <td>Изменен</td>
-                                <td/>
+                                <td />
                             </tr>
                         </thead>
 
@@ -955,7 +1033,7 @@
                                     <td>Ассоциация</td>
                                     <td>Изменен</td>
                                     <td>Использование</td>
-                                    <td/>
+                                    <td />
                                 </tr>
                             </thead>
 

@@ -11,5 +11,7 @@ namespace Getticket.Web.API.Models.Persons
         /// Имя
         /// </summary>
         public string Name { get; set; }
+
+        public string CountryName { get; set; }
     }
 }

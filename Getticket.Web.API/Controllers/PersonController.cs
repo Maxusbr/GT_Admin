@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.ModelBinding;
+using Getticket.Web.API.Models;
 using Getticket.Web.API.Models.Persons;
 using Getticket.Web.API.Services;
 
@@ -17,14 +19,16 @@ namespace Getticket.Web.API.Controllers
     public class PersonController : ApiController
     {
         private readonly IPersonService _personService;
+        private readonly ITagService _tagService;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="personService"></param>
-        public PersonController(IPersonService personService)
+        public PersonController(IPersonService personService, ITagService tagService)
         {
             _personService = personService;
+            _tagService = tagService;
         }
 
         #region Person
@@ -70,11 +74,20 @@ namespace Getticket.Web.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("add")]
-        public IHttpActionResult Post([FromBody] PersonModel model)
+        public IHttpActionResult Post(PersonModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+            if (model.IdBithplace == null)
+            {
+                if (string.IsNullOrEmpty(model.Country))
+                {
+                    ModelState.AddModelError("Country", "Укажите название страны");
+                    return BadRequest("Укажите название страны");
+                }
+                model.IdBithplace = _personService.UpdatePlace(model.Country, model.Place);
             }
             return Ok(_personService.SavePerson(model).Response());
         }
@@ -158,7 +171,7 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="PersonService.DeleteAntros" />
         [HttpPost]
         [Route("antro/delete")]
-        public IHttpActionResult DeleteAntro( [FromBody] IEnumerable<PersonAntroModel> models)
+        public IHttpActionResult DeleteAntro([FromBody] IEnumerable<PersonAntroModel> models)
         {
             return Ok(_personService.DeleteAntros(models).Response());
         }
@@ -367,7 +380,7 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="PersonService.UpdateDescriptions" />
         [HttpPost]
         [Route("description/update/{id}")]
-        public IHttpActionResult UpdateDescriptions(int id,[FromBody] IEnumerable<PersonDescriptionModel> models)
+        public IHttpActionResult UpdateDescriptions(int id, [FromBody] IEnumerable<PersonDescriptionModel> models)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             return Ok(_personService.UpdateDescriptions(id, models).Response());
@@ -435,5 +448,61 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteFacts(models).Response());
         }
         #endregion
+
+
+        /// <see cref="IPersonService.GetCountries" />
+        [HttpGet]
+        [Route("country/{found}")]
+        public IHttpActionResult GetCountries(string found)
+        {
+            return Ok(_personService.GetCountries(found));
+        }
+        /// <see cref="IPersonService.GetCountries" />
+        [HttpGet]
+        [Route("country/")]
+        public IHttpActionResult GetCountries()
+        {
+            return Ok(_personService.GetCountries(string.Empty));
+        }
+
+        /// <see cref="IPersonService.GetCountryPlaces" />
+        [HttpGet]
+        [Route("place/{found}")]
+        public IHttpActionResult GetPlaces(string found)
+        {
+            return Ok(_personService.GetCountryPlaces(found));
+        }
+
+        /// <see cref="IPersonService.GetCountryPlaces" />
+        [HttpGet]
+        [Route("place/")]
+        public IHttpActionResult GetPlaces()
+        {
+            return Ok(_personService.GetCountryPlaces(string.Empty));
+        }
+
+        /// <see cref="ITagService.GeTagLinkTypes" />
+        [HttpGet]
+        [Route("tags/gettype")]
+        public IHttpActionResult GeTagLinkTypes()
+        {
+            return Ok(_tagService.GeTagLinkTypes());
+        }
+
+        /// <see cref="ITagService.GeTagLinkTypes" />
+        [HttpGet]
+        [Route("tags")]
+        public IHttpActionResult GeTags()
+        {
+            return Ok(_tagService.GeTags());
+        }
+
+        /// <see cref="ITagService.AddTagLinks" />
+        [HttpPost]
+        [Route("tags/add")]
+        public IHttpActionResult AddTagLinks([FromBody] IList<TagLinkModel> list)
+        {
+            return Ok(_tagService.AddTagLinks(list).Response());
+        }
     }
 }
