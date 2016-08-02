@@ -28,13 +28,6 @@ namespace Getticket.Web.API.Services
             _tagRepository = tagRepository;
         }
 
-        /// <see cref="ITagService.GeTagLinkTypes"/>
-        public IList<TagLinkTypeModel> GeTagLinkTypes()
-        {
-            var result = _tagRepository.GeTagLinkTypes();
-            return TagModelHelper.GeTagLinkTypeModels(result);
-        }
-
         /// <see cref="ITagService.GeTags"/>
         public IList<TagModel> GeTags()
         {
@@ -42,19 +35,27 @@ namespace Getticket.Web.API.Services
             return TagModelHelper.GeTagModels(result);
         }
 
-        /// <see cref="ITagService.AddTagLinks"/>
-        public ServiceResponce AddTagLinks(IList<TagLinkModel> list)
+        /// <see cref="ITagService.AddTagLinks(TagsAntroModel)"/>
+        public bool AddTagLinks(TagsAntroModel model)
         {
-            var response = list.Select(link =>
-                _tagRepository.AddTagLink(TagModelHelper.GetTagLink(link)))
-                    .All(taglink => taglink != null) ? ServiceResponce
-                        .FromSuccess()
-                        .Result("Tags add complete") :
-                        ServiceResponce
-                        .FromFailed()
-                        .Result("Error add tags");
+            if (model.Tags.Length < 1) return true;
+            var list = model.Tags.Select(o => TagModelHelper.GetTagLink(model, o));
+            var response = list.Select(link => _tagRepository.AddTagLink(link))
+                    .All(taglink => taglink != null);
             return response;
         }
+
+        /// <see cref="ITagService.AddTagLinks(TagsDescriptionModel)"/>
+        public bool AddTagLinks(TagsDescriptionModel model)
+        {
+            if (model.Tags.Length < 1) return true;
+            var list = model.Tags.Select(o => TagModelHelper.GetTagLink(model.Tizer.Id, o));
+            var response = list.Select(link => _tagRepository.AddTagLink(link))
+                    .All(taglink => taglink != null);
+            return response;
+        }
+
+
     }
 
 }

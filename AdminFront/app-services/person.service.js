@@ -161,6 +161,22 @@
             });
         }
 
+        function getTags(callback) {
+            $http.get(`${apiUrl}persons/tags`).success(function (data) {
+                callback(data);
+            });
+        }
+
+        function saveDescriptions(model, callback) {
+            return $http.post(`${apiUrl}persons/tags/save`, model).success(function (data) {
+                callback(data);
+            }).error(function (data) {
+                callback(data);
+            });
+        }
+
+        service.getTags = getTags;
+
         service.getTypes = getTypes;
         service.getPersons = getPersons;
 
@@ -177,6 +193,7 @@
         service.getCountries = getCountries;
         service.getPlaces = getPlaces;
         service.Save = save;
+        service.saveDescriptions = saveDescriptions;
 
         return service;;
     }

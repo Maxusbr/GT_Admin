@@ -12,34 +12,32 @@ namespace Getticket.Web.API.Helpers
     /// </summary>
     public static class TagModelHelper
     {
-        public static IList<TagLinkTypeModel> GeTagLinkTypeModels(IList<TagLinkType> list)
-        {
-            return list.Select(o => new TagLinkTypeModel { Id = o.Id, Name = o.Name }).ToList();
-        }
 
         public static IList<TagModel> GeTagModels(IList<Tag> list)
         {
             return list.Select(o => new TagModel { Id = o.Id, Name = o.Name, UsesType = o.UsesType }).ToList();
         }
 
-        public static TagLink GetTagLink(TagLinkModel model)
-        {
-            return new TagLink
-            {
-                Id = model.Id,
-                Tag = GetTag(model.Tag),
-                IdTag = model.IdTag,
-                IdLinkType = model.IdLinkType,
-                FeatureName = model.FeatureName,
-                FeatureType = model.FeatureType,
-                ConditionFeatureValue = model.ConditionFeatureValue,
-                FeatureValue = model.FeatureValue
-            };
-        }
-
         private static Tag GetTag(TagModel model)
         {
             return new Tag {Id = model.Id, Name = model.Name};
         }
+
+        public static TagAntroLink GetTagLink(TagsAntroModel model, TagModel tag)
+        {
+            return new TagAntroLink { Tag = GetTag(tag), IdTag = tag.Id, Antro = GetAntro(model)};
+        }
+
+        private static TagAntro GetAntro(TagsAntroModel model)
+        {
+            return new TagAntro {IdAntroName = model.IdAntroName, IdPerson = model.IdPerson, Value = model.Value,
+                IsMoreThan = model.IsMoreThan};
+        }
+
+        public static TagDescriptionLink GetTagLink(int idDescription, TagModel tag)
+        {
+            return new TagDescriptionLink {IdTag = tag.Id, Tag = GetTag(tag),IdDescription = idDescription };
+        }
+
     }
 }

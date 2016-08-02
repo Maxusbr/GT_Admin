@@ -18,10 +18,6 @@ namespace Getticket.Web.DAL.Migrations
         protected override void Seed(GetticketDBContext context)
         {
             //TempDb(context);
-            context.TagLinkTypes.AddOrUpdate(o => o.Id, new TagLinkType { Id = 1, Name = "Персона" });
-            context.TagLinkTypes.AddOrUpdate(o => o.Id, new TagLinkType { Id = 2, Name = "Факт" });
-            context.TagLinkTypes.AddOrUpdate(o => o.Id, new TagLinkType { Id = 3, Name = "Подборка" });
-            context.TagLinkTypes.AddOrUpdate(o => o.Id, new TagLinkType { Id = 4, Name = "Площадка" });
 
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 1, Name = "Ноги" });
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 2, Name = "Длинные" });

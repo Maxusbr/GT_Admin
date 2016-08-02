@@ -17,23 +17,24 @@ namespace Getticket.Web.API.Services
     public interface ITagService
     {
         /// <summary>
-        /// Возвращает список <see cref="TagLinkTypeModel"/>
-        /// </summary>
-        /// <returns></returns>
-        IList<TagLinkTypeModel> GeTagLinkTypes();
-
-        /// <summary>
         /// Возвращает список <see cref="TagModel"/>
         /// </summary>
         /// <returns></returns>
         IList<TagModel> GeTags();
 
         /// <summary>
+        /// Добавляет связь <see cref="TagModel"/> c <see cref="TagAntro"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool AddTagLinks(TagsAntroModel model);
+
+        /// <summary>
         /// Добавляет связь <see cref="TagModel"/>
         /// </summary>
-        /// <param name="list"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        ServiceResponce AddTagLinks(IList<TagLinkModel> list);
+        bool AddTagLinks(TagsDescriptionModel model);
     }
 
 }

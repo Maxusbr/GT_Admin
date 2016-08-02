@@ -231,22 +231,37 @@ namespace Getticket.Web.DAL.Entities
             /// </summary>
             public PersonConfiguration()
             {
-                
+
             }
         }
         #endregion
 
         #region Tags
-
-        /// <see cref="TagLinkType"/>
-        public virtual DbSet<TagLinkType> TagLinkTypes { get; set; }
-
         /// <see cref="Tag"/>
         public virtual DbSet<Tag> Tags { get; set; }
 
-        /// <see cref="TagLink"/>
-        public virtual DbSet<TagLink> TagLinks { get; set; }
+        /// <see cref="TagAntro"/>
+        public virtual DbSet<TagAntro> TagAntros { get; set; }
 
+        /// <see cref="TagAntroLink"/>
+        public virtual DbSet<TagAntroLink> TagAntroLinks { get; set; }
+
+        /// <see cref="TagDescriptionLink"/>
+        public virtual DbSet<TagDescriptionLink> TagDescriptionLinks { get; set; }
+
+        /// <summary>
+        /// Настройки сущности <see cref="Tag"/>
+        /// </summary>
+        public class TagConfiguration : EntityTypeConfiguration<Tag>
+        {
+            /// <summary>
+            /// Конструктор
+            /// </summary>
+            public TagConfiguration()
+            {
+                
+            }
+        }
         #endregion
 
         /// <summary>

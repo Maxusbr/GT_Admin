@@ -97,6 +97,9 @@
   <ItemGroup>
     <Content Include="app-content\angular-datepicker.css" />
     <Content Include="app-content\isteven-multi-select.css" />
+    <Content Include="app-content\ng-tags-input.bootstrap.min.css" />
+    <Content Include="app-content\ng-tags-input.css" />
+    <Content Include="app-content\ng-tags-input.min.css" />
     <Content Include="app-services\person.service.js" />
     <Content Include="app-content\ui-bootstrap-csp.css" />
     <Content Include="Global.asax" />
@@ -132,6 +135,7 @@
     <Content Include="scripts\moment-with-locales.min.js" />
     <Content Include="scripts\moment.js" />
     <Content Include="scripts\moment.min.js" />
+    <Content Include="scripts\ng-tags-input.min.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="app-content\bootstrap\config.json" />
     <Content Include="app-content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
