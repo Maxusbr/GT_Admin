@@ -175,6 +175,13 @@
             });
         }
 
+        function savePersonTags(id, model, callback) {
+            return $http.post(`${apiUrl}persons/tags/save/${id}`, model).success(function (data) {
+                callback(data);
+            }).error(function (data) {
+                callback(data);
+            });
+        }
         service.getTags = getTags;
 
         service.getTypes = getTypes;
@@ -194,6 +201,7 @@
         service.getPlaces = getPlaces;
         service.Save = save;
         service.saveDescriptions = saveDescriptions;
+        service.savePersonTags = savePersonTags;
 
         return service;;
     }

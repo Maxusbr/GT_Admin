@@ -23,8 +23,10 @@ namespace Getticket.Web.DAL.Repositories
             var result = db.Tags.ToList();
             foreach (var tag in result)
             {
-                if (db.TagDescriptionLinks.Any(o => o.IdTag == tag.Id))
+                if (db.TagLinks.Any(o => o.IdTag == tag.Id))
                     tag.UsesType.Add("Персоны");
+                if (db.TagDescriptionLinks.Any(o => o.IdTag == tag.Id))
+                    tag.UsesType.Add("Подборки");
                 if (db.TagAntroLinks.Any(o => o.IdTag == tag.Id))
                     tag.UsesType.Add("Факты");
             }
@@ -50,9 +52,14 @@ namespace Getticket.Web.DAL.Repositories
                 if (model.Tag == null) return null;
                 model.IdTag = AddTag(model.Tag).Id;
             }
-            db.TagDescriptionLinks.Add(new TagDescriptionLink {IdTag = model.IdTag, IdDescription = model.IdDescription});
-            db.SaveChanges();
-            return model;
+            var tag = db.TagDescriptionLinks.FirstOrDefault(o => o.IdDescription == model.IdDescription && o.IdTag == model.IdTag);
+            if (tag == null)
+            {
+                tag = new TagDescriptionLink { IdTag = model.IdTag, IdDescription = model.IdDescription};
+                db.TagDescriptionLinks.Add(tag);
+                db.SaveChanges();
+            }
+            return tag;
         }
 
         /// <see cref="ITagRepository.AddTagLink(TagAntroLink)" />
@@ -68,9 +75,32 @@ namespace Getticket.Web.DAL.Repositories
                 if (model.Antro == null) return null;
                 model.IdTagAntro = AddTagAntro(model.Antro).Id;
             }
-            db.TagAntroLinks.Add(new TagAntroLink {IdTag = model.IdTag, IdTagAntro = model.IdTagAntro});
-            db.SaveChanges();
-            return model;
+            var tag = db.TagAntroLinks.FirstOrDefault(o => o.IdTagAntro == model.IdTagAntro&& o.IdTag == model.IdTag);
+            if (tag == null)
+            {
+                tag = new TagAntroLink { IdTag = model.IdTag, IdTagAntro = model.IdTagAntro };
+                db.TagAntroLinks.Add(tag);
+                db.SaveChanges();
+            }
+            return tag;
+        }
+
+        /// <see cref="ITagRepository.AddTagLink(TagLink)" />
+        public TagLink AddTagLink(TagLink model)
+        {
+            if (model.IdTag == 0)
+            {
+                if (model.Tag == null) return null;
+                model.IdTag = AddTag(model.Tag).Id;
+            }
+            var tag = db.TagLinks.FirstOrDefault(o => o.IdPerson == model.IdPerson && o.IdTag == model.IdTag);
+            if(tag == null)
+            {
+                tag = new TagLink {IdTag = model.IdTag, IdPerson = model.IdPerson};
+                db.TagLinks.Add(tag);
+                db.SaveChanges();
+            }
+            return tag;
         }
 
         private TagAntro AddTagAntro(TagAntro model)

@@ -1,4 +1,10 @@
-<script src="/scripts/isteven-multi-select.js"></script>
+<!--<script src="/scripts/isteven-multi-select.js"></script>-->
+<script type="text/ng-template" id="my-custom-template">
+    <div class="right-panel">
+        <span ng-bind-html="$highlight($getDisplayText())"></span>
+        <span ng-show="data.UsesType.length">({{data.UsesType|join:','}})</span>
+    </div>
+</script>
 <div class="col-md-24">
     <div class="row persona-info__small-block">
         <div class="col-md-24">
@@ -47,7 +53,7 @@
 
             <div class="col-md-4">
                 <div class="row">
-                    <a type="button" href="#/main/persona/create/schema" class="btn btn-blue btn-lg col-md-18">
+                    <a type="button" href="" ng-click="showSchema()" ng-disabled="!person.Id" class="btn btn-blue btn-lg col-md-18">
                         далее
                     </a>
                 </div>
@@ -154,14 +160,17 @@
                             <span class="big">Ключи страницы \ блока \ первоисточника</span>
 
                             <div class="tags">
-                                <span>Ноги</span>
+                                <tags-input ng-model="personTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                                    <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
+                                </tags-input>
+                                <!--<span>Ноги</span>
                                 <span>Длинные</span>
                                 <span>Теннис</span>
                                 <span>Ноги</span>
                                 <span>Длинные</span>
                                 <span class="yellow">Руки</span>
                                 <span class="green">Сет</span>
-                                <span class="red">Родители</span>
+                                <span class="red">Родители</span>-->
                             </div>
                         </div>
                     </div>

@@ -36,5 +36,12 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="model"></param>
         /// <returns></returns>
         TagAntroLink AddTagLink(TagAntroLink model);
+
+        /// <summary>
+        /// Добавляет связь <see cref="Tag"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        TagLink AddTagLink(TagLink model);
     }
 }

@@ -249,6 +249,9 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="TagDescriptionLink"/>
         public virtual DbSet<TagDescriptionLink> TagDescriptionLinks { get; set; }
 
+        /// <see cref="TagLink"/>
+        public virtual DbSet<TagLink> TagLinks { get; set; }
+
         /// <summary>
         /// Настройки сущности <see cref="Tag"/>
         /// </summary>

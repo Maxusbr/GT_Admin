@@ -245,6 +245,7 @@
     <Compile Include="Models\TagAntroModel.cs" />
     <Compile Include="Models\TagAntroLinkModel.cs" />
     <Compile Include="Models\TagDescriptionLinkModel.cs" />
+    <Compile Include="Models\TagLinkModel.cs" />
     <Compile Include="Models\TagModel.cs" />
     <Compile Include="Providers\OAuthAuthorizationServerOptionsProvider.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

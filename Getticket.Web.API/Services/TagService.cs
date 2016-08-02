@@ -55,7 +55,15 @@ namespace Getticket.Web.API.Services
             return response;
         }
 
-
+        /// <see cref="ITagService.AddTagLinks(int,IEnumerable{TagModel})"/>
+        public bool AddTagLinks(int personId, IEnumerable<TagModel> models)
+        {
+            if (!models.Any()) return true;
+            var list = TagModelHelper.GetTagLink(personId, models);
+            var response = list.Select(link => _tagRepository.AddTagLink(link))
+                    .All(taglink => taglink != null);
+            return response;
+        }
     }
 
 }

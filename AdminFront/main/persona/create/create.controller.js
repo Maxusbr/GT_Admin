@@ -12,9 +12,9 @@
         
     }
 
-    MainPersonaCreateController.$inject = ['$scope', '$stateParams', '$rootScope', '$filter'];
+    MainPersonaCreateController.$inject = ['$scope', '$stateParams', '$rootScope', '$filter', 'personService', '$location'];
 
-    function MainPersonaCreateController($scope, $stateParams, $rootScope, $filter) {
+    function MainPersonaCreateController($scope, $stateParams, $rootScope, $filter, personService, $location) {
         $scope.localLang = {
             "nothingSelected": "Другие персоны подборки",
             "selectAll": "Выбрать все",
@@ -45,6 +45,20 @@
                 reloadPersons();
         }
 
+        personService.getTags(function (data) {
+            $scope.tags = [];
+            $scope.tags.push.apply($scope.tags, data);
+        });
+        $scope.personTags = [];
+
+        $scope.loadTags = function (query) {
+            var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
+            result = $filter('orderBy')(result, function (item) {
+                item.Name.substring(0, query.length);
+            });
+            return result;
+        }
+
         $rootScope.$watch('persons', watchPersons);
         $scope.$watch('person', function (item) {
             if($rootScope.person == item) return;
@@ -54,5 +68,16 @@
         $scope.$watch('otherPerson', function (items) {
             $rootScope.otherPerson = items;
         });
+
+        $scope.showSchema = function () {
+            if (!$rootScope.person) return;
+            personService.savePersonTags($rootScope.person.Id, $scope.personTags, function (data) {
+                if (data.Message)
+                    $scope.response = data.Message;
+                else {
+                    $location.path("/main/persona/create/schema");
+                }
+            });
+        }
     }
 })();

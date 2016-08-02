@@ -533,5 +533,26 @@ namespace Getticket.Web.API.Controllers
 
             return Ok(succes.Response());
         }
+
+
+        /// <summary>
+        /// Сохранить теги персоны
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("tags/save/{id}")]
+        public IHttpActionResult SaveDescriptions(int id, [FromBody] IEnumerable<TagModel> models)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save tags");
+            var succes = ServiceResponce.FromSuccess().Result("All save complete");
+
+            return Ok(!_tagService.AddTagLinks(id, models) ? error.Response() : succes.Response());
+        }
     }
 }
