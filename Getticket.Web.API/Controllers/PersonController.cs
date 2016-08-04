@@ -481,7 +481,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.GetCountryPlaces(string.Empty));
         }
 
-        /// <see cref="ITagService.GeTags" />
+        /// <see cref="ITagService.GeTags()" />
         [HttpGet]
         [Route("tags")]
         public IHttpActionResult GeTags()
@@ -489,6 +489,13 @@ namespace Getticket.Web.API.Controllers
             return Ok(_tagService.GeTags());
         }
 
+        /// <see cref="ITagService.GeTags(int)" />
+        [HttpGet]
+        [Route("tags/{id}")]
+        public IHttpActionResult GeTags(int id)
+        {
+            return Ok(_tagService.GeTags(id));
+        }
         /// <summary>
         /// Сохранить описания и теги
         /// </summary>

@@ -28,10 +28,17 @@ namespace Getticket.Web.API.Services
             _tagRepository = tagRepository;
         }
 
-        /// <see cref="ITagService.GeTags"/>
+        /// <see cref="ITagService.GeTags()"/>
         public IList<TagModel> GeTags()
         {
             var result = _tagRepository.GeTags();
+            return TagModelHelper.GeTagModels(result);
+        }
+
+        /// <see cref="ITagService.GeTags(int)"/>
+        public IList<TagModel> GeTags(int personId)
+        {
+            var result = _tagRepository.GeTags(personId);
             return TagModelHelper.GeTagModels(result);
         }
 

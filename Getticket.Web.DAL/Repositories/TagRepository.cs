@@ -17,7 +17,7 @@ namespace Getticket.Web.DAL.Repositories
     public class TagRepository : BaseRepository<Tag>, ITagRepository
     {
 
-        /// <see cref="ITagRepository.GeTags" />
+        /// <see cref="ITagRepository.GeTags()" />
         public IList<Tag> GeTags()
         {
             var result = db.Tags.ToList();
@@ -31,6 +31,12 @@ namespace Getticket.Web.DAL.Repositories
                     tag.UsesType.Add("Факты");
             }
             return result;
+        }
+
+        /// <see cref="ITagRepository.GeTags(int)" />
+        public IList<Tag> GeTags(int personId)
+        {
+            return db.TagLinks.Where(o => o.IdPerson == personId).Include(o => o.Tag).Select(o => o.Tag).ToList();
         }
 
         /// <see cref="ITagRepository.AddTag" />
