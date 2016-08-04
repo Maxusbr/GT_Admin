@@ -17,7 +17,7 @@ namespace Getticket.Web.DAL.Migrations
         // Update-Database -ProjectName Getticket.Web.DAL -StartUpProjectName Getticket.Web.API -Force -Verbose
         protected override void Seed(GetticketDBContext context)
         {
-            //TempDb(context);
+            TempDb(context);
 
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 1, Name = "Ноги" });
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 2, Name = "Длинные" });
@@ -116,18 +116,25 @@ namespace Getticket.Web.DAL.Migrations
             context.Person.AddOrUpdate(o => o.Id, pers4);
             context.Person.AddOrUpdate(o => o.Id, pers5);
 
-            context.EventTypes.AddOrUpdate(o => o.Id, new EventType { Id = 1, Name = "Спорт" });
-            context.EventTypes.AddOrUpdate(o => o.Id, new EventType { Id = 2, Name = "Театр" });
-            context.EventTypes.AddOrUpdate(o => o.Id, new EventType { Id = 3, Name = "Музыка" });
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 1, Name = "Спорт" });
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 2, Name = "Театр" });
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 3, Name = "Музыка" });
+            context.SaveChanges();
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 4, Name = "Бокс", IdParent = 1 });
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 5, Name = "Фигурное катание", IdParent = 1 });
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 6, Name = "Концерт", IdParent = 3 });
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 7, Name = "Спектакль", IdParent = 2 });
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 8, Name = "Балет", IdParent = 2 });
+            context.SaveChanges();
 
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 1, Name = "Бокс", Description = "1/5 Бой за звание чемпиона мира по боксу в супертяжелом весе по версии WBA Лукас Браун...", id_EventType = 1 });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 2, Name = "Фигурное катание", Description = "3 Чемпионат мира по фигурному катанию", id_EventType = 1 });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 3, Name = "Весёлые бабури", Description = "1/2 Петр Налич и биг-бенд \"Песни Утесова и не только...\"", id_EventType = 3 });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 4, Name = "Джаз", Description = "8 А.Кролл, Л.Ролл, М. Волл День джаза в Доме музыки. \"Все цвета московского джаза\"", id_EventType = 3 });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 5, Name = "Вишневый сад", id_EventType = 2 });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 6, Name = "Лебединое озеро", id_EventType = 2 });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 7, Name = "Современник", id_EventType = 2 });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 8, Name = "Justified", id_EventType = 3 });
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 1, Name = "Бокс", IdCategory = 4, Description = "1/5 Бой за звание чемпиона мира по боксу в супертяжелом весе по версии WBA Лукас Браун..." });
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 2, Name = "Фигурное катание", IdCategory = 5, Description = "3 Чемпионат мира по фигурному катанию"});
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 3, Name = "Весёлые бабури", IdCategory = 6, Description = "1/2 Петр Налич и биг-бенд \"Песни Утесова и не только...\""});
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 4, Name = "Джаз", IdCategory = 6, Description = "8 А.Кролл, Л.Ролл, М. Волл День джаза в Доме музыки. \"Все цвета московского джаза\""});
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 5, Name = "Вишневый сад", IdCategory = 7 });
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 6, Name = "Лебединое озеро", IdCategory = 8 });
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 7, Name = "Современник", IdCategory = 7 });
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 8, Name = "Justified", IdCategory = 6 });
 
             context.PersonConnectionType.AddOrUpdate(o => o.Id, new PersonConnectionType { Id = 1, Name = "Персона" });
             context.PersonConnectionType.AddOrUpdate(o => o.Id, new PersonConnectionType { Id = 2, Name = "Мероприятие" });

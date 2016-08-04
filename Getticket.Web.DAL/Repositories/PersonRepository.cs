@@ -265,7 +265,8 @@ namespace Getticket.Web.DAL.Repositories
         {
             return db.PersonConnections.Where(o => o.id_Person == id)
                 .Include(o => o.Event)
-                .Include(o => o.Event.EventType)
+                .Include(o => o.Event.Category)
+                .Include(o => o.Event.Category.ParentCategory)
                 .Include(o => o.PersonConnectionType)
                 .Include(o => o.PersonConnectTo)
                 .ToList();
