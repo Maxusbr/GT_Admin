@@ -17,7 +17,9 @@ namespace Getticket.Web.DAL.Repositories
         {
             var query = db.Events
                 .Where(o => true)
-                .Include(o => o.EventType);
+                .Include(o => o.Category)
+                .Include(o => o.Category.ParentCategory)
+                .Include(o => o.Organizer);
             return GetAll(query);
         }
     }

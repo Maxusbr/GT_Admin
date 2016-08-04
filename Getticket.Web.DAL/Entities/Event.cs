@@ -12,12 +12,18 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Имя события
         /// </summary>
-        [Required]public string Name { get; set; }
+        [Required]
+        public string Name { get; set; }
 
         /// <summary>
-        /// Описание мероприятия
+        /// Описание события
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Мероприятие или Событие, true - Мероприятие
+        /// </summary>
+        public bool IsReallyEvent { get; set; }
 
         /// <summary>
         /// Дата начала продаж (билетов?)
@@ -40,13 +46,37 @@ namespace Getticket.Web.DAL.Entities
         public DateTime? TicketReturn { get; set; }
 
         /// <summary>
-        /// Внешний ключ для <see cref="Entities.EventType"/>
+        /// Опубликовано
         /// </summary>
-        [Required]public int id_EventType { get; set; }
+        public bool IsPublished { get; set; }
+
         /// <summary>
-        /// Тип события
+        /// Возрастное ограничение
         /// </summary>
-        [ForeignKey("id_EventType")]
-        public virtual EventType EventType { get; set; }
+        public int AgeLimit { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="EventCategory"/>
+        /// </summary>
+        [Required]
+        public int IdCategory { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="Company"/>
+        /// </summary>
+        public int? IdCompany { get; set; }
+
+        /// <summary>
+        /// <see cref="EventCategory"/>
+        /// </summary>
+        [ForeignKey("IdCategory")]
+        public virtual EventCategory Category { get; set; }
+
+        /// <summary>
+        /// <see cref="Company"/>
+        /// </summary>
+        [ForeignKey("IdCompany")]
+        public virtual Company Organizer { get; set; }
+
     }
 }

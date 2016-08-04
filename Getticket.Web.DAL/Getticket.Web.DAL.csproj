@@ -60,9 +60,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AccessRole.cs" />
-    <Compile Include="Entities\EventType.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\EventLinkPerson.cs" />
+    <Compile Include="Entities\EventLinkEvent.cs" />
+    <Compile Include="Entities\EventGenreLink.cs" />
+    <Compile Include="Entities\EventGenre.cs" />
+    <Compile Include="Entities\EventDescriptionType.cs" />
+    <Compile Include="Entities\EventDescription.cs" />
+    <Compile Include="Entities\EventCategory.cs" />
+    <Compile Include="Entities\EventConnection.cs" />
+    <Compile Include="Entities\EventConnectionType.cs" />
     <Compile Include="Entities\PersonFactType.cs" />
     <Compile Include="Entities\PersonFact.cs" />
+    <Compile Include="Entities\EventMedia.cs" />
     <Compile Include="Entities\PersonMediaType.cs" />
     <Compile Include="Entities\PersonSocialLink.cs" />
     <Compile Include="Entities\PersonSocialLinkType.cs" />
