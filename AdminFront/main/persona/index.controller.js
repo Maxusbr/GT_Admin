@@ -6,10 +6,10 @@
         .module('app')
         .controller('MainPersonaIndexController', MainPersonaIndexController);
 
-    MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$rootScope', '$location', 'personService'];
+    MainPersonaIndexController.$inject = ['$scope', '$stateParams', '$rootScope', '$location', '$filter', 'personService'];
 
 
-    function MainPersonaIndexController($scope, $stateParams, $rootScope, $location, personService) {
+    function MainPersonaIndexController($scope, $stateParams, $rootScope, $location, $filter, personService) {
         if ($stateParams.id > 0)
             $rootScope.id = $scope.id = $stateParams.id;
         else {
@@ -197,6 +197,39 @@
             $scope.person.ZodiacMonth = zodiacMonth($scope.person.Bithday);
             $scope.person.IsChange = true;
         }
+        function getAntros() {
+            personService.getAntro($scope.id, getAntro);
+        }
+        function getAllLinks() {
+            personService.getLinks($scope.id, function (data) {
+                getLinks(data);
+                getAntros();
+            });
+        }
+        function getMedias() {
+            personService.getMedia($scope.id, function (data) {
+                getMedia(data);
+                getAllLinks();
+            });
+        }
+        function getConnections() {
+            personService.getConnection($scope.id, function (data) {
+                getConnection(data);
+                getMedias();
+            });
+        }
+        function getFacts() {
+            personService.getFact($scope.id, function (data) {
+                getFact(data);
+                getConnections();
+            });
+        }
+        function getDescriptions() {
+            personService.getDescript($scope.id, function (data) {
+                getDescript(data);
+                getFacts();
+            });
+        }
         if ($rootScope.persons !== undefined)
             $rootScope.persons.forEach(function (item) {
                 if (item.Id == $scope.id) {
@@ -204,12 +237,7 @@
                     $scope.person.birthday = new Date($scope.person.Bithday);
                     $scope.changeDate();
                     $scope.person.IsChange = false;
-                    personService.getDescript($scope.id, getDescript);
-                    personService.getFact($scope.id, getFact);
-                    personService.getConnection($scope.id, getConnection);
-                    personService.getMedia($scope.id, getMedia);
-                    personService.getLinks($scope.id, getLinks);
-                    personService.getAntro($scope.id, getAntro);
+                    getDescriptions();
                     return;
                 }
             });
@@ -241,7 +269,11 @@
                 if (data.Message)
                     $scope.response = data.Message;
                 else {
-                    personService.getPersons();
+                    personService.getPersons(function() {
+                        var person = $scope.persons.filter(function (item) { return item.Id == $scope.id; })[0];
+                        if (person === undefined || person === null) return;
+                        $scope.person.LastChange = person.LastChange;
+                    });
                     $scope.person.IsChange = false;
                     $scope.isEdit = false;
                 }
@@ -261,13 +293,15 @@
         }
         // Description metods
         function continueSaveDescription(list) {
-            list.forEach(function (item) {
-                item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
-                item.PersonDescriptionType = $rootScope.descriptiontypes.filter(function (type) {
-                    return type.Id == item.id_DescriptionType;
-                })[0].Name;
-            });
-            $scope.Changed(list);
+            
+            personService.getDescript($scope.id, getDescript);
+            //list.forEach(function (item) {
+            //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
+            //    item.PersonDescriptionType = $rootScope.descriptiontypes.filter(function (type) {
+            //        return type.Id == item.id_DescriptionType;
+            //    })[0].Name;
+            //});
+            //$scope.Changed(list);
         }
         function continueDeleteDescription(list) {
             personService.getDescript($scope.id, getDescript);
@@ -300,11 +334,12 @@
 
         // Fact metods
         function continueSaveFact(list) {
-            list.forEach(function (item) {
-                item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
-                item.FactType = $rootScope.facttypes.filter(function (type) { return type.Id === item.id_FactType; })[0];
-            });
-            $scope.Changed(list);
+            personService.getFact($scope.id, getFact);
+            //list.forEach(function (item) {
+            //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
+            //    item.FactType = $rootScope.facttypes.filter(function (type) { return type.Id === item.id_FactType; })[0];
+            //});
+            //$scope.Changed(list);
         }
         function continueDeleteFact(list) {
             personService.getFact($scope.id, getFact);
@@ -341,11 +376,12 @@
 
         // Connection metods
         function continueSaveConnection(list) {
-            list.forEach(function (item) {
-                item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
-                item.PersonConnectionType = $rootScope.connectiontypes.filter(function (type) { return type.Id === item.id_ConnectionType; })[0].Name;
-            });
-            $scope.Changed(list);
+            personService.getConnection($scope.id, getConnection);
+            //list.forEach(function (item) {
+            //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
+            //    item.PersonConnectionType = $rootScope.connectiontypes.filter(function (type) { return type.Id === item.id_ConnectionType; })[0].Name;
+            //});
+            //$scope.Changed(list);
         }
         function continueDeleteConnection(list) {
             personService.getConnection($scope.id, getConnection);
@@ -388,11 +424,12 @@
 
         // Media metods
         function continueSaveMedia(list) {
-            list.forEach(function (item) {
-                item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
-                item.MediaType = $rootScope.mediatypes.filter(function (type) { return type.Id == item.id_MediaType; })[0].Name;
-            });
-            $scope.Changed(list);
+            personService.getMedia($scope.id, getMedia);
+            //list.forEach(function (item) {
+            //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
+            //    item.MediaType = $rootScope.mediatypes.filter(function (type) { return type.Id == item.id_MediaType; })[0].Name;
+            //});
+            //$scope.Changed(list);
         }
         function continueDeleteMedia(list) {
             personService.getMedia($scope.id, getMedia);
@@ -423,13 +460,14 @@
             $scope.Changed($scope.medialist);
         }
 
-        // Media metods
+        // Links metods
         function continueSaveLink(list) {
-            list.forEach(function (item) {
-                item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
-                item.PersonSocialLinkType = $rootScope.socialtypes.filter(function (type) { return type.Id == item.IdSocialLinkType; })[0].Name;
-            });
-            $scope.Changed(list);
+            personService.getLinks($scope.id, getLinks);
+            //list.forEach(function (item) {
+            //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
+            //    item.PersonSocialLinkType = $rootScope.socialtypes.filter(function (type) { return type.Id == item.IdSocialLinkType; })[0].Name;
+            //});
+            //$scope.Changed(list);
         }
         function continueDeleteLink(list) {
             personService.getLinks($scope.id, getLinks);
@@ -462,11 +500,12 @@
 
         // Media antros
         function continueSaveAntro(list) {
-            list.forEach(function (item) {
-                item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
-                item.AntroName = $rootScope.antronames.filter(function (type) { return type.Id == item.IdAntro; })[0].Name;
-            });
-            $scope.Changed(list);
+            personService.getAntro($scope.id, getAntro);
+            //list.forEach(function (item) {
+            //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
+            //    item.AntroName = $rootScope.antronames.filter(function (type) { return type.Id == item.IdAntro; })[0].Name;
+            //});
+            //$scope.Changed(list);
         }
         function continueDeleteAntro(list) {
             personService.getAntro($scope.id, getAntro);
@@ -516,6 +555,7 @@
             list = $scope.antro.filter(function (item) { return item.Changed; });
             if (list.length > 0)
                 personService.saveEntities($scope.id, list, 'antro', continueSaveAntro);
+            $scope.person.IsChange = false;
         }
 
         $scope.createDescription = function () {
@@ -528,6 +568,22 @@
 
             $('.persona-info__full-block').hide();
             $('.persona-info__small-block').show();
+        }
+        personService.getTags(function (data) {
+            $scope.tags = [];
+            $scope.tags.push.apply($scope.tags, data);
+        });
+
+        $scope.tagChange = function (item) {
+            item.Changed = true;
+            $scope.Changed($scope.medialist);
+        }
+        $scope.loadMediaTags = function (query) {
+            var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
+            result = $filter('orderBy')(result, function (item) {
+                item.Name.substring(0, query.length);
+            });
+            return result;
         }
     }
 })();

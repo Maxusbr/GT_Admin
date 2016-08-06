@@ -122,9 +122,12 @@ namespace Getticket.Web.DAL.Entities
         }
         #endregion
 
-        #region EventsLog Config
+        #region Log Config
         /// <see cref="EventLog"/>
         public virtual DbSet<EventLog> EventLogs { get; set; }
+
+        /// <see cref="PersonLog"/>
+        public virtual DbSet<PersonLog> PersonLogs { get; set; }
 
         /// <summary>
         /// Настройка сущности <see cref="EventLog"/>
@@ -276,9 +279,11 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="TagDescriptionLink"/>
         public virtual DbSet<TagDescriptionLink> TagDescriptionLinks { get; set; }
 
-        /// <see cref="TagLink"/>
-        public virtual DbSet<TagLink> TagLinks { get; set; }
+        /// <see cref="TagPersonLink"/>
+        public virtual DbSet<TagPersonLink> TagPersonLinks { get; set; }
 
+        /// <see cref="TagMediaLink"/>
+        public virtual DbSet<TagMediaLink> TagMediaLinks { get; set; }
         /// <summary>
         /// Настройки сущности <see cref="Tag"/>
         /// </summary>

@@ -68,5 +68,10 @@ namespace Getticket.Web.API.Models.Persons
         /// </summary>
         public string EventName { get; set; }
         public IList<PersonConnectionModel> Connections { get; set; }
+
+        /// <summary>
+        /// Последние изменения
+        /// </summary>
+        public LastChangeModel LastChange { get; set; }
     }
 }

@@ -29,4 +29,10 @@ namespace Getticket.Web.API.Models
         public int Value { get; set; }
         public TagModel[] Tags { get; set; }
     }
+
+    public class TagsPersonMediaModel
+    {
+        public int IdMedia { get; set; }
+        public IList<TagModel> Tags { get; set; }
+    }
 }

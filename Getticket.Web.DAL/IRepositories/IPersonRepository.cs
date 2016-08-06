@@ -22,8 +22,9 @@ namespace Getticket.Web.DAL.IRepositories
         /// Если <see cref="Person"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="person"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        Person SavePerson(Person person);
+        Person SavePerson(Person person, int userId);
 
         /// <summary>
         /// Возвращает всех <see cref="Person"/>
@@ -80,15 +81,17 @@ namespace Getticket.Web.DAL.IRepositories
         /// Если <see cref="PersonAntro"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="property"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        PersonAntro UpdatePersonAntro(PersonAntro property);
+        PersonAntro UpdatePersonAntro(PersonAntro property, int userId);
 
         /// <summary>
         /// Добавляет/заменяет набор характеристик <paramref name="properties" />
         /// </summary>
         /// <param name="properties"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        bool AddPersonAntros(IList<PersonAntro> properties);
+        bool AddPersonAntros(IList<PersonAntro> properties, int userId);
 
         /// <summary>
         /// Удаляет набор характеристик <paramref name="properties" />
@@ -172,16 +175,18 @@ namespace Getticket.Web.DAL.IRepositories
         /// Добавляет записи связей <see cref="PersonConnection"/>
         /// </summary>
         /// <param name="connections"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        bool AddConnections(IList<PersonConnection> connections);
+        bool AddConnections(IList<PersonConnection> connections, int userId);
 
         /// <summary>
         /// Если <see cref="PersonConnection"/> новый - добавляем новую запись в БД.
         /// Если <see cref="PersonConnection"/> уже существует - обновляет связь <see cref="PersonConnection"/>
         /// </summary>
         /// <param name="connection"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        PersonConnection SaveConnection(PersonConnection connection);
+        PersonConnection SaveConnection(PersonConnection connection, int userId);
 
         /// <summary>
         /// Удаляет записи связей <see cref="PersonConnection"/>
@@ -223,8 +228,9 @@ namespace Getticket.Web.DAL.IRepositories
         /// Если <see cref="PersonDescription"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="description"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        PersonDescription UpdateDescription(PersonDescription description);
+        PersonDescription UpdateDescription(PersonDescription description, int userId);
 
         /// <summary>
         /// Удаляет описание <see cref="PersonDescription"/>
@@ -245,8 +251,9 @@ namespace Getticket.Web.DAL.IRepositories
         /// Если <see cref="PersonMedia"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="media"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        PersonMedia UpdateMedia(PersonMedia media);
+        PersonMedia UpdateMedia(PersonMedia media, int userId);
 
         /// <summary>
         /// Удаляет Media <see cref="PersonMedia"/>
@@ -309,15 +316,17 @@ namespace Getticket.Web.DAL.IRepositories
         /// Если <see cref="PersonFact"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="facts"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        bool UpdatePersonFacts(IList<PersonFact> facts);
+        bool UpdatePersonFacts(IList<PersonFact> facts, int userId);
 
         /// <summary>
         /// Обновляет/добавляет <see cref="PersonFact"/> в БД.
         /// </summary>
         /// <param name="fact"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        PersonFact UpdatePersonFact(PersonFact fact);
+        PersonFact UpdatePersonFact(PersonFact fact, int userId);
 
         /// <summary>
         /// Удаляет факты <see cref="PersonFact"/> по <paramref name="id" />
@@ -359,15 +368,17 @@ namespace Getticket.Web.DAL.IRepositories
         /// Если <see cref="PersonSocialLink"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="links"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        bool UpdateSocialLinks(IList<PersonSocialLink> links);
+        bool UpdateSocialLinks(IList<PersonSocialLink> links, int userId);
 
         /// <summary>
         /// Обновляет/добавляет <see cref="PersonSocialLink"/> в БД.
         /// </summary>
         /// <param name="link"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        PersonSocialLink UpdateSocialLink(PersonSocialLink link);
+        PersonSocialLink UpdateSocialLink(PersonSocialLink link, int userId);
 
         /// <summary>
         /// Удаляет ссылки <see cref="PersonSocialLink"/> по <paramref name="id" />

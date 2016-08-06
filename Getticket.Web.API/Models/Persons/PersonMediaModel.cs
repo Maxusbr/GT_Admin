@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Getticket.Web.API.Models.Persons
 {
@@ -15,5 +16,7 @@ namespace Getticket.Web.API.Models.Persons
         [Required]public string MediaLink { get; set; }
         public string MediaType { get; set; }
         public string Description { get; set; }
+        public LastChangeModel LastChange { get; set; }
+        public IList<TagModel> Tags { get; set; }
     }
 }

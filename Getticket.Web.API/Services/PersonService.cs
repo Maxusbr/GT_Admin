@@ -17,14 +17,19 @@ namespace Getticket.Web.API.Services
     public class PersonService : IPersonService
     {
         private readonly IPersonRepository _personRepository;
+        private readonly ILogRepository _logRepository;
+        private readonly ITagRepository _tagRepository;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="personRepository"></param>
-        public PersonService(IPersonRepository personRepository)
+        /// <param name="logRepository"></param>
+        public PersonService(IPersonRepository personRepository, ILogRepository logRepository, ITagRepository tagRepository)
         {
             _personRepository = personRepository;
+            _logRepository = logRepository;
+            _tagRepository = tagRepository;
         }
 
         /// <summary>
@@ -42,6 +47,7 @@ namespace Getticket.Web.API.Services
                 var con = item.Connections.FirstOrDefault(o => o.Event != null);
                 item.EventName = con?.Event?.Name;
                 item.EventType = con?.Event?.EventType;
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePerson(item.Id));
             }
             return listPerson;
         }
@@ -66,6 +72,7 @@ namespace Getticket.Web.API.Services
                 var con = item.Connections.FirstOrDefault(o => o.Event != null);
                 item.EventName = con?.Event?.Name;
                 item.EventType = con?.Event?.EventType;
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePerson(item.Id));
             }
             return listPerson;
         }
@@ -98,8 +105,12 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public IList<PersonAntroModel> GetPersonAntros(int id)
         {
-            var result = _personRepository.GetPersonAntros(id);
-            return PersonModelHelper.GetPersonAntroModels(result);
+            var result = PersonModelHelper.GetPersonAntroModels(_personRepository.GetPersonAntros(id));
+            foreach (var item in result)
+            {
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonAntro(item.IdPerson, item.Id));
+            }
+            return result;
         }
 
         /// <summary>
@@ -110,6 +121,10 @@ namespace Getticket.Web.API.Services
         public IEnumerable<EntityCollection<PersonConnectionModel>> GetConnection(int id)
         {
             var list = PersonModelHelper.GetConnectionModels(_personRepository.GetConnections(id));
+            foreach (var item in list)
+            {
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonConnection(item.id_Person, item.Id));
+            }
             var types = list.GroupBy(o => o.id_ConnectionType).Select(o => o.Key);
             return types.Select(tp => new EntityCollection<PersonConnectionModel> { List = list.Where(o => o.id_ConnectionType == tp), Type = tp });
         }
@@ -122,6 +137,10 @@ namespace Getticket.Web.API.Services
         public IEnumerable<EntityCollection<PersonSocialLinkModel>> GetSocialLinks(int id)
         {
             var list = PersonModelHelper.GetSocialLinkModels(_personRepository.GetSocialLinks(id));
+            foreach (var item in list)
+            {
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonLink(item.id_Person, item.Id));
+            }
             var types = list.GroupBy(o => o.IdSocialLinkType).Select(o => o.Key);
             return types.Select(tp => new EntityCollection<PersonSocialLinkModel> { List = list.Where(o => o.IdSocialLinkType == tp), Type = tp });
 
@@ -135,6 +154,11 @@ namespace Getticket.Web.API.Services
         public IEnumerable<EntityCollection<PersonMediaModel>> GetMedia(int id)
         {
             var list = PersonModelHelper.GetMediaModels(_personRepository.GetMedia(id));
+            foreach (var item in list)
+            {
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonMedia(item.id_Person, item.Id));
+                item.Tags = TagModelHelper.GeTagModels(_tagRepository.GePersonMediaTags(item.Id));
+            }
             var types = list.GroupBy(o => o.id_MediaType).Select(o => o.Key);
             return types.Select(tp => new EntityCollection<PersonMediaModel> { List = list.Where(o => o.id_MediaType == tp), Type = tp });
         }
@@ -147,6 +171,10 @@ namespace Getticket.Web.API.Services
         public IEnumerable<EntityCollection<PersonDescriptionModel>> GetDescriptions(int id)
         {
             var list = PersonModelHelper.GetDescriptionModels(_personRepository.GetDescriptions(id));
+            foreach (var item in list)
+            {
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonDescription(item.id_Person, item.Id));
+            }
             var types = list.GroupBy(o => o.id_DescriptionType).Select(o => o.Key);
             return types.Select(tp => new EntityCollection<PersonDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp });
         }
@@ -155,6 +183,10 @@ namespace Getticket.Web.API.Services
         public IEnumerable<EntityCollection<PersonFactModel>> GetFacts(int id)
         {
             var list = PersonModelHelper.GetFactModels(_personRepository.GetPersonFacts(id));
+            foreach (var item in list)
+            {
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonFact(item.id_Person, item.Id));
+            }
             var types = list.GroupBy(o => o.id_FactType).Select(o => o.Key);
             return types.Select(tp => new EntityCollection<PersonFactModel> { List = list.Where(o => o.id_FactType == tp), Type = tp });
         }
@@ -163,28 +195,12 @@ namespace Getticket.Web.API.Services
         /// Add or Update Person entity
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce SavePerson(PersonModel model)
+        public ServiceResponce SavePerson(PersonModel model, int userId)
         {
-            var person = model.Id > 0 ? _personRepository.FindPersonById(model.Id) : PersonModelHelper.GetPerson(model);
-            if (person == null)
-            {
-                return ServiceResponce
-                    .FromFailed()
-                    .Add("error", "Person with specified Id was not found");
-            }
-            if (model.Id > 0)
-            {
-                person.Bithday = model.Bithday;
-                person.Name = model.Name;
-                person.NameLatin = model.NameLatin;
-                person.Patronymic = model.Patronymic;
-                person.LastName = model.LastName;
-                person.LastNameLatin = model.LastNameLatin;
-                person.id_Bithplace = model.IdBithplace;
-                person.id_Sex = model.IdSex;
-            }
-            var res = _personRepository.SavePerson(person);
+            var person = PersonModelHelper.GetPerson(model);
+            var res = _personRepository.SavePerson(person, userId);
             var response = res != null ? ServiceResponce
                 .FromSuccess()
                 .Result("Person save")
@@ -250,8 +266,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateAntros(int pesonId, IEnumerable<PersonAntroModel> models)
+        public ServiceResponce UpdateAntros(int pesonId, IEnumerable<PersonAntroModel> models, int userId)
         {
             var result = _personRepository.AddPersonAntros(
                 models.Select(o => new PersonAntro
@@ -260,7 +277,7 @@ namespace Getticket.Web.API.Services
                     id_Antro = o.IdAntro,
                     id_Person = pesonId,
                     Value = o.Value
-                }).ToList());
+                }).ToList(), userId);
             return result ? ServiceResponce
                 .FromSuccess()
                 .Result("Antros save complete") :
@@ -348,8 +365,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateConnection(int pesonId, IEnumerable<PersonConnectionModel> models)
+        public ServiceResponce UpdateConnection(int pesonId, IEnumerable<PersonConnectionModel> models, int userId)
         {
             var result = _personRepository.AddConnections(
                 models.Select(o => new PersonConnection
@@ -359,7 +377,7 @@ namespace Getticket.Web.API.Services
                     id_ConnectionType = o.id_ConnectionType,
                     id_Event = o.id_Event,
                     id_PersonConnectTo = o.id_PersonConnectTo
-                }).ToList());
+                }).ToList(), userId);
             return result ? ServiceResponce
                 .FromSuccess()
                 .Result("Connections save complete") :
@@ -396,7 +414,7 @@ namespace Getticket.Web.API.Services
         /// Возвращает список типов ссылок
         /// </summary>
         /// <returns></returns>
-        public IList<PersonSocialLinkTypeModel> GetSocialLinkTipes()
+        public IList<PersonSocialLinkTypeModel> GetSocialLinkTypes()
         {
             var result = _personRepository.GetLinkTypes();
             return PersonModelHelper.GetSocialLinkTypeModels(result);
@@ -446,8 +464,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateSocialLink(int pesonId, IEnumerable<PersonSocialLinkModel> models)
+        public ServiceResponce UpdateSocialLink(int pesonId, IEnumerable<PersonSocialLinkModel> models, int userId)
         {
             var result = _personRepository.UpdateSocialLinks(
                 models.Select(o => new PersonSocialLink
@@ -455,7 +474,7 @@ namespace Getticket.Web.API.Services
                     Id = o.Id,
                     id_Person = pesonId,
                     id_SocialLinkType = o.IdSocialLinkType
-                }).ToList());
+                }).ToList(), userId);
             return result ? ServiceResponce
                 .FromSuccess()
                 .Result("SocialLink save complete") :
@@ -537,26 +556,18 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateMedia(int pesonId, IEnumerable<PersonMediaModel> models)
+        public bool UpdateMedia(int pesonId, IEnumerable<PersonMediaModel> models, int userId)
         {
-            if (models.Select(item => _personRepository.UpdateMedia(new PersonMedia
+            return models.Select(item => _personRepository.UpdateMedia(new PersonMedia
             {
                 Id = item.Id,
                 id_Person = pesonId,
                 id_MediaType = item.id_MediaType,
                 MediaLink = item.MediaLink,
                 Description = item.Description
-            })).Any(result => result == null))
-            {
-                return ServiceResponce
-                    .FromFailed()
-                    .Result($"Error save media");
-            }
-
-            return ServiceResponce
-                .FromSuccess()
-                .Result("Media save complete");
+            }, userId)).All(result => result != null);
         }
 
         /// <summary>
@@ -633,8 +644,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateDescriptions(int pesonId, IEnumerable<PersonDescriptionModel> models)
+        public ServiceResponce UpdateDescriptions(int pesonId, IEnumerable<PersonDescriptionModel> models, int userId)
         {
             if (models == null || models.Select(item => _personRepository.UpdateDescription(new PersonDescription
             {
@@ -643,7 +655,7 @@ namespace Getticket.Web.API.Services
                 id_DescriptionType = item.id_DescriptionType,
                 DescriptionText = item.DescriptionText,
                 Status = item.Status
-            })).Any(result => result == null))
+            }, userId)).Any(result => result == null))
             {
                 return ServiceResponce
                     .FromFailed()
@@ -656,7 +668,7 @@ namespace Getticket.Web.API.Services
         }
 
 
-        public int UpdateDescriptions(PersonDescriptionModel model)
+        public int UpdateDescriptions(PersonDescriptionModel model, int userId)
         {
             var result = _personRepository.UpdateDescription(new PersonDescription
             {
@@ -665,7 +677,7 @@ namespace Getticket.Web.API.Services
                 id_DescriptionType = model.id_DescriptionType,
                 DescriptionText = model.DescriptionText,
                 Status = model.Status
-            });
+            }, userId);
             if (result == null)
             {
                 return -1;
@@ -731,7 +743,7 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IPersonService.UpdateFacts"/>
-        public ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models)
+        public ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models, int userId)
         {
             if (models.Select(item => _personRepository.UpdatePersonFact(new PersonFact
             {
@@ -739,7 +751,7 @@ namespace Getticket.Web.API.Services
                 id_Person = pesonId,
                 id_FactType = item.id_FactType,
                 FactText = item.FactText
-            })).Any(result => result == null))
+            }, userId)).Any(result => result == null))
             {
                 return ServiceResponce
                     .FromFailed()

@@ -52,10 +52,7 @@
                         <input type="text" class="form-control" placeholder="Отчество" name="Patronymic"
                                ng-model="person.Patronymic" ng-change="person.IsChange = true">
                     </div>
-                    <div class="form-group" ng-show="isEdit">
-                        <input date-time ng-model="person.birthday" required format="D MMMM YYYY" class="form-control" view="date" min-view="date"
-                               date-change="changeDate" placeholder="День рождения*"/>
-                    </div>
+
                 </div>
 
                 <div class="col-md-4 col-md-offset-2">
@@ -80,19 +77,16 @@
                         <input type="text" class="form-control" placeholder="Отчество (латинское)" name="PatronymicLatin"
                                ng-model="person.PatronymicLatin" ng-change="person.IsChange = true">
                     </div>
-                    <div class="form-group" ng-show="isEdit">
-                        <input type="text" placeholder="Страна" name="Country" class="form-control" ng-change="person.IsChange = true"
-                               ng-model="person.Country" uib-typeahead="item.Name as item.Name for item in countries | filter:$viewValue">
-                    </div>
-                    <div class="form-group" ng-show="isEdit">
-                        <input type="text" class="form-control" placeholder="Город" name="Place"
-                               ng-model="person.Place" uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">
-                    </div>
+
                 </div>
 
                 <div class="col-md-8 col-md-offset-2">
                     <div class="row">
-                        <select class="form-control" disabled="disabled">
+                        <div class="form-group" ng-show="isEdit">
+                            <input date-time ng-model="person.birthday" required format="D MMMM YYYY" class="form-control" view="date" min-view="date"
+                                   date-change="changeDate" placeholder="День рождения*" />
+                        </div>
+                        <select class="form-control" disabled="disabled" ng-show="!isEdit">
                             <option>{{person.txtBirthday | date : 'd MMMM yyyy'}} ({{person.Age}})</option>
                         </select>
                         <p>
@@ -104,9 +98,17 @@
                     </div>
 
                     <div class="row">
-                        <select class="form-control" disabled="disabled">
+                        <select class="form-control" disabled="disabled" ng-show="!isEdit">
                             <option>{{person.Place}}, {{person.Country}}</option>
                         </select>
+                        <div class="form-group" ng-show="isEdit">
+                            <input type="text" placeholder="Страна" name="Country" class="form-control" ng-change="person.IsChange = true"
+                                   ng-model="person.Country" uib-typeahead="item.Name as item.Name for item in countries | filter:$viewValue">
+                        </div>
+                        <div class="form-group" ng-show="isEdit">
+                            <input type="text" class="form-control" placeholder="Город" name="Place"
+                                   ng-model="person.Place" uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">
+                        </div>
                         <!--<p>
                             (Санкт-Петербург, Россия)
                         </p>-->
@@ -136,14 +138,16 @@
         <div class="col-md-24 row">
             <!-- Last Changes -->
             <div class="col-md-19 persona-info-block">
-                <p>
+                <p ng-show="person.LastChange">
                     <span class="text-muted">Последние изменение персоны / </span>
-                    <span>Фото, 25 августа, Дарья Редактор</span>
-                    <span>(все изменения)</span>
+                    <span>{{person.LastChange.NameProperty}} {{person.LastChange.Date| amCalendar}}, {{person.LastChange.UserName}} {{person.LastChange.Position}}</span>
+                    <!--<span>(все изменения)</span>-->
                 </p>
                 <p>
-                    Рейтинг просмотров 71% (Подробнее - недельный, месячный) <br>
-                    В избраном 136
+                    Рейтинг просмотров {{persentView}}%
+                    <!--(Подробнее - недельный, месячный)-->
+                    <br>
+                    В избраном {{inFavorites}}
                 </p>
             </div>
             <!-- End Last Changes -->
@@ -167,45 +171,7 @@
             </div>
         </div>
     </div>
-
-
-
-
 </div>
-
-<!--<div class="row collapse persona-info__small-block">
-    <div class="col-md-24">
-        <div class="col-md-2">
-            <img src="http://placehold.it/50x50" alt="Placeholder">
-        </div>
-
-        <div class="col-md-3 persona-info__name-row">
-            <div class="row">
-                {{ person.LastName }} {{ person.Name }}
-            </div>
-        </div>
-
-        <div class="col-md-6 persona-info__addition-info">
-            <p>
-                9 февраля 1991 (25 лет)
-            </p>
-            <p>
-                <span class="text-muted">(зодиак)</span>
-                Водолей /
-                <span class="text-muted">(восточный)</span>
-                Коза
-            </p>
-        </div>
-        <div class="col-md-6 persona-info__addition-info">
-            <p>
-                Ленинград, СССР
-            </p>
-            <p>
-                (Санкт-Петербург, Россия)
-            </p>
-        </div>
-    </div>
-</div>-->
 
 
 <div class="row" ng-show="!isCreate">
@@ -227,13 +193,13 @@
                     <table class="table persona-main__table">
                         <thead>
                             <tr>
-                                <td class="col-md-5">Текст (38)</td>
+                                <td class="col-md-5">Текст ({{descriptionlist.length}})</td>
                                 <td class="col-md-3">Тип текста</td>
                                 <td class="col-md-4">Статус</td>
                                 <td class="col-md-2">Изменен</td>
-                                <td class="col-md-3">Источник</td>
+                                <td class="col-md-4">Источник</td>
                                 <td class="col-md-4">Использование</td>
-                                <td />
+                                <td class="col-md-1" />
                             </tr>
                         </thead>
                         <tbody>
@@ -256,128 +222,22 @@
                                               ng-show="item.isDescriptionEdit" ng-change="item.Changed = true; Changed(descriptionlist)"></textarea>
                                     <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isDescriptionEdit = !item.isDescriptionEdit"></a>
                                 </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
+                                <td>
+                                    <span ng-if="item.LastChange">
+                                        {{item.LastChange.UserName}}<br>
+                                        {{item.LastChange.Date | amCalendar}}
+                                    </span>
+                                </td>
                                 <td><a href="#">Ссылка (Сохраненная копия)</a></td>
                                 <td>
-                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                    / <a href="#">подробнее, статистика</a>
+                                    <!--Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                    / <a href="#">подробнее, статистика</a>-->
                                 </td>
                                 <td>
                                     <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
                                        ng-click="saveDescription(item);"></a>
-                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteDescription($index)"
-                                       ng-confirm-click="Удалить это описание?"></a>
                                 </td>
                             </tr>
-                            <!--<tr>
-                                <td class="persona-main__table_text">
-                                    С 2008 в составе международных команд,
-                                    3 олимпийских бронзы. С 2011 основной скип сборной России.
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td>Тизер</td>
-                                <td class="text-danger">
-                                    <strong>КA</strong>: Нужно ранжировать награды по степени
-                                    важности
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td><a href="#">Ссылка (Сохраненная копия)</a></td>
-                                <td>
-                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                    / <a href="#">подробнее, статистика</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="persona-main__table_text">
-                                    Родилась в Москве 6 февраля 1991 года.
-                                    В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже
-                                    каталась на стадионе «Юных Пионеров»,
-                                    где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких
-                                    московских
-                                    школах, с 2000 по 2005
-                                    в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке
-                                    запомнилась
-                                    Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания
-                                    у нее не было и не будет отличников.
-                                    По словам Анны, это ее очень закалило.
-                                    Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и
-                                    оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее
-                                    жизни...
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td>Превью (основное)</td>
-                                <td>Опубликован</td>
-                                <td>Карина Т. <br> 20.08.2016</td>
-                                <td class="text-danger">
-                                    <strong>!ДУБЛЬ</strong> (ссылка) Самая красивая спортсменка
-                                    России
-                                    (Sports.ru)
-                                </td>
-                                <td>Главная (2 мероприятия), Персона (Поиск)</td>
-                            </tr>
-                            <tr>
-                                <td class="persona-main__table_text">
-                                    Лучший скип сборной России. Знаменита не только
-                                    спортивными достижениями, но и своей привлекательностью.
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td>Тизер</td>
-                                <td class="text-success">
-                                    Запланировано к Джульетта С. Оригинальный текст Главная,
-                                    Персона
-                                    (Поиск) публикации с 24 июля
-                                    16:00 28.08.2016
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>Оригинальный текст</td>
-                                <td>Главная, Персона (Поиск)</td>
-                            </tr>
-                            <tr>
-                                <td class="persona-main__table_text">
-                                    Занималась фигурным катанием. Каталась на стадионе
-                                    “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в
-                                    нескольких московских школах, с 2000 по 2005
-                                    в школе No73, а с 2005 по 2008 в школе No1304. К концу учебы стала отличницей и
-                                    оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни.
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td>Основное (учеба)</td>
-                                <td>Опубликован</td>
-                                <td>Марьяна А. <br>22 июля</td>
-                                <td>
-                                    Полный рерайт <br>
-                                    <a href="#">Ссылка (Сохраненная копия)</a>
-                                </td>
-                                <td>Главная, Персона (Поиск)</td>
-                            </tr>
-                            <tr>
-                                <td class="persona-main__table_text">
-                                    Родилась в Москве 6 февраля 1991 года.
-                                    В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже
-                                    каталась на стадионе «Юных Пионеров»,
-                                    где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких
-                                    московских
-                                    школах, с 2000 по 2005
-                                    в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке
-                                    запомнилась
-                                    Екатерина Владимировна, которая часто
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td>Основное (карьера)</td>
-                                <td class="text-success">Запланировано к публикации с 16:00 28.08.2016</td>
-                                <td>Карина Т. <br>22 июля</td>
-                                <td class="text-danger">
-                                    <strong>!ДУБЛЬ</strong> (ссылка) Самая красивая спортсменка
-                                    России
-                                    (Sports.ru)
-                                </td>
-                                <td>Персона (Поиск)</td>
-                            </tr>-->
                         </tbody>
                     </table>
 
@@ -393,28 +253,31 @@
                     <table class="table persona-main__table">
                         <thead>
                             <tr>
-                                <td class="col-md-5">Факт (71)</td>
-                                <td class="col-md-4">Статус</td>
-                                <td class="col-md-2">Изменен</td>
+                                <td class="col-md-7">Факт ({{factlist.length}})</td>
+                                <td class="col-md-5">Статус/Изменен</td>
                                 <td class="col-md-3">Связь</td>
                                 <td class="col-md-3">Источник</td>
                                 <td class="col-md-4">Использование</td>
-                                <td />
+                                <td class="col-md-1" />
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in factlist">
                                 <td class="persona-main__table_text">
                                     <span ng-show="!item.isEdit">{{item.FactText}}</span>
-                                    <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.FactText"
-                                              ng-show="item.isEdit" ng-change="item.Changed = true; Changed(factlist)"></textarea>
+                                    <textarea type="text" class="form-control" style="min-height: 80px" data-ng-model="item.FactText" maxlength="190"
+                                       ng-trim="false"       ng-model-options="{ allowInvalid: true }" ng-show="item.isEdit" ng-change="item.Changed = true; Changed(factlist)"></textarea>
                                     <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
                                 </td>
                                 <td class="text-danger">
                                     <strong>КA</strong>: Нужно ранжировать награды по степени
                                     важности
+                                    <br>
+                                    <span ng-if="item.LastChange">
+                                        {{item.LastChange.UserName}}<br>
+                                        {{item.LastChange.Date | amCalendar}}
+                                    </span>
                                 </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
                                 <td>
                                     <span ng-show="!item.isTypeEdit">{{item.FactType.Name}} / {{item.FactType.Descript}}</span>
                                     <select ng-model="item.id_FactType" class="form-control" ng-show="item.isTypeEdit"
@@ -423,140 +286,14 @@
                                 </td>
                                 <td><a href="#">Ссылка (Сохраненная копия)</a></td>
                                 <td>
-                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                    / <a href="#">подробнее, статистика</a>
+                                    <!--Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                    / <a href="#">подробнее, статистика</a>-->
                                 </td>
                                 <td>
                                     <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
                                        ng-click="saveFact(item);"></a>
-                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteFact($index)"
-                                       ng-confirm-click="Удалить этот факт?"></a>
                                 </td>
                             </tr>
-                            <!--<tr>
-                                <td class="persona-main__table_text">
-                                    С 2008 в составе международных команд,
-                                    3 олимпийских бронзы. С 2011 основной скип сборной России.
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td class="text-danger">
-                                    <strong>КA</strong>: Нужно ранжировать награды по степени
-                                    важности
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    БИО <br>
-                                    / ФИО
-                                </td>
-                                <td><a href="#">Ссылка (Сохраненная копия)</a></td>
-                                <td>
-                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                    / <a href="#">подробнее, статистика</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="persona-main__table_text">
-                                    Родилась в Москве 6 февраля 1991 года.
-                                    В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже
-                                    каталась на стадионе «Юных Пионеров»,
-                                    где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких
-                                    московских
-                                    школах, с 2000 по 2005
-                                    в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке
-                                    запомнилась
-                                    Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания
-                                    у нее не было и не будет отличников.
-                                    По словам Анны, это ее очень закалило.
-                                    Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и
-                                    оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее
-                                    жизни...
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td>Опубликован</td>
-                                <td>Карина Т. <br> 20.08.2016</td>
-                                <td>
-                                    Мероприятие <br>
-                                    / Образование
-                                </td>
-                                <td class="text-danger">
-                                    <strong>!ДУБЛЬ</strong> (ссылка) Самая красивая спортсменка
-                                    России
-                                    (Sports.ru)
-                                </td>
-                                <td>Главная (2 мероприятия), Персона (Поиск)</td>
-                            </tr>
-                            <tr>
-                                <td class="persona-main__table_text">
-                                    Лучший скип сборной России. Знаменита не только
-                                    спортивными достижениями, но и своей привлекательностью.
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td class="text-success">
-                                    Запланировано к Джульетта С. Оригинальный текст Главная,
-                                    Персона
-                                    (Поиск) публикации с 24 июля
-                                    16:00 28.08.2016
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    Событие <br>
-                                    / Место рождения
-                                </td>
-                                <td>Оригинальный текст</td>
-                                <td>Главная, Персона (Поиск)</td>
-                            </tr>
-                            <tr>
-                                <td class="persona-main__table_text">
-                                    Занималась фигурным катанием. Каталась на стадионе
-                                    “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в
-                                    нескольких московских школах, с 2000 по 2005
-                                    в школе No73, а с 2005 по 2008 в школе No1304. К концу учебы стала отличницей и
-                                    оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни.
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td>Опубликован</td>
-                                <td>Марьяна А. <br>22 июля</td>
-                                <td>
-                                    Персона <br>
-                                    / Дата Рождения
-                                </td>
-                                <td>
-                                    Полный рерайт <br>
-                                    <a href="#">Ссылка (Сохраненная копия)</a>
-                                </td>
-                                <td>Главная, Персона (Поиск)</td>
-                            </tr>
-                            <tr>
-                                <td class="persona-main__table_text">
-                                    Родилась в Москве 6 февраля 1991 года.
-                                    В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже
-                                    каталась на стадионе «Юных Пионеров»,
-                                    где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких
-                                    московских
-                                    школах, с 2000 по 2005
-                                    в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке
-                                    запомнилась
-                                    Екатерина Владимировна, которая часто
-
-                                    <a href="#" class="persona-table__edit glyphicon glyphicon-pencil"></a>
-                                </td>
-                                <td class="text-success">Запланировано к публикации с 16:00 28.08.2016</td>
-                                <td>Карина Т. <br>22 июля</td>
-                                <td>
-                                    Связь <br>
-                                    / Событие
-                                </td>
-                                <td class="text-danger">
-                                    <strong>!ДУБЛЬ</strong> (ссылка) Самая красивая спортсменка
-                                    России
-                                    (Sports.ru)
-                                </td>
-                                <td>Персона (Поиск)</td>
-                            </tr>-->
                         </tbody>
                     </table>
 
@@ -569,14 +306,14 @@
 
             <div id="connections" class="tab-pane">
                 <div class="col-md-24">
-                    <table class="table persona-main__table col-md-18">
+                    <table class="table persona-main__table">
                         <thead>
                             <tr>
-                                <td class="col-md-4">Объект\Вид связи (15)</td>
-                                <td class="col-md-4">Тип связи</td>
-                                <td class="col-md-4">Характеристика связи</td>
-                                <td class="col-md-4">Изменен</td>
-                                <td />
+                                <td class="col-md-6">Объект\Вид связи ({{connectionList.length}})</td>
+                                <td class="col-md-6">Тип связи</td>
+                                <td class="col-md-6">Характеристика связи</td>
+                                <td class="col-md-5">Изменен</td>
+                                <td class="col-md-1" />
                             </tr>
                         </thead>
 
@@ -604,114 +341,16 @@
                                     <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isDescriptionEdit = !item.isDescriptionEdit"></a>
                                 </td>
                                 <td>
-                                    Джульетта С.<br>
-                                    сегодня, 19:02
+                                    <span ng-if="item.LastChange">
+                                        {{item.LastChange.UserName}}<br>
+                                        {{item.LastChange.Date | amCalendar}}
+                                    </span>
                                 </td>
                                 <td>
                                     <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
                                        ng-click="saveConnection(item);"></a>
-                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteConnection($index)"
-                                       ng-confirm-click="Удалить эту связь?"></a>
                                 </td>
                             </tr>
-                            <!--<tr>
-                                <td>
-                                    Чемпионат мира по керлингу
-                                </td>
-                                <td class="text-danger">
-                                    Мероприятие
-                                </td>
-                                <td>
-                                    Член команды (скип, основной скип)
-                                </td>
-                                <td>
-                                    Джульетта С.<br>
-                                    сегодня, 19:02
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Чемпионат мира по керлингу в Германии 2016
-                                </td>
-                                <td class="text-danger">
-                                    Событие
-                                </td>
-                                <td>
-                                    Член команды (основной скип)
-                                </td>
-                                <td>
-                                    Джульетта С.<br>
-                                    сегодня, 19:02
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Промо-тур The 20/20 Experience
-                                </td>
-                                <td>
-                                    Событие
-                                </td>
-                                <td>
-                                    Певец (соло)
-                                </td>
-                                <td>
-                                    Джульетта С.<br>
-                                    сегодня, 19:02
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Мюзикл Граф Орлов
-                                </td>
-                                <td>
-                                    Событие
-                                </td>
-                                <td>
-                                    Артист (Граф Орлов)
-                                </td>
-                                <td>
-                                    Марьяна А. <br>
-                                    22 июля
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Ольга Андриянова
-                                </td>
-                                <td>
-                                    Персона
-                                </td>
-                                <td>
-                                    Тренер (2010 - н.в.) <br>
-                                    <span class="small">/ Анна - ученица</span>
-                                </td>
-                                <td>
-                                    Карина Т. <br>
-                                    22 июля
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Неизвестный Федор Федорович
-                                </td>
-                                <td>
-                                    Персона
-                                </td>
-                                <td>
-                                    Ученица (2010 - н.в.) <br>
-                                    <span class="small">/ Анна - тренер</span> <br>
-                                    Встречаются
-                                </td>
-                                <td>
-                                    Карина Т. <br>
-                                    22 июля
-                                </td>
-                            </tr>-->
                         </tbody>
                     </table>
 
@@ -721,19 +360,24 @@
                     </div>
                 </div>
             </div>
-
+            <script type="text/ng-template" id="my-custom-template">
+                <div class="right-panel">
+                    <span ng-bind-html="$highlight($getDisplayText())"></span>
+                    <span ng-show="data.UsesType.length">({{data.UsesType|join:','}})</span>
+                </div>
+            </script>
             <div id="media" class="tab-pane">
                 <div class="col-md-24">
                     <table class="table persona-main__table">
                         <thead>
                             <tr>
-                                <td class="col-md-5">Данные медиа</td>
-                                <td class="col-md-3">Медиа</td>
-                                <td class="col-md-3">Ассоциация</td>
+                                <td class="col-md-4">Данные медиа</td>
+                                <td class="col-md-4">Медиа</td>
+                                <td class="col-md-4">Ассоциация</td>
                                 <td class="col-md-3">Изменен</td>
-                                <td class="col-md-2">Теги</td>
-                                <td class="col-md-5">Использование</td>
-                                <td />
+                                <td class="col-md-5">Теги</td>
+                                <td class="col-md-3">Использование</td>
+                                <td class="col-md-1" />
                             </tr>
                         </thead>
 
@@ -757,107 +401,38 @@
                                     <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEdit = !item.isEdit"></a>
                                 </td>
                                 <td>
-                                    Связи <br>
+                                    <!--Связи <br>
                                     * Мероприятие (1) <br>
-                                    * Персона (1)
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    10: керлинг, чемпионат, девушки, ...
+                                    * Персона (1)-->
                                 </td>
                                 <td>
-                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                    / <a href="#">подробнее</a>, <a href="#">статистика</a>
+                                    <span ng-if="item.LastChange">
+                                        {{item.LastChange.UserName}}<br>
+                                        {{item.LastChange.Date | amCalendar}}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="tags" ng-show="!item.isEditTags">
+                                        {{item.Tags.length}}:
+                                        <span ng-repeat="tag in item.Tags">
+                                            {{tag.Name}}
+                                        </span>
+                                    </div>
+                                    <tags-input ng-show="item.isEditTags" ng-model="item.Tags" on-tag-added="tagChange(item)"
+                                                on-tag-removed="tagChange(item)" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                                        <auto-complete source="loadMediaTags($query)" min-length="0" debounce-delay="0" template="my-custom-template"/>
+                                    </tags-input>
+                                    <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isEditTags = !item.isEditTags"></a>
+                                </td>
+                                <td>
+                                    <!--Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                    / <a href="#">подробнее</a>, <a href="#">статистика</a>-->
                                 </td>
                                 <td>
                                     <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
                                        ng-click="saveMedia(item);"></a>
-                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteMedia($index)"
-                                       ng-confirm-click="Удалить этот файл?"></a>
                                 </td>
                             </tr>
-                            <!--<tr>
-                                <td>
-                                    Чемпионат Европы по керлингу <br>
-                                    Россия, Москва, ДС Мегаспорт <br>
-                                    3 декабря 2011 <br>
-                                    // Прививкова Людмила, Сидорова Анна <br> + описание
-                                </td>
-                                <td>
-                                    Фото
-                                    <div class="persona-main__container_media small">
-                                        <img ng-src="{{item.value}}" alt="Placeholder" style="width: 100px; margin-top: 8px; height: 100px;">
-                                    </div>
-                                </td>
-                                <td>
-                                    Связи <br>
-                                    * Мероприятие (1) <br>
-                                    * Персона (1)
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    10: керлинг, чемпионат, девушки, ...
-                                </td>
-                                <td>
-                                    Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                    / <a href="#">подробнее</a>, <a href="#">статистика</a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Чемпионат Европы по керлингу <br>
-                                    Россия, Москва, ДС Мегаспорт <br>
-                                    3 декабря 2011 <br>
-                                    // Прививкова Людмила, Сидорова Анна <br>
-                                    <span class="text-danger">! описания нет</span>
-                                </td>
-                                <td>
-                                    Фото
-                                    <div class="persona-main__container_media small">
-                                    </div>
-                                </td>
-                                <td>
-                                    Связи <br>
-                                    * Мероприятие (1) <br>
-                                    * Персона (1)
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    10: керлинг, чемпионат, девушки, ...
-                                </td>
-                                <td>
-                                    Главная (2 мероприятия), Персона (Поиск)
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    Чемпионат Европы по керлингу <br>
-                                    Россия, Москва, ДС Мегаспорт <br>
-                                    3 декабря 2011 <br>
-                                    // Прививкова Людмила, <span class="text-danger">Неизвестный М</span> <br>
-                                    + описание
-                                </td>
-                                <td>
-                                    Видео
-                                    <div class="persona-main__container_media small">
-                                    </div>
-                                </td>
-                                <td>
-                                    Связи <br>
-                                    * Мероприятие (1) <br>
-                                    * Персона (1)
-                                </td>
-                                <td>Джульетта С. <br> сегодня, 19:02</td>
-                                <td>
-                                    10: керлинг, чемпионат, девушки, ...
-                                </td>
-                                <td>
-                                    Главная, Персона (Поиск)
-                                </td>
-                            </tr>-->
-
                         </tbody>
                     </table>
                     <div class="pull-right">
@@ -878,7 +453,7 @@
                                 <td>Активность</td>
                                 <td>Назначение</td>
                                 <td>Изменен</td>
-                                <td />
+                                <td class="col-md-1" />
                             </tr>
                         </thead>
 
@@ -902,118 +477,19 @@
                                               ng-show="item.isDescriptionEdit" ng-change="item.Changed = true; Changed(linklist)"></textarea>
                                     <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isDescriptionEdit = !item.isDescriptionEdit"></a>
                                 </td>
-                                <td>5 твитов\сутки</td>
-                                <td>Публично (Персона\Полная)</td>
+                                <td><!--5 твитов\сутки--></td>
+                                <td><!--Публично (Персона\Полная)--></td>
                                 <td>
-                                    Джульетта С. <br>
-                                    сегодня, 19:02
+                                    <span ng-if="item.LastChange">
+                                        {{item.LastChange.UserName}}<br>
+                                        {{item.LastChange.Date | amCalendar}}
+                                    </span>
                                 </td>
                                 <td>
                                     <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
                                        ng-click="saveLink(item);"></a>
-                                    <a href="" class="persona-table__edit glyphicon glyphicon-trash" confirmed-click="deleteLink($index)"
-                                       ng-confirm-click="Удалить эту ссылку?"></a>
                                 </td>
                             </tr>
-                            <!--<tr>
-                                <td>Личный twitter</td>
-                                <td>
-                                    <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
-                                </td>
-                                <td></td>
-                                <td>5 твитов\сутки</td>
-                                <td>Публично (Персона\Полная)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    сегодня, 19:02
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>Фан twitter</td>
-                                <td>
-                                    <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
-                                </td>
-                                <td>Довольно активное сообщество. <br> Причем преимущественно женское(!)</td>
-                                <td></td>
-                                <td>Внутренее</td>
-                                <td>
-                                    Карина Т. <br>
-                                    сегодня, 19:02
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Официальный twitter</td>
-                                <td>
-                                    <a href="https://twitter.com/_team_sidorova_">https://twitter.com/_team_sidorova_</a>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td>То же, что и в твиттере и инстаграмме, сайт но зато с подписями что и где</td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>Личный instagram</td>
-                                <td><a href="http://instagram.com/curlme_anna">instagram.com/curlme_anna</a></td>
-                                <td></td>
-                                <td></td>
-                                <td>Публично (Поиск\По активности персоны)</td>
-                                <td>
-                                    Джульетта С. <br>
-                                    24 июля
-                                </td>
-                            </tr>-->
                         </tbody>
                     </table>
                     <div class="pull-right">
@@ -1029,11 +505,11 @@
                         <table class="table persona-main__table">
                             <thead>
                                 <tr>
-                                    <td>Данные</td>
-                                    <td>Ассоциация</td>
-                                    <td>Изменен</td>
-                                    <td>Использование</td>
-                                    <td />
+                                    <td class="col-md-6">Данные</td>
+                                    <td class="col-md-6">Ассоциация</td>
+                                    <td class="col-md-5">Изменен</td>
+                                    <td class="col-md-6">Использование</td>
+                                    <td class="col-md-1" />
                                 </tr>
                             </thead>
 
@@ -1051,19 +527,21 @@
                                     </td>
 
                                     <td>
-                                        Связи <br>
+                                        <!--Связи <br>
                                         * Мероприятие (1) <br>
-                                        * Персона (1) <br>
+                                        * Персона (1) <br>-->
                                     </td>
 
                                     <td>
-                                        Джульетта С. <br>
-                                        сегодня, 19:02
+                                        <span ng-if="item.LastChange">
+                                            {{item.LastChange.UserName}}<br>
+                                            {{item.LastChange.Date | amCalendar}}
+                                        </span>
                                     </td>
 
                                     <td>
-                                        Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                        / <a href="#">подробнее</a>, <a href="#">статистика</a>
+                                        <!--Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
+                                        / <a href="#">подробнее</a>, <a href="#">статистика</a>-->
                                     </td>
                                     <td>
                                         <a href="" style="width: 40px" class="persona-table__edit glyphicon glyphicon-floppy-disk" ng-show="item.Changed"
@@ -1072,72 +550,6 @@
                                            ng-confirm-click="Удалить эту характеристику?"></a>
                                     </td>
                                 </tr>
-                                <!--<tr>
-                                    <td>
-                                        Глаза \ Цвет <br>
-                                        Зеленые
-                                    </td>
-
-                                    <td>
-                                        Связи <br>
-                                        * Мероприятие (1) <br>
-                                        * Персона (1) <br>
-                                    </td>
-
-                                    <td>
-                                        Джульетта С. <br>
-                                        сегодня, 19:02
-                                    </td>
-
-                                    <td>
-                                        Главная (4 мероприятия), Персона (Поиск, +), Персона (Подробно, +) <br>
-                                        / <a href="#">подробнее</a>, <a href="#">статистика</a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        Стопа \ Размер <br>
-                                        39
-                                    </td>
-
-                                    <td>
-                                        Связи <br>
-                                        * Событие (1) <br>
-                                        * Персона (2) <br>
-                                    </td>
-
-                                    <td>
-                                        Карина Т. <br>
-                                        20.08.2016
-                                    </td>
-
-                                    <td>
-                                        Главная (2 мероприятия), Персона (Поиск)
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        Рост <br>
-                                        170
-                                    </td>
-
-                                    <td>
-                                        Связи <br>
-                                        * Событие (1) <br>
-                                        * Персона (2) <br>
-                                    </td>
-
-                                    <td>
-                                        Джульетта С. <br>
-                                        24 июля
-                                    </td>
-
-                                    <td>
-                                        Главная, Персона (Поиск)
-                                    </td>
-                                </tr>-->
                             </tbody>
                         </table>
                         <div class="pull-right">
@@ -1154,29 +566,6 @@
                         <span class="title">{{item.type}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
                         {{item.value}}
                     </p>
-                    <!--<p>
-                        <span class="title">Тизер (еще 7)</span> <br>
-                        Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей
-                        привлекательностью.
-                    </p>
-
-                    <p>
-                        <span class="title">Описание (еще 4)</span> <br>
-                        Родилась в Москве 6 февраля 1991 года.
-                        В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на
-                        стадионе «Юных Пионеров»,
-                        где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с
-                        2000 по 2005
-                        в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась
-                        Екатерина
-                        Владимировна, которая часто говорила, что за сорок лет преподавания
-                        у нее не было и не будет отличников.
-                        По словам Анны, это ее очень закалило.
-                        Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею
-                        до
-                        тех пор, пока спорт не стал занимать все большее место в ее жизни...
-                    </p>
-                    </div>-->
                 </div>
                 <div class="col-md-4">
                     <p ng-show="factlist[0]">
@@ -1187,13 +576,6 @@
                         <span class="title">{{factlist[1].FactType.Name}}</span> <br>
                         {{factlist[1].FactText}}
                     </p>
-
-                    <!--<p>
-                        <span class="title">Био</span> <br>
-                        Анна училась в школах №73
-                        и №1304, в 2013 году закончила факультет истории политологии и права в Российском ...
-                    </p>-->
-
                     <p ng-show="factlist.length - 2 > 0">
                         <span class="title">еще {{factlist.length - 2}}</span> <br>
                     </p>
@@ -1205,22 +587,6 @@
                         {{item.value}} <br>
                         {{item.descript}}
                     </p>
-                    <!--<p>
-                        <span class="title">Персона (еще 3)</span> <br>
-                        Ольга Андриянова <br>
-                        Тренер (для Персоны)
-                    </p>
-
-                    <p>
-                        <span class="title">Мероприятия (еще 14)</span> <br>
-                        Чемпионат мира по керлингу
-                    </p>
-
-                    <p>
-                        <span class="title">Событие (еще 19)</span> <br>
-                        Чемпионат мира по керлингу
-                        в Германии 2016
-                    </p>-->
                 </div>
 
                 <div class="col-md-4">
@@ -1228,13 +594,6 @@
                         <span class="title">{{item.type}} <a ng-show="item.count > 0">(еще {{item.count}})</a></span> <br>
                         <img ng-src="{{item.value}}" alt="Placeholder" style="width: 100px; margin-top: 8px;">
                     </div>
-                    <!--<div class="persona-main__container_media">
-                        <span style="">Фото (еще 71)</span>
-                    </div>
-
-                    <div class="persona-main__container_media" style="margin-top: 20px;">
-                        <span>Видео (еще 28)</span>
-                    </div>-->
                 </div>
 
                 <div class="col-md-4">
@@ -1245,15 +604,6 @@
                             <span ng-show="!item.descript">ссылка</span>
                         </a>
                     </p>
-                    <!--<p>
-                        <span class="title">instagram</span> <br>
-                        <a href="https://instagram.com/curlme_anna">instagram.com/curlme_anna</a>
-                    </p>
-
-                    <p>
-                        <span class="title">facebook</span> <br>
-                        <a href="https://www.facebook.com/fakeacc_curl">https://www.facebook.com/fakeacc_curl</a>
-                    </p>-->
                 </div>
 
                 <div class="col-md-4">
@@ -1262,26 +612,6 @@
                             <td>{{row.AntroName}}</td>
                             <td>{{row.Value}}</td>
                         </tr>
-                        <!--<tr>
-                            <td>Рост</td>
-                            <td>170 см</td>
-                        </tr>
-                        <tr>
-                            <td>Вес</td>
-                            <td>55 кг</td>
-                        </tr>
-                        <tr>
-                            <td>Глаза</td>
-                            <td>Зеленые (фото)</td>
-                        </tr>
-                        <tr>
-                            <td>Размер стопы</td>
-                            <td>39</td>
-                        </tr>
-                        <tr>
-                            <td>Длина ноги</td>
-                            <td>120 см</td>
-                        </tr>-->
                     </table>
                 </div>
 

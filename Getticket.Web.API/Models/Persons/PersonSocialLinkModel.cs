@@ -17,5 +17,6 @@ namespace Getticket.Web.API.Models.Persons
 
         [Required]public int IdSocialLinkType { get; set; }
         public string PersonSocialLinkType { get; set; }
+        public LastChangeModel LastChange { get; set; }
     }
 }

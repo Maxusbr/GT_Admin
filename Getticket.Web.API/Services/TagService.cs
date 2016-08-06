@@ -35,16 +35,38 @@ namespace Getticket.Web.API.Services
             return TagModelHelper.GeTagModels(result);
         }
 
-        /// <see cref="ITagService.GeTags(int)"/>
-        public IList<TagModel> GeTags(int personId)
+        /// <see cref="ITagService.GePersonTags"/>
+        public IList<TagModel> GePersonTags(int personId)
         {
-            var result = _tagRepository.GeTags(personId);
+            var result = _tagRepository.GePersonTags(personId);
+            return TagModelHelper.GeTagModels(result);
+        }
+
+        /// <see cref="ITagService.GeDescriptionTags"/>
+        public IList<TagModel> GeDescriptionTags(int descriptionId)
+        {
+            var result = _tagRepository.GeDescriptionTags(descriptionId);
+            return TagModelHelper.GeTagModels(result);
+        }
+
+        /// <see cref="ITagService.GeAntroTags"/>
+        public IList<TagModel> GeAntroTags(int tagAntroId)
+        {
+            var result = _tagRepository.GeAntroTags(tagAntroId);
+            return TagModelHelper.GeTagModels(result);
+        }
+
+        /// <see cref="ITagService.GePersonMediaTags"/>
+        public IList<TagModel> GePersonMediaTags(int mediaId)
+        {
+            var result = _tagRepository.GePersonMediaTags(mediaId);
             return TagModelHelper.GeTagModels(result);
         }
 
         /// <see cref="ITagService.AddTagLinks(TagsAntroModel)"/>
         public bool AddTagLinks(TagsAntroModel model)
         {
+            _tagRepository.DeletePersonAntroTags(model.IdPerson, model.IdAntroName, model.IsMoreThan, model.Value);
             if (model.Tags.Length < 1) return true;
             var list = model.Tags.Select(o => TagModelHelper.GetTagLink(model, o));
             var response = list.Select(link => _tagRepository.AddTagLink(link))
@@ -55,6 +77,7 @@ namespace Getticket.Web.API.Services
         /// <see cref="ITagService.AddTagLinks(TagsDescriptionModel)"/>
         public bool AddTagLinks(TagsDescriptionModel model)
         {
+            _tagRepository.DeletePersonDescriptionTags(model.Tizer.Id);
             if (model.Tags.Length < 1) return true;
             var list = model.Tags.Select(o => TagModelHelper.GetTagLink(model.Tizer.Id, o));
             var response = list.Select(link => _tagRepository.AddTagLink(link))
@@ -65,8 +88,20 @@ namespace Getticket.Web.API.Services
         /// <see cref="ITagService.AddTagLinks(int,IEnumerable{TagModel})"/>
         public bool AddTagLinks(int personId, IEnumerable<TagModel> models)
         {
+            _tagRepository.DeletePersonTags(personId);
             if (!models.Any()) return true;
             var list = TagModelHelper.GetTagLink(personId, models);
+            var response = list.Select(link => _tagRepository.AddTagLink(link))
+                    .All(taglink => taglink != null);
+            return response;
+        }
+
+        /// <see cref="ITagService.AddTagLinks(TagsPersonMediaModel)"/>
+        public bool AddTagLinks(TagsPersonMediaModel model)
+        {
+            _tagRepository.DeletePersonMediaTags(model.IdMedia);
+            if (!model.Tags.Any()) return true;
+            var list = TagModelHelper.GetTagLink(model);
             var response = list.Select(link => _tagRepository.AddTagLink(link))
                     .All(taglink => taglink != null);
             return response;

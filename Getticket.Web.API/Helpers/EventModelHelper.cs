@@ -29,7 +29,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static EventModel GetEventModel(Event entity)
         {
-            return entity != null ? new EventModel
+            var result = entity != null ? new EventModel
             {
                 Id = entity.Id,
                 Name = entity.Name,
@@ -38,8 +38,10 @@ namespace Getticket.Web.API.Helpers
                 Description = entity.Description,
                 EventDate = entity.EventDate,
                 TicketReturn = entity.TicketReturn,
-                EventType = entity.EventType?.Name
+                EventType = entity.Category.IdParent != null ? entity.Category.ParentCategory.Name: entity.Category.Name
             } : new EventModel();
+
+            return result;
         }
         
     }

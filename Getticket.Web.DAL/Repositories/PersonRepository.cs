@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.Infrastructure;
 using Getticket.Web.DAL.IRepositories;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Repositories
 {
@@ -28,9 +31,27 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.SavePerson" />
-        public Person SavePerson(Person person)
+        public Person SavePerson(Person person, int userId)
         {
-            return base.Save(person);
+            if (person.Id == 0)
+            {
+                db.Entry(person).State = System.Data.Entity.EntityState.Added;
+            }
+            else if (person.Id > 0)
+            {
+                var pr = db.Person.FirstOrDefault(o => o.Id == person.Id);
+                SaveLog(pr, person, person.Id, userId, LogType.Entity);
+                db.Entry(pr).CurrentValues.SetValues(person);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return person;
         }
 
         /// <see cref="IPersonRepository.FindAllPerson" />
@@ -49,7 +70,7 @@ namespace Getticket.Web.DAL.Repositories
             {
                 where = where.And(x => x.id_Sex == sexId);
             }
-            return GetMany(where, x => orderby ? x.LastNameLatin: x.LastName, x => x.Sex, x => x.Place);
+            return GetMany(where, x => orderby ? x.LastNameLatin : x.LastName, x => x.Sex, x => x.Place);
         }
 
         /// <see cref="IPersonRepository.DeletePerson" />
@@ -110,7 +131,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.UpdatePersonAntro" />
-        public PersonAntro UpdatePersonAntro(PersonAntro property)
+        public PersonAntro UpdatePersonAntro(PersonAntro property, int userId)
         {
             if (property.Id == 0)
             {
@@ -118,7 +139,9 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (property.Id > 0)
             {
-                db.Entry(property).State = System.Data.Entity.EntityState.Modified;
+                var pr = db.PersonAntro.FirstOrDefault(o => o.Id == property.Id);
+                SaveLog(pr, property, property.id_Person, userId, LogType.Anthropometry);
+                db.Entry(pr).CurrentValues.SetValues(property);
             }
             try
             {
@@ -131,10 +154,12 @@ namespace Getticket.Web.DAL.Repositories
             return property;
         }
 
+        
+
         /// <see cref="IPersonRepository.AddPersonAntros" />
-        public bool AddPersonAntros(IList<PersonAntro> properties)
+        public bool AddPersonAntros(IList<PersonAntro> properties, int userId)
         {
-            return properties.Select(UpdatePersonAntro).All(rec => rec != null);
+            return properties.Select(property => UpdatePersonAntro(property, userId)).All(rec => rec != null);
         }
 
         /// <see cref="IPersonRepository.DeletePersonAntros" />
@@ -273,13 +298,13 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.AddConnections" />
-        public bool AddConnections(IList<PersonConnection> connections)
+        public bool AddConnections(IList<PersonConnection> connections, int userId)
         {
-            return connections.All(el => SaveConnection(el) != null);
+            return connections.All(el => SaveConnection(el, userId) != null);
         }
 
         /// <see cref="IPersonRepository.SaveConnection" />
-        public PersonConnection SaveConnection(PersonConnection connection)
+        public PersonConnection SaveConnection(PersonConnection connection, int userId)
         {
             if (connection.Id == 0)
             {
@@ -287,7 +312,9 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (connection.Id > 0)
             {
-                db.Entry(connection).State = System.Data.Entity.EntityState.Modified;
+                var pr = db.PersonConnections.FirstOrDefault(o => o.Id == connection.Id);
+                SaveLog(pr, connection, connection.id_Person, userId, LogType.Connection);
+                db.Entry(pr).CurrentValues.SetValues(connection);
             }
             try
             {
@@ -359,7 +386,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.UpdateDescription" />
-        public PersonDescription UpdateDescription(PersonDescription description)
+        public PersonDescription UpdateDescription(PersonDescription description, int userId)
         {
             if (description.Id == 0)
             {
@@ -367,7 +394,9 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (description.Id > 0)
             {
-                db.Entry(description).State = System.Data.Entity.EntityState.Modified;
+                var pr = db.PersonDescriptions.FirstOrDefault(o => o.Id == description.Id);
+                SaveLog(pr, description, description.id_Person, userId, LogType.Description);
+                db.Entry(pr).CurrentValues.SetValues(description);
             }
             try
             {
@@ -398,7 +427,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.UpdateMedia" />
-        public PersonMedia UpdateMedia(PersonMedia media)
+        public PersonMedia UpdateMedia(PersonMedia media, int userId)
         {
             if (media.Id == 0)
             {
@@ -406,7 +435,9 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (media.Id > 0)
             {
-                db.Entry(media).State = System.Data.Entity.EntityState.Modified;
+                var pr = db.PersonMedia.FirstOrDefault(o => o.Id == media.Id);
+                SaveLog(pr, media, media.id_Person, userId, LogType.Media);
+                db.Entry(pr).CurrentValues.SetValues(media);
             }
             try
             {
@@ -516,13 +547,13 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.UpdatePersonFacts" />
-        public bool UpdatePersonFacts(IList<PersonFact> facts)
+        public bool UpdatePersonFacts(IList<PersonFact> facts, int userId)
         {
-            return facts.All(fact => UpdatePersonFact(fact) != null);
+            return facts.All(fact => UpdatePersonFact(fact, userId) != null);
         }
 
         /// <see cref="IPersonRepository.UpdatePersonFact" />
-        public PersonFact UpdatePersonFact(PersonFact fact)
+        public PersonFact UpdatePersonFact(PersonFact fact, int userId)
         {
             if (fact.Id == 0)
             {
@@ -530,7 +561,9 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (fact.Id > 0)
             {
-                db.Entry(fact).State = System.Data.Entity.EntityState.Modified;
+                var pr = db.PersonFacts.FirstOrDefault(o => o.Id == fact.Id);
+                SaveLog(pr, fact, fact.id_Person, userId, LogType.Fact);
+                db.Entry(pr).CurrentValues.SetValues(fact);
             }
             try
             {
@@ -601,13 +634,13 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.UpdateSocialLinks" />
-        public bool UpdateSocialLinks(IList<PersonSocialLink> links)
+        public bool UpdateSocialLinks(IList<PersonSocialLink> links, int userId)
         {
-            return links.All(link => UpdateSocialLink(link) != null);
+            return links.All(link => UpdateSocialLink(link, userId) != null);
         }
 
         /// <see cref="IPersonRepository.UpdateSocialLink" />
-        public PersonSocialLink UpdateSocialLink(PersonSocialLink link)
+        public PersonSocialLink UpdateSocialLink(PersonSocialLink link, int userId)
         {
             if (link.Id == 0)
             {
@@ -615,7 +648,9 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (link.Id > 0)
             {
-                db.Entry(link).State = System.Data.Entity.EntityState.Modified;
+                var pr = db.PersonSocialLinks.FirstOrDefault(o => o.Id == link.Id);
+                SaveLog(pr, link, link.id_Person, userId, LogType.Link);
+                db.Entry(pr).CurrentValues.SetValues(link);
             }
             try
             {
@@ -642,7 +677,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IPersonRepository.GetCountries" />
         public IList<Country> GetCountries(string foundName)
         {
-            return string.IsNullOrEmpty(foundName) ? db.Country.ToList(): 
+            return string.IsNullOrEmpty(foundName) ? db.Country.ToList() :
                 db.Country.Where(o => o.Name.ToLower().Contains(foundName.ToLower())).ToList();
         }
 
@@ -689,7 +724,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IPersonRepository.GetCountryPlaces(string)" />
         public IList<CountryPlace> GetCountryPlaces(string foundName)
         {
-            return string.IsNullOrEmpty(foundName) ? db.CountryPlaces.Where(o => true).Include(o => o.Country).ToList():
+            return string.IsNullOrEmpty(foundName) ? db.CountryPlaces.Where(o => true).Include(o => o.Country).ToList() :
                 db.CountryPlaces.Where(o => o.Name.ToLower().Contains(foundName.ToLower())).Include(o => o.Country).ToList();
         }
 
@@ -771,14 +806,31 @@ namespace Getticket.Web.DAL.Repositories
             var cnt = db.Country.FirstOrDefault(o => o.Name.ToLower().Equals(country));
             if (cnt == null)
             {
-                cnt =db.Country.Add(new Country {Name = country});
+                cnt = db.Country.Add(new Country { Name = country });
                 db.SaveChanges();
             }
             var pls = db.CountryPlaces.FirstOrDefault(o => o.Name.ToLower().Equals(place));
             if (pls != null) return pls.Id;
-            pls = db.CountryPlaces.Add(new CountryPlace {Name = place, id_Country = cnt.Id});
+            pls = db.CountryPlaces.Add(new CountryPlace { Name = place, id_Country = cnt.Id });
             db.SaveChanges();
             return pls.Id;
+        }
+
+        private void SaveLog<T>(T from, T to, int personId, int userId, LogType type) where T : BaseEntity
+        {
+            var log = new PersonLog
+            {
+                Date = DateTime.Now,
+                UserId = userId,
+                IdPerson = personId,
+                IdProperty = to.Id,
+                Type = type,
+                ChengeFrom = JsonConvert.SerializeObject(from),
+                ChangeTo = JsonConvert.SerializeObject(to)
+            };
+            db.Entry(log).State = System.Data.Entity.EntityState.Added;
+            //db.PersonLogs.Add(log);
+            //db.SaveChanges();
         }
     }
 }

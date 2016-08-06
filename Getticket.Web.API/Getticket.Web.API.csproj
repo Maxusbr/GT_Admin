@@ -207,6 +207,7 @@
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
     <Compile Include="Helpers\EventModelHelper.cs" />
     <Compile Include="Helpers\RestorePasswordEmailModelHelper.cs" />
+    <Compile Include="Helpers\LogModelHelper.cs" />
     <Compile Include="Helpers\TagModelHelper.cs" />
     <Compile Include="Helpers\TimeSpanExtensions.cs" />
     <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="Models\CreateDescriptionModel.cs" />
     <Compile Include="Models\Emails\RestorePasswordEmailModel.cs" />
     <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\LastChangeModel.cs" />
     <Compile Include="Models\Persons\CountryModel.cs" />
     <Compile Include="Models\Persons\CountryPlaceModel.cs" />
     <Compile Include="Models\Persons\EntityCollection.cs" />

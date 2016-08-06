@@ -6,55 +6,54 @@ using Getticket.Web.DAL.Enums;
 namespace Getticket.Web.DAL.Entities
 {
     /// <summary>
-    /// Лог изменения сущностей <see cref="Entities.Event" /> сущностями <see cref="Entities.User" />
+    /// Лог изменения сущностей <see cref="Entities.Person" /> сущностями <see cref="Entities.User" />
     /// </summary>
-    public class EventLog : BaseEntity
+    public class PersonLog : BaseEntity
     {
         /// <summary>
-        /// Содержание <see cref="Event" /> до изменения
+        /// Содержание <see cref="Entities.Person" /> до изменения
         /// Обязательное поле
         /// </summary>
         [Required]
         public string ChengeFrom { get; set; }
 
         /// <summary>
-        /// Содержание <see cref="Event" /> после изменения,
+        /// Содержание <see cref="Entities.Person" /> после изменения,
         /// Обязательное поле
         /// </summary>
         [Required]
         public string ChangeTo { get; set; }
 
         /// <summary>
-        /// FK для <see cref="Entities.User" />
+        /// FK для <see cref="Entities.UserInfo" />
         /// </summary>
         public int UserId { get; set; }
 
         /// <summary>
         /// Ссылка на изменившего <see cref="Entities.User" />
         /// </summary>
-        
-        public User User { get; set; }
+        [ForeignKey("UserId")]
+        public virtual UserInfo User { get; set; }
+        /// <summary>
+        /// FK для <see cref="Entities.Person" />
+        /// </summary>
+        public int IdPerson { get; set; }
 
         /// <summary>
-        /// FK для <see cref="Entities.Event" />
+        /// Ссылка на измененное <see cref="Entities.Person" />
         /// </summary>
-        public int EventId { get; set; }
-
-        /// <summary>
-        /// Ссылка на измененное <see cref="Entities.Event" />
-        /// </summary>
-        [ForeignKey("EventId")]
-        public Event Event { get; set; }
-
-        /// <summary>
-        /// Ссылка на измененное свойство
-        /// </summary>
-        public int IdProperty { get; set; }
+        [ForeignKey("IdPerson")]
+        public virtual Person Person { get; set; }
 
         /// <summary>
         /// Дата изменения
         /// </summary>
         public DateTime Date { get; set; }
+
+        /// <summary>
+        /// Ссылка на измененное свойство
+        /// </summary>
+        public int IdProperty { get; set; }
 
         /// <see cref="LogType"/>
         public LogType Type { get; set; }

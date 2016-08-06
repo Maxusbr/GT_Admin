@@ -45,6 +45,7 @@ namespace Getticket.Web.API.App_Start
             kernel.Bind<IPersonRepository>().To<PersonRepository>();
             kernel.Bind<IEventRepository>().To<EventRepository>();
             kernel.Bind<ITagRepository>().To<TagRepository>();
+            kernel.Bind<ILogRepository>().To<LogRepository>();
 
             kernel.Bind<IPersonService>().To<PersonService>().InRequestScope();
             kernel.Bind<IEventService>().To<EventService>().InRequestScope();

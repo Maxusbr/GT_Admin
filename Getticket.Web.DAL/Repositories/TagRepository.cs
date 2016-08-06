@@ -23,20 +23,40 @@ namespace Getticket.Web.DAL.Repositories
             var result = db.Tags.ToList();
             foreach (var tag in result)
             {
-                if (db.TagLinks.Any(o => o.IdTag == tag.Id))
+                if (db.TagPersonLinks.Any(o => o.IdTag == tag.Id))
                     tag.UsesType.Add("Персоны");
                 if (db.TagDescriptionLinks.Any(o => o.IdTag == tag.Id))
                     tag.UsesType.Add("Подборки");
                 if (db.TagAntroLinks.Any(o => o.IdTag == tag.Id))
                     tag.UsesType.Add("Факты");
+                if (db.TagMediaLinks.Any(o => o.IdTag == tag.Id))
+                    tag.UsesType.Add("Медиа");
             }
             return result;
         }
 
-        /// <see cref="ITagRepository.GeTags(int)" />
-        public IList<Tag> GeTags(int personId)
+        /// <see cref="ITagRepository.GePersonTags(int)" />
+        public IList<Tag> GePersonTags(int personId)
         {
-            return db.TagLinks.Where(o => o.IdPerson == personId).Include(o => o.Tag).Select(o => o.Tag).ToList();
+            return db.TagPersonLinks.Where(o => o.IdPerson == personId).Include(o => o.Tag).Select(o => o.Tag).ToList();
+        }
+
+        /// <see cref="ITagRepository.GeDescriptionTags(int)" />
+        public IList<Tag> GeDescriptionTags(int descriptionId)
+        {
+            return db.TagDescriptionLinks.Where(o => o.IdDescription == descriptionId).Include(o => o.Tag).Select(o => o.Tag).ToList();
+        }
+
+        /// <see cref="ITagRepository.GeAntroTags(int)" />
+        public IList<Tag> GeAntroTags(int tagAntroId)
+        {
+            return db.TagAntroLinks.Where(o => o.IdTagAntro == tagAntroId).Include(o => o.Tag).Select(o => o.Tag).ToList();
+        }
+
+        /// <see cref="ITagRepository.GePersonMediaTags(int)" />
+        public IList<Tag> GePersonMediaTags(int mediaId)
+        {
+            return db.TagMediaLinks.Where(o => o.IdMedia == mediaId).Include(o => o.Tag).Select(o => o.Tag).ToList();
         }
 
         /// <see cref="ITagRepository.AddTag" />
@@ -91,23 +111,72 @@ namespace Getticket.Web.DAL.Repositories
             return tag;
         }
 
-        /// <see cref="ITagRepository.AddTagLink(TagLink)" />
-        public TagLink AddTagLink(TagLink model)
+        /// <see cref="ITagRepository.AddTagLink(TagPersonLink)" />
+        public TagPersonLink AddTagLink(TagPersonLink model)
         {
             if (model.IdTag == 0)
             {
                 if (model.Tag == null) return null;
                 model.IdTag = AddTag(model.Tag).Id;
             }
-            var tag = db.TagLinks.FirstOrDefault(o => o.IdPerson == model.IdPerson && o.IdTag == model.IdTag);
+            var tag = db.TagPersonLinks.FirstOrDefault(o => o.IdPerson == model.IdPerson && o.IdTag == model.IdTag);
             if(tag == null)
             {
-                tag = new TagLink {IdTag = model.IdTag, IdPerson = model.IdPerson};
-                db.TagLinks.Add(tag);
+                tag = new TagPersonLink {IdTag = model.IdTag, IdPerson = model.IdPerson};
+                db.TagPersonLinks.Add(tag);
                 db.SaveChanges();
             }
             return tag;
         }
+
+        /// <see cref="ITagRepository.AddTagLink(TagMediaLink)" />
+        public TagMediaLink AddTagLink(TagMediaLink model)
+        {
+            if (model.IdTag == 0)
+            {
+                if (model.Tag == null) return null;
+                model.IdTag = AddTag(model.Tag).Id;
+            }
+            var tag = db.TagMediaLinks.FirstOrDefault(o => o.IdMedia == model.IdMedia && o.IdTag == model.IdTag);
+            if (tag == null)
+            {
+                tag = new TagMediaLink { IdTag = model.IdTag, IdMedia = model.IdMedia };
+                db.TagMediaLinks.Add(tag);
+                db.SaveChanges();
+            }
+            return tag;
+        }
+
+        /// <see cref="ITagRepository.DeletePersonMediaTags" />
+        public void DeletePersonMediaTags(int idMedia)
+        {
+            db.TagMediaLinks.RemoveRange(db.TagMediaLinks.Where(o => o.IdMedia == idMedia));
+            db.SaveChanges();
+        }
+
+        /// <see cref="ITagRepository.DeletePersonTags" />
+        public void DeletePersonTags(int idPerson)
+        {
+            db.TagPersonLinks.RemoveRange(db.TagPersonLinks.Where(o => o.IdPerson == idPerson));
+            db.SaveChanges();
+        }
+
+        /// <see cref="ITagRepository.DeletePersonDescriptionTags" />
+        public void DeletePersonDescriptionTags(int idDescription)
+        {
+            db.TagDescriptionLinks.RemoveRange(db.TagDescriptionLinks.Where(o => o.IdDescription == idDescription));
+            db.SaveChanges();
+        }
+
+        /// <see cref="ITagRepository.DeletePersonAntroTags" />
+        public void DeletePersonAntroTags(int idPerson, int idAntroName, bool isMoreThan, int value)
+        {
+            var antro = db.TagAntros.FirstOrDefault(o => o.IdPerson == idPerson && o.IdAntroName == idAntroName && o.Value == value && o.IsMoreThan == isMoreThan);
+            if (antro != null) return;
+            db.TagAntroLinks.RemoveRange(db.TagAntroLinks.Where(o => o.IdTagAntro == antro.Id));
+            db.SaveChanges();
+        }
+
 
         private TagAntro AddTagAntro(TagAntro model)
         {

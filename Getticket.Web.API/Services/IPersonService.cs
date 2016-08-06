@@ -89,8 +89,9 @@ namespace Getticket.Web.API.Services
         /// Add or Update Person entity
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce SavePerson(PersonModel model);
+        ServiceResponce SavePerson(PersonModel model, int userId);
 
         /// <summary>
         /// Delete Person entity
@@ -120,8 +121,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce UpdateAntros(int pesonId, IEnumerable<PersonAntroModel> models);
+        ServiceResponce UpdateAntros(int pesonId, IEnumerable<PersonAntroModel> models, int userId);
 
         /// <summary>
         /// Удалить антропометрические характеристики
@@ -156,8 +158,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce UpdateConnection(int pesonId, IEnumerable<PersonConnectionModel> models);
+        ServiceResponce UpdateConnection(int pesonId, IEnumerable<PersonConnectionModel> models, int userId);
 
         /// <summary>
         /// Удалить связи
@@ -170,7 +173,7 @@ namespace Getticket.Web.API.Services
         /// Возвращает список типов ссылок
         /// </summary>
         /// <returns></returns>
-        IList<PersonSocialLinkTypeModel> GetSocialLinkTipes();
+        IList<PersonSocialLinkTypeModel> GetSocialLinkTypes();
 
         /// <summary>
         /// Добавить/Изменить типы ссылок
@@ -191,8 +194,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce UpdateSocialLink(int pesonId, IEnumerable<PersonSocialLinkModel> models);
+        ServiceResponce UpdateSocialLink(int pesonId, IEnumerable<PersonSocialLinkModel> models, int userId);
 
         /// <summary>
         /// Удалить ссылки
@@ -226,8 +230,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce UpdateMedia(int pesonId, IEnumerable<PersonMediaModel> models);
+        bool UpdateMedia(int pesonId, IEnumerable<PersonMediaModel> models, int userId);
 
         /// <summary>
         /// Удалить список медиа
@@ -256,20 +261,23 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         ServiceResponce DeleteDescriptionTypes(IEnumerable<PersonDescriptionTypeModel> models);
+
         /// <summary>
         /// Добавить/Изменить список описаний для Person c Id = <paramref name="pesonId"/>
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce UpdateDescriptions(int pesonId, IEnumerable<PersonDescriptionModel> models);
+        ServiceResponce UpdateDescriptions(int pesonId, IEnumerable<PersonDescriptionModel> models, int userId);
 
         /// <summary>
         /// Добавить/Изменить описание
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        int UpdateDescriptions(PersonDescriptionModel model);
+        int UpdateDescriptions(PersonDescriptionModel model, int userId);
 
         /// <summary>
         /// Удалить список описаний
@@ -303,8 +311,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="pesonId"></param>
         /// <param name="models"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models);
+        ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models, int userId);
 
         /// <summary>
         /// Удалить факты

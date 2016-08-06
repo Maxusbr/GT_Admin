@@ -174,7 +174,7 @@
         }
 
         function saveDescriptions(model, callback) {
-            return $http.post(`${apiUrl}persons/tags/save`, model).success(function (data) {
+            return $http.post(`${apiUrl}persons/tags/save/description`, model).success(function (data) {
                 callback(data);
             }).error(function (data) {
                 callback(data);

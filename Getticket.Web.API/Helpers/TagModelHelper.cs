@@ -39,10 +39,16 @@ namespace Getticket.Web.API.Helpers
             return new TagDescriptionLink {IdTag = tag.Id, Tag = GetTag(tag),IdDescription = idDescription };
         }
 
-        public static IList<TagLink> GetTagLink(int personId, IEnumerable<TagModel> tags)
+        public static IList<TagPersonLink> GetTagLink(int personId, IEnumerable<TagModel> tags)
         {
-            return tags.Select(o => new TagLink {IdPerson = personId, IdTag = o.Id, Tag = GetTag(o) }).ToList();
+            return tags.Select(o => new TagPersonLink {IdPerson = personId, IdTag = o.Id, Tag = GetTag(o) }).ToList();
         }
 
+        public static IList<TagMediaLink> GetTagLink(TagsPersonMediaModel model)
+        {
+            return
+                model.Tags.Select(o => new TagMediaLink {IdMedia = model.IdMedia, IdTag = o.Id, Tag = GetTag(o)})
+                    .ToList();
+        }
     }
 }

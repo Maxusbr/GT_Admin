@@ -18,6 +18,6 @@ namespace Getticket.Web.API.Models.Persons
         public string Description { get; set; }
         public int? id_Event { get; set; }
         public EventModel Event { get; set; }
-
+        public LastChangeModel LastChange { get; set; }
     }
 }
