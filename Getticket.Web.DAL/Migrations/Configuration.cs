@@ -66,13 +66,15 @@ namespace Getticket.Web.DAL.Migrations
             User user3 = new User()
             {
                 Id = 3,
-                UserName = "admin@admin.su",
-                UserPhone = "+79159998877",
-                Password = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+                UserName = "admin@getticket.ru",
+                UserPhone = "+79153332258",
+                Password = "e71a2ec101b9eb9d9d242881522528c91005a9d4d87d9e0ace54b79005bd7a97",
                 AccessRoleId = 1,
-                UserStatuses = new UserStatuses() { Name = "seed", Description = "", Status = UserStatusType.System },
-                UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ" }
+                UserStatuses = new UserStatuses() { Name = "seed", Description = "admin", Status = UserStatusType.System },
+                UserInfo = new UserInfo() { Id = 3, Name = "gtadmin", LastName = "Админ" }
             };
+
+
             var user4 = new User()
             {
                 Id = 4,
@@ -81,7 +83,7 @@ namespace Getticket.Web.DAL.Migrations
                 Password = "65e84be33532fb784c48129675f9eff3a682b27168c0ea744b2cf58ee02337c5",
                 AccessRoleId = 1,
                 UserStatuses = new UserStatuses() { Name = "seed", Description = "", Status = UserStatusType.System },
-                UserInfo = new UserInfo() { Id = 3, Name = "admin", LastName = "Админ" }
+                UserInfo = new UserInfo() { Id = 4, Name = "admin", LastName = "Админ" }
             };
             context.Users.AddOrUpdate(u => u.Id, user1);
             context.Users.AddOrUpdate(u => u.Id, user2);
