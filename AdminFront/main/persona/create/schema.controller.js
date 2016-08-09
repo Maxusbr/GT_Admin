@@ -10,13 +10,17 @@
         $scope.id = $rootScope.person.Id;
         function getDescript(data) {
             $scope.tizerlist = [];
-            var item = $filter('filter')(data, { Type: 1 })[0];
-            if (item != undefined) {
-                item.List.forEach(function (el) {
+            $scope.descriptionlist = [];
+
+            data.forEach(function(item) {
+                item.List.forEach(function(el) {
                     el.Name = el.DescriptionText.length > 28 ? el.DescriptionText.substr(0, 25) + '...' : el.DescriptionText;
-                    $scope.tizerlist.push(el);
+                    if(item.Type === 1)
+                        $scope.tizerlist.push(el);
+                    if (item.Type === 2)
+                        $scope.descriptionlist.push(el);
                 });
-            }
+            });
         }
         var indx = 0;
         var fact = { id: indx++, Tags: [], IdPerson: $scope.id };
