@@ -24,16 +24,29 @@ namespace Getticket.Web.DAL.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// Внешний ключ для <see cref="Entities.Country"/>
+        /// Название
+        /// </summary>
+        [MaxLength(50)]
+        [Index("CountryPlaceNameIndex", 2, IsUnique = true)]
+        public string Abr { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="Entities.Region"/>
         /// </summary>
         [Required]
-        [Index("CountryPlaceNameIndex", 2, IsUnique = true)]
-        public int id_Country { get; set; }
+        [Index("CountryPlaceNameIndex", 3, IsUnique = true)]
+        public int id_Region { get; set; }
 
         /// <summary>
         /// <see cref="Entities.Country"/>
         /// </summary>
-        [ForeignKey("id_Country")]
         public virtual Country Country { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.Region"/>
+        /// </summary>
+        [ForeignKey("id_Region")]
+        public virtual Region Region { get; set; }
+
     }
 }
