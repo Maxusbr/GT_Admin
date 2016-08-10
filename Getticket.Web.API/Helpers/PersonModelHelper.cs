@@ -4,6 +4,7 @@ using Getticket.Web.DAL.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using Getticket.Web.API.Models.Persons;
+using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.API.Helpers
 {
@@ -29,7 +30,7 @@ namespace Getticket.Web.API.Helpers
                 Name = person.Name,
                 LastName = person.LastName,
                 Patronymic = person.Patronymic,
-                Sex = person.Sex,
+                Sex = (int)person.Sex,
                 Bithday = person.Bithday,
                 NameLatin = person.NameLatin,
                 LastNameLatin = person.LastNameLatin,
@@ -317,7 +318,7 @@ namespace Getticket.Web.API.Helpers
                 NameLatin = model.NameLatin,
                 LastNameLatin = model.LastNameLatin,
                 PatronymicLatin = model.PatronymicLatin,
-                Sex = model.Sex,
+                Sex = (Sex)model.Sex,
                 id_Bithplace = model.IdBithplace,
             };
             return person;

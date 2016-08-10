@@ -15,7 +15,7 @@
         else {
             $scope.isCreate = $scope.isEdit = true;
             $rootScope.id = $scope.id = -1;
-            $scope.person = {Country:"", Place:"", IdSex: 1}
+            $scope.person = {Country:"", Place:"", Sex: 0}
         }
         
 

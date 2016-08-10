@@ -56,7 +56,7 @@ namespace Getticket.Web.API.Models.Persons
         public string Place { get; set; }
         public string Country { get; set; }
         [Required]
-        public Sex Sex { get; set; }
+        public int Sex { get; set; }
 
         /// <summary>
         /// Тип события

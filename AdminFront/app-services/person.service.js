@@ -152,7 +152,7 @@
                 IdBithplace: person.IdBithplace,
                 Place: person.Place,
                 Country: person.Country,
-                IdSex: person.IdSex
+                Sex: person.Sex
             }
             return $http.post(`${apiUrl}persons/add`, model).success(function (data) {
                 callback(data);
