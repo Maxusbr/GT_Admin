@@ -268,7 +268,7 @@ namespace Getticket.Web.API.Helpers
             {
                 Id = description.Id,
                 id_Person = description.id_Person,
-                id_DescriptionType = (int)description.PersonDescriptionType.Type,
+                id_DescriptionType = description.id_DescriptionType,
                 PersonDescriptionType = description.PersonDescriptionType.Name,
                 DescriptionText = description.DescriptionText, Status = description.Status
             } : new PersonDescriptionModel();

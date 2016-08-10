@@ -294,14 +294,17 @@
         // Description metods
         function continueSaveDescription(list) {
             
-            personService.getDescript($scope.id, getDescript);
+            personService.getDescript($scope.id, function (data) {
+                getDescript(data);
+                $scope.Changed(data);
+            });
             //list.forEach(function (item) {
             //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
             //    item.PersonDescriptionType = $rootScope.descriptiontypes.filter(function (type) {
             //        return type.Id == item.id_DescriptionType;
             //    })[0].Name;
             //});
-            //$scope.Changed(list);
+            //
         }
         function continueDeleteDescription(list) {
             personService.getDescript($scope.id, getDescript);
@@ -334,7 +337,10 @@
 
         // Fact metods
         function continueSaveFact(list) {
-            personService.getFact($scope.id, getFact);
+            personService.getFact($scope.id, function (data) {
+                getFact(data);
+                $scope.Changed(data);
+            });
             //list.forEach(function (item) {
             //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
             //    item.FactType = $rootScope.facttypes.filter(function (type) { return type.Id === item.id_FactType; })[0];
@@ -376,7 +382,10 @@
 
         // Connection metods
         function continueSaveConnection(list) {
-            personService.getConnection($scope.id, getConnection);
+            personService.getConnection($scope.id, function (data) {
+                getConnection(data);
+                $scope.Changed(data);
+            });
             //list.forEach(function (item) {
             //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
             //    item.PersonConnectionType = $rootScope.connectiontypes.filter(function (type) { return type.Id === item.id_ConnectionType; })[0].Name;
@@ -424,7 +433,10 @@
 
         // Media metods
         function continueSaveMedia(list) {
-            personService.getMedia($scope.id, getMedia);
+            personService.getMedia($scope.id, function (data) {
+                getMedia(data);
+                $scope.Changed(data);
+            });
             //list.forEach(function (item) {
             //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
             //    item.MediaType = $rootScope.mediatypes.filter(function (type) { return type.Id == item.id_MediaType; })[0].Name;
@@ -462,7 +474,10 @@
 
         // Links metods
         function continueSaveLink(list) {
-            personService.getLinks($scope.id, getLinks);
+            personService.getLinks($scope.id, function (data) {
+                getLinks(data);
+                $scope.Changed(data);
+            });
             //list.forEach(function (item) {
             //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
             //    item.PersonSocialLinkType = $rootScope.socialtypes.filter(function (type) { return type.Id == item.IdSocialLinkType; })[0].Name;
@@ -500,7 +515,10 @@
 
         // Media antros
         function continueSaveAntro(list) {
-            personService.getAntro($scope.id, getAntro);
+            personService.getAntro($scope.id, function(data) {
+                getAntro(data);
+                $scope.Changed(data);
+            });
             //list.forEach(function (item) {
             //    item.Changed = item.isEdit = item.isTypeEdit = item.isDescriptionEdit = false;
             //    item.AntroName = $rootScope.antronames.filter(function (type) { return type.Id == item.IdAntro; })[0].Name;
@@ -529,9 +547,9 @@
             var antro = {
                 Id: 0, Changed: true, isTypeEdit: true, isEdit: true, isDescriptionEdit: true,
                 id_Person: $scope.id,
-                IdAntro: 1
+                IdAntro: $rootScope.antronames[0].Id,
+                AntroName: $rootScope.antronames[0].Name
             }
-            antro.AntroName = $rootScope.antronames.filter(function (type) { return type.Id == antro.IdAntro; })[0].Name;
             $scope.antro.push(antro);
             $scope.Changed($scope.antro);
         }
