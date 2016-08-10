@@ -376,7 +376,8 @@ namespace Getticket.Web.API.Services
                     id_Person = pesonId,
                     id_ConnectionType = o.id_ConnectionType,
                     id_Event = o.id_Event,
-                    id_PersonConnectTo = o.id_PersonConnectTo
+                    id_PersonConnectTo = o.id_PersonConnectTo,
+                    Description = o.Description
                 }).ToList(), userId);
             return result ? ServiceResponce
                 .FromSuccess()
@@ -473,7 +474,9 @@ namespace Getticket.Web.API.Services
                 {
                     Id = o.Id,
                     id_Person = pesonId,
-                    id_SocialLinkType = o.IdSocialLinkType
+                    id_SocialLinkType = o.IdSocialLinkType,
+                    Link = o.Link,
+                    Description = o.Description
                 }).ToList(), userId);
             return result ? ServiceResponce
                 .FromSuccess()

@@ -66,6 +66,7 @@ namespace Getticket.Web.API.Services
         /// <see cref="ITagService.AddTagLinks(TagsAntroModel)"/>
         public bool AddTagLinks(TagsAntroModel model)
         {
+            if (model.IdAntroName == 0) return true;
             _tagRepository.DeletePersonAntroTags(model.IdPerson, model.IdAntroName, model.IsMoreThan, model.Value);
             if (model.Tags.Length < 1) return true;
             var list = model.Tags.Select(o => TagModelHelper.GetTagLink(model, o));
@@ -89,7 +90,7 @@ namespace Getticket.Web.API.Services
         public bool AddTagLinks(int personId, IEnumerable<TagModel> models)
         {
             _tagRepository.DeletePersonTags(personId);
-            if (!models.Any()) return true;
+            if (models == null || !models.Any()) return true;
             var list = TagModelHelper.GetTagLink(personId, models);
             var response = list.Select(link => _tagRepository.AddTagLink(link))
                     .All(taglink => taglink != null);

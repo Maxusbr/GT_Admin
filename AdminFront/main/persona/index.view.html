@@ -337,7 +337,7 @@
                                 <td>
                                     <span ng-show="!item.isDescriptionEdit">{{item.Description}}</span>
                                     <textarea type="text" class="form-control" style="min-height: 80px" ng-model="item.Description"
-                                              ng-show="item.isDescriptionEdit" ng-change="item.Changed = true; Changed(descriptionlist)"></textarea>
+                                              ng-show="item.isDescriptionEdit" ng-change="item.Changed = true; Changed(connectionList)"></textarea>
                                     <a href="" class="persona-table__edit glyphicon glyphicon-pencil" ng-click="item.isDescriptionEdit = !item.isDescriptionEdit"></a>
                                 </td>
                                 <td>

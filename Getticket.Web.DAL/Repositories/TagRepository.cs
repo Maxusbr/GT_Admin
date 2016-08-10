@@ -172,7 +172,7 @@ namespace Getticket.Web.DAL.Repositories
         public void DeletePersonAntroTags(int idPerson, int idAntroName, bool isMoreThan, int value)
         {
             var antro = db.TagAntros.FirstOrDefault(o => o.IdPerson == idPerson && o.IdAntroName == idAntroName && o.Value == value && o.IsMoreThan == isMoreThan);
-            if (antro != null) return;
+            if (antro == null) return;
             db.TagAntroLinks.RemoveRange(db.TagAntroLinks.Where(o => o.IdTagAntro == antro.Id));
             db.SaveChanges();
         }
