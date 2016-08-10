@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -24,5 +25,7 @@ namespace Getticket.Web.DAL.Entities
         [Required]
         [Index("NameIndex", Order = 2, IsUnique = true)]
         public string Detail { get; set; }
+
+        public DescriptionTypes Type { get; set; }
     }
 }

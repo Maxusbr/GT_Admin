@@ -120,8 +120,43 @@
                     </div>
                 </div>
             </div>
-
             <div class="row persona-create__block">
+                <div class="col-md-5">
+                    <div class="persona-create__title" title="(общий текст)">
+                        / Описание статичное
+                    </div>
+                    <div>
+                        <select class="form-control" id="" ng-model="description" ng-change="staticDescription = description.DescriptionText"
+                                ng-options="item as item.Name for item in descriptionlist">
+                            <option style="color: green;" value=""> + Новый</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-11">
+                    <div>
+                        Текст
+                    </div>
+
+                    <div style="padding-top: 5px;">
+                        <textarea title="(общий текст)" ng-change="existDescription = !staticDescription" ng-model="staticDescription" class="standard"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="space"></div>
+                    <div class="checkbox-input-container" style="margin-top: 24px">
+                        <div class="checkbox-input">
+                            <input type="checkbox" value="None" name="check" id="no-need-2" ng-model="existDescription"/>
+                            <label for="no-need-2"></label>
+                        </div>
+
+                        <span>Статичное описание не требуется</span>
+                    </div>
+
+                </div>
+            </div>
+            <!--<div class="row persona-create__block">
                 <div class="col-md-24 persona-create__title">
                     / Описание статичное (общий текст)
                 </div>
@@ -150,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="row persona-create__block">
                 <div class="col-md-24 persona-create__title">

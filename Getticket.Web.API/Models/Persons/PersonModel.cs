@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Getticket.Web.DAL.Enums;
 
 
 namespace Getticket.Web.API.Models.Persons
@@ -55,8 +56,7 @@ namespace Getticket.Web.API.Models.Persons
         public string Place { get; set; }
         public string Country { get; set; }
         [Required]
-        public int IdSex { get; set; }
-        public string Sex { get; set; }
+        public Sex Sex { get; set; }
 
         /// <summary>
         /// Тип события

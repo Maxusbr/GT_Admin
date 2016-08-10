@@ -15,9 +15,9 @@
             data.forEach(function(item) {
                 item.List.forEach(function(el) {
                     el.Name = el.DescriptionText.length > 28 ? el.DescriptionText.substr(0, 25) + '...' : el.DescriptionText;
-                    if(item.Type === 1)
+                    if(item.Type === 0)
                         $scope.tizerlist.push(el);
-                    if (item.Type === 2)
+                    if (item.Type === 1)
                         $scope.descriptionlist.push(el);
                 });
             });

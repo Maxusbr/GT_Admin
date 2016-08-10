@@ -24,7 +24,6 @@ namespace Getticket.Web.DAL.Repositories
         {
             if (id <= 0) return null;
             var person = db.Person.Where(u => u.Id == id)
-                .Include(o => o.Sex)
                 .Include(o => o.Place)
                 .FirstOrDefault();
             return person;
@@ -58,19 +57,19 @@ namespace Getticket.Web.DAL.Repositories
         public IList<Person> FindAllPerson()
         {
             Expression<Func<Person, bool>> where = x => true;
-            return GetMany(where, x => x.LastName, x => x.Sex, x => x.Place);
+            return GetMany(where, x => x.LastName, x => x.Place);
         }
 
         /// <see cref="IPersonRepository.FindPerson" />
-        public IList<Person> FindPerson(PageInfo page, string alphabetically, int? sexId = null)
+        public IList<Person> FindPerson(PageInfo page, string alphabetically, Sex? sexId = null)
         {
             var orderby = !string.IsNullOrEmpty(alphabetically) && alphabetically.Equals("A-Z");
             Expression<Func<Person, bool>> where = x => true;
             if (sexId != null)
             {
-                where = where.And(x => x.id_Sex == sexId);
+                where = where.And(x => x.Sex == sexId);
             }
-            return GetMany(where, x => orderby ? x.LastNameLatin : x.LastName, x => x.Sex, x => x.Place);
+            return GetMany(where, x => orderby ? x.LastNameLatin : x.LastName, x => x.Place);
         }
 
         /// <see cref="IPersonRepository.DeletePerson" />
@@ -757,45 +756,6 @@ namespace Getticket.Web.DAL.Repositories
             var item = db.CountryPlaces.FirstOrDefault(u => u.Id == id);
             if (item == null) return false;
             db.CountryPlaces.Remove(item);
-            db.SaveChanges();
-            return true;
-        }
-
-        /// <see cref="IPersonRepository.GetSexes" />
-        public IList<Sex> GetSexes()
-        {
-            return db.Sex.ToList();
-        }
-
-        /// <see cref="IPersonRepository.SaveSex" />
-        public Sex SaveSex(Sex sex)
-        {
-            if (sex.Id == 0)
-            {
-                db.Entry(sex).State = System.Data.Entity.EntityState.Added;
-            }
-            else if (sex.Id > 0)
-            {
-                db.Entry(sex).State = System.Data.Entity.EntityState.Modified;
-            }
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            return sex;
-        }
-
-        /// <see cref="IPersonRepository.DeleteSex" />
-        public bool DeleteSex(int id)
-        {
-            if (id <= 0) return false;
-            var item = db.Sex.FirstOrDefault(u => u.Id == id);
-            if (item == null) return false;
-            db.Sex.Remove(item);
             db.SaveChanges();
             return true;
         }

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -41,11 +42,6 @@ namespace Getticket.Web.DAL.Entities
         public int? id_Bithplace { get; set; }
 
         /// <summary>
-        /// Внешний ключ для пола
-        /// </summary>
-        public int id_Sex { get; set; }
-
-        /// <summary>
         /// Имя (латинское)
         /// </summary>
         public string NameLatin { get; set; }
@@ -67,9 +63,8 @@ namespace Getticket.Web.DAL.Entities
         public virtual CountryPlace Place { get; set; }
 
         /// <summary>
-        /// Пол <see cref="Entities.Sex"/>
+        /// Пол <see cref="Enums.Sex"/>
         /// </summary>
-        [ForeignKey("id_Sex")]
-        public virtual Sex Sex { get; set; }
+        public Sex Sex { get; set; }
     }
 }

@@ -105,18 +105,18 @@ namespace Getticket.Web.DAL.Migrations
             //context.CountryPlaces.AddOrUpdate(o => o.Id, place2);
             //context.CountryPlaces.AddOrUpdate(o => o.Id, place3);
 
-            //var pers1 = new Person { Name = "Светлана", LastName = "Абакачева", id_Sex = 2, Id = 1, Bithday = new DateTime(1990, 5, 16), id_Bithplace = 1 };
-            //var pers2 = new Person { Name = "Джастин", LastName = "Тимберлейк", NameLatin = "Justin", LastNameLatin = "Timberlake", id_Sex = 1, Id = 2, Bithday = new DateTime(1985, 11, 5), id_Bithplace = 3 };
-            //var pers3 = new Person { Name = "Анна", LastName = "Сидорова", Patronymic = "Владимировна", NameLatin = "Anna", LastNameLatin = "Sidorova", PatronymicLatin = "Vladimirova", id_Sex = 2, Id = 3, Bithday = new DateTime(1995, 3, 14), id_Bithplace = 2 };
-            //var pers4 = new Person { Name = "Вероника", LastName = "Абасова", id_Sex = 2, Id = 4, Bithday = new DateTime(1989, 8, 12), id_Bithplace = 2 };
-            //var pers5 = new Person { Name = "Алена", LastName = "Бабенко", id_Sex = 2, Id = 5, Bithday = new DateTime(1986, 7, 10), id_Bithplace = 2 };
-            //var pers6 = new Person { Name = "Алена", LastName = "Бабенко", id_Sex = 2, Id = 5, Bithday = new DateTime(1986, 7, 10), id_Bithplace = 2 };
+            var pers1 = new Person { Id = 7, Name = "Светлана", LastName = "Абакачева", Sex = Sex.Female, Bithday = new DateTime(1990, 5, 16), id_Bithplace = 4 };
+            var pers2 = new Person { Id = 6, Name = "Джастин", LastName = "Тимберлейк", NameLatin = "Justin", LastNameLatin = "Timberlake", Sex = Sex.Male, Bithday = new DateTime(1985, 11, 5), id_Bithplace = 6 };
+            var pers3 = new Person { Id = 8, Name = "Анна", LastName = "Сидорова", Patronymic = "Владимировна", NameLatin = "Anna", LastNameLatin = "Sidorova", PatronymicLatin = "Vladimirova", Sex = Sex.Female, Bithday = new DateTime(1995, 3, 14), id_Bithplace = 5 };
+            var pers4 = new Person { Id = 9, Name = "Вероника", LastName = "Абасова", Sex = Sex.Female, Bithday = new DateTime(1989, 8, 12), id_Bithplace = 5 };
+            var pers5 = new Person { Id = 10, Name = "Алена", LastName = "Бабенко", Sex = Sex.Female, Bithday = new DateTime(1986, 7, 10), id_Bithplace = 5 };
+            var pers6 = new Person { Id = 5, Name = "Алена", LastName = "Бабенко", Sex = Sex.Female, Bithday = new DateTime(1986, 7, 10), id_Bithplace = 5 };
 
-            //context.Person.AddOrUpdate(o => o.Id, pers1);
-            //context.Person.AddOrUpdate(o => o.Id, pers2);
-            //context.Person.AddOrUpdate(o => o.Id, pers3);
-            //context.Person.AddOrUpdate(o => o.Id, pers4);
-            //context.Person.AddOrUpdate(o => o.Id, pers5);
+            context.Person.AddOrUpdate(o => o.Id, pers1);
+            context.Person.AddOrUpdate(o => o.Id, pers2);
+            context.Person.AddOrUpdate(o => o.Id, pers3);
+            context.Person.AddOrUpdate(o => o.Id, pers4);
+            context.Person.AddOrUpdate(o => o.Id, pers5);
 
             //context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 1, Name = "Спорт" });
             //context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 2, Name = "Театр" });
@@ -148,8 +148,8 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonConnectionType.AddOrUpdate(o => o.Id, new PersonConnectionType { Id = 3, Name = "Событие" });
             context.SaveChanges();
 
-            context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 1, id_ConnectionType = 3, id_Person = 6, id_Event = 15, Description = "Артист" });
-            context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 2, id_ConnectionType = 3, id_Person = 7, id_Event = 16, Description = "Певец(соло)" });
+            context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 1, id_ConnectionType = 3, id_Person = 7, id_Event = 15, Description = "Артист" });
+            context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 2, id_ConnectionType = 3, id_Person = 6, id_Event = 16, Description = "Певец(соло)" });
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 3, id_ConnectionType = 3, id_Person = 8, id_Event = 10, Description = "Член команды (основной скип)" });
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 4, id_ConnectionType = 3, id_Person = 9, id_Event = 13, Description = "Артист" });
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 5, id_ConnectionType = 3, id_Person = 10, id_Event = 14, Description = "Артист (Граф Орлов)" });
@@ -157,14 +157,14 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 7, id_ConnectionType = 1, id_Person = 10, id_PersonConnectTo = 6, Description = "Подруга" });
             context.SaveChanges();
 
-            context.PersonDescriptionType.AddOrUpdate(o => o.Id, new PersonDescriptionType { Id = 1, Name = "Тизер" });
-            context.PersonDescriptionType.AddOrUpdate(o => o.Id, new PersonDescriptionType { Id = 2, Name = "Описание" });
+            context.PersonDescriptionType.AddOrUpdate(o => o.Id, new PersonDescriptionType { Id = 1, Name = "Тизер", Type = DescriptionTypes.Tizer});
+            context.PersonDescriptionType.AddOrUpdate(o => o.Id, new PersonDescriptionType { Id = 2, Name = "Описание", Type = DescriptionTypes.Description});
             context.SaveChanges();
 
-            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 1, id_DescriptionType = 1, id_Person = 6, DescriptionText = "С 2008 в составе международных команд, 3 олимпийских бронзы.С 2011 основной скип сборной России.", Status = "КA: Нужно ранжировать награды по степени важности" });
-            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 2, id_DescriptionType = 1, id_Person = 6, DescriptionText = "Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью.", Status = "КA: Нужно ранжировать награды по степени важности" });
-            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 3, id_DescriptionType = 2, id_Person = 6, DescriptionText = "Родилась в Москве 6 февраля 1991 года. В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на стадионе «Юных Пионеров», где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания у нее не было и не будет отличников. По словам Анны, это ее очень закалило. Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни...", Status = "КA: Нужно ранжировать награды по степени важности" });
-            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 4, id_DescriptionType = 2, id_Person = 6, DescriptionText = "Занималась фигурным катанием. Каталась на стадионе “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна.Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304.К концу учебы стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни.", Status = "КA: Нужно ранжировать награды по степени важности" });
+            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 1, id_DescriptionType = 1, id_Person = 7, DescriptionText = "С 2008 в составе международных команд, 3 олимпийских бронзы.С 2011 основной скип сборной России.", Status = "КA: Нужно ранжировать награды по степени важности" });
+            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 2, id_DescriptionType = 1, id_Person = 7, DescriptionText = "Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью.", Status = "КA: Нужно ранжировать награды по степени важности" });
+            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 3, id_DescriptionType = 2, id_Person = 7, DescriptionText = "Родилась в Москве 6 февраля 1991 года. В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на стадионе «Юных Пионеров», где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания у нее не было и не будет отличников. По словам Анны, это ее очень закалило. Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни...", Status = "КA: Нужно ранжировать награды по степени важности" });
+            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 4, id_DescriptionType = 2, id_Person = 7, DescriptionText = "Занималась фигурным катанием. Каталась на стадионе “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна.Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304.К концу учебы стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни.", Status = "КA: Нужно ранжировать награды по степени важности" });
             context.SaveChanges();
 
             context.PersonAntroNames.AddOrUpdate(o => o.Id, new PersonAntroName { Id = 2, Name = "Глаза \\ Цвет" });
@@ -173,14 +173,14 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonAntroNames.AddOrUpdate(o => o.Id, new PersonAntroName { Id = 5, Name = "Вес" });
             context.SaveChanges();
 
-            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 3, id_Person = 6, id_Antro = 2, Value = "Зеленые" });
-            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 4, id_Person = 6, id_Antro = 3, Value = "39" });
-            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 5, id_Person = 6, id_Antro = 4, Value = "170" });
-            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 6, id_Person = 6, id_Antro = 5, Value = "72" });
+            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 3, id_Person = 7, id_Antro = 2, Value = "Зеленые" });
+            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 4, id_Person = 7, id_Antro = 3, Value = "39" });
+            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 5, id_Person = 7, id_Antro = 4, Value = "170" });
+            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 6, id_Person = 7, id_Antro = 5, Value = "72" });
             context.SaveChanges();
 
-            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 7, id_Person = 7, id_Antro = 2, Value = "Карие" });
-            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 8, id_Person = 7, id_Antro = 3, Value = "41" });
+            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 7, id_Person = 6, id_Antro = 2, Value = "Карие" });
+            context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 8, id_Person = 6, id_Antro = 3, Value = "41" });
             context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 9, id_Person = 8, id_Antro = 4, Value = "175" });
             context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 10, id_Person = 8, id_Antro = 5, Value = "65" });
             context.SaveChanges();
@@ -189,18 +189,18 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonMediaType.AddOrUpdate(o => o.Id, new PersonMediaType { Id = 2, Name = "Фото" });
             context.SaveChanges();
 
-            context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 1, id_Person = 6, id_MediaType = 1, MediaLink = "http://localhost:36049/app-content/images/flag_ru.gif", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание"});
-            context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 2, id_Person = 6, id_MediaType = 1, MediaLink = "http://localhost:36049/app-content/images/flag_ru.jpg", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание" });
-            context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 3, id_Person = 6, id_MediaType = 2, MediaLink = "http://localhost:36049/app-content/images/logo-fullsize.png", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание" });
-            context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 4, id_Person = 6, id_MediaType = 2, MediaLink = "http://localhost:36049/app-content/images/logo-small.png", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание" });
+            context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 1, id_Person = 7, id_MediaType = 1, MediaLink = "http://localhost:36049/app-content/images/flag_ru.gif", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание"});
+            context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 2, id_Person = 7, id_MediaType = 1, MediaLink = "http://localhost:36049/app-content/images/flag_ru.jpg", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание" });
+            context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 3, id_Person = 7, id_MediaType = 2, MediaLink = "http://localhost:36049/app-content/images/logo-fullsize.png", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание" });
+            context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 4, id_Person = 7, id_MediaType = 2, MediaLink = "http://localhost:36049/app-content/images/logo-small.png", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание" });
             context.SaveChanges();
 
             context.PersonSocialLinkTypes.AddOrUpdate(o => o.Id, new PersonSocialLinkType { Id = 1, Name = "instagram" });
             context.PersonSocialLinkTypes.AddOrUpdate(o => o.Id, new PersonSocialLinkType { Id = 2, Name = "facebook" });
             context.SaveChanges();
 
-            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 1, id_Person = 6, id_SocialLinkType = 1, Link = "https://instagram.com/curlme_anna", Description = "instagram.com/curlme_anna" });
-            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 2, id_Person = 6, id_SocialLinkType = 2, Link = "https://www.facebook.com/fakeacc_curl", Description = "https://www.facebook.com/fakeacc_curl" });
+            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 1, id_Person = 7, id_SocialLinkType = 1, Link = "https://instagram.com/curlme_anna", Description = "instagram.com/curlme_anna" });
+            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 2, id_Person = 7, id_SocialLinkType = 2, Link = "https://www.facebook.com/fakeacc_curl", Description = "https://www.facebook.com/fakeacc_curl" });
             context.SaveChanges();
 
             context.PersonFactTypes.AddOrUpdate(o => o.Id, new PersonFactType { Id = 1, Name = "БИО", Descript = "ФИО"});
@@ -208,10 +208,10 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonFactTypes.AddOrUpdate(o => o.Id, new PersonFactType { Id = 3, Name = "Событие" });
             context.SaveChanges();
 
-            context.PersonFacts.AddOrUpdate(o => o.Id, new PersonFact {Id = 1, id_FactType = 1, id_Person = 6, FactText = "Родилась в Москве 6 февраля 1991 года. В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на стадионе «Юных Пионеров», где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания у нее не было и не будет отличников. По словам Анны, это ее очень закалило. Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни..." });
-            context.PersonFacts.AddOrUpdate(o => o.Id, new PersonFact {Id = 2, id_FactType = 2, id_Person = 6, FactText = "Занималась фигурным катанием. Каталась на стадионе “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. К концу учебы стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни." });
-            context.PersonFacts.AddOrUpdate(o => o.Id, new PersonFact {Id = 3, id_FactType = 3, id_Person = 6, FactText = "С 2008 в составе международных команд, 3 олимпийских бронзы.С 2011 основной скип сборной России." });
-            context.PersonFacts.AddOrUpdate(o => o.Id, new PersonFact {Id = 4, id_FactType = 3, id_Person = 6, FactText = "Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью." });
+            context.PersonFacts.AddOrUpdate(o => o.Id, new PersonFact {Id = 1, id_FactType = 1, id_Person = 7, FactText = "Родилась в Москве 6 февраля 1991 года. В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на стадионе «Юных Пионеров», где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания у нее не было и не будет отличников. По словам Анны, это ее очень закалило. Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни..." });
+            context.PersonFacts.AddOrUpdate(o => o.Id, new PersonFact {Id = 2, id_FactType = 2, id_Person = 7, FactText = "Занималась фигурным катанием. Каталась на стадионе “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. К концу учебы стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни." });
+            context.PersonFacts.AddOrUpdate(o => o.Id, new PersonFact {Id = 3, id_FactType = 3, id_Person = 7, FactText = "С 2008 в составе международных команд, 3 олимпийских бронзы.С 2011 основной скип сборной России." });
+            context.PersonFacts.AddOrUpdate(o => o.Id, new PersonFact {Id = 4, id_FactType = 3, id_Person = 7, FactText = "Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью." });
 
             context.SaveChanges();
         }

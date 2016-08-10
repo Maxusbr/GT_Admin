@@ -1,4 +1,6 @@
-﻿namespace Getticket.Web.API.Models.Persons
+﻿using Getticket.Web.DAL.Enums;
+
+namespace Getticket.Web.API.Models.Persons
 {
     /// <summary>
     /// Тип описания
@@ -9,5 +11,7 @@
         /// Имя
         /// </summary>
         public string Name { get; set; }
+
+        public int Type { get; set; }
     }
 }

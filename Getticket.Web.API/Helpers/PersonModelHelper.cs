@@ -29,8 +29,7 @@ namespace Getticket.Web.API.Helpers
                 Name = person.Name,
                 LastName = person.LastName,
                 Patronymic = person.Patronymic,
-                IdSex = person.id_Sex,
-                Sex = person.Sex.Name,
+                Sex = person.Sex,
                 Bithday = person.Bithday,
                 NameLatin = person.NameLatin,
                 LastNameLatin = person.LastNameLatin,
@@ -268,8 +267,8 @@ namespace Getticket.Web.API.Helpers
             {
                 Id = description.Id,
                 id_Person = description.id_Person,
-                id_DescriptionType = description.id_DescriptionType,
-                PersonDescriptionType = description.PersonDescriptionType?.Name,
+                id_DescriptionType = (int)description.PersonDescriptionType.Type,
+                PersonDescriptionType = description.PersonDescriptionType.Name,
                 DescriptionText = description.DescriptionText, Status = description.Status
             } : new PersonDescriptionModel();
         }
@@ -318,7 +317,7 @@ namespace Getticket.Web.API.Helpers
                 NameLatin = model.NameLatin,
                 LastNameLatin = model.LastNameLatin,
                 PatronymicLatin = model.PatronymicLatin,
-                id_Sex = model.IdSex,
+                Sex = model.Sex,
                 id_Bithplace = model.IdBithplace,
             };
             return person;
@@ -371,7 +370,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<PersonDescriptionTypeModel> GetDescriptionTypeModels(IList<PersonDescriptionType> result)
         {
-            return result.Select(o => new PersonDescriptionTypeModel { Id = o.Id, Name = o.Name }).ToList();
+            return result.Select(o => new PersonDescriptionTypeModel { Id = o.Id, Name = o.Name, Type = (int)o.Type}).ToList();
         }
 
         /// <summary>

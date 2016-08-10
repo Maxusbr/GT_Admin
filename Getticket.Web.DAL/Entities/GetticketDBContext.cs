@@ -165,11 +165,6 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<CountryPlace> CountryPlaces { get; set; }
 
         /// <summary>
-        /// <see cref="Entities.Sex"/>
-        /// </summary>
-        public virtual DbSet<Sex> Sex { get; set; }
-
-        /// <summary>
         /// <see cref="Company"/>
         /// </summary>
         public virtual DbSet<Company> Companies { get; set; }

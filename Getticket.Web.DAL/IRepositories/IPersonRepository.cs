@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.Infrastructure;
 
 namespace Getticket.Web.DAL.IRepositories
@@ -39,7 +40,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="alphabetically">Сортировка по алфавиту (А-Я или A-Z)</param>
         /// <param name="sexId"></param>
         /// <returns></returns>
-        IList<Person> FindPerson(PageInfo page, string alphabetically, int? sexId = null);
+        IList<Person> FindPerson(PageInfo page, string alphabetically, Sex? sexId = null);
 
         /// <summary>
         /// Удаляет <see cref="Person"/> из БД по его <paramref name="id" />
@@ -435,27 +436,6 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="id"></param>
         /// <returns></returns>
         bool DeleteCountryPlace(int id);
-
-        /// <summary>
-        /// Возвращает список <see cref="Sex"/>
-        /// </summary>
-        /// <returns></returns>
-        IList<Sex> GetSexes();
-
-        /// <summary>
-        /// Если <see cref="Sex"/> новый - добавляем новую запись в БД.
-        /// Если <see cref="Sex"/> уже существует - сохраняем изменения записи.
-        /// </summary>
-        /// <param name="sex"></param>
-        /// <returns></returns>
-        Sex SaveSex(Sex sex);
-
-        /// <summary>
-        /// Удалить тип <see cref="Sex"/> по ее <paramref name="id" />
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        bool DeleteSex(int id);
 
         /// <summary>
         /// Добавить город
