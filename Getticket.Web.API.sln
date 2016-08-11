@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Getticket.Web.DAL", "Getticket.Web.DAL\Getticket.Web.DAL.csproj", "{FDD79A9E-2AAF-405E-B418-1F1FDBF14BEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Getticket.Web.API", "Getticket.Web.API\Getticket.Web.API.csproj", "{64AADBE7-08F0-469B-98F7-FB207466488A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminFront", "AdminFront\AdminFront.csproj", "{D3DF1989-9FEC-4EA6-997B-E7B9311D6A61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AF", "AF\AF.csproj", "{5AD6BC31-1D90-4949-9E16-1E5130B0948E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D3DF1989-9FEC-4EA6-997B-E7B9311D6A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3DF1989-9FEC-4EA6-997B-E7B9311D6A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3DF1989-9FEC-4EA6-997B-E7B9311D6A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD6BC31-1D90-4949-9E16-1E5130B0948E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD6BC31-1D90-4949-9E16-1E5130B0948E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD6BC31-1D90-4949-9E16-1E5130B0948E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD6BC31-1D90-4949-9E16-1E5130B0948E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
