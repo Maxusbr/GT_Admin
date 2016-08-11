@@ -1,0 +1,92 @@
+﻿div.win-container{
+    display: inline-block;
+    height:100%;
+    border-top:1px solid gray;
+    border-bottom: 1px solid gray;
+    border-left:1px solid gray;
+    border-right: 1px solid gray;
+    overflow-y:hidden;
+    font-family:"Segoe UI"
+}
+div.win-header{
+    background-color: #212121;
+    height:29px;
+    display:block;
+    padding:2px 5px;
+    color:#ffffff;
+    font-size:16px;
+    font-family:"Segoe UI Light";
+    padding: 0 20px;
+}
+div.win-header-text{
+    display:inline-block;
+    align-content:center;
+}
+div.win-menu{
+    background-color: #212121;
+    display:block;
+    color:white;
+    white-space:nowrap; 
+    display: inline-block;
+    width:100%;
+    height:80px;
+    padding:10px 20px;
+    font-size:12px;
+}
+div.win-menu-button{
+    display:inline-block;
+    padding:5px;
+    margin:5px;
+    width:100px;
+    text-align:center;
+    word-wrap:break-word;
+    font-size:10px;
+}
+div.win-menu-button span{
+    font-size:20px;
+    margin:5px;
+}
+div.win-menu-button a{
+    cursor:pointer;
+    color:inherit;
+}
+div.win_buttons{
+    background-color:#212121;
+    width:23px;
+    height:23px;
+    margin-right:1px;
+    margin-bottom:1px;
+    display:inline-block;
+    padding:3px;
+    float:right;
+}
+div.win-content{
+    padding:20px;
+    height:calc(100% - 110px);
+    overflow-y:auto;
+    overflow-x:hidden;
+    background:#efefef;
+    color:#1b1b1b;
+    font-size:12px;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: darkgray;
+  cursor: default;
+}
+
+.highlight {
+    background-color: gray;
+}
+
+.glyphicon{
+    cursor: pointer;
+}
+
+div.settings{
+    width:300px;
+}
+
+div.scrolled-view{
+
+}
