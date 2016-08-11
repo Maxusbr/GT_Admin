@@ -16,7 +16,8 @@ function mainMenuCtrl($scope, $location, $timeout) {
             angular.element('.main-menu__list li.active > button').triggerHandler('click');
         });
     };
-
+    var link = '/app-content/images/MainMenu.svg#';
+    $scope.showWidth = true;
     $scope.menu = [
         {
             title: 'Мероприятия',
@@ -24,7 +25,8 @@ function mainMenuCtrl($scope, $location, $timeout) {
             customMenu: {
                 expand: '.custom-menu__container',
                 toggle: '#events__container'
-            }
+            },
+            refSvg: link + 'Events'
         },
         {
             "title": "События",
@@ -35,19 +37,23 @@ function mainMenuCtrl($scope, $location, $timeout) {
             customMenu: {
                 expand: '.custom-menu__container',
                 toggle: '#eventIs__content'
-            }
+            },
+            refSvg: link + 'ActiveEvents'
         },
         {
             "title": "Площадки",
-            "href": "/main/platform"
+            "href": "/main/platform",
+            refSvg: link + 'Venues'
         },
         {
             "title": "Залы",
-            "href": "/main/halls"
+            "href": "/main/halls",
+            refSvg: link + 'Halls'
         },
         {
             "title": "Роли",
-            "href": "/main/role"
+            "href": "/main/role",
+            refSvg: link + 'Roles-Rights'
         },
         {
             "title": "Пользователи",
@@ -56,7 +62,8 @@ function mainMenuCtrl($scope, $location, $timeout) {
                 expand: '.custom-menu__container',
                 toggle: '#user__container'
             },
-            "content": "#usercontent"
+            "content": "#usercontent",
+            refSvg: link + 'Users'
         },
         {
             title: 'Персоны',
@@ -64,11 +71,13 @@ function mainMenuCtrl($scope, $location, $timeout) {
             customMenu: {
                 expand: '.custom-menu__container',
                 toggle: '#persona__container'
-            }
+            },
+            refSvg: link + 'Persons'
         },
         {
             "title": "Загрузка",
-            "href": "/main/download"
+            "href": "/main/download",
+            refSvg: link + 'Persons'
         },
 
     ];
@@ -77,16 +86,20 @@ function mainMenuCtrl($scope, $location, $timeout) {
         isActive();
     });
 
-    $scope.ToggleCustomMenu = function (menuSelector, toggleSelector) {
-        var menu = $(menuSelector);
-        var content = $(toggleSelector);
+    $scope.ToggleCustomMenu = function (customMenu) {
+        if (customMenu) {
+            var menu = $(customMenu.expand);
+            var content = $(customMenu.toggle);
 
-        menu.toggle();
-        content.toggleClass('col-md-19 col-md-24');
+            menu.toggle();
+            content.toggleClass('col-md-19 col-md-24');
+        }
+        $scope.showWidth = !$scope.showWidth;
+        $('#main-menu__container').toggleClass('col-md-3 col-md-1');
     };
 
     $scope.$watch(function () {
-        return $location.path()
+        return $location.path();
     }, function (params) {
         isActive();
     });

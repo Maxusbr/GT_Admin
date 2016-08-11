@@ -1,19 +1,24 @@
 <div class="main-menu__logo text-center">
-    <img src="/app-content/images/logo-small.png" class="img-circle" ng-click="Logout()">
+    <img ng-show="showWidth" src="/app-content/images/logo-small.png" class="img-circle" ng-click="Logout()">
 
-    <p>Vitaly B. <i class="glyphicon glyphicon-pencil"></i></p>
-    <p>v 0.0.3.30</p>
+    <p>Vitaly B. <i  ng-show="showWidth" class="glyphicon glyphicon-pencil"></i></p>
+    <p ng-show="showWidth" >v 0.0.3.30</p>
 </div>
-
 <div class="main-menu__list">
     <div class="row">
         <ul class="nav nav-list">
             <li ng-repeat="item in menu" ng-class="{ active: item.active }" ng-click="{ active: true }">
-                <a href="/#{{ item.href }}">{{ item.title }} <span ng-if="item.countAll" class="small">&nbsp; <span class="text-success">{{ item.countActive }}</span> / {{item.countAll}}</span></a>
+                <a href="/#{{ item.href }}"><span ng-show="showWidth" >{{ item.title }}
+                        <span ng-if="item.countAll" class="small">&nbsp; <span class="text-success">{{ item.countActive }}</span> / {{item.countAll}}</span></span>
+                    <svg class="icon" ng-show="!showWidth">
+                        <use xlink:href="{{item.refSvg}}"/>
+                    </svg>
+                </a>
 
-                <button ng-if="item.customMenu && item.active"
-                        ng-click="ToggleCustomMenu(item.customMenu.expand, item.customMenu.toggle)">
+                <button ng-if="item.active"
+                        ng-click="ToggleCustomMenu(item.customMenu)">
                     <span class="glyphicon glyphicon-plus"></span>
+                    
                 </button>
             </li>
         </ul>
