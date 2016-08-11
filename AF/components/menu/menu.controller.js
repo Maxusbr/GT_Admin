@@ -57,7 +57,7 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
         },
         {
             "title": "Пользователи",
-            "href": "/main/user",
+            "href": "/main/user/user.list.html",
             customMenu: {
                 expand: '.custom-menu__container',
                 toggle: '#user__container'
@@ -101,7 +101,7 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
     $scope.$watch(function () {
         return $location.path();
     }, function (params) {
-        app.loadContentView($location.path(), 2500);
+        app.loadChapterView($location.path(), 2500);
         isActive();
     });
 

@@ -41,6 +41,11 @@ var app;
             }
         });
 
+        app.loadChapterView = function loadChapter(location, pixels){
+            app.closeAll();
+            app.loadContentView(location, pixels);
+        }
+
         //load content for display and put them to root content div
         app.loadContentView = function loadView(location, pixels) {
             if (location !== "") {
@@ -58,6 +63,21 @@ var app;
         app.scrollRight = function (pixels) {
             var leftPos = $('#divContent').scrollLeft();
             $('#divContent').animate({ scrollLeft: leftPos + pixels }, 'slow');
+        }
+
+
+        app.closeAll = function close_all() {
+            app.closeView('r1');
+        }
+
+        //universal for close any window
+        app.closeView = function close_view(classId) {
+                var dv = document.getElementById("divContent");
+                var wins = dv.getElementsByClassName(classId);
+                var len = wins.length;
+                for (var i = 0; i < len; i++) {
+                    wins[i].parentNode.removeChild(wins[i]);
+            }
         }
     }
 
