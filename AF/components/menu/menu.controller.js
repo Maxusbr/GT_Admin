@@ -8,8 +8,8 @@ angular.module('app')
         };
     });
 
-mainMenuCtrl.$inject = ['$scope', '$location', '$timeout'];
-function mainMenuCtrl($scope, $location, $timeout) {
+mainMenuCtrl.$inject = ['$scope', '$location', '$timeout', '$http', '$compile'];
+function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
 
     $scope.HideCustomMenu = function () {
         $timeout(function () {
@@ -21,7 +21,7 @@ function mainMenuCtrl($scope, $location, $timeout) {
     $scope.menu = [
         {
             title: 'Мероприятия',
-            href: '/main/events',
+            href: '/main/events/base.html',
             customMenu: {
                 expand: '.custom-menu__container',
                 toggle: '#events__container'
@@ -101,6 +101,7 @@ function mainMenuCtrl($scope, $location, $timeout) {
     $scope.$watch(function () {
         return $location.path();
     }, function (params) {
+        app.loadContentView($location.path(), 2500);
         isActive();
     });
 
@@ -113,6 +114,5 @@ function mainMenuCtrl($scope, $location, $timeout) {
                 $scope.menu[key].active = false;
             }
         });
-
     }
 }

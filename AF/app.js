@@ -1,13 +1,15 @@
 ﻿//set api adress
-var apiUrl = 'http://localhost:35162/';
+var apiUrl = 'http://localhost:5831/';
 //var apiUrl = 'http://getticketwebapi.azurewebsites.net/';
 var pageNumber = 1;
 var pageSize = 20;
 
+var app;
+
 (function () {
     'use strict';
 
-    var app = angular
+    app = angular
         .module('app', [
             // 'ngRoute',
             'ui.router',
@@ -21,9 +23,9 @@ var pageSize = 20;
         .config(config)
         .run(run);
 
-    run.$inject = ['$rootScope', '$templateCache', '$cookieStore', '$location', '$http', 'amMoment'];
+    run.$inject = ['$rootScope', '$templateCache', '$cookieStore', '$location', '$http', 'amMoment', '$compile'];
 
-    function run($rootScope, $templateCache, $cookieStore, $location, $http, amMoment) {
+    function run($rootScope, $templateCache, $cookieStore, $location, $http, amMoment, $compile) {
         amMoment.changeLocale('ru');
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
@@ -38,6 +40,25 @@ var pageSize = 20;
                 $location.path('/sign-in');
             }
         });
+
+        //load content for display and put them to root content div
+        app.loadContentView = function loadView(location, pixels) {
+            if (location !== "") {
+                $http.get(apiUrl + location)
+            .success(function (data) {
+                var element = angular.element(data);
+                $compile(element)($rootScope);
+                $('#divContent').append(element);
+                app.scrollRight(pixels);
+            });
+            }
+        }
+
+        //scroll view to right pos of loaded screen
+        app.scrollRight = function (pixels) {
+            var leftPos = $('#divContent').scrollLeft();
+            $('#divContent').animate({ scrollLeft: leftPos + pixels }, 'slow');
+        }
     }
 
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
@@ -248,4 +269,12 @@ var pageSize = 20;
             };
         }
     ]);
+
+    //this.scrollRight = function (pixels) {
+
+    //    console.log('scroll - ' + pixels);
+    //    var leftPos = $('#divContent').scrollLeft();
+    //    console.log('left pos - ' + leftPos);
+    //    $('#divContent').animate({ scrollLeft: leftPos + pixels }, 'slow');
+    //}
 })();

@@ -14,7 +14,7 @@
 
     <!-- Custom CSS -->
     <link href="/Content/css/sb-admin.css" rel="stylesheet">
-    <link href="/Content/css/Portal/DashboardStyles.css" rel="stylesheet" />
+    <link href="/Content/css/Portal/HeaderStyles.css" rel="stylesheet" />
 
     <!-- Morris Charts CSS -->
     <link href="/Content/css/plugins/morris.css" rel="stylesheet">
@@ -151,8 +151,12 @@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
-        <div id="page-wrapper" style="height:100%; background:#2e80ab; padding:0px;">
-
+        <div id="page-wrapper" style="height:100%; background:#2e80ab; padding:0px;" ng-controller="MainController">
+            <div style="height: 100%; overflow-y: hidden; overflow-x: hidden">
+                <div class="panel" style="overflow-x:scroll; height:100%; background: #333;display: inline-block; width: 100%; " id="divContent">
+                    
+                </div>
+            </div>
         </div>
     </div>
 
