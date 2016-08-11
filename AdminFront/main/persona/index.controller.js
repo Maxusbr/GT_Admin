@@ -249,18 +249,25 @@
         $scope.Changed = function (list) {
             $scope.IsChanged = list.filter(function (item) { return item.Changed; }).length > 0;
         }
-
+        $scope.places = [];
         $scope.countries = [];
         personService.getCountries("", function (data) {
             $scope.countries.push.apply($scope.countries, data);
         });
-        $scope.places = [];
-        personService.getPlaces("", function (data) {
-            $scope.places.push.apply($scope.places, data);
-        });
-        $scope.$watch('person.Place', function(data) {
-            var place = $scope.places.filter(function (item) { return item.Name === data; })[0];
-            if (place === undefined || place === null) return;
+        $scope.getPlaces = function (value) {
+            $scope.places = [];
+            return personService.getPlaces(value).then(function (response) {
+                $scope.places.push.apply($scope.places, response.data);
+                return response.data.map(function(item) {
+                    return item;
+                });
+            });
+        }
+        
+        $scope.$watch('person.Place', function (place) {
+            //var place = $scope.places.filter(function (item) { return item.Name === data; })[0];
+            if (!place || !place.CountryName) return;
+            $scope.person.Place = place.Name;
             $scope.person.IdBithplace = place.Id;
             $scope.person.Country = place.CountryName;
         });

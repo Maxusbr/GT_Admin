@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-content\angular-datepicker.css" />
+    <Content Include="app-content\images\MainMenu.svg" />
     <Content Include="app-content\isteven-multi-select.css" />
     <Content Include="app-content\ng-tags-input.bootstrap.min.css" />
     <Content Include="app-content\ng-tags-input.css" />

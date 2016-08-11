@@ -37,7 +37,7 @@ namespace Getticket.Web.API.Helpers
                 PatronymicLatin = person.PatronymicLatin,
                 IdBithplace = person.id_Bithplace,
                 Place = person.Place?.Name,
-                Country = person.Place?.Country?.Name,
+                Country = person.Place?.Region?.Country?.Name,
                 ZodiacYear = GetZodiacYears(person.Bithday),
                 ZodiacMonth = GetZodiacMonth(person.Bithday),
                 BirthdayTxt = person.Bithday.ToLongDateString(),
@@ -403,7 +403,8 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<CountryPlaceModel> GetCountryPlaceModels(IList<CountryPlace> result)
         {
-            return result.Select(o => new CountryPlaceModel { Id = o.Id, Name = o.Name, IdCountry = o.id_Country, CountryName = o.Country.Name}).ToList();
+            return result.Select(o => new CountryPlaceModel { Id = o.Id, Name = o.Name, IdCountry = o.Region.Country_Id,
+                CountryName = o.Region.Country.Name}).ToList();
         }
     }
 }

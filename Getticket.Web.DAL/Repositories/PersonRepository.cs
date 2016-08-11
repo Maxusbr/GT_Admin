@@ -716,15 +716,18 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IPersonRepository.GetCountryPlaces(int)" />
         public IList<CountryPlace> GetCountryPlaces(int id)
         {
-            return db.CountryPlaces.Where(o => o.id_Country == id)
-                .Include(o => o.Country).ToList();
+            return db.CountryPlaces.Where(o => o.Region.Country_Id == id)
+                .Include(o => o.Region).Include(o => o.Region.Country).ToList();
         }
 
         /// <see cref="IPersonRepository.GetCountryPlaces(string)" />
         public IList<CountryPlace> GetCountryPlaces(string foundName)
         {
-            return string.IsNullOrEmpty(foundName) ? db.CountryPlaces.Where(o => true).Include(o => o.Country).ToList() :
-                db.CountryPlaces.Where(o => o.Name.ToLower().Contains(foundName.ToLower())).Include(o => o.Country).ToList();
+            var result = string.IsNullOrEmpty(foundName) ? new List<CountryPlace>() : 
+                db.CountryPlaces.Where(o => o.Name.ToLower().StartsWith(foundName.ToLower()))
+                .Include(o => o.Region)
+                .Include(o => o.Region.Country).ToList();
+            return result;
         }
 
         /// <see cref="IPersonRepository.SaveCountryPlace" />
@@ -771,7 +774,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             var pls = db.CountryPlaces.FirstOrDefault(o => o.Name.ToLower().Equals(place));
             if (pls != null) return pls.Id;
-            pls = db.CountryPlaces.Add(new CountryPlace { Name = place, id_Country = cnt.Id });
+            pls = db.CountryPlaces.Add(new CountryPlace { Name = place, id_Region = cnt.Id });
             db.SaveChanges();
             return pls.Id;
         }

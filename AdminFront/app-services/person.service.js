@@ -133,10 +133,8 @@
             });
         }
 
-        function getPlaces(name, callback) {
-            $http.get(`${apiUrl}persons/place/${name}`).success(function (data) {
-                callback(data);
-            });
+        function getPlaces(name) {
+            return $http.get(`${apiUrl}persons/place/${name}`);
         }
 
         function save(person, callback) {
