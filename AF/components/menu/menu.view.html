@@ -1,0 +1,23 @@
+<div class="main-menu__list">
+    <div class="row">
+        <ul class="nav navbar-nav" ng-class="{ 'side-nav-short': hideMenu === true, 'side-nav': hideMenu !== true }">
+            <li ng-repeat="item in menu" ng-class="{ active: item.active }" ng-click="{ active: true }">
+                <a href="/#{{ item.href }}">
+                    <span ng-show="showWidth">
+                        {{ item.title }}
+                        <span ng-if="item.countAll" class="small">&nbsp; <span class="text-success">{{ item.countActive }}</span> / {{item.countAll}}</span>
+                    </span>
+                    <svg class="icon" ng-show="!showWidth">
+                        <use xlink:href="{{item.refSvg}}" />
+                    </svg>
+                </a>
+
+                <button ng-if="item.active"
+                        ng-click="ToggleCustomMenu(item.customMenu)">
+                    <span class="glyphicon glyphicon-plus"></span>
+
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
