@@ -16,7 +16,8 @@
         }
 
         $scope.selectPerson = function (id) {
-            $scope.Id = id;
+            $rootScope.Id = id;
+            app.closeSecond();
             app.loadContentView('/main/person/person.viewone.html', 1800);
         }
     }

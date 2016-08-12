@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    
+
     function personService($http, $rootScope) {
         var service = {};
 
@@ -72,13 +72,13 @@
                 });
                 console.log("load persons");
                 if (callback) callback();
-            }).error(function(data) {
+            }).error(function (data) {
                 if (callback) callback(data);
             });
         }
 
         function getLinks(id, callback) {
-            $http.get(`${serviceUrl}persons/social/${id}`).success(function(data) {
+            $http.get(`${serviceUrl}persons/social/${id}`).success(function (data) {
                 callback(data);
             });
         }
@@ -143,7 +143,7 @@
                 Name: person.Name,
                 LastName: person.LastName,
                 Patronymic: person.Patronymic,
-                Bithday: `${person.Bithday.getFullYear()}-${person.Bithday.getMonth()+1}-${person.Bithday.getDate()}`,
+                Bithday: `${person.Bithday.getFullYear()}-${person.Bithday.getMonth() + 1}-${person.Bithday.getDate()}`,
                 NameLatin: person.NameLatin,
                 LastNameLatin: person.LastNameLatin,
                 PatronymicLatin: person.PatronymicLatin,
@@ -207,6 +207,12 @@
         service.Save = save;
         service.saveDescriptions = saveDescriptions;
         service.savePersonTags = savePersonTags;
+
+        service.getPerson = function (id, callback) {
+            return $http.get(`${serviceUrl}persons/${id}`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
 
         return service;;
     }
