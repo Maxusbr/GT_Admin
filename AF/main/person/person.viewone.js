@@ -1,13 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    function PeronViewoneController($rootScope) {
+    function personViewoneController($rootScope) {
         var vm = this;
     }
 
     angular
         .module('app')
-        .controller('PeronViewoneController', PeronViewoneController);
+        .controller('personViewoneController', personViewoneController);
 
-    PeronViewoneController.$inject = ['$rootScope'];
+    personViewoneController.$inject = ['$rootScope'];
 })();
