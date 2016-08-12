@@ -1,11 +1,76 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-
-</body>
-</html>
+﻿<div class="win-container r2 personViewOne" style="width:1000px;" ng-controller="PeronViewoneController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Одна персона: TODO:PersonName
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personViewOne')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="createPreson()">
+                <span class="fa fa-edit"></span>
+                <br />
+                Редактировать
+            </a>
+        </div>
+        <div class="win-menu-button" style="width:600px;">
+            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" ng-model="personaMenuFilter" />
+        </div>
+    </div>
+    <div class="win-content">
+        <div class="panel-info" cg-busy="Promise">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <img style="width:150px; height:150px"/>
+                            <br/>
+                            <span>TODO: add sex</span>
+                        </div>
+                        <div class="col-lg-5">
+                            TODO: name rus
+                            <br/>
+                            TODO: sname rus
+                            <br/>
+                            TODO: fname rus
+                            <br/>
+                            TODO: burth date
+                        </div>
+                        <div class="col-lg-5">
+                            TODO: name eng
+                            <br />
+                            TODO: sname eng
+                            <br />
+                            TODO: fname eng
+                            <br />
+                            TODO: burth place
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <!--person menu-->
+                    <a href="#" class="btn btn-block btn-default">
+                        <span class="fa fa-book"></span> Описание
+                    </a>
+                    <a href="#" class="btn btn-block btn-default">
+                        <span class="fa fa-bookmark"></span> Факты
+                    </a>
+                    <a href="#" class="btn btn-block btn-default">
+                        <span class="fa fa-child"></span> Связи
+                    </a>
+                    <a href="#" class="btn btn-block btn-default">
+                        <span class="fa fa-file-video-o"></span> Медиа и файлы
+                    </a>
+                    <a href="#" class="btn btn-block btn-default">
+                        <span class="fa fa-cloud"></span> Интернет
+                    </a>
+                    <a href="#" class="btn btn-block btn-default">
+                        <span class="fa fa-heart-o"></span> Антропометрия
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
