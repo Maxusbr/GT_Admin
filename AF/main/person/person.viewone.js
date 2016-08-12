@@ -4,7 +4,7 @@
     function personViewoneController($rootScope, $scope, personService) {
         var vm = this;
 
-        $rootScope.displayFacts = function display_facts(){
+        $rootScope.displayFacts = function display_facts() {
             app.closeThird();
             app.loadContentView('/main/person/r3/person.facts.html', 2500);
         }
@@ -18,10 +18,14 @@
         }
 
         $scope.Id = $rootScope.Id;
+        $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
             $scope.person = data;
+            personService.getCountes($scope.Id, function (counts) {
+                $scope.counts = counts;
+            });
         });
-        $rootScope.editPerson = function edit_person(){
+        $rootScope.editPerson = function edit_person() {
             app.closeThird();
             app.loadContentView('/main/person/person.edit.html', 2200);
         }

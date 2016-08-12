@@ -214,6 +214,11 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.getCountes = function (id, callback) {
+            return $http.get(`${serviceUrl}persons/counts/${id}`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
         return service;;
     }
 

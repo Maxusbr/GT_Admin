@@ -69,6 +69,17 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <summary>
+        /// <see cref="PersonService.GetCounts" />
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("counts/{id}")]
+        public IHttpActionResult GetCounts(int id)
+        {
+            return Ok(_personService.GetCounts(id));
+        }
+        /// <summary>
         /// Add person entity
         /// </summary>
         /// <param name="model"></param>

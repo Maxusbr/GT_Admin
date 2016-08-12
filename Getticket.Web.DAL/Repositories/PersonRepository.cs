@@ -779,6 +779,42 @@ namespace Getticket.Web.DAL.Repositories
             return pls.Id;
         }
 
+        /// <see cref="IPersonRepository.GetCountDescriptions" />
+        public int GetCountDescriptions(int id)
+        {
+            return db.PersonDescriptions.Count(o => o.id_Person == id);
+        }
+
+        /// <see cref="IPersonRepository.GetCountFacts" />
+        public int GetCountFacts(int id)
+        {
+            return db.PersonFacts.Count(o => o.id_Person == id);
+        }
+
+        /// <see cref="IPersonRepository.GetCountConnects" />
+        public int GetCountConnects(int id)
+        {
+            return db.PersonConnections.Count(o => o.id_Person == id);
+        }
+
+        /// <see cref="IPersonRepository.GetCountMedias" />
+        public int GetCountMedias(int id)
+        {
+            return db.PersonMedia.Count(o => o.id_Person == id);
+        }
+
+        /// <see cref="IPersonRepository.GetCountLinks" />
+        public int GetCountLinks(int id)
+        {
+            return db.PersonSocialLinks.Count(o => o.id_Person == id);
+        }
+
+        /// <see cref="IPersonRepository.GetCountAntros" />
+        public int GetCountAntros(int id)
+        {
+            return db.PersonAntro.Count(o => o.id_Person == id);
+        }
+
         private void SaveLog<T>(T from, T to, int personId, int userId, LogType type) where T : BaseEntity
         {
             var log = new PersonLog
