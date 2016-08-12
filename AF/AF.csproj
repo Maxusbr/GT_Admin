@@ -115,8 +115,13 @@
     <Content Include="Content\ng-tags-input.css" />
     <Content Include="Content\ng-tags-input.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="main\events\base.html" />
-    <Content Include="main\main.controller.js" />
+    <Content Include="main\base.html" />
+    <Content Include="main\events\events.list.html" />
+    <Content Include="main\events\events.list.js" />
+    <Content Include="main\person\person.create.html" />
+    <Content Include="main\person\person.create.js" />
+    <Content Include="main\person\person.list.html" />
+    <Content Include="main\person\person.list.js" />
     <Content Include="main\user\user.create.html" />
     <Content Include="main\user\user.create.js" />
     <Content Include="main\user\user.invite.html" />
@@ -1033,9 +1038,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="main\person\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

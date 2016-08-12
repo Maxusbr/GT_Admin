@@ -21,7 +21,7 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
     $scope.menu = [
         {
             title: 'Мероприятия',
-            href: '/main/events/base.html',
+            href: '/main/events/events.list.html',
             customMenu: {
                 expand: '.custom-menu__container',
                 toggle: '#events__container'
@@ -67,18 +67,18 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
         },
         {
             title: 'Персоны',
-            href: '/main/persona',
+            href: '/main/person/person.list.html',
             customMenu: {
                 expand: '.custom-menu__container',
                 toggle: '#persona__container'
             },
             refSvg: link + 'Persons'
         },
-        {
-            "title": "Загрузка",
-            "href": "/main/download",
-            refSvg: link + 'Persons'
-        },
+        //{
+        //    "title": "Загрузка",
+        //    "href": "/main/download",
+        //    refSvg: link + 'Persons'
+        //},
 
     ];
 

@@ -1,0 +1,47 @@
+﻿<div class="win-container r1 personList" style="width:1000px;" ng-controller="PersonListController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Список персон
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personList')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="createPreson()">
+                <span class="fa fa-plus"></span>
+                <br />
+                Добавить
+            </a>
+        </div>
+        <div class="win-menu-button" style="width:250px;">
+            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" />
+        </div>
+    </div>
+    <div class="win-content">
+
+        <div class="panel-info" cg-busy="Promise">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                        <th>Отчество</th>
+                        <th>Жанр</th>
+                        <th>Событие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in userlist">
+                        <td>{{row.fname}} {{row.sname}}</td>
+                        <td>{{row.company}}</td>
+                        <td>{{row.event}}</td>
+                        <td>{{row.role}}</td>
+                        <td>{{row.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
