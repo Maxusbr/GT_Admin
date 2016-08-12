@@ -4,6 +4,7 @@ using Getticket.Web.API.Services;
 using Getticket.Web.DAL.Entities;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace Getticket.Web.API.Controllers
@@ -34,6 +35,22 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult GetAll()
         {
             return Ok(UserServ.GetAll());
+        }
+
+        /// <summary>
+        /// Информация о текущем пользователе
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("userinfo")]
+        public IHttpActionResult UserInformation()
+        {
+            //string userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+
+            //// Get the name
+            //string name = User.Claims.FirstOrDefault(c => c.Type == "name")?.Value;
+
+            return Ok(User.Identity.Name);
         }
 
         /// <summary>

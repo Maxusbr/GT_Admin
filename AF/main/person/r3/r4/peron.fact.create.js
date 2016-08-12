@@ -1,8 +1,19 @@
 ﻿(function () {
     'use strict';
 
-    function PersonFactCreateController($rootScope) {
+    function PersonFactCreateController($rootScope, $scope) {
         var vm = this;
+        $scope.fact = $rootScope.fact ? $rootScope.fact: {
+            FactText: "",
+            LastChange: {
+                UserName: $rootScope.UserName,
+                Date: new Date()
+            },
+            FactType: {
+                Name: "",
+                Descript: ""
+            }
+        };
 
         $rootScope.saveFact = function save_fact() {
             console.log('save fact click');
@@ -16,5 +27,5 @@
         .module('app')
         .controller('PersonFactCreateController', PersonFactCreateController);
 
-    PersonFactCreateController.$inject = ['$rootScope'];
+    PersonFactCreateController.$inject = ['$rootScope', '$scope'];
 })();

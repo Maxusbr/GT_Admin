@@ -1,4 +1,4 @@
-﻿<div class="win-container r4 personFactCreate" style="width:400px;">
+﻿<div class="win-container r4 personFactCreate" style="width:400px;" ng-controller="PersonFactCreateController">
     <div class="win-header">
         <div class="win-header-text">
             Создать новый факт
@@ -28,7 +28,8 @@
             </tr>
             <tr>
                 <td>Изменен</td>
-                <td>TODO: static data</td>
+                <td>{{fact.LastChange.UserName}}<br>
+                    {{fact.LastChange.Date | amCalendar}}</td>
             </tr>
             <tr>
                 <td>Связь</td>

@@ -22,7 +22,11 @@
                 service.isAuth = true;
                 callback(response);
                 deferred.resolve(response);
-                
+                $http.get(`${serviceUrl}users/userinfo`)
+                    .success(function (data) {
+                        $rootScope.UserName = data;
+                        $cookieStore.put('username', $rootScope.UserName);
+                    });
 
             }).error(function (err, status) {
                 logOut();

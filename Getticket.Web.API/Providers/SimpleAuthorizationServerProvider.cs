@@ -62,7 +62,7 @@ namespace Getticket.Web.API.Providers
             {
                 var identity = new ClaimsIdentity(context.Options.AuthenticationType);
 
-                identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+                identity.AddClaim(new Claim(ClaimTypes.Name, $"{user.UserInfo.LastName} {user.UserInfo.Name}"));
                 identity.AddClaim(new Claim(ClaimTypes.Email, user.UserName));
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
 
