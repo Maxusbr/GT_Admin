@@ -6,7 +6,7 @@
 
         $rootScope.addFact = function add_fact(){
             app.closeFour();
-            app.loadContentView('/main/person/personData/peron.fact.create.html', 3200)
+            app.loadContentView('/main/person/r3/peron.fact.create.html', 3200)
         }
     }
 
