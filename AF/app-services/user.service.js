@@ -1,60 +1,34 @@
 ﻿(function () {
     'use strict';
 
-    angular
-        .module('app')
-        .factory('UserService', UserService);
-
-    UserService.$inject = ['$http', '$rootScope'];
-    function UserService($http, $rootScope) {
+    function userService($http, $rootScope) {
         var service = {};
 
-        service.GetAll = GetAll;
-        service.GetById = GetById;
-        service.GetByUsername = GetByUsername;
-        service.Create = Create;
-        service.Update = Update;
-        service.Delete = Delete;
-
-        service.getListUsers = getListUsers;
-        service.getListRoles = getListRoles;
-        service.registerUser = registerUser;
-        return service;
-
-        function GetAll() {
+        service.GetAll = function getAll() {
             return $http.get('http://webapiadmin.azurewebsites.net').then(handleSuccess, handleError('Error getting all users'));
         }
 
-        function GetById(id) {
+        service.GetById = function getById(id) {
             return $http.get('/api/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
         }
 
-        function GetByUsername(username) {
+        service.GetByUsername = function getByUsername(username) {
             return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
         }
 
-
-        function Create(user) {
+        service.Create = function create(user) {
             return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
         }
 
-        function Update(user) {
+        service.Update = function update(user) {
             return $http.post(`${serviceUrl}users/update/${user.Id}`, user).then(handleSuccess, handleError('Error updating user'));
         }
 
-        function Delete(id) {
+        service.Delete = function deleteUser(id) {
             return $http.delete('/api/users/' + id).then(handleSuccess, handleError('Error deleting user'));
         }
 
-        function getUsers() {
-            return $http.get(`${serviceUrl}users`)
-                .success(function (data) { return data })
-                .error(function (data) {
-                    return { success: false, message: data };
-                });
-        }
-
-        function getListUsers() {
+        service.getListUsers = function getListUsers() {
             $http.get(`${serviceUrl}users`)
                 .success(function (data) {
                     $rootScope.userlist = data;
@@ -72,7 +46,7 @@
                 });
         }
 
-        function getListRoles() {
+        service.getListRoles = function getListRoles() {
             return $http.get(`${serviceUrl}sysroles`)
                 .success(function (data) { return data })
                 .error(function (data) {
@@ -80,12 +54,21 @@
                 });
         }
 
-        function registerUser(user) {
+        service.registerUser = function registerUser(user) {
             return $http.post(`${serviceUrl}users/register`, user)
                 .success(function (data) { return data })
                 .error(function (data) { return data; });
         }
-        // private functions
+
+        return service;
+
+        function getUsers() {
+            return $http.get(`${serviceUrl}users`)
+                .success(function (data) { return data })
+                .error(function (data) {
+                    return { success: false, message: data };
+                });
+        } // private functions
 
         function handleSuccess(res) {
             return { success: true, data: res.data };
@@ -98,4 +81,9 @@
         }
     }
 
+    angular
+        .module('app')
+        .factory('userService', userService);
+
+    userService.$inject = ['$http', '$rootScope'];
 })();

@@ -38,11 +38,11 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="row in userlist">
-                        <td>{{row.fname}} {{row.sname}}</td>
-                        <td>{{row.company}}</td>
+                        <td>{{row.LastName}} {{row.Name}}</td>
+                        <td>{{row.Company}}</td>
                         <td style="width:200px; text-wrap:normal">{{row.event}}</td>
                         <td>{{row.role}}</td>
-                        <td>{{row.status}}</td>
+                        <td class="{{row.StatusName}}">{{row.StatusDescription}}</td>
                     </tr>
                 </tbody>
             </table>
