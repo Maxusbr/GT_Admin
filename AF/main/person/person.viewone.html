@@ -1,7 +1,7 @@
 ﻿<div class="win-container r2 personViewOne" style="width:1000px;" ng-controller="personViewoneController">
     <div class="win-header">
         <div class="win-header-text">
-            Одна персона: TODO:PersonName
+            Одна персона: {{person.Name}} {{person.LastName}}
         </div>
         <div class="win_buttons">
             <a href="#" ng-click="closeMe('personViewOne')"><span class="glyphicon glyphicon-remove-sign"></span></a>
@@ -15,37 +15,53 @@
                 Редактировать
             </a>
         </div>
-        <div class="win-menu-button" style="width:600px;">
+        <!--<div class="win-menu-button" style="width:600px;">
             <input class="form-control" placeholder="Имя, фамилия, отчество, событие" ng-model="personaMenuFilter" />
-        </div>
+        </div>-->
     </div>
     <div class="win-content">
         <div class="panel-info" cg-busy="Promise">
-            <div class="row">
+            <div class="row" ng-if="person">
                 <div class="col-lg-9">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <img style="width:150px; height:150px"/>
                             <br/>
-                            <span>TODO: add sex</span>
+                            <div class="radio-input-container">
+                                <div class="radio-input">
+                                    <input type="radio" value="None" ng-disabled="true" id="sexM" ng-checked="person.Sex == 0" ng-click="person.Sex = 0; person.IsChange = true" name="check">
+                                    <label for="sexM"></label>
+                                </div>
+
+                                <span>M</span>
+                            </div>
+
+                            <div class="radio-input-container">
+                                <div class="radio-input">
+                                    <input type="radio" value="None" ng-disabled="true" id="sexF" ng-checked="person.Sex == 1" ng-click="person.Sex = 1; person.IsChange = true" name="check">
+                                    <label for="sexF"></label>
+                                </div>
+
+                                <span>Ж</span>
+                            </div>
                         </div>
                         <div class="col-lg-4">
-                            TODO: name rus
+                            {{person.LastName}}
                             <br/>
-                            TODO: sname rus
+                            {{person.Name}}
                             <br/>
-                            TODO: fname rus
+                            {{person.Patronymic}}
                             <br/>
-                            TODO: burth date
+                            {{person.Bithday | date : 'd MMMM yyyy'}}
                         </div>
                         <div class="col-lg-4">
-                            TODO: name eng
+                            {{person.LastNameLatin}}
                             <br />
-                            TODO: sname eng
+                            {{ person.NameLatin }}
                             <br />
-                            TODO: fname eng
+                            {{ person.PatronymicLatin }}
                             <br />
-                            TODO: burth place
+                            {{person.Place}}, {{person.Country}}
                         </div>
                     </div>
                 </div>
@@ -54,7 +70,7 @@
                     <a href="#" class="btn btn-block btn-default">
                         <span class="fa fa-book"></span> Описание (0)
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayFacts()">
+                    <a href="#" class="btn btn-block btn-default">
                         <span class="fa fa-bookmark"></span> Факты (0)
                     </a>
                     <a href="#" class="btn btn-block btn-default">
