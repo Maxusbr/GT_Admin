@@ -12,6 +12,10 @@
             app.closeThird();
             app.loadContentView('/main/person/r3/person.media.html', 2500);
         }
+        $rootScope.displayConnections = function display_connections() {
+            app.closeThird();
+            app.loadContentView('/main/person/r3/person.connections.html', 2500);
+        }
 
         $scope.Id = $rootScope.Id;
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
