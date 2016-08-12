@@ -1,4 +1,4 @@
-﻿<div class="win-container r1 disReport" style="width:600px;">
+﻿<div class="win-container r1 userList" style="width:800px;" ng-controller="MainUserListController">
     <div class="win-header">
         <div class="win-header-text">
             Список пользователей
@@ -9,10 +9,17 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#">
+            <a href="#" ng-click="createUser()">
                 <span class="fa fa-plus"></span>
                 <br />
                 Добавить
+            </a>
+        </div>
+        <div class="win-menu-button">
+            <a href="#">
+                <span class="fa fa-magnet"></span>
+                <br />
+                Пригласить
             </a>
         </div>
     </div>
@@ -22,14 +29,22 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Автомобиль</th>
-                        <th>Залито топлива</th>
-                        <th>Слито топлива</th>
-                        <th>Израсходовано</th>
-                        <th>Расход</th>
+                        <th>Имя</th>
+                        <th>Компания</th>
+                        <th>Событие</th>
+                        <th>Роль</th>
+                        <th>Статус</th>
                     </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                    <tr ng-repeat="row in userlist">
+                        <td>{{row.fname}} {{row.sname}}</td>
+                        <td>{{row.company}}</td>
+                        <td>{{row.event}}</td>
+                        <td>{{row.role}}</td>
+                        <td>{{row.status}}</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

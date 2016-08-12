@@ -1,0 +1,76 @@
+﻿<div class="win-container r2 userCreate" style="width:350px;">
+    <div class="win-header">
+        <div class="win-header-text">
+            Добавить нового
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('userCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#">
+                <span class="fa fa-save"></span>
+                <br />
+                Сохранить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+
+        <div class="panel-info" cg-busy="Promise">
+            Имя
+            <br/>
+            <input class="form-control" placeholder="от 3 знаков"/>   
+            <br />         
+            Фамилия
+            <br />
+            <input class="form-control" placeholder="от 3 знаков" />
+            <br />
+            Компания
+            <br />
+            <input class="form-control" placeholder="от 3 знаков" />
+            <br />
+            Должность
+            <br />
+            <input class="form-control" placeholder="от 3 знаков" />
+            <br />
+            Мейл
+            <br />
+            <input class="form-control" placeholder="example@example.ru" />
+            <br />
+            Телефон
+            <br />
+            <input class="form-control" placeholder="+7 999 999 99 99" />
+            <br />            
+            Пароль
+            <br />
+            <input class="form-control" placeholder="*******" />
+            <br />
+            <label>
+                <input type="checkbox" ng-click="generatePassword()" id="generatePassword" value="">
+                <span ng-if="passtype=='text'" class="glyphicon glyphicon-ok"></span>
+                <span ng-if="passtype=='password'" class="glyphicon"></span>
+                Сгенерировать пароль автоматически
+            </label>
+            <br/>
+            <br/>
+            <label>
+                <input type="checkbox" value="" name="noletter" ng-model="user.NotSendWelcome">
+                <span ng-if="user.NotSendWelcome" class="glyphicon glyphicon-ok"></span>
+                <span ng-if="!user.NotSendWelcome" class="glyphicon"></span>
+                Не отправлять Welcome Letter и др. письма
+            </label>
+
+            <div class="form-group">
+                <select name="role" id="role"
+                        ng-model="user.RoleId" class="form-control"
+                        ng-options="role.id as role.name for role in roles"
+                        required>
+                    <option value="">Выберите роль</option>
+                </select>
+                <label for="role" class="small text-muted">Роль для ограничения прав</label>
+            </div>
+        </div>
+    </div>
+</div>

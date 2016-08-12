@@ -117,6 +117,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="main\events\base.html" />
     <Content Include="main\main.controller.js" />
+    <Content Include="main\user\user.create.html" />
+    <Content Include="main\user\user.create.js" />
     <Content Include="main\user\user.list.html" />
     <Content Include="main\user\user.list.js" />
     <Content Include="Scripts\angular-datepicker.js" />

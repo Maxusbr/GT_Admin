@@ -49,8 +49,10 @@ var app;
         //load content for display and put them to root content div
         app.loadContentView = function loadView(location, pixels) {
             if (location !== "") {
+                console.log(location);
                 $http.get(apiUrl + location)
             .success(function (data) {
+                console.log(data);
                 var element = angular.element(data);
                 $compile(element)($rootScope);
                 $('#divContent').append(element);
@@ -68,16 +70,25 @@ var app;
 
         app.closeAll = function close_all() {
             app.closeView('r1');
+            app.closeView('r2');
+        }
+
+        app.closeSecond = function close_second() {
+            app.closeView('r2');
         }
 
         //universal for close any window
         app.closeView = function close_view(classId) {
-                var dv = document.getElementById("divContent");
-                var wins = dv.getElementsByClassName(classId);
-                var len = wins.length;
-                for (var i = 0; i < len; i++) {
-                    wins[i].parentNode.removeChild(wins[i]);
+            var dv = document.getElementById("divContent");
+            var wins = dv.getElementsByClassName(classId);
+            var len = wins.length;
+            for (var i = 0; i < len; i++) {
+                wins[i].parentNode.removeChild(wins[i]);
             }
+        }
+
+        $rootScope.closeMe = function close_me(classID) {
+            app.closeView(classID);
         }
     }
 

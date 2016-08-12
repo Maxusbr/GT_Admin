@@ -86,6 +86,12 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
         isActive();
     });
 
+    $scope.clickMenu = function click_Menu(url){
+        console.log(url);
+        app.loadChapterView(url, 2500);
+        isActive();
+    }
+
     $scope.ToggleCustomMenu = function (customMenu) {
         if (customMenu) {
             var menu = $(customMenu.expand);

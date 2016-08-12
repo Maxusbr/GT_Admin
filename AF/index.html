@@ -152,11 +152,9 @@
             <!-- /.navbar-collapse -->
         </nav>
         <div id="page-wrapper" style="height:100%; background:#2e80ab; padding:0px;" ng-controller="MainController">
-            <div style="height: 100%; overflow-y: hidden; overflow-x: hidden">
-                <div class="panel" style="overflow-x:scroll; height:100%; background: #333;display: inline-block; width: 100%; " id="divContent">
-                    
+                <div class="panel" style="overflow-x:scroll; height:100%; overflow-y: hidden; white-space:nowrap;">
+                    <div  id="divContent" style="white-space:nowrap; display:inline-block; height:100%"></div>
                 </div>
-            </div>
         </div>
     </div>
 
@@ -181,5 +179,8 @@
     <script type="text/javascript" src="/components/menu/menu.controller.js"></script>
 
     <script type="text/javascript" src="/main/main.controller.js"></script>
+
+    <script type="text/javascript" src="/main/user/user.list.js"></script>
+    <script type="text/javascript" src="/main/user/user.create.js"></script>
 </body>
 </html>
