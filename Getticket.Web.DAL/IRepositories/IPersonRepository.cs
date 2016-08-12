@@ -444,5 +444,44 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="place"></param>
         /// <returns></returns>
         int UpdatePlace(string country, string place);
+
+        /// <summary>
+        /// Возвращает количество описаний
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetCountDescriptions(int id);
+
+        /// <summary>
+        /// Возвращает количество фактов
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetCountFacts(int id);
+
+        /// <summary>
+        /// Возвращает количество связей
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetCountConnects(int id);
+        /// <summary>
+        /// Возвращает количество медиа
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetCountMedias(int id);
+        /// <summary>
+        /// Возвращает количество ссылок
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetCountLinks(int id);
+        /// <summary>
+        /// Возвращает количество антропометрии
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetCountAntros(int id);
     }
 }

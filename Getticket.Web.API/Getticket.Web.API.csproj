@@ -221,6 +221,7 @@
     <Compile Include="Models\LastChangeModel.cs" />
     <Compile Include="Models\Persons\CountryModel.cs" />
     <Compile Include="Models\Persons\CountryPlaceModel.cs" />
+    <Compile Include="Models\Persons\CountsModel.cs" />
     <Compile Include="Models\Persons\EntityCollection.cs" />
     <Compile Include="Models\Persons\PersonFactModel.cs" />
     <Compile Include="Models\Persons\PersonFactTypeModel.cs" />

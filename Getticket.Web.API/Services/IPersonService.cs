@@ -38,6 +38,13 @@ namespace Getticket.Web.API.Services
         PersonModel GetPerson(int id);
 
         /// <summary>
+        /// Возвращает количества описаний, фактов и т.д.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        CountsModel GetCounts(int id);
+
+        /// <summary>
         /// Возвращает список названий антропометрических характеристик 
         /// </summary>
         /// <returns></returns>
@@ -343,6 +350,7 @@ namespace Getticket.Web.API.Services
         /// <param name="place"></param>
         /// <returns></returns>
         int UpdatePlace(string country, string place);
+
     }
 
 }

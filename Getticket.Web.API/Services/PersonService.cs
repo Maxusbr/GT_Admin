@@ -89,6 +89,24 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
+        /// <see cref="IPersonService.GetCounts"/>
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public CountsModel GetCounts(int id)
+        {
+            return new CountsModel
+            {
+                CountDescriptions = _personRepository.GetCountDescriptions(id),
+                CountFacts = _personRepository.GetCountFacts(id),
+                CountConnects = _personRepository.GetCountConnects(id),
+                CountMedias = _personRepository.GetCountMedias(id),
+                CountLinks = _personRepository.GetCountLinks(id),
+                CountAntros = _personRepository.GetCountAntros(id)
+            };
+        }
+
+        /// <summary>
         /// Возвращает список названий антропометрических характеристик 
         /// </summary>
         /// <returns></returns>
