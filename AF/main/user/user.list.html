@@ -11,39 +11,40 @@
         <div class="win-menu-button">
             <a href="#" ng-click="createUser()">
                 <span class="fa fa-plus"></span>
-                <br />
+                <br/>
                 Добавить
             </a>
         </div>
         <div class="win-menu-button">
             <a href="#" ng-click="inviteUser()">
                 <span class="fa fa-magnet"></span>
-                <br />
+                <br/>
                 Пригласить
             </a>
         </div>
     </div>
-    <div class="win-content">
 
-        <div class="panel-info" cg-busy="Promise">
+    <div class="win-content" cg-busy="Promise">
+        
+        <div class="panel-info">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Имя</th>
-                        <th>Компания</th>
-                        <th style="width:200px; text-wrap:normal">Событие</th>
-                        <th>Роль</th>
-                        <th>Статус</th>
-                    </tr>
+                <tr>
+                    <th>Имя</th>
+                    <th>Компания</th>
+                    <th style="width: 200px; text-wrap: normal">Событие</th>
+                    <th>Роль</th>
+                    <th>Статус</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="row in userlist">
-                        <td>{{row.LastName}} {{row.Name}}</td>
-                        <td>{{row.Company}}</td>
-                        <td style="width:200px; text-wrap:normal">{{row.event}}</td>
-                        <td>{{row.role}}</td>
-                        <td class="{{row.StatusName}}">{{row.StatusDescription}}</td>
-                    </tr>
+                <tr ng-repeat="row in userlist">
+                    <td>{{row.LastName}} {{row.Name}}</td>
+                    <td>{{row.Company}}</td>
+                    <td style="width: 200px; text-wrap: normal">{{row.event}}</td>
+                    <td>{{row.role}}</td>
+                    <td class="{{row.StatusName}}">{{row.StatusDescription}}</td>
+                </tr>
                 </tbody>
             </table>
         </div>

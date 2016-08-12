@@ -17,8 +17,8 @@ var app;
             'ngCookies',
             'vcRecaptcha',
             'ngMessages',
-            'ngResource',
-            'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap', 'ngTagsInput'
+            'ngResource', 'cgBusy',
+            'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap', 'ngTagsInput', 'ngMaterial'
             // 'webix'
         ])
         .config(config)

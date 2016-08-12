@@ -10,12 +10,12 @@
         }
 
         $scope.Id = $rootScope.Id;
-        personService.getPerson($scope.Id, function(data) {
+        $scope.Promise = personService.getPerson($scope.Id, function (data) {
             $scope.person = data;
         });
         $rootScope.editPerson = function edit_person(){
             app.closeThird();
-            app.loadContentView('peron.edit.html', 2200);
+            app.loadContentView('/main/person/person.edit.html', 2200);
         }
     }
 

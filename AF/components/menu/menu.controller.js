@@ -82,12 +82,23 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
 
     ];
 
+    function isActive(url) {
+        $.each($('#main-menu__container a'), function (key, val) {
+            if ((url).indexOf($(val).attr('href')) >= 0) {
+                $scope.menu[key].active = true;
+            }
+            else {
+                $scope.menu[key].active = false;
+            }
+        });
+    }
+
     $timeout(function () {
         isActive();
     });
 
     $scope.clickMenu = function click_Menu(url){
-        console.log(url);
+        //console.log(url);
         //$location.path(url);
         app.loadChapterView(url, 2500);
         isActive(url);
@@ -111,15 +122,4 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
     //    //app.loadChapterView($location.path(), 2500);
     //    //isActive();
     //});
-
-    function isActive(url) {
-        $.each($('#main-menu__container a'), function (key, val) {
-            if ((url).indexOf($(val).attr('href')) >= 0) {
-                $scope.menu[key].active = true;
-            }
-            else {
-                $scope.menu[key].active = false;
-            }
-        });
-    }
 }

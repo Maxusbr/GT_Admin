@@ -1,7 +1,8 @@
-﻿<div class="win-container r3 personEdit" style="width:700px;" ng-controller="PersonEditController">
+﻿<script type="text/javascript" src="/main/person/person.edit.js"></script>
+<div class="win-container r3 personEdit" style="width:700px;" ng-controller="PersonEditController">
     <div class="win-header">
         <div class="win-header-text">
-            Добавить персону
+            Изменить персону
         </div>
         <div class="win_buttons">
             <a href="#" ng-click="closeMe('personEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
@@ -22,38 +23,43 @@
                 <h5>На русском</h5>
                 Имя
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Name" />
                 <br />
                 Фамилия
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.LastName"  />
                 <br />
                 Отчество
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Patronymic" />
             </div>
             <div class="col-lg-6">
                 <h5>На английском</h5>
                 Имя
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.NameLatin" />
                 <br />
                 Фамилия
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.LastNameLatin"  />
                 <br />
                 Отчество
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.PatronymicLatin"  />
             </div>
         </div>
         <hr />
         <div class="row">
             <div class="col-lg-6">
                 Дата рождения
-                <br />
-                <input class="form-control" placeholder="от 3 знаков" />
-            </div>
+                <br/>
+                <md-content>
+                    <md-datepicker ng-model="person.bithday" md-placeholder="Дата рождения"></md-datepicker>
+                </md-content>
+
+                    
+                    <!--<input class="form-control" placeholder="от 3 знаков" />-->
+</div>
             <div class="col-lg-6">
                 Город рождения
                 <br />

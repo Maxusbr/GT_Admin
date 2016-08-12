@@ -50,7 +50,7 @@
         }
 
         function getPersons(callback) {
-            $http.get(`${serviceUrl}persons`).success(function (data) {
+            return $http.get(`${serviceUrl}persons`).success(function (data) {
                 $rootScope.menuScope = [];
                 $rootScope.persons = data;
                 $rootScope.persons.forEach(function (item) {

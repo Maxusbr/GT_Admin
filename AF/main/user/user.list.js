@@ -5,8 +5,8 @@
         .module('app')
         .controller('MainUserListController', MainUserListController);
 
-    MainUserListController.$inject = ['$rootScope', 'userService'];
-    function MainUserListController($rootScope, userService) {
+    MainUserListController.$inject = ['$rootScope', '$scope', 'userService'];
+    function MainUserListController($rootScope, $scope, userService) {
         var vm = this;
         //$rootScope.userlist = [
         //    {
@@ -89,7 +89,7 @@
         //    },
         //]
 
-        if (!$rootScope.userlist) userService.getListUsers();
+        if (!$rootScope.userlist) $scope.Promise = userService.getListUsers();
 
         $rootScope.createUser = function create_user() {
             console.log('create user');

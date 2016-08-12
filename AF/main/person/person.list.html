@@ -20,28 +20,28 @@
         </div>
     </div>
     <div class="win-content">
-
         <div class="panel-info" cg-busy="Promise">
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>Фамилия</th>
-                        <th>Имя</th>
-                        <th>Отчество</th>
-                        <th>Жанр</th>
-                        <th>Событие</th>
-                    </tr>
+                <tr>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>Жанр</th>
+                    <th>Событие</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="row in menuScope | filter:personaMenuFilter" ng-click="selectPerson(row.id)">
-                        <td>{{row.name.lastName}}</td>
-                        <td>{{row.name.firstName}}</td>
-                        <td>{{row.name.middleName}}</td>
-                        <td>{{row.type}}</td>
-                        <td>{{row.event}}</td>
-                    </tr>
+                <tr ng-repeat="row in menuScope | filter:personaMenuFilter" ng-click="selectPerson(row.id)">
+                    <td>{{row.name.lastName}}</td>
+                    <td>{{row.name.firstName}}</td>
+                    <td>{{row.name.middleName}}</td>
+                    <td>{{row.type}}</td>
+                    <td>{{row.event}}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
+        
     </div>
 </div>

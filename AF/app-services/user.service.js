@@ -29,7 +29,7 @@
         }
 
         service.getListUsers = function getListUsers() {
-            $http.get(`${serviceUrl}users`)
+            return $http.get(`${serviceUrl}users`)
                 .success(function (data) {
                     $rootScope.userlist = data;
                     $rootScope.userMenuList = [];
