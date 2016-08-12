@@ -1,0 +1,38 @@
+﻿<div class="win-container r2 userInvite" style="width:350px;">
+    <div class="win-header">
+        <div class="win-header-text">
+            Пригласить нового
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('userInvite')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#">
+                <span class="fa fa-coffee"></span>
+                <br />
+                Пригласить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+
+        <div class="panel-info" cg-busy="Promise">
+            Мейл
+            <br />
+            <input class="form-control" placeholder="example@example.ru" />
+            <br />
+
+            <div class="form-group">
+                <select name="role" id="role"
+                        ng-model="user.RoleId" class="form-control"
+                        ng-options="role.id as role.name for role in roles"
+                        required>
+                    <option value="">Выберите роль</option>
+                </select>
+                <label for="role" class="small text-muted">Роль для ограничения прав</label>
+            </div>
+        </div>
+    </div>
+</div>
