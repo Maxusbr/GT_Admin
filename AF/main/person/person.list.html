@@ -32,10 +32,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in menuScope | filter:personaMenuFilter" ng-click="selectPerson(row.id)">
-                    <td>{{row.name.lastName}}</td>
-                    <td>{{row.name.firstName}}</td>
-                    <td>{{row.name.middleName}}</td>
+                <tr ng-repeat="row in menuScope | filter:personaMenuFilter">
+                    <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.lastName}}</a></td>
+                    <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.firstName}}</a></td>
+                    <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.middleName}}</a></td>
                     <td>{{row.type}}</td>
                     <td>{{row.event}}</td>
                 </tr>
