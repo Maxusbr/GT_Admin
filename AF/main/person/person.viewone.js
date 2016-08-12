@@ -6,7 +6,7 @@
 
         $rootScope.displayFacts = function display_facts(){
             app.closeThird();
-            app.loadContentView('person.facts.html',2500);
+            app.loadContentView('/main/person/person.facts.html', 2500);
         }
 
         $scope.Id = $rootScope.Id;

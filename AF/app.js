@@ -53,7 +53,6 @@ var app;
                 console.log(location);
                 $http.get(apiUrl + location)
             .success(function (data) {
-                console.log(data);
                 var element = angular.element(data);
                 $compile(element)($rootScope);
                 $('#divContent').append(element);
