@@ -113,7 +113,7 @@ var app;
             .state('main', {
                 //abstract: true,
                 url: '/main',
-                templateUrl: '/main/base.html',
+                templateUrl: '/main/_base.html',
                 controller: 'baseController',
                 controllerAs: 'vm',
                 onEnter: function () {

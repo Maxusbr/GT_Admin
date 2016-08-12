@@ -33,7 +33,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="row in menuScope | filter:personaMenuFilter">
+                    <tr ng-repeat="row in menuScope | filter:personaMenuFilter" ng-click="selectPerson(row.id)">
                         <td>{{row.name.lastName}}</td>
                         <td>{{row.name.firstName}}</td>
                         <td>{{row.name.middleName}}</td>
