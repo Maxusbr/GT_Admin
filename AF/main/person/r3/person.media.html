@@ -1,4 +1,4 @@
-﻿<div class="win-container r3 personMedia" style="width:800px;" ng-controller="PersonFactsController">
+﻿<div class="win-container r3 personMedia" style="width:800px;" ng-controller="PersonMediaController">
     <div class="win-header">
         <div class="win-header-text">
             Медиа
@@ -9,7 +9,7 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="addFact()">
+            <a href="#" ng-click="addMedia()">
                 <span class="fa fa-plus"></span>
                 <br />
                 Добавить
@@ -20,23 +20,84 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Факт</th>
-                    <th>Статус/изменен</th>
-                    <th>Связь</th>
-                    <th>Источник</th>
+                    <th>Данные</th>
+                    <th>Медиа</th>
+                    <th>Ассоциация</th>
+                    <th>Изменен</th>
+                    <th>Теги</th>
                     <th>Использование</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>TODO: text</td>
-                    <td>
-                        TODO: status
-                        <br />
-                        TODO: changed by
+                    <td>Event
+                    <br/>
+                    Event place
+                    <br/>
+                    event date
+                    <br/>
+                    persons of event
+                    <br/>
+                    description
                     </td>
-                    <td>TODO: connection</td>
-                    <td>TODO: source</td>
+                    <td>
+                        Photo
+                        <br/>
+                        <a href="//photo-url" target="_blank"/>
+                        <br />
+                        <img style="width:50px; height:50px"/><!--preview-->
+                    </td>
+                    <td>TODO: associated</td>
+                    <td>TODO: changed by</td>
+                    <td>TODO: tag 1, tag2, tag3, tag4</td>
+                    <td>TODO: used</td>
+                </tr>
+                <tr>
+                    <td>
+                        Event
+                        <br />
+                        Event place
+                        <br />
+                        event date
+                        <br />
+                        persons of event
+                        <br />
+                        description
+                    </td>
+                    <td>
+                        Photo
+                        <br />
+                        <a href="//photo-url" target="_blank" />
+                        <br />
+                        <img style="width:50px; height:50px" /><!--preview-->
+                    </td>
+                    <td>TODO: associated</td>
+                    <td>TODO: changed by</td>
+                    <td>TODO: tag 1, tag2, tag3, tag4</td>
+                    <td>TODO: used</td>
+                </tr>
+                <tr>
+                    <td>
+                        Event
+                        <br />
+                        Event place
+                        <br />
+                        event date
+                        <br />
+                        persons of event
+                        <br />
+                        description
+                    </td>
+                    <td>
+                        Photo
+                        <br />
+                        <a href="//photo-url" target="_blank" />
+                        <br />
+                        <img style="width:50px; height:50px" /><!--preview-->
+                    </td>
+                    <td>TODO: associated</td>
+                    <td>TODO: changed by</td>
+                    <td>TODO: tag 1, tag2, tag3, tag4</td>
                     <td>TODO: used</td>
                 </tr>
             </tbody>
