@@ -83,6 +83,8 @@
     <Content Include="main\person\r3\person.facts.js" />
     <Content Include="main\person\r3\person.media.html" />
     <Content Include="main\person\r3\person.media.js" />
+    <Content Include="main\person\r3\r4\person.internet.editor.html" />
+    <Content Include="main\person\r3\r4\person.internet.editor.js" />
     <Content Include="main\_base.html" />
     <Content Include="main\person\person.viewone.html" />
     <Content Include="main\person\person.viewone.js" />
