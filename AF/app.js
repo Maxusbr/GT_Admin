@@ -72,15 +72,23 @@ var app;
             app.closeView('r1');
             app.closeView('r2');
             app.closeView('r3');
+            app.closeView('r4');
         }
 
         app.closeSecond = function close_second() {
             app.closeView('r2');
             app.closeView('r3');
+            app.closeView('r4');
         }
 
         app.closeThird = function close_third(){
             app.closeView('r3');
+            app.closeView('r4');
+        }
+
+        app.closeFour = function close_four()
+        {
+            app.closeView('r4');
         }
 
         //universal for close any window
