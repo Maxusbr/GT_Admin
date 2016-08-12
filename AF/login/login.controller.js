@@ -9,18 +9,7 @@
     function LoginController($location, AuthenticationService, FlashService, $http) {
         var vm = this;
 
-        vm.login = login;
-        vm.emailpattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
-
-        (function initController() {
-            // reset login status
-            AuthenticationService.ClearCredentials();
-        })();
-
-        //$scope.clickLogin = login();
-        
-
-        function login() {
+        vm.login = function login() {
             console.log('click login');
             vm.dataLoading = true;
             AuthenticationService.Login(vm.user.username, vm.user.password, function (response) {
@@ -33,8 +22,21 @@
                     FlashService.Error(response.message);
                 }
             });
-        };
+        }
 
+        vm.emailpattern = /^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+
+        (function initController() {
+            // reset login status
+            AuthenticationService.ClearCredentials();
+        })();
+
+        //$scope.clickLogin = login();
+        ;
+        vm.logOut = function () {
+            AuthenticationService.ClearCredentials();
+            $location.path('/');
+        }
         function handleSuccess(res) {
             return res.data;
         }

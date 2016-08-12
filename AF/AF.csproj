@@ -70,6 +70,7 @@
     <Content Include="login\login.view.html" />
     <Content Include="main\person\person.edit.html" />
     <Content Include="main\person\person.edit.js" />
+    <Content Include="main\_base.html" />
     <Content Include="main\person\person.viewone.html" />
     <Content Include="main\person\person.viewone.js" />
     <Content Include="packages.config" />

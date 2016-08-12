@@ -98,6 +98,9 @@ var app;
         $rootScope.closeMe = function close_me(classID) {
             app.closeView(classID);
         }
+        $rootScope.logOut = function () {
+            $location.path('/logOut');
+        }
     }
 
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
@@ -116,7 +119,7 @@ var app;
             .state('main', {
                 //abstract: true,
                 url: '/main',
-                templateUrl: '/main/base.html',
+                templateUrl: '/main/_base.html',
                 controller: 'baseController',
                 controllerAs: 'vm',
                 onEnter: function () {
@@ -134,6 +137,15 @@ var app;
             //})
             .state('login', {
                 url: '/sign-in',
+                templateUrl: '/login/login.view.html',
+                controller: 'LoginController',
+                controllerAs: 'vm',
+                onEnter: function () {
+                    console.log("enter login");
+                }
+            })
+            .state('logout', {
+                url: '/logOut',
                 templateUrl: '/login/login.view.html',
                 controller: 'LoginController',
                 controllerAs: 'vm',
