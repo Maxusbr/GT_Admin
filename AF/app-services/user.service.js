@@ -39,7 +39,7 @@
         }
 
         function Update(user) {
-            return $http.post(`${apiUrl}users/update/${user.Id}`, user).then(handleSuccess, handleError('Error updating user'));
+            return $http.post(`${serviceUrl}users/update/${user.Id}`, user).then(handleSuccess, handleError('Error updating user'));
         }
 
         function Delete(id) {
@@ -47,7 +47,7 @@
         }
 
         function getUsers() {
-            return $http.get(`${apiUrl}users`)
+            return $http.get(`${serviceUrl}users`)
                 .success(function (data) { return data })
                 .error(function (data) {
                     return { success: false, message: data };
@@ -55,7 +55,7 @@
         }
 
         function getListUsers() {
-            $http.get(`${apiUrl}users`)
+            $http.get(`${serviceUrl}users`)
                 .success(function (data) {
                     $rootScope.userlist = data;
                     $rootScope.userMenuList = [];
@@ -73,7 +73,7 @@
         }
 
         function getListRoles() {
-            return $http.get(`${apiUrl}sysroles`)
+            return $http.get(`${serviceUrl}sysroles`)
                 .success(function (data) { return data })
                 .error(function (data) {
                     return { success: false, message: data };
@@ -81,7 +81,7 @@
         }
 
         function registerUser(user) {
-            return $http.post(`${apiUrl}users/register`, user)
+            return $http.post(`${serviceUrl}users/register`, user)
                 .success(function (data) { return data })
                 .error(function (data) { return data; });
         }

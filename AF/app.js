@@ -1,5 +1,6 @@
 ﻿//set api adress
 var apiUrl = 'http://localhost:5831/';
+var serviceUrl = 'http://localhost:35162/';
 //var apiUrl = 'http://getticketwebapi.azurewebsites.net/';
 var pageNumber = 1;
 var pageSize = 20;
@@ -80,6 +81,7 @@ var app;
         //universal for close any window
         app.closeView = function close_view(classId) {
             var dv = document.getElementById("divContent");
+            if (dv === null)return;
             var wins = dv.getElementsByClassName(classId);
             var len = wins.length;
             for (var i = 0; i < len; i++) {
@@ -102,28 +104,28 @@ var app;
         
 
         // For any unmatched url, send to /route1
-        //$urlRouterProvider.otherwise("/login");
+        //$urlRouterProvider.otherwise("/main");
 
         $stateProvider
             .state('main', {
-                abstract: true,
+                //abstract: true,
                 url: '/main',
-                templateUrl: '/main/main.view.html',
-                controller: 'MainController',
+                templateUrl: '/main/base.html',
+                controller: 'baseController',
                 controllerAs: 'vm',
                 onEnter: function () {
                     console.log("enter main abstract");
                 }
             })
-            .state('home', {
-                url: '/',
-                templateUrl: '/home/home.view.html',
-                controller: 'HomeController',
-                controllerAs: 'vm',
-                onEnter: function () {
-                    console.log("enter home");
-                }
-            })
+            //.state('home', {
+            //    url: '/',
+            //    templateUrl: '/home/home.view.html',
+            //    controller: 'HomeController',
+            //    controllerAs: 'vm',
+            //    onEnter: function () {
+            //        console.log("enter home");
+            //    }
+            //})
             .state('login', {
                 url: '/sign-in',
                 templateUrl: '/login/login.view.html',
@@ -133,60 +135,60 @@ var app;
                     console.log("enter login");
                 }
             })
-            .state('registration', {
-                url: '/registration',
-                templateUrl: '/register/register.view.html',
-                controller: 'RegisterController',
-                controllerAs: 'vm',
-                onEnter: function () {
-                    console.log("enter register");
-                }
-            })
-            .state('registration.confirm', {
-                url: '/confirm',
-                templateUrl: '/confirm/confirm.view.html',
-                controller: 'ConfirmController',
-                controllerAs: 'vm',
-                onEnter: function () {
-                    console.log("enter confirm");
-                }
-            })
-            .state('recovery', {
-                url: '/recovery',
-                templateUrl: '/recovery/recovery.view.html',
-                controller: 'RecoveryController',
-                controllerAs: 'vm',
-                onEnter: function () {
-                    console.log("enter recovery");
-                }
-            })
-            .state('recovery.congirm', {
-                url: '/:key',
-                templateUrl: '/recovery_confirm/recovery_confirm.view.html',
-                controller: 'RecoveryConfirmController',
-                controllerAs: 'vm',
-                onEnter: function () {
-                    console.log("enter recovery_confirm");
-                }
-            })
-            .state('change_password', {
-                url: '/change_password',
-                templateUrl: '/change_password/change_password.view.html',
-                controller: 'ChangePasswordController',
-                controllerAs: 'vm',
-                onEnter: function () {
-                    console.log("enter change_password");
-                }
-            })
-            .state('success', {
-                url: '/success',
-                templateUrl: '/success/success.view.html',
-                controller: 'SuccessController',
-                controllerAs: 'vm',
-                onEnter: function () {
-                    console.log("enter success");
-                }
-            });
+            //.state('registration', {
+            //    url: '/registration',
+            //    templateUrl: '/register/register.view.html',
+            //    controller: 'RegisterController',
+            //    controllerAs: 'vm',
+            //    onEnter: function () {
+            //        console.log("enter register");
+            //    }
+            //})
+            //.state('registration.confirm', {
+            //    url: '/confirm',
+            //    templateUrl: '/confirm/confirm.view.html',
+            //    controller: 'ConfirmController',
+            //    controllerAs: 'vm',
+            //    onEnter: function () {
+            //        console.log("enter confirm");
+            //    }
+            //})
+            //.state('recovery', {
+            //    url: '/recovery',
+            //    templateUrl: '/recovery/recovery.view.html',
+            //    controller: 'RecoveryController',
+            //    controllerAs: 'vm',
+            //    onEnter: function () {
+            //        console.log("enter recovery");
+            //    }
+            //})
+            //.state('recovery.congirm', {
+            //    url: '/:key',
+            //    templateUrl: '/recovery_confirm/recovery_confirm.view.html',
+            //    controller: 'RecoveryConfirmController',
+            //    controllerAs: 'vm',
+            //    onEnter: function () {
+            //        console.log("enter recovery_confirm");
+            //    }
+            //})
+            //.state('change_password', {
+            //    url: '/change_password',
+            //    templateUrl: '/change_password/change_password.view.html',
+            //    controller: 'ChangePasswordController',
+            //    controllerAs: 'vm',
+            //    onEnter: function () {
+            //        console.log("enter change_password");
+            //    }
+            //})
+            //.state('success', {
+            //    url: '/success',
+            //    templateUrl: '/success/success.view.html',
+            //    controller: 'SuccessController',
+            //    controllerAs: 'vm',
+            //    onEnter: function () {
+            //        console.log("enter success");
+            //    }
+            //});
 
         /**
          * Не даем браузеру кэшировать ангулярку, альтернатива -- правильная настройка бэкенда

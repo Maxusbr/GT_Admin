@@ -16,7 +16,7 @@
             </a>
         </div>
         <div class="win-menu-button" style="width:250px;">
-            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" />
+            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" ng-model="personaMenuFilter" />
         </div>
     </div>
     <div class="win-content">
@@ -33,12 +33,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="row in userlist">
-                        <td>{{row.fname}} {{row.sname}}</td>
-                        <td>{{row.company}}</td>
+                    <tr ng-repeat="row in menuScope | filter:personaMenuFilter">
+                        <td>{{row.name.lastName}}</td>
+                        <td>{{row.name.firstName}}</td>
+                        <td>{{row.name.middleName}}</td>
+                        <td>{{row.type}}</td>
                         <td>{{row.event}}</td>
-                        <td>{{row.role}}</td>
-                        <td>{{row.status}}</td>
                     </tr>
                 </tbody>
             </table>

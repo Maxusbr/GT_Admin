@@ -42,7 +42,7 @@
     <script src="/Scripts/bootstrap.min.js"></script>
 </head>
 <body style="height:calc(100% - 55px);">
-    <div id="wrapper" style="height:100%;" ng-style="{'padding-left': (hideMenu ? 70 : 225) + 'px'}">
+    <div id="wrapper" style="height:100%;" ng-style="{'padding-left': (hideMenu ? 70 : 225) + 'px'}" ui-view>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -151,7 +151,7 @@
             </div>
             <!-- /.navbar-collapse -->
         </nav>
-        <div id="page-wrapper" style="height:100%; background:#2e80ab; padding:0px;" ng-controller="MainController">
+        <div id="page-wrapper" style="height:100%; background:#2e80ab; padding:0px;" >
                 <div class="panel" style="overflow-x:scroll; height:100%; overflow-y: hidden; white-space:nowrap;  background:#2e80ab; ">
                     <div  id="divContent" style="white-space:nowrap; display:inline-block; height:100%"></div>
                 </div>
@@ -174,15 +174,21 @@
     <script src="/Scripts/angular-resource.min.js"></script>
 
     <!--components-->
-    <script type="text/javascript" src="/app.js"></script>
+<script type="text/javascript" src="/app.js"></script>
+    <script type="text/javascript" src="/app-services/authentication.service.js"></script>
+    <script type="text/javascript" src="/app-services/flash.service.js"></script>
+    <script type="text/javascript" src="/app-services/person.service.js"></script>
+    <script type="text/javascript" src="/app-services/user.service.js"></script>
+    <script type="text/javascript" src="/main/_base.js"></script>
+    <script type="text/javascript" src="/login/login.controller.js"></script>
 
     <script type="text/javascript" src="/components/menu/menu.controller.js"></script>
 
-    <script type="text/javascript" src="/main/main.controller.js"></script>
+    <!--<script type="text/javascript" src="/main/main.controller.js"></script>-->
 
     <script type="text/javascript" src="/main/user/user.list.js"></script>
     <script type="text/javascript" src="/main/user/user.create.js"></script>
-    <script type="text/javascript" src="/main/user/user.invite.js"></script>
+    <!--<script type="text/javascript" src="/main/user/user.invite.js"></script>-->
 
     <script type="text/javascript" src="/main/person/person.list.js"></script>
 

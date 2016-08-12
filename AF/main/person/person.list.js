@@ -5,10 +5,10 @@
         .module('app')
         .controller('PersonListController', PersonListController);
 
-    PersonListController.$inject = ['$rootScope'];
-    function PersonListController($rootScope) {
+    PersonListController.$inject = ['$rootScope', 'personService'];
+    function PersonListController($rootScope, personService) {
         var vm = this;
-
+        personService.getPersons();
         $rootScope.createPreson = function create_person() {
             console.log('create person');
             app.closeSecond();

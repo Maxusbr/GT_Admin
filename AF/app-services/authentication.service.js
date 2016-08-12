@@ -22,7 +22,7 @@
 
             var deferred = $q.defer();
 
-            $http.post(apiUrl + 'logon', data, {
+            $http.post(serviceUrl + 'logon', data, {
                 //withCredentials: true,
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             }).success(function (response) {

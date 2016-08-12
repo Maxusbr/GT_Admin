@@ -1,12 +1,13 @@
 ﻿(function () {
     'use strict';
 
-    angular
-        .module('app')
-        .controller('UserCreateController', UserCreateController);
-
-    UserCreateController.$inject = ['$rootScope'];
-    function UserCreateController($rootScope) {
+    function baseController($rootScope) {
         var vm = this;
     }
+
+    angular
+        .module('app')
+        .controller('baseController', baseController);
+
+    baseController.$inject = ['$rootScope'];
 })();

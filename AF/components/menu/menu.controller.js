@@ -88,8 +88,9 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
 
     $scope.clickMenu = function click_Menu(url){
         console.log(url);
+        //$location.path(url);
         app.loadChapterView(url, 2500);
-        isActive();
+        isActive(url);
     }
 
     $scope.ToggleCustomMenu = function (customMenu) {
@@ -104,16 +105,16 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
         $('#main-menu__container').toggleClass('col-md-3 col-md-1');
     };
 
-    $scope.$watch(function () {
-        return $location.path();
-    }, function (params) {
-        app.loadChapterView($location.path(), 2500);
-        isActive();
-    });
+    //$scope.$watch(function () {
+    //    return $location.path();
+    //}, function (params) {
+    //    //app.loadChapterView($location.path(), 2500);
+    //    //isActive();
+    //});
 
-    function isActive() {
+    function isActive(url) {
         $.each($('#main-menu__container a'), function (key, val) {
-            if (('/#' + $location.path()).indexOf($(val).attr('href')) >= 0) {
+            if ((url).indexOf($(val).attr('href')) >= 0) {
                 $scope.menu[key].active = true;
             }
             else {
