@@ -16,6 +16,14 @@
             app.closeThird();
             app.loadContentView('/main/person/r3/person.connections.html', 2500);
         }
+        $rootScope.displayInternet = function display_internet() {
+            app.closeThird();
+            app.loadContentView('/main/person/r3/person.internet.html', 2500);
+        }
+        $rootScope.displayAntro = function display_antro() {
+            app.closeThird();
+            app.loadContentView('/main/person/r3/person.antro.html', 2500);
+        }
 
         $scope.Id = $rootScope.Id;
         $scope.Promise = personService.getPerson($scope.Id, function (data) {

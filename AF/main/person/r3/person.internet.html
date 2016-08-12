@@ -1,15 +1,15 @@
-﻿<div class="win-container r3 personConnections" style="width:600px;" ng-controller="PersonConnectionsController">
+﻿<div class="win-container r3 personInternet" style="width:600px;" ng-controller="PersonInternetController">
     <div class="win-header">
         <div class="win-header-text">
-            Связи
+            Интернет
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('personConnections')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('personInternet')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="addConnection()">
+            <a href="#" ng-click="addInternet()">
                 <span class="fa fa-plus"></span>
                 <br />
                 Добавить
@@ -20,9 +20,11 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Что связываем</th>
-                    <th>Тип связи</th>
-                    <th>Характеристика</th>
+                    <th>Тип</th>
+                    <th>Ссылка</th>
+                    <th>Комментарий</th>
+                    <th>Активность</th>
+                    <th>Назначение</th>
                     <th>Изменен</th>
                 </tr>
             </thead>
@@ -30,6 +32,8 @@
                 <tr>
                     <td>TODO: text</td>
                     <td>TODO: type</td>
+                    <td>TODO: data</td>
+                    <td>TODO: changed by</td>
                     <td>TODO: data</td>
                     <td>TODO: changed by</td>
                 </tr>
