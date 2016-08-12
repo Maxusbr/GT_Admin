@@ -5,18 +5,11 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$q', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
-    function AuthenticationService($http, $q, $cookieStore, $rootScope, $timeout, UserService) {
+    AuthenticationService.$inject = ['$http', '$q', '$cookieStore', '$rootScope', '$timeout', 'userService'];
+    function AuthenticationService($http, $q, $cookieStore, $rootScope, $timeout, userService) {
         var service = {};
 
-        service.Login = login;
-        service.Logout = logOut;
-        service.SetCredentials = SetCredentials;
-        service.ClearCredentials = ClearCredentials;
-        service.isAuth = false;
-        return service;
-
-        function login(username, password, callback) {
+        service.Login = function login(username, password, callback) {
 
             var data = "grant_type=password&username=" + username + "&password=" + password;
 
@@ -40,12 +33,12 @@
             return deferred.promise;
 
         };
-        function logOut() {
+        service.Logout = function logOut() {
 
             ClearCredentials();
             service.isAuth = false;
         };
-        function SetCredentials(username, password, token) {
+        service.SetCredentials = function setCredentials(username, password, token) {
             var authdata = Base64.encode(username + ':' + password);
 
             $rootScope.globals = {
@@ -60,11 +53,16 @@
             $cookieStore.put('globals', $rootScope.globals);
         }
 
-        function ClearCredentials() {
+        service.ClearCredentials = function clearCredentials() {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Bearer';
         }
+
+        service.isAuth = false;
+        return service;
+
+
     }
 
     // Base64 encoding service used by AuthenticationService
