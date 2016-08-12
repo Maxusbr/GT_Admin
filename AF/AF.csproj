@@ -83,6 +83,8 @@
     <Content Include="main\person\r3\person.facts.js" />
     <Content Include="main\person\r3\person.media.html" />
     <Content Include="main\person\r3\person.media.js" />
+    <Content Include="main\person\r3\r4\person.internet.editor.html" />
+    <Content Include="main\person\r3\r4\person.internet.editor.js" />
     <Content Include="main\_base.html" />
     <Content Include="main\person\person.viewone.html" />
     <Content Include="main\person\person.viewone.js" />
@@ -111,6 +113,7 @@
     <Content Include="Scripts\plugins\d3\LICENSE" />
     <Content Include="Scripts\plugins\d3\README.md" />
     <Content Include="Scripts\version.json" />
+    <None Include="Properties\PublishProfiles\getticket - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
