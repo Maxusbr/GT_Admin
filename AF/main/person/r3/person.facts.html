@@ -16,11 +16,11 @@
             </a>
         </div>
     </div>
-    <div class="win-content">
-            <table class="table">
+    <div class="win-content col-md-18">
+            <table class="table" style="table-layout: fixed;">
                 <thead>
                     <tr>
-                        <th>Факт</th>
+                        <th class="col-md-6">Факт</th>
                         <th>Статус/изменен</th>
                         <th>Связь</th>
                         <th>Источник</th>
@@ -29,8 +29,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in factlist">
-                        <td><textarea type="text" class="form-control" style="min-height: 80px" data-ng-model="item.FactText" ng-disable="true"
-                            ng-trim="false" ng-model-options="{ allowInvalid: true }" ></textarea></td>
+                        <td><span style="">{{item.FactText}}</span></td>
                         <td>TODO: status
                             <br/>
                             <span ng-if="item.LastChange">
