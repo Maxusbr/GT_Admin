@@ -111,6 +111,7 @@
     <Content Include="Scripts\plugins\d3\LICENSE" />
     <Content Include="Scripts\plugins\d3\README.md" />
     <Content Include="Scripts\version.json" />
+    <None Include="Properties\PublishProfiles\getticket - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
