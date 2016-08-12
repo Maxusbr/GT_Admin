@@ -16,6 +16,14 @@
             app.closeThird();
             app.loadContentView('/main/person/r3/person.connections.html', 2500);
         }
+        $rootScope.displayInternet = function display_internet() {
+            app.closeThird();
+            app.loadContentView('/main/person/r3/person.internet.html', 2500);
+        }
+        $rootScope.displayAntro = function display_antro() {
+            app.closeThird();
+            app.loadContentView('/main/person/r3/person.antro.html', 2500);
+        }
 
         $scope.Id = $rootScope.Id;
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
