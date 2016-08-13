@@ -69,6 +69,8 @@
     <Content Include="Content\angular-material.min.css" />
     <Content Include="login\login.controller.js" />
     <Content Include="login\login.view.html" />
+    <Content Include="main\dictionary\dictionary.person.links.html" />
+    <Content Include="main\dictionary\dictionary.person.links.js" />
     <Content Include="main\person\r3\person.antro.html" />
     <Content Include="main\person\r3\person.antro.js" />
     <Content Include="main\person\r3\person.connections.html" />
