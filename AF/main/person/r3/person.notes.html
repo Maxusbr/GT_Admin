@@ -1,15 +1,55 @@
-﻿<div class="win-container r1 disReport" style="width:600px;" ng-controller="personNotesController">
+﻿<div class="win-container r3 disPersonNotes" style="width:800px;" ng-controller="personNotesController">
     <div class="win-header">
         <div class="win-header-text">
             Описание персоны
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('disReport')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('disPersonNotes')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
     </div>
     <div class="win-content">
-
+        <h5>Все теги персоны</h5>
+        <i>Ноги, Руки, главноеХвост</i>
+        <h5>Все описания для персоны</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Страница</th>
+                    <th>Блок</th>
+                    <th>Версия страницы</th>
+                    <th>Статич. опис.</th>
+                    <th>Тизер</th>
+                    <th>Адаптивных</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#">Персона/Сирена Уильямс</a></td>
+                    <td><a href="#">Другие персоны подборки</a></td>
+                    <td><a href="#">Подборка "Про ноги"</a></td>
+                    <td><a href="#">Указан</a></td>
+                    <td><a href="#">Указан</a></td>
+                    <td><a href="#">8</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">Без источника</a></td>
+                    <td><a href="#">Без источника</a></td>
+                    <td><a href="#">Без источника</a></td>
+                    <td><a href="#">Указан</a></td>
+                    <td><a href="#">Указан</a></td>
+                    <td><a href="#">6</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#">Без источника</a></td>
+                    <td><a href="#">Без источника</a></td>
+                    <td><a href="#">Без источника</a></td>
+                    <td><a href="#">Не указан</a></td>
+                    <td><a href="#">Не указан</a></td>
+                    <td><a href="#">11</a></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

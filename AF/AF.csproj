@@ -91,6 +91,7 @@
     <Content Include="main\person\r3\r4\person.internet.editor.js" />
     <Content Include="main\person\person.viewone.html" />
     <Content Include="main\person\person.viewone.js" />
+    <Content Include="main\_base.html" />
     <Content Include="packages.config" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
