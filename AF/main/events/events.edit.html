@@ -1,0 +1,98 @@
+﻿
+<div class="win-container r3 personEdit" style="width:700px;" ng-controller="EventsEditController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Изменить персону
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#">
+                <span class="fa fa-save"></span>
+                <br />
+                Сохранить
+            </a>
+        </div>
+    </div>
+        <div class="win-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <h5>На русском</h5>
+                Название
+                <br />
+                <input class="form-control" placeholder="от 3 знаков" />
+                <br />
+                Описание
+                <br />
+                <input class="form-control" placeholder="от 3 знаков" />
+                <br />
+            </div>
+            <div class="col-lg-6">
+                <h5>На английском</h5>
+                Название
+                <br />
+                <input class="form-control" placeholder="от 3 знаков" />
+                <br />
+                Описание
+                <br />
+                <input class="form-control" placeholder="от 3 знаков" />
+                <br />
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-6">
+                Категория
+                <br />
+                <input class="form-control" placeholder="от 3 знаков" />
+                <br />
+            </div>
+            <div class="col-lg-6">
+                Подкатегория
+                <br />
+                <input class="form-control" placeholder="от 3 знаков" />
+                <br />
+            </div>
+            <div class="col-lg-6">
+                Организатор
+                <br />
+                <input class="form-control" placeholder="от 3 знаков" />
+                <br />
+            </div>
+            <div class="col-lg-6">
+                Возрастные ограничения
+                <br />
+                <input class="form-control" placeholder="12+" />
+                <br />
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-4">
+                <span style="padding-right: 5px;">Опубликовано</span>
+                <input class="form-control" placeholder="от 3 знаков" type="checkbox" style="display: inline-block;" />
+            </div>
+            <div class="col-lg-4">
+                Дата начала доступности
+                <br />
+                <!-- <input type="date" name="calendar" value="" class="form-control" placeholder="" /> -->
+                <md-content>
+                    <md-datepicker ng-model="person.bithday" md-placeholder="Дата рождения"></md-datepicker>
+                </md-content>
+            </div>
+            <div class="col-lg-4">
+                Дата окончания доступности
+                <br />
+                <!-- <input type="date" name="calendar" value="" class="form-control" placeholder=""/> -->
+                <md-content>
+                    <md-datepicker ng-model="person.bithday" md-placeholder="Дата рождения"></md-datepicker>
+                </md-content>
+
+            </div>
+        </div>
+        
+    </div>
+</div>

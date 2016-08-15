@@ -1,0 +1,46 @@
+﻿<div class="win-container r3 personInternet" style="width:600px;" ng-controller="EventsUsersController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Права и пользователи
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personInternet')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="addInternet()">
+                <span class="fa fa-plus"></span>
+                <br />
+                Добавить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Редакторы</th>
+                    <th>Операторы</th>
+                    <th>Аккаунт-менеджеры</th>
+                    <th>Представители организации</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr ng-repeat="item in linklist">
+                    <td><span>{{item.PersonSocialLinkType}}</span></td>
+                    <td><a href="{{item.Link}}">{{item.Link}}</a></td>
+                    <td><span>{{item.Description}}</span></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <span ng-if="item.LastChange">
+                            {{item.LastChange.UserName}}<br>
+                            {{item.LastChange.Date | amCalendar}}
+                        </span>
+                    </td>
+                </tr> -->
+            </tbody>
+        </table>
+    </div>
+</div>

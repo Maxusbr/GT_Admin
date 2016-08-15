@@ -1,11 +1,68 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-
-</body>
-</html>
+﻿<div class="win-container r1 personList" style="width:1000px;" ng-controller="EventListController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Список мероприятий
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personList')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="createEvent()" >
+                <span class="fa fa-plus"></span>
+                <br />
+                Добавить
+            </a>
+        </div>
+        <div class="win-menu-button" style="width:250px;">
+            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" ng-model="personaMenuFilter" />
+        </div>
+    </div>
+    <div class="win-content">
+        <div class="panel-info" cg-busy="Promise">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Категория</th>
+                    <th>Подкатегория</th>
+                    <th>Организатор</th>
+                    <th>Возрастные ограничегия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- <tr ng-repeat="row in menuScope | filter:personaMenuFilter">
+                    <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.lastName}}</a></td>
+                    <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.firstName}}</a></td>
+                    <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.middleName}}</a></td>
+                    <td>{{row.type}}</td>
+                    <td>{{row.event}}</td>
+                </tr> -->
+                    <tr >
+                        <td><a href="#" ng-click="selectEvents(1)">Новогодний симфонический концерт Большого театра</a></td>
+                        <td><a href="#" ng-click="selectEvents(1)">Театр</a></td>
+                        <td><a href="#" ng-click="selectEvents(1)">Командные виды</a></td>
+                        <td>Большой театр</td>
+                        <td>12+</td>
+                    </tr>
+                    <tr >
+                        <td><a href="#" ng-click="selectEvents(1)">Новогодний симфонический концерт Большого театра</a></td>
+                        <td><a href="#" ng-click="selectEvents(1)">Театр</a></td>
+                        <td><a href="#" ng-click="selectEvents(1)">Командные виды</a></td>
+                        <td>Большой театр</td>
+                        <td>12+</td>
+                    </tr>
+                    <tr >
+                        <td><a href="#" ng-click="selectEvents(1)">Новогодний симфонический концерт Большого театра</a></td>
+                        <td><a href="#" ng-click="selectEvents(1)">Театр</a></td>
+                        <td><a href="#" ng-click="selectEvents(1)">Командные виды</a></td>
+                        <td>Большой театр</td>
+                        <td>12+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
