@@ -29,77 +29,30 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Event
-                    <br/>
-                    Event place
-                    <br/>
-                    event date
-                    <br/>
-                    persons of event
-                    <br/>
-                    description
+                <tr ng-repeat="item in medialist">
+                    <td><span style="">{{item.Description}}</span></td>
+                    <td>
+                        <div class="persona-main__container_media small" >
+                            <img ng-src="{{item.MediaLink}}" alt="Placeholder" style="width: 80px;">
+                        </div>
+                        <span>{{item.MediaType}}</span>
+                    </td>
+                    <td>TODO: Ассоциация</td>
+                    <td>
+                        {{item.LastChange.UserName}}<br>
+                        {{item.LastChange.Date | amCalendar}}
                     </td>
                     <td>
-                        Photo
-                        <br/>
-                        <a href="//photo-url" target="_blank"/>
-                        <br />
-                        <img style="width:50px; height:50px"/><!--preview-->
+                        <div class="tags" ng-show="!item.isEditTags">
+                            <!--{{item.Tags.length}}:-->
+                            <span ng-repeat="tag in item.Tags">
+                                {{tag.Name}}
+                            </span>
+                        </div>
                     </td>
-                    <td>TODO: associated</td>
-                    <td>TODO: changed by</td>
-                    <td>TODO: tag 1, tag2, tag3, tag4</td>
                     <td>TODO: used</td>
                 </tr>
-                <tr>
-                    <td>
-                        Event
-                        <br />
-                        Event place
-                        <br />
-                        event date
-                        <br />
-                        persons of event
-                        <br />
-                        description
-                    </td>
-                    <td>
-                        Photo
-                        <br />
-                        <a href="//photo-url" target="_blank" />
-                        <br />
-                        <img style="width:50px; height:50px" /><!--preview-->
-                    </td>
-                    <td>TODO: associated</td>
-                    <td>TODO: changed by</td>
-                    <td>TODO: tag 1, tag2, tag3, tag4</td>
-                    <td>TODO: used</td>
-                </tr>
-                <tr>
-                    <td>
-                        Event
-                        <br />
-                        Event place
-                        <br />
-                        event date
-                        <br />
-                        persons of event
-                        <br />
-                        description
-                    </td>
-                    <td>
-                        Photo
-                        <br />
-                        <a href="//photo-url" target="_blank" />
-                        <br />
-                        <img style="width:50px; height:50px" /><!--preview-->
-                    </td>
-                    <td>TODO: associated</td>
-                    <td>TODO: changed by</td>
-                    <td>TODO: tag 1, tag2, tag3, tag4</td>
-                    <td>TODO: used</td>
-                </tr>
+
             </tbody>
         </table>
     </div>

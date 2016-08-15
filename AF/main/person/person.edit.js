@@ -3,7 +3,7 @@
 
     function PersonEditController($rootScope, $scope, personService) {
         var vm = this;
-        $scope.Id = $rootScope.Id;
+        $scope.Id = $rootScope.personId;
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
             $scope.person = data;
             $scope.person.bithday = new Date($scope.person.Bithday);
