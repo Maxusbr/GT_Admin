@@ -219,6 +219,13 @@
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });
         }
+
+        service.getLinkTypes = function (callback) {
+            return $http.get(`${serviceUrl}persons/social/types`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         return service;;
     }
 

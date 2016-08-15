@@ -1,22 +1,10 @@
 ﻿(function () {
     'use strict';
 
-    function PersonInternetEditorController($rootScope) {
+    function PersonInternetEditorController($rootScope, $scope, personService) {
         var vm = this;
-
-        //редактируемая запись
-        $rootScope.editedModel;
-
-        //типы источников ссылок
-        $rootScope.socialtypes = [
-            {
-                Id: 1,
-                Name:'Facebook'
-            }
-        ];
-
         //назначения ссылок
-        $rootScope.destinationtypes = [
+        $scope.destinationtypes = [
             {
                 Id: 1,
                 Name: 'Публичная ссылка'
@@ -26,6 +14,16 @@
                 Name: 'Для внутреннего использования'
             }
         ];
+        //редактируемая запись
+        $rootScope.editedModel = $rootScope.EditedLink ? $rootScope.EditedLink : {IdDestination: 1};
+
+        //типы источников ссылок
+        personService.getLinkTypes(function (data) {
+            $scope.socialtypes = [];
+            $scope.socialtypes.push.apply($scope.socialtypes, data);
+        });
+
+        
 
         $rootScope.saveInternet = function save_fact() {
             console.log('save link click');
@@ -36,6 +34,7 @@
         }
 
         $rootScope.displayLinkTypes = function display_link_types() {
+            app.closeFive();
             app.loadContentView('/main/dictionary/dictionary.person.links.html', 3200);
         }
     }
@@ -44,5 +43,5 @@
         .module('app')
         .controller('PersonInternetEditorController', PersonInternetEditorController);
 
-    PersonInternetEditorController.$inject = ['$rootScope'];
+    PersonInternetEditorController.$inject = ['$rootScope', '$scope', 'personService'];
 })();
