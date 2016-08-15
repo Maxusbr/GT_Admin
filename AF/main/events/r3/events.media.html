@@ -1,0 +1,59 @@
+﻿<div class="win-container r3 personMedia" style="width:800px;" ng-controller="EventsMediaController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Медиа
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personMedia')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="addMedia()">
+                <span class="fa fa-plus"></span>
+                <br />
+                Добавить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Данные</th>
+                    <th>Медиа</th>
+                    <th>Ассоциация</th>
+                    <th>Изменен</th>
+                    <th>Теги</th>
+                    <th>Использование</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in medialist">
+                    <td><span style="">{{item.Description}}</span></td>
+                    <td>
+                        <div class="persona-main__container_media small" >
+                            <img ng-src="{{item.MediaLink}}" alt="Placeholder" style="width: 80px;">
+                        </div>
+                        <span>{{item.MediaType}}</span>
+                    </td>
+                    <td>TODO: Ассоциация</td>
+                    <td>
+                        {{item.LastChange.UserName}}<br>
+                        {{item.LastChange.Date | amCalendar}}
+                    </td>
+                    <td>
+                        <div class="tags" ng-show="!item.isEditTags">
+                            <!--{{item.Tags.length}}:-->
+                            <span ng-repeat="tag in item.Tags">
+                                {{tag.Name}}
+                            </span>
+                        </div>
+                    </td>
+                    <td>TODO: used</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

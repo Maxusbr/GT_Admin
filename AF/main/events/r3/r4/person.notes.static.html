@@ -1,0 +1,29 @@
+﻿<div class="win-container r4 disPersonNotesStatic" style="width:400px;" ng-controller="personNotesStaticController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Статическое описнаие
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disPersonNotesStatic')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <a href="#" ng-click="savePersonNotesStatic()">
+            <span class="fa fa-save"></span>
+            <br />
+            Сохранить
+        </a>
+    </div>
+    <div class="win-content">
+        <textarea style="min-height:300px;"></textarea>
+        <br/>
+        <label>
+            <input type="checkbox" value="" name="noletter" ng-model="user.NotSendWelcome">
+            <span ng-if="user.NotSendWelcome" class="glyphicon glyphicon-ok"></span>
+            <span ng-if="!user.NotSendWelcome" class="glyphicon"></span>
+            Статичное описание не требуется
+        </label>
+        <br/>
+        <i>Статчиеское описание для персоны - это такое описание, которое описывается описанием описания. Тут Виталий должен какой то текст скостромить для пользователя, который подскажет ему, что это за хрень</i>
+    </div>
+</div>

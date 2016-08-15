@@ -1,0 +1,54 @@
+﻿<div class="win-container r3 disPersonNotes" style="width:800px;" ng-controller="EventsNotesController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Описание мероприятия
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disPersonNotes')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+    </div>
+    <div class="win-content">
+        <h5>Все теги мероприятия</h5>
+        <i>Ноги, Руки, главноеХвост</i>
+        <h5>Все описания для мероприятия</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Факты</th>
+                    <th>Тизеры</th>
+                    <th>Описание</th>
+                    <th>Теги</th>
+                    <th>Жанры</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="#" ng-click="displaySource()">Персона/Сирена Уильямс</a></td>
+                    <td><a href="#" ng-click="displaySource()">Другие персоны подборки</a></td>
+                    <td><a href="#" ng-click="displaySource()">Подборка "Про ноги"</a></td>
+                    <td><a href="#" ng-click="displayNotesStatic()">Указан</a></td>
+                    <td><a href="#">Указан</a></td>
+                    <td><a href="#">8</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
+                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
+                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
+                    <td><a href="#" ng-click="displayNotesStatic()">Не требуется</a></td>
+                    <td><a href="#">Указан</a></td>
+                    <td><a href="#">6</a></td>
+                </tr>
+                <tr>
+                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
+                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
+                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
+                    <td><a href="#" ng-click="displayNotesStatic()">Не указан</a></td>
+                    <td><a href="#">Не указан</a></td>
+                    <td><a href="#">11</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
