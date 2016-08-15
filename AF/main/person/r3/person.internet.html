@@ -29,13 +29,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>TODO: text</td>
-                    <td>TODO: type</td>
-                    <td>TODO: data</td>
-                    <td>TODO: changed by</td>
-                    <td>TODO: data</td>
-                    <td>TODO: changed by</td>
+                <tr ng-repeat="item in linklist">
+                    <td><span>{{item.PersonSocialLinkType}}</span></td>
+                    <td><a href="{{item.Link}}">{{item.Link}}</a></td>
+                    <td><span>{{item.Description}}</span></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <span ng-if="item.LastChange">
+                            {{item.LastChange.UserName}}<br>
+                            {{item.LastChange.Date | amCalendar}}
+                        </span>
+                    </td>
                 </tr>
             </tbody>
         </table>

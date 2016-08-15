@@ -27,23 +27,8 @@
                         <div class="col-lg-3">
                             <img style="width:150px; height:150px"/>
                             <br/>
-                            <div class="radio-input-container">
-                                <div class="radio-input">
-                                    <input type="radio" value="None" ng-disabled="true" id="sexM" ng-checked="person.Sex == 0" ng-click="person.Sex = 0; person.IsChange = true" name="check">
-                                    <label for="sexM"></label>
-                                </div>
-
-                                <span>M</span>
-                            </div>
-
-                            <div class="radio-input-container">
-                                <div class="radio-input">
-                                    <input type="radio" value="None" ng-disabled="true" id="sexF" ng-checked="person.Sex == 1" ng-click="person.Sex = 1; person.IsChange = true" name="check">
-                                    <label for="sexF"></label>
-                                </div>
-
-                                <span>Ж</span>
-                            </div>
+                            <div class="col-lg-3">Пол: <span ng-show="person.Sex == 0">Mужской</span>
+                                <span ng-show="person.Sex == 1">Женский</span></div>
                         </div>
                         <div class="col-lg-4">
                             {{person.LastName}}

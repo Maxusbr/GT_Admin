@@ -68,7 +68,8 @@
             <div class="col-lg-6">
                 Пол
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <select class="form-control" ng-model="person.Sex" ng-options="item.id as item.name for item in sexes">
+                </select>
             </div>
         </div>
     </div>
