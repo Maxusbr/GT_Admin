@@ -74,23 +74,33 @@ var app;
             app.closeView('r2');
             app.closeView('r3');
             app.closeView('r4');
+            app.closeView('r5');
         }
 
         app.closeSecond = function close_second() {
             app.closeView('r2');
             app.closeView('r3');
             app.closeView('r4');
+            app.closeView('r5');
         }
 
         app.closeThird = function close_third(){
             app.closeView('r3');
             app.closeView('r4');
+            app.closeView('r5');
         }
 
         app.closeFour = function close_four()
         {
             app.closeView('r4');
+            app.closeView('r5');
         }
+
+        app.closeFive = function close_five()
+        {
+            app.closeView('r5');
+        }
+
 
         //universal for close any window
         app.closeView = function close_view(classId) {
@@ -98,7 +108,7 @@ var app;
             if (dv === null)return;
             var wins = dv.getElementsByClassName(classId);
             var len = wins.length;
-            for (var i = 0; i < len; i++) {
+            for (var i = len-1; i >= 0; i--) {
                 wins[i].parentNode.removeChild(wins[i]);
             }
         }
