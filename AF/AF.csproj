@@ -71,6 +71,8 @@
     <Content Include="login\login.view.html" />
     <Content Include="main\dictionary\dictionary.person.links.html" />
     <Content Include="main\dictionary\dictionary.person.links.js" />
+    <Content Include="main\dictionary\dictionary.person.wtf.html" />
+    <Content Include="main\dictionary\dictionary.person.wtf.js" />
     <Content Include="main\person\r3\r4\person.notes.ades.html" />
     <Content Include="main\person\r3\r4\person.notes.ades.js" />
     <Content Include="main\person\r3\person.antro.html" />
