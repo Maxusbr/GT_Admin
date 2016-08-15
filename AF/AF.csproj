@@ -91,6 +91,7 @@
     <Content Include="main\person\r3\r4\person.internet.editor.js" />
     <Content Include="main\person\person.viewone.html" />
     <Content Include="main\person\person.viewone.js" />
+    <Content Include="main\person\r3\r4\person.notes.source.js" />
     <Content Include="main\_base.html" />
     <Content Include="packages.config" />
     <Content Include="Content\bootstrap-theme.css.map" />
@@ -117,6 +118,7 @@
     <Content Include="Scripts\plugins\d3\LICENSE" />
     <Content Include="Scripts\plugins\d3\README.md" />
     <Content Include="Scripts\version.json" />
+    <Content Include="main\person\r3\r4\person.notes.source.html" />
     <None Include="Properties\PublishProfiles\getticket - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
