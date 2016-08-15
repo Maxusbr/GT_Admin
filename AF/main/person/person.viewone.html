@@ -24,13 +24,13 @@
             <div class="row" ng-if="person">
                 <div class="col-lg-9">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-5">
                             <img style="width:150px; height:150px"/>
                             <br/>
                             <div class="col-lg-3">Пол: <span ng-show="person.Sex == 0">Mужской</span>
                                 <span ng-show="person.Sex == 1">Женский</span></div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             {{person.LastName}}
                             <br/>
                             {{person.Name}}
@@ -39,7 +39,7 @@
                             <br/>
                             {{person.Bithday | date : 'd MMMM yyyy'}}
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             {{person.LastNameLatin}}
                             <br />
                             {{ person.NameLatin }}
