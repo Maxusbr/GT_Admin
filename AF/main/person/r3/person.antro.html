@@ -27,11 +27,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>TODO: text</td>
+                <tr ng-repeat="item in antro">
+                    <td>
+                        <span>{{item.AntroName}}</span><br>
+                        <span>{{item.Value}}</span>
+                    </td>
                     <td>TODO: type</td>
                     <td>TODO: data</td>
-                    <td>TODO: changed by</td>
+                    <td>
+                        <span ng-if="item.LastChange">
+                            {{item.LastChange.UserName}}<br>
+                            {{item.LastChange.Date | amCalendar}}
+                        </span>
+                    </td>
                 </tr>
             </tbody>
         </table>

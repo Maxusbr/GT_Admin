@@ -8,6 +8,7 @@
             $scope.person = data;
             $scope.person.bithday = new Date($scope.person.Bithday);
         });
+        $scope.sexes = [{id: 0, name: "Мужской"},{id: 1, name: "Женский"}];
     }
 
     angular
