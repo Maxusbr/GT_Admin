@@ -92,6 +92,8 @@
     <Content Include="main\person\person.viewone.html" />
     <Content Include="main\person\person.viewone.js" />
     <Content Include="main\person\r3\r4\person.notes.source.js" />
+    <Content Include="main\person\r3\r4\person.notes.static.html" />
+    <Content Include="main\person\r3\r4\person.notes.static.js" />
     <Content Include="main\_base.html" />
     <Content Include="packages.config" />
     <Content Include="Content\bootstrap-theme.css.map" />

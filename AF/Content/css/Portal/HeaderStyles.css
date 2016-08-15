@@ -71,6 +71,11 @@ div.win-content{
     font-size:12px;
 }
 
+.win-content i{
+    white-space:normal;
+    font-size:10px;
+}
+
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: darkgray;
   cursor: default;
