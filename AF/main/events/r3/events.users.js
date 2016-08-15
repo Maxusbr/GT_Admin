@@ -27,5 +27,5 @@
         .module('app')
         .controller('EventsUsersController', EventsUsersController);
 
-    EventsInternetController.$inject = ['$rootScope', '$scope', 'personService'];
+    EventsUsersController.$inject = ['$rootScope', '$scope', 'personService'];
 })();
