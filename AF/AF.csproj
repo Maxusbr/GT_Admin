@@ -71,6 +71,8 @@
     <Content Include="login\login.view.html" />
     <Content Include="main\dictionary\dictionary.person.links.html" />
     <Content Include="main\dictionary\dictionary.person.links.js" />
+    <Content Include="main\person\r3\r4\person.notes.ades.html" />
+    <Content Include="main\person\r3\r4\person.notes.ades.js" />
     <Content Include="main\person\r3\person.antro.html" />
     <Content Include="main\person\r3\person.antro.js" />
     <Content Include="main\person\r3\person.connections.html" />
@@ -79,6 +81,8 @@
     <Content Include="main\person\r3\person.internet.js" />
     <Content Include="main\person\r3\person.notes.html" />
     <Content Include="main\person\r3\person.notes.js" />
+    <Content Include="main\person\r3\r4\person.notes.tizer.html" />
+    <Content Include="main\person\r3\r4\person.notes.tizer.js" />
     <Content Include="main\person\r3\r4\peron.fact.create.html" />
     <Content Include="main\person\r3\r4\peron.fact.create.js" />
     <Content Include="main\person\person.edit.html" />
