@@ -1,15 +1,29 @@
 ﻿(function () {
     'use strict';
 
-    function baseController($rootScope, $cookieStore) {
+    function DictionaryPersonLinkController($rootScope, $cookieStore) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
+
+        $rootScope.dictionaryLinks = [
+            {
+                Id:1,
+                Name:'facebook'
+            }
+        ];
+
+        $rootScope.editItem;
+
+        $rootScope.saveChanges = function save_changes() {
+            //TODO: save changes to server
+            //TODO: refresh dictionary list
+        }
     }
 
     angular
         .module('app')
-        .controller('baseController', baseController);
+        .controller('DictionaryPersonLinkController', DictionaryPersonLinkController);
 
-    baseController.$inject = ['$rootScope', '$cookieStore'];
+    DictionaryPersonLinkController.$inject = ['$rootScope', '$cookieStore'];
 })();

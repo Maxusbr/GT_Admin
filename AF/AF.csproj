@@ -77,6 +77,8 @@
     <Content Include="main\person\r3\person.connections.js" />
     <Content Include="main\person\r3\person.internet.html" />
     <Content Include="main\person\r3\person.internet.js" />
+    <Content Include="main\person\r3\person.notes.html" />
+    <Content Include="main\person\r3\person.notes.js" />
     <Content Include="main\person\r3\r4\peron.fact.create.html" />
     <Content Include="main\person\r3\r4\peron.fact.create.js" />
     <Content Include="main\person\person.edit.html" />
@@ -87,9 +89,9 @@
     <Content Include="main\person\r3\person.media.js" />
     <Content Include="main\person\r3\r4\person.internet.editor.html" />
     <Content Include="main\person\r3\r4\person.internet.editor.js" />
-    <Content Include="main\_base.html" />
     <Content Include="main\person\person.viewone.html" />
     <Content Include="main\person\person.viewone.js" />
+    <Content Include="main\_base.html" />
     <Content Include="packages.config" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
