@@ -4,7 +4,7 @@
     function PersonFactsController($rootScope, $scope, personService) {
         var vm = this;
 
-        personService.getFact($rootScope.Id, function (data) {
+        personService.getFact($rootScope.personId, function (data) {
             $scope.factlist = [];
             data.forEach(function (item) {
                 $scope.factlist.push.apply($scope.factlist, item.List);

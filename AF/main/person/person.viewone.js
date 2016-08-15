@@ -25,7 +25,7 @@
             app.loadContentView('/main/person/r3/person.antro.html', 2500);
         }
 
-        $scope.Id = $rootScope.Id;
+        $scope.Id = $rootScope.personId;
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
             $scope.person = data;
