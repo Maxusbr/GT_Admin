@@ -11,6 +11,11 @@
             //TODO: update notes list
             //TODO: close this window
         }
+
+        $rootScope.displayPersonWTF = function display_person_WTF() {
+            app.closeFive();
+            app.loadContentView('/main/dictionary/dictionary.person.wtf.html', 3200);
+        }
             
     }
 
