@@ -11,6 +11,9 @@ angular.module('app')
 mainMenuCtrl.$inject = ['$scope', '$location', '$timeout', '$http', '$compile'];
 function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
 
+
+
+
     $scope.HideCustomMenu = function () {
         $timeout(function () {
             angular.element('.main-menu__list li.active > button').triggerHandler('click');
@@ -98,8 +101,6 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
     });
 
     $scope.clickMenu = function click_Menu(url){
-        //console.log(url);
-        //$location.path(url);
         app.loadChapterView(url, 2500);
         isActive(url);
     }
