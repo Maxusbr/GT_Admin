@@ -44,8 +44,7 @@
                 <td style="width: 160px">Медиа/Фото</td>
                 <td>
                     <input 
-                    ng-model="confirmed"
-                    ng-change='changeFile()' 
+                    id="the-file-input"
                     class="form-control" 
                     type="file" 
                     style="background-color: rgba(255, 0, 0, 0); border: medium none; box-shadow: none; padding: 0;" /></td>
@@ -54,6 +53,36 @@
                 <td style="width: 160px">Медиа/Видео</td>
                 <td><input class="form-control" /></td>
             </tr>
+            <tr>
+                <td colspan="2" style="border: none;">
+                    <div style="width: 300px;margin: 0px auto;">
+                        <img id="some_container_div" style="width: 300px;">
+                    </div>
+                </td>
+            </tr>
+            <script>
+                function renderImage(file) {
+                    console.log(file);
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        var the_url = event.target.result;
+                        $('#some_container_div').attr('src', the_url);
+                    }
+                    reader.readAsDataURL(file);
+                }
+                $("#the-file-input").change(function() {
+                    console.log(this.files);
+                    renderImage(this.files[0]);
+                });
+            </script>
+            
+            <!-- <tr>
+                <td colspan="2">
+                    <div id="some_container_div"></div>
+                </td>
+            </tr> -->
+            
+            
             <tr>
                 <td>Название</td>
                 <td><input class="form-control" /></td>
@@ -68,7 +97,7 @@
                 <td>Теги</td>
                 <td>
                     <tags-input ng-model="personTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
-                    <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template"/>
+                    <auto-complete source="loadTags($query)" min-length="10" debounce-delay="0" template="my-custom-template"/>
                     </tags-input>
                     <script type="text/ng-template" id="my-custom-template">
                         <div class="right-panel">
