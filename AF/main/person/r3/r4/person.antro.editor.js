@@ -11,7 +11,8 @@
             }
 
             $rootScope.displayAntroTypes = function display_antro_types(){
-                
+                app.closeFive();
+                app.loadContentView('/main/dictionary/dictionary.antro.types.html', 3200);
             }
     }
 
