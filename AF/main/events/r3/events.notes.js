@@ -15,6 +15,11 @@
             app.closeFour();
             app.loadContentView('/main/events/r3/r4/events.notes.static.html', 3200);
         }
+
+        $rootScope.addNotes = function add_fact() {
+            app.closeFour();
+            app.loadContentView('/main/events/r3/r4/events.notes.create.html', 3200)
+        }
     }
 
     angular

@@ -1,0 +1,43 @@
+﻿<div class="win-container r4 personFactCreate" style="width:400px;" ng-controller="EventsNotesCreateController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Создать новое описание
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personFactCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="saveFact()">
+                <span class="fa fa-save"></span>
+                <br />
+                Добавить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+        <table class="table">
+            <tr>
+                <td>Факты</td>
+                <td><textarea class="form-control" style="height:80px;" /></td>
+            </tr>
+            <tr>
+                <td>Тизеры</td>
+                <td><textarea class="form-control" style="height:80px;" /></td>
+            </tr>
+            <tr>
+                <td>Описание</td>
+                <td><textarea class="form-control" style="height:80px;" /></td>
+            </tr>
+            <tr>
+                <td>Теги</td>
+                <td><input class="form-control" /></td>
+            </tr>
+            <tr>
+                <td>Жанры</td>
+                <td><input class="form-control" /></td>
+            </tr>
+        </table>
+    </div>
+</div>
