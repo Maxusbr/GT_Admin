@@ -26,11 +26,11 @@
     <div class="win-content">
         Тип ссылки
         <br/>
-        <select class="form-control" ng-model="editedModel.IdSocialLinkType" ng-options="type.Id as type.Name for type in socialtypes"/>
+        <select class="form-control" ng-model="editedModel.IdSocialLinkType" ng-options="type.Id as type.Name for type in socialtypes" required/>
         <br/>
         Ссылка
         <br/>
-        <input type="text" class="form-control" ng-model="editedModel.Link"/>
+        <input type="text" class="form-control" ng-model="editedModel.Link" required/>
         <br />
         Описание
         <br />

@@ -1,23 +1,25 @@
 ﻿(function () {
     'use strict';
 
-    function DictionaryPersonLinkController($rootScope, $cookieStore) {
+    function DictionaryPersonLinkController($rootScope, $scope, $cookieStore, personService) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
 
-        $rootScope.dictionaryLinks = [
-            {
-                Id:1,
-                Name:'facebook'
-            }
-        ];
+        //$rootScope.dictionaryLinks = [
+        //    {
+        //        Id:1,
+        //        Name:'facebook'
+        //    }
+        //];
 
-        $rootScope.editItem;
+        $scope.editItem = { Name: "" };
 
-        $rootScope.saveChanges = function save_changes() {
+        $scope.saveChanges = function () {
             //TODO: save changes to server
-            //TODO: refresh dictionary list
+            var list = [$scope.editItem];
+            personService.saveEntitieTypes(list, 'social', $rootScope.getLinkTypes);
+            $rootScope.closeMe('disDicPersonLinks');
         }
     }
 
@@ -25,5 +27,5 @@
         .module('app')
         .controller('DictionaryPersonLinkController', DictionaryPersonLinkController);
 
-    DictionaryPersonLinkController.$inject = ['$rootScope', '$cookieStore'];
+    DictionaryPersonLinkController.$inject = ['$rootScope', '$scope', '$cookieStore', 'personService'];
 })();
