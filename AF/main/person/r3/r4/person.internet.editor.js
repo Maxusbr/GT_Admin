@@ -15,22 +15,26 @@
             }
         ];
         //редактируемая запись
-        $rootScope.editedModel = $rootScope.EditedLink ? $rootScope.EditedLink : {IdDestination: 1};
+        $rootScope.editedModel = $rootScope.EditedLink ? $rootScope.EditedLink : { IdDestination: 1, Link: "", Description: ""};
 
         //типы источников ссылок
-        personService.getLinkTypes(function (data) {
-            $scope.socialtypes = [];
-            $scope.socialtypes.push.apply($scope.socialtypes, data);
-        });
-
         
+        $rootScope.getLinkTypes = function () {
+            console.log('get link types');
+            personService.getLinkTypes(function (data) {
+                $rootScope.socialtypes = [];
+                $rootScope.socialtypes.push.apply($rootScope.socialtypes, data);
+            });
+        }
+        $rootScope.getLinkTypes();
 
-        $rootScope.saveInternet = function save_fact() {
+        $rootScope.saveInternet = function() {
             console.log('save link click');
             //TODO: save changes or create new
+            var list = [$rootScope.editedModel];
+            personService.saveEntities($rootScope.personId, list, 'social', $rootScope.getLinks);
             //close this view
-            app.closeMe('personInternetCreate');
-            //TODO: refresh facts table
+            $rootScope.closeMe('personInternetCreate');
         }
 
         $rootScope.displayLinkTypes = function display_link_types() {

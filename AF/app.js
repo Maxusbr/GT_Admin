@@ -113,7 +113,7 @@ var app;
             }
         }
 
-        $rootScope.closeMe = function close_me(classID) {
+        $rootScope.closeMe = function(classID) {
             app.closeView(classID);
         }
         $rootScope.logOut = function () {

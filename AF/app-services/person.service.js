@@ -120,6 +120,7 @@
             });
         }
 
+
         function deleteEntities(list, entity, callback) {
             $http.post(`${serviceUrl}persons/${entity}/delete`, list).success(function (response) {
                 if (response.status === 'success')
@@ -226,6 +227,12 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.saveEntitieTypes = function (list, entity, callback) {
+            $http.post(`${serviceUrl}persons/${entity}/updatetypes`, list).success(function (response) {
+                if (response.status === 'success')
+                    callback(list);
+            });
+        }
         return service;;
     }
 
