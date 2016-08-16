@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Entities;
 
 namespace Getticket.Web.API.Helpers

@@ -80,6 +80,7 @@ namespace Getticket.Web.API.Controllers
         {
             return Ok(_personService.GetCounts(id));
         }
+
         /// <summary>
         /// Add person entity
         /// </summary>

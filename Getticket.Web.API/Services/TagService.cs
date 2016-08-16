@@ -5,9 +5,8 @@ using System.Linq;
 using System.Web;
 using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Events;
 using Getticket.Web.API.Models.Persons;
-using Getticket.Web.DAL.Entities;
-using Getticket.Web.DAL.Infrastructure;
 
 namespace Getticket.Web.API.Services
 {
@@ -106,6 +105,24 @@ namespace Getticket.Web.API.Services
             var response = list.Select(link => _tagRepository.AddTagLink(link))
                     .All(taglink => taglink != null);
             return response;
+        }
+
+        /// <see cref="ITagService.AddTagLinks(TagsEventMediaModel)"/>
+        public bool AddTagLinks(TagsEventMediaModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <see cref="ITagService.AddTagLinks(EventTagModel)"/>
+        public bool AddTagLinks(EventTagModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <see cref="ITagService.GeEventTags"/>
+        public IList<TagModel> GeEventTags(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -202,19 +202,19 @@ namespace Getticket.Web.API.Services
 
 
         /// <summary>
-        /// Добавить/Изменить связи для Event c Id = <paramref name="pesonId"/>
+        /// Добавить/Изменить связи для Event c Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="pesonId"></param>
+        /// <param name="eventId"></param>
         /// <param name="models"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateConnection(int pesonId, IEnumerable<EventConnectionModel> models, int userId)
+        public ServiceResponce UpdateConnection(int eventId, IEnumerable<EventConnectionModel> models, int userId)
         {
             var result = _eventRepository.AddConnections(
                 models.Select(o => new EventConnection
                 {
                     Id = o.Id,
-                    id_Person = pesonId,
+                    id_Person = eventId,
                     id_ConnectionType = o.id_ConnectionType,
                     id_Event = o.id_Event,
                     id_EventConnectTo = o.id_EventConnectTo,
@@ -297,18 +297,18 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
-        /// Добавить/Изменить список медиа для Event c Id = <paramref name="pesonId"/>
+        /// Добавить/Изменить список медиа для Event c Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="pesonId"></param>
+        /// <param name="eventId"></param>
         /// <param name="models"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public bool UpdateMedia(int pesonId, IEnumerable<EventMediaModel> models, int userId)
+        public bool UpdateMedia(int eventId, IEnumerable<EventMediaModel> models, int userId)
         {
             return models.Select(item => _eventRepository.UpdateMedia(new EventMedia
             {
                 Id = item.Id,
-                IdEvent = pesonId,
+                IdEvent = eventId,
                 IdMediaType = item.id_MediaType,
                 MediaLink = item.MediaLink,
                 Description = item.Description
@@ -385,18 +385,18 @@ namespace Getticket.Web.API.Services
         }
 
         /// <summary>
-        /// Добавить/Изменить список описаний для Event c Id = <paramref name="pesonId"/>
+        /// Добавить/Изменить список описаний для Event c Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="pesonId"></param>
+        /// <param name="eventId"></param>
         /// <param name="models"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateDescriptions(int pesonId, IEnumerable<EventDescriptionModel> models, int userId)
+        public ServiceResponce UpdateDescriptions(int eventId, IEnumerable<EventDescriptionModel> models, int userId)
         {
             if (models == null || models.Select(item => _eventRepository.UpdateDescription(new EventDescription
             {
                 Id = item.Id,
-                IdEvent = pesonId,
+                IdEvent = eventId,
                 IdType = item.id_DescriptionType,
                 Description = item.DescriptionText,
                 Status = item.Status

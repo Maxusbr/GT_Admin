@@ -216,7 +216,9 @@
     <Compile Include="Helpers\PersonModelHelper.cs" />
     <Compile Include="Models\AccessRoleModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
-    <Compile Include="Models\CreateDescriptionModel.cs" />
+    <Compile Include="Models\Events\EventTagModel.cs" />
+    <Compile Include="Models\Events\TagsEventMediaModel.cs" />
+    <Compile Include="Models\Persons\CreateDescriptionModel.cs" />
     <Compile Include="Models\Emails\RestorePasswordEmailModel.cs" />
     <Compile Include="Models\Events\EventModel.cs" />
     <Compile Include="Models\LastChangeModel.cs" />
@@ -258,10 +260,10 @@
     <Compile Include="Models\Emails\BaseEmailModel.cs" />
     <Compile Include="Models\Emails\ChangePasswordEmailModel.cs" />
     <Compile Include="Models\Emails\RegisteredEmailModel.cs" />
-    <Compile Include="Models\TagAntroModel.cs" />
-    <Compile Include="Models\TagAntroLinkModel.cs" />
-    <Compile Include="Models\TagDescriptionLinkModel.cs" />
-    <Compile Include="Models\TagLinkModel.cs" />
+    <Compile Include="Models\Persons\TagAntroModel.cs" />
+    <Compile Include="Models\Persons\TagAntroLinkModel.cs" />
+    <Compile Include="Models\Persons\TagDescriptionLinkModel.cs" />
+    <Compile Include="Models\Persons\TagLinkModel.cs" />
     <Compile Include="Models\TagModel.cs" />
     <Compile Include="Providers\OAuthAuthorizationServerOptionsProvider.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

@@ -94,13 +94,13 @@ namespace Getticket.Web.API.Services
         ServiceResponce DeleteConnectionTypes(IEnumerable<EventConnectionTypeModel> models);
 
         /// <summary>
-        /// Добавить/Изменить связи для Event c Id = <paramref name="pesonId"/>
+        /// Добавить/Изменить связи для Event c Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="pesonId"></param>
+        /// <param name="eventId"></param>
         /// <param name="models"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce UpdateConnection(int pesonId, IEnumerable<EventConnectionModel> models, int userId);
+        ServiceResponce UpdateConnection(int eventId, IEnumerable<EventConnectionModel> models, int userId);
 
         /// <summary>
         /// Удалить связи
@@ -130,13 +130,13 @@ namespace Getticket.Web.API.Services
         ServiceResponce DeleteMediaTypes(IEnumerable<MediaTypeModel> models);
 
         /// <summary>
-        /// Добавить/Изменить список медиа для Event c Id = <paramref name="pesonId"/>
+        /// Добавить/Изменить список медиа для Event c Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="pesonId"></param>
+        /// <param name="eventId"></param>
         /// <param name="models"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        bool UpdateMedia(int pesonId, IEnumerable<EventMediaModel> models, int userId);
+        bool UpdateMedia(int eventId, IEnumerable<EventMediaModel> models, int userId);
 
         /// <summary>
         /// Удалить список медиа
@@ -167,13 +167,13 @@ namespace Getticket.Web.API.Services
         ServiceResponce DeleteDescriptionTypes(IEnumerable<EventDescriptionTypeModel> models);
 
         /// <summary>
-        /// Добавить/Изменить список описаний для Event c Id = <paramref name="pesonId"/>
+        /// Добавить/Изменить список описаний для Event c Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="pesonId"></param>
+        /// <param name="eventId"></param>
         /// <param name="models"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce UpdateDescriptions(int pesonId, IEnumerable<EventDescriptionModel> models, int userId);
+        ServiceResponce UpdateDescriptions(int eventId, IEnumerable<EventDescriptionModel> models, int userId);
 
         /// <summary>
         /// Добавить/Изменить описание
