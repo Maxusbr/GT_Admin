@@ -30,11 +30,11 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in linklist">
-                    <td><span>{{item.PersonSocialLinkType}}</span></td>
+                    <td><a href="#" ng-click="editLink(item)">{{item.PersonSocialLinkType}}</a></td>
                     <td>{{item.PersonSocialLinkType}}<a href="{{item.Link}}" target="_blank"> <span class="fa fa-external-link"></span></a></td>
                     <td><span>{{item.Description}}</span></td>
                     <td></td>
-                    <td></td>
+                    <td>{{getDestination(item)}}</td>
                     <td>
                         <span ng-if="item.LastChange">
                             {{item.LastChange.UserName}}<br>

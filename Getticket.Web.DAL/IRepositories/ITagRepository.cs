@@ -52,7 +52,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        TagDescriptionLink AddTagLink(TagDescriptionLink model);
+        TagPersonDescriptionLink AddTagLink(TagPersonDescriptionLink model);
 
         /// <summary>
         /// Добавляет связь <see cref="Tag"/>
@@ -74,7 +74,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        TagMediaLink AddTagLink(TagMediaLink model);
+        TagPersonMediaLink AddTagLink(TagPersonMediaLink model);
 
         /// <summary>
         /// Удалить все ссылки на <see cref="PersonMedia"/>
@@ -103,5 +103,10 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="value"></param>
         void DeletePersonAntroTags(int idPerson, int idAntroName, bool isMoreThan, int value);
 
+        /// <summary>
+        /// Возвращает список <see cref="Tag"/> для <see cref="EventMedia"/> с Id = <paramref name="mediaId"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<Tag> GeEventMediaTags(int mediaId);
     }
 }

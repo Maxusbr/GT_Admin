@@ -25,7 +25,7 @@ namespace Getticket.Web.DAL.Entities
         public int id_Person { get; set; }
 
         /// <summary>
-        /// Внешний ключ для <see cref="Entities.PersonConnectionType"/>
+        /// Внешний ключ для <see cref="Entities.ConnectionType"/>
         /// </summary>
         [Required]
         public int id_ConnectionType { get; set; }
@@ -53,10 +53,10 @@ namespace Getticket.Web.DAL.Entities
         public virtual Person PersonConnectTo { get; set; }
 
         /// <summary>
-        /// Тип связи <see cref="Entities.PersonConnectionType"/>
+        /// Тип связи <see cref="Entities.ConnectionType"/>
         /// </summary>
         [ForeignKey("id_ConnectionType")]
-        public virtual PersonConnectionType PersonConnectionType { get; set; }
+        public virtual ConnectionType PersonConnectionType { get; set; }
 
         /// <summary>
         /// Событие <see cref="Entities.Event"/>

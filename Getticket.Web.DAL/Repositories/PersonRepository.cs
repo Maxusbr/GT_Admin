@@ -246,13 +246,13 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.GetConnectionTypes" />
-        public IList<PersonConnectionType> GetConnectionTypes()
+        public IList<ConnectionType> GetConnectionTypes()
         {
-            return db.PersonConnectionType.ToList();
+            return db.ConnectionTypes.ToList();
         }
 
         /// <see cref="IPersonRepository.UpdateConnectionType" />
-        public PersonConnectionType UpdateConnectionType(PersonConnectionType type)
+        public ConnectionType UpdateConnectionType(ConnectionType type)
         {
             if (type.Id == 0)
             {
@@ -277,9 +277,9 @@ namespace Getticket.Web.DAL.Repositories
         public bool DeleteConnectionType(int id)
         {
             if (id <= 0) return false;
-            var item = db.PersonConnectionType.FirstOrDefault(u => u.Id == id);
+            var item = db.ConnectionTypes.FirstOrDefault(u => u.Id == id);
             if (item == null) return false;
-            db.PersonConnectionType.Remove(item);
+            db.ConnectionTypes.Remove(item);
             db.SaveChanges();
             return true;
         }
@@ -486,13 +486,13 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.GetMediaTypes" />
-        public IList<PersonMediaType> GetMediaTypes()
+        public IList<MediaType> GetMediaTypes()
         {
-            return db.PersonMediaType.ToList();
+            return db.MediaTypes.ToList();
         }
 
         /// <see cref="IPersonRepository.UpdateMediaType" />
-        public PersonMediaType UpdateMediaType(PersonMediaType type)
+        public MediaType UpdateMediaType(MediaType type)
         {
             if (type.Id == 0)
             {
@@ -517,9 +517,9 @@ namespace Getticket.Web.DAL.Repositories
         public bool DeleteMediaType(int id)
         {
             if (id <= 0) return false;
-            var item = db.PersonMediaType.FirstOrDefault(u => u.Id == id);
+            var item = db.MediaTypes.FirstOrDefault(u => u.Id == id);
             if (item == null) return false;
-            db.PersonMediaType.Remove(item);
+            db.MediaTypes.Remove(item);
             db.SaveChanges();
             return true;
         }
@@ -858,16 +858,4 @@ namespace Getticket.Web.DAL.Repositories
         }
     }
 
-    public class ComparerDescription : IEqualityComparer<PersonDescription>
-    {
-        public bool Equals(PersonDescription x, PersonDescription y)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetHashCode(PersonDescription obj)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

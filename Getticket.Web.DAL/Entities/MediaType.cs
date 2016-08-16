@@ -6,16 +6,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Getticket.Web.DAL.Entities
 {
     /// <summary>
-    /// Тип связи
+    /// Тип медиа
     /// </summary>
-    public class EventConnectionType : BaseEntity
+    public class MediaType : BaseEntity
     {
         /// <summary>
-        /// Наименование
+        /// Конструктор
         /// </summary>
-        [MaxLength(200)]
+        public MediaType(){}
+
+        /// <summary>
+        /// Имя
+        /// </summary>
         [Required]
+        [MaxLength(300)]
         [Index("NameIndex", IsUnique = true)]
         public string Name { get; set; }
+
     }
 }

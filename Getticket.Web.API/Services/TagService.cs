@@ -86,12 +86,12 @@ namespace Getticket.Web.API.Services
             return response;
         }
 
-        /// <see cref="ITagService.AddTagLinks(int,IEnumerable{TagModel})"/>
-        public bool AddTagLinks(int personId, IEnumerable<TagModel> models)
+        /// <see cref="ITagService.AddTagLinks(PersonTagModel)"/>
+        public bool AddTagLinks(PersonTagModel model)
         {
-            _tagRepository.DeletePersonTags(personId);
-            if (models == null || !models.Any()) return true;
-            var list = TagModelHelper.GetTagLink(personId, models);
+            _tagRepository.DeletePersonTags(model.personId);
+            if (model.models == null || !model.models.Any()) return true;
+            var list = TagModelHelper.GetTagLink(model.personId, model.models);
             var response = list.Select(link => _tagRepository.AddTagLink(link))
                     .All(taglink => taglink != null);
             return response;

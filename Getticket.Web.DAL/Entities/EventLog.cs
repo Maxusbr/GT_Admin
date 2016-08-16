@@ -33,7 +33,7 @@ namespace Getticket.Web.DAL.Entities
         /// Ссылка на изменившего <see cref="Entities.User" />
         /// </summary>
         
-        public User User { get; set; }
+        public UserInfo User { get; set; }
 
         /// <summary>
         /// FK для <see cref="Entities.Event" />

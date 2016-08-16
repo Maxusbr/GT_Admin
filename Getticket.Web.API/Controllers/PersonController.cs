@@ -26,6 +26,7 @@ namespace Getticket.Web.API.Controllers
         /// Конструктор
         /// </summary>
         /// <param name="personService"></param>
+        /// <param name="tagService"></param>
         public PersonController(IPersonService personService, ITagService tagService)
         {
             _personService = personService;
@@ -327,7 +328,7 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="PersonService.UpdateMediaTypes" />
         [HttpPost]
         [Route("media/updatetypes")]
-        public IHttpActionResult UpdateMediaTypes([FromBody] IEnumerable<PersonMediaTypeModel> models)
+        public IHttpActionResult UpdateMediaTypes([FromBody] IEnumerable<MediaTypeModel> models)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             return Ok(_personService.UpdateMediaTypes(models).Response());
@@ -336,7 +337,7 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="PersonService.DeleteMediaTypes" />
         [HttpPost]
         [Route("media/deltypes")]
-        public IHttpActionResult DeleteMediaTypes([FromBody] IEnumerable<PersonMediaTypeModel> models)
+        public IHttpActionResult DeleteMediaTypes([FromBody] IEnumerable<MediaTypeModel> models)
         {
             return Ok(_personService.DeleteMediaTypes(models).Response());
         }
@@ -587,7 +588,7 @@ namespace Getticket.Web.API.Controllers
             var error = ServiceResponce.FromFailed().Result($"Error save tags");
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
 
-            return Ok(!_tagService.AddTagLinks(id, models) ? error.Response() : succes.Response());
+            return Ok(!_tagService.AddTagLinks(new PersonTagModel {personId = id, models = models}) ? error.Response() : succes.Response());
         }
     }
 }

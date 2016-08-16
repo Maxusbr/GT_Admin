@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function personNotesController($rootScope, $cookieStore, $scope, personService) {
+    function personNotesController($rootScope, $cookieStore, $scope, personService, $filter) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
@@ -67,11 +67,34 @@
                     return "";
             }
         }
+
+        personService.getTags(function (data) {
+            $scope.tags = [];
+            $scope.tags.push.apply($scope.tags, data);
+        });
+
+        function getPersonTags() {
+            personService.getPersonTags($rootScope.person.Id, function (data) {
+                $scope.personTags = [];
+                $scope.personTags.push.apply($scope.personTags, data);
+            });
+        }
+
+        if ($rootScope.person)
+            getPersonTags();
+
+        $scope.loadTags = function (query) {
+            var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
+            result = $filter('orderBy')(result, function (item) {
+                item.Name.substring(0, query.length);
+            });
+            return result;
+        }
     }
 
     angular
         .module('app')
         .controller('personNotesController', personNotesController);
 
-    personNotesController.$inject = ['$rootScope', '$cookieStore', '$scope', 'personService'];
+    personNotesController.$inject = ['$rootScope', '$cookieStore', '$scope', 'personService', '$filter'];
 })();

@@ -1,4 +1,5 @@
-﻿using Getticket.Web.API.Models.Persons;
+﻿using Getticket.Web.API.Models.Events;
+using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.API.Models

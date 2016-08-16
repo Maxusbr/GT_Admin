@@ -140,9 +140,9 @@ namespace Getticket.Web.DAL.Migrations
             context.Events.AddOrUpdate(o => o.Id, new Event { Id = 8, Name = "Justified", IdCategory = 6 });
             context.SaveChanges();
 
-            context.PersonConnectionType.AddOrUpdate(o => o.Id, new PersonConnectionType { Id = 1, Name = "Персона" });
-            context.PersonConnectionType.AddOrUpdate(o => o.Id, new PersonConnectionType { Id = 2, Name = "Мероприятие" });
-            context.PersonConnectionType.AddOrUpdate(o => o.Id, new PersonConnectionType { Id = 3, Name = "Событие" });
+            context.ConnectionTypes.AddOrUpdate(o => o.Id, new ConnectionType { Id = 1, Name = "Персона" });
+            context.ConnectionTypes.AddOrUpdate(o => o.Id, new ConnectionType { Id = 2, Name = "Мероприятие" });
+            context.ConnectionTypes.AddOrUpdate(o => o.Id, new ConnectionType { Id = 3, Name = "Событие" });
             context.SaveChanges();
 
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 1, id_ConnectionType = 3, id_Person = 1, id_Event = 5, Description = "Артист" });
@@ -208,8 +208,8 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonAntro.AddOrUpdate(o => o.Id, new PersonAntro { Id = 8, id_Person = 3, id_Antro = 4, Value = "65" });
             context.SaveChanges();
 
-            context.PersonMediaType.AddOrUpdate(o => o.Id, new PersonMediaType { Id = 1, Name = "Видео" });
-            context.PersonMediaType.AddOrUpdate(o => o.Id, new PersonMediaType { Id = 2, Name = "Фото" });
+            context.MediaTypes.AddOrUpdate(o => o.Id, new MediaType { Id = 1, Name = "Видео" });
+            context.MediaTypes.AddOrUpdate(o => o.Id, new MediaType { Id = 2, Name = "Фото" });
             context.SaveChanges();
 
             context.PersonMedia.AddOrUpdate(o => o.Id, new PersonMedia { Id = 1, id_Person = 1, id_MediaType = 1, MediaLink = "http://localhost:36049/app-content/images/flag_ru.gif", Description = "Чемпионат Европы по керлингу Россия, Москва, ДС Мегаспорт 3 декабря 2011 // Прививкова Людмила, Сидорова Анна + описание" });
@@ -222,8 +222,8 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonSocialLinkTypes.AddOrUpdate(o => o.Id, new PersonSocialLinkType { Id = 2, Name = "facebook" });
             context.SaveChanges();
 
-            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 1, id_Person = 1, id_SocialLinkType = 1, Link = "https://instagram.com/curlme_anna", Description = "instagram.com/curlme_anna" });
-            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 2, id_Person = 1, id_SocialLinkType = 2, Link = "https://www.facebook.com/fakeacc_curl", Description = "https://www.facebook.com/fakeacc_curl" });
+            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 1, Destination = DestinationTypes.Public, id_Person = 1, id_SocialLinkType = 1, Link = "https://instagram.com/curlme_anna", Description = "instagram.com/curlme_anna" });
+            context.PersonSocialLinks.AddOrUpdate(o => o.Id, new PersonSocialLink { Id = 2, Destination = DestinationTypes.Local, id_Person = 1, id_SocialLinkType = 2, Link = "https://www.facebook.com/fakeacc_curl", Description = "https://www.facebook.com/fakeacc_curl" });
             context.SaveChanges();
 
             context.PersonFactTypes.AddOrUpdate(o => o.Id, new PersonFactType { Id = 1, Name = "БИО", Descript = "ФИО" });

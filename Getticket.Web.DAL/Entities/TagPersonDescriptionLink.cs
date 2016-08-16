@@ -8,12 +8,12 @@ namespace Getticket.Web.DAL.Entities
     /// <summary>
     /// Связь ключевых слов
     /// </summary>
-    public class TagDescriptionLink
+    public class TagPersonDescriptionLink
     {
         /// <summary>
         /// Конструктор
         /// </summary>
-        public TagDescriptionLink(){}
+        public TagPersonDescriptionLink(){}
 
         /// <summary>
         /// Внешний ключ для <see cref="Entities.Tag"/>

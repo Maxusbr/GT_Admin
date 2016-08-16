@@ -28,16 +28,16 @@ namespace Getticket.Web.DAL.Entities
         public string Description { get; set; }
 
         /// <summary>
-        /// Внешний ключ для <see cref="Entities.EventConnectionType"/>
+        /// Внешний ключ для <see cref="Entities.ConnectionType"/>
         /// </summary>
         [Required]
         public int id_ConnectionType { get; set; }
 
         /// <summary>
-        /// Тип связи <see cref="Entities.EventConnectionType"/>
+        /// Тип связи <see cref="Entities.ConnectionType"/>
         /// </summary>
         [ForeignKey("id_ConnectionType")]
-        public virtual EventConnectionType EventConnectionType { get; set; }
+        public virtual ConnectionType ConnectionType { get; set; }
 
         /// <summary>
         /// Внешний ключ для связи между сущностями <see cref="Entities.Event"/>

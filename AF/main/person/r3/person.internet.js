@@ -3,6 +3,17 @@
 
     function PersonInternetController($rootScope, $scope, personService) {
         var vm = this;
+        //назначения ссылок
+        $rootScope.destinationtypes = [
+            {
+                Id: 0,
+                Name: 'Публичная ссылка'
+            },
+            {
+                Id: 1,
+                Name: 'Для внутреннего использования'
+            }
+        ];
         $rootScope.getLinks = function () {
             console.log('load links');
             personService.getLinks($rootScope.personId, function (data) {
@@ -20,10 +31,13 @@
                 });
             });
         }
-        
-        $rootScope.addInternet = function add_connection() {
+        $scope.editLink = function(item) {
+            $rootScope.EditedLink = item;
+            $rootScope.addInternet();
+        }
+        $rootScope.addInternet = function() {
             app.closeFour();
-            app.loadContentView('/main/person/r3/r4/person.internet.editor.html', 3200)
+            app.loadContentView('/main/person/r3/r4/person.internet.editor.html', 3200);
         }
         $rootScope.getLinks();
     }

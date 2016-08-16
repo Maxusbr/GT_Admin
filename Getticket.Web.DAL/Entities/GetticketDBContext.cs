@@ -107,16 +107,47 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="EventMedia"/>
         public virtual DbSet<EventMedia> EventMedias { get; set; }
 
+        /// <see cref="EventConnection"/>
+        public virtual DbSet<EventConnection> EventConnections { get; set; }
+
+        /// <see cref="EventDescriptionTizerLink"/>
+        public virtual DbSet<EventDescriptionTizerLink> EventDescriptionTizerLinks { get; set; }
+
         /// <summary>
-        /// Настройка сущности <see cref="Event"/>
+        /// Настройка сущности <see cref="Entities.PersonDescriptionTizerLink"/>
         /// </summary>
-        public class EventConfiguration : EntityTypeConfiguration<Event>
+        public class EventDescriptionTizerLinkConfiguration : EntityTypeConfiguration<EventDescriptionTizerLink>
         {
             /// <summary>
             /// Конструктр
             /// </summary>
-            public EventConfiguration()
+            public EventDescriptionTizerLinkConfiguration()
             {
+                this
+                    .HasRequired(e => e.Description)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdStaticDescription)
+                    .WillCascadeOnDelete(false);
+                this
+                    .HasRequired(e => e.Tizer)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdTizer)
+                    .WillCascadeOnDelete(false);
+            }
+        }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.PersonDescription"/>
+        /// </summary>
+        public class EventDescriptionConfiguration : EntityTypeConfiguration<EventDescription>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public EventDescriptionConfiguration()
+            {
+                this
+                    .Ignore(o => o.StaticDescription);
 
             }
         }
@@ -169,6 +200,11 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         public virtual DbSet<Company> Companies { get; set; }
 
+        /// <summary>
+        /// <see cref="Entities.MediaType"/>
+        /// </summary>
+        public virtual DbSet<MediaType> MediaTypes { get; set; }
+
         #region Person Config
 
         /// <summary>
@@ -197,9 +233,9 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<PersonChangeLog> PersonChangeLog { get; set; }
 
         /// <summary>
-        /// <see cref="Entities.PersonConnectionType"/>
+        /// <see cref="Entities.ConnectionType"/>
         /// </summary>
-        public virtual DbSet<PersonConnectionType> PersonConnectionType { get; set; }
+        public virtual DbSet<ConnectionType> ConnectionTypes { get; set; }
 
         /// <summary>
         /// <see cref="PersonConnection"/>
@@ -225,11 +261,6 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="Entities.PersonMedia"/>
         /// </summary>
         public virtual DbSet<PersonMedia> PersonMedia { get; set; }
-
-        /// <summary>
-        /// <see cref="Entities.PersonMediaType"/>
-        /// </summary>
-        public virtual DbSet<PersonMediaType> PersonMediaType { get; set; }
 
         /// <summary>
         /// <see cref="PersonSocialLinkType"/>
@@ -281,7 +312,7 @@ namespace Getticket.Web.DAL.Entities
         }
 
         /// <summary>
-        /// Настройка сущности <see cref="Entities.Person"/>
+        /// Настройка сущности <see cref="Entities.PersonDescriptionTizerLink"/>
         /// </summary>
         public class PersonDescriptionTizerLinkConfiguration : EntityTypeConfiguration<PersonDescriptionTizerLink>
         {
@@ -302,6 +333,10 @@ namespace Getticket.Web.DAL.Entities
                     .WillCascadeOnDelete(false);
             }
         }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.PersonDescription"/>
+        /// </summary>
         public class PersonDescriptionConfiguration : EntityTypeConfiguration<PersonDescription>
         {
             /// <summary>
@@ -327,14 +362,15 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="TagAntroLink"/>
         public virtual DbSet<TagAntroLink> TagAntroLinks { get; set; }
 
-        /// <see cref="TagDescriptionLink"/>
-        public virtual DbSet<TagDescriptionLink> TagDescriptionLinks { get; set; }
+        /// <see cref="TagPersonDescriptionLink"/>
+        public virtual DbSet<TagPersonDescriptionLink> TagDescriptionLinks { get; set; }
 
         /// <see cref="TagPersonLink"/>
         public virtual DbSet<TagPersonLink> TagPersonLinks { get; set; }
 
-        /// <see cref="TagMediaLink"/>
-        public virtual DbSet<TagMediaLink> TagMediaLinks { get; set; }
+        /// <see cref="TagPersonMediaLink"/>
+        public virtual DbSet<TagPersonMediaLink> TagPersonMediaLinks { get; set; }
+        
         /// <summary>
         /// Настройки сущности <see cref="Tag"/>
         /// </summary>
@@ -359,9 +395,11 @@ namespace Getticket.Web.DAL.Entities
         {
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new InviteCodeConfiguration());
-            modelBuilder.Configurations.Add(new EventConfiguration());
+            modelBuilder.Configurations.Add(new EventDescriptionConfiguration());
+            modelBuilder.Configurations.Add(new EventDescriptionTizerLinkConfiguration());
             modelBuilder.Configurations.Add(new EventLogConfiguration());
             modelBuilder.Configurations.Add(new PersonDescriptionTizerLinkConfiguration());
+            modelBuilder.Configurations.Add(new PersonDescriptionConfiguration());
         }
     }
 }

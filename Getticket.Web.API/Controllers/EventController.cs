@@ -12,14 +12,17 @@ namespace Getticket.Web.API.Controllers
     public class EventController : ApiController
     {
         private readonly IEventService _eventService;
+        private readonly ITagService _tagService;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="eventService"></param>
-        public EventController(IEventService eventService)
+        /// <param name="tagService"></param>
+        public EventController(IEventService eventService, ITagService tagService)
         {
             _eventService = eventService;
+            _tagService = tagService;
         }
 
         /// <see cref="IEventService.GetEvents" />

@@ -9,9 +9,20 @@
     </div>
     <div class="win-menu">
     </div>
+    
     <div class="win-content">
         <h5>Все теги персоны</h5>
         <i>Ноги, Руки, главноеХвост</i>
+
+        <tags-input ng-model="personTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+            <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template"/>
+        </tags-input>
+        <script type="text/ng-template" id="my-custom-template">
+            <div class="right-panel">
+                <span ng-bind-html="$highlight($getDisplayText())"></span>
+                <span ng-show="data.UsesType.length">({{data.UsesType|join:','}})</span>
+            </div>
+        </script>
         <h5>Все описания для персоны</h5>
         <table class="table" cg-busy="Promise">
             <thead>

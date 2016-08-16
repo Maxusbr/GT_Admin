@@ -14,7 +14,7 @@ namespace Getticket.Web.API.Models.Persons
         public string Description { get; set; }
 
         public int id_Person { get; set; }
-
+        public int Destination { get; set; }
         [Required]public int IdSocialLinkType { get; set; }
         public string PersonSocialLinkType { get; set; }
         public LastChangeModel LastChange { get; set; }

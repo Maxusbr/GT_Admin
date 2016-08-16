@@ -27,7 +27,7 @@ namespace Getticket.Web.DAL.Entities
         public string MediaLink { get; set; }
 
         /// <summary>
-        /// Внешний ключ для <see cref="PersonMediaType"/>
+        /// Внешний ключ для <see cref="Entities.MediaType"/>
         /// </summary>
         [Required]
         public int id_MediaType { get; set; }
@@ -44,10 +44,10 @@ namespace Getticket.Web.DAL.Entities
         public virtual Person Person { get; set; }
 
         /// <summary>
-        /// <see cref="PersonMediaType"/>
+        /// <see cref="Entities.MediaType"/>
         /// </summary>
         [ForeignKey("id_MediaType")]
-        public virtual PersonMediaType MediaType { get; set; }
+        public virtual MediaType MediaType { get; set; }
 
     }
 }

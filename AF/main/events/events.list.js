@@ -19,7 +19,7 @@
 
         $scope.selectEvents = function (id) {
             console.log(id);
-            $rootScope.Id = id;
+            $rootScope.eventId = id;
             app.closeSecond();
             app.loadContentView('/main/events/events.viewone.html', 1800);
         }

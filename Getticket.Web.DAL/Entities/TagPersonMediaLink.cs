@@ -8,7 +8,7 @@ namespace Getticket.Web.DAL.Entities
     /// <summary>
     /// Связь ключевых слов
     /// </summary>
-    public class TagMediaLink
+    public class TagPersonMediaLink
     {
         /// <summary>
         /// Внешний ключ для <see cref="Entities.Tag"/>

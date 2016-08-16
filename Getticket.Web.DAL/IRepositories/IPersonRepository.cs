@@ -145,21 +145,21 @@ namespace Getticket.Web.DAL.IRepositories
         bool AddChangeLog(PersonChangeLog change);
 
         /// <summary>
-        /// Возвращает список <see cref="PersonConnectionType"/>
+        /// Возвращает список <see cref="ConnectionType"/>
         /// </summary>
         /// <returns></returns>
-        IList<PersonConnectionType> GetConnectionTypes();
+        IList<ConnectionType> GetConnectionTypes();
 
         /// <summary>
-        /// Если <see cref="PersonConnectionType"/> новый - добавляем новую запись в БД.
-        /// Если <see cref="PersonConnectionType"/> уже существует - сохраняем изменения записи.
+        /// Если <see cref="ConnectionType"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="ConnectionType"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        PersonConnectionType UpdateConnectionType(PersonConnectionType type);
+        ConnectionType UpdateConnectionType(ConnectionType type);
 
         /// <summary>
-        /// Удалить тип <see cref="PersonConnectionType"/> по ее <paramref name="id" />
+        /// Удалить тип <see cref="ConnectionType"/> по ее <paramref name="id" />
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -264,21 +264,21 @@ namespace Getticket.Web.DAL.IRepositories
         bool DeleteMedia(int id);
 
         /// <summary>
-        /// Возвращает список <see cref="PersonMediaType"/>
+        /// Возвращает список <see cref="MediaType"/>
         /// </summary>
         /// <returns></returns>
-        IList<PersonMediaType> GetMediaTypes();
+        IList<MediaType> GetMediaTypes();
 
         /// <summary>
-        /// Если <see cref="PersonMediaType"/> новый - добавляем новую запись в БД.
-        /// Если <see cref="PersonMediaType"/> уже существует - сохраняем изменения записи.
+        /// Если <see cref="MediaType"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="MediaType"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        PersonMediaType UpdateMediaType(PersonMediaType type);
+        MediaType UpdateMediaType(MediaType type);
 
         /// <summary>
-        /// Удаляет Media <see cref="PersonMediaType"/>
+        /// Удаляет Media <see cref="MediaType"/>
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

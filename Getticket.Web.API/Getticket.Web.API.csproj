@@ -218,8 +218,17 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CreateDescriptionModel.cs" />
     <Compile Include="Models\Emails\RestorePasswordEmailModel.cs" />
-    <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\Events\EventModel.cs" />
     <Compile Include="Models\LastChangeModel.cs" />
+    <Compile Include="Models\Events\CountsModel.cs" />
+    <Compile Include="Models\Events\EntityCollection.cs" />
+    <Compile Include="Models\Events\EventConnectionModel.cs" />
+    <Compile Include="Models\Events\EventConnectionTypeModel.cs" />
+    <Compile Include="Models\Events\EventDescriptionModel.cs" />
+    <Compile Include="Models\Events\EventDescriptionTypeModel.cs" />
+    <Compile Include="Models\Events\EventDetailModel.cs" />
+    <Compile Include="Models\Events\EventMediaModel.cs" />
+    <Compile Include="Models\MediaTypeModel.cs" />
     <Compile Include="Models\Persons\CountryModel.cs" />
     <Compile Include="Models\Persons\CountryPlaceModel.cs" />
     <Compile Include="Models\Persons\CountsModel.cs" />
@@ -230,7 +239,6 @@
     <Compile Include="Models\Persons\PersonFactModel.cs" />
     <Compile Include="Models\Persons\PersonFactTypeModel.cs" />
     <Compile Include="Models\Persons\PersonDetailModel.cs" />
-    <Compile Include="Models\Persons\PersonMediaTypeModel.cs" />
     <Compile Include="Models\Persons\PersonModel.cs" />
     <Compile Include="Models\Persons\PersonAntroModel.cs" />
     <Compile Include="Models\Persons\PersonAntroNameModel.cs" />
@@ -244,6 +252,7 @@
     <Compile Include="Models\Persons\PersonSearchParams.cs" />
     <Compile Include="Models\Persons\PersonSocialLinkModel.cs" />
     <Compile Include="Models\Persons\PersonSocialLinkTypeModel.cs" />
+    <Compile Include="Models\Persons\PersonTagModel.cs" />
     <Compile Include="Models\Persons\SexModel.cs" />
     <Compile Include="Models\RestorePasswordModel.cs" />
     <Compile Include="Models\Emails\BaseEmailModel.cs" />

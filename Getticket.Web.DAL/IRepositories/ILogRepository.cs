@@ -70,5 +70,28 @@ namespace Getticket.Web.DAL.IRepositories
         /// <returns></returns>
         PersonLog GetLastChangePersonAntro(int personId, int id);
 
+        /// <summary>
+        /// Возвращает последнее изменение связи <see cref="EventLog"/>
+        /// </summary>
+        /// <param name="idEvent"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        EventLog GetLastChangeEventConnection(int idEvent, int id);
+
+        /// <summary>
+        /// Возвращает последнее изменение медиа <see cref="EventLog"/>
+        /// </summary>
+        /// <param name="idEvent"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        EventLog GetLastChangeEventMedia(int idEvent, int id);
+
+        /// <summary>
+        /// Возвращает последнее изменение описания <see cref="EventLog"/>
+        /// </summary>
+        /// <param name="idEvent"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        EventLog GetLastChangeEventDescription(int idEvent, int id);
     }
 }

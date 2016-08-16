@@ -222,7 +222,8 @@ namespace Getticket.Web.API.Helpers
                 IdSocialLinkType = link.id_SocialLinkType,
                 Link = link.Link,
                 PersonSocialLinkType = link.PersonSocialLinkType?.Name,
-                Description = link.Description
+                Description = link.Description,
+                Destination = (int)link.Destination
             } : new PersonSocialLinkModel();
         }
 
@@ -346,7 +347,7 @@ namespace Getticket.Web.API.Helpers
         /// </summary>
         /// <param name="result"></param>
         /// <returns></returns>
-        public static IList<PersonConnectionTypeModel> GetConnectionTypeModels(IList<PersonConnectionType> result)
+        public static IList<PersonConnectionTypeModel> GetConnectionTypeModels(IList<ConnectionType> result)
         {
             return result.Select(o => new PersonConnectionTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
@@ -366,9 +367,9 @@ namespace Getticket.Web.API.Helpers
         /// </summary>
         /// <param name="result"></param>
         /// <returns></returns>
-        public static IList<PersonMediaTypeModel> GetMediaTypeModels(IList<PersonMediaType> result)
+        public static IList<MediaTypeModel> GetMediaTypeModels(IList<MediaType> result)
         {
-            return result.Select(o => new PersonMediaTypeModel { Id = o.Id, Name = o.Name }).ToList();
+            return result.Select(o => new MediaTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         /// <summary>

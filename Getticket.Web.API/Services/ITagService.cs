@@ -56,10 +56,8 @@ namespace Getticket.Web.API.Services
         /// <summary>
         /// Добавляет связь <see cref="TagModel"/> с <see cref="PersonModel"/>
         /// </summary>
-        /// <param name="personId"></param>
-        /// <param name="models"></param>
         /// <returns></returns>
-        bool AddTagLinks(int personId, IEnumerable<TagModel> models);
+        bool AddTagLinks(PersonTagModel model);
 
         /// <summary>
         /// Добавляет связь <see cref="TagModel"/> с <see cref="PersonMediaModel"/>
@@ -69,4 +67,5 @@ namespace Getticket.Web.API.Services
         bool AddTagLinks(TagsPersonMediaModel model);
     }
 
+    
 }
