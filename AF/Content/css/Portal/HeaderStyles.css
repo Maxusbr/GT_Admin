@@ -63,7 +63,7 @@ div.win_buttons{
 }
 div.win-content{
     padding:20px;
-    height:calc(100% - 110px);
+    height:calc(100% - 140px);
     overflow-y:auto;
     overflow-x:hidden;
     background:#efefef;
