@@ -31,11 +31,11 @@
                 });
             });
         }
-        $scope.editLink = function(item) {
-            $rootScope.EditedLink = item;
-            $rootScope.addInternet();
+        $scope.getDestination = function(id) {
+            return $rootScope.destinationtypes.filter(function (item) { return item.Id === id; })[0].Name;
         }
-        $rootScope.addInternet = function() {
+        $rootScope.addInternet = function (item) {
+            $rootScope.EditedLink = item;
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.internet.editor.html', 3200);
         }
