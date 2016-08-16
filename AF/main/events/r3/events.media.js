@@ -18,9 +18,9 @@
             });
         });
 
-        $rootScope.addFact = function add_fact() {
+        $rootScope.addMedia = function add_fact() {
             app.closeFour();
-            app.loadContentView('/main/events/r3/r4/events.fact.create.html', 3200)
+            app.loadContentView('/main/events/r3/r4/events.media.create.html', 3200)
         }
     }
 
