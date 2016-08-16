@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function PersonInternetEditorController($rootScope) {
+    function EventsConnectionsCreateController($rootScope) {
         var vm = this;
 
         //редактируемая запись
@@ -42,7 +42,7 @@
 
     angular
         .module('app')
-        .controller('PersonInternetEditorController', PersonInternetEditorController);
+        .controller('EventsConnectionsCreateController', EventsConnectionsCreateController);
 
     PersonInternetEditorController.$inject = ['$rootScope'];
 })();

@@ -17,9 +17,9 @@
                 $scope.linklist.push.apply($scope.linklist, item.List);
             });
         });
-        $rootScope.addInternet = function add_connection() {
+        $rootScope.addUser = function add_connection() {
             app.closeFour();
-            app.loadContentView('/main/events/r3/r4/events.internet.editor.html', 3200)
+            app.loadContentView('/main/events/r3/r4/events.users.create.html', 3200)
         }
     }
 

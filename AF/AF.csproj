@@ -69,6 +69,8 @@
     <Content Include="Content\angular-material.min.css" />
     <Content Include="login\login.controller.js" />
     <Content Include="login\login.view.html" />
+    <Content Include="main\dictionary\dictionary.antro.types.html" />
+    <Content Include="main\dictionary\dictionary.antro.types.js" />
     <Content Include="main\dictionary\dictionary.person.links.html" />
     <Content Include="main\dictionary\dictionary.person.links.js" />
     <Content Include="main\dictionary\dictionary.person.wtf.html" />
@@ -97,6 +99,10 @@
     <Content Include="main\events\r3\r4\person.notes.source.js" />
     <Content Include="main\events\r3\r4\person.notes.static.html" />
     <Content Include="main\events\r3\r4\person.notes.static.js" />
+    <Content Include="main\person\r3\r4\person.antro.editor.html" />
+    <Content Include="main\person\r3\r4\person.antro.editor.js" />
+    <Content Include="main\person\r3\r4\person.media.editor.html" />
+    <Content Include="main\person\r3\r4\person.media.editor.js" />
     <Content Include="main\person\r3\r4\person.notes.ades.html" />
     <Content Include="main\person\r3\r4\person.notes.ades.js" />
     <Content Include="main\person\r3\person.antro.html" />
