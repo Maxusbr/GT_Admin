@@ -1,0 +1,36 @@
+﻿<div class="win-container r5 disPersonAntroTypesEditor" style="width:300px;" ng-controller="dictionaryAntroTypesController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Типы антропометрии
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disPersonAntroTypesEditor')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+    </div>
+    <div class="win-content">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5>Редактирование</h5>
+            </div>
+            <div class="panel-body">
+                <input type="text" class="form-control" ng-model="editItem.Name" />
+                <br />
+                <button class="md-button" ng-click="saveChanges()">Сохранить</button>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="row in socialtypes">
+                    <td>{{row.Name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
