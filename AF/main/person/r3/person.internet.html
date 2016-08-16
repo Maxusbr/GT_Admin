@@ -1,4 +1,4 @@
-﻿<div class="win-container r3 personInternet" style="width:600px;" ng-controller="PersonInternetController">
+﻿<div class="win-container r3 personInternet" style="width:700px;" ng-controller="PersonInternetController">
     <div class="win-header">
         <div class="win-header-text">
             Интернет
@@ -31,7 +31,7 @@
             <tbody>
                 <tr ng-repeat="item in linklist">
                     <td><span>{{item.PersonSocialLinkType}}</span></td>
-                    <td><a href="{{item.Link}}">{{item.PersonSocialLinkType}}</a></td>
+                    <td>{{item.PersonSocialLinkType}}<a href="{{item.Link}}" target="_blank"> <span class="fa fa-external-link"></span></a></td>
                     <td><span>{{item.Description}}</span></td>
                     <td></td>
                     <td></td>
