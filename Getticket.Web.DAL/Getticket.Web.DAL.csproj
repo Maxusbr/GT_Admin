@@ -125,6 +125,10 @@
     <Compile Include="IRepositories\ILogRepository.cs" />
     <Compile Include="IRepositories\ITagRepository.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
+    <Compile Include="Migrations\201608161229005_fixDescriptionList.cs" />
+    <Compile Include="Migrations\201608161229005_fixDescriptionList.Designer.cs">
+      <DependentUpon>201608161229005_fixDescriptionList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccessRoleRepository.cs" />
@@ -144,6 +148,11 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608161229005_fixDescriptionList.resx">
+      <DependentUpon>201608161229005_fixDescriptionList.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -30,13 +30,13 @@
         }
 
         $rootScope.displayNotesStatic = function (descript) {
-            $rootScope.staticDescript = descript ? descript : {};
+            $rootScope.staticDescript = descript ? descript : {id_DescriptionType: 2 };
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.static.html', 3200);
         }
 
         $rootScope.displayNotesTizer = function (tizer) {
-            $rootScope.editableTizer = tizer ? tizer : {};
+            $rootScope.editableTizer = tizer ? tizer : { id_DescriptionType: 1 };
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.tizer.html', 3200);
         }

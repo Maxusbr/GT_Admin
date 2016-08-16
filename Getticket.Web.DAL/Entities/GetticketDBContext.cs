@@ -283,12 +283,12 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Настройка сущности <see cref="Entities.Person"/>
         /// </summary>
-        public class PersonDescriptionConfiguration : EntityTypeConfiguration<PersonDescriptionTizerLink>
+        public class PersonDescriptionTizerLinkConfiguration : EntityTypeConfiguration<PersonDescriptionTizerLink>
         {
             /// <summary>
             /// Конструктр
             /// </summary>
-            public PersonDescriptionConfiguration()
+            public PersonDescriptionTizerLinkConfiguration()
             {
                 this
                     .HasRequired(e => e.Description)
@@ -302,6 +302,19 @@ namespace Getticket.Web.DAL.Entities
                     .WillCascadeOnDelete(false);
             }
         }
+        public class PersonDescriptionConfiguration : EntityTypeConfiguration<PersonDescription>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public PersonDescriptionConfiguration()
+            {
+                this
+                    .Ignore(o => o.StaticDescription);
+                
+            }
+        }
+
         #endregion
 
         #region Tags
@@ -348,7 +361,7 @@ namespace Getticket.Web.DAL.Entities
             modelBuilder.Configurations.Add(new InviteCodeConfiguration());
             modelBuilder.Configurations.Add(new EventConfiguration());
             modelBuilder.Configurations.Add(new EventLogConfiguration());
-            modelBuilder.Configurations.Add(new PersonDescriptionConfiguration());
+            modelBuilder.Configurations.Add(new PersonDescriptionTizerLinkConfiguration());
         }
     }
 }

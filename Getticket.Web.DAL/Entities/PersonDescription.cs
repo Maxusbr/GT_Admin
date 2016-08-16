@@ -62,7 +62,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Статическое описание
         /// </summary>
-        public virtual PersonDescription StaticDescription { get; set; }
+        public PersonDescription StaticDescription { get; set; }
 
         /// <summary>
         /// размещение описания
