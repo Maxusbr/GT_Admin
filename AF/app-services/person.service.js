@@ -78,37 +78,37 @@
         }
 
         function getLinks(id, callback) {
-            $http.get(`${serviceUrl}persons/social/${id}`).success(function (data) {
+            return $http.get(`${serviceUrl}persons/social/${id}`).success(function (data) {
                 callback(data);
             });
         }
 
         function getMedia(id, callback) {
-            $http.get(`${serviceUrl}persons/media/${id}`).success(function (data) {
+            return $http.get(`${serviceUrl}persons/media/${id}`).success(function (data) {
                 callback(data);
             });
         }
 
         function getDescript(id, callback) {
-            $http.get(`${serviceUrl}persons/description/${id}`).success(function (data) {
+            return $http.get(`${serviceUrl}persons/description/${id}`).success(function (data) {
                 callback(data);
             });
         }
 
         function getFact(id, callback) {
-            $http.get(`${serviceUrl}persons/fact/${id}`).success(function (data) {
+            return $http.get(`${serviceUrl}persons/fact/${id}`).success(function (data) {
                 callback(data);
             });
         }
 
         function getConnection(id, callback) {
-            $http.get(`${serviceUrl}persons/connection/${id}`).success(function (data) {
+            return $http.get(`${serviceUrl}persons/connection/${id}`).success(function (data) {
                 callback(data);
             });
         }
 
         function getAntro(id, callback) {
-            $http.get(`${serviceUrl}persons/antro/${id}`).success(function (data) {
+            return $http.get(`${serviceUrl}persons/antro/${id}`).success(function (data) {
                 callback(data);
             });
         }

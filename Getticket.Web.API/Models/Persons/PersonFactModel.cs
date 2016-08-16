@@ -17,6 +17,7 @@ namespace Getticket.Web.API.Models.Persons
         public int id_Person { get; set; }
 
         public int id_FactType { get; set; }
+        public string Status { get; set; }
         public PersonFactTypeModel FactType { get; set; }
         public LastChangeModel LastChange { get; set; }
     }

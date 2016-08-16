@@ -270,7 +270,13 @@ namespace Getticket.Web.API.Helpers
                 id_Person = description.id_Person,
                 id_DescriptionType = description.id_DescriptionType,
                 PersonDescriptionType = description.PersonDescriptionType.Name,
-                DescriptionText = description.DescriptionText, Status = description.Status
+                DescriptionText = description.DescriptionText,
+                Status = description.Status,
+                IdStaticDescription = description.StaticDescription?.Id,
+                IdBlock = description.IdBlock,
+                RequiredStaticDescription = description.RequiredStaticDescription,
+                PageBlock = PageModelHelper.GetPageBlockModel(description.PageBlock),
+                StaticDescription = description.StaticDescription != null ? GetDescriptionModel(description.StaticDescription) : null
             } : new PersonDescriptionModel();
         }
 
@@ -292,8 +298,9 @@ namespace Getticket.Web.API.Helpers
                 Id = fact.Id,
                 id_Person = fact.id_Person,
                 id_FactType = fact.id_FactType,
-                FactType = new PersonFactTypeModel {Id = fact.FactType.Id, Name = fact.FactType.Name, Descript = fact.FactType.Descript ?? ""},
-                FactText = fact.FactText
+                FactType = new PersonFactTypeModel { Id = fact.FactType.Id, Name = fact.FactType.Name, Descript = fact.FactType.Descript ?? "" },
+                FactText = fact.FactText,
+                Status = fact.Status
             } : new PersonFactModel();
         }
 
@@ -371,7 +378,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<PersonDescriptionTypeModel> GetDescriptionTypeModels(IList<PersonDescriptionType> result)
         {
-            return result.Select(o => new PersonDescriptionTypeModel { Id = o.Id, Name = o.Name, Type = (int)o.Type}).ToList();
+            return result.Select(o => new PersonDescriptionTypeModel { Id = o.Id, Name = o.Name, Type = (int)o.Type }).ToList();
         }
 
         /// <summary>
@@ -381,7 +388,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<PersonFactTypeModel> GetFactTypeModels(IList<PersonFactType> result)
         {
-            return result.Select(o => new PersonFactTypeModel { Id = o.Id, Name = o.Name, Descript = o.Descript ?? ""}).ToList();
+            return result.Select(o => new PersonFactTypeModel { Id = o.Id, Name = o.Name, Descript = o.Descript ?? "" }).ToList();
         }
 
 
@@ -393,7 +400,7 @@ namespace Getticket.Web.API.Helpers
         /// <exception cref="NotImplementedException"></exception>
         public static IList<CountryModel> GetCountryModels(IList<Country> result)
         {
-            return result.Select(o => new CountryModel {Id = o.Id, Name = o.Name}).ToList();
+            return result.Select(o => new CountryModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         /// <summary>
@@ -403,8 +410,13 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IList<CountryPlaceModel> GetCountryPlaceModels(IList<CountryPlace> result)
         {
-            return result.Select(o => new CountryPlaceModel { Id = o.Id, Name = o.Name, IdCountry = o.Region.Country_Id,
-                CountryName = o.Region.Country.Name}).ToList();
+            return result.Select(o => new CountryPlaceModel
+            {
+                Id = o.Id,
+                Name = o.Name,
+                IdCountry = o.Region.Country_Id,
+                CountryName = o.Region.Country.Name
+            }).ToList();
         }
     }
 }

@@ -217,6 +217,11 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<PersonDescription> PersonDescriptions { get; set; }
 
         /// <summary>
+        /// <see cref="PersonDescriptionTizerLink"/>
+        /// </summary>
+        public virtual DbSet<PersonDescriptionTizerLink> PersonDescriptionTizerLinks { get; set; }
+
+        /// <summary>
         /// <see cref="Entities.PersonMedia"/>
         /// </summary>
         public virtual DbSet<PersonMedia> PersonMedia { get; set; }
@@ -247,6 +252,21 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<PersonFact> PersonFacts { get; set; }
 
         /// <summary>
+        /// <see cref="PageSchema"/>
+        /// </summary>
+        public virtual DbSet<PageSchema> PageSchemas { get; set; }
+
+        /// <summary>
+        /// <see cref="PageBlock"/>
+        /// </summary>
+        public virtual DbSet<PageBlock> PageBlocks { get; set; }
+
+        /// <summary>
+        /// <see cref="PageBlockType"/>
+        /// </summary>
+        public virtual DbSet<PageBlockType> PageBlockTypes { get; set; }
+
+        /// <summary>
         /// Настройка сущности <see cref="Entities.Person"/>
         /// </summary>
         public class PersonConfiguration : EntityTypeConfiguration<Person>
@@ -257,6 +277,29 @@ namespace Getticket.Web.DAL.Entities
             public PersonConfiguration()
             {
 
+            }
+        }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.Person"/>
+        /// </summary>
+        public class PersonDescriptionConfiguration : EntityTypeConfiguration<PersonDescriptionTizerLink>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public PersonDescriptionConfiguration()
+            {
+                this
+                    .HasRequired(e => e.Description)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdStaticDescription)
+                    .WillCascadeOnDelete(false);
+                this
+                    .HasRequired(e => e.Tizer)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdTizer)
+                    .WillCascadeOnDelete(false);
             }
         }
         #endregion
@@ -305,6 +348,7 @@ namespace Getticket.Web.DAL.Entities
             modelBuilder.Configurations.Add(new InviteCodeConfiguration());
             modelBuilder.Configurations.Add(new EventConfiguration());
             modelBuilder.Configurations.Add(new EventLogConfiguration());
+            modelBuilder.Configurations.Add(new PersonDescriptionConfiguration());
         }
     }
 }

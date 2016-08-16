@@ -38,6 +38,16 @@ namespace Getticket.Web.DAL.Entities
         public string Status { get; set; }
 
         /// <summary>
+        /// Статическое описание требуется?
+        /// </summary>
+        public bool RequiredStaticDescription { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для схемы размещения
+        /// </summary>
+        public int? IdBlock { get; set; }
+
+        /// <summary>
         /// <see cref="Entities.Person"/>
         /// </summary>
         [ForeignKey("id_Person")]
@@ -48,6 +58,17 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [ForeignKey("id_DescriptionType")]
         public virtual PersonDescriptionType PersonDescriptionType { get; set; }
+
+        /// <summary>
+        /// Статическое описание
+        /// </summary>
+        public virtual PersonDescription StaticDescription { get; set; }
+
+        /// <summary>
+        /// размещение описания
+        /// </summary>
+        [ForeignKey("IdBlock")]
+        public virtual PageBlock PageBlock { get; set; }
 
     }
 }

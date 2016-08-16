@@ -206,6 +206,7 @@
     <Compile Include="Helpers\ChangePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\InviteEmailModelHelper.cs" />
     <Compile Include="Helpers\EventModelHelper.cs" />
+    <Compile Include="Helpers\PageModelHelper.cs" />
     <Compile Include="Helpers\RestorePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\LogModelHelper.cs" />
     <Compile Include="Helpers\TagModelHelper.cs" />
@@ -223,6 +224,9 @@
     <Compile Include="Models\Persons\CountryPlaceModel.cs" />
     <Compile Include="Models\Persons\CountsModel.cs" />
     <Compile Include="Models\Persons\EntityCollection.cs" />
+    <Compile Include="Models\PageBlockModel.cs" />
+    <Compile Include="Models\PageBlockTypeModel.cs" />
+    <Compile Include="Models\PageSchemaModel.cs" />
     <Compile Include="Models\Persons\PersonFactModel.cs" />
     <Compile Include="Models\Persons\PersonFactTypeModel.cs" />
     <Compile Include="Models\Persons\PersonDetailModel.cs" />

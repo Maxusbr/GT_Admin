@@ -153,7 +153,7 @@ namespace Getticket.Web.DAL.Repositories
             return property;
         }
 
-        
+
 
         /// <see cref="IPersonRepository.AddPersonAntros" />
         public bool AddPersonAntros(IList<PersonAntro> properties, int userId)
@@ -380,8 +380,33 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IPersonRepository.GetDescriptions" />
         public IList<PersonDescription> GetDescriptions(int id)
         {
-            return db.PersonDescriptions.Where(o => o.id_Person == id)
-                .Include(o => o.PersonDescriptionType).ToList();
+            var listLink = db.PersonDescriptionTizerLinks.Include(o => o.Tizer).Where(o => o.Tizer.id_Person == id).ToList();
+
+            var list = new List<PersonDescription>();
+
+            foreach (var el in listLink)
+            {
+                var item = db.PersonDescriptions.Where(o => o.Id == el.IdTizer)
+                    .Include(o => o.PersonDescriptionType)
+                    .Include(o => o.PageBlock)
+                    .Include(o => o.PageBlock.Page)
+                    .FirstOrDefault();
+                if (item == null) continue;
+                item.StaticDescription = db.PersonDescriptions.Where(o => o.Id == el.IdStaticDescription)
+                    .Include(o => o.PersonDescriptionType)
+                    .Include(o => o.PageBlock)
+                    .Include(o => o.PageBlock.Page).FirstOrDefault();
+                list.Add(item);
+            }
+            var list1 = listLink.Select(s => s.IdTizer).Distinct();
+            var list2 = listLink.Select(s => s.IdStaticDescription).Distinct();
+            list.AddRange(
+                db.PersonDescriptions.Where(o => o.id_Person == id && (!list1.Contains(o.Id) && !list2.Contains(o.Id)))
+                .Include(o => o.PersonDescriptionType)
+                    .Include(o => o.PageBlock)
+                    .Include(o => o.PageBlock.Page)
+                );
+            return list;
         }
 
         /// <see cref="IPersonRepository.UpdateDescription" />
@@ -723,7 +748,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IPersonRepository.GetCountryPlaces(string)" />
         public IList<CountryPlace> GetCountryPlaces(string foundName)
         {
-            var result = string.IsNullOrEmpty(foundName) ? new List<CountryPlace>() : 
+            var result = string.IsNullOrEmpty(foundName) ? new List<CountryPlace>() :
                 db.CountryPlaces.Where(o => o.Name.ToLower().StartsWith(foundName.ToLower()))
                 .Include(o => o.Region)
                 .Include(o => o.Region.Country).ToList();
@@ -830,6 +855,19 @@ namespace Getticket.Web.DAL.Repositories
             db.Entry(log).State = System.Data.Entity.EntityState.Added;
             //db.PersonLogs.Add(log);
             //db.SaveChanges();
+        }
+    }
+
+    public class ComparerDescription : IEqualityComparer<PersonDescription>
+    {
+        public bool Equals(PersonDescription x, PersonDescription y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetHashCode(PersonDescription obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -61,6 +61,10 @@
   <ItemGroup>
     <Compile Include="Entities\AccessRole.cs" />
     <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\PageBlock.cs" />
+    <Compile Include="Entities\PageSchema.cs" />
+    <Compile Include="Entities\PageBlockType.cs" />
+    <Compile Include="Entities\PersonDescriptionTizerLink.cs" />
     <Compile Include="Entities\Region.cs" />
     <Compile Include="Entities\EventLinkPerson.cs" />
     <Compile Include="Entities\EventLinkEvent.cs" />
@@ -107,6 +111,7 @@
     <Compile Include="Enums\AccessRoleType.cs" />
     <Compile Include="Enums\DescriptionTypes.cs" />
     <Compile Include="Enums\LogType.cs" />
+    <Compile Include="Enums\PageTypes.cs" />
     <Compile Include="Enums\Sex.cs" />
     <Compile Include="Enums\UserStatusType.cs" />
     <Compile Include="Infrastructure\PageInfo.cs" />
