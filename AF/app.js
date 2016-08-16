@@ -119,6 +119,11 @@ var app;
         $rootScope.logOut = function () {
             $location.path('/logOut');
         }
+
+        $rootScope.refreshMain = function () {
+            console.log('refresh');
+            location.reload();
+        };
     }
 
     config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
@@ -142,6 +147,7 @@ var app;
                 controllerAs: 'vm',
                 onEnter: function () {
                     console.log("enter main abstract");
+                    loadDashboard();
                 }
             })
             //.state('home', {
@@ -321,6 +327,10 @@ var app;
         '</div>' +
     '</span>';
         $templateCache.put('isteven-multi-select.htm', template);
+    }
+
+    function loadDashboard() {
+        app.loadChapterView('/main/dashboard.html', 2500);
     }
 
     app.directive('ngConfirmClick', [
