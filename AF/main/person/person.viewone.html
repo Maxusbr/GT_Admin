@@ -24,13 +24,15 @@
             <div class="row" ng-if="person">
                 <div class="col-lg-9">
                     <div class="row">
-                        <div class="col-lg-5">
+                       <!--  <div class="col-lg-3">
                             <img style="width:150px; height:150px"/>
-                            <br/>
-                            <div class="col-lg-3">Пол: <span ng-show="person.Sex == 0">Mужской</span>
-                                <span ng-show="person.Sex == 1">Женский</span></div>
+                            <br/> -->
+                        <div class="col-lg-4">Пол: <span ng-show="person.Sex == 0">Mужской
+                            </span>
+                                <span ng-show="person.Sex == 1">Женский</span>
                         </div>
-                        <div class="col-lg-3">
+<!--                         </div> -->
+                        <div class="col-lg-4">
                             {{person.LastName}}
                             <br/>
                             {{person.Name}}
@@ -39,7 +41,7 @@
                             <br/>
                             {{person.Bithday | date : 'd MMMM yyyy'}}
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             {{person.LastNameLatin}}
                             <br />
                             {{ person.NameLatin }}
@@ -48,6 +50,31 @@
                             <br />
                             {{person.Place}}, {{person.Country}}
                         </div>
+                        <div class="col-lg-12 text-center">
+                            <input 
+                            id="the-file-input"
+                            class="form-control" 
+                            type="file" 
+                            style="background-color: rgba(255, 0, 0, 0); border: medium none; box-shadow: none; padding: 0;" />
+                            <div style="width: 100px; margin: 0px auto;">
+                                <img id="some_container_div" style="width: 100px;">
+                            </div>
+                            <script>
+                                function renderImage(file) {
+                                    console.log(file);
+                                    var reader = new FileReader();
+                                    reader.onload = function(event) {
+                                        var the_url = event.target.result;
+                                        $('#some_container_div').attr('src', the_url);
+                                    }
+                                    reader.readAsDataURL(file);
+                                }
+                                $("#the-file-input").change(function() {
+                                    console.log(this.files);
+                                    renderImage(this.files[0]);
+                                });
+                            </script>
+                        </div>        
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -70,6 +97,7 @@
                     <a href="#" class="btn btn-block btn-default" ng-click="displayAntro()">
                         <span class="fa fa-heart-o"></span> Антропометрия ({{counts.CountAntros}})
                     </a>
+
                 </div>
             </div>
         </div>
@@ -121,3 +149,5 @@
         </div>
     </div>
 </div>
+
+            
