@@ -144,7 +144,7 @@
                 Name: person.Name,
                 LastName: person.LastName,
                 Patronymic: person.Patronymic,
-                Bithday: `${person.Bithday.getFullYear()}-${person.Bithday.getMonth() + 1}-${person.Bithday.getDate()}`,
+                Bithday: `${person.bithday.getFullYear()}-${person.bithday.getMonth() + 1}-${person.bithday.getDate()}`,
                 NameLatin: person.NameLatin,
                 LastNameLatin: person.LastNameLatin,
                 PatronymicLatin: person.PatronymicLatin,
@@ -262,6 +262,13 @@
                 //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
             });
         };
+
+        service.saveAssociation = function (id, model, callback) {
+            return $http.post(`${serviceUrl}persons/association/${id}/save`, model)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         return service;;
     }
 
