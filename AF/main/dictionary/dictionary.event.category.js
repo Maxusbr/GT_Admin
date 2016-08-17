@@ -13,12 +13,20 @@
         //    }
         //];
 
-        $scope.editItem = { Name: "" };
+        $scope.editItemCat = { Name: "" };
+        $scope.editItemSubCat = { Name: "" };
 
-        $scope.saveChanges = function () {
+        $scope.clickCategory = function (id) {
+
+        }
+
+        $scope.saveCategories = function () {
             //TODO: save changes to server
-            var list = [$scope.editItem];
-            personService.saveEntitieTypes(list, 'social', $rootScope.getLinkTypes);
+        }
+
+        $scope.saveSubCategories = function () {
+            //TODO: save changes to server
+            
         }
     }
 
