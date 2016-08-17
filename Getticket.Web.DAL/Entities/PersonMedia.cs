@@ -11,9 +11,9 @@ namespace Getticket.Web.DAL.Entities
     public class PersonMedia : BaseEntity
     {
         /// <summary>
-        /// Конструктор
+        /// Наименование
         /// </summary>
-        public PersonMedia(){}
+        public string Name { get; set; }
 
         /// <summary>
         /// Внешний ключ для <see cref="Person"/>

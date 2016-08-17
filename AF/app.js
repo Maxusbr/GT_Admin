@@ -1,8 +1,8 @@
 ﻿//set api adress
-//var apiUrl = 'http://localhost:5831/';
-//var serviceUrl = 'http://localhost:35162/';
-var apiUrl = 'http://getticket.azurewebsites.net/';
-var serviceUrl = 'http://getticketwebapi.azurewebsites.net/';
+var apiUrl = 'http://localhost:5831/';
+var serviceUrl = 'http://localhost:35162/';
+//var apiUrl = 'http://getticket.azurewebsites.net/';
+//var serviceUrl = 'http://getticketwebapi.azurewebsites.net/';
 var pageNumber = 1;
 var pageSize = 20;
 
@@ -19,7 +19,7 @@ var app;
             'vcRecaptcha',
             'ngMessages',
             'ngResource', 'cgBusy',
-            'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap', 'ngTagsInput', 'ngMaterial'
+            'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap', 'ngTagsInput', 'ngMaterial', 'ngFileUpload'
             // 'webix'
         ])
         .config(config)

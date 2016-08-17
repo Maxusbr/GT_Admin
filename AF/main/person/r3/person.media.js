@@ -18,13 +18,14 @@
             });
         });
 
-        $rootScope.editMedia = function edit_media() {
+        $rootScope.editMedia = function (item) {
+            $rootScope.editedMedia = item;
             app.closeFour();
-            app.loadContentView('/main/person/r3/r4/person.media.editor.html', 3200)
+            app.loadContentView('/main/person/r3/r4/person.media.editor.html', 3200);
         }
         $rootScope.addMedia = function add_media() {
             app.closeFour();
-            app.loadContentView('/main/person/r3/r4/person.media.create.html', 3200)
+            app.loadContentView('/main/person/r3/r4/person.media.create.html', 3200);
         }
     }
 
