@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in factlist">
-                        <td><span style="">{{item.FactText}}</span></td>
+                        <td><a href="" ng-click="editFact()"><span style="">{{item.FactText}}</span></a></td>
                         <td>TODO: status
                             <br/>
                             <span ng-if="item.LastChange">

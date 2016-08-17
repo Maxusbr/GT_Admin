@@ -1,7 +1,7 @@
-﻿<div class="win-container r4 personFactCreate" style="width:400px;" ng-controller="PersonFactCreateController">
+﻿<div class="win-container r4 personFactCreate" style="width:400px;" ng-controller="PersonFactEditorController">
     <div class="win-header">
         <div class="win-header-text">
-            Создать новый факт
+            Редактировать факт
         </div>
         <div class="win_buttons">
             <a href="#" ng-click="closeMe('personFactCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
@@ -12,7 +12,7 @@
             <a href="#" ng-click="saveFact()">
                 <span class="fa fa-save"></span>
                 <br />
-                Добавить
+                Редактировать
             </a>
         </div>
     </div>
@@ -33,14 +33,19 @@
             </tr>
             <tr>
                 <td>Связь</td>
-                <select name="" id="" class="form-control">
-                    <option value="1">1</option>
-                    <option value="1">1</option>
-                </select>
+                
+                <td>
+                    <select name="" id="" class="form-control">
+                        <option value="1">1</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>Источник</td>
-                <td><input class="form-control" /></td>
+                <td>
+                    <input class="form-control" />
+                </td>
             </tr>
         </table>
     </div>

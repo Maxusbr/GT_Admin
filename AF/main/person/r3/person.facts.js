@@ -15,6 +15,11 @@
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/peron.fact.create.html', 3200);
         }
+        $rootScope.editFact = function addFact(){
+            app.closeFour();
+            app.loadContentView('/main/person/r3/r4/peron.fact.editor.html', 3200);
+        }
+
     }
 
     angular
