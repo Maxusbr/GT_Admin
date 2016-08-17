@@ -16,6 +16,16 @@
                 return item.IdParent === id;
             });
         }
+
+        $scope.editCat = function () {
+            app.closeFive();
+            app.loadContentView('/main/dictionary/dictionary.event.category.html', 3200);
+        }
+
+        $scope.editOrg = function () {
+            app.closeFive();
+            app.loadContentView('/main/dictionary/dictionary.event.org.html', 3200);
+        }
     }
 
     angular
