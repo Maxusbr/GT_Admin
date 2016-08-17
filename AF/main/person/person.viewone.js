@@ -32,12 +32,15 @@
 
         $scope.Id = $rootScope.personId;
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
-        $scope.Promise = personService.getPerson($scope.Id, function (data) {
-            $rootScope.person = data;
-            personService.getCountes($scope.Id, function (counts) {
-                $scope.counts = counts;
+        $rootScope.getPerson = function(id) {
+            $scope.Promise = personService.getPerson(id, function (data) {
+                $rootScope.person = data;
+                personService.getCountes(id, function (counts) {
+                    $scope.counts = counts;
+                });
             });
-        });
+        }
+        $rootScope.getPerson($scope.Id);
         $rootScope.editPerson = function edit_person() {
             app.closeThird();
             app.loadContentView('/main/person/person.edit.html', 2200);

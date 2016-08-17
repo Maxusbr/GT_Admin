@@ -55,7 +55,10 @@ namespace Getticket.Web.DAL.Entities
         /// Отчество (латинское)
         /// </summary>
         public string PatronymicLatin { get; set; }
-
+        /// <summary>
+        /// Ссылка на фото
+        /// </summary>
+        public string MediaLink { get; set; }
         /// <summary>
         /// Место рождения <see cref="CountryPlace"/>
         /// </summary>

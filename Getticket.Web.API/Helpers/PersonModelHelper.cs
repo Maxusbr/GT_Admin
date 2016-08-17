@@ -35,6 +35,7 @@ namespace Getticket.Web.API.Helpers
                 NameLatin = person.NameLatin,
                 LastNameLatin = person.LastNameLatin,
                 PatronymicLatin = person.PatronymicLatin,
+                MediaLink = person.MediaLink,
                 IdBithplace = person.id_Bithplace,
                 Place = person.Place?.Name,
                 Country = person.Place?.Region?.Country?.Name,
@@ -331,6 +332,7 @@ namespace Getticket.Web.API.Helpers
                 NameLatin = model.NameLatin,
                 LastNameLatin = model.LastNameLatin,
                 PatronymicLatin = model.PatronymicLatin,
+                MediaLink = model.MediaLink,
                 Sex = (Sex)model.Sex,
                 id_Bithplace = model.IdBithplace,
             };

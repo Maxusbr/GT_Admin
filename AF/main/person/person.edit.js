@@ -18,6 +18,13 @@
                 });
             });
         }
+        $scope.save= function() {
+            personService.Save($scope.person, function (data) {
+                $rootScope.getPerson($scope.Id);
+                app.closeView('personEdit');
+            });
+        }
+        
     }
 
     angular

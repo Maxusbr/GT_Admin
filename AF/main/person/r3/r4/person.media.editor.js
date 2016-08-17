@@ -1,10 +1,12 @@
 ﻿(function () {
     'use strict';
 
-    function PersonMediaEditController($rootScope, $scope, personService) {
+    function PersonMediaEditController($rootScope, $scope, personService, eventService) {
         var vm = this;
         $scope.file = $rootScope.editedMedia.MediaLink;
-        
+        $scope.association = { type: 'person' }
+        if (!$rootScope.events)
+            eventService.getEvents();
         function save(path) {
             $rootScope.editedMedia.MediaLink = path;
             var list = [$rootScope.editedMedia];
@@ -21,11 +23,15 @@
                 });
             else save($scope.file);
         }
+
+        $scope.addAssociation = function(item) {
+            personService.saveAssociation(item);
+        }
     }
 
     angular
         .module('app')
         .controller('PersonMediaEditController', PersonMediaEditController);
 
-    PersonMediaEditController.$inject = ['$rootScope', '$scope', 'personService'];
+    PersonMediaEditController.$inject = ['$rootScope', '$scope', 'personService', 'eventService'];
 })();

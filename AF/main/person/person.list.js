@@ -9,6 +9,7 @@
     function PersonListController($rootScope, $scope, personService, $interval) {
         var vm = this;
         $scope.Promise = personService.getPersons();
+        
         $rootScope.createPreson = function create_person() {
             console.log('create person');
             app.closeSecond();
