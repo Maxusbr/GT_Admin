@@ -7,6 +7,7 @@
             $rootScope.UserName = $cookieStore.get('username');
         if (!$rootScope.pageSchema.Page)
             $rootScope.pageSchema.Page = {};
+
         $scope.pages = [
             { Id: 0, Name: "Персона" },
             { Id: 1, Name: "Поиск" },
@@ -18,7 +19,7 @@
 
         //TODO get page blocks
         $scope.bloks = [
-            { Id: 0, Name: "Не указано" },
+            { Id: null, Name: "Не указано" },
             { Id: 1, Name: "Другие персоны подборки" }
         ];
         
@@ -99,6 +100,18 @@
             app.loadContentView('/main/dictionary/dictionary.person.wtf.html', 3200);
         }
             
+        $scope.changeCat = function (id) {
+            if ($rootScope.userPageCategories)
+                $rootScope.pageSchema.UserPageCategory = $rootScope.userPageCategories.filter(function(item) {
+                    return item.Id === id;
+                })[0].Name;
+        }
+            
+        $scope.cangeType = function (id) {
+            $rootScope.pageSchema.Type.Name = $scope.bloks.filter(function (item) {
+                return item.Id === id;
+            })[0].Name;
+        }
     }
 
     angular

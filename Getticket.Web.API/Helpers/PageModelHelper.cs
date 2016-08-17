@@ -48,7 +48,7 @@ namespace Getticket.Web.API.Helpers
             return model != null ? new PageBlock
             {
                 Id = model.Id,
-                IdBlockType = model.Type.Id,
+                IdBlockType = model.Type?.Id,
                 IdPage = model.IdPage,
                 Name = model.Name,
                 Page = GetPage(model.Page)
@@ -68,11 +68,6 @@ namespace Getticket.Web.API.Helpers
             if (result.Page == PageTypes.Event) result.IdEvent = model.IdEvent;
             if (result.Page == PageTypes.Halls) result.IdHall = model.IdHall;
             return result;
-        }
-
-        public static PageBlockType GetPageBlockType(PageBlockTypeModel model)
-        {
-            return model != null ? new PageBlockType { Id = model.Id, Name = model.Name } : null;
         }
     }
 }

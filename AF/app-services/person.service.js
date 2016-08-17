@@ -192,6 +192,11 @@
         }
         service.getTags = getTags;
         service.getPersonTags = getPersonTags;
+        service.getMediaTags = function (id, callback) {
+            return $http.get(`${serviceUrl}persons/media/tags/${id}`).success(function (data) {
+                callback(data);
+            });
+        };
 
         service.getTypes = getTypes;
         service.getPersons = getPersons;

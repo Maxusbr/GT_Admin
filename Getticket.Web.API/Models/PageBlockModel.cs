@@ -20,7 +20,7 @@ namespace Getticket.Web.API.Models
         /// <summary>
         /// Внешний ключ для <see cref="PageBlockTypeModel"/>
         /// </summary>
-        public int IdBlockType { get; set; }
+        public int? IdBlockType { get; set; }
 
         /// <summary>
         /// <see cref="PageSchemaModel"/>

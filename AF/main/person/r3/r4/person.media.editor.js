@@ -29,6 +29,30 @@
         $scope.addAssociation = function(item) {
             personService.saveAssociation(item);
         }
+
+        // Tags
+        personService.getTags(function (data) {
+            $scope.tags = [];
+            $scope.tags.push.apply($scope.tags, data);
+        });
+
+        function getMediaTags() {
+            personService.getPersonTags($rootScope.person.Id, function (data) {
+                $scope.personTags = [];
+                $scope.personTags.push.apply($scope.personTags, data);
+            });
+        }
+
+        if ($rootScope.person)
+            getPersonTags();
+
+        $scope.loadTags = function (query) {
+            var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
+            result = $filter('orderBy')(result, function (item) {
+                item.Name.substring(0, query.length);
+            });
+            return result;
+        }
     }
 
     angular
