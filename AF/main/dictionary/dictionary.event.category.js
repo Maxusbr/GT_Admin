@@ -19,7 +19,6 @@
             //TODO: save changes to server
             var list = [$scope.editItem];
             personService.saveEntitieTypes(list, 'social', $rootScope.getLinkTypes);
-            $rootScope.closeMe('disDicPersonLinks');
         }
     }
 

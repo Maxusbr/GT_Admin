@@ -1,19 +1,24 @@
 ﻿(function () {
     'use strict';
 
-    function dictionaryAntroTypesController($rootScope, $cookieStore) {
+    function DictionaryEventOrgController($rootScope, $scope, $cookieStore, personService) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
 
-            $rootScope.saveChanges = function save_changes(){
-                
-            }
+        $scope.editItem = { Name: "" };
+
+        $scope.saveChanges = function () {
+            //TODO: save changes to server
+            var list = [$scope.editItem];
+            personService.saveEntitieTypes(list, 'social', $rootScope.getLinkTypes);
+            $rootScope.closeMe('disDicEventOrg');
+        }
     }
 
     angular
         .module('app')
-        .controller('dictionaryAntroTypesController', dictionaryAntroTypesController);
+        .controller('DictionaryEventOrgController', DictionaryEventOrgController);
 
-    dictionaryAntroTypesController.$inject = ['$rootScope', '$cookieStore'];
+    DictionaryEventOrgController.$inject = ['$rootScope', '$scope', '$cookieStore', 'personService'];
 })();
