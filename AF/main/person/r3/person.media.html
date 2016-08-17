@@ -30,7 +30,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in medialist">
-                    <td><span style="">{{item.Description}}</span></td>
+                    <td><a href="" ng-click="editMedia()"><span style="">{{item.Description}}</span></a></td>
                     <td>
                         <div class="persona-main__container_media small" >
                             <img ng-src="{{item.MediaLink}}" alt="Placeholder" style="width: 80px;">
