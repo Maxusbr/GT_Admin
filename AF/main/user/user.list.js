@@ -97,6 +97,12 @@
             app.loadContentView('/main/user/user.create.html', 1800);
         }
 
+        $rootScope.showUser = function edit_user() {
+            console.log('create user');
+            app.closeSecond();
+            app.loadContentView('/main/user/user.viewone.html', 1800);
+        }
+
         $rootScope.inviteUser= function invite_user() {
             console.log('create user');
             app.closeSecond();

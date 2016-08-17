@@ -39,11 +39,21 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="row in userlist">
-                    <td>{{row.LastName}} {{row.Name}}</td>
-                    <td>{{row.Company}}</td>
-                    <td style="width: 200px; text-wrap: normal">{{row.event}}</td>
-                    <td>{{row.role}}</td>
-                    <td class="{{row.StatusName}}">{{row.StatusDescription}}</td>
+                    <td>
+                        <a href="" ng-click="showUser()">{{row.LastName}} {{row.Name}}</a>
+                    </td>
+                    <td>
+                        <a href="" ng-click="showUser()">{{row.Company}}</a>
+                    </td>
+                    <td style="width: 200px; text-wrap: normal">
+                        <a href="" ng-click="showUser()">{{row.event}}</a>
+                    </td>
+                    <td>
+                        <a href="" ng-click="showUser()">{{row.role}}</a>
+                    </td>
+                    <td class="{{row.StatusName}}">
+                        <a href="" ng-click="showUser()">{{row.StatusDescription}}</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
