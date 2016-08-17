@@ -7,11 +7,15 @@
         .module('app')
         .controller('EventListController', EventListController);
 
-    EventListController.$inject = ['$rootScope', '$scope', 'personService', '$interval'];
-    function EventListController($rootScope, $scope, personService, $interval) {
+    EventListController.$inject = ['$rootScope', '$scope', 'eventService', '$interval'];
+    function EventListController($rootScope, $scope, eventService, $interval) {
         var vm = this;
-        $scope.Promise = personService.getPersons();
-        $rootScope.createEvent = function create_event() {
+        $rootScope.loadEvent = function() {
+            $scope.Promise = eventService.getEvents();
+        }
+        $rootScope.loadEvent();
+
+        $scope.createEvent = function () {
             console.log('create event');
             app.closeSecond();
             app.loadContentView('/main/events/events.create.html', 1800);

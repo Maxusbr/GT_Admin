@@ -1,18 +1,26 @@
 ﻿(function () {
     'use strict';
 
-    function EventsEditController($rootScope, $scope, personService) {
+    function EventsEditController($rootScope, $scope, eventService, $filter) {
         var vm = this;
-        $scope.Id = $rootScope.Id;
-        $scope.Promise = personService.getPerson($scope.Id, function (data) {
-            $scope.person = data;
-            $scope.person.bithday = new Date($scope.person.Bithday);
+        $scope.event = $rootScope.editEvent;
+        eventService.getCategories(function (data) {
+            $rootScope.eventCategories = data;
+            $scope.baseCategory = data.filter(function (item) {
+                return item.IdParent == null;
+            });
         });
+        $scope.getChildCategory = function (id) {
+            if (!$rootScope.eventCategories) return [];
+            return $rootScope.eventCategories.filter(function(item) {
+                return item.IdParent === id;
+            });
+        }
     }
 
     angular
         .module('app')
         .controller('EventsEditController', EventsEditController);
 
-    EventsEditController.$inject = ['$rootScope', '$scope', 'personService'];
+    EventsEditController.$inject = ['$rootScope', '$scope', 'eventService', '$filter'];
 })();

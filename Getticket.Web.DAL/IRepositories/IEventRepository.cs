@@ -201,5 +201,10 @@ namespace Getticket.Web.DAL.IRepositories
         int GetCountMedias(int id);
 
 
+        /// <summary>
+        /// Возвращает список категорий
+        /// </summary>
+        /// <returns></returns>
+        IList<EventCategory> GetCategories();
     }
 }

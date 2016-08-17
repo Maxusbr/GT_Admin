@@ -48,7 +48,7 @@ namespace Getticket.Web.API.Services
                 item.Connections = PersonModelHelper.GetConnectionModels(models);
                 var con = item.Connections.FirstOrDefault(o => o.Event != null);
                 item.EventName = con?.Event?.Name;
-                item.EventType = con?.Event?.EventType;
+                item.EventType = con?.Event?.EventCategory;
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePerson(item.Id));
             }
             return listPerson;
@@ -73,7 +73,7 @@ namespace Getticket.Web.API.Services
                 item.Connections = PersonModelHelper.GetConnectionModels(models);
                 var con = item.Connections.FirstOrDefault(o => o.Event != null);
                 item.EventName = con?.Event?.Name;
-                item.EventType = con?.Event?.EventType;
+                item.EventType = con?.Event?.EventCategory;
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePerson(item.Id));
             }
             return listPerson;

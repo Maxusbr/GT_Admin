@@ -20,7 +20,7 @@ namespace Getticket.Web.DAL.Repositories
         public IList<Event> GetEvents()
         {
             var query = db.Events
-                .Where(o => true)
+                .Where(o => o.IsReallyEvent)
                 .Include(o => o.Category)
                 .Include(o => o.Category.ParentCategory)
                 .Include(o => o.Organizer);
@@ -369,6 +369,12 @@ namespace Getticket.Web.DAL.Repositories
         public int GetCountMedias(int id)
         {
             return db.EventMedias.Count(o => o.IdEvent == id);
+        }
+
+        /// <see cref="IEventRepository.GetCategories" />
+        public IList<EventCategory> GetCategories()
+        {
+            return db.EventCategories.ToList();
         }
 
 

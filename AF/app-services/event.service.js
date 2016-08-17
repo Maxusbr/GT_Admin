@@ -10,6 +10,18 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.getCountes = function (id, callback) {
+            return $http.get(`${serviceUrl}events/counts/${id}`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
+        service.getCategories = function (callback) {
+            return $http.get(`${serviceUrl}events/categories`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         service.getEvents = function (callback) {
             return $http.get(`${serviceUrl}events`).success(function (data) {
                 $rootScope.events = data;

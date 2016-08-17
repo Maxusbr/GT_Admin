@@ -448,6 +448,12 @@ namespace Getticket.Web.API.Services
                 .FromSuccess()
                 .Result("Descriptions delete complete");
         }
+
+        /// <see cref="IEventService.GetCategories"/>
+        public IList<EventCategoryModel> GetCategories()
+        {
+            return EventModelHelper.GetCategoryModels(_eventRepository.GetCategories());
+        }
     }
 
 }

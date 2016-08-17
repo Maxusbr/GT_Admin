@@ -21,7 +21,7 @@ namespace Getticket.Web.API.Helpers
         /// <returns></returns>
         public static IEnumerable<EventModel> GetEventModels(IList<Event> list)
         {
-            return list.Select(GetEventModel);
+            return list?.Select(GetEventModel);
         }
 
         /// <summary>
@@ -40,7 +40,12 @@ namespace Getticket.Web.API.Helpers
                 Description = entity.Description,
                 EventDate = entity.EventDate,
                 TicketReturn = entity.TicketReturn,
-                EventType = entity.Category.IdParent != null ? entity.Category.ParentCategory.Name: entity.Category.Name
+                EventCategoryId = entity.Category.IdParent != null ? entity.Category.Id: (int?) null,
+                EventParentCategoryId = entity.Category.IdParent ?? entity.Category.Id,
+                EventCategory = entity.Category.IdParent != null ? entity.Category.Name: "",
+                EventParentCategory = entity.Category.IdParent != null ? entity.Category.ParentCategory.Name: entity.Category.Name,
+                AgeLimit = entity.AgeLimit,
+                Organizer = entity.Organizer?.Name
             } : new EventModel();
 
             return result;
@@ -79,6 +84,14 @@ namespace Getticket.Web.API.Helpers
         public static IList<EventDescriptionTypeModel> GetDescriptionTypeModels(IList<EventDescriptionType> result)
         {
             throw new NotImplementedException();
+        }
+
+        public static IList<EventCategoryModel> GetCategoryModels(IList<EventCategory> categories)
+        {
+            return categories.Select(o => new EventCategoryModel
+            {
+                Id = o.Id, Name = o.Name, Description = o.Description, IdParent = o.IdParent
+            }).ToList();
         }
     }
 }
