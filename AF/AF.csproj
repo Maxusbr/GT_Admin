@@ -122,6 +122,12 @@
     <Content Include="main\events\r3\r4\events.users.create.js" />
     <Content Include="main\events\r3\r4\events.users.edit.html" />
     <Content Include="main\events\r3\r4\events.users.edit.js" />
+    <Content Include="main\person\r3\r4\peron.connectionst.create.html" />
+    <Content Include="main\person\r3\r4\peron.connectionst.create.js" />
+    <Content Include="main\person\r3\r4\peron.connectionst.editor.html" />
+    <Content Include="main\person\r3\r4\peron.connectionst.editor.js" />
+    <Content Include="main\person\r3\r4\peron.fact.editor.html" />
+    <Content Include="main\person\r3\r4\peron.fact.editor.js" />
     <Content Include="main\person\r3\r4\person.antro.editor.html" />
     <Content Include="main\person\r3\r4\person.antro.editor.js" />
     <Content Include="main\person\r3\r4\person.media.create.html" />

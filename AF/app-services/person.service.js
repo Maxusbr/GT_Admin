@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function personService($http, $rootScope) {
+    function personService($http, $rootScope, Upload) {
         var service = {};
 
         function getTypes() {
@@ -246,6 +246,22 @@
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });
         }
+        service.uploadImage = function (file, callback) {
+            Upload.upload({
+                url: `${serviceUrl}persons/upload/image`,
+                data: { file: file }
+            }).then(function (resp) {
+                $rootScope.progressPercentage = undefined;
+                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                callback(resp.data);
+            }, function (resp) {
+                console.log('Error status: ' + resp.status);
+                callback(resp.status);
+            }, function (evt) {
+                $rootScope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            });
+        };
         return service;;
     }
 
@@ -253,5 +269,5 @@
         .module('app')
         .factory('personService', personService);
 
-    personService.$inject = ['$http', '$rootScope'];
+    personService.$inject = ['$http', '$rootScope', 'Upload'];
 })();

@@ -50,7 +50,7 @@
                         style="background-color: rgba(255, 0, 0, 0); border: medium none; box-shadow: none; padding: 0;"/>-->
                     <a class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Выберите файл</a>
-                    <a class="button" ngf-select="upload($file)">Выберите файл</a>
+                    <!--<a class="button" ngf-select="upload($file)">Выберите файл</a>-->
                 </td>
             </tr>
             <tr ng-show="editedMedia.MediaTypeId === 1">
@@ -60,6 +60,7 @@
             <tr>
                 <td colspan="2" style="border: none;">
                     <div style="width: 300px; margin: 0px auto;">
+                        <md-progress-linear md-mode="determinate" ng-show="progressPercentage" value="{{progressPercentage}}"></md-progress-linear>
                         <img ngf-src="file" ngf-background="file" ngf-resize="{width: 300, height: 300, quality: 0.9}" style="width: 300px;">
                         <!--<img id="some_container_div" style="width: 300px;">-->
                     </div>

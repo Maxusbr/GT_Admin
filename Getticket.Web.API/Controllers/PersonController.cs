@@ -622,13 +622,15 @@ namespace Getticket.Web.API.Controllers
 
         [HttpPost]
         [Route("upload/image")]
-        public async Task<IHttpActionResult> Upload()
+        public IHttpActionResult Upload()
         {
             var img = WebImage.GetImageFromRequest();
             if (img == null)
             {
                 return BadRequest("Image is null.");
             }
+            var error = ServiceResponce.FromFailed().Result($"Error upload image");
+            var succes = ServiceResponce.FromSuccess().Result("Image updated successfully.");
             var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
             var email = identity.Claims.Where(c => c.Type == ClaimTypes.Email)
                    .Select(c => c.Value).SingleOrDefault();
@@ -636,8 +638,8 @@ namespace Getticket.Web.API.Controllers
 
             string fullPath = HttpContext.Current.Server.MapPath("~/images/uploaded/") + filename;
             img.Save(fullPath);
-            var message1 = string.Format("Image Updated Successfully.");
-            return Ok(Request.CreateErrorResponse(HttpStatusCode.Created, message1)); 
+            succes.Add("path", $"images/uploaded/{filename}");
+            return Ok(succes.Response()); 
         }
     }
 }

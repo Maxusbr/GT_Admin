@@ -1,33 +1,18 @@
 ﻿(function () {
     'use strict';
 
-    function PersonMediaEditController($rootScope, $scope, Upload) {
+    function PersonMediaEditController($rootScope, $scope, personService) {
         var vm = this;
         $scope.file = $rootScope.editedMedia.MediaLink;
-        $scope.upload = function (file) {
-            Upload.upload({
-                url: `${serviceUrl}persons/upload/image`,
-                data: { file: file}
-            }).then(function (resp) {
-                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-            }, function (resp) {
-                console.log('Error status: ' + resp.status);
-            }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-            });
-        };
-        $scope.saveMedia = function() {
-            Upload.upload({
-                url: `${serviceUrl}persons/upload/image`,
-                data: { file: file }
-            }).then(function (resp) {
-                console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-            }, function (resp) {
-                console.log('Error status: ' + resp.status);
-            }, function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        
+        $scope.saveMedia = function () {
+            personService.uploadImage($scope.file, function(data) {
+                $scope.file = $rootScope.editedMedia.MediaLink = `${serviceUrl}${data.path}`;
+                var list = [$rootScope.editedMedia];
+                personService.saveEntities($rootScope.personId, list, 'media', function (data) {
+                    $rootScope.getMedias();
+                    app.closeView('personMediaEdit');
+                });
             });
         }
     }
@@ -36,5 +21,5 @@
         .module('app')
         .controller('PersonMediaEditController', PersonMediaEditController);
 
-    PersonMediaEditController.$inject = ['$rootScope', '$scope', 'Upload'];
+    PersonMediaEditController.$inject = ['$rootScope', '$scope', 'personService'];
 })();
