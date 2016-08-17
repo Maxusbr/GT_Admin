@@ -20,6 +20,11 @@
             app.closeFour();
             app.loadContentView('/main/events/r3/r4/events.notes.create.html', 3200)
         }
+
+        $rootScope.displayTagsSubs=function(){
+            app.closeFour();
+            app.loadContentView('/main/events/r3/r4/events.tagssubs.editor.html', 3200)
+        }
     }
 
     angular
