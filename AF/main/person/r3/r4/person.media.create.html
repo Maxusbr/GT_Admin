@@ -1,15 +1,15 @@
-﻿<div class="win-container r4 personFactCreate" style="width:600px;" ng-controller="PersonMediaCreateController">
+﻿<div class="win-container r4 personMediaCreate" style="width:600px;" ng-controller="PersonMediaCreateController">
     <div class="win-header">
         <div class="win-header-text">
             Добавляем новое медиа
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('personFactCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('personMediaCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="saveFact()">
+            <a href="#" ng-click="saveMedia()">
                 <span class="fa fa-save"></span>
                 <br />
                 Добавить
@@ -21,46 +21,50 @@
             <tr>
                 <td>
                     <span style="position: relative; top: -10px;">Фото</span>
-                    <input 
-                    class="form-control" 
-                    type="radio" 
-                    ng-click="foto_ = true; video_ = false;" 
-                    style="display: inline; width: 50px;" 
-                    name='foto_vs_video'/>
+                    <input class="form-control"
+                           type="radio"
+                           ng-click="editedMedia.id_MediaType = 2" ng-checked="editedMedia.id_MediaType == 2"
+                           style="display: inline; width: 50px;"
+                           name='foto_vs_video' />
                 </td>
                 <td>
                     <span style="position: relative; top: -10px;">Видео</span>
-                    <input 
-                    class="form-control" 
-                    type="radio" 
-                    ng-click="video_ = true; foto_ = false;" 
-                    style="display: inline; width: 50px;" 
-                    checked="checked" 
-                    name='foto_vs_video'/>
+                    <input class="form-control"
+                           type="radio"
+                           ng-click="editedMedia.id_MediaType = 1" ng-checked="editedMedia.id_MediaType == 1"
+                           style="display: inline; width: 50px;"
+                           checked="checked"
+                           name='foto_vs_video' />
                 </td>
             </tr>
 
-            <tr ng-show="foto_">
+            <tr ng-show="editedMedia.id_MediaType === 2">
                 <td style="width: 160px">Медиа/Фото</td>
                 <td>
-                    <input 
-                    id="the-file-input"
-                    class="form-control" 
-                    type="file" 
-                    style="background-color: rgba(255, 0, 0, 0); border: medium none; box-shadow: none; padding: 0;" /></td>
+                    <!--<input
+                        id="the-file-input"
+                        class="form-control"
+                        type="file"
+                        style="background-color: rgba(255, 0, 0, 0); border: medium none; box-shadow: none; padding: 0;"/>-->
+                    <a class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                       ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Выберите файл</a>
+                    <!--<a class="button" ngf-select="upload($file)">Выберите файл</a>-->
+                </td>
             </tr>
-            <tr ng-show="video_">
+            <tr ng-show="editedMedia.id_MediaType === 1">
                 <td style="width: 160px">Медиа/Видео</td>
                 <td><input class="form-control" /></td>
             </tr>
             <tr>
                 <td colspan="2" style="border: none;">
-                    <div style="width: 300px;margin: 0px auto;">
-                        <img id="some_container_div" style="width: 300px;">
+                    <div style="width: 300px; margin: 0px auto;">
+                        <md-progress-linear md-mode="determinate" ng-show="progressPercentage" value="{{progressPercentage}}"></md-progress-linear>
+                        <img ngf-src="file" ngf-background="file" ngf-resize="{width: 300, height: 300, quality: 0.9}" style="width: 300px;">
+                        <!--<img id="some_container_div" style="width: 300px;">-->
                     </div>
                 </td>
             </tr>
-            <script>
+            <!--<script>
                 function renderImage(file) {
                     console.log(file);
                     var reader = new FileReader();
@@ -74,30 +78,29 @@
                     console.log(this.files);
                     renderImage(this.files[0]);
                 });
-            </script>
-            
+            </script>-->
             <!-- <tr>
                 <td colspan="2">
                     <div id="some_container_div"></div>
                 </td>
             </tr> -->
-            
-            
+
+
             <tr>
                 <td>Название</td>
-                <td><input class="form-control" /></td>
+                <td><input class="form-control" ng-model="editedMedia.Name" /></td>
             </tr>
             <tr>
                 <td>Данные</td>
-                <td><textarea class="form-control" style="height:100px;" /></td>
+                <td><textarea class="form-control" style="height:100px;" ng-model="editedMedia.Description" /></td>
             </tr>
-            
-            
+
+
             <tr>
                 <td>Теги</td>
                 <td>
-                    <tags-input ng-model="personTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
-                    <auto-complete source="loadTags($query)" min-length="10" debounce-delay="0" template="my-custom-template"/>
+                    <tags-input ng-model="editedMedia.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                        <auto-complete source="loadTags($query)" min-length="10" debounce-delay="0" template="my-custom-template" />
                     </tags-input>
                     <script type="text/ng-template" id="my-custom-template">
                         <div class="right-panel">
@@ -108,7 +111,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan ='2'>
+                <td colspan='2'>
                     <h5>Ассоциации</h5>
                     <div class="panel">
                         <table class="table" style="max-height:300px;">
@@ -119,52 +122,49 @@
                                 </tr>
                             </thead>
                         </table>
-                        <br/>
-                        <hr/>
-                        <br/>
+                        <br />
+                        <hr />
+                        <br />
                         <div class="panel">
                             Добавить/редактировать ассоциацию
                             <div class="row">
                                 <div class="col-lg-4">
-                                    <input 
-                                    type="radio" 
-                                    value="None" 
-                                    id="sexF"  
-                                    name="check"
-                                    checked="checked"
-                                    ng-click="association.type = 'event'"> Мероприятие
-                                    <br/>
-                                    <input 
-                                    type="radio" 
-                                    value="None" 
-                                    id="sexF"  
-                                    name="check"
-                                    ng-click="association.type = 'person'"> Персона
+                                    <input type="radio"
+                                           value="None"
+                                           id="sexF"
+                                           name="check"
+                                           checked="checked"
+                                           ng-click="association.type = 'event'"> Мероприятие
                                     <br />
-                                    <input 
-                                    type="radio" 
-                                    value="None" 
-                                    id="sexF"  
-                                    name="check"
-                                    ng-click="association.type = 'media'"> Медиа
+                                    <input type="radio"
+                                           value="None"
+                                           id="sexF"
+                                           name="check"
+                                           ng-click="association.type = 'person'"> Персона
+                                    <br />
+                                    <input type="radio"
+                                           value="None"
+                                           id="sexF"
+                                           name="check"
+                                           ng-click="association.type = 'media'"> Медиа
                                     <br />
                                 </div>
                                 <div class="col-lg-4">
                                     <!--if event-->
                                     <div ng-show="showSelect('event', association.type)">
-                                       <i>Укажите мероприятие, для которого создается связь</i> 
+                                        <i>Укажите мероприятие, для которого создается связь</i>
                                         <select class="form-control"></select>
                                     </div>
                                     <!--if person-->
                                     <div ng-show="showSelect('person', association.type)">
-                                        <i>Укажите персону, для которой создается связь</i> 
+                                        <i>Укажите персону, для которой создается связь</i>
                                         <select class="form-control"></select>
                                     </div>
                                     <!-- if media-->
                                     <div ng-show="showSelect('media', association.type)">
-                                        <i>Укажите персону, для которой создается связь</i> 
+                                        <i>Укажите персону, для которой создается связь</i>
                                         <select class="form-control"></select>
-                                        <i>Укажите медиа</i> 
+                                        <i>Укажите медиа</i>
                                         <select class="form-control"></select>
                                     </div>
                                 </div>

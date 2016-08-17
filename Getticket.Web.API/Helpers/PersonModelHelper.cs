@@ -247,7 +247,6 @@ namespace Getticket.Web.API.Helpers
                 id_Person = media.id_Person,
                 id_MediaType = media.id_MediaType,
                 MediaLink = media.MediaLink,
-                MediaTypeId = media.id_MediaType,
                 MediaType = media.MediaType.Name,
                 Description = media.Description
             } : new PersonMediaModel();
