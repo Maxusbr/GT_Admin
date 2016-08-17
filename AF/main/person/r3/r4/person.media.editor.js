@@ -5,6 +5,7 @@
         var vm = this;
         
         $scope.file = $rootScope.editedMedia.MediaLink;
+        console.log($rootScope.editedMedia);
         $scope.association = { type: 'person' }
         if (!$rootScope.events)
             eventService.getEvents();
