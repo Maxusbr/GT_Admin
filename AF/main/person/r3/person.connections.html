@@ -28,9 +28,9 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in connectionList">
-                    <td>
+                    <td>   <a href="" ng-click="editConnection()">
                         <span ng-show="item.id_ConnectionType > 1">{{item.Event.Name}}</span>
-                        <span ng-show="item.id_ConnectionType === 1">{{item.PersonConnectTo.LastName}} {{item.PersonConnectTo.Name}}</span>
+                        <span ng-show="item.id_ConnectionType === 1">{{item.PersonConnectTo.LastName}} {{item.PersonConnectTo.Name}}</span></a>
                     </td>
                     <td><span>{{item.PersonConnectionType}}</span></td>
                     <td><span>{{item.Description}}</span></td>

@@ -27,7 +27,11 @@
 
         $rootScope.addConnection= function add_connection() {
             app.closeFour();
-            app.loadContentView('/main/person/r3/r4/peron.fact.create.html', 3200)
+            app.loadContentView('/main/person/r3/r4/peron.connectionst.create.html', 3200)
+        }
+        $rootScope.editConnection= function edit_connection() {
+            app.closeFour();
+            app.loadContentView('/main/person/r3/r4/peron.connectionst.create.html', 3200)
         }
     }
 

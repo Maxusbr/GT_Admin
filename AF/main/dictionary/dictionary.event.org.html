@@ -1,10 +1,10 @@
-﻿<div class="win-container r2 r5 disDicPersonLinks" style="width:300px;" ng-controller="DictionaryPersonLinkController">
+﻿<div class="win-container r2 r5 disDicEventOrg" style="width:300px;" ng-controller="DictionaryEventOrgController">
     <div class="win-header">
         <div class="win-header-text">
-            Источники связей
+            Организаторы
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('disDicPersonLinks')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('disDicEventOrg')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
@@ -15,8 +15,8 @@
                 <h5>Редактирование</h5>
             </div>
             <div class="panel-body">
-                <input type="text" class="form-control" ng-model="editItem.Name"/>
-                <br/>
+                <input type="text" class="form-control" ng-model="editItem.Name" />
+                <br />
                 <button class="btn btn-default" ng-click="saveChanges()">Сохранить</button>
             </div>
         </div>
