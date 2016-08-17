@@ -37,8 +37,33 @@ namespace Getticket.Web.API.Models.Events
         public DateTime? TicketReturn { get; set; }
 
         /// <summary>
-        /// Тип события
+        /// Подкатегория
         /// </summary>
-        public string EventType { get; set; }
+        public string EventCategory { get; set; }
+
+        /// <summary>
+        /// Id Подкатегории
+        /// </summary>
+        public int? EventCategoryId { get; set; }
+
+        /// <summary>
+        /// Категория
+        /// </summary>
+        public string EventParentCategory { get; set; }
+
+        /// <summary>
+        /// Id Категории
+        /// </summary>
+        public int EventParentCategoryId { get; set; }
+
+        /// <summary>
+        /// Возрастное ограничение
+        /// </summary>
+        public int AgeLimit { get; set; }
+
+        /// <summary>
+        /// Организатор
+        /// </summary>
+        public string Organizer { get; set; }
     }
 }

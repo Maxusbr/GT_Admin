@@ -63,6 +63,15 @@ namespace Getticket.Web.API.Controllers
             return Ok(_eventService.GetCounts(id));
         }
 
+        /// <see cref="IEventService.GetCategories" />
+        [Route("categories")]
+        [HttpGet]
+        public IHttpActionResult GetCategories()
+        {
+
+            return Ok(_eventService.GetCategories());
+        }
+
         /// <see cref="IEventService.SaveEvent" />
         [HttpPost]
         [Route("add")]

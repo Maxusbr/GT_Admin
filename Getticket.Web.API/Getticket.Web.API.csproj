@@ -216,6 +216,7 @@
     <Compile Include="Helpers\PersonModelHelper.cs" />
     <Compile Include="Models\AccessRoleModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Events\EventCategoryModel.cs" />
     <Compile Include="Models\Events\EventTagModel.cs" />
     <Compile Include="Models\Events\TagsEventMediaModel.cs" />
     <Compile Include="Models\Persons\CreateDescriptionModel.cs" />

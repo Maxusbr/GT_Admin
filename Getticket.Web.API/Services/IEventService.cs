@@ -189,6 +189,12 @@ namespace Getticket.Web.API.Services
         /// <param name="models"></param>
         /// <returns></returns>
         ServiceResponce DeleteDescriptions(IEnumerable<EventDescriptionModel> models);
+
+        /// <summary>
+        /// Получает список категорий событий
+        /// </summary>
+        /// <returns></returns>
+        IList<EventCategoryModel> GetCategories();
     }
 
 }

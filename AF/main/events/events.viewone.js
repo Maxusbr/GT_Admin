@@ -2,26 +2,26 @@
     'use strict';
 
    
-    function EventsViewoneController($rootScope, $scope, personService) {
+    function EventsViewoneController($rootScope, $scope, eventService) {
         var vm = this;
 
-        $rootScope.displayNotes = function display_notes() {
+        $rootScope.displayNotes = function () {
             app.closeThird();
             app.loadContentView('/main/events/r3/events.notes.html', 2500);
         }
-        $rootScope.displayFacts = function display_facts() {
+        $rootScope.displayFacts = function () {
             app.closeThird();
             app.loadContentView('/main/events/r3/events.facts.html', 2500);
         }
-        $rootScope.displayMedia = function display_media() {
+        $rootScope.displayMedia = function () {
             app.closeThird();
             app.loadContentView('/main/events/r3/events.media.html', 2500);
         }
-        $rootScope.displayConnections = function display_connections() {
+        $rootScope.displayConnections = function () {
             app.closeThird();
             app.loadContentView('/main/events/r3/events.connections.html', 2500);
         }
-        $rootScope.displayUser = function display_internet() {
+        $rootScope.displayUser = function () {
             app.closeThird();
             app.loadContentView('/main/events/r3/events.users.html', 2500);
         }
@@ -31,13 +31,14 @@
         // }
         $scope.Id = $rootScope.eventId;
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
-        $scope.Promise = personService.getPerson($scope.Id, function (data) {
-            $scope.person = data;
-            personService.getCountes($scope.Id, function (counts) {
+        $scope.Promise = eventService.getEvent($scope.Id, function (data) {
+            $scope.event = data;
+            eventService.getCountes($scope.Id, function (counts) {
                 $scope.counts = counts;
             });
         });
-        $rootScope.editEvent = function() {
+        $rootScope.editEvent = function () {
+            $rootScope.editEvent = $scope.event;
             app.closeThird();
             app.loadContentView('/main/events/events.edit.html', 2200);
         }
@@ -47,6 +48,6 @@
         .module('app')
         .controller('EventsViewoneController', EventsViewoneController);
 
-    EventsViewoneController.$inject = ['$rootScope', '$scope', 'personService'];
+    EventsViewoneController.$inject = ['$rootScope', '$scope', 'eventService'];
     
 })();

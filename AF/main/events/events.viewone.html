@@ -21,28 +21,28 @@
     </div>
     <div class="win-content">
         <div class="panel-info" cg-busy="Promise">
-            <div class="row" ng-if="person">
+            <div class="row" ng-if="event">
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-12">
                             <br/>
-                            Название:  Новогодний симфонический концерт Большого театра
+                            Название:  {{event.Name}}
                             <br/>
                         </div>
                         <div class="col-lg-6">
                             <br/>
-                            Катагория: Театр
+                            Катагория: {{event.EventParentCategory}}
                             <br/>
                             <br/>
-                            Подкатегория: Командные виды
+                            Подкатегория: {{event.EventCategory}}
                             <br/>
                         </div>
                         <div class="col-lg-6">
                             <br/>
-                            Организатор: Большой театр
+                            Организатор: {{row.Organizer}}
                             <br/>
                             <br/>
-                            Возрастные ограничегия: 12+
+                            Возрастные ограничегия: {{row.AgeLimit}}+
                             <br/>
                         </div>
                     </div>
