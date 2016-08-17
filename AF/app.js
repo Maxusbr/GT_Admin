@@ -19,7 +19,7 @@ var app;
             'vcRecaptcha',
             'ngMessages',
             'ngResource', 'cgBusy',
-            'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap', 'ngTagsInput', 'ngMaterial'
+            'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap', 'ngTagsInput', 'ngMaterial', 'ngFileUpload'
             // 'webix'
         ])
         .config(config)

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using Getticket.Web.API.Models;
@@ -613,6 +618,26 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult GetUserPageCategory()
         {
             return Ok(_personService.GetUserPageCategory());
+        }
+
+        [HttpPost]
+        [Route("upload/image")]
+        public async Task<IHttpActionResult> Upload()
+        {
+            var img = WebImage.GetImageFromRequest();
+            if (img == null)
+            {
+                return BadRequest("Image is null.");
+            }
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var email = identity.Claims.Where(c => c.Type == ClaimTypes.Email)
+                   .Select(c => c.Value).SingleOrDefault();
+            var filename = email + img.FileName;
+
+            string fullPath = HttpContext.Current.Server.MapPath("~/images/uploaded/") + filename;
+            img.Save(fullPath);
+            var message1 = string.Format("Image Updated Successfully.");
+            return Ok(Request.CreateErrorResponse(HttpStatusCode.Created, message1)); 
         }
     }
 }

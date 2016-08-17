@@ -243,10 +243,12 @@ namespace Getticket.Web.API.Helpers
             return media != null ? new PersonMediaModel
             {
                 Id = media.Id,
+                Name = media.Name,
                 id_Person = media.id_Person,
                 id_MediaType = media.id_MediaType,
                 MediaLink = media.MediaLink,
-                MediaType = media.MediaType?.Name,
+                MediaTypeId = media.id_MediaType,
+                MediaType = media.MediaType.Name,
                 Description = media.Description
             } : new PersonMediaModel();
         }
