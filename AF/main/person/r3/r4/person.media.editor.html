@@ -23,7 +23,8 @@
                     <span style="position: relative; top: -10px;">Фото</span>
                     <input class="form-control"
                            type="radio"
-                           ng-click="editedMedia.id_MediaType = 2" ng-checked="editedMedia.id_MediaType == 2"
+                           ng-click="editedMedia.id_MediaType = 2" 
+                           ng-checked="editedMedia.id_MediaType == 2"
                            style="display: inline; width: 50px;"
                            name='foto_vs_video' />
                 </td>
@@ -31,7 +32,8 @@
                     <span style="position: relative; top: -10px;">Видео</span>
                     <input class="form-control"
                            type="radio"
-                           ng-click="editedMedia.id_MediaType = 1" ng-checked="editedMedia.id_MediaType == 1"
+                           ng-click="editedMedia.id_MediaType = 1" 
+                           ng-checked="editedMedia.id_MediaType == 1"
                            style="display: inline; width: 50px;"
                            checked="checked"
                            name='foto_vs_video' />
@@ -50,7 +52,7 @@
                 <td style="width: 160px">Медиа/Видео</td>
                 <td><input class="form-control" ng-model="file" /></td>
             </tr>
-            <tr>
+            <tr ng-show="editedMedia.id_MediaType === 2">
                 <td colspan="2" style="border: none;">
                     <div style="width: 300px; margin: 0px auto;">
                         <md-progress-linear md-mode="determinate" ng-show="progressPercentage" value="{{progressPercentage}}"></md-progress-linear>
