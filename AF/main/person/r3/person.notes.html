@@ -39,19 +39,19 @@
             <tbody>
                 <tr ng-repeat="item in descriptionlist">
                     <td>
-                        <a href="#" ng-click="displaySource(item.PageBlock)">
+                        <a href="#" ng-click="displaySource(item.Id, item.PageBlock)">
                             <span ng-show="item.PageBlock">{{getSchemaName(item)}}</span>
                             <span ng-show="!item.PageBlock">Без источника</span>
                         </a>
                     </td>
                     <td>
-                        <a href="#" ng-click="displaySource(item.PageBlock)">
+                        <a href="#" ng-click="displaySource(item.Id, item.PageBlock)">
                             <span ng-show="item.PageBlock">{{item.PageBlock.Type.Name}}</span>
                             <span ng-show="!item.PageBlock">Без источника</span>
                         </a>
                     </td>
                     <td>
-                        <a href="#" ng-click="displaySource(item.PageBlock)">
+                        <a href="#" ng-click="displaySource(item.Id, item.PageBlock)">
                             <span ng-show="item.PageBlock">TODO Подборка "Про ноги"</span>
                             <span ng-show="!item.PageBlock">Без источника</span>
                         </a>

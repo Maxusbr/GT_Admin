@@ -591,5 +591,20 @@ namespace Getticket.Web.API.Controllers
 
             return Ok(!_tagService.AddTagLinks(new PersonTagModel {personId = id, models = models}) ? error.Response() : succes.Response());
         }
+
+
+        /// <see cref="IPersonService.SaveDescriptionSchema"/>
+        [HttpPost]
+        [Route("description/{id}/schema/save")]
+        public IHttpActionResult SaveDescriptionSchema(int id, [FromBody] PageBlockModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save schema");
+            var succes = ServiceResponce.FromSuccess().Result("Schema save complete");
+            return Ok(_personService.SaveDescriptionSchema(id, model) ? succes.Response(): error.Response());
+        }
     }
 }

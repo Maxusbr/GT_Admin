@@ -821,6 +821,12 @@ namespace Getticket.Web.API.Services
         {
             return _personRepository.UpdatePlace(country, place);
         }
+
+        /// <see cref="IPersonService.SaveDescriptionSchema"/>
+        public bool SaveDescriptionSchema(int id, PageBlockModel model)
+        {
+            return _personRepository.SaveDescriptionSchema(id, PageModelHelper.GetPageBlock(model));
+        }
     }
 
 }

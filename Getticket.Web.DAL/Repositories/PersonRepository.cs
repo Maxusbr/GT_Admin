@@ -840,6 +840,74 @@ namespace Getticket.Web.DAL.Repositories
             return db.PersonAntro.Count(o => o.id_Person == id);
         }
 
+        /// <see cref="IPersonRepository.SaveDescriptionSchema" />
+        public bool SaveDescriptionSchema(int id, PageBlock pageBlock)
+        {
+            var page = SavePage(pageBlock.Page);
+            if (page == null) return false;
+            pageBlock.IdPage = page.Id;
+            pageBlock.Page = page;
+            var pageblock = SavePageBlock(pageBlock);
+            if (pageblock == null) return false;
+            if (id == 0) return true;
+            var desc = db.PersonDescriptions.FirstOrDefault(o => o.Id == id);
+            if (desc == null) return false;
+            desc.IdBlock = pageblock.Id;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private PageBlock SavePageBlock(PageBlock pageBlock)
+        {
+            if (pageBlock.Id == 0)
+            {
+                db.Entry(pageBlock).State = EntityState.Added;
+            }
+            else if (pageBlock.Id > 0)
+            {
+                var pr = db.PageBlocks.FirstOrDefault(o => o.Id == pageBlock.Id);
+                db.Entry(pr).CurrentValues.SetValues(pageBlock);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return pageBlock;
+        }
+
+        private PageSchema SavePage(PageSchema page)
+        {
+            if (page.Id == 0)
+            {
+                db.Entry(page).State = EntityState.Added;
+            }
+            else if (page.Id > 0)
+            {
+                var pr = db.PageSchemas.FirstOrDefault(o => o.Id == page.Id);
+                db.Entry(pr).CurrentValues.SetValues(page);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return page;
+        }
+
         private void SaveLog<T>(T from, T to, int personId, int userId, LogType type) where T : BaseEntity
         {
             var log = new PersonLog

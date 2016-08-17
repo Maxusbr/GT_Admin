@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.API.Helpers
 {
@@ -40,6 +41,39 @@ namespace Getticket.Web.API.Helpers
         public static PageBlockTypeModel GetPageBlockTypeModel(PageBlockType type)
         {
             return type != null ? new PageBlockTypeModel {Id = type.Id, Name = type.Name} : null;
+        }
+
+        public static PageBlock GetPageBlock(PageBlockModel model)
+        {
+            return model != null ? new PageBlock
+            {
+                Id = model.Id,
+                IdBlockType = model.IdBlockType,
+                IdPage = model.IdPage,
+                Name = model.Name,
+                Type = GetPageBlockType(model.Type),
+                Page = GetPage(model.Page)
+            }
+            : null;
+        }
+
+        public static PageSchema GetPage(PageSchemaModel model)
+        {
+            if (model == null) return null;
+            var result = new PageSchema
+            {
+                Id = model.Id,
+                Page = (PageTypes?)model.PageType
+            };
+            if (result.Page == PageTypes.Person) result.IdPerson = model.IdPerson;
+            if (result.Page == PageTypes.Event) result.IdEvent = model.IdEvent;
+            if (result.Page == PageTypes.Halls) result.IdHall = model.IdHall;
+            return result;
+        }
+
+        public static PageBlockType GetPageBlockType(PageBlockTypeModel model)
+        {
+            return model != null ? new PageBlockType { Id = model.Id, Name = model.Name } : null;
         }
     }
 }

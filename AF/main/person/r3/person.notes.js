@@ -23,13 +23,15 @@
         }
         $rootScope.getDescript();
 
-        $rootScope.displaySource = function (page) {
+        $rootScope.displaySource = function (id, page) {
+            $rootScope.editDescriptionId = id;
             $rootScope.pageSchema = page ? page: {};
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.source.html', 3200);
         }
 
-        $rootScope.displayNotesStatic = function (descript) {
+        $rootScope.displayNotesStatic = function (id, descript) {
+            $rootScope.editDescriptionId = id;
             $rootScope.staticDescript = descript ? descript : {id_DescriptionType: 2 };
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.static.html', 3200);

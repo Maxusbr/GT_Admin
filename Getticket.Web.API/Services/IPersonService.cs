@@ -352,6 +352,13 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         int UpdatePlace(string country, string place);
 
+        /// <summary>
+        /// Сохранить схему описания
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool SaveDescriptionSchema(int id, PageBlockModel model);
     }
 
 }

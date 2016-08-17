@@ -483,5 +483,13 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="id"></param>
         /// <returns></returns>
         int GetCountAntros(int id);
+
+        /// <summary>
+        /// Сохранить схему описания
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pageBlock"></param>
+        /// <returns></returns>
+        bool SaveDescriptionSchema(int id, PageBlock pageBlock);
     }
 }
