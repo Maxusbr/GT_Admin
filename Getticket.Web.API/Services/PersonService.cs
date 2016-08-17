@@ -9,6 +9,7 @@ using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.Infrastructure;
+using UserPageCategoryModel = Getticket.Web.API.Models.UserPageCategoryModel;
 
 namespace Getticket.Web.API.Services
 {
@@ -825,7 +826,20 @@ namespace Getticket.Web.API.Services
         /// <see cref="IPersonService.SaveDescriptionSchema"/>
         public bool SaveDescriptionSchema(int id, PageBlockModel model)
         {
-            return _personRepository.SaveDescriptionSchema(id, PageModelHelper.GetPageBlock(model));
+            return _personRepository.SaveDescriptionSchema(id,
+                PageModelHelper.GetPageBlock(model),
+                new UserPageCategory
+                {
+                    Id = model.UserPageCategoryId ?? 0,
+                    Name = model.UserPageCategory
+                });
+        }
+
+        /// <see cref="IPersonService.GetUserPageCategory"/>
+        public IList<UserPageCategoryModel> GetUserPageCategory()
+        {
+            var result = _personRepository.GetUserPageCategory();
+            return result.Select(o => new UserPageCategoryModel {Id = o.Id, Name = o.Name}).ToList();
         }
     }
 

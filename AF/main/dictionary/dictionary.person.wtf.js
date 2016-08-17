@@ -1,23 +1,23 @@
 ﻿(function () {
     'use strict';
 
-    function DictionaryPersonWTFController($rootScope, $cookieStore) {
+    function DictionaryPersonWTFController($rootScope, $scope, $filter) {
         var vm = this;
-        if (!$rootScope.UserName)
-            $rootScope.UserName = $cookieStore.get('username');
 
-        $rootScope.dictionaryWTF = [
-            {
-                Id:1,
-                Name:'facebook'
+        $scope.editItem = {Id: 0, Name: ""};
+
+        $scope.saveChanges = function (item) {
+            $rootScope.pageSchema.UserPageCategoryId = item.Id;
+            $rootScope.pageSchema.UserPageCategory = item.Name;
+            var cat = $rootScope.userPageCategories.filter(function(el) {
+                return el.Id === item.Id;
+            });
+            if (cat.length) {
+                cat.Name = item.Name;
+            } else {
+                $rootScope.userPageCategories.push(item);
             }
-        ];
-
-        $rootScope.editItem;
-
-        $rootScope.saveChanges = function save_changes() {
-            //TODO: save changes to server
-            //TODO: refresh dictionary list
+            app.closeView('disDicPersonWTF');
         }
     }
 
@@ -25,5 +25,5 @@
         .module('app')
         .controller('DictionaryPersonWTFController', DictionaryPersonWTFController);
 
-    DictionaryPersonWTFController.$inject = ['$rootScope', '$cookieStore'];
+    DictionaryPersonWTFController.$inject = ['$rootScope', '$scope', '$filter'];
 })();

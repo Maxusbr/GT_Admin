@@ -32,7 +32,13 @@ namespace Getticket.Web.API.Models
         /// </summary>
         public PageBlockTypeModel Type { get; set; }
 
-
-
+        /// <summary>
+        /// Источник
+        /// </summary>
+        public int? UserPageCategoryId { get; set; }
+        /// <summary>
+        /// Источник
+        /// </summary>
+        public string UserPageCategory { get; set; }
     }
 }

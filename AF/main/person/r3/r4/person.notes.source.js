@@ -74,6 +74,15 @@
                     return "";
             }
         }
+        $rootScope.userPageCategories = [
+            {
+                Id: null,
+                Name: "Не указано"
+            }
+        ];
+        personService.getUserPageCategories(function(data) {
+            $rootScope.userPageCategories.push.apply($rootScope.userPageCategories, data);
+        });
 
         $rootScope.savePersonNotesSource = function() {
             //TODO: save changes or create new source
@@ -85,7 +94,7 @@
             });
         }
 
-        $rootScope.displayPersonWTF = function display_person_WTF() {
+        $scope.displayPersonWTF = function display_person_WTF() {
             app.closeFive();
             app.loadContentView('/main/dictionary/dictionary.person.wtf.html', 3200);
         }
