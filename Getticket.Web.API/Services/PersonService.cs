@@ -591,7 +591,8 @@ namespace Getticket.Web.API.Services
                 id_Person = pesonId,
                 id_MediaType = item.id_MediaType,
                 MediaLink = item.MediaLink,
-                Description = item.Description
+                Description = item.Description,
+                Name = item.Name
             }, userId)).All(result => result != null);
         }
 
