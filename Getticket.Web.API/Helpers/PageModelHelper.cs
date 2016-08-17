@@ -48,10 +48,9 @@ namespace Getticket.Web.API.Helpers
             return model != null ? new PageBlock
             {
                 Id = model.Id,
-                IdBlockType = model.IdBlockType,
+                IdBlockType = model.Type.Id,
                 IdPage = model.IdPage,
                 Name = model.Name,
-                Type = GetPageBlockType(model.Type),
                 Page = GetPage(model.Page)
             }
             : null;

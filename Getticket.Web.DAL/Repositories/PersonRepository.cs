@@ -846,7 +846,6 @@ namespace Getticket.Web.DAL.Repositories
             var page = SavePage(pageBlock.Page);
             if (page == null) return false;
             pageBlock.IdPage = page.Id;
-            pageBlock.Page = page;
             var pageblock = SavePageBlock(pageBlock);
             if (pageblock == null) return false;
             if (id == 0) return true;
