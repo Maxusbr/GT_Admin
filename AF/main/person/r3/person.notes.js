@@ -68,6 +68,7 @@
             }
         }
 
+        // Tags
         personService.getTags(function (data) {
             $scope.tags = [];
             $scope.tags.push.apply($scope.tags, data);

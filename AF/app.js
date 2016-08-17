@@ -349,6 +349,14 @@ var app;
         }
     ]);
 
+    app.filter('join', function() {
+        return function(arr, glue) {
+            if (!Array.isArray(arr)) {
+                return arr;
+            }
+            return arr.join(glue);
+        };
+    });
     //this.scrollRight = function (pixels) {
 
     //    console.log('scroll - ' + pixels);
