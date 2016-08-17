@@ -52,7 +52,7 @@
                     </td>
                     <td>
                         <a href="#" ng-click="displaySource(item.Id, item.PageBlock)">
-                            <span ng-show="item.PageBlock">TODO Подборка "Про ноги"</span>
+                            <span ng-show="item.PageBlock">{{item.PageBlock.UserPageCategory}}</span>
                             <span ng-show="!item.PageBlock">Без источника</span>
                         </a>
                     </td>
