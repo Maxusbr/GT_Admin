@@ -27,7 +27,7 @@
 
         $rootScope.addConnection= function add_connection() {
             app.closeFour();
-            app.loadContentView('/main/events/r3/r4/events.connections.create.html', 3200)
+            app.loadContentView('/main/events/r3/r4/events.connections.edit.html', 3200)
         }
     }
 
