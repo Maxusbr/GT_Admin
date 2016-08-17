@@ -33,7 +33,7 @@ function mainMenuCtrl($scope, $location, $timeout, $http, $compile) {
         },
         {
             "title": "События",
-            "href": "/main/event-is",
+            "href": "/main/concert/concert.list.html",
             "countActive": "25",
             "countAll": "55",
             "content": "#eventiscontent",

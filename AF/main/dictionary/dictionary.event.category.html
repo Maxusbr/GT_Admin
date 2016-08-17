@@ -1,0 +1,66 @@
+﻿<div class="win-container r2 r5 disDicEventCategory" style="width:600px;" ng-controller="DictionaryPersonLinkController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Категории событий
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disDicEventCategory')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+    </div>
+    <div class="win-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <h5>Категория</h5>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5>Редактирование</h5>
+                    </div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" ng-model="editItem.Name" />
+                        <br />
+                        <button class="btn btn-default" ng-click="saveChanges()">Сохранить</button>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in socialtypes">
+                            <td>{{row.Name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6">
+                <h5>Подкатегория</h5>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h5>Редактирование</h5>
+                    </div>
+                    <div class="panel-body">
+                        <input type="text" class="form-control" ng-model="editItem.Name" />
+                        <br />
+                        <button class="btn btn-default" ng-click="saveChanges()">Сохранить</button>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in socialtypes">
+                            <td>{{row.Name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

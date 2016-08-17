@@ -1,0 +1,91 @@
+﻿<div class="win-container r1 disConcertList" style="width:1000px;">
+    <div class="win-header">
+        <div class="win-header-text">
+            Список событий
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disConcertList')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="createPreson()">
+                <span class="fa fa-plus"></span>
+                <br />
+                Добавить
+            </a>
+        </div>
+        <div class="win-menu-button">
+            <a href="#" ng-click="createPreson()">
+                <span class="fa fa-arrow-left"></span>
+                <br />
+                Прошедшие
+            </a>
+        </div>
+        <div class="win-menu-button">
+            <a href="#" ng-click="createPreson()">
+                <span class="fa fa-arrow-down"></span>
+                <br />
+                Идущие
+            </a>
+        </div>
+        <div class="win-menu-button">
+            <a href="#" ng-click="createPreson()">
+                <span class="fa fa-arrow-right"></span>
+                <br />
+                Будущие
+            </a>
+        </div>
+        <div class="win-menu-button" style="width:250px;">
+            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" ng-model="personaMenuFilter" />
+        </div>
+    </div>
+    <div class="win-content">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Место</th>
+                    <th>Начало</th>
+                    <th>Окончание</th>
+                    <th>Билетов</th>
+                    <th>Продано</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Бой за звание чемпиона мира по боксув супертяжелом весе по версии WBA</td>
+                    <td>СК Олимпийский</td>
+                    <td>22.12.2016 18:00</td>
+                    <td>22.12.2016 24:00</td>
+                    <td>6000</td>
+                    <td>3214</td>
+                </tr>
+                <tr>
+                    <td>Чемпионат мира по фигурному катанию в Москве</td>
+                    <td>СК Олимпийский</td>
+                    <td>22.12.2016 18:00</td>
+                    <td>22.12.2016 24:00</td>
+                    <td>6000</td>
+                    <td>3214</td>
+                </tr>
+                <tr>
+                    <td>Петр Налич и биг-бэнд "Песни Утёсова и не только..."</td>
+                    <td>СК Олимпийский</td>
+                    <td>22.12.2016 18:00</td>
+                    <td>22.12.2016 24:00</td>
+                    <td>6000</td>
+                    <td>3214</td>
+                </tr>
+                <tr>
+                    <td>А.Кролл. К. Ролл М. Волл. День джаза в Доме музыки."Все цвета московс...</td>
+                    <td>СК Олимпийский</td>
+                    <td>22.12.2016 18:00</td>
+                    <td>22.12.2016 24:00</td>
+                    <td>6000</td>
+                    <td>3214</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
