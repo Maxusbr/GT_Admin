@@ -5,8 +5,9 @@ namespace Getticket.Web.API.Models
     /// <summary>
     /// Тип блока страницы
     /// </summary>
-    public class PageBlockTypeModel : BaseModel
+    public class PageBlockTypeModel
     {
+        public int? Id { get; set; }
         /// <summary>
         /// Наименование
         /// </summary>

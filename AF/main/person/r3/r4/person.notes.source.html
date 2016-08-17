@@ -43,7 +43,7 @@
         <br />
         <div class="row">
             <div class="col-lg-6">
-                <select class="form-control" ng-model="pageSchema.Type.Id" ng-options="type.Id as type.Name for type in bloks">
+                <select class="form-control" ng-model="pageSchema.Type.Id" ng-change="cangeType(pageSchema.Type.Id)" ng-options="type.Id as type.Name for type in bloks">
                     <option>Не указано</option>
                     <option>Другие персоны подборки</option>
                 </select>
@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-lg-6">
                 Страница
-                <select class="form-control" ng-model="pageSchema.UserPageCategoryId" ng-options="item.Id as item.Name for item in userPageCategories">
+                <select class="form-control" ng-model="pageSchema.UserPageCategoryId" ng-change="changeCat(pageSchema.UserPageCategoryId)" ng-options="item.Id as item.Name for item in userPageCategories">
                     <option>Не указано</option>
                     <option>Хуямоя</option>
                 </select>

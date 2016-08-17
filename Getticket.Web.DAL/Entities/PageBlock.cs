@@ -24,7 +24,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Внешний ключ для <see cref="Entities.PageBlockType"/>
         /// </summary>
-        public int IdBlockType { get; set; }
+        public int? IdBlockType { get; set; }
 
         /// <summary>
         /// <see cref="Entities.PageSchema"/>

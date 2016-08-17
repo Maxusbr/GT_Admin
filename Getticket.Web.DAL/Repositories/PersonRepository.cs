@@ -875,7 +875,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (cat.Id > 0)
             {
-                var pr = db.PageBlocks.FirstOrDefault(o => o.Id == cat.Id);
+                var pr = db.UserPageCategories.FirstOrDefault(o => o.Id == cat.Id);
                 db.Entry(pr).CurrentValues.SetValues(cat);
             }
             else

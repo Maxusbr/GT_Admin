@@ -46,8 +46,8 @@
                     </td>
                     <td>
                         <a href="#" ng-click="displaySource(item.Id, item.PageBlock)">
-                            <span ng-show="item.PageBlock">{{item.PageBlock.Type.Name}}</span>
-                            <span ng-show="!item.PageBlock">Без источника</span>
+                            <span ng-show="item.PageBlock.Type">{{item.PageBlock.Type.Name}}</span>
+                            <span ng-show="!item.PageBlock.Type">Без источника</span>
                         </a>
                     </td>
                     <td>
