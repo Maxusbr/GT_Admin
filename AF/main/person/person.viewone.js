@@ -36,7 +36,8 @@
         $rootScope.getPerson = function(id) {
             $scope.Promise = personService.getPerson(id, function (data) {
                 $rootScope.person = data;
-                $rootScope.file = $rootScope.person.MediaLink; 
+                if ($rootScope.person.MediaLink)
+                    $scope.file = $rootScope.person.MediaLink;
                 personService.getCountes(id, function (counts) {
                     $scope.counts = counts;
                 });
@@ -48,10 +49,16 @@
             app.closeThird();
             app.loadContentView('/main/person/person.edit.html', 2200);
         }
-        
+        $scope.upload = function(file) {
+            $scope.file = file;
+        }
         $scope.saveFoto = function () {
-            personService.uploadImage($scope.file, function(data) {
-                save(`${serviceUrl}${data.path}`);
+            if (!$scope.file) return;
+            personService.uploadImage($scope.file, function (data) {
+                $rootScope.person.MediaLink = `${serviceUrl}${data.path}`;
+                personService.Save($rootScope.person, function (data) {
+                    $rootScope.getPerson($rootScope.personId);
+                });
             });
         }
     }

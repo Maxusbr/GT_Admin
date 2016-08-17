@@ -4,7 +4,7 @@
     function PersonCreatController($rootScope, $scope, personService) {
         var vm = this;
         $scope.sexes = [{ id: 0, name: "Мужской" }, { id: 1, name: "Женский" }];
-        $scope.person = {};
+        $scope.person = { Id: 0 };
         $scope.getPlaces = function (value) {
             $scope.places = [];
             return personService.getPlaces(value).then(function (response) {
@@ -15,9 +15,12 @@
             });
         }
         $scope.save = function () {
+            if ($scope.place) {
+                $scope.person.Place = $scope.place.Name;
+                $scope.person.Country = $scope.place.CountryName;
+            }
             personService.Save($scope.person, function (data) {
-                personService.getPersons();
-                app.closeView('personEdit');
+                personService.getPersons(app.closeView('personEdit'));
             });
         }
     }
