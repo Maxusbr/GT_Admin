@@ -1,7 +1,7 @@
-﻿<div class="win-container r3 personFacts" style="width:800px;" ng-controller="EventsFactsController">
+﻿<div class="win-container r3 personFacts" style="width:800px;" ng-controller="EventFactsController">
     <div class="win-header">
         <div class="win-header-text">
-            События мероприятия
+            Факты о персоне
         </div>
         <div class="win_buttons">
             <a href="#" ng-click="closeMe('personFacts')"><span class="glyphicon glyphicon-remove-sign"></span></a>
@@ -20,14 +20,16 @@
             <table class="table" style="table-layout: fixed;">
                 <thead>
                     <tr>
-                        <th class="col-md-4">Участники</th>
-                        <th class="col-md-4">Программа мероприятия</th>
-                        <th class="col-md-4">Входной контроль</th>
+                        <th class="col-md-6">Факт</th>
+                        <th>Статус/изменен</th>
+                        <th>Связь</th>
+                        <th>Источник</th>
+                        <th>Использование</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr ng-repeat="item in factlist">
-                        <td><span style="">{{item.FactText}}</span></td>
+                    <tr ng-repeat="item in factlist">
+                        <td><a href="" ng-click="editFact()"><span style="">{{item.FactText}}</span></a></td>
                         <td>TODO: status
                             <br/>
                             <span ng-if="item.LastChange">
@@ -38,7 +40,7 @@
                         <td><span>{{item.FactType.Name}} / {{item.FactType.Descript}}</span></td>
                         <td>TODO: source</td>
                         <td>TODO: used</td>
-                    </tr> -->
+                    </tr>
                 </tbody>
             </table>
     </div>

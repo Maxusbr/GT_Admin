@@ -15,7 +15,7 @@
         }
         $rootScope.displayHapens = function () {
             app.closeThird();
-            app.loadContentView('/main/events/r3/events.hapens.html', 2500);
+            app.loadContentView('/main/events/r3/events.facts.html', 2500);
         }
         $rootScope.displayMedia = function () {
             app.closeThird();
