@@ -28,6 +28,11 @@ namespace Getticket.Web.DAL.Entities
         public int id_DescriptionType { get; set; }
 
         /// <summary>
+        /// Внешний ключ для <see cref="Entities.UserPageCategory"/>
+        /// </summary>
+        public int? IdUserPageCategory { get; set; }
+
+        /// <summary>
         /// Текст описания
         /// </summary>
         public string DescriptionText { get; set; }
@@ -69,6 +74,12 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [ForeignKey("IdBlock")]
         public virtual PageBlock PageBlock { get; set; }
+
+        /// <summary>
+        /// Источник
+        /// </summary>
+        [ForeignKey("IdUserPageCategory")]
+        public virtual UserPageCategory UserPageCategory { get; set; }
 
     }
 }

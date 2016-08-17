@@ -62,6 +62,7 @@
     <Compile Include="Entities\AccessRole.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\PageBlock.cs" />
+    <Compile Include="Entities\UserPageCategory.cs" />
     <Compile Include="Entities\PageSchema.cs" />
     <Compile Include="Entities\PageBlockType.cs" />
     <Compile Include="Entities\EventDescriptionTizerLink.cs" />

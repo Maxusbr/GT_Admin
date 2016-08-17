@@ -606,5 +606,13 @@ namespace Getticket.Web.API.Controllers
             var succes = ServiceResponce.FromSuccess().Result("Schema save complete");
             return Ok(_personService.SaveDescriptionSchema(id, model) ? succes.Response(): error.Response());
         }
+
+        /// <see cref="IPersonService.GetUserPageCategory" />
+        [HttpGet]
+        [Route("userpagecategory")]
+        public IHttpActionResult GetUserPageCategory()
+        {
+            return Ok(_personService.GetUserPageCategory());
+        }
     }
 }

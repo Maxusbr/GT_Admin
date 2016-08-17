@@ -489,7 +489,14 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="id"></param>
         /// <param name="pageBlock"></param>
+        /// <param name="cat"></param>
         /// <returns></returns>
-        bool SaveDescriptionSchema(int id, PageBlock pageBlock);
+        bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat);
+
+        /// <summary>
+        /// Получить список источников
+        /// </summary>
+        /// <returns></returns>
+        IList<UserPageCategory> GetUserPageCategory();
     }
 }

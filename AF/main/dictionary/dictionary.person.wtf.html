@@ -17,7 +17,7 @@
             <div class="panel-body">
                 <input type="text" class="form-control" ng-model="editItem.Name" />
                 <br />
-                <button class="md-button" ng-click="saveChanges()">Сохранить</button>
+                <button class="md-button" ng-click="saveChanges(editItem)">Сохранить</button>
             </div>
         </div>
         <table class="table">
@@ -27,8 +27,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="row in dictionaryLinks">
-                    <td>{{row.Name}}</td>
+                <tr ng-repeat="item in userPageCategories">
+                    <td><a href="#" ng-click="editItem = item">{{row.Name}}</a></td>
                 </tr>
             </tbody>
         </table>

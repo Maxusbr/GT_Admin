@@ -56,11 +56,11 @@
         <div class="row">
             <div class="col-lg-6">
                 Страница
-                <select class="form-control">
+                <select class="form-control" ng-model="pageSchema.UserPageCategoryId" ng-options="item.Id as item.Name for item in userPageCategories">
                     <option>Не указано</option>
                     <option>Хуямоя</option>
                 </select>
-                <a href="#">Редактировать</a>
+                <a href="#" ng-click="displayPersonWTF()">Редактировать</a>
             </div>
             <div class="col-lg-6">
                 Блок
