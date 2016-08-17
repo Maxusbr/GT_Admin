@@ -390,6 +390,7 @@ namespace Getticket.Web.DAL.Repositories
                     .Include(o => o.PersonDescriptionType)
                     .Include(o => o.PageBlock)
                     .Include(o => o.PageBlock.Page)
+                    .Include(o => o.UserPageCategory)
                     .FirstOrDefault();
                 if (item == null) continue;
                 item.StaticDescription = db.PersonDescriptions.Where(o => o.Id == el.IdStaticDescription)
@@ -402,9 +403,10 @@ namespace Getticket.Web.DAL.Repositories
             var list2 = listLink.Select(s => s.IdStaticDescription).Distinct();
             list.AddRange(
                 db.PersonDescriptions.Where(o => o.id_Person == id && (!list1.Contains(o.Id) && !list2.Contains(o.Id)))
-                .Include(o => o.PersonDescriptionType)
+                    .Include(o => o.PersonDescriptionType)
                     .Include(o => o.PageBlock)
                     .Include(o => o.PageBlock.Page)
+                    .Include(o => o.UserPageCategory)
                 );
             return list;
         }
@@ -841,8 +843,9 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.SaveDescriptionSchema" />
-        public bool SaveDescriptionSchema(int id, PageBlock pageBlock)
+        public bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat)
         {
+            cat = SaveUserPageCategory(cat);
             var page = SavePage(pageBlock.Page);
             if (page == null) return false;
             pageBlock.IdPage = page.Id;
@@ -852,6 +855,7 @@ namespace Getticket.Web.DAL.Repositories
             var desc = db.PersonDescriptions.FirstOrDefault(o => o.Id == id);
             if (desc == null) return false;
             desc.IdBlock = pageblock.Id;
+            desc.IdUserPageCategory = cat?.Id;
             try
             {
                 db.SaveChanges();
@@ -861,6 +865,38 @@ namespace Getticket.Web.DAL.Repositories
                 return false;
             }
             return true;
+        }
+
+        private UserPageCategory SaveUserPageCategory(UserPageCategory cat)
+        {
+            if (cat.Id == 0)
+            {
+                db.Entry(cat).State = EntityState.Added;
+            }
+            else if (cat.Id > 0)
+            {
+                var pr = db.PageBlocks.FirstOrDefault(o => o.Id == cat.Id);
+                db.Entry(pr).CurrentValues.SetValues(cat);
+            }
+            else
+            {
+                return null;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return cat;
+        }
+
+        /// <see cref="IPersonRepository.GetUserPageCategory" />
+        public IList<UserPageCategory> GetUserPageCategory()
+        {
+            return db.UserPageCategories.ToList();
         }
 
         private PageBlock SavePageBlock(PageBlock pageBlock)

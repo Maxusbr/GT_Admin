@@ -298,6 +298,11 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<PageBlockType> PageBlockTypes { get; set; }
 
         /// <summary>
+        /// <see cref="UserPageCategory"/>
+        /// </summary>
+        public virtual DbSet<UserPageCategory> UserPageCategories { get; set; }
+
+        /// <summary>
         /// Настройка сущности <see cref="Entities.Person"/>
         /// </summary>
         public class PersonConfiguration : EntityTypeConfiguration<Person>

@@ -266,6 +266,7 @@
     <Compile Include="Models\Persons\TagDescriptionLinkModel.cs" />
     <Compile Include="Models\Persons\TagLinkModel.cs" />
     <Compile Include="Models\TagModel.cs" />
+    <Compile Include="Models\UserPageCategoryModel.cs" />
     <Compile Include="Providers\OAuthAuthorizationServerOptionsProvider.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Attributes\CheckModelForNullAttribute.cs" />

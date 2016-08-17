@@ -265,7 +265,7 @@ namespace Getticket.Web.API.Helpers
 
         private static PersonDescriptionModel GetDescriptionModel(PersonDescription description)
         {
-            return description != null ? new PersonDescriptionModel
+            var result = description != null ? new PersonDescriptionModel
             {
                 Id = description.Id,
                 id_Person = description.id_Person,
@@ -277,8 +277,12 @@ namespace Getticket.Web.API.Helpers
                 IdBlock = description.IdBlock,
                 RequiredStaticDescription = description.RequiredStaticDescription,
                 PageBlock = PageModelHelper.GetPageBlockModel(description.PageBlock),
-                StaticDescription = description.StaticDescription != null ? GetDescriptionModel(description.StaticDescription) : null
+                StaticDescription = description.StaticDescription != null ? GetDescriptionModel(description.StaticDescription) : null,
             } : new PersonDescriptionModel();
+            if (result.PageBlock == null) return result;
+            result.PageBlock.UserPageCategoryId = description?.IdUserPageCategory;
+            result.PageBlock.UserPageCategory = description?.UserPageCategory?.Name;
+            return result;
         }
 
         /// <summary>

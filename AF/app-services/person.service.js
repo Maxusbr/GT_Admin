@@ -239,6 +239,13 @@
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });
         }
+
+
+        service.getUserPageCategories = function (callback) {
+            return $http.get(`${serviceUrl}persons/userpagecategory`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
         return service;;
     }
 

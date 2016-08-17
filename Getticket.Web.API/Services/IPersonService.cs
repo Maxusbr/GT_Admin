@@ -359,6 +359,12 @@ namespace Getticket.Web.API.Services
         /// <param name="model"></param>
         /// <returns></returns>
         bool SaveDescriptionSchema(int id, PageBlockModel model);
+
+        /// <summary>
+        /// Возвращает список моделей источников
+        /// </summary>
+        /// <returns></returns>
+        IList<UserPageCategoryModel> GetUserPageCategory();
     }
 
 }

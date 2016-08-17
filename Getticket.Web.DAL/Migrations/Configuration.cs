@@ -24,7 +24,7 @@ namespace Getticket.Web.DAL.Migrations
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 2, Name = "Длинные" });
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 3, Name = "Теннис" });
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 4, Name = "Стройные" });
-
+            
             context.SaveChanges();
         }
 
@@ -92,6 +92,9 @@ namespace Getticket.Web.DAL.Migrations
             context.Users.AddOrUpdate(u => u.Id, user2);
             context.Users.AddOrUpdate(u => u.Id, user3);
             context.Users.AddOrUpdate(u => u.Id, user4);
+
+            //context.UserPageCategories.AddOrUpdate(o => o.Id, new UserPageCategory { Id = 1, Name = "Не указано" });
+            //context.SaveChanges();
 
             var pers1 = new Person { Id = 1, Name = "Светлана", LastName = "Абакачева", Sex = Sex.Female, Bithday = new DateTime(1990, 5, 16), id_Bithplace = 2295 };
             var pers2 = new Person { Id = 2, Name = "Джастин", LastName = "Тимберлейк", NameLatin = "Justin", LastNameLatin = "Timberlake", Sex = Sex.Male, Bithday = new DateTime(1985, 11, 5), id_Bithplace = 177329 };
