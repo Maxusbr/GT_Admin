@@ -9,7 +9,7 @@
             var list = [$rootScope.editedMedia];
             personService.saveEntities($rootScope.personId, list, 'media', function (data) {
                 $rootScope.getMedias();
-                app.closeView('personMediaEdit');
+                app.closeView('personMediaCreate');
             });
         }
 
