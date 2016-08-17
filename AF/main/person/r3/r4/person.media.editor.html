@@ -43,14 +43,9 @@
             <tr ng-show="editedMedia.id_MediaType === 2">
                 <td style="width: 160px">Медиа/Фото</td>
                 <td>
-                    <!--<input
-                        id="the-file-input"
-                        class="form-control"
-                        type="file"
-                        style="background-color: rgba(255, 0, 0, 0); border: medium none; box-shadow: none; padding: 0;"/>-->
+                    
                     <a class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Выберите файл</a>
-                    <!--<a class="button" ngf-select="upload($file)">Выберите файл</a>-->
                 </td>
             </tr>
             <tr ng-show="editedMedia.id_MediaType === 1">
@@ -62,32 +57,9 @@
                     <div style="width: 300px; margin: 0px auto;">
                         <md-progress-linear md-mode="determinate" ng-show="progressPercentage" value="{{progressPercentage}}"></md-progress-linear>
                         <img ngf-src="file" ngf-background="file" ngf-resize="{width: 300, height: 300, quality: 0.9}" style="width: 300px;">
-                        <!--<img id="some_container_div" style="width: 300px;">-->
                     </div>
                 </td>
             </tr>
-            <!--<script>
-                function renderImage(file) {
-                    console.log(file);
-                    var reader = new FileReader();
-                    reader.onload = function(event) {
-                        var the_url = event.target.result;
-                        $('#some_container_div').attr('src', the_url);
-                    }
-                    reader.readAsDataURL(file);
-                }
-                $("#the-file-input").change(function() {
-                    console.log(this.files);
-                    renderImage(this.files[0]);
-                });
-            </script>-->
-            
-            <!-- <tr>
-                <td colspan="2">
-                    <div id="some_container_div"></div>
-                </td>
-            </tr> -->
-            
             
             <tr>
                 <td>Название</td>

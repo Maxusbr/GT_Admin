@@ -34,13 +34,21 @@
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
             $rootScope.person = data;
+            $rootScope.file = $rootScope.person.MediaLink; 
             personService.getCountes($scope.Id, function (counts) {
                 $scope.counts = counts;
             });
         });
+
         $rootScope.editPerson = function edit_person() {
             app.closeThird();
             app.loadContentView('/main/person/person.edit.html', 2200);
+        }
+        
+        $scope.saveFoto = function () {
+            personService.uploadImage($scope.file, function(data) {
+                save(`${serviceUrl}${data.path}`);
+            });
         }
     }
 
