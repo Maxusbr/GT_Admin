@@ -144,15 +144,18 @@
                 Name: person.Name,
                 LastName: person.LastName,
                 Patronymic: person.Patronymic,
-                Bithday: `${person.Bithday.getFullYear()}-${person.Bithday.getMonth() + 1}-${person.Bithday.getDate()}`,
+                Bithday: person.Bithday,
                 NameLatin: person.NameLatin,
                 LastNameLatin: person.LastNameLatin,
                 PatronymicLatin: person.PatronymicLatin,
                 IdBithplace: person.IdBithplace,
                 Place: person.Place,
                 Country: person.Country,
-                Sex: person.Sex
+                Sex: person.Sex, 
+                MediaLink: person.MediaLink
             }
+            if (person.bithday)
+                model.Bithday = `${person.bithday.getFullYear()}-${person.bithday.getMonth() + 1}-${person.bithday.getDate()}`;
             return $http.post(`${serviceUrl}persons/add`, model).success(function (data) {
                 callback(data);
             }).error(function (data) {
@@ -262,6 +265,13 @@
                 //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
             });
         };
+
+        service.saveAssociation = function (id, model, callback) {
+            return $http.post(`${serviceUrl}persons/association/${id}/save`, model)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         return service;;
     }
 

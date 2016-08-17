@@ -62,7 +62,7 @@ namespace Getticket.Web.API.Models.Persons
         /// Тип события
         /// </summary>
         public string EventType { get; set; }
-
+        public string MediaLink { get; set; }
         /// <summary>
         /// Название события
         /// </summary>
