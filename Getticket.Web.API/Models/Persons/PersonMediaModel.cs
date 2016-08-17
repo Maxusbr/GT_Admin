@@ -15,7 +15,6 @@ namespace Getticket.Web.API.Models.Persons
         /// Путь к файлу
         /// </summary>
         [Required]public string MediaLink { get; set; }
-        [Required]public int MediaTypeId { get; set; }
         public string MediaType { get; set; }
         public string Description { get; set; }
         public LastChangeModel LastChange { get; set; }

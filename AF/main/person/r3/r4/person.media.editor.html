@@ -24,7 +24,7 @@
                     <input 
                     class="form-control" 
                     type="radio" 
-                    ng-click="editedMedia.MediaTypeId = 2" ng-checked="editedMedia.MediaTypeId == 2"
+                    ng-click="editedMedia.id_MediaType = 2" ng-checked="editedMedia.id_MediaType == 2"
                     style="display: inline; width: 50px;" 
                     name='foto_vs_video'/>
                 </td>
@@ -33,14 +33,14 @@
                     <input 
                     class="form-control" 
                     type="radio" 
-                    ng-click="editedMedia.MediaTypeId = 1"  ng-checked="editedMedia.MediaTypeId == 1"
+                    ng-click="editedMedia.id_MediaType = 1"  ng-checked="editedMedia.id_MediaType == 1"
                     style="display: inline; width: 50px;" 
                     checked="checked" 
                     name='foto_vs_video'/>
                 </td>
             </tr>
 
-            <tr ng-show="editedMedia.MediaTypeId === 2">
+            <tr ng-show="editedMedia.id_MediaType === 2">
                 <td style="width: 160px">Медиа/Фото</td>
                 <td>
                     <!--<input
@@ -53,9 +53,9 @@
                     <!--<a class="button" ngf-select="upload($file)">Выберите файл</a>-->
                 </td>
             </tr>
-            <tr ng-show="editedMedia.MediaTypeId === 1">
+            <tr ng-show="editedMedia.id_MediaType === 1">
                 <td style="width: 160px">Медиа/Видео</td>
-                <td><input class="form-control" /></td>
+                <td><input class="form-control" ng-model="file"/></td>
             </tr>
             <tr>
                 <td colspan="2" style="border: none;">
