@@ -64,6 +64,7 @@
     <Compile Include="Entities\PageBlock.cs" />
     <Compile Include="Entities\PageSchema.cs" />
     <Compile Include="Entities\PageBlockType.cs" />
+    <Compile Include="Entities\EventDescriptionTizerLink.cs" />
     <Compile Include="Entities\PersonDescriptionTizerLink.cs" />
     <Compile Include="Entities\Region.cs" />
     <Compile Include="Entities\EventLinkPerson.cs" />
@@ -74,12 +75,11 @@
     <Compile Include="Entities\EventDescription.cs" />
     <Compile Include="Entities\EventCategory.cs" />
     <Compile Include="Entities\EventConnection.cs" />
-    <Compile Include="Entities\EventConnectionType.cs" />
     <Compile Include="Entities\PersonLog.cs" />
     <Compile Include="Entities\PersonFactType.cs" />
     <Compile Include="Entities\PersonFact.cs" />
     <Compile Include="Entities\EventMedia.cs" />
-    <Compile Include="Entities\PersonMediaType.cs" />
+    <Compile Include="Entities\MediaType.cs" />
     <Compile Include="Entities\PersonSocialLink.cs" />
     <Compile Include="Entities\PersonSocialLinkType.cs" />
     <Compile Include="Entities\PersonMedia.cs" />
@@ -90,7 +90,7 @@
     <Compile Include="Entities\PersonChangeParam.cs" />
     <Compile Include="Entities\PersonAntroNames.cs" />
     <Compile Include="Entities\PersonDescriptionType.cs" />
-    <Compile Include="Entities\PersonConnectionType.cs" />
+    <Compile Include="Entities\ConnectionType.cs" />
     <Compile Include="Entities\CountryPlaces.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\EventLog.cs" />
@@ -101,10 +101,10 @@
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\TagAntro.cs" />
     <Compile Include="Entities\Tag.cs" />
-    <Compile Include="Entities\TagMediaLink.cs" />
+    <Compile Include="Entities\TagPersonMediaLink.cs" />
     <Compile Include="Entities\TagPersonLink.cs" />
     <Compile Include="Entities\TagAntroLink.cs" />
-    <Compile Include="Entities\TagDescriptionLink.cs" />
+    <Compile Include="Entities\TagPersonDescriptionLink.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInfo.cs" />
     <Compile Include="Entities\UserStatus.cs" />
@@ -113,6 +113,7 @@
     <Compile Include="Enums\LogType.cs" />
     <Compile Include="Enums\PageTypes.cs" />
     <Compile Include="Enums\Sex.cs" />
+    <Compile Include="Enums\DestinationTypes.cs" />
     <Compile Include="Enums\UserStatusType.cs" />
     <Compile Include="Infrastructure\PageInfo.cs" />
     <Compile Include="Infrastructure\PredicateBuilder.cs" />

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Getticket.Web.DAL.Enums;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -31,7 +32,10 @@ namespace Getticket.Web.DAL.Entities
         /// Ссылка
         /// </summary>
         public string Link { get; set; }
-
+        /// <summary>
+        /// Назначение
+        /// </summary>
+        public DestinationTypes Destination { get; set; }
         /// <summary>
         /// <see cref="Entities.Person"/>
         /// </summary>

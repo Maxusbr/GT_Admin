@@ -5,9 +5,8 @@ using System.Linq;
 using System.Web;
 using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Events;
 using Getticket.Web.API.Models.Persons;
-using Getticket.Web.DAL.Entities;
-using Getticket.Web.DAL.Infrastructure;
 
 namespace Getticket.Web.API.Services
 {
@@ -86,12 +85,12 @@ namespace Getticket.Web.API.Services
             return response;
         }
 
-        /// <see cref="ITagService.AddTagLinks(int,IEnumerable{TagModel})"/>
-        public bool AddTagLinks(int personId, IEnumerable<TagModel> models)
+        /// <see cref="ITagService.AddTagLinks(PersonTagModel)"/>
+        public bool AddTagLinks(PersonTagModel model)
         {
-            _tagRepository.DeletePersonTags(personId);
-            if (models == null || !models.Any()) return true;
-            var list = TagModelHelper.GetTagLink(personId, models);
+            _tagRepository.DeletePersonTags(model.personId);
+            if (model.models == null || !model.models.Any()) return true;
+            var list = TagModelHelper.GetTagLink(model.personId, model.models);
             var response = list.Select(link => _tagRepository.AddTagLink(link))
                     .All(taglink => taglink != null);
             return response;
@@ -106,6 +105,24 @@ namespace Getticket.Web.API.Services
             var response = list.Select(link => _tagRepository.AddTagLink(link))
                     .All(taglink => taglink != null);
             return response;
+        }
+
+        /// <see cref="ITagService.AddTagLinks(TagsEventMediaModel)"/>
+        public bool AddTagLinks(TagsEventMediaModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <see cref="ITagService.AddTagLinks(EventTagModel)"/>
+        public bool AddTagLinks(EventTagModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <see cref="ITagService.GeEventTags"/>
+        public IList<TagModel> GeEventTags(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 

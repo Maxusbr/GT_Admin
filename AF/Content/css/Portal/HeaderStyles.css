@@ -193,3 +193,25 @@ div.scrolled-view{
   .table tbody tr td span {
       white-space: normal;
   }
+
+  .tags span {
+    display: inline-block;
+    padding: 4px;
+    margin: 2px;
+    cursor: pointer;
+    background-color: #f2f1f0;
+}
+
+    .tags span.yellow {
+        background-color: #f9e665;
+    }
+
+    .tags span.green {
+        background-color: #1ea24c;
+        color: #fff;
+    }
+
+    .tags span.red {
+        background-color: #dc4f35;
+        color: #fff;
+    }

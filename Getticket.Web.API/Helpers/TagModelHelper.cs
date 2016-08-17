@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Entities;
 
 namespace Getticket.Web.API.Helpers
@@ -34,9 +35,9 @@ namespace Getticket.Web.API.Helpers
                 IsMoreThan = model.IsMoreThan};
         }
 
-        public static TagDescriptionLink GetTagLink(int idDescription, TagModel tag)
+        public static TagPersonDescriptionLink GetTagLink(int idDescription, TagModel tag)
         {
-            return new TagDescriptionLink {IdTag = tag.Id, Tag = GetTag(tag),IdDescription = idDescription };
+            return new TagPersonDescriptionLink {IdTag = tag.Id, Tag = GetTag(tag),IdDescription = idDescription };
         }
 
         public static IList<TagPersonLink> GetTagLink(int personId, IEnumerable<TagModel> tags)
@@ -44,10 +45,10 @@ namespace Getticket.Web.API.Helpers
             return tags.Select(o => new TagPersonLink {IdPerson = personId, IdTag = o.Id, Tag = GetTag(o) }).ToList();
         }
 
-        public static IList<TagMediaLink> GetTagLink(TagsPersonMediaModel model)
+        public static IList<TagPersonMediaLink> GetTagLink(TagsPersonMediaModel model)
         {
             return
-                model.Tags.Select(o => new TagMediaLink {IdMedia = model.IdMedia, IdTag = o.Id, Tag = GetTag(o)})
+                model.Tags.Select(o => new TagPersonMediaLink {IdMedia = model.IdMedia, IdTag = o.Id, Tag = GetTag(o)})
                     .ToList();
         }
     }

@@ -29,7 +29,7 @@ namespace Getticket.Web.DAL.Repositories
                     tag.UsesType.Add("Подборки");
                 if (db.TagAntroLinks.Any(o => o.IdTag == tag.Id))
                     tag.UsesType.Add("Факты");
-                if (db.TagMediaLinks.Any(o => o.IdTag == tag.Id))
+                if (db.TagPersonMediaLinks.Any(o => o.IdTag == tag.Id))
                     tag.UsesType.Add("Медиа");
             }
             return result;
@@ -56,7 +56,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="ITagRepository.GePersonMediaTags(int)" />
         public IList<Tag> GePersonMediaTags(int mediaId)
         {
-            return db.TagMediaLinks.Where(o => o.IdMedia == mediaId).Include(o => o.Tag).Select(o => o.Tag).ToList();
+            return db.TagPersonMediaLinks.Where(o => o.IdMedia == mediaId).Include(o => o.Tag).Select(o => o.Tag).ToList();
         }
 
         /// <see cref="ITagRepository.AddTag" />
@@ -70,8 +70,8 @@ namespace Getticket.Web.DAL.Repositories
             return tag;
         }
 
-        /// <see cref="ITagRepository.AddTagLink(TagDescriptionLink)" />
-        public TagDescriptionLink AddTagLink(TagDescriptionLink model)
+        /// <see cref="ITagRepository.AddTagLink(TagPersonDescriptionLink)" />
+        public TagPersonDescriptionLink AddTagLink(TagPersonDescriptionLink model)
         {
             if (model.IdTag == 0)
             {
@@ -81,7 +81,7 @@ namespace Getticket.Web.DAL.Repositories
             var tag = db.TagDescriptionLinks.FirstOrDefault(o => o.IdDescription == model.IdDescription && o.IdTag == model.IdTag);
             if (tag == null)
             {
-                tag = new TagDescriptionLink { IdTag = model.IdTag, IdDescription = model.IdDescription};
+                tag = new TagPersonDescriptionLink { IdTag = model.IdTag, IdDescription = model.IdDescription};
                 db.TagDescriptionLinks.Add(tag);
                 db.SaveChanges();
             }
@@ -129,19 +129,19 @@ namespace Getticket.Web.DAL.Repositories
             return tag;
         }
 
-        /// <see cref="ITagRepository.AddTagLink(TagMediaLink)" />
-        public TagMediaLink AddTagLink(TagMediaLink model)
+        /// <see cref="ITagRepository.AddTagLink(TagPersonMediaLink)" />
+        public TagPersonMediaLink AddTagLink(TagPersonMediaLink model)
         {
             if (model.IdTag == 0)
             {
                 if (model.Tag == null) return null;
                 model.IdTag = AddTag(model.Tag).Id;
             }
-            var tag = db.TagMediaLinks.FirstOrDefault(o => o.IdMedia == model.IdMedia && o.IdTag == model.IdTag);
+            var tag = db.TagPersonMediaLinks.FirstOrDefault(o => o.IdMedia == model.IdMedia && o.IdTag == model.IdTag);
             if (tag == null)
             {
-                tag = new TagMediaLink { IdTag = model.IdTag, IdMedia = model.IdMedia };
-                db.TagMediaLinks.Add(tag);
+                tag = new TagPersonMediaLink { IdTag = model.IdTag, IdMedia = model.IdMedia };
+                db.TagPersonMediaLinks.Add(tag);
                 db.SaveChanges();
             }
             return tag;
@@ -150,7 +150,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="ITagRepository.DeletePersonMediaTags" />
         public void DeletePersonMediaTags(int idMedia)
         {
-            db.TagMediaLinks.RemoveRange(db.TagMediaLinks.Where(o => o.IdMedia == idMedia));
+            db.TagPersonMediaLinks.RemoveRange(db.TagPersonMediaLinks.Where(o => o.IdMedia == idMedia));
             db.SaveChanges();
         }
 
@@ -175,6 +175,12 @@ namespace Getticket.Web.DAL.Repositories
             if (antro == null) return;
             db.TagAntroLinks.RemoveRange(db.TagAntroLinks.Where(o => o.IdTagAntro == antro.Id));
             db.SaveChanges();
+        }
+
+        /// <see cref="ITagRepository.GeEventMediaTags" />
+        public IList<Tag> GeEventMediaTags(int mediaId)
+        {
+            return db.TagPersonMediaLinks.Where(o => o.IdMedia == mediaId).Include(o => o.Tag).Select(o => o.Tag).ToList();
         }
 
 

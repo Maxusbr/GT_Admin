@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Getticket.Web.API.Models
+﻿namespace Getticket.Web.API.Models.Persons
 {
     /// <summary>
     /// Связь ключевых слов

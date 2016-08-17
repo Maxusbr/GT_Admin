@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Getticket.Web.API.Helpers;
+using Getticket.Web.API.Models;
 using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Entities;
+using Getticket.Web.DAL.Enums;
 using Getticket.Web.DAL.Infrastructure;
 
 namespace Getticket.Web.API.Services
@@ -346,7 +348,7 @@ namespace Getticket.Web.API.Services
         {
             foreach (var item in models)
             {
-                var result = _personRepository.UpdateConnectionType(new PersonConnectionType { Id = item.Id, Name = item.Name });
+                var result = _personRepository.UpdateConnectionType(new ConnectionType { Id = item.Id, Name = item.Name });
                 if (result == null) return ServiceResponce
                  .FromFailed()
                  .Result($"Error save connection type");
@@ -494,7 +496,8 @@ namespace Getticket.Web.API.Services
                     id_Person = pesonId,
                     id_SocialLinkType = o.IdSocialLinkType,
                     Link = o.Link,
-                    Description = o.Description
+                    Description = o.Description,
+                    Destination = (DestinationTypes)o.Destination
                 }).ToList(), userId);
             return result ? ServiceResponce
                 .FromSuccess()
@@ -527,7 +530,7 @@ namespace Getticket.Web.API.Services
         /// Возвращает список типов медиа
         /// </summary>
         /// <returns></returns>
-        public IList<PersonMediaTypeModel> GetMediaTypes()
+        public IList<MediaTypeModel> GetMediaTypes()
         {
             var result = _personRepository.GetMediaTypes();
             return PersonModelHelper.GetMediaTypeModels(result);
@@ -538,11 +541,11 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateMediaTypes(IEnumerable<PersonMediaTypeModel> models)
+        public ServiceResponce UpdateMediaTypes(IEnumerable<MediaTypeModel> models)
         {
             foreach (var item in models)
             {
-                var result = _personRepository.UpdateMediaType(new PersonMediaType { Id = item.Id, Name = item.Name });
+                var result = _personRepository.UpdateMediaType(new MediaType { Id = item.Id, Name = item.Name });
                 if (result == null) return ServiceResponce
                  .FromFailed()
                  .Result($"Error save media type");
@@ -558,7 +561,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        public ServiceResponce DeleteMediaTypes(IEnumerable<PersonMediaTypeModel> models)
+        public ServiceResponce DeleteMediaTypes(IEnumerable<MediaTypeModel> models)
         {
             if (models.Any(item => !_personRepository.DeleteMediaType(item.Id)))
             {
@@ -817,6 +820,12 @@ namespace Getticket.Web.API.Services
         public int UpdatePlace(string country, string place)
         {
             return _personRepository.UpdatePlace(country, place);
+        }
+
+        /// <see cref="IPersonService.SaveDescriptionSchema"/>
+        public bool SaveDescriptionSchema(int id, PageBlockModel model)
+        {
+            return _personRepository.SaveDescriptionSchema(id, PageModelHelper.GetPageBlock(model));
         }
     }
 

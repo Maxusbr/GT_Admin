@@ -82,5 +82,28 @@ namespace Getticket.Web.DAL.Repositories
                 db.PersonLogs.OrderByDescending(o => o.Date).Include(o => o.User)
                     .FirstOrDefault(o => o.IdPerson == personId && o.IdProperty == id && o.Type == LogType.Anthropometry);
         }
+
+        /// <see cref="ILogRepository.GetLastChangeEventConnection" />
+        public EventLog GetLastChangeEventConnection(int idEvent, int id)
+        {
+            return db.EventLogs.OrderByDescending(o => o.Date)
+                .FirstOrDefault(o => o.EventId == idEvent && o.Type == LogType.Entity);
+        }
+
+        /// <see cref="ILogRepository.GetLastChangeEventMedia" />
+        public EventLog GetLastChangeEventMedia(int idEvent, int id)
+        {
+            return
+                db.EventLogs.OrderByDescending(o => o.Date).Include(o => o.User)
+                    .FirstOrDefault(o => o.EventId == idEvent && o.IdProperty == id && o.Type == LogType.Media);
+        }
+
+        /// <see cref="ILogRepository.GetLastChangeEventDescription" />
+        public EventLog GetLastChangeEventDescription(int idEvent, int id)
+        {
+            return
+                db.EventLogs.OrderByDescending(o => o.Date).Include(o => o.User)
+                    .FirstOrDefault(o => o.EventId == idEvent && o.IdProperty == id && o.Type == LogType.Description);
+        }
     }
 }

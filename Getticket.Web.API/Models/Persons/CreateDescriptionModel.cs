@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Getticket.Web.API.Models.Persons;
+﻿using System.Collections.Generic;
 
-namespace Getticket.Web.API.Models
+namespace Getticket.Web.API.Models.Persons
 {
     public class CreateDescriptionModel
     {

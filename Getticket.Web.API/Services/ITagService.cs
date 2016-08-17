@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Getticket.Web.API.Controllers;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Events;
 using Getticket.Web.API.Models.Persons;
 
 namespace Getticket.Web.API.Services
@@ -56,10 +58,8 @@ namespace Getticket.Web.API.Services
         /// <summary>
         /// Добавляет связь <see cref="TagModel"/> с <see cref="PersonModel"/>
         /// </summary>
-        /// <param name="personId"></param>
-        /// <param name="models"></param>
         /// <returns></returns>
-        bool AddTagLinks(int personId, IEnumerable<TagModel> models);
+        bool AddTagLinks(PersonTagModel model);
 
         /// <summary>
         /// Добавляет связь <see cref="TagModel"/> с <see cref="PersonMediaModel"/>
@@ -67,6 +67,27 @@ namespace Getticket.Web.API.Services
         /// <param name="model"></param>
         /// <returns></returns>
         bool AddTagLinks(TagsPersonMediaModel model);
+
+        /// <summary>
+        /// Добавляет связь <see cref="TagModel"/> с <see cref="EventMediaModel"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool AddTagLinks(TagsEventMediaModel model);
+
+        /// <summary>
+        /// Добавляет связь <see cref="TagModel"/> с <see cref="EventModel"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool AddTagLinks(EventTagModel model);
+
+        /// <summary>
+        /// Возвращает список <see cref="TagModel"/> для <see cref="EventModel"/> с Id = <paramref name="id"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<TagModel> GeEventTags(int id);
     }
 
+    
 }

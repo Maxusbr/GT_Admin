@@ -20,7 +20,17 @@
         <textarea style="min-height:200px; width:360px;" ng-model="editableTizer.DescriptionText"></textarea>
         <br />
         <h5>Ключи (от 3 до 10)</h5>
-        <textarea style="min-height:100px; width:360px;"></textarea>
+        <div class="tags">
+            <tags-input ng-model="personTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
+            </tags-input>
+        </div>
+        <script type="text/ng-template" id="my-custom-template">
+            <div class="right-panel">
+                <span ng-bind-html="$highlight($getDisplayText())"></span>
+                <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
+            </div>
+        </script>
         <br />
         <i>Тизер = это краткая штукотень. Напишите сюда 180 символов для "прочитал - и все пиздец как понятно". Тут Виталий должен какой то текст скостромить для пользователя, который подскажет ему, что это за хрень</i>
     </div>

@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function personNotesSourceController($rootScope, $scope, $cookieStore) {
+    function personNotesSourceController($rootScope, $scope, $cookieStore, personService) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
@@ -16,6 +16,7 @@
             { Id: 5, Name: "Главная" }
         ];
 
+        //TODO get page blocks
         $scope.bloks = [
             { Id: 0, Name: "Не указано" },
             { Id: 1, Name: "Другие персоны подборки" }
@@ -33,9 +34,15 @@
                 case 1:
                     return "Поиск";
                 case 2:
-                    return `Мероприятие/${item.PageBlock.Page.Event.Name}`;
+                    $scope.detailId = $rootScope.pageSchema.Page.IdEvent;
+                    return $rootScope.events.forEach(function (item) {
+                        $scope.details.push({ Id: item.Id, Name: `${item.PageBlock.Page.Event.Name}` });
+                    });
                 case 3:
-                    return `Площадка/${item.PageBlock.Page.Hall.Name}`;
+                    $scope.detailId = $rootScope.pageSchema.Page.IdHall;
+                    return $rootScope.halls.forEach(function (item) {
+                        $scope.details.push({ Id: item.Id, Name: `${item.PageBlock.Page.Hall.Name}` });
+                    });
                 case 4:
                     return "Профиль";
                 case 5:
@@ -46,10 +53,36 @@
         }
         $scope.getDetail($rootScope.pageSchema.Page.PageType);
 
+        $scope.changeDetail = function (item) {
+            switch ($rootScope.pageSchema.Page.PageType) {
+                case 0:
+                    $rootScope.pageSchema.Page.IdPerson = item;
+                    break;
+                case 1: break;
+                    return "Поиск";
+                case 2:
+                    $rootScope.pageSchema.Page.IdEvent = item;
+                    break;
+                case 3:
+                    $rootScope.pageSchema.Page.IdHall = item;
+                    break;
+                case 4: break;
+                    return "Профиль";
+                case 5: break;
+                    return "Главная";
+                default:
+                    return "";
+            }
+        }
+
         $rootScope.savePersonNotesSource = function() {
             //TODO: save changes or create new source
             //TODO: update notes list
             //TODO: close this window
+            personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.pageSchema, function () {
+                $rootScope.getDescript();
+                app.closeView('disPersonNotesSource');
+            });
         }
 
         $rootScope.displayPersonWTF = function display_person_WTF() {
@@ -63,5 +96,5 @@
         .module('app')
         .controller('personNotesSourceController', personNotesSourceController);
 
-    personNotesSourceController.$inject = ['$rootScope', '$scope', '$cookieStore'];
+    personNotesSourceController.$inject = ['$rootScope', '$scope', '$cookieStore', 'personService'];
 })();

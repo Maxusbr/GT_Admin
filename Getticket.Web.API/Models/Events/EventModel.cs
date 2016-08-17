@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Getticket.Web.API.Models
+namespace Getticket.Web.API.Models.Events
 {
     /// <summary>
     /// Сущность для хранения событий

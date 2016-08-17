@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Getticket.Web.API.Helpers;
+using Getticket.Web.API.Models;
 using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Infrastructure;
@@ -216,21 +217,21 @@ namespace Getticket.Web.API.Services
         /// Возвращает список типов медиа
         /// </summary>
         /// <returns></returns>
-        IList<PersonMediaTypeModel> GetMediaTypes();
+        IList<MediaTypeModel> GetMediaTypes();
 
         /// <summary>
         /// Добавить/Изменить типы медиа
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        ServiceResponce UpdateMediaTypes(IEnumerable<PersonMediaTypeModel> models);
+        ServiceResponce UpdateMediaTypes(IEnumerable<MediaTypeModel> models);
 
         /// <summary>
         /// Удалить типы медиа
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        ServiceResponce DeleteMediaTypes(IEnumerable<PersonMediaTypeModel> models);
+        ServiceResponce DeleteMediaTypes(IEnumerable<MediaTypeModel> models);
 
         /// <summary>
         /// Добавить/Изменить список медиа для Person c Id = <paramref name="pesonId"/>
@@ -351,6 +352,13 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         int UpdatePlace(string country, string place);
 
+        /// <summary>
+        /// Сохранить схему описания
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool SaveDescriptionSchema(int id, PageBlockModel model);
     }
 
 }

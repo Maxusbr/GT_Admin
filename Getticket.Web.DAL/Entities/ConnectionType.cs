@@ -8,12 +8,12 @@ namespace Getticket.Web.DAL.Entities
     /// <summary>
     /// Тип связи
     /// </summary>
-    public class PersonConnectionType : BaseEntity
+    public class ConnectionType : BaseEntity
     {
         /// <summary>
         /// Конструктор
         /// </summary>
-        public PersonConnectionType(){}
+        public ConnectionType(){}
 
         /// <summary>
         /// Наименование

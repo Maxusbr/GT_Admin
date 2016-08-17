@@ -33,7 +33,7 @@
         $scope.Id = $rootScope.personId;
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
-            $scope.person = data;
+            $rootScope.person = data;
             personService.getCountes($scope.Id, function (counts) {
                 $scope.counts = counts;
             });

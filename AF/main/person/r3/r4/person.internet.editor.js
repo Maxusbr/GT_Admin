@@ -3,17 +3,7 @@
 
     function PersonInternetEditorController($rootScope, $scope, personService) {
         var vm = this;
-        //назначения ссылок
-        $scope.destinationtypes = [
-            {
-                Id: 1,
-                Name: 'Публичная ссылка'
-            },
-            {
-                Id: 2,
-                Name: 'Для внутреннего использования'
-            }
-        ];
+        
         //редактируемая запись
         $rootScope.editedModel = $rootScope.EditedLink ? $rootScope.EditedLink : { IdDestination: 1, Link: "", Description: ""};
 

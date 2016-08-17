@@ -246,13 +246,13 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.GetConnectionTypes" />
-        public IList<PersonConnectionType> GetConnectionTypes()
+        public IList<ConnectionType> GetConnectionTypes()
         {
-            return db.PersonConnectionType.ToList();
+            return db.ConnectionTypes.ToList();
         }
 
         /// <see cref="IPersonRepository.UpdateConnectionType" />
-        public PersonConnectionType UpdateConnectionType(PersonConnectionType type)
+        public ConnectionType UpdateConnectionType(ConnectionType type)
         {
             if (type.Id == 0)
             {
@@ -277,9 +277,9 @@ namespace Getticket.Web.DAL.Repositories
         public bool DeleteConnectionType(int id)
         {
             if (id <= 0) return false;
-            var item = db.PersonConnectionType.FirstOrDefault(u => u.Id == id);
+            var item = db.ConnectionTypes.FirstOrDefault(u => u.Id == id);
             if (item == null) return false;
-            db.PersonConnectionType.Remove(item);
+            db.ConnectionTypes.Remove(item);
             db.SaveChanges();
             return true;
         }
@@ -486,13 +486,13 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.GetMediaTypes" />
-        public IList<PersonMediaType> GetMediaTypes()
+        public IList<MediaType> GetMediaTypes()
         {
-            return db.PersonMediaType.ToList();
+            return db.MediaTypes.ToList();
         }
 
         /// <see cref="IPersonRepository.UpdateMediaType" />
-        public PersonMediaType UpdateMediaType(PersonMediaType type)
+        public MediaType UpdateMediaType(MediaType type)
         {
             if (type.Id == 0)
             {
@@ -517,9 +517,9 @@ namespace Getticket.Web.DAL.Repositories
         public bool DeleteMediaType(int id)
         {
             if (id <= 0) return false;
-            var item = db.PersonMediaType.FirstOrDefault(u => u.Id == id);
+            var item = db.MediaTypes.FirstOrDefault(u => u.Id == id);
             if (item == null) return false;
-            db.PersonMediaType.Remove(item);
+            db.MediaTypes.Remove(item);
             db.SaveChanges();
             return true;
         }
@@ -840,6 +840,74 @@ namespace Getticket.Web.DAL.Repositories
             return db.PersonAntro.Count(o => o.id_Person == id);
         }
 
+        /// <see cref="IPersonRepository.SaveDescriptionSchema" />
+        public bool SaveDescriptionSchema(int id, PageBlock pageBlock)
+        {
+            var page = SavePage(pageBlock.Page);
+            if (page == null) return false;
+            pageBlock.IdPage = page.Id;
+            pageBlock.Page = page;
+            var pageblock = SavePageBlock(pageBlock);
+            if (pageblock == null) return false;
+            if (id == 0) return true;
+            var desc = db.PersonDescriptions.FirstOrDefault(o => o.Id == id);
+            if (desc == null) return false;
+            desc.IdBlock = pageblock.Id;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private PageBlock SavePageBlock(PageBlock pageBlock)
+        {
+            if (pageBlock.Id == 0)
+            {
+                db.Entry(pageBlock).State = EntityState.Added;
+            }
+            else if (pageBlock.Id > 0)
+            {
+                var pr = db.PageBlocks.FirstOrDefault(o => o.Id == pageBlock.Id);
+                db.Entry(pr).CurrentValues.SetValues(pageBlock);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return pageBlock;
+        }
+
+        private PageSchema SavePage(PageSchema page)
+        {
+            if (page.Id == 0)
+            {
+                db.Entry(page).State = EntityState.Added;
+            }
+            else if (page.Id > 0)
+            {
+                var pr = db.PageSchemas.FirstOrDefault(o => o.Id == page.Id);
+                db.Entry(pr).CurrentValues.SetValues(page);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return page;
+        }
+
         private void SaveLog<T>(T from, T to, int personId, int userId, LogType type) where T : BaseEntity
         {
             var log = new PersonLog
@@ -858,16 +926,4 @@ namespace Getticket.Web.DAL.Repositories
         }
     }
 
-    public class ComparerDescription : IEqualityComparer<PersonDescription>
-    {
-        public bool Equals(PersonDescription x, PersonDescription y)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetHashCode(PersonDescription obj)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

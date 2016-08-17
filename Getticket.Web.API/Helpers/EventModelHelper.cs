@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using Getticket.Web.API.Models.Events;
 using Getticket.Web.API.Models.Persons;
 
 namespace Getticket.Web.API.Helpers
@@ -43,6 +45,40 @@ namespace Getticket.Web.API.Helpers
 
             return result;
         }
-        
+
+        public static IEnumerable<EventConnectionModel> GetConnectionModels(IList<EventConnection> getConnections)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IEnumerable<EventMediaModel> GetMediaModels(IList<EventMedia> getMedia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IEnumerable<EventDescriptionModel> GetDescriptionModels(IList<EventDescription> getDescriptions)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Event GetEvent(EventModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IList<EventConnectionTypeModel> GetConnectionTypeModels(IList<ConnectionType> result)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IList<MediaTypeModel> GetMediaTypeModels(IList<MediaType> result)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static IList<EventDescriptionTypeModel> GetDescriptionTypeModels(IList<EventDescriptionType> result)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

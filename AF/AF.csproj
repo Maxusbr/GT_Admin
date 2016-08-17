@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app-services\event.service.js" />
     <Content Include="Content\angular-material.min.css" />
     <Content Include="login\login.controller.js" />
     <Content Include="login\login.view.html" />
@@ -92,14 +93,26 @@
     <Content Include="main\events\r3\events.notes.js" />
     <Content Include="main\events\r3\events.users.html" />
     <Content Include="main\events\r3\events.users.js" />
-    <Content Include="main\events\r3\r4\peron.fact.create.html" />
-    <Content Include="main\events\r3\r4\peron.fact.create.js" />
-    <Content Include="main\events\r3\r4\person.internet.editor.html" />
-    <Content Include="main\events\r3\r4\person.internet.editor.js" />
-    <Content Include="main\events\r3\r4\person.notes.source.html" />
-    <Content Include="main\events\r3\r4\person.notes.source.js" />
-    <Content Include="main\events\r3\r4\person.notes.static.html" />
-    <Content Include="main\events\r3\r4\person.notes.static.js" />
+    <Content Include="main\events\r3\r4\events.connections.create.html" />
+    <Content Include="main\events\r3\r4\events.connections.create.js" />
+    <Content Include="main\events\r3\r4\events.connections.edit.html" />
+    <Content Include="main\events\r3\r4\events.connections.edit.js" />
+    <Content Include="main\events\r3\r4\events.fact.create.html" />
+    <Content Include="main\events\r3\r4\events.fact.create.js" />
+    <Content Include="main\events\r3\r4\events.fact.edit.html" />
+    <Content Include="main\events\r3\r4\events.fact.edit.js" />
+    <Content Include="main\events\r3\r4\events.media.create.html" />
+    <Content Include="main\events\r3\r4\events.media.create.js" />
+    <Content Include="main\events\r3\r4\events.media.edit.html" />
+    <Content Include="main\events\r3\r4\events.media.edit.js" />
+    <Content Include="main\events\r3\r4\events.notes.create.html" />
+    <Content Include="main\events\r3\r4\events.notes.create.js" />
+    <Content Include="main\events\r3\r4\events.notes.edit.html" />
+    <Content Include="main\events\r3\r4\events.notes.edit.js" />
+    <Content Include="main\events\r3\r4\events.users.create.html" />
+    <Content Include="main\events\r3\r4\events.users.create.js" />
+    <Content Include="main\events\r3\r4\events.users.edit.html" />
+    <Content Include="main\events\r3\r4\events.users.edit.js" />
     <Content Include="main\person\r3\r4\person.antro.editor.html" />
     <Content Include="main\person\r3\r4\person.antro.editor.js" />
     <Content Include="main\person\r3\r4\person.media.editor.html" />

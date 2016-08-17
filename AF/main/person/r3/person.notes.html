@@ -9,9 +9,21 @@
     </div>
     <div class="win-menu">
     </div>
+
     <div class="win-content">
         <h5>Все теги персоны</h5>
         <i>Ноги, Руки, главноеХвост</i>
+        <div class="tags">
+            <tags-input ng-model="personTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
+            </tags-input>
+        </div>
+        <script type="text/ng-template" id="my-custom-template">
+            <div class="right-panel">
+                <span ng-bind-html="$highlight($getDisplayText())"></span>
+                <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
+            </div>
+        </script>
         <h5>Все описания для персоны</h5>
         <table class="table" cg-busy="Promise">
             <thead>
@@ -26,27 +38,37 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in descriptionlist">
-                    <td><a href="#" ng-click="displaySource(item.PageBlock)">
-                        <span ng-show="item.PageBlock">{{getSchemaName(item)}}</span>
-                        <span ng-show="!item.PageBlock">Без источника</span>
-                    </a></td>
-                    <td><a href="#" ng-click="displaySource(item.PageBlock)">
-                        <span ng-show="item.PageBlock">{{item.PageBlock.Type.Name}}</span>
-                        <span ng-show="!item.PageBlock">Без источника</span>
-                    </a></td>
-                    <td><a href="#" ng-click="displaySource(item.PageBlock)">
-                        <span  ng-show="item.PageBlock">TODO Подборка "Про ноги"</span>
-                        <span ng-show="!item.PageBlock">Без источника</span>
-                    </a></td>
-                    <td><a href="#" ng-click="displayNotesStatic(item.StaticDescription)">
-                        <span ng-show="item.RequiredStaticDescription && item.StaticDescription">Указан</span>
-                        <span ng-show="!item.RequiredStaticDescription">Не требуется</span>
-                        <span ng-show="item.RequiredStaticDescription && !item.StaticDescription">Не указан</span>
-                    </a></td>
-                    <td><a href="#" ng-click="displayNotesTizer(item)">
-                        <span ng-show="item.DescriptionText">Указан</span>
-                        <span ng-show="!item.DescriptionText">Не указан</span>
-                    </a></td>
+                    <td>
+                        <a href="#" ng-click="displaySource(item.Id, item.PageBlock)">
+                            <span ng-show="item.PageBlock">{{getSchemaName(item)}}</span>
+                            <span ng-show="!item.PageBlock">Без источника</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" ng-click="displaySource(item.Id, item.PageBlock)">
+                            <span ng-show="item.PageBlock">{{item.PageBlock.Type.Name}}</span>
+                            <span ng-show="!item.PageBlock">Без источника</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" ng-click="displaySource(item.Id, item.PageBlock)">
+                            <span ng-show="item.PageBlock">TODO Подборка "Про ноги"</span>
+                            <span ng-show="!item.PageBlock">Без источника</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" ng-click="displayNotesStatic(item.StaticDescription)">
+                            <span ng-show="item.RequiredStaticDescription && item.StaticDescription">Указан</span>
+                            <span ng-show="!item.RequiredStaticDescription">Не требуется</span>
+                            <span ng-show="item.RequiredStaticDescription && !item.StaticDescription">Не указан</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" ng-click="displayNotesTizer(item)">
+                            <span ng-show="item.DescriptionText">Указан</span>
+                            <span ng-show="!item.DescriptionText">Не указан</span>
+                        </a>
+                    </td>
                     <td><a href="#" ng-click="displayNotesAdaptDescription()">TODO 8</a></td>
                 </tr>
                 <!--<tr>

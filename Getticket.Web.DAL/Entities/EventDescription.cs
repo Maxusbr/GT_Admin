@@ -37,5 +37,31 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [ForeignKey("IdType")]
         public virtual EventDescriptionType DescriptionType { get; set; }
+
+        /// <summary>
+        /// Статус
+        /// </summary>
+        public string Status { get; set; }
+
+        /// <summary>
+        /// Статическое описание требуется?
+        /// </summary>
+        public bool RequiredStaticDescription { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для схемы размещения
+        /// </summary>
+        public int? IdBlock { get; set; }
+
+        /// <summary>
+        /// Статическое описание
+        /// </summary>
+        public EventDescription StaticDescription { get; set; }
+
+        /// <summary>
+        /// размещение описания
+        /// </summary>
+        [ForeignKey("IdBlock")]
+        public virtual PageBlock PageBlock { get; set; }
     }
 }
