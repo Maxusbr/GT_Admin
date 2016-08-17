@@ -1,0 +1,74 @@
+﻿<div class="win-container r2 personViewOne" style="width:800px;" ng-controller="UserViewoneController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Пользователь: 
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personViewOne')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="editUser()">
+                <span class="fa fa-edit"></span>
+                <br />
+                Редактировать
+            </a>
+        </div>
+        <!--<div class="win-menu-button" style="width:600px;">
+            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" ng-model="personaMenuFilter" />
+        </div>-->
+    </div>
+    <div class="win-content">
+        <div class="panel-info" cg-busy="Promise">
+            <div class="row" ng-if="person">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <br/>
+                            Название:  Новогодний симфонический концерт Большого театра
+                            <br/>
+                        </div>
+                        <div class="col-lg-6">
+                            <br/>
+                            Катагория: Театр
+                            <br/>
+                            <br/>
+                            Подкатегория: Командные виды
+                            <br/>
+                        </div>
+                        <div class="col-lg-6">
+                            <br/>
+                            Организатор: Большой театр
+                            <br/>
+                            <br/>
+                            Возрастные ограничегия: 12+
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <!--person menu-->
+                    <a href="#" class="btn btn-block btn-default" ng-click="displayNotes()">
+                        <span class="fa fa-book"></span> Описание ({{counts.CountDescriptions}})
+                    </a>
+                    <a href="#" class="btn btn-block btn-default" ng-click="displayFacts()">
+                        <span class="fa fa-bookmark"></span> События ({{counts.CountFacts}})
+                    </a>
+                    <a href="#" class="btn btn-block btn-default" ng-click="displayConnections()">
+                        <span class="fa fa-child"></span> Связи ({{counts.CountConnects}})
+                    </a>
+                    <a href="#" class="btn btn-block btn-default" ng-click="displayMedia()">
+                        <span class="fa fa-file-video-o"></span> Медиа и файлы ({{counts.CountMedias}})
+                    </a>
+                    <a href="#" class="btn btn-block btn-default" ng-click="displayUser()">
+                        <span class="fa fa-cloud"></span> Права и пользователи ({{counts.CountLinks}})
+                    </a>
+                    <!-- <a href="#" class="btn btn-block btn-default" ng-click="displayAntro()">
+                        <span class="fa fa-heart-o"></span> Антропометрия ({{counts.CountAntros}})
+                    </a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
