@@ -115,6 +115,8 @@
     <Content Include="main\events\r3\r4\events.users.edit.js" />
     <Content Include="main\person\r3\r4\person.antro.editor.html" />
     <Content Include="main\person\r3\r4\person.antro.editor.js" />
+    <Content Include="main\person\r3\r4\person.media.create.html" />
+    <Content Include="main\person\r3\r4\person.media.create.js" />
     <Content Include="main\person\r3\r4\person.media.editor.html" />
     <Content Include="main\person\r3\r4\person.media.editor.js" />
     <Content Include="main\person\r3\r4\person.notes.ades.html" />
