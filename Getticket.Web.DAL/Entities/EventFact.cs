@@ -45,7 +45,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// <see cref="Entities.Person"/>
         /// </summary>
-        [ForeignKey("id_Person")]
+        [ForeignKey("id_Event")]
         public virtual Event Event { get; set; }
 
         /// <summary>
