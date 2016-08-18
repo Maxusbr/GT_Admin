@@ -11,9 +11,13 @@
         if (!$rootScope.events)
             eventService.getEvents();
         var mediaAssociations = [];
-
-        $scope.personeRange = $rootScope.editedMedia.Links.PersonLinks;
-        $scope.eventRange = $rootScope.editedMedia.Links.EventLinks;
+        if ($rootScope.editedMedia.Links) {
+            $scope.personeRange = $rootScope.editedMedia.Links.PersonLinks;
+            $scope.eventRange = $rootScope.editedMedia.Links.EventLinks;
+        } else {
+            $scope.personeRange = [];
+            $scope.eventRange = [];
+        }
         function save(path) {
             $rootScope.editedMedia.id_Person = $rootScope.personId;
             $rootScope.editedMedia.MediaLink = path;
