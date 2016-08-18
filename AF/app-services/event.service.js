@@ -102,8 +102,8 @@
                 .error(function (data) { callback(data); });
         }
         
-        service.getFact = getFact;
-        function getFact(id, callback) {
+        service.getFact = function getFact(id, callback) {
+            console.log('get facts - '+ id);
             return $http.get(`${serviceUrl}events/fact/${id}`).success(function (data) {
                 callback(data);
             });

@@ -40,5 +40,5 @@
         .module('app')
         .controller('EventFactsController', EventFactsController);
 
-    EventFactsController.$inject = ['$rootScope', '$scope', 'personService'];
+    EventFactsController.$inject = ['$rootScope', '$scope', 'eventService'];
 })();

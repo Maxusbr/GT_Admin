@@ -10,7 +10,7 @@
             $rootScope.editedFact.id_Event = $rootScope.eventId;
             eventService.saveEntity($rootScope.eventId, $rootScope.editedFact, 'fact', function (data) {
                 $rootScope.getFacts();
-                app.closeView('personFactEdit');
+                app.closeView('personFactCreate');
             });
         }
 
