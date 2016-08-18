@@ -22,7 +22,8 @@
             }
             console.log($scope.person);
             personService.Save($scope.person, function (data) {
-                personService.getPersons(app.closeView('personEdit'));
+                personService.getPersons();
+                app.closeView('personEdit');
             });
         }
     }
