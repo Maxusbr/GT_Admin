@@ -14,6 +14,7 @@
                 default:
                     break;
             }
+            
         }
         function getConnectionList(id) {
             $scope.connectionList = [];
@@ -95,7 +96,9 @@
         //    }
         //}
 
-        $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
+        console.log
+
+            $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
 
         $rootScope.saveConnection = function () {
             console.log('save connection click');
@@ -105,6 +108,7 @@
             $rootScope.editedConnection.Event = null;
             $rootScope.editedConnection.PersonConnectTo = null;
             $rootScope.editedConnection.id_Person = $rootScope.personId;
+            console.log($rootScope.editedConnection);
             personService.saveEntity($rootScope.personId, $rootScope.editedConnection, 'connection', function (data) {
                 $rootScope.getPersonConnection();
                 app.closeView('personConnectionEdit');
