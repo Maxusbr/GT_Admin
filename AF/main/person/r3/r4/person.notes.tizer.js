@@ -10,15 +10,22 @@
             { id_DescriptionType: 1, RequiredStaticDescription: true };
         $scope.notRequired = !$scope.tizer.RequiredStaticDescription;
 
-        $scope.savePersonNotesTizer = function(){
+        function saveTizerTags() {
+            if ($scope.tizerTags.length && $scope.tizer.Id > 0)
+                personService.saveTags($scope.tizer.Id, $scope.tizerTags, 'tizer');
+        }
+
+        $scope.savePersonNotesTizer = function () {
             //TODO: save changes
             //TODO: update notes table
             //TODO: close window
             $scope.tizer.id_Person = $rootScope.personId;
             $scope.tizer.id_DescriptionType = 1;
             personService.saveEntity(0, $scope.tizer, 'description', function (data) {
-                if ($rootScope.editableDesc.id_DescriptionType === 2 && data > 0)
-                    personService.saveEntity(data, $rootScope.editableDesc, 'description', function(data) {
+                $scope.tizer.Id = data;
+                saveTizerTags();
+                if ($rootScope.editableDesc.id_DescriptionType === 2 && $scope.tizer.Id > 0)
+                    personService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (data) {
                         $rootScope.getDescript();
                         app.closeView('disPersonNotesTizer');
                     });
@@ -35,15 +42,15 @@
             $scope.tags.push.apply($scope.tags, data);
         });
 
-        function getPersonTags() {
-            personService.getPersonTags($rootScope.person.Id, function (data) {
-                $scope.personTags = [];
-                $scope.personTags.push.apply($scope.personTags, data);
-            });
+        function getTizerTags() {
+            if ($scope.tizer.Id)
+                personService.getEntityTags($scope.tizer.Id, 'tizer', function (data) {
+                    $scope.tizerTags = [];
+                    $scope.tizerTags.push.apply($scope.tizerTags, data);
+                });
         }
+        getTizerTags();
 
-        if ($rootScope.person)
-            getPersonTags();
 
         $scope.loadTags = function (query) {
             var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
@@ -52,6 +59,7 @@
             });
             return result;
         }
+
     }
 
     angular

@@ -607,6 +607,32 @@ namespace Getticket.Web.API.Services
             }, userId)).All(result => result != null);
         }
 
+        /// <see cref="IPersonService.UpdateMedia(PersonMediaModel, int)"/>
+        public bool UpdateMedia(PersonMediaModel model, int userId)
+        {
+            var result = _personRepository.UpdateMedia(new PersonMedia
+            {
+                Id = model.Id,
+                id_Person = model.id_Person,
+                id_MediaType = model.id_MediaType,
+                MediaLink = model.MediaLink,
+                Description = model.Description,
+                Name = model.Name
+            }, userId);
+            if (result == null) return false;
+            if (!model.Tags.Any()) return true;
+            return model.Tags.Select(item => _tagRepository.AddTagLink(new TagPersonMediaLink
+            {
+                IdTag = item.Id,
+                IdMedia = result.Id,
+                Tag = new Tag
+                {
+                    Id = item.Id,
+                    Name = item.Name
+                }
+            })).All(res => res != null);
+        }
+
         /// <summary>
         /// Удалить список медиа
         /// </summary>
@@ -866,7 +892,7 @@ namespace Getticket.Web.API.Services
         public IList<UserPageCategoryModel> GetUserPageCategory()
         {
             var result = _personRepository.GetUserPageCategory();
-            return result.Select(o => new UserPageCategoryModel {Id = o.Id, Name = o.Name}).ToList();
+            return result.Select(o => new UserPageCategoryModel { Id = o.Id, Name = o.Name }).ToList();
         }
     }
 

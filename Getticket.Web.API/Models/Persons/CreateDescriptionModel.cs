@@ -29,6 +29,12 @@ namespace Getticket.Web.API.Models.Persons
     public class TagsPersonMediaModel
     {
         public int IdMedia { get; set; }
+        public IEnumerable<TagModel> Tags { get; set; }
+    }
+
+    public class TagsTizerModel
+    {
+        public int IdTizer { get; set; }
         public IList<TagModel> Tags { get; set; }
     }
 }

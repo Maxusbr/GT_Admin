@@ -156,6 +156,12 @@
     <Content Include="main\person\r3\r4\person.notes.static.js" />
     <Content Include="main\person\r3\r4\r5\person.notes.ades.edit.html" />
     <Content Include="main\person\r3\r4\r5\person.notes.ades.edit.js" />
+    <Content Include="main\user\r3\user.entry.html" />
+    <Content Include="main\user\r3\user.entry.js" />
+    <Content Include="main\user\r3\user.message.html" />
+    <Content Include="main\user\r3\user.message.js" />
+    <Content Include="main\user\r3\user.statistic.html" />
+    <Content Include="main\user\r3\user.statistic.js" />
     <Content Include="main\user\user.edit.html" />
     <Content Include="main\user\user.edit.js" />
     <Content Include="main\user\user.viewone.html" />

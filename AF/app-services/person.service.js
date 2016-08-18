@@ -169,8 +169,8 @@
             });
         }
 
-        function getPersonTags(id, callback) {
-            $http.get(`${serviceUrl}persons/tags/${id}`).success(function (data) {
+        function getEntityTags(id, entity, callback) {
+            $http.get(`${serviceUrl}persons/tags/${entity}/${id}`).success(function (data) {
                 callback(data);
             });
         }
@@ -183,21 +183,27 @@
             });
         }
 
-        function savePersonTags(id, model, callback) {
-            return $http.post(`${serviceUrl}persons/tags/save/${id}`, model).success(function (data) {
-                callback(data);
+        function saveTags(id, model, entity, callback) {
+            return $http.post(`${serviceUrl}persons/tags/save/${entity}/${id}`, model).success(function (data) {
+                if(callback)
+                    callback(data);
             }).error(function (data) {
-                callback(data);
+                if(callback)
+                    callback(data);
             });
         }
         service.getTags = getTags;
-        service.getPersonTags = getPersonTags;
+        service.getEntityTags = getEntityTags;
         service.getMediaTags = function (id, callback) {
             return $http.get(`${serviceUrl}persons/media/tags/${id}`).success(function (data) {
                 callback(data);
             });
         };
-
+        service.getTizerTags = function (id, callback) {
+            return $http.get(`${serviceUrl}persons/tizer/tags/${id}`).success(function (data) {
+                callback(data);
+            });
+        };
         service.getTypes = getTypes;
         service.getPersons = getPersons;
 
@@ -222,7 +228,7 @@
         service.getPlaces = getPlaces;
         service.Save = save;
         service.saveDescriptions = saveDescriptions;
-        service.savePersonTags = savePersonTags;
+        service.saveTags = saveTags;
 
         service.getPerson = function (id, callback) {
             return $http.get(`${serviceUrl}persons/${id}`)

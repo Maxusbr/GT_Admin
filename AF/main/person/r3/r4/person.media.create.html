@@ -99,13 +99,15 @@
             <tr>
                 <td>Теги</td>
                 <td>
-                    <tags-input ng-model="editedMedia.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи">
-                        <auto-complete source="loadTags($query)" min-length="10" debounce-delay="0" template="my-custom-template" />
-                    </tags-input>
+                    <div class="tags">
+                        <tags-input ng-model="editedMedia.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                            <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
+                        </tags-input>
+                    </div>
                     <script type="text/ng-template" id="my-custom-template">
                         <div class="right-panel">
                             <span ng-bind-html="$highlight($getDisplayText())"></span>
-                            <span ng-show="data.UsesType.length">({{data.UsesType|join:','}})</span>
+                            <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
                         </div>
                     </script>
                 </td>
