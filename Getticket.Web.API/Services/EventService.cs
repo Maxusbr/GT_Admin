@@ -337,13 +337,13 @@ namespace Getticket.Web.API.Services
         /// <see cref="IPersonService.LinkMediaPerson"/>
         public bool LinkMediaPerson(int idMedia, int idPerson)
         {
-            return _eventRepository.LinkMedia(new MediaLinkPerson { IdMedia = idMedia, IdPerson = idPerson });
+            return _eventRepository.LinkMedia(new EventMediaLinkPerson { IdMedia = idMedia, IdPerson = idPerson });
         }
 
         /// <see cref="IPersonService.LinkMediaEvent"/>
         public bool LinkMediaEvent(int idMedia, int idEvent)
         {
-            return _eventRepository.LinkMedia(new MediaLinkEvent { IdMedia = idMedia, IdEvent = idEvent });
+            return _eventRepository.LinkMedia(new EventMediaLinkEvent { IdMedia = idMedia, IdEvent = idEvent });
         }
 
         /// <summary>

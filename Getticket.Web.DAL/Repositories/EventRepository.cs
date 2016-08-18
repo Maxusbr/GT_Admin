@@ -390,7 +390,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.LinkMedia(MediaLinkEvent)" />
-        public bool LinkMedia(MediaLinkEvent model)
+        public bool LinkMedia(EventMediaLinkEvent model)
         {
             if (model.IdEvent == 0 || model.IdMedia == 0) return false;
             var link =

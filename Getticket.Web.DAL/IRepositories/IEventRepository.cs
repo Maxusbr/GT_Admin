@@ -186,14 +186,14 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        bool LinkMedia(MediaLinkPerson model);
+        bool LinkMedia(EventMediaLinkPerson model);
 
         /// <summary>
         /// Связать Media и Event
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        bool LinkMedia(MediaLinkEvent model);
+        bool LinkMedia(EventMediaLinkEvent model);
 
         /// <summary>
         /// Возвращает количество описаний
