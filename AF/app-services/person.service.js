@@ -301,6 +301,11 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.saveMediaLink = function (id, idEntity, entity, callback) {
+            return $http.post(`${serviceUrl}persons/media/${id}/link/${entity}/${idEntity}`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
         return service;;
     }
 

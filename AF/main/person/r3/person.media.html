@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="win-content">
-        <table class="table">
+        <table class="table" cg-busy="Promise">
             <thead>
                 <tr>
                     <th>Данные</th>
@@ -37,7 +37,10 @@
                         </div>
                         <span>{{item.MediaType}}</span>
                     </td>
-                    <td>TODO: Ассоциация</td>
+                    <td>персоны ({{item.Links.PersonLinks.length}})
+                        <br/>
+                        мероприятия ({{item.Links.EventLinks.length}})
+                    </td>
                     <td>
                         {{item.LastChange.UserName}}<br>
                         {{item.LastChange.Date | amCalendar}}

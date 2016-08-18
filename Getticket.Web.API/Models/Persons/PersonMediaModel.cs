@@ -19,5 +19,7 @@ namespace Getticket.Web.API.Models.Persons
         public string Description { get; set; }
         public LastChangeModel LastChange { get; set; }
         public IEnumerable<TagModel> Tags { get; set; }
+
+        public PersonMediaLinks Links { get; set; }
     }
 }

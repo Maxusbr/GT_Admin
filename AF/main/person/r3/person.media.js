@@ -4,7 +4,7 @@
     function PersonMediaController($rootScope, $scope, personService) {
         var vm = this;
         $rootScope.getMedias = function() {
-            personService.getMedia($rootScope.personId, function (data) {
+            $scope.Promise = personService.getMedia($rootScope.personId, function (data) {
                 $scope.medias = [];
                 $scope.medialist = [];
                 data.forEach(function (item) {

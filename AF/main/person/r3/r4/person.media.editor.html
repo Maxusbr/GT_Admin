@@ -96,6 +96,14 @@
                                     <th>Тип связи</th>
                                     <th>Объект связи</th>
                                 </tr>
+                                <tr ng-repeat="link in personeRange">
+                                    <td>Персона</td>
+                                    <td>{{link.LastName}} {{link.Name}}</td>
+                                </tr>
+                                <tr ng-repeat="link in eventRange">
+                                    <td>Мероприятие</td>
+                                    <td>{{link.Name}}</td>
+                                </tr>
                             </thead>
                         </table>
                         <br />
@@ -113,22 +121,22 @@
                                            ng-checked="association.type == 'person'"
                                            ng-click="association.type = 'person'"> Персона
                                     <br />
-                                    <input type="radio"
+                                    <!--<input type="radio"
                                            ng-checked="association.type == 'media'"
                                            ng-click="association.type = 'media'"> Медиа
-                                    <br />
+                                    <br />-->
                                 </div>
                                 <div class="col-lg-4">
                                     <!--if event-->
                                     <div ng-show="association.type == 'event'">
                                         <i>Укажите мероприятие, для которого создается связь</i>
-                                        <select class="form-control" ng-model="association.eventId"
+                                        <select class="form-control" ng-model="association.Id"
                                                 ng-options="item.Id as item.Name for item in events"></select>
                                     </div>
                                     <!--if person-->
                                     <div ng-show="association.type == 'person'">
                                         <i>Укажите персону, для которой создается связь</i>
-                                        <select class="form-control" ng-model="association.personId"
+                                        <select class="form-control" ng-model="association.Id"
                                                 ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
                                     </div>
                                     <!-- if media-->
@@ -137,8 +145,8 @@
                                         <select class="form-control" ng-model="association.personId" ng-change="getPersonMedia(association.personId)"
                                                 ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
                                         <i>Укажите медиа</i>
-                                        <select class="form-control" ng-model="association.mediaId"
-                                                ng-options="item.Id as item.Name for item in personMedias"></select>
+                                        <select class="form-control" ng-model="association.Id"
+                                                ng-options="item.Id as item.Name for item in personmedialist"></select>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">

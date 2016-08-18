@@ -262,7 +262,23 @@ namespace Getticket.Web.API.Services
         /// <param name="model"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        bool UpdateMedia(PersonMediaModel model, int userId);
+        int UpdateMedia(PersonMediaModel model, int userId);
+
+        /// <summary>
+        /// Связать Media и Person
+        /// </summary>
+        /// <param name="idMedia"></param>
+        /// <param name="idPerson"></param>
+        /// <returns></returns>
+        bool LinkMediaPerson(int idMedia, int idPerson);
+
+        /// <summary>
+        /// Связать Media и Event
+        /// </summary>
+        /// <param name="idMedia"></param>
+        /// <param name="idEvent"></param>
+        /// <returns></returns>
+        bool LinkMediaEvent(int idMedia, int idEvent);
 
         /// <summary>
         /// Удалить список медиа
