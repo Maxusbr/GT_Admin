@@ -259,6 +259,13 @@
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });
         }
+
+        service.getAntroNames = function (callback) {
+            return $http.get(`${serviceUrl}persons/antro/names`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         service.saveEntitieTypes = function (list, entity, callback) {
             $http.post(`${serviceUrl}persons/${entity}/updatetypes`, list).success(function (response) {
                 if (response.status === 'success')
@@ -304,6 +311,12 @@
 
         service.saveMediaLink = function (id, idEntity, entity, callback) {
             return $http.post(`${serviceUrl}persons/media/${id}/link/${entity}/${idEntity}`)
+                .success(function (data) { if(callback) callback(data); })
+                .error(function (data) { if(callback) callback(data); });
+        }
+
+        service.saveAntroLink = function (id, idEntity, entity, callback) {
+            return $http.post(`${serviceUrl}persons/antro/${id}/link/${entity}/${idEntity}`)
                 .success(function (data) { if(callback) callback(data); })
                 .error(function (data) { if(callback) callback(data); });
         }

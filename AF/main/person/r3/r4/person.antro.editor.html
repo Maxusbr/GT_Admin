@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-lg-6">
                 Параметр
-                <select class="form-control">
+                <select class="form-control" ng-model="editedAntro.IdAntro" ng-options="item.Id as item.Name for item in antronames">
                     <option>Глаза/цвет</option>
                     <option>Стопа/размер</option>
                     <option>Рост</option>
@@ -35,7 +35,7 @@
             </div>
             <div class="col-lg-6">
                 Значение
-                <input class="form-control" />
+                <input class="form-control" ng-model="editedAntro.Value"/>
             </div>
         </div>
         <br/>
@@ -49,17 +49,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Мероприятие</td>
-                        <td>Балет в мариинке</td>
-                    </tr>
-                    <tr>
-                        <td>Медиа</td>
-                        <td>Тимберлейк/запись концерта</td>
-                    </tr>
-                    <tr>
+                    <tr ng-repeat="link in personeRange">
                         <td>Персона</td>
-                        <td>Тимберлейк</td>
+                        <td>{{link.LastName}} {{link.Name}}</td>
+                    </tr>
+                    <tr ng-repeat="link in eventRange">
+                        <td>Мероприятие</td>
+                        <td>{{link.Name}}</td>
                     </tr>
                 </tbody>
             </table>
