@@ -195,6 +195,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\uploaded\max_73%40inbox.rub60a9b42fccd39037151de4e98090afb7988348bda002bbb2e1b6150e0d22057.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -335,7 +336,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\uploaded\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
