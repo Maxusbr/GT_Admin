@@ -10,15 +10,14 @@
             app.closeFour();
             app.loadContentView('/main/events/r3/r4/events.notes.source.html', 3200);
         }
-
-        $rootScope.displayNotesStatic = function display_source(){
-            app.closeFour();
-            app.loadContentView('/main/events/r3/r4/events.notes.static.html', 3200);
-        }
+        // $rootScope.displayNotesStatic = function display_source(){
+        //     app.closeFour();
+        //     app.loadContentView('/main/events/r3/r4/events.notes.static.html', 3200);
+        // }
 
         $rootScope.addNotes = function add_fact() {
             app.closeFour();
-            app.loadContentView('/main/events/r3/r4/events.notes.create.html', 3200)
+            app.loadContentView('/main/events/r3/r4/events.notes.edit.html', 3200)
         }
 
         $rootScope.displayTagsSubs=function(){
