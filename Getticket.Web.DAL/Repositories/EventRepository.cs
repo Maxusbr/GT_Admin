@@ -17,10 +17,10 @@ namespace Getticket.Web.DAL.Repositories
     public class EventRepository : BaseRepository<Event>, IEventRepository
     {
         /// <see cref="IEventRepository.GetEvents" />
-        public IList<Event> GetEvents()
+        public IList<Event> GetEvents(bool realy = false)
         {
             var query = db.Events
-                .Where(o => o.IsReallyEvent)
+                .Where(o => o.IsReallyEvent == realy)
                 .Include(o => o.Category)
                 .Include(o => o.Category.ParentCategory)
                 .Include(o => o.Organizer);

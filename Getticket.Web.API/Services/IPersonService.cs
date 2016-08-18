@@ -176,6 +176,13 @@ namespace Getticket.Web.API.Services
         /// <param name="userId"></param>
         /// <returns></returns>
         ServiceResponce UpdateConnection(int pesonId, IEnumerable<PersonConnectionModel> models, int userId);
+        /// <summary>
+        /// Добавить/Изменить связи для Person
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        int UpdateConnection(PersonConnectionModel model, int userId);
 
         /// <summary>
         /// Удалить связи

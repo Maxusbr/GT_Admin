@@ -248,6 +248,12 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.getСonnectionTypes = function (callback) {
+            return $http.get(`${serviceUrl}persons/connection/types`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         service.saveEntitieTypes = function (list, entity, callback) {
             $http.post(`${serviceUrl}persons/${entity}/updatetypes`, list).success(function (response) {
                 if (response.status === 'success')

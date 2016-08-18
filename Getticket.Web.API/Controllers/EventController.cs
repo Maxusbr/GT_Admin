@@ -43,6 +43,17 @@ namespace Getticket.Web.API.Controllers
             return Ok(_eventService.GetEvents());
         }
 
+        /// <summary>
+        /// Список концертов
+        /// </summary>
+        /// <returns></returns>
+        [Route("realy")]
+        [HttpGet]
+        public IHttpActionResult GetRealyAll()
+        {
+
+            return Ok(_eventService.GetEvents(true));
+        }
         /// <see cref="IEventService.GetEvent" />
         [Route("{id}")]
         [HttpGet]

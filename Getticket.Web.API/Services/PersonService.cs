@@ -419,6 +419,21 @@ namespace Getticket.Web.API.Services
                 .Result($"Error save connections");
         }
 
+        /// <see cref="IPersonService.UpdateConnection(PersonConnectionModel, int)"/>
+        public int UpdateConnection(PersonConnectionModel model, int userId)
+        {
+            var res =  _personRepository.SaveConnection(new PersonConnection
+            {
+                Id = model.Id,
+                id_Person = model.id_Person,
+                id_ConnectionType = model.id_ConnectionType,
+                id_Event = model.id_Event,
+                id_PersonConnectTo = model.id_PersonConnectTo,
+                Description = model.Description
+            }, userId);
+            return res?.Id ?? -1;
+        }
+
         /// <summary>
         /// Удалить связи
         /// </summary>

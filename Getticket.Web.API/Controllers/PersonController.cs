@@ -237,14 +237,24 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteConnectionTypes(models).Response());
         }
 
-        /// <see cref="PersonService.UpdateConnection" />
+        ///// <see cref="PersonService.UpdateConnection" />
+        //[HttpPost]
+        //[Route("connection/update/{id}")]
+        //public IHttpActionResult UpdateConnection(int id, [FromBody] IEnumerable<PersonConnectionModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var userId = User.Identity.GetUserId<int>();
+        //    return Ok(_personService.UpdateConnection(id, models, userId).Response());
+        //}
+
+        /// <see cref="PersonService.UpdateConnection(PersonConnectionModel, int)" />
         [HttpPost]
         [Route("connection/update/{id}")]
-        public IHttpActionResult UpdateConnection(int id, [FromBody] IEnumerable<PersonConnectionModel> models)
+        public IHttpActionResult UpdateConnection(int id, [FromBody] PersonConnectionModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_personService.UpdateConnection(id, models, userId).Response());
+            return Ok(_personService.UpdateConnection(model, userId));
         }
 
         /// <see cref="PersonService.DeleteConnection" />

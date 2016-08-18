@@ -1,10 +1,10 @@
-﻿<div class="win-container r4 personFactCreate" style="width:400px;" ng-controller="PersonConnectionstEditorController">
+﻿<div class="win-container r4 personConnectionEdit" style="width:400px;" ng-controller="PersonConnectionstEditorController">
     <div class="win-header">
         <div class="win-header-text">
             Редактировать связь
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('personFactCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('personConnectionEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
@@ -12,7 +12,7 @@
             <a href="#" ng-click="saveFact()">
                 <span class="fa fa-save"></span>
                 <br />
-                Редактировать
+                Сохранить
             </a>
         </div>
     </div>
@@ -20,18 +20,20 @@
         <table class="table">
             <tr>
                 <td>Что связываем</td>
-                <td><input class="form-control" /></td>
+                <td><select name="" id="" class="form-control" ng-model="connectionId" ng-change="setConnection()"
+                            ng-options="item.Id as item.Name for item in connectionList"></select></td>
             </tr>
             <tr>
                 <td>Тип связи</td>
-                <td><select name="" id="" class="form-control">
+                <td><select name="" id="" class="form-control" ng-model="editedConnection.id_ConnectionType" ng-change="getConnections(editedConnection.id_ConnectionType)"
+                            ng-options="item.Id as item.Name for item in connectiontypes">
                     <option value="1">1</option>
                     <option value="1">1</option>
                 </select></td>
             </tr>
             <tr>
                 <td>Характеристика</td>
-                <td><input class="form-control" /></td>
+                <td><input class="form-control" ng-model="editedConnection.Description"/></td>
             </tr>
         </table>
     </div>

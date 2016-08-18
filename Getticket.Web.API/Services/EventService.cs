@@ -36,9 +36,9 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IEventService.GetEvents" />
-        public IEnumerable<EventModel> GetEvents()
+        public IEnumerable<EventModel> GetEvents(bool realy = false)
         {
-            return EventModelHelper.GetEventModels(_eventRepository.GetEvents());
+            return EventModelHelper.GetEventModels(_eventRepository.GetEvents(realy));
         }
 
         /// <summary>

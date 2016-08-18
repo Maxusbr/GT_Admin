@@ -32,6 +32,15 @@
             });
         };
 
+        service.getRealyEvents = function (callback) {
+            return $http.get(`${serviceUrl}events/realy`).success(function (data) {
+                $rootScope.realyEvents = data;
+                console.log("load concert");
+                if (callback) callback();
+            }).error(function (data) {
+                if (callback) callback(data);
+            });
+        };
         service.getMedia = function getMedia(id, callback) {
             return $http.get(`${serviceUrl}events/media/${id}`).success(function (data) {
                 callback(data);
