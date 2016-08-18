@@ -759,7 +759,15 @@ namespace Getticket.Web.API.Controllers
             var filename = email + img.FileName;
 
             string fullPath = HttpContext.Current.Server.MapPath("~/images/uploaded/") + filename;
-            img.Save(fullPath);
+            try
+            {
+                img.Save(fullPath);
+            }
+            catch (Exception ex)
+            {
+                error.Add("errorsave", ex);
+                return Ok(error.Response());
+            }
             succes.Add("path", $"images/uploaded/{filename}");
             return Ok(succes.Response());
         }

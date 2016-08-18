@@ -285,6 +285,7 @@
             }).then(function (resp) {
                 $rootScope.progressPercentage = undefined;
                 console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                console.log(resp.data.errorsave);
                 callback(resp.data);
             }, function (resp) {
                 console.log('Error status: ' + resp.status);
