@@ -297,14 +297,14 @@
 
         service.saveAssociation = function (id, model, callback) {
             return $http.post(`${serviceUrl}persons/association/${id}/save`, model)
-                .success(function (data) { callback(data); })
-                .error(function (data) { callback(data); });
+                .success(function (data) { if(callback) callback(data); })
+                .error(function (data) { if(callback) callback(data); });
         }
 
         service.saveMediaLink = function (id, idEntity, entity, callback) {
             return $http.post(`${serviceUrl}persons/media/${id}/link/${entity}/${idEntity}`)
-                .success(function (data) { callback(data); })
-                .error(function (data) { callback(data); });
+                .success(function (data) { if(callback) callback(data); })
+                .error(function (data) { if(callback) callback(data); });
         }
         return service;;
     }
