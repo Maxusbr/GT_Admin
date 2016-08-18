@@ -6,10 +6,6 @@
         $rootScope.getFacts = function() {
             personService.getFact($rootScope.personId, function (data) {
                 $scope.factlist = data;
-
-                //data.forEach(function (item) {
-                //    $scope.factlist.push.apply($scope.factlist, item.List);
-                //});
             });
         }
 

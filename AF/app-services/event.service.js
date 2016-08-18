@@ -95,6 +95,20 @@
             //}
         };
 
+        //facts
+        service.getFactTypes = function (callback) {
+            return $http.get(`${serviceUrl}events/fact/types`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+        
+        service.getFact = getFact;
+        function getFact(id, callback) {
+            return $http.get(`${serviceUrl}events/fact/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
+
 
         service.saveEntities = function saveEntities(id, list, entity, callback) {
             return $http.post(`${serviceUrl}events/${entity}/update/${id}`, list).success(function (response) {
