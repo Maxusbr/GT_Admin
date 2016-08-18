@@ -38,6 +38,7 @@
             }
         }
         $scope.getConnections = function (id) {
+            console.log(id);
             getConnectionList(id);
             $scope.connectionId = getConnectionId();
         }
@@ -65,12 +66,10 @@
         }
 
         $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
+        console.log($rootScope.editedConnection);
 
         $rootScope.saveFact = function save_fact() {
             console.log('save connection click');
-            //TODO: save changes or create new
-            //TODO: close this view
-            //TODO: refresh facts table
             $rootScope.editedConnection.id_Person = $rootScope.personId;
             personService.saveEntity($rootScope.personId, $rootScope.editedConnection, 'connection', function (data) {
                 $rootScope.getPersonConnection();
