@@ -383,7 +383,7 @@ namespace Getticket.Web.API.Controllers
             var userId = User.Identity.GetUserId<int>();
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save media");
-            return Ok(!_personService.UpdateMedia(model, userId) ? error.Response() : succes.Response());
+            return Ok(_personService.UpdateMedia(model, userId));
         }
 
         /// <see cref="PersonService.DeleteMedia" />
@@ -392,6 +392,26 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult DeleteMedia([FromBody] IEnumerable<PersonMediaModel> models)
         {
             return Ok(_personService.DeleteMedia(models).Response());
+        }
+
+        /// <see cref="PersonService.DeleteMedia" />
+        [HttpPost]
+        [Route("media/{id}/link/person/{idPerson}")]
+        public IHttpActionResult MediaLinkPerson(int id, int idPerson)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            return Ok(_personService.LinkMediaPerson(id, idPerson) ? succes.Response(): error.Response());
+        }
+
+        /// <see cref="PersonService.DeleteMedia" />
+        [HttpPost]
+        [Route("media/{id}/link/event/{idEvent}")]
+        public IHttpActionResult MediaLinkEvent(int id, int idEvent)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            return Ok(_personService.LinkMediaEvent(id, idEvent) ? succes.Response(): error.Response());
         }
         #endregion
 

@@ -179,6 +179,11 @@ namespace Getticket.Web.API.Services
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonMedia(item.id_Person, item.Id));
                 item.Tags = TagModelHelper.GeTagModels(_tagRepository.GePersonMediaTags(item.Id));
+                item.Links = new PersonMediaLinks
+                {
+                    PersonLinks = PersonModelHelper.GetPersonModels(_personRepository.GetMediaPersonLinks(item.Id)),
+                    EventLinks = EventModelHelper.GetEventModels(_personRepository.GetMediaEventLinks(item.Id))
+                };
             }
             var types = list.GroupBy(o => o.id_MediaType).Select(o => o.Key);
             return types.Select(tp => new EntityCollection<PersonMediaModel> { List = list.Where(o => o.id_MediaType == tp), Type = tp });
@@ -624,7 +629,7 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IPersonService.UpdateMedia(PersonMediaModel, int)"/>
-        public bool UpdateMedia(PersonMediaModel model, int userId)
+        public int UpdateMedia(PersonMediaModel model, int userId)
         {
             var result = _personRepository.UpdateMedia(new PersonMedia
             {
@@ -635,18 +640,33 @@ namespace Getticket.Web.API.Services
                 Description = model.Description,
                 Name = model.Name
             }, userId);
-            if (result == null) return false;
-            if (!model.Tags.Any()) return true;
-            return model.Tags.Select(item => _tagRepository.AddTagLink(new TagPersonMediaLink
+            if (result == null) return -1;
+            if (model.Tags.Any())
             {
-                IdTag = item.Id,
-                IdMedia = result.Id,
-                Tag = new Tag
+                var tagsave = model.Tags.Select(item => _tagRepository.AddTagLink(new TagPersonMediaLink
                 {
-                    Id = item.Id,
-                    Name = item.Name
-                }
-            })).All(res => res != null);
+                    IdTag = item.Id,
+                    IdMedia = result.Id,
+                    Tag = new Tag
+                    {
+                        Id = item.Id,
+                        Name = item.Name
+                    }
+                })).All(res => res != null);
+            }
+            return result.Id;
+        }
+
+        /// <see cref="IPersonService.LinkMediaPerson"/>
+        public bool LinkMediaPerson(int idMedia, int idPerson)
+        {
+            return _personRepository.LinkMedia(new MediaLinkPerson {IdMedia = idMedia, IdPerson = idPerson});
+        }
+
+        /// <see cref="IPersonService.LinkMediaEvent"/>
+        public bool LinkMediaEvent(int idMedia, int idEvent)
+        {
+            return _personRepository.LinkMedia(new MediaLinkEvent { IdMedia = idMedia, IdEvent = idEvent });
         }
 
         /// <summary>

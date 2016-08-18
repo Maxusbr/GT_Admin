@@ -251,7 +251,7 @@ namespace Getticket.Web.DAL.Migrations
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 1, id_ConnectionType = 2, id_Person = 1, id_Event = 5, Description = "Артист" });
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 2, id_ConnectionType = 3, id_Person = 2, id_Event = 8, Description = "Певец(соло)" });
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 3, id_ConnectionType = 2, id_Person = 3, id_Event = 2, Description = "Член команды (основной скип)" });
-            context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 4, id_ConnectionType = 1, id_Person = 4, id_Event = 5, Description = "Артист" });
+            context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 4, id_ConnectionType = 2, id_Person = 4, id_Event = 5, Description = "Артист" });
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 5, id_ConnectionType = 2, id_Person = 5, id_Event = 5, Description = "Артист (Граф Орлов)" });
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 6, id_ConnectionType = 1, id_Person = 5, id_PersonConnectTo = 1, Description = "Подруга" });
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 7, id_ConnectionType = 1, id_Person = 5, id_PersonConnectTo = 3, Description = "Подруга" });

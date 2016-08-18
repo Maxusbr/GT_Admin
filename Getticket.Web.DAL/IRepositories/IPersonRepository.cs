@@ -248,6 +248,20 @@ namespace Getticket.Web.DAL.IRepositories
         bool LinkDescriptions(PersonDescriptionTizerLink model);
 
         /// <summary>
+        /// Связать Media и Person
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool LinkMedia(MediaLinkPerson model);
+
+        /// <summary>
+        /// Связать Media и Event
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool LinkMedia(MediaLinkEvent model);
+
+        /// <summary>
         /// Возвращает список описаний <see cref="PersonMedia"/> для <see cref="Person"/> по ее <paramref name="id" />
         /// </summary>
         /// <param name="id"></param>
@@ -505,5 +519,19 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <returns></returns>
         IList<UserPageCategory> GetUserPageCategory();
+
+        /// <summary>
+        /// Список ассоциаций персон и медиа
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<Person> GetMediaPersonLinks(int id);
+
+        /// <summary>
+        /// Список ассоциаций мероприятий и медиа
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<Event>  GetMediaEventLinks(int id);
     }
 }
