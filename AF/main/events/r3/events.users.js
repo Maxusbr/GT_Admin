@@ -19,7 +19,7 @@
         });
         $rootScope.addUser = function add_connection() {
             app.closeFour();
-            app.loadContentView('/main/events/r3/r4/events.users.create.html', 3200)
+            app.loadContentView('/main/events/r3/r4/events.users.edit.html', 3200)
         }
     }
 

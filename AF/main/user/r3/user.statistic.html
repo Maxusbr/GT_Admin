@@ -1,0 +1,47 @@
+﻿<div class="win-container r3 userStatic" style="width:800px;" ng-controller="UserStatisticController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Статистика Юзера
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('userStatic')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <!-- <div class="win-menu-button">
+            <a href="#" ng-click="addStatistic()">
+                <span class="fa fa-plus"></span>
+                <br />
+                Добавить
+            </a>
+        </div> -->
+    </div>
+    <div class="win-content col-md-18">
+            <table class="table" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                        <th >Вход</th>
+                        <th>Инциденты</th>
+                        <th>Терминал</th>
+                        <th>Пропускная <br>способность</th>
+                        <th>Сообщения<br> ВХ/ИС</th>
+                        <th>Решено<br> инцидентов</th>
+                        <th>Паузы</th>
+                        <th>Время<br> работы</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <td><!-- <a href="" ng-click="editStatistic()"> --><span style="">В работе</span></a></td>
+                        <td><span style='color:red;'>5</span>/15</td>
+                        <td>A, W</td>
+                        <td>7 ч/м</span></td>
+                        <td>9/12</td>
+                        <td><span style='color:green;'>7</span>/11</td>
+                        <td>12 мин.</td>
+                        <td>1ч 39м./ 4ч.</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>

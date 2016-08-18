@@ -17,43 +17,61 @@
         </div>
     </div>
     <div class="win-content">
+        <h5>Общее описание мероприятия</h5>
+        <div class="row">
+            <div class="col-lg-6">
+                <h5>Теги/подкатегории</h5>
+                <tags-input ng-model="editedMedia.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                    <auto-complete source="loadTags($query)" min-length="10" debounce-delay="0" template="my-custom-template" />
+                </tags-input>
+            </div>
+            <div class="col-lg-6">
+                <h5>Жанры</h5>
+                <tags-input ng-model="editedMedia.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                    <auto-complete source="loadTags($query)" min-length="10" debounce-delay="0" template="my-custom-template" />
+                </tags-input>
+            </div>
+        </div>
+        <hr/>
         <h5>Все теги мероприятия</h5>
         <i>Ноги, Руки, главноеХвост</i>
+        <hr />
         <h5>Все описания для мероприятия</h5>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Факты</th>
-                    <th>Тизеры</th>
-                    <th>Описание</th>
-                    <th>Теги</th>
-                    <th>Жанры</th>
+                    <th>Текст</th>
+                    <th>Тип текста</th>
+                    <th>Статус</th>
+                    <th>Изменен</th>
+                    <th>Источник</th>
+                    <th>Использование</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><a href="#" ng-click="displaySource()">Персона/Сирена Уильямс</a></td>
-                    <td><a href="#" ng-click="displaySource()">Другие персоны подборки</a></td>
-                    <td><a href="#" ng-click="displaySource()">Подборка "Про ноги"</a></td>
-                    <td><a href="#" ng-click="displayNotesStatic()">Указан</a></td>
-                    <td><a href="#">Указан</a></td>
-                   
+                    <td><a href="#" ng-click="displaySource()">тыдыдыщ</a></td>
+                    <td>нет редактора в ТЗ</td>
+                    <td>Не опубликован</td>
+                    <td>admin, 18/08/16</td>
+                    <td><a href="#">Ссылка</a></td>
+                    <td>---</td>
                 </tr>
                 <tr>
-                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
-                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
-                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
-                    <td><a href="#" ng-click="displayNotesStatic()">Не требуется</a></td>
-                    <td><a href="#">Указан</a></td>
-                    
+                    <td><a href="#" ng-click="displaySource()">тыдыдыщ</a></td>
+                    <td>нет редактора в ТЗ</td>
+                    <td>Не опубликован</td>
+                    <td>admin, 18/08/16</td>
+                    <td><a href="#">Оригинальный текст</a></td>
+                    <td>---</td>
                 </tr>
                 <tr>
-                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
-                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
-                    <td><a href="#" ng-click="displaySource()">Без источника</a></td>
-                    <td><a href="#" ng-click="displayNotesStatic()">Не указан</a></td>
-                    <td><a href="#">Не указан</a></td>
-                    
+                    <td><a href="#" ng-click="displaySource()">Бтыдыдыщ</a></td>
+                    <td>нет редактора в ТЗ</td>
+                    <td>Не опубликован</td>
+                    <td>admin, 18/08/16</td>
+                    <td><a href="#">Оригинальный текст</a></td>
+                    <td>---</td>
                 </tr>
             </tbody>
         </table>
