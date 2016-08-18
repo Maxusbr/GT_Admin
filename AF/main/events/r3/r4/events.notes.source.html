@@ -1,0 +1,75 @@
+﻿<div class="win-container r4 disPersonNotesSource" style="width:600px;" ng-controller="personNotesSourceController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Редактирование источника
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disPersonNotesSource')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="savePersonNotesSource()">
+                <span class="fa fa-save"></span>
+                <br />
+                Сохранить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+        <h5>Страница</h5>
+        <i>Откуда бедный посетитель попадает на эту страницу</i>
+        <br/>
+        <div class="row">
+            <div class="col-lg-6">
+                Страница <select class="form-control" ng-change="getDetail(pageSchema.Page.PageType)" ng-model="pageSchema.Page.PageType" 
+                                 ng-options="type.Id as type.Name for type in pages">
+                    <!--<option>Персона</option>
+                    <option>Поиск</option>
+                    <option>Мероприятие</option>
+                    <option>Площадка</option>
+                    <option>Профиль</option>
+                    <option>Главная</option>-->
+                </select>
+            </div>
+            <div class="col-lg-6">
+                Уточнение <select class="form-control" ng-model="detailId" ng-change="changeDetail(detailId)" 
+                                  ng-options="type.Id as type.Name for type in details"></select>
+            </div>
+        </div>
+        <br/>
+        <h5>Местоположение</h5>
+        <i>Отредактируйте местоположение контента</i>
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+                <select class="form-control" ng-model="pageSchema.Type.Id" ng-change="cangeType(pageSchema.Type.Id)" ng-options="type.Id as type.Name for type in bloks">
+                    <option>Не указано</option>
+                    <option>Другие персоны подборки</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <h5>Версия страницы или блока</h5>
+        <i>Создайте свою классификацию для создаваемого контента. Это будете видеть только вы, пользователю она не доступна. Кройте хуями смело.</i>
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+                Страница
+                <select class="form-control" ng-model="pageSchema.UserPageCategoryId" ng-change="changeCat(pageSchema.UserPageCategoryId)" ng-options="item.Id as item.Name for item in userPageCategories">
+                    <option>Не указано</option>
+                    <option>Хуямоя</option>
+                </select>
+                <a href="#" ng-click="displayPersonWTF()">Редактировать</a>
+            </div>
+            <div class="col-lg-6">
+                Блок
+                <select class="form-control">
+                    <option>Версия задана страницей</option>
+                </select>
+
+                <i>Пункт - загадка. Прямая цитата из ТЗ (!!!!!): Если у блока контента также создадим вдруг версию, то нужно будет выбирать версию. В текущем макете отображена ситуация, когда версий у блока нет.</i>
+            </div>
+        </div>
+    </div>
+</div>

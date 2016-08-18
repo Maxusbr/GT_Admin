@@ -18,6 +18,6 @@ namespace Getticket.Web.API.Models.Persons
         public string MediaType { get; set; }
         public string Description { get; set; }
         public LastChangeModel LastChange { get; set; }
-        public IList<TagModel> Tags { get; set; }
+        public IEnumerable<TagModel> Tags { get; set; }
     }
 }

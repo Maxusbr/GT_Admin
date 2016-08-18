@@ -237,14 +237,24 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteConnectionTypes(models).Response());
         }
 
-        /// <see cref="PersonService.UpdateConnection" />
+        ///// <see cref="PersonService.UpdateConnection" />
+        //[HttpPost]
+        //[Route("connection/update/{id}")]
+        //public IHttpActionResult UpdateConnection(int id, [FromBody] IEnumerable<PersonConnectionModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var userId = User.Identity.GetUserId<int>();
+        //    return Ok(_personService.UpdateConnection(id, models, userId).Response());
+        //}
+
+        /// <see cref="PersonService.UpdateConnection(PersonConnectionModel, int)" />
         [HttpPost]
         [Route("connection/update/{id}")]
-        public IHttpActionResult UpdateConnection(int id, [FromBody] IEnumerable<PersonConnectionModel> models)
+        public IHttpActionResult UpdateConnection(int id, [FromBody] PersonConnectionModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_personService.UpdateConnection(id, models, userId).Response());
+            return Ok(_personService.UpdateConnection(model, userId));
         }
 
         /// <see cref="PersonService.DeleteConnection" />
@@ -348,20 +358,32 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteMediaTypes(models).Response());
         }
 
-        /// <see cref="PersonService.UpdateMedia" />
+        ///// <see cref="PersonService.UpdateMedia(int, IEnumerable{PersonMediaModel}, int)" />
+        //[HttpPost]
+        //[Route("media/update/{id}")]
+        //public IHttpActionResult UpdateMedia(int id, [FromBody] IEnumerable<PersonMediaModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var list = models as IList<PersonMediaModel> ?? models.ToList();
+        //    var userId = User.Identity.GetUserId<int>();
+        //    var succes = ServiceResponce.FromSuccess().Result("All save complete");
+        //    var error = ServiceResponce.FromFailed().Result($"Error save media");
+        //    if (!_personService.UpdateMedia(id, list, userId)) return Ok(error.Response());
+        //    error = ServiceResponce.FromFailed().Result($"Error save tags");
+        //    return Ok(list.Any(item => !_tagService.AddTagLinks(new TagsPersonMediaModel { IdMedia = item.Id, Tags = item.Tags })) ?
+        //        error.Response() : succes.Response());
+        //}
+
+        /// <see cref="PersonService.UpdateMedia(PersonMediaModel, int)" />
         [HttpPost]
         [Route("media/update/{id}")]
-        public IHttpActionResult UpdateMedia(int id, [FromBody] IEnumerable<PersonMediaModel> models)
+        public IHttpActionResult UpdateMedia(int id, [FromBody] PersonMediaModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var list = models as IList<PersonMediaModel> ?? models.ToList();
             var userId = User.Identity.GetUserId<int>();
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save media");
-            if (!_personService.UpdateMedia(id, list, userId)) return Ok(error.Response());
-            error = ServiceResponce.FromFailed().Result($"Error save tags");
-            return Ok(list.Any(item => !_tagService.AddTagLinks(new TagsPersonMediaModel { IdMedia = item.Id, Tags = item.Tags })) ?
-                error.Response() : succes.Response());
+            return Ok(!_personService.UpdateMedia(model, userId) ? error.Response() : succes.Response());
         }
 
         /// <see cref="PersonService.DeleteMedia" />
@@ -468,14 +490,24 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteFactTypes(models).Response());
         }
 
-        /// <see cref="IPersonService.UpdateFacts" />
+        ///// <see cref="IPersonService.UpdateFacts" />
+        //[HttpPost]
+        //[Route("fact/update/{id}")]
+        //public IHttpActionResult UpdateFacts(int id, [FromBody] IEnumerable<PersonFactModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var userId = User.Identity.GetUserId<int>();
+        //    return Ok(_personService.UpdateFacts(id, models, userId).Response());
+        //}
+
+        /// <see cref="IPersonService.UpdateFacts(PersonFactModel, int)" />
         [HttpPost]
         [Route("fact/update/{id}")]
-        public IHttpActionResult UpdateFacts(int id, [FromBody] IEnumerable<PersonFactModel> models)
+        public IHttpActionResult UpdateFacts(int id, [FromBody] PersonFactModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_personService.UpdateFacts(id, models, userId).Response());
+            return Ok(_personService.UpdateFacts(model, userId));
         }
 
         /// <see cref="IPersonService.DeleteFacts" />
@@ -529,56 +561,72 @@ namespace Getticket.Web.API.Controllers
 
         /// <see cref="ITagService.GePersonTags" />
         [HttpGet]
-        [Route("tags/{id}")]
-        public IHttpActionResult GeTags(int id)
+        [Route("tags/person/{id}")]
+        public IHttpActionResult GePersonTags(int id)
         {
             return Ok(_tagService.GePersonTags(id));
+        }
+
+        /// <see cref="ITagService.GePersonTags" />
+        [HttpGet]
+        [Route("tags/tizer/{id}")]
+        public IHttpActionResult GeTizerTags(int id)
+        {
+            return Ok(_tagService.GeDescriptionTags(id));
+        }
+
+        /// <see cref="ITagService.GePersonTags" />
+        [HttpGet]
+        [Route("tags/media/{id}")]
+        public IHttpActionResult GeMediaTags(int id)
+        {
+            return Ok(_tagService.GePersonMediaTags(id));
         }
         /// <summary>
         /// Сохранить описания и теги
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("tags/save/description")]
-        public IHttpActionResult SaveDescriptions([FromBody] CreateDescriptionModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var error = ServiceResponce.FromFailed().Result($"Error save description");
-            var succes = ServiceResponce.FromSuccess().Result("All save complete");
-            var userId = User.Identity.GetUserId<int>();
-            var id = _personService.UpdateDescriptions(model.TagDescription.Tizer, userId);
-            if (id < 1) return Ok(error.Response());
-            model.TagDescription.Tizer.Id = id;
-            if (!_tagService.AddTagLinks(model.TagDescription))
-            {
-                error.Result("Error save tags");
-                return Ok(error.Response());
-            }
-            if (model.TagDescription.ExistDescription)
-            {
-                if (_personService.UpdateDescriptions(new PersonDescriptionModel
-                {
-                    id_DescriptionType = 2,
-                    id_Person = model.IdPerson,
-                    DescriptionText = model.TagDescription.StaticDescription
-                }, userId) < 1)
-                {
-                    error.Result("Error save description");
-                    return Ok(error.Response());
-                }
-            }
-            if (model.TagAntroList.Any(item => !_tagService.AddTagLinks(item)))
-            {
-                error.Result("Error save tags");
-                return Ok(error.Response());
-            }
+        //[HttpPost]
+        //[Route("tags/save/description")]
+        //public IHttpActionResult SaveDescriptions([FromBody] CreateDescriptionModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    var error = ServiceResponce.FromFailed().Result($"Error save description");
+        //    var succes = ServiceResponce.FromSuccess().Result("All save complete");
+        //    var userId = User.Identity.GetUserId<int>();
+        //    var id = _personService.UpdateDescriptions(model.TagDescription.Tizer, userId);
+        //    if (id < 1) return Ok(error.Response());
+        //    model.TagDescription.Tizer.Id = id;
+        //    if (!_tagService.AddTagLinks(model.TagDescription))
+        //    {
+        //        error.Result("Error save tags");
+        //        return Ok(error.Response());
+        //    }
+        //    if (model.TagDescription.ExistDescription)
+        //    {
+        //        if (_personService.UpdateDescriptions(new PersonDescriptionModel
+        //        {
+        //            id_DescriptionType = 2,
+        //            id_Person = model.IdPerson,
+        //            DescriptionText = model.TagDescription.StaticDescription
+        //        }, userId) < 1)
+        //        {
+        //            error.Result("Error save description");
+        //            return Ok(error.Response());
+        //        }
+        //    }
+        //    if (model.TagAntroList.Any(item => !_tagService.AddTagLinks(item)))
+        //    {
+        //        error.Result("Error save tags");
+        //        return Ok(error.Response());
+        //    }
 
-            return Ok(succes.Response());
-        }
+        //    return Ok(succes.Response());
+        //}
 
 
         /// <summary>
@@ -588,7 +636,7 @@ namespace Getticket.Web.API.Controllers
         /// <param name="models"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("tags/save/{id}")]
+        [Route("tags/save/person/{id}")]
         public IHttpActionResult SavePersonTags(int id, [FromBody] IEnumerable<TagModel> models)
         {
             if (!ModelState.IsValid)
@@ -601,6 +649,25 @@ namespace Getticket.Web.API.Controllers
             return Ok(!_tagService.AddTagLinks(new PersonTagModel { personId = id, models = models }) ? error.Response() : succes.Response());
         }
 
+        /// <summary>
+        /// Сохранить теги персоны
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("tags/save/tizer/{id}")]
+        public IHttpActionResult SaveTizerTags(int id, [FromBody] IEnumerable<TagModel> models)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save tags");
+            var succes = ServiceResponce.FromSuccess().Result("All save complete");
+
+            return Ok(!_tagService.AddTagLinks(new TagsTizerModel { IdTizer = id, Tags = models.ToList() }) ? error.Response() : succes.Response());
+        }
 
         /// <see cref="IPersonService.SaveDescriptionSchema"/>
         [HttpPost]

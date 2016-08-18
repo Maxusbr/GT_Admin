@@ -307,7 +307,8 @@ namespace Getticket.Web.API.Helpers
                 id_FactType = fact.id_FactType,
                 FactType = new PersonFactTypeModel { Id = fact.FactType.Id, Name = fact.FactType.Name, Descript = fact.FactType.Descript ?? "" },
                 FactText = fact.FactText,
-                Status = fact.Status
+                Status = fact.Status,
+                Source = fact.Source
             } : new PersonFactModel();
         }
 

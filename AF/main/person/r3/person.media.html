@@ -24,7 +24,7 @@
                     <th>Медиа</th>
                     <th>Ассоциация</th>
                     <th>Изменен</th>
-                    <th>Теги</th>
+                    <th >Теги</th>
                     <th>Использование</th>
                 </tr>
             </thead>
@@ -43,11 +43,11 @@
                         {{item.LastChange.Date | amCalendar}}
                     </td>
                     <td>
-                        <div class="tags" ng-show="!item.isEditTags">
+                        <div class="tags" ng-show="!item.isEditTags" style="width: 80px;">
                             <!--{{item.Tags.length}}:-->
-                            <span ng-repeat="tag in item.Tags">
+                            <span ><p ng-repeat="tag in item.Tags">
                                 {{tag.Name}}
-                            </span>
+                            </p></span>
                         </div>
                     </td>
                     <td>TODO: used</td>

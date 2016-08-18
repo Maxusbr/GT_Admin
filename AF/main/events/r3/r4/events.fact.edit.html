@@ -1,4 +1,4 @@
-﻿<div class="win-container r4 personFactCreate" style="width:400px;" ng-controller="EventsFactCreateController">
+﻿<div class="win-container r4 personFactCreate" style="width:400px;" ng-controller="EventsFactEditController">
     <div class="win-header">
         <div class="win-header-text">
             Создать новый факт
@@ -19,16 +19,29 @@
     <div class="win-content">
         <table class="table">
             <tr>
-                <td>Участники</td>
-                <td><textarea class="form-control" style="height:100px;" /></td>
+                <td>Текст факта</td>
+                <td><textarea class="form-control" style="height:150px;" /></td>
             </tr>
             <tr>
-                <td>Программа мероприятия</td>
-                <td><textarea class="form-control" style="height:100px;" /></td>
+                <td>Статус</td>
+                <td><input class="form-control" /></td>
             </tr>
-            
             <tr>
-                <td>Входной контроль</td>
+                <td>Изменен</td>
+                <td>{{fact.LastChange.UserName}}<br>
+                    {{fact.LastChange.Date | amCalendar}}</td>
+            </tr>
+            <tr>
+                <td>Связь</td>
+                <td>
+                    <select name="" id="" class="form-control">
+                        <option value="1">1</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Источник</td>
                 <td><input class="form-control" /></td>
             </tr>
         </table>

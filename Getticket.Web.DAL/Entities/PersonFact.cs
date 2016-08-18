@@ -38,6 +38,11 @@ namespace Getticket.Web.DAL.Entities
         public string Status { get; set; }
 
         /// <summary>
+        /// Источник
+        /// </summary>
+        public string Source { get; set; }
+
+        /// <summary>
         /// <see cref="Entities.Person"/>
         /// </summary>
         [ForeignKey("id_Person")]

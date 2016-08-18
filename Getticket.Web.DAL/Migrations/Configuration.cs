@@ -122,16 +122,24 @@ namespace Getticket.Web.DAL.Migrations
 
             context.Events.AddOrUpdate(o => o.Id, new Event { Id = 1, Name = "Бокс", IdCategory = 4, AgeLimit = 16, IsReallyEvent = true,
                 Description = "1/5 Бой за звание чемпиона мира по боксу в супертяжелом весе по версии WBA Лукас Браун..." });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 2, Name = "Фигурное катание", IdCategory = 5, AgeLimit = 4, IsReallyEvent = true,
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 2, Name = "Фигурное катание", IdCategory = 5, AgeLimit = 4,
                 Description = "3 Чемпионат мира по фигурному катанию" });
             context.Events.AddOrUpdate(o => o.Id, new Event { Id = 3, Name = "Весёлые бабури", IdCategory = 6, AgeLimit = 14, IsReallyEvent = true,
                 Description = "1/2 Петр Налич и биг-бенд \"Песни Утесова и не только...\"" });
             context.Events.AddOrUpdate(o => o.Id, new Event { Id = 4, Name = "Джаз", IdCategory = 6, AgeLimit = 14, IsReallyEvent = true,
                 Description = "8 А.Кролл, Л.Ролл, М. Волл День джаза в Доме музыки. \"Все цвета московского джаза\"" });
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 5, Name = "Вишневый сад", IdCategory = 7, AgeLimit = 12, IsReallyEvent = true});
-            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 6, Name = "Лебединое озеро", IdCategory = 8, AgeLimit = 10, IsReallyEvent = true});
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 5, Name = "Вишневый сад", IdCategory = 7, AgeLimit = 12});
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 6, Name = "Лебединое озеро", IdCategory = 8, AgeLimit = 10});
             context.Events.AddOrUpdate(o => o.Id, new Event { Id = 7, Name = "Современник", IdCategory = 2, AgeLimit = 12});
             context.Events.AddOrUpdate(o => o.Id, new Event { Id = 8, Name = "Justified", IdCategory = 6, AgeLimit = 14, IsReallyEvent = true});
+            context.Events.AddOrUpdate(o => o.Id, new Event
+            {
+                Id = 9,
+                Name = "Бокс",
+                IdCategory = 4,
+                AgeLimit = 16,
+                Description = "Чемпиона мира по боксу в супертяжелом весе по версии WBA"
+            });
             context.SaveChanges();
 
             context.ConnectionTypes.AddOrUpdate(o => o.Id, new ConnectionType { Id = 1, Name = "Персона" });

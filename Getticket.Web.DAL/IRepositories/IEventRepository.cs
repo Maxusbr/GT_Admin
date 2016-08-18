@@ -16,7 +16,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// Возвращает список <see cref="Event"/>
         /// </summary>
         /// <returns></returns>
-        IList<Event> GetEvents();
+        IList<Event> GetEvents(bool realy = false);
 
         /// <summary>
         /// Находим <see cref="Event"/> с Id = <paramref name="id" /> 

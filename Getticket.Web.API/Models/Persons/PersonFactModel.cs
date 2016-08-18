@@ -10,7 +10,7 @@ namespace Getticket.Web.API.Models.Persons
         /// <summary>
         /// Текст описания
         /// </summary>
-        [MaxLength(190)]
+        //[MaxLength(190)]
         [Required]
         public string FactText { get; set; }
 
@@ -18,6 +18,7 @@ namespace Getticket.Web.API.Models.Persons
 
         public int id_FactType { get; set; }
         public string Status { get; set; }
+        public string Source { get; set; }
         public PersonFactTypeModel FactType { get; set; }
         public LastChangeModel LastChange { get; set; }
     }

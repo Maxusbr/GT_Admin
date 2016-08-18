@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function EventsFactCreateController($rootScope, $scope) {
+    function EventsNotesEditController($rootScope, $scope) {
         var vm = this;
         $scope.fact = $rootScope.fact ? $rootScope.fact: {
             FactText: "",
@@ -25,7 +25,7 @@
 
     angular
         .module('app')
-        .controller('EventsFactCreateController', EventsFactCreateController);
+        .controller('EventsNotesEditController', EventsNotesEditController);
 
-    EventsFactCreateController.$inject = ['$rootScope', '$scope'];
+    EventsNotesEditController.$inject = ['$rootScope', '$scope'];
 })();

@@ -29,8 +29,8 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in factlist">
-                        <td><a href="" ng-click="editFact()"><span style="">{{item.FactText}}</span></a></td>
-                        <td>TODO: status
+                        <td><a href="" ng-click="editFact(item)"><span style="">{{item.FactText}}</span></a></td>
+                        <td>{{item.Status}}
                             <br/>
                             <span ng-if="item.LastChange">
                                 {{item.LastChange.UserName}}<br>
@@ -38,7 +38,7 @@
                             </span>
                         </td>
                         <td><span>{{item.FactType.Name}} / {{item.FactType.Descript}}</span></td>
-                        <td>TODO: source</td>
+                        <td>{{item.Source}}</td>
                         <td>TODO: used</td>
                     </tr>
                 </tbody>

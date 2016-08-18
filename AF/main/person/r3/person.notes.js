@@ -6,7 +6,7 @@
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
 
-        $rootScope.getDescript = function() {
+        $rootScope.getDescript = function () {
             $scope.Promise = personService.getDescript($rootScope.personId, function (data) {
                 $scope.descriptions = [];
                 $scope.descriptionlist = data;
@@ -25,7 +25,7 @@
 
         $rootScope.displaySource = function (id, page) {
             $rootScope.editDescriptionId = id;
-            $rootScope.pageSchema = page ? page: {};
+            $rootScope.pageSchema = page ? page : {};
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.source.html', 3200);
         }
@@ -48,22 +48,22 @@
             app.loadContentView('/main/person/r3/r4/person.notes.ades.html', 3200);
         }
 
-        $scope.getSchemaName = function(item) {
+        $scope.getSchemaName = function (item) {
             if (!item.PageBlock) return "";
 
             switch (item.PageBlock.Page.PageType) {
-            case 0:
-                return `Персона/${item.PageBlock.Page.Person.LastName} ${item.PageBlock.Page.Person.Name}`;
-            case 1:
-                return "Поиск";
-            case 2:
-                return `Мероприятие/${item.PageBlock.Page.Event.Name}`;
-            case 3:
-                return `Площадка/${item.PageBlock.Page.Hall.Name}`;
-            case 4:
-                return "Профиль";
-            case 5:
-                return "Главная";
+                case 0:
+                    return `Персона/${item.PageBlock.Page.Person.LastName} ${item.PageBlock.Page.Person.Name}`;
+                case 1:
+                    return "Поиск";
+                case 2:
+                    return `Мероприятие/${item.PageBlock.Page.Event.Name}`;
+                case 3:
+                    return `Площадка/${item.PageBlock.Page.Hall.Name}`;
+                case 4:
+                    return "Профиль";
+                case 5:
+                    return "Главная";
                 default:
                     return "";
             }
@@ -76,7 +76,7 @@
         });
 
         function getPersonTags() {
-            personService.getPersonTags($rootScope.person.Id, function (data) {
+            personService.getEntityTags($rootScope.person.Id, 'person', function (data) {
                 $scope.personTags = [];
                 $scope.personTags.push.apply($scope.personTags, data);
             });
@@ -91,6 +91,11 @@
                 item.Name.substring(0, query.length);
             });
             return result;
+        }
+
+        $scope.savePersonTags = function () {
+            if ($scope.personTags.length)
+                personService.saveTags($rootScope.personId, $scope.personTags, 'person');
         }
     }
 

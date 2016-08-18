@@ -74,12 +74,12 @@ namespace Getticket.Web.API.Services
             return response;
         }
 
-        /// <see cref="ITagService.AddTagLinks(TagsDescriptionModel)"/>
-        public bool AddTagLinks(TagsDescriptionModel model)
+        /// <see cref="ITagService.AddTagLinks(TagsTizerModel)"/>
+        public bool AddTagLinks(TagsTizerModel model)
         {
-            _tagRepository.DeletePersonDescriptionTags(model.Tizer.Id);
-            if (model.Tags.Length < 1) return true;
-            var list = model.Tags.Select(o => TagModelHelper.GetTagLink(model.Tizer.Id, o));
+            _tagRepository.DeletePersonDescriptionTags(model.IdTizer);
+            if (model.Tags.Count < 1) return true;
+            var list = model.Tags.Select(o => TagModelHelper.GetTagLink(model.IdTizer, o));
             var response = list.Select(link => _tagRepository.AddTagLink(link))
                     .All(taglink => taglink != null);
             return response;

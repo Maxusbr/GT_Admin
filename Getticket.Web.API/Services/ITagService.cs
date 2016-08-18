@@ -53,7 +53,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        bool AddTagLinks(TagsDescriptionModel model);
+        bool AddTagLinks(TagsTizerModel model);
 
         /// <summary>
         /// Добавляет связь <see cref="TagModel"/> с <see cref="PersonModel"/>

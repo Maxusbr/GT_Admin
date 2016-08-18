@@ -20,7 +20,7 @@
 
         $rootScope.addMedia = function add_fact() {
             app.closeFour();
-            app.loadContentView('/main/events/r3/r4/events.media.create.html', 3200)
+            app.loadContentView('/main/events/r3/r4/events.media.edit.html', 3200)
         }
     }
 

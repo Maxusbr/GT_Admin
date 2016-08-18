@@ -20,7 +20,7 @@ namespace Getticket.Web.API.Services
         /// Возвращает список событий
         /// </summary>
         /// <returns></returns>
-        IEnumerable<EventModel> GetEvents();
+        IEnumerable<EventModel> GetEvents(bool realy = false);
 
         /// <summary>
         /// Воозвращает модель EventModel по <paramref name="id"/>
