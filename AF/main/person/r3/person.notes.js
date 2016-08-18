@@ -31,6 +31,8 @@
         }
         
         $rootScope.displayNewSource = function () {
+            $rootScope.editableDesc = { id_DescriptionType: 1 };
+            $rootScope.pageSchema = {};
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.source.html', 3200);
         }

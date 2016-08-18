@@ -960,7 +960,7 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IPersonService.SaveDescriptionSchema"/>
-        public bool SaveDescriptionSchema(int id, PageBlockModel model)
+        public bool SaveDescriptionSchema(int id, PageBlockModel model, int parsonId)
         {
             return _personRepository.SaveDescriptionSchema(id,
                 PageModelHelper.GetPageBlock(model),
@@ -968,7 +968,7 @@ namespace Getticket.Web.API.Services
                 {
                     Id = model.UserPageCategoryId ?? 0,
                     Name = model.UserPageCategory
-                });
+                }, parsonId);
         }
 
         /// <see cref="IPersonService.GetUserPageCategory"/>
