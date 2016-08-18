@@ -107,8 +107,10 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="EventMedia"/>
         public virtual DbSet<EventMedia> EventMedias { get; set; }
 
+        /// <see cref="EventMediaLinkEvent"/>
         public virtual DbSet<EventMediaLinkEvent> EventMediaLinkEvents { get; set; }
 
+        /// <see cref="EventMediaLinkPerson"/>
         public virtual DbSet<EventMediaLinkPerson> EventMediaLinkPersons { get; set; }
 
         /// <see cref="EventConnection"/>
@@ -153,6 +155,52 @@ namespace Getticket.Web.DAL.Entities
                 this
                     .Ignore(o => o.StaticDescription);
 
+            }
+        }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.MediaLinkEvent"/>
+        /// </summary>
+        public class EventMediaLinkEventConfiguration : EntityTypeConfiguration<MediaLinkEvent>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public EventMediaLinkEventConfiguration()
+            {
+                this
+                    .HasRequired(e => e.Event)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdEvent)
+                    .WillCascadeOnDelete(false);
+                this
+                    .HasRequired(e => e.Media)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdMedia)
+                    .WillCascadeOnDelete(false);
+            }
+        }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.MediaLinkPerson"/>
+        /// </summary>
+        public class EventMediaLinkPersonConfiguration : EntityTypeConfiguration<MediaLinkPerson>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public EventMediaLinkPersonConfiguration()
+            {
+                this
+                    .HasRequired(e => e.Person)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdPerson)
+                    .WillCascadeOnDelete(false);
+                this
+                    .HasRequired(e => e.Media)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdMedia)
+                    .WillCascadeOnDelete(false);
             }
         }
         #endregion
@@ -526,6 +574,8 @@ namespace Getticket.Web.DAL.Entities
             modelBuilder.Configurations.Add(new MediaLinkEventConfiguration());
             modelBuilder.Configurations.Add(new AntroLinkPersonConfiguration());
             modelBuilder.Configurations.Add(new AntroLinkEventConfiguration());
+            modelBuilder.Configurations.Add(new EventMediaLinkPersonConfiguration());
+            modelBuilder.Configurations.Add(new EventMediaLinkEventConfiguration());
         }
     }
 }
