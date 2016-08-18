@@ -29,6 +29,11 @@
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.source.html', 3200);
         }
+        
+        $rootScope.displayNewSource = function () {
+            app.closeFour();
+            app.loadContentView('/main/person/r3/r4/person.notes.source.html', 3200);
+        }
 
         $rootScope.displayNotesStatic = function (item) {
             $rootScope.editableDesc = item ? item : { id_DescriptionType: 2 };
