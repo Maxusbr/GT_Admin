@@ -9,7 +9,7 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="saveFact()">
+            <a href="#" ng-click="saveConnection()">
                 <span class="fa fa-save"></span> Сохранить
             </a>
         </div>
@@ -28,7 +28,8 @@
             </tr>
             <tr>
                 <td>Что связываем</td>
-                <td><select name="" id="" class="form-control" ng-model="connectionId" ng-change="setConnection()"
+                <td><select name="" id="" class="form-control" ng-model="connectionId" 
+                            
                             ng-options="item.Id as item.Name for item in connectionList"></select></td>
             </tr>
             <tr>
