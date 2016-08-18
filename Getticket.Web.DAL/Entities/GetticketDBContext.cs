@@ -161,7 +161,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Настройка сущности <see cref="Entities.MediaLinkEvent"/>
         /// </summary>
-        public class EventMediaLinkEventConfiguration : EntityTypeConfiguration<MediaLinkEvent>
+        public class EventMediaLinkEventConfiguration : EntityTypeConfiguration<EventMediaLinkEvent>
         {
             /// <summary>
             /// Конструктр
@@ -184,7 +184,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Настройка сущности <see cref="Entities.MediaLinkPerson"/>
         /// </summary>
-        public class EventMediaLinkPersonConfiguration : EntityTypeConfiguration<MediaLinkPerson>
+        public class EventMediaLinkPersonConfiguration : EntityTypeConfiguration<EventMediaLinkPerson>
         {
             /// <summary>
             /// Конструктр
