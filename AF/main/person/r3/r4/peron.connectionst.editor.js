@@ -14,6 +14,7 @@
                 default:
                     break;
             }
+            
         }
         function getConnectionList(id) {
             $scope.connectionList = [];
@@ -64,14 +65,13 @@
             }
         }
 
-        $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
+        console.log
+
+            $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
 
         $rootScope.saveFact = function save_fact() {
-            console.log('save connection click');
-            //TODO: save changes or create new
-            //TODO: close this view
-            //TODO: refresh facts table
             $rootScope.editedConnection.id_Person = $rootScope.personId;
+            console.log($rootScope.editedConnection);
             personService.saveEntity($rootScope.personId, $rootScope.editedConnection, 'connection', function (data) {
                 $rootScope.getPersonConnection();
                 app.closeView('personConnectionEdit');
