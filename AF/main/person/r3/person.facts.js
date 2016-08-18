@@ -3,23 +3,34 @@
 
     function PersonFactsController($rootScope, $scope, personService) {
         var vm = this;
+        $rootScope.getFacts = function() {
+            personService.getFact($rootScope.personId, function (data) {
+                $scope.factlist = data;
 
-        personService.getFact($rootScope.personId, function (data) {
-            $scope.factlist = [];
-            data.forEach(function (item) {
-                $scope.factlist.push.apply($scope.factlist, item.List);
+                //data.forEach(function (item) {
+                //    $scope.factlist.push.apply($scope.factlist, item.List);
+                //});
             });
-        });
+        }
 
         $rootScope.addFact = function addFact(){
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/peron.fact.create.html', 3200);
         }
-        $rootScope.editFact = function addFact(){
+        $rootScope.editFact = function (item) {
+            $rootScope.editedFact = item;
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/peron.fact.editor.html', 3200);
         }
+        $rootScope.getFacts();
 
+        if (!$rootScope.facttypes)
+            personService.getFactTypes(function (data) {
+                $rootScope.facttypes = [];
+                $rootScope.facttypes.push.apply($rootScope.facttypes, data);
+            });
+
+        
     }
 
     angular

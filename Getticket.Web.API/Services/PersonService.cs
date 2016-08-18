@@ -212,15 +212,16 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IPersonService.GetFacts" />
-        public IEnumerable<EntityCollection<PersonFactModel>> GetFacts(int id)
+        public IEnumerable<PersonFactModel> GetFacts(int id)
         {
             var list = PersonModelHelper.GetFactModels(_personRepository.GetPersonFacts(id));
             foreach (var item in list)
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonFact(item.id_Person, item.Id));
             }
-            var types = list.GroupBy(o => o.id_FactType).Select(o => o.Key);
-            return types.Select(tp => new EntityCollection<PersonFactModel> { List = list.Where(o => o.id_FactType == tp), Type = tp });
+            //var types = list.GroupBy(o => o.id_FactType).Select(o => o.Key);
+            //return types.Select(tp => new EntityCollection<PersonFactModel> { List = list.Where(o => o.id_FactType == tp), Type = tp });
+            return list;
         }
 
         /// <summary>
@@ -422,7 +423,7 @@ namespace Getticket.Web.API.Services
         /// <see cref="IPersonService.UpdateConnection(PersonConnectionModel, int)"/>
         public int UpdateConnection(PersonConnectionModel model, int userId)
         {
-            var res =  _personRepository.SaveConnection(new PersonConnection
+            var res = _personRepository.SaveConnection(new PersonConnection
             {
                 Id = model.Id,
                 id_Person = model.id_Person,
@@ -835,7 +836,7 @@ namespace Getticket.Web.API.Services
                 .Result("Fact type delete complete");
         }
 
-        /// <see cref="IPersonService.UpdateFacts"/>
+        /// <see cref="IPersonService.UpdateFacts(int, IEnumerable{PersonFactModel}, int)"/>
         public ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models, int userId)
         {
             if (models.Select(item => _personRepository.UpdatePersonFact(new PersonFact
@@ -843,7 +844,9 @@ namespace Getticket.Web.API.Services
                 Id = item.Id,
                 id_Person = pesonId,
                 id_FactType = item.id_FactType,
-                FactText = item.FactText
+                FactText = item.FactText,
+                Status = item.Status,
+                Source = item.Source
             }, userId)).Any(result => result == null))
             {
                 return ServiceResponce
@@ -854,6 +857,21 @@ namespace Getticket.Web.API.Services
             return ServiceResponce
                 .FromSuccess()
                 .Result("Facts save complete");
+        }
+
+        /// <see cref="IPersonService.UpdateFacts(PersonFactModel, int)"/>
+        public int UpdateFacts(PersonFactModel model, int userId)
+        {
+            var res = _personRepository.UpdatePersonFact(new PersonFact
+            {
+                Id = model.Id,
+                id_Person = model.id_Person,
+                id_FactType = model.id_FactType,
+                FactText = model.FactText,
+                Status = model.Status,
+                Source = model.Source
+            }, userId);
+            return res?.Id ?? -1;
         }
 
         /// <see cref="IPersonService.DeleteFacts"/>

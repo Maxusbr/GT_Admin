@@ -98,7 +98,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IEnumerable<EntityCollection<PersonFactModel>> GetFacts(int id);
+        IEnumerable<PersonFactModel> GetFacts(int id);
 
         /// <summary>
         /// Add or Update Person entity
@@ -350,6 +350,14 @@ namespace Getticket.Web.API.Services
         /// <param name="userId"></param>
         /// <returns></returns>
         ServiceResponce UpdateFacts(int pesonId, IEnumerable<PersonFactModel> models, int userId);
+
+        /// <summary>
+        /// Добавить/Изменить список фактов для Person
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        int UpdateFacts(PersonFactModel model, int userId);
 
         /// <summary>
         /// Удалить факты

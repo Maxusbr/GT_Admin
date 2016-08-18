@@ -490,14 +490,24 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteFactTypes(models).Response());
         }
 
-        /// <see cref="IPersonService.UpdateFacts" />
+        ///// <see cref="IPersonService.UpdateFacts" />
+        //[HttpPost]
+        //[Route("fact/update/{id}")]
+        //public IHttpActionResult UpdateFacts(int id, [FromBody] IEnumerable<PersonFactModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var userId = User.Identity.GetUserId<int>();
+        //    return Ok(_personService.UpdateFacts(id, models, userId).Response());
+        //}
+
+        /// <see cref="IPersonService.UpdateFacts(PersonFactModel, int)" />
         [HttpPost]
         [Route("fact/update/{id}")]
-        public IHttpActionResult UpdateFacts(int id, [FromBody] IEnumerable<PersonFactModel> models)
+        public IHttpActionResult UpdateFacts(int id, [FromBody] PersonFactModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_personService.UpdateFacts(id, models, userId).Response());
+            return Ok(_personService.UpdateFacts(model, userId));
         }
 
         /// <see cref="IPersonService.DeleteFacts" />

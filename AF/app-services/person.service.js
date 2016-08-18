@@ -254,6 +254,11 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.getFactTypes = function (callback) {
+            return $http.get(`${serviceUrl}persons/fact/types`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
         service.saveEntitieTypes = function (list, entity, callback) {
             $http.post(`${serviceUrl}persons/${entity}/updatetypes`, list).success(function (response) {
                 if (response.status === 'success')
