@@ -9,7 +9,12 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="displayNewSource()">
+            <a href="#" ng-click="savePersonTags()">
+                <span class="fa fa-save"></span> Сохранить теги
+            </a>
+        </div>
+        <div class="win-menu-button">
+            <a href="#" ng-click="displayNotesTizer()">
                 <span class="fa fa-plus"></span> Добавить
             </a>
         </div>
@@ -23,7 +28,6 @@
                 <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
             </tags-input>
         </div>
-        <button class="btn btn-success" ng-click="savePersonTags()">Сохранить теги</button>
         <script type="text/ng-template" id="my-custom-template">
             <div class="right-panel">
                 <span ng-bind-html="$highlight($getDisplayText())"></span>
