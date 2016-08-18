@@ -215,6 +215,40 @@ namespace Getticket.Web.DAL.IRepositories
         int GetCountMedias(int id);
 
 
+
+        #region facts
+
+
+        /// <see cref="IPersonRepository.GetPersonFactTypes" />
+        IList<EventFactType> GetEventFactTypes();
+
+        /// <see cref="IPersonRepository.UpdateFactType" />
+        EventFactType UpdateFactType(EventFactType type);
+
+        /// <see cref="IPersonRepository.DeleteFactType" />
+        bool DeleteFactType(int id);
+
+        /// <see cref="IPersonRepository.GetPersonFacts" />
+        IList<EventFact> GetEventFacts(int id);
+
+        /// <see cref="IPersonRepository.UpdatePersonFacts" />
+        bool UpdateEventFacts(IList<EventFact> facts, int userId);
+
+        /// <see cref="IPersonRepository.UpdatePersonFact" />
+        EventFact UpdateEventFact(EventFact fact, int userId);
+
+        /// <see cref="IPersonRepository.DeletePersonFact" />
+        bool DeleteEventFact(int id);
+
+
+        /// <see cref="IPersonRepository.GetCountFacts" />
+        int GetCountFacts(int id);
+
+        #endregion
+
+
+
+
         /// <summary>
         /// Возвращает список категорий
         /// </summary>

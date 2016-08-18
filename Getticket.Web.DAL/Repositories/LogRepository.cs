@@ -105,5 +105,13 @@ namespace Getticket.Web.DAL.Repositories
                 db.EventLogs.OrderByDescending(o => o.Date).Include(o => o.User)
                     .FirstOrDefault(o => o.EventId == idEvent && o.IdProperty == id && o.Type == LogType.Description);
         }
+
+        /// <see cref="ILogRepository.GetLastChangePersonFact" />
+        public EventLog GetLastChangeEventFact(int idEvent, int id)
+        {
+            return
+                db.EventLogs.OrderByDescending(o => o.Date).Include(o => o.User)
+                    .FirstOrDefault(o => o.EventId == idEvent && o.IdProperty == id && o.Type == LogType.Fact);
+        }
     }
 }

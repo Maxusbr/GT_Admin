@@ -461,6 +461,119 @@ namespace Getticket.Web.API.Services
                 .Result("Descriptions delete complete");
         }
 
+
+
+        #region facts
+
+        /// <see cref="IEventService.GetFacts" />
+        public IEnumerable<EventFactModel> GetFacts(int id)
+        {
+            var list = EventModelHelper.GetFactModels(_eventRepository.GetEventFacts(id));
+            foreach (var item in list)
+            {
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangeEventFact(item.id_Event, item.Id));
+            }
+            //var types = list.GroupBy(o => o.id_FactType).Select(o => o.Key);
+            //return types.Select(tp => new EntityCollection<EventFactModel> { List = list.Where(o => o.id_FactType == tp), Type = tp });
+            return list;
+        }
+
+        /// <see cref="IEventService.GetFactsTypes"/>
+        public IList<EventFactTypeModel> GetFactsTypes()
+        {
+            var result = _eventRepository.GetEventFactTypes();
+            return EventModelHelper.GetFactTypeModels(result);
+        }
+
+        /// <see cref="IEventService.UpdateFactTypes"/>
+        public ServiceResponce UpdateFactTypes(IEnumerable<EventFactTypeModel> models)
+        {
+            foreach (var item in models)
+            {
+                var result = _eventRepository.UpdateFactType(new EventFactType { Id = item.Id, Name = item.Name });
+                if (result == null) return ServiceResponce
+                 .FromFailed()
+                 .Result($"Error save fact type");
+            }
+
+            return ServiceResponce
+                .FromSuccess()
+                .Result("Fatc type save complete");
+        }
+
+        /// <see cref="IEventService.DeleteFactTypes"/>
+        public ServiceResponce DeleteFactTypes(IEnumerable<EventFactTypeModel> models)
+        {
+            if (models.Any(item => !_eventRepository.DeleteFactType(item.Id)))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Result($"Error delete fact type");
+            }
+
+            return ServiceResponce
+                .FromSuccess()
+                .Result("Fact type delete complete");
+        }
+
+        /// <see cref="IEventService.UpdateFacts(int, IEnumerable{EventFactModel}, int)"/>
+        public ServiceResponce UpdateFacts(int pesonId, IEnumerable<EventFactModel> models, int userId)
+        {
+            if (models.Select(item => _eventRepository.UpdateEventFact(new EventFact
+            {
+                Id = item.Id,
+                id_Event = pesonId,
+                id_FactType = item.id_FactType,
+                FactText = item.FactText,
+                Status = item.Status,
+                Source = item.Source
+            }, userId)).Any(result => result == null))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Result($"Error save fact");
+            }
+
+            return ServiceResponce
+                .FromSuccess()
+                .Result("Facts save complete");
+        }
+
+        /// <see cref="IEventService.UpdateFacts(EventFactModel, int)"/>
+        public int UpdateFacts(EventFactModel model, int userId)
+        {
+            var res = _eventRepository.UpdateEventFact(new EventFact
+            {
+                Id = model.Id,
+                id_Event = model.id_Event,
+                id_FactType = model.id_FactType,
+                FactText = model.FactText,
+                Status = model.Status,
+                Source = model.Source
+            }, userId);
+            return res?.Id ?? -1;
+        }
+
+        /// <see cref="IEventService.DeleteFacts"/>
+        public ServiceResponce DeleteFacts(IEnumerable<EventFactModel> models)
+        {
+            if (models.Any(item => !_eventRepository.DeleteEventFact(item.Id)))
+            {
+                return ServiceResponce
+                    .FromFailed()
+                    .Result($"Error delete fact");
+            }
+
+            return ServiceResponce
+                .FromSuccess()
+                .Result("Facts delete complete");
+        }
+
+        #endregion
+
+
+
+
         /// <see cref="IEventService.GetCategories"/>
         public IList<EventCategoryModel> GetCategories()
         {

@@ -93,5 +93,7 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="id"></param>
         /// <returns></returns>
         EventLog GetLastChangeEventDescription(int idEvent, int id);
+
+        EventLog GetLastChangeEventFact(int idEvent, int id);
     }
 }

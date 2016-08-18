@@ -206,6 +206,62 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         ServiceResponce DeleteDescriptions(IEnumerable<EventDescriptionModel> models);
 
+
+        #region facts
+
+        /// <summary>
+        /// Возвращает список моделей фактов
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IEnumerable<EventFactModel> GetFacts(int id);
+
+        /// <summary>
+        /// Возвращает список типов фактов
+        /// </summary>
+        /// <returns></returns>
+        IList<EventFactTypeModel> GetFactsTypes();
+
+        /// <summary>
+        /// Добавить/Изменить типы фактов
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce UpdateFactTypes(IEnumerable<EventFactTypeModel> models);
+
+        /// <summary>
+        /// Удалить типы фактов
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce DeleteFactTypes(IEnumerable<EventFactTypeModel> models);
+
+        /// <summary>
+        /// Добавить/Изменить список фактов для Person c Id = <paramref name="pesonId"/>
+        /// </summary>
+        /// <param name="pesonId"></param>
+        /// <param name="models"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        ServiceResponce UpdateFacts(int pesonId, IEnumerable<EventFactModel> models, int userId);
+
+        /// <summary>
+        /// Добавить/Изменить список фактов для Person
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        int UpdateFacts(EventFactModel model, int userId);
+
+        /// <summary>
+        /// Удалить факты
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        ServiceResponce DeleteFacts(IEnumerable<EventFactModel> models);
+
+        #endregion
+
         /// <summary>
         /// Получает список категорий событий
         /// </summary>

@@ -416,6 +416,105 @@ namespace Getticket.Web.DAL.Repositories
 
         #endregion
 
+        #region facts
+
+
+        /// <see cref="IPersonRepository.GetPersonFactTypes" />
+        public IList<EventFactType> GetEventFactTypes()
+        {
+            return db.EventFactTypes.ToList();
+        }
+
+        /// <see cref="IPersonRepository.UpdateFactType" />
+        public EventFactType UpdateFactType(EventFactType type)
+        {
+            if (type.Id == 0)
+            {
+                db.Entry(type).State = System.Data.Entity.EntityState.Added;
+            }
+            else if (type.Id > 0)
+            {
+                db.Entry(type).State = System.Data.Entity.EntityState.Modified;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return type;
+        }
+
+        /// <see cref="IPersonRepository.DeleteFactType" />
+        public bool DeleteFactType(int id)
+        {
+            if (id <= 0) return false;
+            var item = db.EventFactTypes.FirstOrDefault(u => u.Id == id);
+            if (item == null) return false;
+            db.EventFactTypes.Remove(item);
+            db.SaveChanges();
+            return true;
+        }
+
+        /// <see cref="IPersonRepository.GetPersonFacts" />
+        public IList<EventFact> GetEventFacts(int id)
+        {
+            return db.EventFacts.Where(o => o.id_Event == id)
+                .Include(o => o.FactType).ToList();
+        }
+
+        /// <see cref="IPersonRepository.UpdatePersonFacts" />
+        public bool UpdateEventFacts(IList<EventFact> facts, int userId)
+        {
+            return facts.All(fact => UpdateEventFact(fact, userId) != null);
+        }
+
+        /// <see cref="IPersonRepository.UpdatePersonFact" />
+        public EventFact UpdateEventFact(EventFact fact, int userId)
+        {
+            if (fact.Id == 0)
+            {
+                db.Entry(fact).State = System.Data.Entity.EntityState.Added;
+            }
+            else if (fact.Id > 0)
+            {
+                var pr = db.EventFacts.FirstOrDefault(o => o.Id == fact.Id);
+                SaveLog(pr, fact, fact.id_Event, userId, LogType.Fact);
+                db.Entry(pr).CurrentValues.SetValues(fact);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return fact;
+        }
+
+        /// <see cref="IPersonRepository.DeletePersonFact" />
+        public bool DeleteEventFact(int id)
+        {
+            if (id <= 0) return false;
+            var item = db.EventFacts.FirstOrDefault(u => u.Id == id);
+            if (item == null) return false;
+            db.EventFacts.Remove(item);
+            db.SaveChanges();
+            return true;
+        }
+
+
+        /// <see cref="IPersonRepository.GetCountFacts" />
+        public int GetCountFacts(int id)
+        {
+            return db.EventFacts.Count(o => o.id_Event == id);
+        }
+
+        #endregion
+
 
         /// <see cref="IEventRepository.GetCountDescriptions" />
         public int GetCountDescriptions(int id)

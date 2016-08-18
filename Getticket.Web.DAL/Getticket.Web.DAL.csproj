@@ -68,6 +68,8 @@
     <Compile Include="Entities\MediaLinkPerson.cs" />
     <Compile Include="Entities\MediaLinkEvent.cs" />
     <Compile Include="Entities\PageBlock.cs" />
+    <Compile Include="Entities\EventFact.cs" />
+    <Compile Include="Entities\EventFactType.cs" />
     <Compile Include="Entities\UserPageCategory.cs" />
     <Compile Include="Entities\PageSchema.cs" />
     <Compile Include="Entities\PageBlockType.cs" />

@@ -86,6 +86,37 @@ namespace Getticket.Web.API.Helpers
             throw new NotImplementedException();
         }
 
+        public static IList<EventFactModel> GetFactModels(IList<EventFact> facts)
+        {
+            var list = facts.Select(GetFactModel);
+            return list.ToList();
+        }
+
+
+        private static EventFactModel GetFactModel(EventFact fact)
+        {
+            return fact != null ? new EventFactModel
+            {
+                Id = fact.Id,
+                id_Event = fact.id_Event,
+                id_FactType = fact.id_FactType,
+                FactType = new EventFactTypeModel { Id = fact.FactType.Id, Name = fact.FactType.Name, Descript = fact.FactType.Descript ?? "" },
+                FactText = fact.FactText,
+                Status = fact.Status,
+                Source = fact.Source
+            } : new EventFactModel();
+        }
+
+        /// <summary>
+        /// Get fact type models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<EventFactTypeModel> GetFactTypeModels(IList<EventFactType> result)
+        {
+            return result.Select(o => new EventFactTypeModel { Id = o.Id, Name = o.Name, Descript = o.Descript ?? "" }).ToList();
+        }
+
         public static IList<EventCategoryModel> GetCategoryModels(IList<EventCategory> categories)
         {
             return categories.Select(o => new EventCategoryModel

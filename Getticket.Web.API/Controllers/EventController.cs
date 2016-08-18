@@ -314,6 +314,76 @@ namespace Getticket.Web.API.Controllers
         }
         #endregion
 
+
+
+        #region Facts
+
+        /// <see cref="IPersonService.GetFacts" />
+        [HttpGet]
+        [Route("fact/{id}")]
+        public IHttpActionResult GetFacts(int id)
+        {
+            return Ok(_eventService.GetFacts(id));
+        }
+
+        /// <see cref="IPersonService.GetFactsTypes" />
+        [HttpGet]
+        [Route("fact/types")]
+        public IHttpActionResult GetFactsTypes()
+        {
+            return Ok(_eventService.GetFactsTypes());
+        }
+
+        /// <see cref="IPersonService.UpdateFactTypes" />
+        [HttpPost]
+        [Route("fact/updatetypes")]
+        public IHttpActionResult UpdateFactTypes([FromBody] IEnumerable<EventFactTypeModel> models)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            return Ok(_eventService.UpdateFactTypes(models).Response());
+        }
+
+        /// <see cref="IPersonService.DeleteFactTypes" />
+        [HttpPost]
+        [Route("fact/deltypes")]
+        public IHttpActionResult DeleteFactTypes([FromBody] IEnumerable<EventFactTypeModel> models)
+        {
+            return Ok(_eventService.DeleteFactTypes(models).Response());
+        }
+
+        ///// <see cref="IPersonService.UpdateFacts" />
+        //[HttpPost]
+        //[Route("fact/update/{id}")]
+        //public IHttpActionResult UpdateFacts(int id, [FromBody] IEnumerable<PersonFactModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var userId = User.Identity.GetUserId<int>();
+        //    return Ok(_personService.UpdateFacts(id, models, userId).Response());
+        //}
+
+        /// <see cref="IPersonService.UpdateFacts(PersonFactModel, int)" />
+        [HttpPost]
+        [Route("fact/update/{id}")]
+        public IHttpActionResult UpdateFacts(int id, [FromBody] EventFactModel model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            var userId = User.Identity.GetUserId<int>();
+            return Ok(_eventService.UpdateFacts(model, userId));
+        }
+
+        /// <see cref="IPersonService.DeleteFacts" />
+        [HttpPost]
+        [Route("fact/delete")]
+        public IHttpActionResult DeleteFacts([FromBody] IEnumerable<EventFactModel> models)
+        {
+            return Ok(_eventService.DeleteFacts(models).Response());
+        }
+        #endregion
+
+
+
+
+
         /// <see cref="ITagService.GeTags()" />
         [HttpGet]
         [Route("tags")]
