@@ -37,12 +37,15 @@
                     break;
             }
         }
-        $scope.getConnections = function (id) {
-            getConnectionList(id);
-            $scope.connectionId = getConnectionId();
-        }
-        $scope.setConnection = function () {
-            if (!$scope.connectionId) return;
+        $scope.$watch('connectionId', function (id) {
+            $rootScope.editedConnection.PersonConnectionType = $rootScope.connectiontypes.filter(function (item) {
+                return item.Id === $rootScope.editedConnection.id_ConnectionType;
+            })[0].Name;
+            $rootScope.editedConnection.PersonConnectTo = null;
+            $rootScope.editedConnection.id_PersonConnectTo = null;
+            $rootScope.editedConnection.Event = null;
+            $rootScope.editedConnection.id_Event = null;
+            if (!id) return;
             switch ($rootScope.editedConnection.id_ConnectionType) {
                 case 1:
                     $rootScope.editedConnection.id_PersonConnectTo = $scope.connectionId;
@@ -57,20 +60,50 @@
                     var event = $scope.connectionList.filter(function (item) {
                         return item.Id === $scope.connectionId;
                     })[0];
-                    $rootScope.editedConnection.Event = { Id: event.Id, Name: event.Name};
+                    $rootScope.editedConnection.Event = { Id: event.Id, Name: event.Name };
                     break;
                 default:
                     break;
             }
+        });
+        $scope.getConnections = function (id) {
+            getConnectionList(id);
+            $scope.connectionId = getConnectionId();
         }
+        //$scope.setConnection = function () {
+        //    $rootScope.editedConnection.id_Event = 0;
+        //    $rootScope.editedConnection.id_PersonConnectTo = 0;
+        //    if (!$scope.connectionId) return;
+        //    switch ($rootScope.editedConnection.id_ConnectionType) {
+        //        case 1:
+        //            $rootScope.editedConnection.id_PersonConnectTo = $scope.connectionId;
+        //            var person = $scope.connectionList.filter(function (item) {
+        //                return item.Id === $scope.connectionId;
+        //            })[0];
+        //            $rootScope.editedConnection.PersonConnectTo = { Name: person.Name, Id: person.Id };
+        //            break;
+        //        case 2:
+        //        case 3:
+        //            $rootScope.editedConnection.id_Event = $scope.connectionId;
+        //            var event = $scope.connectionList.filter(function (item) {
+        //                return item.Id === $scope.connectionId;
+        //            })[0];
+        //            $rootScope.editedConnection.Event = { Id: event.Id, Name: event.Name};
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //}
 
         $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
 
-        $rootScope.saveFact = function save_fact() {
+        $rootScope.saveConnection = function () {
             console.log('save connection click');
             //TODO: save changes or create new
             //TODO: close this view
             //TODO: refresh facts table
+            $rootScope.editedConnection.Event = null;
+            $rootScope.editedConnection.PersonConnectTo = null;
             $rootScope.editedConnection.id_Person = $rootScope.personId;
             personService.saveEntity($rootScope.personId, $rootScope.editedConnection, 'connection', function (data) {
                 $rootScope.getPersonConnection();
