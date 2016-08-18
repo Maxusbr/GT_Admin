@@ -1,0 +1,45 @@
+﻿<div class="win-container r3 personFacts" style="width:800px;" ng-controller="EventsHapensController">
+    <div class="win-header">
+        <div class="win-header-text">
+            События мероприятия
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personFacts')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="addHapens()">
+                <span class="fa fa-plus"></span>
+                <br />
+                Добавить
+            </a>
+        </div>
+    </div>
+    <div class="win-content col-md-18">
+            <table class="table" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                        <th class="col-md-4">Участники</th>
+                        <th class="col-md-4">Программа мероприятия</th>
+                        <th class="col-md-4">Входной контроль</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr ng-repeat="item in factlist">
+                        <td><span style="">{{item.FactText}}</span></td>
+                        <td>TODO: status
+                            <br/>
+                            <span ng-if="item.LastChange">
+                                {{item.LastChange.UserName}}<br>
+                                {{item.LastChange.Date | amCalendar}}
+                            </span>
+                        </td>
+                        <td><span>{{item.FactType.Name}} / {{item.FactType.Descript}}</span></td>
+                        <td>TODO: source</td>
+                        <td>TODO: used</td>
+                    </tr> -->
+                </tbody>
+            </table>
+    </div>
+</div>
