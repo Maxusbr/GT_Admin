@@ -130,6 +130,11 @@ namespace Getticket.Web.API.Services
             foreach (var item in result)
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonAntro(item.IdPerson, item.Id));
+                item.Links = new LinksModel
+                {
+                    PersonLinks = PersonModelHelper.GetPersonModels(_personRepository.GetAntroPersonLinks(item.Id)),
+                    EventLinks = EventModelHelper.GetEventModels(_personRepository.GetAntroEventLinks(item.Id))
+                };
             }
             return result;
         }
@@ -179,7 +184,7 @@ namespace Getticket.Web.API.Services
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonMedia(item.id_Person, item.Id));
                 item.Tags = TagModelHelper.GeTagModels(_tagRepository.GePersonMediaTags(item.Id));
-                item.Links = new PersonMediaLinks
+                item.Links = new LinksModel
                 {
                     PersonLinks = PersonModelHelper.GetPersonModels(_personRepository.GetMediaPersonLinks(item.Id)),
                     EventLinks = EventModelHelper.GetEventModels(_personRepository.GetMediaEventLinks(item.Id))
@@ -322,6 +327,19 @@ namespace Getticket.Web.API.Services
                 ServiceResponce
                 .FromFailed()
                 .Result($"Error save antros");
+        }
+
+        /// <see cref="IPersonService.UpdateAntros(PersonAntroModel, int)"/>
+        public int UpdateAntros(PersonAntroModel model, int userId)
+        {
+            return _personRepository.AddPersonAntros(
+                new PersonAntro
+                {
+                    Id = model.Id,
+                    id_Antro = model.IdAntro,
+                    id_Person = model.IdPerson,
+                    Value = model.Value
+                }, userId);
         }
 
         /// <summary>
@@ -667,6 +685,18 @@ namespace Getticket.Web.API.Services
         public bool LinkMediaEvent(int idMedia, int idEvent)
         {
             return _personRepository.LinkMedia(new MediaLinkEvent { IdMedia = idMedia, IdEvent = idEvent });
+        }
+
+        /// <see cref="IPersonService.LinkAntroPerson"/>
+        public bool LinkAntroPerson(int idAntro, int idPerson)
+        {
+            return _personRepository.LinkAntro(new AntroLinkPerson { IdAntro = idAntro, IdPerson = idPerson });
+        }
+
+        /// <see cref="IPersonService.LinkAntroEvent"/>
+        public bool LinkAntroEvent(int idAntro, int idEvent)
+        {
+            return _personRepository.LinkAntro(new AntroLinkEvent { IdAntro = idAntro, IdEvent = idEvent });
         }
 
         /// <summary>

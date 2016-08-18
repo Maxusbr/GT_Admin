@@ -72,34 +72,44 @@
                 Добавить/редактировать ассоциацию
                 <div class="row">
                     <div class="col-lg-4">
-                        <input type="radio" value="None" id="sexF" ng-checked="person.Sex == 1" ng-click="person.Sex = 1; person.IsChange = true" name="check"> Мероприятие
-                        <br/>
-                        <input type="radio" value="None" id="sexF" ng-checked="person.Sex == 1" ng-click="person.Sex = 1; person.IsChange = true" name="check"> Персона
+                        <input type="radio"
+                               ng-checked="association.type == 'event'"
+                               ng-click="association.type = 'event'"> Мероприятие
                         <br />
-                        <input type="radio" value="None" id="sexF" ng-checked="person.Sex == 1" ng-click="person.Sex = 1; person.IsChange = true" name="check"> Медиа
+                        <input type="radio"
+                               ng-checked="association.type == 'person'"
+                               ng-click="association.type = 'person'"> Персона
                         <br />
+                        <!--<input type="radio"
+                       ng-checked="association.type == 'media'"
+                       ng-click="association.type = 'media'"> Медиа
+                <br />-->
                     </div>
                     <div class="col-lg-4">
                         <!--if event-->
-                        <div>
-                           <i>Укажите мероприятие, для которого создается связь</i> 
-                            <select class="form-control"></select>
+                        <div ng-show="association.type == 'event'">
+                            <i>Укажите мероприятие, для которого создается связь</i>
+                            <select class="form-control" ng-model="association.Id"
+                                    ng-options="item.Id as item.Name for item in events"></select>
                         </div>
                         <!--if person-->
-                        <div>
-                            <i>Укажите персону, для которой создается связь</i> 
-                            <select class="form-control"></select>
+                        <div ng-show="association.type == 'person'">
+                            <i>Укажите персону, для которой создается связь</i>
+                            <select class="form-control" ng-model="association.Id"
+                                    ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
                         </div>
                         <!-- if media-->
-                        <div>
-                            <i>Укажите персону, для которой создается связь</i> 
-                            <select class="form-control"></select>
-                            <i>Укажите медиа</i> 
-                            <select class="form-control"></select>
+                        <div ng-show="association.type == 'media'">
+                            <i>Укажите персону, для которой создается связь</i>
+                            <select class="form-control" ng-model="association.personId" ng-change="getPersonMedia(association.personId)"
+                                    ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
+                            <i>Укажите медиа</i>
+                            <select class="form-control" ng-model="association.Id"
+                                    ng-options="item.Id as item.Name for item in personmedialist"></select>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <button class="btn btn-default">Сохранить</button>
+                        <button class="btn btn-default" ng-click="addAssociation(association)">Сохранить</button>
                     </div>
                 </div>
             </div>

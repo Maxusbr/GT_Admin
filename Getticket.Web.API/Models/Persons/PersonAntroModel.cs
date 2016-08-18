@@ -19,5 +19,6 @@ namespace Getticket.Web.API.Models.Persons
         public int IdAntro { get; set; }
         public string AntroName { get; set; }
         public LastChangeModel LastChange { get; set; }
+        public LinksModel Links { get; set; }
     }
 }

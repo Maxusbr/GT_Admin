@@ -9,7 +9,7 @@ namespace Getticket.Web.API.Models.Persons
     /// <summary>
     /// Ассоциации медиа
     /// </summary>
-    public class PersonMediaLinks
+    public class LinksModel
     {
         public IEnumerable<PersonModel> PersonLinks { get; set; }
         public IEnumerable<EventModel> EventLinks { get; set; }

@@ -313,6 +313,16 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<MediaLinkEvent> MediaEventLinks { get; set; }
 
         /// <summary>
+        /// <see cref="AntroLinkPerson"/>
+        /// </summary>
+        public virtual DbSet<AntroLinkPerson> AntroPersonLinks { get; set; }
+
+        /// <summary>
+        /// <see cref="AntroLinkEvent"/>
+        /// </summary>
+        public virtual DbSet<AntroLinkEvent> AntroEventLinks { get; set; }
+
+        /// <summary>
         /// Настройка сущности <see cref="Entities.Person"/>
         /// </summary>
         public class PersonConfiguration : EntityTypeConfiguration<Person>
@@ -396,6 +406,53 @@ namespace Getticket.Web.DAL.Entities
         }
 
         /// <summary>
+        /// Настройка сущности <see cref="Entities.MediaLinkEvent"/>
+        /// </summary>
+        public class AntroLinkEventConfiguration : EntityTypeConfiguration<AntroLinkEvent>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public AntroLinkEventConfiguration()
+            {
+                this
+                    .HasRequired(e => e.Event)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdEvent)
+                    .WillCascadeOnDelete(false);
+                this
+                    .HasRequired(e => e.Antro)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdAntro)
+                    .WillCascadeOnDelete(false);
+            }
+        }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.MediaLinkPerson"/>
+        /// </summary>
+        public class AntroLinkPersonConfiguration : EntityTypeConfiguration<AntroLinkPerson>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public AntroLinkPersonConfiguration()
+            {
+                this
+                    .HasRequired(e => e.Person)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdPerson)
+                    .WillCascadeOnDelete(false);
+                this
+                    .HasRequired(e => e.Antro)
+                    .WithMany()
+                    .HasForeignKey(e => e.IdAntro)
+                    .WillCascadeOnDelete(false);
+            }
+        }
+
+
+        /// <summary>
         /// Настройка сущности <see cref="Entities.PersonDescription"/>
         /// </summary>
         public class PersonDescriptionConfiguration : EntityTypeConfiguration<PersonDescription>
@@ -463,6 +520,8 @@ namespace Getticket.Web.DAL.Entities
             modelBuilder.Configurations.Add(new PersonDescriptionConfiguration());
             modelBuilder.Configurations.Add(new MediaLinkPersonConfiguration());
             modelBuilder.Configurations.Add(new MediaLinkEventConfiguration());
+            modelBuilder.Configurations.Add(new AntroLinkPersonConfiguration());
+            modelBuilder.Configurations.Add(new AntroLinkEventConfiguration());
         }
     }
 }

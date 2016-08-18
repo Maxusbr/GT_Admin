@@ -9,7 +9,8 @@
             $scope.antro.push.apply($scope.antro, data);
         });
 
-        $rootScope.addAntro = function add_connection() {
+        $rootScope.addAntro = function (item) {
+            $rootScope.editedAntro = item;
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.antro.editor.html', 3200)
         }

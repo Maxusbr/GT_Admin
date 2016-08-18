@@ -20,6 +20,6 @@ namespace Getticket.Web.API.Models.Persons
         public LastChangeModel LastChange { get; set; }
         public IEnumerable<TagModel> Tags { get; set; }
 
-        public PersonMediaLinks Links { get; set; }
+        public LinksModel Links { get; set; }
     }
 }
