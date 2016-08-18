@@ -146,6 +146,22 @@ namespace Getticket.Web.API.Services
         ServiceResponce DeleteMedia(IEnumerable<EventMediaModel> models);
 
         /// <summary>
+        /// Добавить ссылку медиа на персону
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="idPerson"></param>
+        /// <returns></returns>
+        bool LinkMediaPerson(int id, int idPerson);
+
+        /// <summary>
+        /// Добавить ссылку медиа на мероприятие
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="idEvent"></param>
+        /// <returns></returns>
+        bool LinkMediaEvent(int id, int idEvent);
+
+        /// <summary>
         /// Возвращает список типов описаний
         /// </summary>
         /// <returns></returns>

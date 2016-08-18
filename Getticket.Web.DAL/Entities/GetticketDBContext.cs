@@ -107,6 +107,10 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="EventMedia"/>
         public virtual DbSet<EventMedia> EventMedias { get; set; }
 
+        public virtual DbSet<EventMediaLinkEvent> EventMediaLinkEvents { get; set; }
+
+        public virtual DbSet<EventMediaLinkPerson> EventMediaLinkPersons { get; set; }
+
         /// <see cref="EventConnection"/>
         public virtual DbSet<EventConnection> EventConnections { get; set; }
 

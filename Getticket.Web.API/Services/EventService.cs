@@ -334,6 +334,18 @@ namespace Getticket.Web.API.Services
                 .Result("Media delete complete");
         }
 
+        /// <see cref="IPersonService.LinkMediaPerson"/>
+        public bool LinkMediaPerson(int idMedia, int idPerson)
+        {
+            return _eventRepository.LinkMedia(new MediaLinkPerson { IdMedia = idMedia, IdPerson = idPerson });
+        }
+
+        /// <see cref="IPersonService.LinkMediaEvent"/>
+        public bool LinkMediaEvent(int idMedia, int idEvent)
+        {
+            return _eventRepository.LinkMedia(new MediaLinkEvent { IdMedia = idMedia, IdEvent = idEvent });
+        }
+
         /// <summary>
         /// Возвращает список типов описаний
         /// </summary>

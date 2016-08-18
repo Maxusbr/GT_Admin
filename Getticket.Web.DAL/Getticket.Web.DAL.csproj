@@ -63,6 +63,8 @@
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\AntroLinkEvent.cs" />
     <Compile Include="Entities\AntroLinkPerson.cs" />
+    <Compile Include="Entities\EventMediaLinkEvent.cs" />
+    <Compile Include="Entities\EventMediaLinkPerson.cs" />
     <Compile Include="Entities\MediaLinkPerson.cs" />
     <Compile Include="Entities\MediaLinkEvent.cs" />
     <Compile Include="Entities\PageBlock.cs" />
