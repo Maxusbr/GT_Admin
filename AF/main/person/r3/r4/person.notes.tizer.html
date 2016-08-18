@@ -17,7 +17,14 @@
         </div>
     </div>
     <div class="win-content">
-        <textarea style="min-height:200px; width:360px;" ng-model="editableTizer.DescriptionText"></textarea>
+        <textarea style="min-height:200px; width:360px;" ng-model="tizer.DescriptionText"></textarea>
+        <br />
+        <label>
+            <input type="checkbox" value="" name="noletter" ng-model="notRequired" ng-change="tizer.RequiredStaticDescription = !notRequired">
+            <span ng-if="notRequired" class="glyphicon glyphicon-ok"></span>
+            <span ng-if="!notRequired" class="glyphicon"></span>
+            Статичное описание не требуется
+        </label>
         <br />
         <h5>Ключи (от 3 до 10)</h5>
         <div class="tags">

@@ -5,18 +5,18 @@
     function UserViewoneController($rootScope, $scope, personService) {
         var vm = this;
 
-        // $rootScope.displayNotes = function display_notes() {
-        //     app.closeThird();
-        //     app.loadContentView('/main/events/r3/events.notes.html', 2500);
-        // }
-        // $rootScope.displayFacts = function display_facts() {
-        //     app.closeThird();
-        //     app.loadContentView('/main/events/r3/events.facts.html', 2500);
-        // }
-        // $rootScope.displayMedia = function display_media() {
-        //     app.closeThird();
-        //     app.loadContentView('/main/events/r3/events.media.html', 2500);
-        // }
+        $rootScope.displayStatistic = function display_statistic() {
+            app.closeThird();
+            app.loadContentView('/main/user/r3/user.statistic.html', 2500);
+        }
+        $rootScope.displayMessege = function display_messege() {
+            app.closeThird();
+            app.loadContentView('/main/user/r3/user.message.html', 2500);
+        }
+        $rootScope.displayEntry = function display_entry() {
+            app.closeThird();
+            app.loadContentView('/main/user/r3/user.entry.html', 2500);
+        }
         // $rootScope.displayConnections = function display_connections() {
         //     app.closeThird();
         //     app.loadContentView('/main/events/r3/events.connections.html', 2500);
@@ -29,6 +29,8 @@
         //     app.closeThird();
         //     app.loadContentView('/main/events/r3/events.antro.html', 2500);
         // }
+
+        //перепилить для user
         $scope.Id = $rootScope.eventId;
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
@@ -37,7 +39,8 @@
                 $scope.counts = counts;
             });
         });
-
+        //
+        
         $rootScope.editUser = function edit_user() {
             app.closeThird();
             app.loadContentView('/main/user/user.edit.html', 2200);

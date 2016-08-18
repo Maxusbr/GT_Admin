@@ -200,6 +200,17 @@ namespace Getticket.Web.API.Services
             return types.Select(tp => new EntityCollection<PersonDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp });
         }
 
+        /// <see cref="IPersonService.GetListDescriptions" />
+        public IEnumerable<PersonDescriptionModel> GetListDescriptions(int id)
+        {
+            var list = PersonModelHelper.GetDescriptionModels(_personRepository.GetDescriptions(id));
+            foreach (var item in list)
+            {
+                item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonDescription(item.id_Person, item.Id));
+            }
+            return list;
+        }
+
         /// <see cref="IPersonService.GetFacts" />
         public IEnumerable<EntityCollection<PersonFactModel>> GetFacts(int id)
         {
@@ -702,7 +713,10 @@ namespace Getticket.Web.API.Services
                 id_Person = model.id_Person,
                 id_DescriptionType = model.id_DescriptionType,
                 DescriptionText = model.DescriptionText,
-                Status = model.Status
+                Status = model.Status,
+                RequiredStaticDescription = model.RequiredStaticDescription,
+                IdBlock = model.IdBlock,
+                IdUserPageCategory = model.PageBlock?.UserPageCategoryId
             }, userId);
             if (result == null)
             {
@@ -728,6 +742,18 @@ namespace Getticket.Web.API.Services
             return ServiceResponce
                 .FromSuccess()
                 .Result("Descriptions delete complete");
+        }
+
+        /// <see cref="IPersonService.LinkDescriptions"/>
+        public bool LinkDescriptions(int idTizer, int idDesc)
+        {
+            if (idTizer == 0 || idDesc == 0) return false;
+            return
+                _personRepository.LinkDescriptions(new PersonDescriptionTizerLink
+                {
+                    IdTizer = idTizer,
+                    IdStaticDescription = idDesc
+                });
         }
 
         /// <see cref="IPersonService.GetFactsTypes"/>

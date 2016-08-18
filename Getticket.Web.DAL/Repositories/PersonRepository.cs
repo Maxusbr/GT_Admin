@@ -446,6 +446,29 @@ namespace Getticket.Web.DAL.Repositories
             return true;
         }
 
+        /// <see cref="IPersonRepository.LinkDescriptions" />
+        public bool LinkDescriptions(PersonDescriptionTizerLink model)
+        {
+            if (model.IdStaticDescription == 0 || model.IdTizer == 0) return false;
+            var link =
+                db.PersonDescriptionTizerLinks.FirstOrDefault(
+                    o => o.IdTizer == model.IdTizer && o.IdStaticDescription == model.IdStaticDescription);
+
+            if (link == null)
+            {
+                db.Entry(model).State = System.Data.Entity.EntityState.Added;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
         /// <see cref="IPersonRepository.GetMedia" />
         public IList<PersonMedia> GetMedia(int id)
         {
