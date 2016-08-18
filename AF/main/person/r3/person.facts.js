@@ -13,9 +13,10 @@
             });
         }
 
-        $rootScope.addFact = function addFact(){
+        $rootScope.addFact = function addFact() {
+            $rootScope.editedFact = {}
             app.closeFour();
-            app.loadContentView('/main/person/r3/r4/peron.fact.create.html', 3200);
+            app.loadContentView('/main/person/r3/r4/peron.fact.editor.html', 3200);
         }
         $rootScope.editFact = function (item) {
             $rootScope.editedFact = item;

@@ -155,10 +155,17 @@ namespace Getticket.Web.DAL.Repositories
 
 
 
-        /// <see cref="IPersonRepository.AddPersonAntros" />
+        /// <see cref="IPersonRepository.AddPersonAntros(IList{PersonAntro}, int)" />
         public bool AddPersonAntros(IList<PersonAntro> properties, int userId)
         {
             return properties.Select(property => UpdatePersonAntro(property, userId)).All(rec => rec != null);
+        }
+
+        /// <see cref="IPersonRepository.AddPersonAntros(PersonAntro, int)" />
+        public int AddPersonAntros(PersonAntro property, int userId)
+        {
+            var res = UpdatePersonAntro(property, userId);
+            return res?.Id ?? -1;
         }
 
         /// <see cref="IPersonRepository.DeletePersonAntros" />
@@ -503,6 +510,56 @@ namespace Getticket.Web.DAL.Repositories
             var link =
                 db.MediaEventLinks.FirstOrDefault(
                     o => o.IdMedia == model.IdMedia && o.IdEvent == model.IdEvent);
+
+            if (link == null)
+            {
+                db.Entry(model).State = System.Data.Entity.EntityState.Added;
+            }
+            else
+                return true;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <see cref="IPersonRepository.LinkAntro(AntroLinkPerson)" />
+        public bool LinkAntro(AntroLinkPerson model)
+        {
+            if (model.IdPerson == 0 || model.IdAntro == 0) return false;
+            var link =
+                db.AntroPersonLinks.FirstOrDefault(
+                    o => o.IdAntro == model.IdAntro && o.IdPerson == model.IdPerson);
+
+            if (link == null)
+            {
+                db.Entry(model).State = System.Data.Entity.EntityState.Added;
+            }
+            else
+                return true;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <see cref="IPersonRepository.LinkAntro(AntroLinkEvent)" />
+        public bool LinkAntro(AntroLinkEvent model)
+        {
+            if (model.IdEvent == 0 || model.IdAntro == 0) return false;
+            var link =
+                db.AntroEventLinks.FirstOrDefault(
+                    o => o.IdAntro == model.IdAntro && o.IdEvent == model.IdEvent);
 
             if (link == null)
             {
@@ -918,7 +975,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.SaveDescriptionSchema" />
-        public bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat)
+        public bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat, int personId)
         {
             cat = SaveUserPageCategory(cat);
             var page = SavePage(pageBlock.Page);
@@ -926,9 +983,12 @@ namespace Getticket.Web.DAL.Repositories
             pageBlock.IdPage = page.Id;
             var pageblock = SavePageBlock(pageBlock);
             if (pageblock == null) return false;
-            if (id == 0) return true;
             var desc = db.PersonDescriptions.FirstOrDefault(o => o.Id == id);
-            if (desc == null) return false;
+            if (desc == null)
+            {
+                desc = new PersonDescription {id_DescriptionType = 1, id_Person = personId};
+                db.Entry(desc).State = EntityState.Added;
+            }
             desc.IdBlock = pageblock.Id;
             desc.IdUserPageCategory = cat?.Id;
             try
@@ -984,6 +1044,18 @@ namespace Getticket.Web.DAL.Repositories
         public IList<Event> GetMediaEventLinks(int id)
         {
             return db.MediaEventLinks.Where(o => o.IdMedia == id).Include(o => o.Event).Select(o => o.Event).ToList();
+        }
+
+        /// <see cref="IPersonRepository.GetAntroPersonLinks" />
+        public IList<Person> GetAntroPersonLinks(int id)
+        {
+            return db.AntroPersonLinks.Where(o => o.IdAntro == id).Include(o => o.Person).Select(o => o.Person).ToList();
+        }
+
+        /// <see cref="IPersonRepository.GetAntroEventLinks" />
+        public IList<Event> GetAntroEventLinks(int id)
+        {
+            return db.AntroEventLinks.Where(o => o.IdAntro == id).Include(o => o.Event).Select(o => o.Event).ToList();
         }
 
         private PageBlock SavePageBlock(PageBlock pageBlock)

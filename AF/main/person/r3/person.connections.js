@@ -38,7 +38,7 @@
         if (!$rootScope.realyEvents)
             eventService.getRealyEvents();
         $rootScope.addConnection = function () {
-            $rootScope.editedConnection = {Id: 0};
+            $rootScope.editedConnection = { id_ConnectionType: 1};
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/peron.connectionst.editor.html', 3200);
         }

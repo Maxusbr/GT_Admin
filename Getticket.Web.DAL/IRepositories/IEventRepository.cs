@@ -182,6 +182,20 @@ namespace Getticket.Web.DAL.IRepositories
         bool DeleteMediaType(int id);
 
         /// <summary>
+        /// Связать Media и Person
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool LinkMedia(EventMediaLinkPerson model);
+
+        /// <summary>
+        /// Связать Media и Event
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool LinkMedia(EventMediaLinkEvent model);
+
+        /// <summary>
         /// Возвращает количество описаний
         /// </summary>
         /// <param name="id"></param>

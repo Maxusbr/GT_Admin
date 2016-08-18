@@ -259,6 +259,13 @@
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });
         }
+
+        service.getAntroNames = function (callback) {
+            return $http.get(`${serviceUrl}persons/antro/names`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         service.saveEntitieTypes = function (list, entity, callback) {
             $http.post(`${serviceUrl}persons/${entity}/updatetypes`, list).success(function (response) {
                 if (response.status === 'success')
@@ -266,8 +273,8 @@
             });
         }
 
-        service.saveDescriptionSchema = function (id, model, callback) {
-            return $http.post(`${serviceUrl}persons/description/${id}/schema/save`, model)
+        service.saveDescriptionSchema = function (id, personId, model, callback) {
+            return $http.post(`${serviceUrl}persons/description/${id}/schema/save/${personId}`, model)
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });
         }
@@ -285,6 +292,7 @@
             }).then(function (resp) {
                 $rootScope.progressPercentage = undefined;
                 console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                console.log(resp.data.errorsave);
                 callback(resp.data);
             }, function (resp) {
                 console.log('Error status: ' + resp.status);
@@ -303,6 +311,12 @@
 
         service.saveMediaLink = function (id, idEntity, entity, callback) {
             return $http.post(`${serviceUrl}persons/media/${id}/link/${entity}/${idEntity}`)
+                .success(function (data) { if(callback) callback(data); })
+                .error(function (data) { if(callback) callback(data); });
+        }
+
+        service.saveAntroLink = function (id, idEntity, entity, callback) {
+            return $http.post(`${serviceUrl}persons/antro/${id}/link/${entity}/${idEntity}`)
                 .success(function (data) { if(callback) callback(data); })
                 .error(function (data) { if(callback) callback(data); });
         }

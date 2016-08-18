@@ -10,16 +10,12 @@
     <div class="win-menu">
         <div class="win-menu-button">
             <a href="#" ng-click="saveAntro()">
-                <span class="fa fa-save"></span>
-                <br />
-                Сохранить
+                <span class="fa fa-save"></span> Сохранить
             </a>
         </div>
         <div class="win-menu-button">
             <a href="#" ng-click="displayAntroTypes()">
-                <span class="fa fa-link"></span>
-                <br />
-                Типы ссылок
+                <span class="fa fa-link"></span> Типы ссылок
             </a>
         </div>
     </div>
@@ -28,7 +24,7 @@
         <div class="row">
             <div class="col-lg-6">
                 Параметр
-                <select class="form-control">
+                <select class="form-control" ng-model="editedAntro.IdAntro" ng-options="item.Id as item.Name for item in antronames">
                     <option>Глаза/цвет</option>
                     <option>Стопа/размер</option>
                     <option>Рост</option>
@@ -37,7 +33,7 @@
             </div>
             <div class="col-lg-6">
                 Значение
-                <input class="form-control" />
+                <input class="form-control" ng-model="editedAntro.Value"/>
             </div>
         </div>
         <br/>
@@ -51,17 +47,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Мероприятие</td>
-                        <td>Балет в мариинке</td>
-                    </tr>
-                    <tr>
-                        <td>Медиа</td>
-                        <td>Тимберлейк/запись концерта</td>
-                    </tr>
-                    <tr>
+                    <tr ng-repeat="link in personeRange">
                         <td>Персона</td>
-                        <td>Тимберлейк</td>
+                        <td>{{link.LastName}} {{link.Name}}</td>
+                    </tr>
+                    <tr ng-repeat="link in eventRange">
+                        <td>Мероприятие</td>
+                        <td>{{link.Name}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -72,34 +64,44 @@
                 Добавить/редактировать ассоциацию
                 <div class="row">
                     <div class="col-lg-4">
-                        <input type="radio" value="None" id="sexF" ng-checked="person.Sex == 1" ng-click="person.Sex = 1; person.IsChange = true" name="check"> Мероприятие
-                        <br/>
-                        <input type="radio" value="None" id="sexF" ng-checked="person.Sex == 1" ng-click="person.Sex = 1; person.IsChange = true" name="check"> Персона
+                        <input type="radio"
+                               ng-checked="association.type == 'event'"
+                               ng-click="association.type = 'event'"> Мероприятие
                         <br />
-                        <input type="radio" value="None" id="sexF" ng-checked="person.Sex == 1" ng-click="person.Sex = 1; person.IsChange = true" name="check"> Медиа
+                        <input type="radio"
+                               ng-checked="association.type == 'person'"
+                               ng-click="association.type = 'person'"> Персона
                         <br />
+                        <!--<input type="radio"
+                       ng-checked="association.type == 'media'"
+                       ng-click="association.type = 'media'"> Медиа
+                <br />-->
                     </div>
                     <div class="col-lg-4">
                         <!--if event-->
-                        <div>
-                           <i>Укажите мероприятие, для которого создается связь</i> 
-                            <select class="form-control"></select>
+                        <div ng-show="association.type == 'event'">
+                            <i>Укажите мероприятие, для которого создается связь</i>
+                            <select class="form-control" ng-model="association.Id"
+                                    ng-options="item.Id as item.Name for item in events"></select>
                         </div>
                         <!--if person-->
-                        <div>
-                            <i>Укажите персону, для которой создается связь</i> 
-                            <select class="form-control"></select>
+                        <div ng-show="association.type == 'person'">
+                            <i>Укажите персону, для которой создается связь</i>
+                            <select class="form-control" ng-model="association.Id"
+                                    ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
                         </div>
                         <!-- if media-->
-                        <div>
-                            <i>Укажите персону, для которой создается связь</i> 
-                            <select class="form-control"></select>
-                            <i>Укажите медиа</i> 
-                            <select class="form-control"></select>
+                        <div ng-show="association.type == 'media'">
+                            <i>Укажите персону, для которой создается связь</i>
+                            <select class="form-control" ng-model="association.personId" ng-change="getPersonMedia(association.personId)"
+                                    ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
+                            <i>Укажите медиа</i>
+                            <select class="form-control" ng-model="association.Id"
+                                    ng-options="item.Id as item.Name for item in personmedialist"></select>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        <button class="btn btn-default">Сохранить</button>
+                        <button class="btn btn-default" ng-click="addAssociation(association)">Сохранить</button>
                     </div>
                 </div>
             </div>

@@ -236,6 +236,27 @@ namespace Getticket.Web.API.Controllers
         {
             return Ok(_eventService.DeleteMedia(models).Response());
         }
+
+
+        /// <see cref="IPersonService.LinkMediaPerson" />
+        [HttpPost]
+        [Route("media/{id}/link/person/{idPerson}")]
+        public IHttpActionResult MediaLinkPerson(int id, int idPerson)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            return Ok(_eventService.LinkMediaPerson(id, idPerson) ? succes.Response() : error.Response());
+        }
+
+        /// <see cref="IPersonService.LinkMediaEvent" />
+        [HttpPost]
+        [Route("media/{id}/link/event/{idEvent}")]
+        public IHttpActionResult MediaLinkEvent(int id, int idEvent)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            return Ok(_eventService.LinkMediaEvent(id, idEvent) ? succes.Response() : error.Response());
+        }
         #endregion
 
 

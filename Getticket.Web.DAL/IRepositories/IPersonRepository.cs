@@ -95,6 +95,14 @@ namespace Getticket.Web.DAL.IRepositories
         bool AddPersonAntros(IList<PersonAntro> properties, int userId);
 
         /// <summary>
+        /// Добавляет/заменяет характеристику <paramref name="property" />
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        int AddPersonAntros(PersonAntro property, int userId);
+
+        /// <summary>
         /// Удаляет набор характеристик <paramref name="properties" />
         /// </summary>
         /// <param name="properties"></param>
@@ -260,6 +268,20 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="model"></param>
         /// <returns></returns>
         bool LinkMedia(MediaLinkEvent model);
+
+        /// <summary>
+        /// Связать Media и Person
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool LinkAntro(AntroLinkPerson model);
+
+        /// <summary>
+        /// Связать Media и Event
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool LinkAntro(AntroLinkEvent model);
 
         /// <summary>
         /// Возвращает список описаний <see cref="PersonMedia"/> для <see cref="Person"/> по ее <paramref name="id" />
@@ -511,8 +533,9 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="id"></param>
         /// <param name="pageBlock"></param>
         /// <param name="cat"></param>
+        /// <param name="personId"></param>
         /// <returns></returns>
-        bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat);
+        bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat, int personId);
 
         /// <summary>
         /// Получить список источников
@@ -533,5 +556,20 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="id"></param>
         /// <returns></returns>
         IList<Event>  GetMediaEventLinks(int id);
+
+        /// <summary>
+        /// Список ассоциаций персон и антро
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<Person> GetAntroPersonLinks(int id);
+
+        /// <summary>
+        /// Список ассоциаций мероприятий и антро
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<Event> GetAntroEventLinks(int id);
+
     }
 }

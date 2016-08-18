@@ -141,6 +141,14 @@ namespace Getticket.Web.API.Services
         ServiceResponce UpdateAntros(int pesonId, IEnumerable<PersonAntroModel> models, int userId);
 
         /// <summary>
+        /// Добавить/обновить антропометрические характеристики для Person c Id = <paramref name="pesonId"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        int UpdateAntros(PersonAntroModel model, int userId);
+
+        /// <summary>
         /// Удалить антропометрические характеристики
         /// </summary>
         /// <param name="models"></param>
@@ -281,6 +289,22 @@ namespace Getticket.Web.API.Services
         bool LinkMediaEvent(int idMedia, int idEvent);
 
         /// <summary>
+        /// Связать Antro и Person
+        /// </summary>
+        /// <param name="idAntro"></param>
+        /// <param name="idPerson"></param>
+        /// <returns></returns>
+        bool LinkAntroPerson(int idAntro, int idPerson);
+
+        /// <summary>
+        /// Связать Antro и Event
+        /// </summary>
+        /// <param name="idAntro"></param>
+        /// <param name="idEvent"></param>
+        /// <returns></returns>
+        bool LinkAntroEvent(int idAntro, int idEvent);
+
+        /// <summary>
         /// Удалить список медиа
         /// </summary>
         /// <param name="models"></param>
@@ -409,8 +433,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
+        /// <param name="parsonId"></param>
         /// <returns></returns>
-        bool SaveDescriptionSchema(int id, PageBlockModel model);
+        bool SaveDescriptionSchema(int id, PageBlockModel model, int parsonId);
 
         /// <summary>
         /// Возвращает список моделей источников

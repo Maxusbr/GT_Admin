@@ -10,14 +10,12 @@
     <div class="win-menu">
         <div class="win-menu-button">
             <a href="#" ng-click="addAntro()">
-                <span class="fa fa-plus"></span>
-                <br />
-                Добавить
+                <span class="fa fa-plus"></span> Добавить
             </a>
         </div>
     </div>
     <div class="win-content">
-        <table class="table">
+        <table class="table" cg-busy="Promise">
             <thead>
                 <tr>
                     <th>Данные</th>
@@ -29,11 +27,17 @@
             <tbody>
                 <tr ng-repeat="item in antro">
                     <td>
-                        <span>{{item.AntroName}}</span><br>
-                        <span>{{item.Value}}</span>
+                        <a href="#" ng-click="addAntro(item)">
+                            <span>{{item.AntroName}}</span><br>
+                            <span>{{item.Value}}</span>
+                        </a>
                     </td>
-                    <td>TODO: type</td>
-                    <td>TODO: data</td>
+                    <td>
+                        персоны ({{item.Links.PersonLinks.length}})
+                        <br />
+                        мероприятия ({{item.Links.EventLinks.length}})
+                    </td>
+                    <td>---</td>
                     <td>
                         <span ng-if="item.LastChange">
                             {{item.LastChange.UserName}}<br>

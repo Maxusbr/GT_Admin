@@ -9,27 +9,28 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="saveFact()">
-                <span class="fa fa-save"></span>
-                <br />
-                Сохранить
+            <a href="#" ng-click="saveConnection()">
+                <span class="fa fa-save"></span> Сохранить
             </a>
         </div>
     </div>
     <div class="win-content">
         <table class="table">
             <tr>
-                <td>Что связываем</td>
-                <td><select name="" id="" class="form-control" ng-model="connectionId" ng-change="setConnection()"
-                            ng-options="item.Id as item.Name for item in connectionList"></select></td>
+                <td>Тип связи</td>
+                <td>
+                    <select name="" id="" class="form-control" ng-model="editedConnection.id_ConnectionType" ng-change="getConnections(editedConnection.id_ConnectionType)"
+                            ng-options="item.Id as item.Name for item in connectiontypes">
+                        <option value="1">1</option>
+                        <option value="1">1</option>
+                    </select>
+                </td>
             </tr>
             <tr>
-                <td>Тип связи</td>
-                <td><select name="" id="" class="form-control" ng-model="editedConnection.id_ConnectionType" ng-change="getConnections(editedConnection.id_ConnectionType)"
-                            ng-options="item.Id as item.Name for item in connectiontypes">
-                    <option value="1">1</option>
-                    <option value="1">1</option>
-                </select></td>
+                <td>Что связываем</td>
+                <td><select name="" id="" class="form-control" ng-model="connectionId" 
+                            
+                            ng-options="item.Id as item.Name for item in connectionList"></select></td>
             </tr>
             <tr>
                 <td>Характеристика</td>

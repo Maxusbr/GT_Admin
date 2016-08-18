@@ -71,7 +71,9 @@ namespace Getticket.Web.DAL.Repositories
             db.SaveChanges();
             return true;
         }
-        
+
+
+        #region Connections
 
         /// <see cref="IEventRepository.GetConnectionTypes" />
         public IList<ConnectionType> GetConnectionTypes()
@@ -165,6 +167,11 @@ namespace Getticket.Web.DAL.Repositories
             db.SaveChanges();
             return true;
         }
+
+        #endregion
+
+
+        #region descriptions
 
         /// <see cref="IEventRepository.GetDescriptionTypes" />
         public IList<EventDescriptionType> GetDescriptionTypes()
@@ -272,6 +279,11 @@ namespace Getticket.Web.DAL.Repositories
             return true;
         }
 
+        #endregion
+
+
+        #region Media
+
         /// <see cref="IEventRepository.GetMedia" />
         public IList<EventMedia> GetMedia(int id)
         {
@@ -352,7 +364,59 @@ namespace Getticket.Web.DAL.Repositories
             return true;
         }
 
-        
+        /// <see cref="IPersonRepository.LinkMedia(MediaLinkPerson)" />
+        public bool LinkMedia(EventMediaLinkPerson model)
+        {
+            if (model.IdPerson == 0 || model.IdMedia == 0) return false;
+            var link =
+                db.EventMediaLinkPersons.FirstOrDefault(
+                    o => o.IdMedia == model.IdMedia && o.IdPerson == model.IdPerson);
+
+            if (link == null)
+            {
+                db.Entry(model).State = System.Data.Entity.EntityState.Added;
+            }
+            else
+                return true;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <see cref="IPersonRepository.LinkMedia(MediaLinkEvent)" />
+        public bool LinkMedia(EventMediaLinkEvent model)
+        {
+            if (model.IdEvent == 0 || model.IdMedia == 0) return false;
+            var link =
+                db.EventMediaLinkEvents.FirstOrDefault(
+                    o => o.IdMedia == model.IdMedia && o.IdEvent == model.IdEvent);
+
+            if (link == null)
+            {
+                db.Entry(model).State = System.Data.Entity.EntityState.Added;
+            }
+            else
+                return true;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
+
         /// <see cref="IEventRepository.GetCountDescriptions" />
         public int GetCountDescriptions(int id)
         {

@@ -181,14 +181,24 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteAntroNames(id).Response());
         }
 
-        /// <see cref="PersonService.UpdateAntros" />
+        ///// <see cref="PersonService.UpdateAntros" />
+        //[HttpPost]
+        //[Route("antro/update/{id}")]
+        //public IHttpActionResult UpdateAntro(int id, [FromBody] IEnumerable<PersonAntroModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var userId = User.Identity.GetUserId<int>();
+        //    return Ok(_personService.UpdateAntros(id, models, userId).Response());
+        //}
+
+        /// <see cref="IPersonService.UpdateAntros(PersonAntroModel, int)" />
         [HttpPost]
         [Route("antro/update/{id}")]
-        public IHttpActionResult UpdateAntro(int id, [FromBody] IEnumerable<PersonAntroModel> models)
+        public IHttpActionResult UpdateAntro(int id, [FromBody] PersonAntroModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_personService.UpdateAntros(id, models, userId).Response());
+            return Ok(_personService.UpdateAntros(model, userId));
         }
 
         /// <see cref="PersonService.DeleteAntros" />
@@ -197,6 +207,26 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult DeleteAntro([FromBody] IEnumerable<PersonAntroModel> models)
         {
             return Ok(_personService.DeleteAntros(models).Response());
+        }
+
+        /// <see cref="IPersonService.LinkAntroPerson" />
+        [HttpPost]
+        [Route("antro/{id}/link/person/{idPerson}")]
+        public IHttpActionResult AntroLinkPerson(int id, int idPerson)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            return Ok(_personService.LinkAntroPerson(id, idPerson) ? succes.Response() : error.Response());
+        }
+
+        /// <see cref="IPersonService.LinkMediaEvent" />
+        [HttpPost]
+        [Route("antro/{id}/link/event/{idEvent}")]
+        public IHttpActionResult AntroLinkEvent(int id, int idEvent)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            return Ok(_personService.LinkAntroEvent(id, idEvent) ? succes.Response() : error.Response());
         }
         #endregion
 
@@ -394,7 +424,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteMedia(models).Response());
         }
 
-        /// <see cref="PersonService.DeleteMedia" />
+        /// <see cref="IPersonService.LinkMediaPerson" />
         [HttpPost]
         [Route("media/{id}/link/person/{idPerson}")]
         public IHttpActionResult MediaLinkPerson(int id, int idPerson)
@@ -404,7 +434,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.LinkMediaPerson(id, idPerson) ? succes.Response(): error.Response());
         }
 
-        /// <see cref="PersonService.DeleteMedia" />
+        /// <see cref="IPersonService.LinkMediaEvent" />
         [HttpPost]
         [Route("media/{id}/link/event/{idEvent}")]
         public IHttpActionResult MediaLinkEvent(int id, int idEvent)
@@ -413,6 +443,7 @@ namespace Getticket.Web.API.Controllers
             var error = ServiceResponce.FromFailed().Result($"Error save link");
             return Ok(_personService.LinkMediaEvent(id, idEvent) ? succes.Response(): error.Response());
         }
+
         #endregion
 
 
@@ -691,8 +722,8 @@ namespace Getticket.Web.API.Controllers
 
         /// <see cref="IPersonService.SaveDescriptionSchema"/>
         [HttpPost]
-        [Route("description/{id}/schema/save")]
-        public IHttpActionResult SaveDescriptionSchema(int id, [FromBody] PageBlockModel model)
+        [Route("description/{id}/schema/save/{pesonId}")]
+        public IHttpActionResult SaveDescriptionSchema(int id, int pesonId, [FromBody] PageBlockModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -700,7 +731,7 @@ namespace Getticket.Web.API.Controllers
             }
             var error = ServiceResponce.FromFailed().Result($"Error save schema");
             var succes = ServiceResponce.FromSuccess().Result("Schema save complete");
-            return Ok(_personService.SaveDescriptionSchema(id, model) ? succes.Response() : error.Response());
+            return Ok(_personService.SaveDescriptionSchema(id, model, pesonId) ? succes.Response() : error.Response());
         }
 
         /// <see cref="IPersonService.GetUserPageCategory" />
@@ -728,7 +759,15 @@ namespace Getticket.Web.API.Controllers
             var filename = email + img.FileName;
 
             string fullPath = HttpContext.Current.Server.MapPath("~/images/uploaded/") + filename;
-            img.Save(fullPath);
+            try
+            {
+                img.Save(fullPath);
+            }
+            catch (Exception ex)
+            {
+                error.Add("errorsave", ex);
+                return Ok(error.Response());
+            }
             succes.Add("path", $"images/uploaded/{filename}");
             return Ok(succes.Response());
         }
