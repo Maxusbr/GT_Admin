@@ -33,6 +33,14 @@
         $scope.addAssociation = function(item) {
             personService.saveAssociation(item);
         }
+        $scope.getPersonMedia = function(personId) {
+            personService.getMedia(personId, function (data) {
+                $scope.personmedialist = [];
+                data.forEach(function (item) {
+                    $scope.personmedialist.push.apply($scope.personmedialist, item.List);
+                });
+            });
+        }
 
         // Tags
         personService.getTags(function (data) {

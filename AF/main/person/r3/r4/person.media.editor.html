@@ -113,10 +113,10 @@
                                            ng-checked="association.type == 'person'"
                                            ng-click="association.type = 'person'"> Персона
                                     <br />
-                                    <input type="radio"
+                                    <!--<input type="radio"
                                            ng-checked="association.type == 'media'"
                                            ng-click="association.type = 'media'"> Медиа
-                                    <br />
+                                    <br />-->
                                 </div>
                                 <div class="col-lg-4">
                                     <!--if event-->
@@ -138,7 +138,7 @@
                                                 ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
                                         <i>Укажите медиа</i>
                                         <select class="form-control" ng-model="association.mediaId"
-                                                ng-options="item.Id as item.Name for item in personMedias"></select>
+                                                ng-options="item.Id as item.Name for item in personmedialist"></select>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
