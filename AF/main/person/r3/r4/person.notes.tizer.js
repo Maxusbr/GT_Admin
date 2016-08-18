@@ -6,10 +6,27 @@
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
 
-        $rootScope.savePersonNotesTizer = function save_person_notes_tizer(){
+        $scope.tizer = $rootScope.editableDesc.id_DescriptionType === 1 ? $rootScope.editableDesc :
+            { id_DescriptionType: 1, RequiredStaticDescription: true };
+        $scope.notRequired = !$scope.tizer.RequiredStaticDescription;
+
+        $scope.savePersonNotesTizer = function(){
             //TODO: save changes
             //TODO: update notes table
             //TODO: close window
+            $scope.tizer.id_Person = $rootScope.personId;
+            $scope.tizer.id_DescriptionType = 1;
+            personService.saveEntity(0, $scope.tizer, 'description', function (data) {
+                if ($rootScope.editableDesc.id_DescriptionType === 2 && data > 0)
+                    personService.saveEntity(data, $rootScope.editableDesc, 'description', function(data) {
+                        $rootScope.getDescript();
+                        app.closeView('disPersonNotesTizer');
+                    });
+                else {
+                    $rootScope.getDescript();
+                    app.closeView('disPersonNotesTizer');
+                }
+            });
         }
 
         // Tags

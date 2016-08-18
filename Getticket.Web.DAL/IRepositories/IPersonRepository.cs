@@ -241,6 +241,13 @@ namespace Getticket.Web.DAL.IRepositories
         bool DeleteDescription(int id);
 
         /// <summary>
+        /// Связать описания
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool LinkDescriptions(PersonDescriptionTizerLink model);
+
+        /// <summary>
         /// Возвращает список описаний <see cref="PersonMedia"/> для <see cref="Person"/> по ее <paramref name="id" />
         /// </summary>
         /// <param name="id"></param>

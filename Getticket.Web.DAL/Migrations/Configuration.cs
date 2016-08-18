@@ -204,7 +204,16 @@ namespace Getticket.Web.DAL.Migrations
             context.PageBlocks.AddOrUpdate(o => o.Id, new PageBlock { Id = 1, IdPage = 1, IdBlockType = 1 });
             context.SaveChanges();
 
-            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 1, id_DescriptionType = 2, id_Person = 1, DescriptionText = "Родилась в Москве 6 февраля 1991 года. В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на стадионе «Юных Пионеров», где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания у нее не было и не будет отличников. По словам Анны, это ее очень закалило. Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни...", Status = "КA: Нужно ранжировать награды по степени важности" });
+            var staticDesc = new PersonDescription
+            {
+                Id = 1,
+                id_DescriptionType = 2,
+                id_Person = 1,
+                DescriptionText =
+                    "Родилась в Москве 6 февраля 1991 года. В возрасте 6 лет она начинает заниматься фигурным катанием в школе ЦСКА, а позже каталась на стадионе «Юных Пионеров», где ее тренировала Федерченко Любовь Анатольевна. Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304. Из учителей будущей чемпионке запомнилась Екатерина Владимировна, которая часто говорила, что за сорок лет преподавания у нее не было и не будет отличников. По словам Анны, это ее очень закалило. Она всегда училась хорошо, а перейдя в другую школу, все-таки стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни...",
+                Status = "КA: Нужно ранжировать награды по степени важности"
+            };
+            context.PersonDescriptions.AddOrUpdate(o => o.Id, staticDesc);
             context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription { Id = 2, id_DescriptionType = 2, id_Person = 1, DescriptionText = "Занималась фигурным катанием. Каталась на стадионе “Юных Пионеров”, где ее тренировала Федерченко Любовь Анатольевна.Училась Анна в нескольких московских школах, с 2000 по 2005 в школе No73, а с 2005 по 2008 в школе No1304.К концу учебы стала отличницей и оставалась ею до тех пор, пока спорт не стал занимать все большее место в ее жизни.", Status = "КA: Нужно ранжировать награды по степени важности" });
             context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription
             {
@@ -214,19 +223,21 @@ namespace Getticket.Web.DAL.Migrations
                 DescriptionText = "Лучший скип сборной России. Знаменита не только спортивными достижениями, но и своей привлекательностью.",
                 Status = "КA: Нужно ранжировать награды по степени важности"
             });
-            context.PersonDescriptions.AddOrUpdate(o => o.Id, new PersonDescription
+            var tizer = new PersonDescription
             {
                 Id = 4,
                 id_DescriptionType = 1,
                 RequiredStaticDescription = true,
                 IdBlock = 1,
                 id_Person = 1,
-                DescriptionText = "С 2008 в составе международных команд, 3 олимпийских бронзы.С 2011 основной скип сборной России.",
+                DescriptionText =
+                    "С 2008 в составе международных команд, 3 олимпийских бронзы.С 2011 основной скип сборной России.",
                 Status = "КA: Нужно ранжировать награды по степени важности"
-            });
+            };
+            context.PersonDescriptions.AddOrUpdate(o => o.Id, tizer);
             context.SaveChanges();
 
-            context.PersonDescriptionTizerLinks.AddOrUpdate(new PersonDescriptionTizerLink { IdTizer = 4, IdStaticDescription = 1 });
+            context.PersonDescriptionTizerLinks.AddOrUpdate(new PersonDescriptionTizerLink { IdTizer = tizer.Id, IdStaticDescription = staticDesc.Id });
             context.SaveChanges();
 
             context.PersonConnections.AddOrUpdate(o => o.Id, new PersonConnection { Id = 1, id_ConnectionType = 3, id_Person = 1, id_Event = 5, Description = "Артист" });

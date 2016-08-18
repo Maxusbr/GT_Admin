@@ -151,7 +151,7 @@
                 IdBithplace: person.IdBithplace,
                 Place: person.Place,
                 Country: person.Country,
-                Sex: person.Sex, 
+                Sex: person.Sex,
                 MediaLink: person.MediaLink
             }
             if (person.bithday)
@@ -210,6 +210,13 @@
 
         service.saveEntities = saveEntities;
         service.deleteEntities = deleteEntities;
+        service.saveEntity = function (id, model, entity, callback) {
+            if (id === undefined) id = 0;
+            return $http.post(`${serviceUrl}persons/${entity}/update/${id}`, model).success(function (response) {
+                if(callback)
+                    callback(response);
+            });
+        };
 
         service.getCountries = getCountries;
         service.getPlaces = getPlaces;
@@ -242,7 +249,7 @@
             });
         }
 
-        service.saveDescriptionSchema = function(id, model, callback) {
+        service.saveDescriptionSchema = function (id, model, callback) {
             return $http.post(`${serviceUrl}persons/description/${id}/schema/save`, model)
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });

@@ -57,16 +57,16 @@
                         </a>
                     </td>
                     <td>
-                        <a href="#" ng-click="displayNotesStatic(item.StaticDescription)">
-                            <span ng-show="item.RequiredStaticDescription && item.StaticDescription">Указан</span>
-                            <span ng-show="!item.RequiredStaticDescription">Не требуется</span>
+                        <a href="#" ng-click="displayNotesStatic(item)">
+                            <span ng-show="item.id_DescriptionType == 2 || (item.StaticDescription && item.RequiredStaticDescription)">Указан</span>
+                            <span ng-show="!item.RequiredStaticDescription && item.id_DescriptionType == 1">Не требуется</span>
                             <span ng-show="item.RequiredStaticDescription && !item.StaticDescription">Не указан</span>
                         </a>
                     </td>
                     <td>
                         <a href="#" ng-click="displayNotesTizer(item)">
-                            <span ng-show="item.DescriptionText">Указан</span>
-                            <span ng-show="!item.DescriptionText">Не указан</span>
+                            <span ng-show="item.DescriptionText && item.id_DescriptionType == 1">Указан</span>
+                            <span ng-show="!item.DescriptionText || item.id_DescriptionType == 2">Не указан</span>
                         </a>
                     </td>
                     <td><a href="#" ng-click="displayNotesAdaptDescription()">TODO 8</a></td>

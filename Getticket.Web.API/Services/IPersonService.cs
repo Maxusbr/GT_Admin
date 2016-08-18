@@ -87,6 +87,13 @@ namespace Getticket.Web.API.Services
         IEnumerable<EntityCollection<PersonDescriptionModel>> GetDescriptions(int id);
 
         /// <summary>
+        /// Возвращает список моделей описаний
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IEnumerable<PersonDescriptionModel> GetListDescriptions(int id);
+
+        /// <summary>
         /// Возвращает список моделей фактов
         /// </summary>
         /// <param name="id"></param>
@@ -293,6 +300,12 @@ namespace Getticket.Web.API.Services
         /// <param name="models"></param>
         /// <returns></returns>
         ServiceResponce DeleteDescriptions(IEnumerable<PersonDescriptionModel> models);
+
+        /// <summary>
+        /// Связывает описания
+        /// </summary>
+        /// <returns></returns>
+        bool LinkDescriptions(int idTizer, int idDesc);
 
         /// <summary>
         /// Возвращает список типов фактов

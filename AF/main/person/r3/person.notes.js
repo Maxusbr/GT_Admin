@@ -9,16 +9,16 @@
         $rootScope.getDescript = function() {
             $scope.Promise = personService.getDescript($rootScope.personId, function (data) {
                 $scope.descriptions = [];
-                $scope.descriptionlist = [];
-                data.forEach(function (item) {
-                    if (item.List.length > 0)
-                        $scope.descriptions.push({
-                            type: item.List[0].PersonDescriptionType,
-                            value: item.List[0].DescriptionText,
-                            count: item.Count - 1
-                        });
-                    $scope.descriptionlist.push.apply($scope.descriptionlist, item.List);
-                });
+                $scope.descriptionlist = data;
+                //data.forEach(function (item) {
+                //    if (item.List.length > 0)
+                //        $scope.descriptions.push({
+                //            type: item.List[0].PersonDescriptionType,
+                //            value: item.List[0].DescriptionText,
+                //            count: item.Count - 1
+                //        });
+                //    $scope.descriptionlist.push.apply($scope.descriptionlist, item.List);
+                //});
             });
         }
         $rootScope.getDescript();
@@ -30,15 +30,14 @@
             app.loadContentView('/main/person/r3/r4/person.notes.source.html', 3200);
         }
 
-        $rootScope.displayNotesStatic = function (id, descript) {
-            $rootScope.editDescriptionId = id;
-            $rootScope.staticDescript = descript ? descript : {id_DescriptionType: 2 };
+        $rootScope.displayNotesStatic = function (item) {
+            $rootScope.editableDesc = item ? item : { id_DescriptionType: 2 };
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.static.html', 3200);
         }
 
         $rootScope.displayNotesTizer = function (tizer) {
-            $rootScope.editableTizer = tizer ? tizer : { id_DescriptionType: 1 };
+            $rootScope.editableDesc = tizer ? tizer : { id_DescriptionType: 1 };
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.tizer.html', 3200);
         }

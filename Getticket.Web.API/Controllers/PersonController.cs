@@ -106,7 +106,7 @@ namespace Getticket.Web.API.Controllers
                     ModelState.AddModelError("Country", "Укажите название страны");
                     return BadRequest("Укажите название страны");
                 }
-                
+
                 model.IdBithplace = _personService.UpdatePlace(model.Country, model.Place);
             }
             var userId = User.Identity.GetUserId<int>();
@@ -360,7 +360,7 @@ namespace Getticket.Web.API.Controllers
             var error = ServiceResponce.FromFailed().Result($"Error save media");
             if (!_personService.UpdateMedia(id, list, userId)) return Ok(error.Response());
             error = ServiceResponce.FromFailed().Result($"Error save tags");
-            return Ok(list.Any(item => !_tagService.AddTagLinks(new TagsPersonMediaModel { IdMedia = item.Id, Tags = item.Tags })) ? 
+            return Ok(list.Any(item => !_tagService.AddTagLinks(new TagsPersonMediaModel { IdMedia = item.Id, Tags = item.Tags })) ?
                 error.Response() : succes.Response());
         }
 
@@ -381,7 +381,7 @@ namespace Getticket.Web.API.Controllers
         [Route("description/{id}")]
         public IHttpActionResult GetDescriptions(int id)
         {
-            return Ok(_personService.GetDescriptions(id));
+            return Ok(_personService.GetListDescriptions(id));
         }
 
         /// <see cref="PersonService.GetDescriptionTypes" />
@@ -409,14 +409,18 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.DeleteDescriptionTypes(models).Response());
         }
 
-        /// <see cref="PersonService.UpdateDescriptions()" />
+        /// <see cref="IPersonService.UpdateDescriptions(PersonDescriptionModel, int)" />
         [HttpPost]
         [Route("description/update/{id}")]
-        public IHttpActionResult UpdateDescriptions(int id, [FromBody] IEnumerable<PersonDescriptionModel> models)
+        public IHttpActionResult UpdateDescriptions(int id, [FromBody] PersonDescriptionModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_personService.UpdateDescriptions(id, models, userId).Response());
+            var descrId = _personService.UpdateDescriptions(model, userId);
+            if (id <= 0 && descrId > 0) return Ok(descrId);
+            if (descrId <= 0 || !_personService.LinkDescriptions(id, descrId))
+                return Ok(ServiceResponce.FromFailed().Result($"Error save description").Response());
+            return Ok(descrId);
         }
 
         /// <see cref="PersonService.DeleteDescriptions" />
@@ -594,7 +598,7 @@ namespace Getticket.Web.API.Controllers
             var error = ServiceResponce.FromFailed().Result($"Error save tags");
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
 
-            return Ok(!_tagService.AddTagLinks(new PersonTagModel {personId = id, models = models}) ? error.Response() : succes.Response());
+            return Ok(!_tagService.AddTagLinks(new PersonTagModel { personId = id, models = models }) ? error.Response() : succes.Response());
         }
 
 
@@ -609,7 +613,7 @@ namespace Getticket.Web.API.Controllers
             }
             var error = ServiceResponce.FromFailed().Result($"Error save schema");
             var succes = ServiceResponce.FromSuccess().Result("Schema save complete");
-            return Ok(_personService.SaveDescriptionSchema(id, model) ? succes.Response(): error.Response());
+            return Ok(_personService.SaveDescriptionSchema(id, model) ? succes.Response() : error.Response());
         }
 
         /// <see cref="IPersonService.GetUserPageCategory" />
@@ -639,7 +643,7 @@ namespace Getticket.Web.API.Controllers
             string fullPath = HttpContext.Current.Server.MapPath("~/images/uploaded/") + filename;
             img.Save(fullPath);
             succes.Add("path", $"images/uploaded/{filename}");
-            return Ok(succes.Response()); 
+            return Ok(succes.Response());
         }
     }
 }
