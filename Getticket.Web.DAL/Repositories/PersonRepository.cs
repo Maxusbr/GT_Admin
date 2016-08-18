@@ -975,7 +975,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.SaveDescriptionSchema" />
-        public bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat)
+        public bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat, int personId)
         {
             cat = SaveUserPageCategory(cat);
             var page = SavePage(pageBlock.Page);
@@ -983,9 +983,12 @@ namespace Getticket.Web.DAL.Repositories
             pageBlock.IdPage = page.Id;
             var pageblock = SavePageBlock(pageBlock);
             if (pageblock == null) return false;
-            if (id == 0) return true;
             var desc = db.PersonDescriptions.FirstOrDefault(o => o.Id == id);
-            if (desc == null) return false;
+            if (desc == null)
+            {
+                desc = new PersonDescription {id_DescriptionType = 1, id_Person = personId};
+                db.Entry(desc).State = EntityState.Added;
+            }
             desc.IdBlock = pageblock.Id;
             desc.IdUserPageCategory = cat?.Id;
             try

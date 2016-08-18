@@ -722,8 +722,8 @@ namespace Getticket.Web.API.Controllers
 
         /// <see cref="IPersonService.SaveDescriptionSchema"/>
         [HttpPost]
-        [Route("description/{id}/schema/save")]
-        public IHttpActionResult SaveDescriptionSchema(int id, [FromBody] PageBlockModel model)
+        [Route("description/{id}/schema/save/{pesonId}")]
+        public IHttpActionResult SaveDescriptionSchema(int id, int pesonId, [FromBody] PageBlockModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -731,7 +731,7 @@ namespace Getticket.Web.API.Controllers
             }
             var error = ServiceResponce.FromFailed().Result($"Error save schema");
             var succes = ServiceResponce.FromSuccess().Result("Schema save complete");
-            return Ok(_personService.SaveDescriptionSchema(id, model) ? succes.Response() : error.Response());
+            return Ok(_personService.SaveDescriptionSchema(id, model, pesonId) ? succes.Response() : error.Response());
         }
 
         /// <see cref="IPersonService.GetUserPageCategory" />

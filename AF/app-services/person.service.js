@@ -273,8 +273,8 @@
             });
         }
 
-        service.saveDescriptionSchema = function (id, model, callback) {
-            return $http.post(`${serviceUrl}persons/description/${id}/schema/save`, model)
+        service.saveDescriptionSchema = function (id, personId, model, callback) {
+            return $http.post(`${serviceUrl}persons/description/${id}/schema/save/${personId}`, model)
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });
         }

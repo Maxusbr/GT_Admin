@@ -433,8 +433,9 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <param name="model"></param>
+        /// <param name="parsonId"></param>
         /// <returns></returns>
-        bool SaveDescriptionSchema(int id, PageBlockModel model);
+        bool SaveDescriptionSchema(int id, PageBlockModel model, int parsonId);
 
         /// <summary>
         /// Возвращает список моделей источников

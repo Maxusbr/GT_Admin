@@ -1,13 +1,15 @@
 ﻿(function () {
     'use strict';
 
-    function personNotesSourceController($rootScope, $scope, $cookieStore, personService) {
+    function personNotesSourceController($rootScope, $scope, $cookieStore, personService, eventService) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
         if (!$rootScope.pageSchema.Page)
             $rootScope.pageSchema.Page = {};
-
+        if (!$rootScope.events)
+            eventService.getEvents();
+        $rootScope.halls = [];
         $scope.pages = [
             { Id: 0, Name: "Персона" },
             { Id: 1, Name: "Поиск" },
@@ -37,12 +39,12 @@
                 case 2:
                     $scope.detailId = $rootScope.pageSchema.Page.IdEvent;
                     return $rootScope.events.forEach(function (item) {
-                        $scope.details.push({ Id: item.Id, Name: `${item.PageBlock.Page.Event.Name}` });
+                        $scope.details.push({ Id: item.Id, Name: item.Name });
                     });
                 case 3:
                     $scope.detailId = $rootScope.pageSchema.Page.IdHall;
                     return $rootScope.halls.forEach(function (item) {
-                        $scope.details.push({ Id: item.Id, Name: `${item.PageBlock.Page.Hall.Name}` });
+                        $scope.details.push({ Id: item.Id, Name: item.Name });
                     });
                 case 4:
                     return "Профиль";
@@ -89,7 +91,8 @@
             //TODO: save changes or create new source
             //TODO: update notes list
             //TODO: close this window
-            personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.pageSchema, function () {
+            if (!$rootScope.editDescriptionId)$rootScope.editDescriptionId = 0;
+            personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.personId, $rootScope.pageSchema, function () {
                 $rootScope.getDescript();
                 app.closeView('disPersonNotesSource');
             });
@@ -118,5 +121,5 @@
         .module('app')
         .controller('personNotesSourceController', personNotesSourceController);
 
-    personNotesSourceController.$inject = ['$rootScope', '$scope', '$cookieStore', 'personService'];
+    personNotesSourceController.$inject = ['$rootScope', '$scope', '$cookieStore', 'personService', 'eventService'];
 })();
