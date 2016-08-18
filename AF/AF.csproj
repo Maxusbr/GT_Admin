@@ -69,6 +69,8 @@
     <Content Include="app-services\dictionary.service.js" />
     <Content Include="app-services\event.service.js" />
     <Content Include="Content\angular-material.min.css" />
+    <Content Include="Content\select.css" />
+    <Content Include="Content\select.min.css" />
     <Content Include="login\login.controller.js" />
     <Content Include="login\login.view.html" />
     <Content Include="main\concert\concert.list.html" />
@@ -200,9 +202,13 @@
     <Content Include="Scripts\plugins\d3\CONTRIBUTING.md" />
     <Content Include="Scripts\plugins\d3\LICENSE" />
     <Content Include="Scripts\plugins\d3\README.md" />
+    <Content Include="Scripts\select.js" />
+    <Content Include="Scripts\select.min.js" />
     <Content Include="Scripts\version.json" />
     <Content Include="main\person\r3\r4\person.notes.source.html" />
+    <Content Include="Content\select.min.css.map" />
     <None Include="Properties\PublishProfiles\getticket - Web Deploy.pubxml" />
+    <Content Include="Scripts\select.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

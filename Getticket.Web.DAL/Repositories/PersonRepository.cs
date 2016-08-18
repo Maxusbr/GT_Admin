@@ -458,6 +458,58 @@ namespace Getticket.Web.DAL.Repositories
             {
                 db.Entry(model).State = System.Data.Entity.EntityState.Added;
             }
+            else
+                return true;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <see cref="IPersonRepository.LinkMedia(MediaLinkPerson)" />
+        public bool LinkMedia(MediaLinkPerson model)
+        {
+            if (model.IdPerson == 0 || model.IdMedia == 0) return false;
+            var link =
+                db.MediaPersonLinks.FirstOrDefault(
+                    o => o.IdMedia == model.IdMedia && o.IdPerson == model.IdPerson);
+
+            if (link == null)
+            {
+                db.Entry(model).State = System.Data.Entity.EntityState.Added;
+            }
+            else
+                return true;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <see cref="IPersonRepository.LinkMedia(MediaLinkEvent)" />
+        public bool LinkMedia(MediaLinkEvent model)
+        {
+            if (model.IdEvent == 0 || model.IdMedia == 0) return false;
+            var link =
+                db.MediaEventLinks.FirstOrDefault(
+                    o => o.IdMedia == model.IdMedia && o.IdEvent == model.IdEvent);
+
+            if (link == null)
+            {
+                db.Entry(model).State = System.Data.Entity.EntityState.Added;
+            }
+            else
+                return true;
             try
             {
                 db.SaveChanges();
@@ -920,6 +972,18 @@ namespace Getticket.Web.DAL.Repositories
         public IList<UserPageCategory> GetUserPageCategory()
         {
             return db.UserPageCategories.ToList();
+        }
+
+        /// <see cref="IPersonRepository.GetMediaPersonLinks" />
+        public IList<Person> GetMediaPersonLinks(int id)
+        {
+            return db.MediaPersonLinks.Where(o => o.IdMedia == id).Include(o => o.Person).Select(o => o.Person).ToList();
+        }
+
+        /// <see cref="IPersonRepository.GetMediaPersonLinks" />
+        public IList<Event> GetMediaEventLinks(int id)
+        {
+            return db.MediaEventLinks.Where(o => o.IdMedia == id).Include(o => o.Event).Select(o => o.Event).ToList();
         }
 
         private PageBlock SavePageBlock(PageBlock pageBlock)

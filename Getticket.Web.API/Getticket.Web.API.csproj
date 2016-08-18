@@ -242,6 +242,7 @@
     <Compile Include="Models\Persons\PersonFactModel.cs" />
     <Compile Include="Models\Persons\PersonFactTypeModel.cs" />
     <Compile Include="Models\Persons\PersonDetailModel.cs" />
+    <Compile Include="Models\Persons\PersonMediaLinks.cs" />
     <Compile Include="Models\Persons\PersonModel.cs" />
     <Compile Include="Models\Persons\PersonAntroModel.cs" />
     <Compile Include="Models\Persons\PersonAntroNameModel.cs" />

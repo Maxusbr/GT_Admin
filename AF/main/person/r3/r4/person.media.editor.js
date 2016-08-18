@@ -10,28 +10,65 @@
 
         if (!$rootScope.events)
             eventService.getEvents();
-
+        var mediaAssociations = [];
+        if ($rootScope.editedMedia.Links) {
+            $scope.personeRange = $rootScope.editedMedia.Links.PersonLinks;
+            $scope.eventRange = $rootScope.editedMedia.Links.EventLinks;
+        } else {
+            $scope.personeRange = [];
+            $scope.eventRange = [];
+        }
         function save(path) {
             $rootScope.editedMedia.id_Person = $rootScope.personId;
             $rootScope.editedMedia.MediaLink = path;
-            var list = [];
-            personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (data) {
+            personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (id) {
+                if (id > 0 && mediaAssociations.length > 0) {
+                    mediaAssociations.forEach(function(item) {
+                        personService.saveMediaLink(id, item.Id, item.type);
+                    });
+                }
                 $rootScope.getMedias();
                 app.closeView('personMediaEdit');
             });
         }
 
         $scope.saveMedia = function () {
-            
             if ($rootScope.editedMedia.id_MediaType === 2 && typeof $scope.file != 'string')
                 personService.uploadImage($scope.file, function(data) {
                     save(`${serviceUrl}${data.path}`);
                 });
             else save($scope.file);
         }
-
-        $scope.addAssociation = function(item) {
-            personService.saveAssociation(item);
+        
+        $scope.addAssociation = function (item) {
+            if ($rootScope.editedMedia.Id)
+                personService.saveMediaLink($rootScope.editedMedia.Id, item.Id, item.type, function(data) {
+                    var res = data;
+                });
+            else mediaAssociations.push(item);
+            switch (item.type) {
+                case 'person':
+                    var pers = $rootScope.persons.filter(function(el) {
+                        return el.Id === item.Id;
+                    })[0];
+                    $scope.personeRange.push({Name: pers.Name, LastName: pers.LastName});
+                    break;
+                case 'event':
+                    var event = $rootScope.events.filter(function (el) {
+                        return el.Id === item.Id;
+                    })[0];
+                    $scope.eventRange.push({ Name: event.Name });
+                    break;
+            default:
+            }
+        }
+        $scope.getPersonMedia = function(personId) {
+            personService.getMedia(personId, function (data) {
+                $scope.personmedialist = [];
+                data.forEach(function (item) {
+                    $scope.personmedialist.push.apply($scope.personmedialist, item.List);
+                });
+            });
         }
 
         // Tags
