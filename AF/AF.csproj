@@ -115,6 +115,8 @@
     <Content Include="main\events\r3\r4\events.media.edit.js" />
     <Content Include="main\events\r3\r4\events.notes.edit.html" />
     <Content Include="main\events\r3\r4\events.notes.edit.js" />
+    <Content Include="main\events\r3\r4\events.notes.source.html" />
+    <Content Include="main\events\r3\r4\events.notes.source.js" />
     <Content Include="main\events\r3\r4\events.users.edit.html" />
     <Content Include="main\events\r3\r4\events.users.edit.js" />
     <Content Include="main\person\r3\r4\peron.connectionst.create.html" />

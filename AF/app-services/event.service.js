@@ -87,12 +87,12 @@
                     $rootScope.mediatypes.push.apply($rootScope.mediatypes, data);
                 });
             }
-            //if (!$rootScope.eventlist) {
-            //    $rootScope.eventlist = [];
-            //    $http.get(`${serviceUrl}events`).success(function (data) {
-            //        $rootScope.eventlist.push.apply($rootScope.eventlist, data);
-            //    });
-            //}
+            if (!$rootScope.facttypes) {
+                $rootScope.facttypes = [];
+                $http.get(`${serviceUrl}persons/fact/types`).success(function (data) {
+                    $rootScope.facttypes.push.apply($rootScope.facttypes, data);
+                });
+            }
         };
 
         //facts
@@ -122,6 +122,14 @@
                     callback(list);
             });
         }
+
+        service.saveEntity = function (id, model, entity, callback) {
+            if (id === undefined) id = 0;
+            return $http.post(`${serviceUrl}events/${entity}/update/${id}`, model).success(function (response) {
+                if (callback)
+                    callback(response);
+            });
+        };
 
         service.Save = function (event, callback) {
             var model = {
