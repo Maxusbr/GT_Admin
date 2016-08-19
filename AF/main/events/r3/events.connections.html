@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="win-content">
-        <table class="table">
+        <table class="table" cg-busy="Promise">
             <thead>
                 <tr>
                     <th>Что связываем</th>
@@ -28,11 +28,11 @@
                 <tr ng-repeat="item in connectionList">
                     <td>
                         <a href="" ng-click="editEventConnection(item)">
-                            <span ng-show="item.id_ConnectionType > 1">{{item.Event.Name}}</span>
-                            <span ng-show="item.id_ConnectionType === 1">{{item.PersonConnectTo.LastName}} {{item.PersonConnectTo.Name}}</span>
+                            <span ng-show="item.id_ConnectionType > 1">{{item.EventConnectTo.Name}}</span>
+                            <span ng-show="item.id_ConnectionType === 1">{{item.Person.LastName}} {{item.Person.Name}}</span>
                         </a>
                     </td>
-                    <td><span>{{item.PersonConnectionType}}</span></td>
+                    <td><span>{{item.EventConnectionType}}</span></td>
                     <td><span>{{item.Description}}</span></td>
                     <td>
                         <span ng-if="item.LastChange">

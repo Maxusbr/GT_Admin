@@ -14,7 +14,7 @@
                 default:
                     break;
             }
-            
+
         }
         function getConnectionList(id) {
             $scope.connectionList = [];
@@ -71,34 +71,8 @@
             getConnectionList(id);
             $scope.connectionId = getConnectionId();
         }
-        //$scope.setConnection = function () {
-        //    $rootScope.editedConnection.id_Event = 0;
-        //    $rootScope.editedConnection.id_PersonConnectTo = 0;
-        //    if (!$scope.connectionId) return;
-        //    switch ($rootScope.editedConnection.id_ConnectionType) {
-        //        case 1:
-        //            $rootScope.editedConnection.id_PersonConnectTo = $scope.connectionId;
-        //            var person = $scope.connectionList.filter(function (item) {
-        //                return item.Id === $scope.connectionId;
-        //            })[0];
-        //            $rootScope.editedConnection.PersonConnectTo = { Name: person.Name, Id: person.Id };
-        //            break;
-        //        case 2:
-        //        case 3:
-        //            $rootScope.editedConnection.id_Event = $scope.connectionId;
-        //            var event = $scope.connectionList.filter(function (item) {
-        //                return item.Id === $scope.connectionId;
-        //            })[0];
-        //            $rootScope.editedConnection.Event = { Id: event.Id, Name: event.Name};
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
 
-        console.log
-
-            $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
+        $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
 
         $rootScope.saveConnection = function () {
             console.log('save connection click');

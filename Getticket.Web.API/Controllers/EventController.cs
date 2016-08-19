@@ -157,14 +157,24 @@ namespace Getticket.Web.API.Controllers
             return Ok(_eventService.DeleteConnectionTypes(models).Response());
         }
 
-        /// <see cref="IEventService.UpdateConnection" />
+        ///// <see cref="IEventService.UpdateConnection" />
+        //[HttpPost]
+        //[Route("connection/update/{id}")]
+        //public IHttpActionResult UpdateConnection(int id, [FromBody] IEnumerable<EventConnectionModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var userId = User.Identity.GetUserId<int>();
+        //    return Ok(_eventService.UpdateConnection(id, models, userId).Response());
+        //}
+
+        /// <see cref="IEventService.UpdateConnection(EventConnectionModel, int)" />
         [HttpPost]
         [Route("connection/update/{id}")]
-        public IHttpActionResult UpdateConnection(int id, [FromBody] IEnumerable<EventConnectionModel> models)
+        public IHttpActionResult UpdateConnection(int id, [FromBody] EventConnectionModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_eventService.UpdateConnection(id, models, userId).Response());
+            return Ok(_eventService.UpdateConnection(model, userId));
         }
 
         /// <see cref="IEventService.DeleteConnection" />

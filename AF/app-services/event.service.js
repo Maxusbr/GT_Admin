@@ -166,6 +166,13 @@
                     callback(list);
             });
         }
+
+        service.getСonnectionTypes = function (callback) {
+            return $http.get(`${serviceUrl}events/connection/types`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         return service;;
     }
 

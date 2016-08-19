@@ -103,6 +103,14 @@ namespace Getticket.Web.API.Services
         ServiceResponce UpdateConnection(int eventId, IEnumerable<EventConnectionModel> models, int userId);
 
         /// <summary>
+        /// Добавить/Изменить связи для Event c Id = <paramref name="eventId"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        int UpdateConnection(EventConnectionModel model, int userId);
+
+        /// <summary>
         /// Удалить связи
         /// </summary>
         /// <param name="models"></param>

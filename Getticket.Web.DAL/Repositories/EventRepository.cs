@@ -123,6 +123,7 @@ namespace Getticket.Web.DAL.Repositories
                 .Include(o => o.Event.Category.ParentCategory)
                 .Include(o => o.ConnectionType)
                 .Include(o => o.EventConnectTo)
+                .Include(o => o.Person)
                 .ToList();
 
             return answer;

@@ -63,7 +63,10 @@ namespace Getticket.Web.API.Services
             {
                 CountDescriptions = _eventRepository.GetCountDescriptions(id),
                 CountConnects = _eventRepository.GetCountConnects(id),
-                CountMedias = _eventRepository.GetCountMedias(id)
+                CountMedias = _eventRepository.GetCountMedias(id),
+                CountFacts = _eventRepository.GetCountFacts(id),
+                //TODO Праваи пользователи
+                CountLinks = 0
             };
         }
 
@@ -226,6 +229,21 @@ namespace Getticket.Web.API.Services
                 ServiceResponce
                 .FromFailed()
                 .Result($"Error save connections");
+        }
+
+        /// <see cref="IEventService.UpdateConnection(EventConnectionModel, int)"/>
+        public int UpdateConnection(EventConnectionModel model, int userId)
+        {
+            var result = _eventRepository.SaveConnection(new EventConnection
+            {
+                Id = model.Id,
+                id_Person = model.id_Person,
+                id_ConnectionType = model.id_ConnectionType,
+                id_Event = model.id_Event,
+                id_EventConnectTo = model.id_EventConnectTo,
+                Description = model.Description
+            }, userId);
+            return result?.Id ?? -1;
         }
 
         /// <summary>

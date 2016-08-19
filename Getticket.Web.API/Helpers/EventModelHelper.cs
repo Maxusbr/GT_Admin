@@ -73,7 +73,8 @@ namespace Getticket.Web.API.Helpers
                 id_EventConnectTo = connection.id_EventConnectTo,
                 Person = PersonModelHelper.GetPersonModel(connection.Person),
                 Event = GetEventModel(connection.Event),
-                Description = connection.Description
+                Description = connection.Description,
+                EventConnectionType = connection.ConnectionType?.Name
             } : new EventConnectionModel();
         }
 
@@ -94,17 +95,17 @@ namespace Getticket.Web.API.Helpers
 
         public static IList<EventConnectionTypeModel> GetConnectionTypeModels(IList<ConnectionType> result)
         {
-            throw new NotImplementedException();
+            return result.Select(o => new EventConnectionTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         public static IList<MediaTypeModel> GetMediaTypeModels(IList<MediaType> result)
         {
-            throw new NotImplementedException();
+            return result.Select(o => new MediaTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         public static IList<EventDescriptionTypeModel> GetDescriptionTypeModels(IList<EventDescriptionType> result)
         {
-            throw new NotImplementedException();
+            return result.Select(o => new EventDescriptionTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         public static IList<EventFactModel> GetFactModels(IList<EventFact> facts)
