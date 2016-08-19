@@ -20,7 +20,8 @@ var app;
             'ngMessages',
             'ngResource', 'cgBusy',
             'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap', 'ngTagsInput', 'ngMaterial', 'ngFileUpload',
-            'ui.select'
+            'ui.select',
+            'youtube-embed'
             // 'webix'
         ])
         .config(config)

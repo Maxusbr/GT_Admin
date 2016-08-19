@@ -47,6 +47,7 @@
             $rootScope.editedConnection.Event = null;
             $rootScope.editedConnection.id_Event = null;
             if (!id) return;
+
             switch ($rootScope.editedConnection.id_ConnectionType) {
                 case 1:
                     $rootScope.editedConnection.id_PersonConnectTo = $scope.connectionId;
