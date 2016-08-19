@@ -12,16 +12,17 @@
         //        Name:'facebook'
         //    }
         //];
-        if (!$rootScope.eventCategories) {
+        $rootScope.$watch('eventCategories', function (items) {
+            if (!items) return;
+            $scope.baseCategory = items.filter(function (item) {
+                return item.IdParent == null;
+            });
+        });
+        if (!$rootScope.eventCategories) 
             eventService.getCategories(function (data) {
                 $rootScope.eventCategories = data;
-                $scope.baseCategory = data.filter(function (item) {
-                    return item.IdParent == null;
-                });
             });
-        } else $scope.baseCategory = $rootScope.eventCategories.filter(function (item) {
-            return item.IdParent == null;
-        });
+
         $scope.getChildCategory = function (id) {
             if (!$rootScope.eventCategories) return [];
             return $rootScope.eventCategories.filter(function (item) {
@@ -45,9 +46,6 @@
                 cat = {}
                 eventService.getCategories(function (data) {
                     $rootScope.eventCategories = data;
-                    $scope.baseCategory = data.filter(function (item) {
-                        return item.IdParent == null;
-                    });
                 });
             });
         }
