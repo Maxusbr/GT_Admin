@@ -6,9 +6,10 @@ using System.Web;
 using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models;
 using Getticket.Web.API.Models.Events;
-
+using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Infrastructure;
+using CountsModel = Getticket.Web.API.Models.Events.CountsModel;
 
 namespace Getticket.Web.API.Services
 {
@@ -75,7 +76,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<EntityCollection<EventConnectionModel>> GetConnection(int id)
+        public IEnumerable<Models.Events.EntityCollection<EventConnectionModel>> GetConnection(int id)
         {
             var list = EventModelHelper.GetConnectionModels(_eventRepository.GetConnections(id));
             foreach (var item in list)
@@ -83,7 +84,7 @@ namespace Getticket.Web.API.Services
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangeEventConnection(item.id_Event, item.Id));
             }
             var types = list.GroupBy(o => o.id_ConnectionType).Select(o => o.Key);
-            return types.Select(tp => new EntityCollection<EventConnectionModel> { List = list.Where(o => o.id_ConnectionType == tp), Type = tp });
+            return types.Select(tp => new Models.Events.EntityCollection<EventConnectionModel> { List = list.Where(o => o.id_ConnectionType == tp), Type = tp });
         }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<EntityCollection<EventMediaModel>> GetMedia(int id)
+        public IEnumerable<Models.Events.EntityCollection<EventMediaModel>> GetMedia(int id)
         {
             var list = EventModelHelper.GetMediaModels(_eventRepository.GetMedia(id));
             foreach (var item in list)
@@ -100,7 +101,7 @@ namespace Getticket.Web.API.Services
                 item.Tags = TagModelHelper.GeTagModels(_tagRepository.GeEventMediaTags(item.Id));
             }
             var types = list.GroupBy(o => o.id_MediaType).Select(o => o.Key);
-            return types.Select(tp => new EntityCollection<EventMediaModel> { List = list.Where(o => o.id_MediaType == tp), Type = tp });
+            return types.Select(tp => new Models.Events.EntityCollection<EventMediaModel> { List = list.Where(o => o.id_MediaType == tp), Type = tp });
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<EntityCollection<EventDescriptionModel>> GetDescriptions(int id)
+        public IEnumerable<Models.Events.EntityCollection<EventDescriptionModel>> GetDescriptions(int id)
         {
             var list = EventModelHelper.GetDescriptionModels(_eventRepository.GetDescriptions(id));
             foreach (var item in list)
@@ -116,7 +117,7 @@ namespace Getticket.Web.API.Services
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangeEventDescription(item.id_Event, item.Id));
             }
             var types = list.GroupBy(o => o.id_DescriptionType).Select(o => o.Key);
-            return types.Select(tp => new EntityCollection<EventDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp });
+            return types.Select(tp => new Models.Events.EntityCollection<EventDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp });
         }
 
         /// <summary>
@@ -368,10 +369,10 @@ namespace Getticket.Web.API.Services
         /// Возвращает список типов описаний
         /// </summary>
         /// <returns></returns>
-        public IList<EventDescriptionTypeModel> GetDescriptionTypes()
+        public IList<PersonDescriptionTypeModel> GetDescriptionTypes()
         {
             var result = _eventRepository.GetDescriptionTypes();
-            return EventModelHelper.GetDescriptionTypeModels(result);
+            return PersonModelHelper.GetDescriptionTypeModels(result);
         }
 
         /// <summary>
@@ -379,11 +380,11 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        public ServiceResponce UpdateDescriptionTypes(IEnumerable<EventDescriptionTypeModel> models)
+        public ServiceResponce UpdateDescriptionTypes(IEnumerable<PersonDescriptionTypeModel> models)
         {
             foreach (var item in models)
             {
-                var result = _eventRepository.UpdateDescriptionType(new EventDescriptionType { Id = item.Id, Name = item.Name });
+                var result = _eventRepository.UpdateDescriptionType(new PersonDescriptionType { Id = item.Id, Name = item.Name });
                 if (result == null) return ServiceResponce
                  .FromFailed()
                  .Result($"Error save description type");
@@ -400,7 +401,7 @@ namespace Getticket.Web.API.Services
         /// <param name="models"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public ServiceResponce DeleteDescriptionTypes(IEnumerable<EventDescriptionTypeModel> models)
+        public ServiceResponce DeleteDescriptionTypes(IEnumerable<PersonDescriptionTypeModel> models)
         {
             if (models.Any(item => !_eventRepository.DeleteDescriptionType(item.Id)))
             {
@@ -597,6 +598,19 @@ namespace Getticket.Web.API.Services
         {
             return EventModelHelper.GetCategoryModels(_eventRepository.GetCategories());
         }
+
+        /// <see cref="IEventService.SaveDescriptionSchema"/>
+        public bool SaveDescriptionSchema(int id, PageBlockModel model, int eventId)
+        {
+            return _eventRepository.SaveDescriptionSchema(id,
+                PageModelHelper.GetPageBlock(model),
+                new UserPageCategory
+                {
+                    Id = model.UserPageCategoryId ?? 0,
+                    Name = model.UserPageCategory
+                }, eventId);
+        }
+
     }
 
 }

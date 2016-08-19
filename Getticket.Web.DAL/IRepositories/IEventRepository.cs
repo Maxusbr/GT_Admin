@@ -94,21 +94,21 @@ namespace Getticket.Web.DAL.IRepositories
         bool DeleteConnections(IList<EventConnection> connections);
 
         /// <summary>
-        /// Возвращает список <see cref="EventDescriptionType"/>
+        /// Возвращает список <see cref="PersonDescriptionType"/>
         /// </summary>
         /// <returns></returns>
-        IList<EventDescriptionType> GetDescriptionTypes();
+        IList<PersonDescriptionType> GetDescriptionTypes();
 
         /// <summary>
-        /// Если <see cref="EventDescriptionType"/> новый - добавляем новую запись в БД.
-        /// Если <see cref="EventDescriptionType"/> уже существует - сохраняем изменения записи.
+        /// Если <see cref="PersonDescriptionType"/> новый - добавляем новую запись в БД.
+        /// Если <see cref="PersonDescriptionType"/> уже существует - сохраняем изменения записи.
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        EventDescriptionType UpdateDescriptionType(EventDescriptionType type);
+        PersonDescriptionType UpdateDescriptionType(PersonDescriptionType type);
 
         /// <summary>
-        /// Удалить тип <see cref="EventDescriptionType"/> по ее <paramref name="id" />
+        /// Удалить тип <see cref="PersonDescriptionType"/> по ее <paramref name="id" />
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -254,5 +254,15 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <returns></returns>
         IList<EventCategory> GetCategories();
+
+        /// <summary>
+        /// Сохранить схему описания
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="pageBlock"></param>
+        /// <param name="cat"></param>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat, int eventId);
     }
 }

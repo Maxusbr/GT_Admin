@@ -95,6 +95,12 @@
             }
         };
 
+        service.saveDescriptionSchema = function (id, personId, model, callback) {
+            return $http.post(`${serviceUrl}events/description/${id}/schema/save/${personId}`, model)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         //facts
         service.getFactTypes = function (callback) {
             return $http.get(`${serviceUrl}events/fact/types`)

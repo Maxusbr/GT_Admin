@@ -291,7 +291,7 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="IEventService.UpdateDescriptionTypes" />
         [HttpPost]
         [Route("description/updatetypes")]
-        public IHttpActionResult UpdateDescriptionTypes([FromBody] IEnumerable<EventDescriptionTypeModel> models)
+        public IHttpActionResult UpdateDescriptionTypes([FromBody] IEnumerable<PersonDescriptionTypeModel> models)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             return Ok(_eventService.UpdateDescriptionTypes(models).Response());
@@ -300,7 +300,7 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="IEventService.DeleteDescriptionTypes" />
         [HttpPost]
         [Route("description/deltypes")]
-        public IHttpActionResult DeleteDescriptionTypes([FromBody] IEnumerable<EventDescriptionTypeModel> models)
+        public IHttpActionResult DeleteDescriptionTypes([FromBody] IEnumerable<PersonDescriptionTypeModel> models)
         {
             return Ok(_eventService.DeleteDescriptionTypes(models).Response());
         }
@@ -321,6 +321,21 @@ namespace Getticket.Web.API.Controllers
         public IHttpActionResult DeleteDescriptions([FromBody] IEnumerable<EventDescriptionModel> models)
         {
             return Ok(_eventService.DeleteDescriptions(models).Response());
+        }
+
+
+        /// <see cref="IPersonService.SaveDescriptionSchema"/>
+        [HttpPost]
+        [Route("description/{id}/schema/save/{eventId}")]
+        public IHttpActionResult SaveDescriptionSchema(int id, int eventId, [FromBody] PageBlockModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save schema");
+            var succes = ServiceResponce.FromSuccess().Result("Schema save complete");
+            return Ok(_eventService.SaveDescriptionSchema(id, model, eventId) ? succes.Response() : error.Response());
         }
         #endregion
 

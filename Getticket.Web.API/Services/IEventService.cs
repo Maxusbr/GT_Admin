@@ -6,8 +6,10 @@ using System.Web;
 using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models;
 using Getticket.Web.API.Models.Events;
+using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.Infrastructure;
+using CountsModel = Getticket.Web.API.Models.Events.CountsModel;
 
 namespace Getticket.Web.API.Services
 {
@@ -41,21 +43,21 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IEnumerable<EntityCollection<EventConnectionModel>> GetConnection(int id);
+        IEnumerable<Models.Events.EntityCollection<EventConnectionModel>> GetConnection(int id);
 
         /// <summary>
         /// Возвращает список моделей интернет-ссылок
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IEnumerable<EntityCollection<EventMediaModel>> GetMedia(int id);
+        IEnumerable<Models.Events.EntityCollection<EventMediaModel>> GetMedia(int id);
 
         /// <summary>
         /// Возвращает список моделей описаний
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IEnumerable<EntityCollection<EventDescriptionModel>> GetDescriptions(int id);
+        IEnumerable<Models.Events.EntityCollection<EventDescriptionModel>> GetDescriptions(int id);
 
 
         /// <summary>
@@ -173,14 +175,14 @@ namespace Getticket.Web.API.Services
         /// Возвращает список типов описаний
         /// </summary>
         /// <returns></returns>
-        IList<EventDescriptionTypeModel> GetDescriptionTypes();
+        IList<PersonDescriptionTypeModel> GetDescriptionTypes();
 
         /// <summary>
         /// Добавить/Изменить типы описаний
         /// </summary>
         /// <param name="models"></param>
         /// <returns></returns>
-        ServiceResponce UpdateDescriptionTypes(IEnumerable<EventDescriptionTypeModel> models);
+        ServiceResponce UpdateDescriptionTypes(IEnumerable<PersonDescriptionTypeModel> models);
 
         /// <summary>
         /// Удалить типы описаний
@@ -188,7 +190,7 @@ namespace Getticket.Web.API.Services
         /// <param name="models"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        ServiceResponce DeleteDescriptionTypes(IEnumerable<EventDescriptionTypeModel> models);
+        ServiceResponce DeleteDescriptionTypes(IEnumerable<PersonDescriptionTypeModel> models);
 
         /// <summary>
         /// Добавить/Изменить список описаний для Event c Id = <paramref name="eventId"/>
@@ -275,6 +277,15 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <returns></returns>
         IList<EventCategoryModel> GetCategories();
+
+        /// <summary>
+        /// Сохранить схему описания
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        bool SaveDescriptionSchema(int id, PageBlockModel model, int eventId);
     }
 
 }

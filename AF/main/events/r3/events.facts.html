@@ -1,7 +1,7 @@
 ﻿<div class="win-container r3 eventFacts" style="width:800px;" ng-controller="EventFactsController">
     <div class="win-header">
         <div class="win-header-text">
-            Факты о персоне
+            Факты о мероприятии
         </div>
         <div class="win_buttons">
             <a href="#" ng-click="closeMe('eventFacts')"><span class="glyphicon glyphicon-remove-sign"></span></a>
@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="win-content col-md-18">
-        <table class="table" style="table-layout: fixed;">
+        <table class="table" style="table-layout: fixed;"  cg-busy="Promise">
             <thead>
                 <tr>
                     <th class="col-md-6">Факт</th>
