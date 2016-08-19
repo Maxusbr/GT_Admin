@@ -87,13 +87,27 @@
                     $rootScope.mediatypes.push.apply($rootScope.mediatypes, data);
                 });
             }
-            //if (!$rootScope.eventlist) {
-            //    $rootScope.eventlist = [];
-            //    $http.get(`${serviceUrl}events`).success(function (data) {
-            //        $rootScope.eventlist.push.apply($rootScope.eventlist, data);
-            //    });
-            //}
+            if (!$rootScope.facttypes) {
+                $rootScope.facttypes = [];
+                $http.get(`${serviceUrl}persons/fact/types`).success(function (data) {
+                    $rootScope.facttypes.push.apply($rootScope.facttypes, data);
+                });
+            }
         };
+
+        //facts
+        service.getFactTypes = function (callback) {
+            return $http.get(`${serviceUrl}events/fact/types`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+        
+        service.getFact = function getFact(id, callback) {
+            console.log('get facts - '+ id);
+            return $http.get(`${serviceUrl}events/fact/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
 
 
         service.saveEntities = function saveEntities(id, list, entity, callback) {
@@ -108,6 +122,14 @@
                     callback(list);
             });
         }
+
+        service.saveEntity = function (id, model, entity, callback) {
+            if (id === undefined) id = 0;
+            return $http.post(`${serviceUrl}events/${entity}/update/${id}`, model).success(function (response) {
+                if (callback)
+                    callback(response);
+            });
+        };
 
         service.Save = function (event, callback) {
             var model = {
@@ -144,6 +166,13 @@
                     callback(list);
             });
         }
+
+        service.getСonnectionTypes = function (callback) {
+            return $http.get(`${serviceUrl}events/connection/types`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         return service;;
     }
 

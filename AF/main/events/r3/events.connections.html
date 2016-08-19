@@ -1,36 +1,38 @@
-﻿<div class="win-container r3 personConnections" style="width:800px;" ng-controller="EventsConnectionsController">
+﻿<div class="win-container r3 eventConnections" style="width:600px;" ng-controller="EventsConnectionsController">
     <div class="win-header">
         <div class="win-header-text">
             Связи
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('personConnections')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('eventConnections')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="addConnection()">
+            <a href="#" ng-click="addEventConnection()">
                 <span class="fa fa-plus"></span> Добавить
             </a>
         </div>
     </div>
     <div class="win-content">
-        <table class="table">
+        <table class="table" cg-busy="Promise">
             <thead>
                 <tr>
-                    <th>Объект/вид связи</th>
+                    <th>Что связываем</th>
                     <th>Тип связи</th>
-                    <th>Характеристика связи</th>
+                    <th>Характеристика</th>
                     <th>Изменен</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr ng-repeat="item in connectionList">
+                <tr ng-repeat="item in connectionList">
                     <td>
-                        <span ng-show="item.id_ConnectionType > 1">{{item.Event.Name}}</span>
-                        <span ng-show="item.id_ConnectionType === 1">{{item.PersonConnectTo.LastName}} {{item.PersonConnectTo.Name}}</span>
+                        <a href="" ng-click="editEventConnection(item)">
+                            <span ng-show="item.id_ConnectionType > 1">{{item.EventConnectTo.Name}}</span>
+                            <span ng-show="item.id_ConnectionType === 1">{{item.Person.LastName}} {{item.Person.Name}}</span>
+                        </a>
                     </td>
-                    <td><span>{{item.PersonConnectionType}}</span></td>
+                    <td><span>{{item.EventConnectionType}}</span></td>
                     <td><span>{{item.Description}}</span></td>
                     <td>
                         <span ng-if="item.LastChange">
@@ -38,7 +40,7 @@
                             {{item.LastChange.Date | amCalendar}}
                         </span>
                     </td>
-                </tr> -->
+                </tr>
             </tbody>
         </table>
     </div>

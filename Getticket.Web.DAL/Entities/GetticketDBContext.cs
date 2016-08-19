@@ -119,6 +119,10 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="EventDescriptionTizerLink"/>
         public virtual DbSet<EventDescriptionTizerLink> EventDescriptionTizerLinks { get; set; }
 
+        public virtual DbSet<EventFact> EventFacts { get; set; }
+
+        public virtual DbSet<EventFactType> EventFactTypes { get; set; }
+
         /// <summary>
         /// Настройка сущности <see cref="Entities.PersonDescriptionTizerLink"/>
         /// </summary>

@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <br/>
-                            Название:  {{event.Name}}
+                            <h5>Название:  {{event.Name}}</h5>
                             <br/>
                         </div>
                         <div class="col-lg-6">
@@ -47,28 +47,80 @@
                 </div>
                 <div class="col-lg-3">
                     <!--person menu-->
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayNotes()">
-                        <span class="fa fa-book"></span> Описание ({{counts.CountDescriptions}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayNotes()">
+                        <span class="fa fa-book pull-left"></span> Описание ({{counts.CountDescriptions}})
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayFacts()">
-                        <span class="fa fa-book"></span> Факты ({{counts.CountFacts}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayFacts()">
+                        <span class="fa fa-bookmark pull-left"></span> Факты ({{counts.CountFacts}})
                     </a>
-                    <!-- <a href="#" class="btn btn-block btn-default" ng-click="displayHapens()">
-                        <span class="fa fa-bookmark"></span> События ({{counts.CountHapens}})
-                    </a> -->
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayConnections()">
-                        <span class="fa fa-child"></span> Связи ({{counts.CountConnects}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayConnections()">
+                        <span class="fa fa-child pull-left"></span> Связи ({{counts.CountConnects}})
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayMedia()">
-                        <span class="fa fa-file-video-o"></span> Медиа и файлы ({{counts.CountMedias}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayMedia()">
+                        <span class="fa fa-file-video-o pull-left"></span> Медиа и файлы ({{counts.CountMedias}})
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayUser()">
-                        <span class="fa fa-cloud"></span> Права и пользователи ({{counts.CountLinks}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayUser()">
+                        <span class="fa fa-cloud pull-left"></span> Права и пользователи ({{counts.CountLinks}})
                     </a>
-                    <!-- <a href="#" class="btn btn-block btn-default" ng-click="displayAntro()">
-                        <span class="fa fa-heart-o"></span> Антропометрия ({{counts.CountAntros}})
-                    </a> -->
                 </div>
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h5>События этого мероприятия</h5>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Даты проведения</th>
+                            <th>Билетов</th>
+                            <th>Продано</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>6000</td>
+                            <td>1320</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>6000</td>
+                            <td>1320</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>6000</td>
+                            <td>1320</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>6000</td>
+                            <td>1320</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>6000</td>
+                            <td>1320</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>6000</td>
+                            <td>1320</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

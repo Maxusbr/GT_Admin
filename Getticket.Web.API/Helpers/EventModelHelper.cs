@@ -53,7 +53,29 @@ namespace Getticket.Web.API.Helpers
 
         public static IEnumerable<EventConnectionModel> GetConnectionModels(IList<EventConnection> getConnections)
         {
-            throw new NotImplementedException();
+            var list = getConnections.Select(GetConnectionModel);
+            return list.ToList();
+        }
+
+        /// <summary>
+        /// Оборачивает <paramref name="connection"/> в модель
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public static EventConnectionModel GetConnectionModel(EventConnection connection)
+        {
+            return connection != null ? new EventConnectionModel
+            {
+                Id = connection.Id,
+                id_ConnectionType = connection.id_ConnectionType,
+                id_Event = connection.id_Event,
+                id_Person = connection.id_Person,
+                id_EventConnectTo = connection.id_EventConnectTo,
+                Person = PersonModelHelper.GetPersonModel(connection.Person),
+                Event = GetEventModel(connection.Event),
+                Description = connection.Description,
+                EventConnectionType = connection.ConnectionType?.Name
+            } : new EventConnectionModel();
         }
 
         public static IEnumerable<EventMediaModel> GetMediaModels(IList<EventMedia> getMedia)
@@ -73,17 +95,48 @@ namespace Getticket.Web.API.Helpers
 
         public static IList<EventConnectionTypeModel> GetConnectionTypeModels(IList<ConnectionType> result)
         {
-            throw new NotImplementedException();
+            return result.Select(o => new EventConnectionTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         public static IList<MediaTypeModel> GetMediaTypeModels(IList<MediaType> result)
         {
-            throw new NotImplementedException();
+            return result.Select(o => new MediaTypeModel { Id = o.Id, Name = o.Name }).ToList();
         }
 
         public static IList<EventDescriptionTypeModel> GetDescriptionTypeModels(IList<EventDescriptionType> result)
         {
-            throw new NotImplementedException();
+            return result.Select(o => new EventDescriptionTypeModel { Id = o.Id, Name = o.Name }).ToList();
+        }
+
+        public static IList<EventFactModel> GetFactModels(IList<EventFact> facts)
+        {
+            var list = facts.Select(GetFactModel);
+            return list.ToList();
+        }
+
+
+        private static EventFactModel GetFactModel(EventFact fact)
+        {
+            return fact != null ? new EventFactModel
+            {
+                Id = fact.Id,
+                id_Event = fact.id_Event,
+                id_FactType = fact.id_FactType,
+                FactType = new EventFactTypeModel { Id = fact.FactType.Id, Name = fact.FactType.Name, Descript = fact.FactType.Descript ?? "" },
+                FactText = fact.FactText,
+                Status = fact.Status,
+                Source = fact.Source
+            } : new EventFactModel();
+        }
+
+        /// <summary>
+        /// Get fact type models
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public static IList<EventFactTypeModel> GetFactTypeModels(IList<EventFactType> result)
+        {
+            return result.Select(o => new EventFactTypeModel { Id = o.Id, Name = o.Name, Descript = o.Descript ?? "" }).ToList();
         }
 
         public static IList<EventCategoryModel> GetCategoryModels(IList<EventCategory> categories)

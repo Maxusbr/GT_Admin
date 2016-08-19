@@ -22,7 +22,7 @@
             <div class="row" ng-if="person">
                 <div class="col-lg-9">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-7">
                             <!--<img style="width: 150px; height: 150px"/>-->
                             <div class="row">
                                 <md-progress-linear md-mode="determinate"
@@ -33,65 +33,63 @@
                                      ngf-background="file"
                                      ngf-resize="{width: 150, height: 150, quality: 0.9}"
                                      style="width: 150px;">
-                                <br/>
-                                <a class="button" ngf-select="upload($file)"
-                                   ngf-pattern="'image/*'" ngf-accept="'image/*'" 
-                                   ngf-max-size="20MB" ngf-min-height="100">Добавить/Изменить фото</a>
                                 <br />
-                                <a href="#" ng-click="saveFoto()">
-                                    <span class="fa fa-save"></span>
-                                    Сохранить
-                                </a>
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <a class="btn btn-info" ngf-select="upload($file)"
+                                           ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                                           ngf-max-size="20MB" ngf-min-height="100"><span class="fa fa-image"></span> Изменить</a>
+                                        <br />
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <a href="#" class="btn btn-info" ng-click="saveFoto()">
+                                            <span class="fa fa-save"></span> Сохранить
+                                        </a>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-4 col-lg-offset-2">
+                                        Пол: <span class="label label-default" ng-show="person.Sex == 0">
+                                            Mужской
+                                        </span>
+                                        <span class="label label-default" ng-show="person.Sex == 1">Женский</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row">
-                                Пол: <span ng-show="person.Sex == 0">
-                                    Mужской
-                                </span>
-                                <span ng-show="person.Sex == 1">Женский</span>
-                            </div>
+                            
                         </div>
-                        <div class="col-lg-4">
-                            {{person.LastName}}
+                        <div class="col-lg-5">
+                            <h5>{{person.LastName}} / {{person.LastNameLatin}}</h5>
                             <br />
-                            {{person.Name}}
+                            <h5> {{person.Name}} / {{ person.NameLatin }}</h5>
                             <br />
-                            {{person.Patronymic}}
+                            <h5> {{person.Patronymic}} / {{ person.PatronymicLatin }}</h5>
                             <br />
-                            {{person.Bithday | date : 'd MMMM yyyy'}}
+                            <span class="fa fa-birthday-cake"></span> {{person.Bithday | date : 'd MMMM yyyy'}}, {{person.Place}}, {{person.Country}}
                         </div>
-                        <div class="col-lg-4">
-                            {{person.LastNameLatin}}
-                            <br />
-                            {{ person.NameLatin }}
-                            <br />
-                            {{ person.PatronymicLatin }}
-                            <br />
-                            {{person.Place}}, {{person.Country}}
-                        </div>
-                        <!--<div class="col-lg-12 text-center" style="padding: 10px 0;">
-
-                        </div>-->
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <!--person menu-->
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayNotes()">
-                        <span class="fa fa-book"></span> Описание ({{counts.CountDescriptions}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayNotes()">
+                        <span class="fa fa-book pull-left"></span> Описание ({{counts.CountDescriptions}})
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayFacts()">
-                        <span class="fa fa-bookmark"></span> Факты ({{counts.CountFacts}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayFacts()">
+                        <span class="fa fa-bookmark pull-left"></span> Факты ({{counts.CountFacts}})
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayConnections()">
-                        <span class="fa fa-child"></span> Связи ({{counts.CountConnects}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayConnections()">
+                        <span class="fa fa-child pull-left"></span> Связи ({{counts.CountConnects}})
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayMedia()">
-                        <span class="fa fa-file-video-o"></span> Медиа и файлы ({{counts.CountMedias}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayMedia()">
+                        <span class="fa fa-file-video-o pull-left"></span> Медиа и файлы ({{counts.CountMedias}})
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayInternet()">
-                        <span class="fa fa-cloud"></span> Интернет ({{counts.CountLinks}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayInternet()">
+                        <span class="fa fa-cloud pull-left"></span> Интернет ({{counts.CountLinks}})
                     </a>
-                    <a href="#" class="btn btn-block btn-default" ng-click="displayAntro()">
-                        <span class="fa fa-heart-o"></span> Антропометрия ({{counts.CountAntros}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayAntro()">
+                        <span class="fa fa-heart-o pull-left"></span> Антропометрия ({{counts.CountAntros}})
                     </a>
 
                 </div>
@@ -99,49 +97,53 @@
         </div>
         <br />
         <br />
-        <div class="panel-info">
-            <h5>Последние 10 событий</h5>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Название</th>
-                        <th>Даты проведения</th>
-                        <th>Организатор</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Концерт Большого театра</td>
-                        <td>12.12.2015-18.12.2015</td>
-                        <td>Большой театр</td>
-                    </tr>
-                    <tr>
-                        <td>Концерт Большого театра</td>
-                        <td>12.12.2015-18.12.2015</td>
-                        <td>Большой театр</td>
-                    </tr>
-                    <tr>
-                        <td>Концерт Большого театра</td>
-                        <td>12.12.2015-18.12.2015</td>
-                        <td>Большой театр</td>
-                    </tr>
-                    <tr>
-                        <td>Концерт Большого театра</td>
-                        <td>12.12.2015-18.12.2015</td>
-                        <td>Большой театр</td>
-                    </tr>
-                    <tr>
-                        <td>Концерт Большого театра</td>
-                        <td>12.12.2015-18.12.2015</td>
-                        <td>Большой театр</td>
-                    </tr>
-                    <tr>
-                        <td>Концерт Большого театра</td>
-                        <td>12.12.2015-18.12.2015</td>
-                        <td>Большой театр</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h5>Последние 10 событий</h5>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Даты проведения</th>
+                            <th>Организатор</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>Большой театр</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>Большой театр</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>Большой театр</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>Большой театр</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>Большой театр</td>
+                        </tr>
+                        <tr>
+                            <td>Концерт Большого театра</td>
+                            <td>12.12.2015-18.12.2015</td>
+                            <td>Большой театр</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

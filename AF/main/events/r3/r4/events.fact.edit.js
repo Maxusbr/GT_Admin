@@ -1,25 +1,25 @@
 ﻿(function () {
     'use strict';
 
-    function EventsFactEditController($rootScope, $scope) {
+    function EventsFactEditController($rootScope, $scope, eventService) {
         var vm = this;
-        $scope.fact = $rootScope.fact ? $rootScope.fact: {
-            FactText: "",
-            LastChange: {
-                UserName: $rootScope.UserName,
-                Date: new Date()
-            },
-            FactType: {
-                Name: "",
-                Descript: ""
-            }
-        };
-
+        
         $rootScope.saveFact = function save_fact() {
-            console.log('save fact click');
-            //TODO: save changes or create new
-            //TODO: close this view
-            //TODO: refresh facts table
+            console.log('save fact click, event - '+  $rootScope.eventId);
+
+            $rootScope.editedFact.id_Event = $rootScope.eventId;
+            eventService.saveEntity($rootScope.eventId, $rootScope.editedFact, 'fact', function (data) {
+                $rootScope.getFacts();
+                app.closeView('personFactCreate');
+            });
+        }
+
+        $scope.setConnection = function (id) {
+            if (!id) return;
+            var type = $rootScope.facttypes.filter(function (item) {
+                return item.Id === id;
+            })[0];
+            $rootScope.editedFact.FactType = type;
         }
     }
 
@@ -27,5 +27,5 @@
         .module('app')
         .controller('EventsFactEditController', EventsFactEditController);
 
-    EventsFactEditController.$inject = ['$rootScope', '$scope'];
+    EventsFactEditController.$inject = ['$rootScope', '$scope', 'eventService'];
 })();

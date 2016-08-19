@@ -1,7 +1,7 @@
 ﻿<div class="win-container r3 eventFacts" style="width:800px;" ng-controller="EventFactsController">
     <div class="win-header">
         <div class="win-header-text">
-            Факты о мероприятии
+            Факты о персоне
         </div>
         <div class="win_buttons">
             <a href="#" ng-click="closeMe('eventFacts')"><span class="glyphicon glyphicon-remove-sign"></span></a>
@@ -15,31 +15,32 @@
         </div>
     </div>
     <div class="win-content col-md-18">
-            <table class="table" style="table-layout: fixed;">
-                <thead>
-                    <tr>
-                        <th class="col-md-6">Факт</th>
-                        <th>Статус/изменен</th>
-                        <th>Связь</th>
-                        <th>Источник</th>
-                        <th>Использование</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in factlist">
-                        <td><a href="" ng-click="editFact()"><span style="">{{item.FactText}}</span></a></td>
-                        <td>TODO: status
-                            <br/>
-                            <span ng-if="item.LastChange">
-                                {{item.LastChange.UserName}}<br>
-                                {{item.LastChange.Date | amCalendar}}
-                            </span>
-                        </td>
-                        <td><span>{{item.FactType.Name}} / {{item.FactType.Descript}}</span></td>
-                        <td>TODO: source</td>
-                        <td>TODO: used</td>
-                    </tr>
-                </tbody>
-            </table>
+        <table class="table" style="table-layout: fixed;">
+            <thead>
+                <tr>
+                    <th class="col-md-6">Факт</th>
+                    <th>Статус/изменен</th>
+                    <th>Связь</th>
+                    <th>Источник</th>
+                    <th>Использование</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in factlist">
+                    <td><a href="" ng-click="editFact(item)"><span style="">{{item.FactText}}</span></a></td>
+                    <td>
+                        {{item.Status}}
+                        <br />
+                        <span ng-if="item.LastChange">
+                            {{item.LastChange.UserName}}<br>
+                            {{item.LastChange.Date | amCalendar}}
+                        </span>
+                    </td>
+                    <td><span>{{item.FactType.Name}} / {{item.FactType.Descript}}</span></td>
+                    <td>{{item.Source}}</td>
+                    <td>----</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
