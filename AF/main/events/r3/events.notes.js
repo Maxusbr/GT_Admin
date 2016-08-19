@@ -1,8 +1,10 @@
 ﻿(function () {
     'use strict';
 
-    function EventsNotesController($rootScope, $scope, eventService) {
+    function EventsNotesController($rootScope, $scope, eventService, personService) {
         var vm = this;
+        if (!$rootScope.persons)
+            $scope.Promise = personService.getPersons();
 
         $rootScope.getDescript = function () {
             $scope.Promise = eventService.getDescript($rootScope.eventId, function (data) {
@@ -70,5 +72,5 @@
         .module('app')
         .controller('EventsNotesController', EventsNotesController);
 
-    EventsNotesController.$inject = ['$rootScope', '$scope', 'eventService'];
+    EventsNotesController.$inject = ['$rootScope', '$scope', 'eventService', 'personService'];
 })();

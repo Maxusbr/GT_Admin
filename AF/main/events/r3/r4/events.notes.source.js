@@ -51,10 +51,8 @@
                     return "";
             }
         }
-        if (!$rootScope.persons)
-            $scope.Promise = personService.getPersons($scope.getDetail($rootScope.pageSchema.Page.PageType));
-        else
-            $scope.getDetail($rootScope.pageSchema.Page.PageType);
+        
+        $scope.getDetail($rootScope.pageSchema.Page.PageType);
 
         $scope.changeDetail = function (item) {
             switch ($rootScope.pageSchema.Page.PageType) {
