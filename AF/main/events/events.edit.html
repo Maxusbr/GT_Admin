@@ -1,16 +1,16 @@
 ﻿
-<div class="win-container r3 personEdit" style="width:700px;" ng-controller="EventsEditController">
+<div class="win-container r3 eventEdit" style="width:700px;" ng-controller="EventsEditController">
     <div class="win-header">
         <div class="win-header-text">
             Изменить событие
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('personEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('eventEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#">
+            <a href="#" ng-click="saveEvent()">
                 <span class="fa fa-save"></span> Сохранить
             </a>
         </div>
@@ -72,20 +72,21 @@
         <div class="row">
             <div class="col-lg-4">
                 <span style="padding-right: 5px;">Опубликовано</span>
-                <input class="form-control" placeholder="от 3 знаков" type="checkbox" style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 30px;" />
+                <input class="form-control" placeholder="от 3 знаков" type="checkbox" 
+                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 30px;" ng-model="event.IsPublished"/>
             </div>
             <div class="col-lg-4">
                 Дата начала доступности
 
                 <md-content>
-                    <md-datepicker ng-model="event.DateStartSold" md-placeholder="Дата начала "></md-datepicker>
+                    <md-datepicker ng-model="dateStartSold" md-placeholder="Дата начала "></md-datepicker>
                 </md-content>
             </div>
             <div class="col-lg-4">
                 Дата окончания доступности
 
                 <md-content>
-                    <md-datepicker ng-model="event.DateStopSold" md-placeholder="Дата окончания "></md-datepicker>
+                    <md-datepicker ng-model="dateStopSold" md-placeholder="Дата окончания "></md-datepicker>
                 </md-content>
                 <!-- <input type="date" name="calendar" value="" class="form-control" placeholder=""/> -->
 
