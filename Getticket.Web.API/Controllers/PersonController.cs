@@ -503,6 +503,20 @@ namespace Getticket.Web.API.Controllers
         {
             return Ok(_personService.DeleteDescriptions(models).Response());
         }
+
+        /// <see cref="IPersonService.SaveDescriptionSchema"/>
+        [HttpPost]
+        [Route("description/{id}/schema/save/{pesonId}")]
+        public IHttpActionResult SaveDescriptionSchema(int id, int pesonId, [FromBody] PageBlockModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save schema");
+            var succes = ServiceResponce.FromSuccess().Result("Schema save complete");
+            return Ok(_personService.SaveDescriptionSchema(id, model, pesonId) ? succes.Response() : error.Response());
+        }
         #endregion
 
 
@@ -720,19 +734,6 @@ namespace Getticket.Web.API.Controllers
             return Ok(!_tagService.AddTagLinks(new TagsTizerModel { IdTizer = id, Tags = models.ToList() }) ? error.Response() : succes.Response());
         }
 
-        /// <see cref="IPersonService.SaveDescriptionSchema"/>
-        [HttpPost]
-        [Route("description/{id}/schema/save/{pesonId}")]
-        public IHttpActionResult SaveDescriptionSchema(int id, int pesonId, [FromBody] PageBlockModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var error = ServiceResponce.FromFailed().Result($"Error save schema");
-            var succes = ServiceResponce.FromSuccess().Result("Schema save complete");
-            return Ok(_personService.SaveDescriptionSchema(id, model, pesonId) ? succes.Response() : error.Response());
-        }
 
         /// <see cref="IPersonService.GetUserPageCategory" />
         [HttpGet]

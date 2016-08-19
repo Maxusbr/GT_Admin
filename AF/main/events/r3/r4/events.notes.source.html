@@ -1,15 +1,15 @@
-﻿<div class="win-container r4 disPersonNotesSource" style="width:600px;" ng-controller="personNotesSourceController">
+﻿<div class="win-container r4 disEventNotesSource" style="width:600px;" ng-controller="eventsNotesSourceController">
     <div class="win-header">
         <div class="win-header-text">
             Редактирование источника
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('disPersonNotesSource')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('disEventNotesSource')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="savePersonNotesSource()">
+            <a href="#" ng-click="saveEventNotesSource()">
                 <span class="fa fa-save"></span>
                 <br />
                 Сохранить
@@ -20,7 +20,7 @@
         <h5>Страница</h5>
         <i>Откуда бедный посетитель попадает на эту страницу</i>
         <br/>
-        <div class="row">
+        <div class="row" cg-busy="Promise">
             <div class="col-lg-6">
                 Страница <select class="form-control" ng-change="getDetail(pageSchema.Page.PageType)" ng-model="pageSchema.Page.PageType" 
                                  ng-options="type.Id as type.Name for type in pages">

@@ -83,9 +83,32 @@ namespace Getticket.Web.API.Helpers
             throw new NotImplementedException();
         }
 
-        public static IEnumerable<EventDescriptionModel> GetDescriptionModels(IList<EventDescription> getDescriptions)
+        public static IEnumerable<EventDescriptionModel> GetDescriptionModels(IList<EventDescription> descriptions)
         {
-            throw new NotImplementedException();
+            var list = descriptions.Select(GetDescriptionModel);
+            return list.ToList();
+        }
+
+        private static EventDescriptionModel GetDescriptionModel(EventDescription description)
+        {
+            var result = description != null ? new EventDescriptionModel
+            {
+                Id = description.Id,
+                id_Event = description.IdEvent,
+                id_DescriptionType = description.IdType,
+                EventDescriptionType = description.DescriptionType.Name,
+                DescriptionText = description.Description,
+                Status = description.Status,
+                IdStaticDescription = description.StaticDescription?.Id,
+                IdBlock = description.IdBlock,
+                RequiredStaticDescription = description.RequiredStaticDescription,
+                PageBlock = PageModelHelper.GetPageBlockModel(description.PageBlock),
+                StaticDescription = description.StaticDescription != null ? GetDescriptionModel(description.StaticDescription) : null,
+            } : new EventDescriptionModel();
+            if (result.PageBlock == null) return result;
+            result.PageBlock.UserPageCategoryId = description?.IdUserPageCategory;
+            result.PageBlock.UserPageCategory = description?.UserPageCategory?.Name;
+            return result;
         }
 
         public static Event GetEvent(EventModel model)

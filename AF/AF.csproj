@@ -119,6 +119,10 @@
     <Content Include="main\events\r3\r4\events.notes.source.js" />
     <Content Include="main\events\r3\r4\events.users.edit.html" />
     <Content Include="main\events\r3\r4\events.users.edit.js" />
+    <Content Include="main\events\r3\r4\events.notes.static.html" />
+    <Content Include="main\events\r3\r4\events.notes.static.js" />
+    <Content Include="main\events\r3\r4\events.notes.tizer.html" />
+    <Content Include="main\events\r3\r4\events.notes.tizer.js" />
     <Content Include="main\person\r3\r4\peron.connectionst.create.html" />
     <Content Include="main\person\r3\r4\peron.connectionst.create.js" />
     <Content Include="main\person\r3\r4\peron.connectionst.editor.html" />

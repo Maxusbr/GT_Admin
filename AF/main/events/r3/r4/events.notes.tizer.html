@@ -1,0 +1,42 @@
+﻿<div class="win-container r4 disEventnNotesTizer" style="width:400px;" ng-controller="eventNotesTizerController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Тизер
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disEventnNotesTizer')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="savePersonNotesTizer()">
+                <span class="fa fa-save"></span> Сохранить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+        <textarea style="min-height:200px; width:360px;" ng-model="tizer.DescriptionText"></textarea>
+        <br />
+        <label>
+            <input type="checkbox" value="" name="noletter" ng-model="notRequired" ng-change="tizer.RequiredStaticDescription = !notRequired">
+            <span ng-if="notRequired" class="glyphicon glyphicon-ok"></span>
+            <span ng-if="!notRequired" class="glyphicon"></span>
+            Статичное описание не требуется
+        </label>
+        <br />
+        <h5>Ключи (от 3 до 10)</h5>
+        <div class="tags">
+            <tags-input ng-model="tizerTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
+            </tags-input>
+        </div>
+        <script type="text/ng-template" id="my-custom-template">
+            <div class="right-panel">
+                <span ng-bind-html="$highlight($getDisplayText())"></span>
+                <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
+            </div>
+        </script>
+        <br />
+        <i>Тизер = это краткая штукотень. Напишите сюда 180 символов для "прочитал - и все пиздец как понятно". Тут Виталий должен какой то текст скостромить для пользователя, который подскажет ему, что это за хрень</i>
+    </div>
+</div>

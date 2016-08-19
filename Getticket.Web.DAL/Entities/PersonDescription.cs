@@ -10,10 +10,6 @@ namespace Getticket.Web.DAL.Entities
     /// </summary>
     public class PersonDescription : BaseEntity
     {
-        /// <summary>
-        /// Конструктор
-        /// </summary>
-        public PersonDescription(){}
 
         /// <summary>
         /// Внешний ключ для <see cref="Entities.Person"/>

@@ -33,10 +33,10 @@ namespace Getticket.Web.DAL.Entities
         public int IdType{ get; set; }
 
         /// <summary>
-        /// Тип события <see cref="EventDescriptionType"/>
+        /// Тип события <see cref="PersonDescriptionType"/>
         /// </summary>
         [ForeignKey("IdType")]
-        public virtual EventDescriptionType DescriptionType { get; set; }
+        public virtual PersonDescriptionType DescriptionType { get; set; }
 
         /// <summary>
         /// Статус
@@ -63,5 +63,16 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [ForeignKey("IdBlock")]
         public virtual PageBlock PageBlock { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="Entities.UserPageCategory"/>
+        /// </summary>
+        public int? IdUserPageCategory { get; set; }
+
+        /// <summary>
+        /// Источник
+        /// </summary>
+        [ForeignKey("IdUserPageCategory")]
+        public virtual UserPageCategory UserPageCategory { get; set; }
     }
 }

@@ -177,13 +177,13 @@ namespace Getticket.Web.DAL.Repositories
         #region descriptions
 
         /// <see cref="IEventRepository.GetDescriptionTypes" />
-        public IList<EventDescriptionType> GetDescriptionTypes()
+        public IList<PersonDescriptionType> GetDescriptionTypes()
         {
-            return db.EventDescriptionTypes.ToList();
+            return db.PersonDescriptionType.ToList();
         }
 
         /// <see cref="IEventRepository.UpdateDescriptionType" />
-        public EventDescriptionType UpdateDescriptionType(EventDescriptionType type)
+        public PersonDescriptionType UpdateDescriptionType(PersonDescriptionType type)
         {
             if (type.Id == 0)
             {
@@ -543,6 +543,103 @@ namespace Getticket.Web.DAL.Repositories
             return db.EventCategories.ToList();
         }
 
+        /// <see cref="IEventRepository.SaveDescriptionSchema" />
+        public bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat, int eventId)
+        {
+            cat = SaveUserPageCategory(cat);
+            var page = SavePage(pageBlock.Page);
+            if (page == null) return false;
+            pageBlock.IdPage = page.Id;
+            var pageblock = SavePageBlock(pageBlock);
+            if (pageblock == null) return false;
+            var desc = db.EventDescriptions.FirstOrDefault(o => o.Id == id);
+            if (desc == null)
+            {
+                desc = new EventDescription { IdType = 1, IdEvent = eventId};
+                db.Entry(desc).State = EntityState.Added;
+            }
+            desc.IdBlock = pageblock.Id;
+            desc.IdUserPageCategory = cat?.Id;
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private PageBlock SavePageBlock(PageBlock pageBlock)
+        {
+            if (pageBlock.Id == 0)
+            {
+                db.Entry(pageBlock).State = EntityState.Added;
+            }
+            else if (pageBlock.Id > 0)
+            {
+                var pr = db.PageBlocks.FirstOrDefault(o => o.Id == pageBlock.Id);
+                db.Entry(pr).CurrentValues.SetValues(pageBlock);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return pageBlock;
+        }
+
+        private PageSchema SavePage(PageSchema page)
+        {
+            if (page.Id == 0)
+            {
+                db.Entry(page).State = EntityState.Added;
+            }
+            else if (page.Id > 0)
+            {
+                var pr = db.PageSchemas.FirstOrDefault(o => o.Id == page.Id);
+                db.Entry(pr).CurrentValues.SetValues(page);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return page;
+        }
+
+        private UserPageCategory SaveUserPageCategory(UserPageCategory cat)
+        {
+            if (cat.Id == 0)
+            {
+                db.Entry(cat).State = EntityState.Added;
+            }
+            else if (cat.Id > 0)
+            {
+                var pr = db.UserPageCategories.FirstOrDefault(o => o.Id == cat.Id);
+                db.Entry(pr).CurrentValues.SetValues(cat);
+            }
+            else
+            {
+                return null;
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return cat;
+        }
 
         private void SaveLog<T>(T from, T to, int eventId, int userId, LogType type) where T : BaseEntity
         {

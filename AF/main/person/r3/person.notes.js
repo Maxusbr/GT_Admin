@@ -3,8 +3,6 @@
 
     function personNotesController($rootScope, $cookieStore, $scope, personService, $filter) {
         var vm = this;
-        if (!$rootScope.UserName)
-            $rootScope.UserName = $cookieStore.get('username');
 
         $rootScope.getDescript = function () {
             $scope.Promise = personService.getDescript($rootScope.personId, function (data) {
@@ -23,33 +21,33 @@
         }
         $rootScope.getDescript();
 
-        $rootScope.displaySource = function (id, page) {
+        $scope.displaySource = function (id, page) {
             $rootScope.editDescriptionId = id;
             $rootScope.pageSchema = page ? page : {};
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.source.html', 3200);
         }
         
-        $rootScope.displayNewSource = function () {
+        $scope.displayNewSource = function () {
             $rootScope.editableDesc = { id_DescriptionType: 1 };
             $rootScope.pageSchema = {};
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.source.html', 3200);
         }
 
-        $rootScope.displayNotesStatic = function (item) {
+        $scope.displayNotesStatic = function (item) {
             $rootScope.editableDesc = item ? item : { id_DescriptionType: 2 };
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.static.html', 3200);
         }
 
-        $rootScope.displayNotesTizer = function (tizer) {
+        $scope.displayNotesTizer = function (tizer) {
             $rootScope.editableDesc = tizer ? tizer : { id_DescriptionType: 1 };
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.tizer.html', 3200);
         }
 
-        $rootScope.displayNotesAdaptDescription = function () {
+        $scope.displayNotesAdaptDescription = function () {
 
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/person.notes.ades.html', 3200);

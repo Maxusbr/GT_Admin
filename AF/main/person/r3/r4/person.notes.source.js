@@ -62,7 +62,7 @@
                     $rootScope.pageSchema.Page.IdPerson = item;
                     break;
                 case 1: break;
-                    return "Поиск";
+                    // "Поиск";
                 case 2:
                     $rootScope.pageSchema.Page.IdEvent = item;
                     break;
@@ -70,22 +70,19 @@
                     $rootScope.pageSchema.Page.IdHall = item;
                     break;
                 case 4: break;
-                    return "Профиль";
+                    // "Профиль";
                 case 5: break;
-                    return "Главная";
+                    // "Главная";
                 default:
-                    return "";
+                    break;
             }
         }
-        $rootScope.userPageCategories = [
-            {
-                Id: null,
-                Name: "Не указано"
-            }
-        ];
-        personService.getUserPageCategories(function(data) {
-            $rootScope.userPageCategories.push.apply($rootScope.userPageCategories, data);
-        });
+        if (!$rootScope.userPageCategories) {
+            $rootScope.userPageCategories = [{Id: null, Name: "Не указано"}];
+            personService.getUserPageCategories(function (data) {
+                $rootScope.userPageCategories.push.apply($rootScope.userPageCategories, data);
+            });
+        }
 
         $rootScope.savePersonNotesSource = function() {
             //TODO: save changes or create new source
