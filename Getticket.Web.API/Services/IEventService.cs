@@ -57,7 +57,7 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        IEnumerable<Models.Events.EntityCollection<EventDescriptionModel>> GetDescriptions(int id);
+        IEnumerable<EventDescriptionModel> GetDescriptions(int id);
 
 
         /// <summary>

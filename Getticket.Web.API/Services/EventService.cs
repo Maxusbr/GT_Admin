@@ -109,15 +109,16 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public IEnumerable<Models.Events.EntityCollection<EventDescriptionModel>> GetDescriptions(int id)
+        public IEnumerable<EventDescriptionModel> GetDescriptions(int id)
         {
             var list = EventModelHelper.GetDescriptionModels(_eventRepository.GetDescriptions(id));
             foreach (var item in list)
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangeEventDescription(item.id_Event, item.Id));
             }
-            var types = list.GroupBy(o => o.id_DescriptionType).Select(o => o.Key);
-            return types.Select(tp => new Models.Events.EntityCollection<EventDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp });
+            return list;
+            //var types = list.GroupBy(o => o.id_DescriptionType).Select(o => o.Key);
+            //return types.Select(tp => new Models.Events.EntityCollection<EventDescriptionModel> { List = list.Where(o => o.id_DescriptionType == tp), Type = tp });
         }
 
         /// <summary>

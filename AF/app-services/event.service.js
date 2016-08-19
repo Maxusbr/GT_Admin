@@ -143,7 +143,7 @@
                 Name: event.Name,
                 
             }
-            return $http.post(`${serviceUrl}events/add`, model).success(function (data) {
+            return $http.post(`${serviceUrl}events/add`, event).success(function (data) {
                 callback(data);
             }).error(function (data) {
                 callback(data);

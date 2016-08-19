@@ -32,8 +32,8 @@
                 <tbody>
                  <tr ng-repeat="row in events | filter:personaMenuFilter">
                     <td><a href="#" ng-click="selectEvents(row.Id)">{{row.Name}}</a></td>
-                    <td><a href="#" ng-click="selectEvents(row.id)">{{row.EventParentCategory}}</a></td>
-                    <td><a href="#" ng-click="selectEvents(row.id)">{{row.EventCategory}}</a></td>
+                    <td><a href="#" ng-click="selectEvents(row.Id)">{{row.EventParentCategory}}</a></td>
+                    <td><a href="#" ng-click="selectEvents(row.Id)">{{row.EventCategory}}</a></td>
                     <td>{{row.Organizer}}</td>
                     <td>{{row.AgeLimit}}+</td>
                 </tr> 

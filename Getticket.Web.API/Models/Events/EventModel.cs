@@ -65,5 +65,12 @@ namespace Getticket.Web.API.Models.Events
         /// Организатор
         /// </summary>
         public string Organizer { get; set; }
+
+        /// <summary>
+        /// Опубликован
+        /// </summary>
+        public bool IsPublished { get; set; }
+
+        public int? IdCompany { get; set; }
     }
 }

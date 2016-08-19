@@ -40,11 +40,13 @@ namespace Getticket.Web.API.Helpers
                 Description = entity.Description,
                 EventDate = entity.EventDate,
                 TicketReturn = entity.TicketReturn,
+                IsPublished = entity.IsPublished,
                 EventCategoryId = entity.Category.IdParent != null ? entity.Category.Id: (int?) null,
                 EventParentCategoryId = entity.Category.IdParent ?? entity.Category.Id,
                 EventCategory = entity.Category.IdParent != null ? entity.Category.Name: "",
                 EventParentCategory = entity.Category.IdParent != null ? entity.Category.ParentCategory.Name: entity.Category.Name,
                 AgeLimit = entity.AgeLimit,
+                IdCompany = entity.Organizer?.Id,
                 Organizer = entity.Organizer?.Name
             } : new EventModel();
 
@@ -113,7 +115,22 @@ namespace Getticket.Web.API.Helpers
 
         public static Event GetEvent(EventModel model)
         {
-            throw new NotImplementedException();
+            var result = model != null ? new Event
+            {
+                Id = model.Id,
+                Name = model.Name,
+                DateStartSold = model.DateStartSold,
+                DateStopSold = model.DateStopSold,
+                Description = model.Description,
+                EventDate = model.EventDate,
+                TicketReturn = model.TicketReturn,
+                IsPublished = model.IsPublished, 
+                IdCategory = model.EventCategoryId??0,
+                AgeLimit = model.AgeLimit,
+                IdCompany = model.IdCompany
+            } : null;
+
+            return result;
         }
 
         public static IList<EventConnectionTypeModel> GetConnectionTypeModels(IList<ConnectionType> result)
