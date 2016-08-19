@@ -15,7 +15,10 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [Required]
         public int IdEvent { get; set; }
-
+        /// <summary>
+        /// Имя
+        /// </summary>
+        public string Name { get; set; }
         /// <summary>
         /// Путь к файлу
         /// </summary>

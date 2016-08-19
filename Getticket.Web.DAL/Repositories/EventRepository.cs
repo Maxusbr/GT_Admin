@@ -593,6 +593,16 @@ namespace Getticket.Web.DAL.Repositories
             }
             return eventCategory;
         }
+        /// <see cref="IEventRepository.GetMediaPersonLinks" />
+        public IList<Person> GetMediaPersonLinks(int id)
+        {
+            return db.EventMediaLinkPersons.Where(o => o.IdMedia == id).Include(o => o.Person).Select(o => o.Person).ToList();
+        }
+        /// <see cref="IEventRepository.GetMediaEventLinks" />
+        public IList<Event> GetMediaEventLinks(int id)
+        {
+            return db.EventMediaLinkEvents.Where(o => o.IdMedia == id).Include(o => o.Event).Select(o => o.Event).ToList();
+        }
 
         private PageBlock SavePageBlock(PageBlock pageBlock)
         {

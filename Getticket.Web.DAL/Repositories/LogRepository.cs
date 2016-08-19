@@ -31,7 +31,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="ILogRepository.GetLastChangePerson" />
         public PersonLog GetLastChangePerson(int personId)
         {
-            return db.PersonLogs.OrderByDescending(o => o.Date)
+            return db.PersonLogs.OrderByDescending(o => o.Date).Include(o => o.User)
                 .FirstOrDefault(o => o.IdPerson == personId && o.Type == LogType.Entity); ;
         }
 
@@ -86,7 +86,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="ILogRepository.GetLastChangeEventConnection" />
         public EventLog GetLastChangeEventConnection(int idEvent, int id)
         {
-            return db.EventLogs.OrderByDescending(o => o.Date)
+            return db.EventLogs.OrderByDescending(o => o.Date).Include(o => o.User)
                 .FirstOrDefault(o => o.EventId == idEvent && o.Type == LogType.Entity);
         }
 

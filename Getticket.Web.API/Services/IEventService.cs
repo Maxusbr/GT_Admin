@@ -149,6 +149,14 @@ namespace Getticket.Web.API.Services
         bool UpdateMedia(int eventId, IEnumerable<EventMediaModel> models, int userId);
 
         /// <summary>
+        /// Добавить/Изменить медиа для Event
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        int UpdateMedia(EventMediaModel model, int userId);
+
+        /// <summary>
         /// Удалить список медиа
         /// </summary>
         /// <param name="models"></param>

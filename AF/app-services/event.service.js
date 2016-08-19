@@ -187,6 +187,12 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.saveMediaLink = function (id, idEntity, entity, callback) {
+            return $http.post(`${serviceUrl}events/media/${id}/link/${entity}/${idEntity}`)
+                .success(function (data) { if(callback) callback(data); })
+                .error(function (data) { if(callback) callback(data); });
+        }
+
         return service;;
     }
 

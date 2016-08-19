@@ -19,7 +19,7 @@ namespace Getticket.Web.API.Helpers
         }
         public static LastChangeModel GetLastChangeModel(EventLog log)
         {
-            return log != null ? new LastChangeModel { Date = log.Date, UserName = $"{log.User.Name} {log.User.LastName}" }
+            return log != null ? new LastChangeModel { Date = log.Date, UserName = $"{log.User?.Name} {log.User?.LastName}" }
             : null;
         }
     }

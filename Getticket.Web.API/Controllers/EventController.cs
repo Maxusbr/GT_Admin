@@ -232,20 +232,32 @@ namespace Getticket.Web.API.Controllers
             return Ok(_eventService.DeleteMediaTypes(models).Response());
         }
 
-        /// <see cref="IEventService.UpdateMedia" />
+        ///// <see cref="IEventService.UpdateMedia" />
+        //[HttpPost]
+        //[Route("media/update/{id}")]
+        //public IHttpActionResult UpdateMedia(int id, [FromBody] IEnumerable<EventMediaModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var list = models as IList<EventMediaModel> ?? models.ToList();
+        //    var userId = User.Identity.GetUserId<int>();
+        //    var succes = ServiceResponce.FromSuccess().Result("All save complete");
+        //    var error = ServiceResponce.FromFailed().Result($"Error save media");
+        //    if (!_eventService.UpdateMedia(id, list, userId)) return Ok(error.Response());
+        //    error = ServiceResponce.FromFailed().Result($"Error save tags");
+        //    return Ok(list.Any(item => !_tagService.AddTagLinks(new TagsEventMediaModel { IdMedia = item.Id, Tags = item.Tags })) ?
+        //        error.Response() : succes.Response());
+        //}
+
+        /// <see cref="IEventService.UpdateMedia(EventMediaModel, int)" />
         [HttpPost]
         [Route("media/update/{id}")]
-        public IHttpActionResult UpdateMedia(int id, [FromBody] IEnumerable<EventMediaModel> models)
+        public IHttpActionResult UpdateMedia(int id, [FromBody] EventMediaModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var list = models as IList<EventMediaModel> ?? models.ToList();
             var userId = User.Identity.GetUserId<int>();
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save media");
-            if (!_eventService.UpdateMedia(id, list, userId)) return Ok(error.Response());
-            error = ServiceResponce.FromFailed().Result($"Error save tags");
-            return Ok(list.Any(item => !_tagService.AddTagLinks(new TagsEventMediaModel { IdMedia = item.Id, Tags = item.Tags })) ?
-                error.Response() : succes.Response());
+            return Ok(_eventService.UpdateMedia(model, userId));
         }
 
         /// <see cref="IEventService.DeleteMedia" />

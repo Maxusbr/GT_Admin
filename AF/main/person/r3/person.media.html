@@ -40,15 +40,15 @@
                         мероприятия ({{item.Links.EventLinks.length}})
                     </td>
                     <td>
-                        {{item.LastChange.UserName}}<br>
-                        {{item.LastChange.Date | amCalendar}}
+                        <i >{{item.LastChange.UserName}}<br>
+                            {{item.LastChange.Date | amCalendar}}</i>
                     </td>
                     <td>
                         <div class="tags" ng-show="!item.isEditTags" style="width: 80px;">
                             <!--{{item.Tags.length}}:-->
-                            <span ><p ng-repeat="tag in item.Tags">
+                            <i ng-repeat="tag in item.Tags">
                                 {{tag.Name}}
-                            </p></span>
+                            </i>
                         </div>
                     </td>
                     <td>-----</td>
