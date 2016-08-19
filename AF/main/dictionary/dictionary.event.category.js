@@ -39,15 +39,10 @@
             $scope.editItemSubCat = item;
         }
 
-        $scope.saveCategories = function () {
-            //TODO: save changes to server
-        }
-
-        $scope.saveSubCategories = function () {
-            if (!$scope.editItemSubCat.Name || !$scope.editItemCat.Id) return;
-            $scope.editItemSubCat.IdParent = $scope.editItemCat.Id;
-            eventService.SaveCategory($scope.editItemSubCat, function (data) {
-                $scope.editItemSubCat = {}
+        $scope.saveCategories = function (cat) {
+            if (!cat.Name) return;
+            eventService.SaveCategory(cat, function (data) {
+                cat = {}
                 eventService.getCategories(function (data) {
                     $rootScope.eventCategories = data;
                     $scope.baseCategory = data.filter(function (item) {
@@ -55,6 +50,12 @@
                     });
                 });
             });
+        }
+
+        $scope.saveSubCategories = function () {
+            if (!$scope.editItemCat.Id) return;
+            $scope.editItemSubCat.IdParent = $scope.editItemCat.Id;
+            $scope.saveCategories($scope.editItemSubCat);
         }
     }
 

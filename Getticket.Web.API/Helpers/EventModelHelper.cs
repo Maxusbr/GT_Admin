@@ -186,5 +186,17 @@ namespace Getticket.Web.API.Helpers
                 Id = o.Id, Name = o.Name, Description = o.Description, IdParent = o.IdParent
             }).ToList();
         }
+
+        public static EventCategoryModel GetCategoryModels(EventCategory model)
+        {
+            return new EventCategoryModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                IdParent = model.IdParent
+            };
+        }
+
     }
 }

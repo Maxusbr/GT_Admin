@@ -571,6 +571,29 @@ namespace Getticket.Web.DAL.Repositories
             return true;
         }
 
+        /// <see cref="IEventRepository.SaveCategory" />
+        public EventCategory SaveCategory(EventCategory eventCategory)
+        {
+            if (eventCategory.Id == 0)
+            {
+                db.Entry(eventCategory).State = EntityState.Added;
+            }
+            else if (eventCategory.Id > 0)
+            {
+                var pr = db.EventCategories.FirstOrDefault(o => o.Id == eventCategory.Id);
+                db.Entry(pr).CurrentValues.SetValues(eventCategory);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return eventCategory;
+        }
+
         private PageBlock SavePageBlock(PageBlock pageBlock)
         {
             if (pageBlock.Id == 0)

@@ -158,6 +158,14 @@
             });
         }
 
+        service.SaveCategory = function (model, callback) {
+            return $http.post(`${serviceUrl}events/categories/save`, model).success(function (data) {
+                if(callback) callback(data);
+            }).error(function (data) {
+                if(callback) callback(data);
+            });
+        }
+
         service.saveEventTags = function (id, model, callback) {
             return $http.post(`${serviceUrl}events/tags/save/${id}`, model).success(function (data) {
                 callback(data);

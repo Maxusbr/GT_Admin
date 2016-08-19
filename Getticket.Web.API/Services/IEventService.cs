@@ -286,6 +286,13 @@ namespace Getticket.Web.API.Services
         /// <param name="eventId"></param>
         /// <returns></returns>
         bool SaveDescriptionSchema(int id, PageBlockModel model, int eventId);
+
+        /// <summary>
+        /// Сохранить категорию
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        EventCategoryModel SaveCategory(EventCategoryModel model);
     }
 
 }

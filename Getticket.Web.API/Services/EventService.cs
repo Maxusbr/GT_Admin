@@ -612,6 +612,15 @@ namespace Getticket.Web.API.Services
                 }, eventId);
         }
 
+        /// <see cref="IEventService.SaveCategory"/>
+        public EventCategoryModel SaveCategory(EventCategoryModel model)
+        {
+            return EventModelHelper.GetCategoryModels(_eventRepository.SaveCategory(
+                new EventCategory
+                {
+                    Id = model.Id, Name = model.Name, IdParent = model.IdParent, Description = model.Description
+                }));
+        }
     }
 
 }
