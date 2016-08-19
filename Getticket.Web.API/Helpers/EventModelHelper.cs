@@ -53,7 +53,28 @@ namespace Getticket.Web.API.Helpers
 
         public static IEnumerable<EventConnectionModel> GetConnectionModels(IList<EventConnection> getConnections)
         {
-            throw new NotImplementedException();
+            var list = getConnections.Select(GetConnectionModel);
+            return list.ToList();
+        }
+
+        /// <summary>
+        /// Оборачивает <paramref name="connection"/> в модель
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <returns></returns>
+        public static EventConnectionModel GetConnectionModel(EventConnection connection)
+        {
+            return connection != null ? new EventConnectionModel
+            {
+                Id = connection.Id,
+                id_ConnectionType = connection.id_ConnectionType,
+                id_Event = connection.id_Event,
+                id_Person = connection.id_Person,
+                id_EventConnectTo = connection.id_EventConnectTo,
+                Person = PersonModelHelper.GetPersonModel(connection.Person),
+                Event = GetEventModel(connection.Event),
+                Description = connection.Description
+            } : new EventConnectionModel();
         }
 
         public static IEnumerable<EventMediaModel> GetMediaModels(IList<EventMedia> getMedia)

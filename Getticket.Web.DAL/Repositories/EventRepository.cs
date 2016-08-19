@@ -117,13 +117,15 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IEventRepository.GetConnections" />
         public IList<EventConnection> GetConnections(int id)
         {
-            return db.EventConnections.Where(o => o.id_Event == id)
+            IList<EventConnection> answer =  db.EventConnections.Where(o => o.id_Event == id)
                 .Include(o => o.Event)
                 .Include(o => o.Event.Category)
                 .Include(o => o.Event.Category.ParentCategory)
                 .Include(o => o.ConnectionType)
                 .Include(o => o.EventConnectTo)
                 .ToList();
+
+            return answer;
         }
 
         /// <see cref="IEventRepository.AddConnections" />

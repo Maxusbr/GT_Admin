@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    function EventsConnectionsController($rootScope, $scope, personService) {
+    function EventsConnectionsController($rootScope, $scope, eventService) {
         var vm = this;
-        personService.getConnection($rootScope.personId, function (data) {
+        eventService.getConnection($rootScope.eventId, function (data) {
             $scope.connections = [];
             $scope.connectionList = [];
             data.forEach(function (item) {
@@ -25,7 +25,7 @@
             });
         });
 
-        $rootScope.addConnection= function add_connection() {
+        $rootScope.addEventConnection = function add_connection() {
             app.closeFour();
             app.loadContentView('/main/events/r3/r4/events.connections.edit.html', 3200)
         }
@@ -35,5 +35,5 @@
         .module('app')
         .controller('EventsConnectionsController', EventsConnectionsController);
 
-    EventsConnectionsController.$inject = ['$rootScope', '$scope', 'personService'];
+    EventsConnectionsController.$inject = ['$rootScope', '$scope', 'eventService'];
 })();
