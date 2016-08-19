@@ -11,6 +11,7 @@ using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Events;
 using Getticket.Web.API.Models.Persons;
 using Getticket.Web.API.Services;
 using Microsoft.AspNet.Identity;
@@ -414,6 +415,27 @@ namespace Getticket.Web.API.Controllers
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save media");
             return Ok(_personService.UpdateMedia(model, userId));
+        }
+        /// <see cref="IPersonService.LinkMediaPerson" />
+        [HttpPost]
+        [Route("media/{id}/links")]
+        public IHttpActionResult MediaLinkPerson(int id, [FromBody] IEnumerable<AssociationModel> models)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            foreach (var model in models)
+            {
+                switch (model.types)
+                {
+                    case "person":
+                        if (!_personService.LinkMediaPerson(id, model.Id)) return Ok(error.Response());
+                        break;
+                    case "event":
+                        if (!_personService.LinkMediaEvent(id, model.Id)) return Ok(error.Response());
+                        break;
+                }
+            }
+            return Ok(succes.Response());
         }
 
         /// <see cref="PersonService.DeleteMedia" />

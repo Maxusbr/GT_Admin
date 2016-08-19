@@ -193,6 +193,11 @@
                 .error(function (data) { if(callback) callback(data); });
         }
 
+        service.saveMediaLinks = function (id, model, callback) {
+            return $http.post(`${serviceUrl}events/media/${id}/links`, model)
+                .success(function (data) { if(callback) callback(data); })
+                .error(function (data) { if(callback) callback(data); });
+        }
         return service;;
     }
 

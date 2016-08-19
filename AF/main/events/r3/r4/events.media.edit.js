@@ -6,8 +6,6 @@
 
         $scope.file = $rootScope.editedMedia.MediaLink;
         $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink: 'https://www.youtube.com/watch?v=undefined';
-
-        $scope.association = { type: 'events' }
         $scope.embed = '//img.youtube.com/vi/undefined';
 
         if (!$rootScope.events)
@@ -21,7 +19,7 @@
         }
 
         console.log($rootScope.editedMedia);
-        $scope.association = { type: 'person' }
+        $scope.association = { types: 'person' }
 
         var mediaAssociations = [];
         if ($rootScope.editedMedia.Links) {
@@ -37,9 +35,7 @@
             $rootScope.editedMedia.MediaLink = path;
             eventService.saveEntity($rootScope.eventId, $rootScope.editedMedia, 'media', function (id) {
                 if (id > 0 && mediaAssociations.length > 0) {
-                    mediaAssociations.forEach(function (item) {
-                        eventService.saveMediaLink(id, item.Id, item.type);
-                    });
+                    eventService.saveMediaLinks(id, mediaAssociations);
                 }
                 $rootScope.getMedias();
                 app.closeView('eventMediaCreate');
@@ -61,11 +57,11 @@
 
         $scope.addAssociation = function (item) {
             if ($rootScope.editedMedia.Id)
-                eventService.saveMediaLink($rootScope.editedMedia.Id, item.Id, item.type, function (data) {
+                eventService.saveMediaLink($rootScope.editedMedia.Id, item.Id, item.types, function (data) {
                     var res = data;
                 });
-            else mediaAssociations.push(item);
-            switch (item.type) {
+            else mediaAssociations.push({ Id: item.Id, types: item.types });
+            switch (item.types) {
                 case 'person':
                     var pers = $rootScope.persons.filter(function (el) {
                         return el.Id === item.Id;
