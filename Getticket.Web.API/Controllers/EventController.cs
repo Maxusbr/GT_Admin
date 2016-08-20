@@ -85,12 +85,11 @@ namespace Getticket.Web.API.Controllers
 
 
         /// <see cref="IEventService.GetCategories" />
-        [Route("categories")]
-        [HttpGet]
-        public IHttpActionResult SaveCategory()
+        [Route("categories/save")]
+        [HttpPost]
+        public IHttpActionResult SaveCategory([FromBody] EventCategoryModel model)
         {
-
-            return Ok(_eventService.GetCategories());
+            return Ok(_eventService.SaveCategory(model));
         }
 
         /// <see cref="IEventService.SaveEvent" />
@@ -233,20 +232,32 @@ namespace Getticket.Web.API.Controllers
             return Ok(_eventService.DeleteMediaTypes(models).Response());
         }
 
-        /// <see cref="IEventService.UpdateMedia" />
+        ///// <see cref="IEventService.UpdateMedia" />
+        //[HttpPost]
+        //[Route("media/update/{id}")]
+        //public IHttpActionResult UpdateMedia(int id, [FromBody] IEnumerable<EventMediaModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var list = models as IList<EventMediaModel> ?? models.ToList();
+        //    var userId = User.Identity.GetUserId<int>();
+        //    var succes = ServiceResponce.FromSuccess().Result("All save complete");
+        //    var error = ServiceResponce.FromFailed().Result($"Error save media");
+        //    if (!_eventService.UpdateMedia(id, list, userId)) return Ok(error.Response());
+        //    error = ServiceResponce.FromFailed().Result($"Error save tags");
+        //    return Ok(list.Any(item => !_tagService.AddTagLinks(new TagsEventMediaModel { IdMedia = item.Id, Tags = item.Tags })) ?
+        //        error.Response() : succes.Response());
+        //}
+
+        /// <see cref="IEventService.UpdateMedia(EventMediaModel, int)" />
         [HttpPost]
         [Route("media/update/{id}")]
-        public IHttpActionResult UpdateMedia(int id, [FromBody] IEnumerable<EventMediaModel> models)
+        public IHttpActionResult UpdateMedia(int id, [FromBody] EventMediaModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            var list = models as IList<EventMediaModel> ?? models.ToList();
             var userId = User.Identity.GetUserId<int>();
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save media");
-            if (!_eventService.UpdateMedia(id, list, userId)) return Ok(error.Response());
-            error = ServiceResponce.FromFailed().Result($"Error save tags");
-            return Ok(list.Any(item => !_tagService.AddTagLinks(new TagsEventMediaModel { IdMedia = item.Id, Tags = item.Tags })) ?
-                error.Response() : succes.Response());
+            return Ok(_eventService.UpdateMedia(model, userId));
         }
 
         /// <see cref="IEventService.DeleteMedia" />
@@ -257,6 +268,27 @@ namespace Getticket.Web.API.Controllers
             return Ok(_eventService.DeleteMedia(models).Response());
         }
 
+        /// <see cref="IPersonService.LinkMediaPerson" />
+        [HttpPost]
+        [Route("media/{id}/links")]
+        public IHttpActionResult MediaLinkPerson(int id, [FromBody] IEnumerable<AssociationModel> models)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            foreach (var model in models)
+            {
+                switch (model.types)
+                {
+                    case "person":
+                        if (!_eventService.LinkMediaPerson(id, model.Id)) return Ok(error.Response());
+                        break;
+                    case "event":
+                        if (!_eventService.LinkMediaEvent(id, model.Id)) return Ok(error.Response());
+                        break;
+                }
+            }
+            return Ok(succes.Response());
+        }
 
         /// <see cref="IPersonService.LinkMediaPerson" />
         [HttpPost]

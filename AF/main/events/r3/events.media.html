@@ -28,27 +28,30 @@
             </thead>
             <tbody>
                 <tr ng-repeat="item in medialist">
-                    <td><span style="">{{item.Description}}</span></td>
+                    <td><a href="" ng-click="addMedia(item)"><span style="">{{item.Description}}</span></a></td>
                     <td>
-                        <div class="persona-main__container_media small" >
+                        <div class="persona-main__container_media small">
                             <img ng-src="{{item.MediaLink}}" alt="Placeholder" style="width: 80px;">
                         </div>
                         <span>{{item.MediaType}}</span>
                     </td>
-                    <td>TODO: Ассоциация</td>
                     <td>
-                        {{item.LastChange.UserName}}<br>
-                        {{item.LastChange.Date | amCalendar}}
+                        персоны ({{item.Links.PersonLinks.length}})
+                        <br />
+                        мероприятия ({{item.Links.EventLinks.length}})
                     </td>
                     <td>
-                        <div class="tags" ng-show="!item.isEditTags">
-                            <!--{{item.Tags.length}}:-->
-                            <span ng-repeat="tag in item.Tags">
+                        <i >{{item.LastChange.UserName}}<br>
+                            {{item.LastChange.Date | amCalendar}}</i>
+                    </td>
+                    <td>
+                        <div class="tags" ng-show="!item.isEditTags" style="width: 80px;">
+                            <i ng-repeat="tag in item.Tags">
                                 {{tag.Name}}
-                            </span>
+                            </i>
                         </div>
                     </td>
-                    <td>TODO: used</td>
+                    <td>-----</td>
                 </tr>
 
             </tbody>

@@ -264,5 +264,24 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="eventId"></param>
         /// <returns></returns>
         bool SaveDescriptionSchema(int id, PageBlock pageBlock, UserPageCategory cat, int eventId);
+
+        /// <summary>
+        /// Сохранить категорию
+        /// </summary>
+        /// <param name="eventCategory"></param>
+        /// <returns></returns>
+        EventCategory SaveCategory(EventCategory eventCategory);
+        /// <summary>
+        /// Список ассоциаций персон и медиа
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<Person> GetMediaPersonLinks(int id);
+        /// <summary>
+        /// Список ассоциаций мероприятий и медиа
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<Event> GetMediaEventLinks(int id);
     }
 }

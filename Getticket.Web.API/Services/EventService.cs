@@ -99,6 +99,11 @@ namespace Getticket.Web.API.Services
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangeEventMedia(item.id_Event, item.Id));
                 item.Tags = TagModelHelper.GeTagModels(_tagRepository.GeEventMediaTags(item.Id));
+                item.Links = new LinksModel
+                {
+                    PersonLinks = PersonModelHelper.GetPersonModels(_eventRepository.GetMediaPersonLinks(item.Id)),
+                    EventLinks = EventModelHelper.GetEventModels(_eventRepository.GetMediaEventLinks(item.Id))
+                };
             }
             var types = list.GroupBy(o => o.id_MediaType).Select(o => o.Key);
             return types.Select(tp => new Models.Events.EntityCollection<EventMediaModel> { List = list.Where(o => o.id_MediaType == tp), Type = tp });
@@ -333,6 +338,20 @@ namespace Getticket.Web.API.Services
                 MediaLink = item.MediaLink,
                 Description = item.Description
             }, userId)).All(result => result != null);
+        }
+
+        /// <see cref="IEventService.UpdateMedia(EventMediaModel,int)"/>
+        public int UpdateMedia(EventMediaModel model, int userId)
+        {
+            var result = _eventRepository.UpdateMedia(new EventMedia
+            {
+                Id = model.Id,
+                IdEvent = model.id_Event,
+                IdMediaType = model.id_MediaType,
+                MediaLink = model.MediaLink,
+                Description = model.Description
+            }, userId);
+            return result?.Id ?? -1;
         }
 
         /// <summary>
@@ -612,6 +631,15 @@ namespace Getticket.Web.API.Services
                 }, eventId);
         }
 
+        /// <see cref="IEventService.SaveCategory"/>
+        public EventCategoryModel SaveCategory(EventCategoryModel model)
+        {
+            return EventModelHelper.GetCategoryModels(_eventRepository.SaveCategory(
+                new EventCategory
+                {
+                    Id = model.Id, Name = model.Name, IdParent = model.IdParent, Description = model.Description
+                }));
+        }
     }
 
 }

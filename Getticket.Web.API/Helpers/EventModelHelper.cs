@@ -80,9 +80,24 @@ namespace Getticket.Web.API.Helpers
             } : new EventConnectionModel();
         }
 
-        public static IEnumerable<EventMediaModel> GetMediaModels(IList<EventMedia> getMedia)
+        public static IEnumerable<EventMediaModel> GetMediaModels(IList<EventMedia> listMedia)
         {
-            throw new NotImplementedException();
+            var list = listMedia.Select(GetMediaModel);
+            return list.ToList();
+        }
+
+        private static EventMediaModel GetMediaModel(EventMedia media)
+        {
+            return media != null ? new EventMediaModel
+            {
+                Id = media.Id,
+                Name = media.Name,
+                id_Event = media.IdEvent,
+                id_MediaType = media.IdMediaType,
+                MediaLink = media.MediaLink,
+                MediaType = media.MediaType.Name,
+                Description = media.Description
+            } : new EventMediaModel();
         }
 
         public static IEnumerable<EventDescriptionModel> GetDescriptionModels(IList<EventDescription> descriptions)
@@ -186,5 +201,17 @@ namespace Getticket.Web.API.Helpers
                 Id = o.Id, Name = o.Name, Description = o.Description, IdParent = o.IdParent
             }).ToList();
         }
+
+        public static EventCategoryModel GetCategoryModels(EventCategory model)
+        {
+            return new EventCategoryModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                IdParent = model.IdParent
+            };
+        }
+
     }
 }

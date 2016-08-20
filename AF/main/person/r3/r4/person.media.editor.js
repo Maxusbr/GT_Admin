@@ -6,7 +6,7 @@
         
         $scope.file = $rootScope.editedMedia.MediaLink;
         console.log($rootScope.editedMedia);
-        $scope.association = { type: 'person' }
+        $scope.association = { types: 'person' }
 
         if (!$rootScope.events)
             eventService.getEvents();
@@ -23,9 +23,8 @@
             $rootScope.editedMedia.MediaLink = path;
             personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (id) {
                 if (id > 0 && mediaAssociations.length > 0) {
-                    mediaAssociations.forEach(function(item) {
-                        personService.saveMediaLink(id, item.Id, item.type);
-                    });
+                    personService.saveMediaLinks(id, mediaAssociations);
+                    
                 }
                 $rootScope.getMedias();
                 app.closeView('personMediaEdit');
@@ -42,11 +41,11 @@
         
         $scope.addAssociation = function (item) {
             if ($rootScope.editedMedia.Id)
-                personService.saveMediaLink($rootScope.editedMedia.Id, item.Id, item.type, function(data) {
+                personService.saveMediaLink($rootScope.editedMedia.Id, item.Id, item.types, function (data) {
                     var res = data;
                 });
-            else mediaAssociations.push(item);
-            switch (item.type) {
+            else mediaAssociations.push({ Id: item.Id, types: item.types });
+            switch (item.types) {
                 case 'person':
                     var pers = $rootScope.persons.filter(function(el) {
                         return el.Id === item.Id;
