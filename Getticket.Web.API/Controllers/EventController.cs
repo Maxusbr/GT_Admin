@@ -348,14 +348,25 @@ namespace Getticket.Web.API.Controllers
         }
 
         /// <see cref="IEventService.UpdateDescriptions(int, IEnumerable{EventDescriptionModel}, int)" />
+        //[HttpPost]
+        //[Route("description/update/{id}")]
+        //public IHttpActionResult UpdateDescriptions(int id, [FromBody] IEnumerable<EventDescriptionModel> models)
+        //{
+        //    if (!ModelState.IsValid) return BadRequest(ModelState);
+        //    var userId = User.Identity.GetUserId<int>();
+        //    return Ok(_eventService.UpdateDescriptions(id, models, userId).Response());
+        //}
+
+        /// <see cref="IEventService.UpdateDescriptions(EventDescriptionModel, int)" />
         [HttpPost]
         [Route("description/update/{id}")]
-        public IHttpActionResult UpdateDescriptions(int id, [FromBody] IEnumerable<EventDescriptionModel> models)
+        public IHttpActionResult UpdateDescriptions(int id, [FromBody] EventDescriptionModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_eventService.UpdateDescriptions(id, models, userId).Response());
+            return Ok(_eventService.UpdateDescriptions(model, userId));
         }
+
 
         /// <see cref="IEventService.DeleteDescriptions" />
         [HttpPost]
@@ -451,78 +462,54 @@ namespace Getticket.Web.API.Controllers
 
 
 
-        /// <see cref="ITagService.GeTags()" />
+        /// <see cref="ITagService.GetTags()" />
         [HttpGet]
         [Route("tags")]
-        public IHttpActionResult GeTags()
+        public IHttpActionResult GetTags()
         {
-            return Ok(_tagService.GeTags());
+            return Ok(_tagService.GetTags());
         }
 
-        /// <see cref="ITagService.GeEventTags" />
+        /// <see cref="ITagService.GetEventListTags()" />
+        [HttpGet]
+        [Route("tags/events")]
+        public IHttpActionResult GetEventTags()
+        {
+            return Ok(_tagService.GetEventListTags());
+        }
+
+        /// <see cref="ITagService.GetEventTags" />
         [HttpGet]
         [Route("tags/{id}")]
         public IHttpActionResult GeTags(int id)
         {
-            return Ok(_tagService.GeEventTags(id));
+            return Ok(_tagService.GetEventTags(id));
         }
 
+        /// <see cref="ITagService.GetEventDescriptionTags" />
+        [HttpGet]
+        [Route("tags/tizer/{id}")]
+        public IHttpActionResult GetTizerTags(int id)
+        {
+            return Ok(_tagService.GetEventDescriptionTags(id));
+        }
+
+        /// <see cref="ITagService.GetEventMediaTags" />
+        [HttpGet]
+        [Route("tags/media/{id}")]
+        public IHttpActionResult GetMediaTags(int id)
+        {
+            return Ok(_tagService.GetEventMediaTags(id));
+        }        
         /// <summary>
-        /// Сохранить описания и теги
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        //[HttpPost]
-        //[Route("tags/save/description")]
-        //public IHttpActionResult SaveDescriptions([FromBody] CreateDescriptionModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var error = ServiceResponce.FromFailed().Result($"Error save description");
-        //    var succes = ServiceResponce.FromSuccess().Result("All save complete");
-        //    var userId = User.Identity.GetUserId<int>();
-        //    var id = _eventService.UpdateDescriptions(model.TagDescription.Tizer, userId);
-        //    if (id < 1) return Ok(error.Response());
-        //    model.TagDescription.Tizer.Id = id;
-        //    if (!_tagService.AddTagLinks(model.TagDescription))
-        //    {
-        //        error.Result("Error save tags");
-        //        return Ok(error.Response());
-        //    }
-        //    if (model.TagDescription.ExistDescription)
-        //    {
-        //        if (_eventService.UpdateDescriptions(new EventDescriptionModel
-        //        {
-        //            id_DescriptionType = 2,
-        //            id_Event = model.IdEvent,
-        //            DescriptionText = model.TagDescription.StaticDescription
-        //        }, userId) < 1)
-        //        {
-        //            error.Result("Error save description");
-        //            return Ok(error.Response());
-        //        }
-        //    }
-        //    if (model.TagAntroList.Any(item => !_tagService.AddTagLinks(item)))
-        //    {
-        //        error.Result("Error save tags");
-        //        return Ok(error.Response());
-        //    }
-
-        //    return Ok(succes.Response());
-        //}
-
-
-        /// <summary>
-        /// Сохранить теги персоны
+        /// Сохранить теги мероприятия
         /// </summary>
         /// <param name="id"></param>
         /// <param name="models"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("tags/save/{id}")]
-        public IHttpActionResult SaveEventTags(int id, [FromBody] IEnumerable<TagModel> models)
+        [Route("tags/save/event/{id}")]
+        public IHttpActionResult SaveEventTags(int id, [FromBody] IEnumerable<TagEventModel> models)
         {
             if (!ModelState.IsValid)
             {
@@ -531,7 +518,68 @@ namespace Getticket.Web.API.Controllers
             var error = ServiceResponce.FromFailed().Result($"Error save tags");
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
 
-            return Ok(!_tagService.AddTagLinks(new EventTagModel { EventId = id, Models = models }) ? error.Response() : succes.Response());
+            return Ok(!_tagService.AddTagLinks(new TagEventLinkModel { IdEvent = id, Tags = models }) ? error.Response() : succes.Response());
+        }
+
+        /// <summary>
+        /// Сохранить теги описания мероприятия
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("tags/save/tizer/{id}")]
+        public IHttpActionResult SaveTizerTags(int id, [FromBody] IEnumerable<TagModel> models)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save tags");
+            var succes = ServiceResponce.FromSuccess().Result("All save complete");
+
+            return Ok(!_tagService.AddTagLinks(new TagEventDescriptionLinkModel { IdDescription = id, Tags = models.ToList() }) ? error.Response() : succes.Response());
+        }
+
+        /// <summary>
+        /// Сохранить теги медиа мероприятия
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("tags/save/media/{id}")]
+        public IHttpActionResult SaveMediaTags(int id, [FromBody] IEnumerable<TagModel> models)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save tags");
+            var succes = ServiceResponce.FromSuccess().Result("All save complete");
+
+            return Ok(!_tagService.AddTagLinks(new TagEventMediaLinkModel { IdMedia = id, Tags = models.ToList() }) ? error.Response() : succes.Response());
+        }
+
+
+        /// <summary>
+        /// Сохранить жанры мероприятия
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("genre/save/{id}")]
+        public IHttpActionResult SaveEventGenres(int id, [FromBody] IEnumerable<EventGenreModel> models)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save tags");
+            var succes = ServiceResponce.FromSuccess().Result("All save complete");
+
+            return Ok(!_tagService.AddGenreLinks(new EventGenreLinkModel { IdEvent = id, Genres = models }) ? error.Response() : succes.Response());
         }
     }
 

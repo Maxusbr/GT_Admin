@@ -638,36 +638,36 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.GetCountryPlaces(string.Empty));
         }
 
-        /// <see cref="ITagService.GeTags()" />
+        /// <see cref="ITagService.GetTags" />
         [HttpGet]
         [Route("tags")]
         public IHttpActionResult GeTags()
         {
-            return Ok(_tagService.GeTags());
+            return Ok(_tagService.GetTags());
         }
 
-        /// <see cref="ITagService.GePersonTags" />
+        /// <see cref="ITagService.GetPersonTags" />
         [HttpGet]
         [Route("tags/person/{id}")]
         public IHttpActionResult GePersonTags(int id)
         {
-            return Ok(_tagService.GePersonTags(id));
+            return Ok(_tagService.GetPersonTags(id));
         }
 
-        /// <see cref="ITagService.GePersonTags" />
+        /// <see cref="ITagService.GetPersonTags" />
         [HttpGet]
         [Route("tags/tizer/{id}")]
         public IHttpActionResult GeTizerTags(int id)
         {
-            return Ok(_tagService.GeDescriptionTags(id));
+            return Ok(_tagService.GetDescriptionTags(id));
         }
 
-        /// <see cref="ITagService.GePersonTags" />
+        /// <see cref="ITagService.GetPersonTags" />
         [HttpGet]
         [Route("tags/media/{id}")]
         public IHttpActionResult GeMediaTags(int id)
         {
-            return Ok(_tagService.GePersonMediaTags(id));
+            return Ok(_tagService.GetPersonMediaTags(id));
         }
         /// <summary>
         /// Сохранить описания и теги
@@ -754,6 +754,26 @@ namespace Getticket.Web.API.Controllers
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
 
             return Ok(!_tagService.AddTagLinks(new TagsTizerModel { IdTizer = id, Tags = models.ToList() }) ? error.Response() : succes.Response());
+        }
+
+        /// <summary>
+        /// Сохранить теги медиа персоны
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("tags/save/media/{id}")]
+        public IHttpActionResult SaveMediaTags(int id, [FromBody] IEnumerable<TagModel> models)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save tags");
+            var succes = ServiceResponce.FromSuccess().Result("All save complete");
+
+            return Ok(!_tagService.AddTagLinks(new TagsPersonMediaModel { IdMedia = id, Tags = models.ToList() }) ? error.Response() : succes.Response());
         }
 
 

@@ -98,7 +98,7 @@ namespace Getticket.Web.API.Services
             foreach (var item in list)
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangeEventMedia(item.id_Event, item.Id));
-                item.Tags = TagModelHelper.GeTagModels(_tagRepository.GeEventMediaTags(item.Id));
+                item.Tags = TagModelHelper.GeTagModels(_tagRepository.GetEventMediaTags(item.Id));
                 item.Links = new LinksModel
                 {
                     PersonLinks = PersonModelHelper.GetPersonModels(_eventRepository.GetMediaPersonLinks(item.Id)),
@@ -463,7 +463,7 @@ namespace Getticket.Web.API.Services
                 .Result("Descriptions save complete");
         }
 
-
+        /// <see cref="IEventService.UpdateDescriptions(EventDescriptionModel, int)"/>
         public int UpdateDescriptions(EventDescriptionModel model, int userId)
         {
             var result = _eventRepository.UpdateDescription(new EventDescription

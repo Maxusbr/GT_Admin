@@ -221,9 +221,15 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\AssociationModel.cs" />
     <Compile Include="Models\Events\EventCategoryModel.cs" />
+    <Compile Include="Models\Events\EventGenreLinkModel.cs" />
+    <Compile Include="Models\Events\EventGenreModel.cs" />
     <Compile Include="Models\Events\EventTagModel.cs" />
     <Compile Include="Models\Events\EventFactModel.cs" />
     <Compile Include="Models\Events\EventFactTypeModel.cs" />
+    <Compile Include="Models\Events\TagEventModel.cs" />
+    <Compile Include="Models\Events\TagEventDescriptionLinkModel.cs" />
+    <Compile Include="Models\Events\TagEventLinkModel.cs" />
+    <Compile Include="Models\Events\TagEventMediaLinkModel.cs" />
     <Compile Include="Models\Events\TagsEventMediaModel.cs" />
     <Compile Include="Models\Persons\CreateDescriptionModel.cs" />
     <Compile Include="Models\Emails\RestorePasswordEmailModel.cs" />

@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Getticket.Web.DAL.Entities
 {
     /// <summary>
-    /// Сущность для жанра
+    /// Теги/подкатегории
     /// </summary>
-    public class EventGenre : BaseEntity
+    public class TagEvent : BaseEntity
     {
         /// <summary>
         /// Имя
@@ -17,5 +19,9 @@ namespace Getticket.Web.DAL.Entities
         [Index("NameIndex", IsUnique = true)]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Где используется
+        /// </summary>
+        public virtual IList<string> UsesType { get; set; } = new List<string>();
     }
 }

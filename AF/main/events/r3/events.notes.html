@@ -23,7 +23,7 @@
         <h5>Общее описание мероприятия</h5>
         <div class="row">
             <div class="col-lg-6">
-                <h5>Теги/подкатегории</h5>
+                <h5>Теги (подкатегории)</h5>
                 <tags-input ng-model="editedMedia.CategoryTags" display-property="Name" add-on-paste="true" placeholder="Теги/подкатегории">
                     <auto-complete source="loadTags($query)" min-length="10" debounce-delay="0" template="tag-template" />
                 </tags-input>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <hr/>
-        <h5>Все теги мероприятия</h5>
+        <!--<h5>Все теги мероприятия</h5>
         <i>Ноги, Руки, главноеХвост</i>
         <div class="tags">
             <tags-input ng-model="editedMedia.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи">
@@ -49,7 +49,7 @@
                 <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
             </div>
         </script>
-        <hr />
+        <hr />-->
         <h5>Все описания для мероприятия</h5>
         <table class="table" cg-busy="Promise">
             <thead>

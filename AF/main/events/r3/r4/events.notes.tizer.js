@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function eventNotesTizerController($rootScope, $cookieStore, $scope, $filter, personService) {
+    function eventNotesTizerController($rootScope, $cookieStore, $scope, $filter, eventService) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
@@ -12,7 +12,7 @@
 
         function saveTizerTags() {
             if ($scope.tizerTags.length && $scope.tizer.Id > 0)
-                personService.saveTags($scope.tizer.Id, $scope.tizerTags, 'tizer');
+                eventService.saveTags($scope.tizer.Id, $scope.tizerTags, 'tizer');
         }
 
         $scope.savePersonNotesTizer = function () {
@@ -21,30 +21,30 @@
             //TODO: close window
             $scope.tizer.id_Person = $rootScope.personId;
             $scope.tizer.id_DescriptionType = 1;
-            personService.saveEntity(0, $scope.tizer, 'description', function (data) {
+            eventService.saveEntity(0, $scope.tizer, 'description', function (data) {
                 $scope.tizer.Id = data;
                 saveTizerTags();
                 if ($rootScope.editableDesc.id_DescriptionType === 2 && $scope.tizer.Id > 0)
-                    personService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (data) {
+                    eventService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (data) {
                         $rootScope.getDescript();
-                        app.closeView('disPersonNotesTizer');
+                        app.closeView('disEventnNotesTizer');
                     });
                 else {
                     $rootScope.getDescript();
-                    app.closeView('disPersonNotesTizer');
+                    app.closeView('disEventnNotesTizer');
                 }
             });
         }
 
         // Tags
-        personService.getTags(function (data) {
+        eventService.getTags(function (data) {
             $scope.tags = [];
             $scope.tags.push.apply($scope.tags, data);
         });
 
         function getTizerTags() {
             if ($scope.tizer.Id)
-                personService.getEntityTags($scope.tizer.Id, 'tizer', function (data) {
+                eventService.getEntityTags($scope.tizer.Id, 'tizer', function (data) {
                     $scope.tizerTags = [];
                     $scope.tizerTags.push.apply($scope.tizerTags, data);
                 });
@@ -53,6 +53,7 @@
 
 
         $scope.loadTags = function (query) {
+            if (!$scope.tags) return [];
             var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
             result = $filter('orderBy')(result, function (item) {
                 item.Name.substring(0, query.length);
@@ -66,5 +67,5 @@
         .module('app')
         .controller('eventNotesTizerController', eventNotesTizerController);
 
-    eventNotesTizerController.$inject = ['$rootScope', '$cookieStore', '$scope', '$filter', 'personService'];
+    eventNotesTizerController.$inject = ['$rootScope', '$cookieStore', '$scope', '$filter', 'eventService'];
 })();

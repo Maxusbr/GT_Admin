@@ -183,7 +183,7 @@ namespace Getticket.Web.API.Services
             foreach (var item in list)
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangePersonMedia(item.id_Person, item.Id));
-                item.Tags = TagModelHelper.GeTagModels(_tagRepository.GePersonMediaTags(item.Id));
+                item.Tags = TagModelHelper.GeTagModels(_tagRepository.GetPersonMediaTags(item.Id));
                 item.Links = new LinksModel
                 {
                     PersonLinks = PersonModelHelper.GetPersonModels(_personRepository.GetMediaPersonLinks(item.Id)),
