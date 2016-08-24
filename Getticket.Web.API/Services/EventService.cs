@@ -135,6 +135,9 @@ namespace Getticket.Web.API.Services
         public ServiceResponce SaveEvent(EventModel model, int userId)
         {
             var _event = EventModelHelper.GetEvent(model);
+            var org = _eventRepository.SaveOrganizer(model.Organizer);
+            if (org != null)
+                _event.IdCompany = org.Id;
             var res = _eventRepository.SaveEvent(_event, userId);
             var response = res != null ? ServiceResponce
                 .FromSuccess()
@@ -639,6 +642,12 @@ namespace Getticket.Web.API.Services
                 {
                     Id = model.Id, Name = model.Name, IdParent = model.IdParent, Description = model.Description
                 }));
+        }
+
+        /// <see cref="IEventService.GetOrganizers"/>
+        public IList<EventOrganizerModel> GetOrganizers()
+        {
+            return _eventRepository.GetOrganizers().Select(o => new EventOrganizerModel {Id = o.Id, Name = o.Name}).ToList();
         }
     }
 

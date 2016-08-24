@@ -301,6 +301,12 @@ namespace Getticket.Web.API.Services
         /// <param name="model"></param>
         /// <returns></returns>
         EventCategoryModel SaveCategory(EventCategoryModel model);
+
+        /// <summary>
+        /// Список организаторов
+        /// </summary>
+        /// <returns></returns>
+        IList<EventOrganizerModel> GetOrganizers();
     }
 
 }

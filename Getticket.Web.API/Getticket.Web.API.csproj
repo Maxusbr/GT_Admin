@@ -220,6 +220,7 @@
     <Compile Include="Models\AccessRoleModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\AssociationModel.cs" />
+    <Compile Include="Models\Events\EventOrganizerModel.cs" />
     <Compile Include="Models\Events\EventCategoryModel.cs" />
     <Compile Include="Models\Events\EventGenreLinkModel.cs" />
     <Compile Include="Models\Events\EventGenreModel.cs" />

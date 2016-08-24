@@ -22,6 +22,12 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.getOrganizers = function (callback) {
+            return $http.get(`${serviceUrl}events/organizers`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         service.getEvents = function (callback) {
             return $http.get(`${serviceUrl}events`).success(function (data) {
                 $rootScope.events = data;

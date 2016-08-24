@@ -9,7 +9,7 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="editEvent()">
+            <a href="#" ng-click="editEvent(event)">
                 <span class="fa fa-edit"></span> Редактировать
             </a>
         </div>
@@ -37,10 +37,10 @@
                         </div>
                         <div class="col-lg-6">
                             <br/>
-                            Организатор: {{row.Organizer}}
+                            Организатор: {{event.Organizer}}
                             <br/>
                             <br/>
-                            Возрастные ограничегия: {{row.AgeLimit}}+
+                            Возрастные ограничегия: {{event.AgeLimit}}+
                             <br/>
                         </div>
                     </div>

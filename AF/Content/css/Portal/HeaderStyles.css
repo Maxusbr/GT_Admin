@@ -85,6 +85,16 @@ div.win-content{
     background-color: gray;
 }
 
+.md-autocomplete-suggestions .highlight {
+    background-color:transparent;
+}
+.md-autocomplete-suggestions-container li .highlight {
+    color: black;
+}
+.md-autocomplete-suggestions li {
+    color: gray;
+}
+
 .glyphicon{
     cursor: pointer;
 }

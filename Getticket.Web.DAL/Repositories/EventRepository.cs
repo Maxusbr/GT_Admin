@@ -117,7 +117,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IEventRepository.GetConnections" />
         public IList<EventConnection> GetConnections(int id)
         {
-            IList<EventConnection> answer =  db.EventConnections.Where(o => o.id_Event == id)
+            IList<EventConnection> answer = db.EventConnections.Where(o => o.id_Event == id)
                 .Include(o => o.Event)
                 .Include(o => o.Event.Category)
                 .Include(o => o.Event.Category.ParentCategory)
@@ -555,7 +555,7 @@ namespace Getticket.Web.DAL.Repositories
             var desc = db.EventDescriptions.FirstOrDefault(o => o.Id == id);
             if (desc == null)
             {
-                desc = new EventDescription { IdType = 1, IdEvent = eventId};
+                desc = new EventDescription { IdType = 1, IdEvent = eventId };
                 db.Entry(desc).State = EntityState.Added;
             }
             desc.IdBlock = pageblock.Id;
@@ -602,6 +602,23 @@ namespace Getticket.Web.DAL.Repositories
         public IList<Event> GetMediaEventLinks(int id)
         {
             return db.EventMediaLinkEvents.Where(o => o.IdMedia == id).Include(o => o.Event).Select(o => o.Event).ToList();
+        }
+
+        /// <see cref="IEventRepository.GetOrganizers" />
+        public IList<Company> GetOrganizers()
+        {
+            return db.Companies.ToList();
+        }
+
+        /// <see cref="IEventRepository.SaveOrganizer" />
+        public Company SaveOrganizer(string name)
+        {
+            var cmp = db.Companies.FirstOrDefault(o => o.Name.ToLower().Equals(name.ToLower()));
+            if (cmp != null) return cmp;
+            cmp = new Company { Name = name };
+            db.Companies.Add(cmp);
+            db.SaveChanges();
+            return cmp;
         }
 
         private PageBlock SavePageBlock(PageBlock pageBlock)

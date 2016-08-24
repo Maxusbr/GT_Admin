@@ -283,5 +283,18 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="id"></param>
         /// <returns></returns>
         IList<Event> GetMediaEventLinks(int id);
+
+        /// <summary>
+        /// Список компаний
+        /// </summary>
+        /// <returns></returns>
+        IList<Company> GetOrganizers();
+
+        /// <summary>
+        /// Сохранить/добавить организатора
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        Company SaveOrganizer(string name);
     }
 }
