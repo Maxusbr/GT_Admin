@@ -481,9 +481,25 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="ITagService.GetEventTags" />
         [HttpGet]
         [Route("tags/{id}")]
-        public IHttpActionResult GeTags(int id)
+        public IHttpActionResult GetTags(int id)
         {
             return Ok(_tagService.GetEventTags(id));
+        }
+
+        /// <see cref="ITagService.GetEventGenres()" />
+        [HttpGet]
+        [Route("genre")]
+        public IHttpActionResult GetGenres()
+        {
+            return Ok(_tagService.GetEventGenres());
+        }
+
+        /// <see cref="ITagService.GetEventGenres(int)" />
+        [HttpGet]
+        [Route("genre/{id}")]
+        public IHttpActionResult GetGenres(int id)
+        {
+            return Ok(_tagService.GetEventGenres(id));
         }
 
         /// <see cref="ITagService.GetEventDescriptionTags" />
@@ -569,7 +585,7 @@ namespace Getticket.Web.API.Controllers
         /// <param name="models"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("genre/save/{id}")]
+        [Route("tags/save/genre/{id}")]
         public IHttpActionResult SaveEventGenres(int id, [FromBody] IEnumerable<EventGenreModel> models)
         {
             if (!ModelState.IsValid)

@@ -44,7 +44,7 @@
 
         $scope.saveEvent = function () {
             eventService.Save($scope.event, function (data) {
-
+                $rootScope.loadEvent();
                 app.closeView('eventEdit');
             });
             

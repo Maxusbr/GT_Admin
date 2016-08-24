@@ -62,8 +62,25 @@
                 callback(data);
             });
         };
+        service.getListEventsTags = function (callback) {
+            return $http.get(`${serviceUrl}events/tags/events`).success(function (data) {
+                callback(data);
+            });
+        };
         service.getEventTags = function (id, callback) {
             return $http.get(`${serviceUrl}events/tags/${id}`).success(function (data) {
+                callback(data);
+            });
+        };
+
+        service.getEventListGenres = function (callback) {
+            return $http.get(`${serviceUrl}events/genre`).success(function (data) {
+                callback(data);
+            });
+        };
+
+        service.getEventGenres = function (id, callback) {
+            return $http.get(`${serviceUrl}events/genre/${id}`).success(function (data) {
                 callback(data);
             });
         };
@@ -165,14 +182,6 @@
                 if (callback) callback(data);
             });
         }
-
-        service.saveEventTags = function (id, model, callback) {
-            return $http.post(`${serviceUrl}events/tags/save/${id}`, model).success(function (data) {
-                callback(data);
-            }).error(function (data) {
-                callback(data);
-            });
-        };
 
         service.saveEntitiesTypes = function (list, entity, callback) {
             $http.post(`${serviceUrl}events/${entity}/updatetypes`, list).success(function (response) {
