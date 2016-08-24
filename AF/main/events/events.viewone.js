@@ -35,14 +35,18 @@
         // }
         $scope.Id = $rootScope.eventId;
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
-        $scope.Promise = eventService.getEvent($scope.Id, function (data) {
-            $scope.event = data;
-            eventService.getCountes($scope.Id, function (counts) {
-                $scope.counts = counts;
+        $rootScope.getEvent = function(id) {
+            $scope.Promise = eventService.getEvent(id, function (data) {
+                $scope.event = data;
+                eventService.getCountes(id, function (counts) {
+                    $scope.counts = counts;
+                });
             });
-        });
-        $rootScope.editEvent = function () {
-            $rootScope.editEvent = $scope.event;
+        }
+        $rootScope.getEvent($scope.Id);
+
+        $scope.editEvent = function (event) {
+            $rootScope.editEvent = event;
             app.closeThird();
             app.loadContentView('/main/events/events.edit.html', 2200);
         }

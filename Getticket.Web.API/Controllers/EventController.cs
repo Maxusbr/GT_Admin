@@ -83,14 +83,23 @@ namespace Getticket.Web.API.Controllers
             return Ok(_eventService.GetCategories());
         }
 
-
-        /// <see cref="IEventService.GetCategories" />
+        /// <see cref="IEventService.SaveCategory" />
         [Route("categories/save")]
         [HttpPost]
         public IHttpActionResult SaveCategory([FromBody] EventCategoryModel model)
         {
             return Ok(_eventService.SaveCategory(model));
         }
+
+        /// <see cref="IEventService.GetCategories" />
+        [Route("organizers")]
+        [HttpGet]
+        public IHttpActionResult GetOrganizers()
+        {
+            return Ok(_eventService.GetOrganizers());
+        }
+
+
 
         /// <see cref="IEventService.SaveEvent" />
         [HttpPost]
