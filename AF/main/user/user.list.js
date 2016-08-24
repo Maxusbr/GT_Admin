@@ -91,19 +91,22 @@
 
         if (!$rootScope.userlist) $scope.Promise = userService.getListUsers();
 
-        $rootScope.createUser = function create_user() {
+        $rootScope.createUser = function () {
+
             console.log('create user');
             app.closeSecond();
             app.loadContentView('/main/user/user.create.html', 1800);
         }
 
-        $rootScope.showUser = function edit_user() {
+        $rootScope.showUser = function (id) {
+            $rootScope.userId = id;
             console.log('create user');
             app.closeSecond();
             app.loadContentView('/main/user/user.viewone.html', 1800);
         }
 
-        $rootScope.inviteUser= function invite_user() {
+        $rootScope.inviteUser = function () {
+
             console.log('create user');
             app.closeSecond();
             app.loadContentView('/main/user/user.invite.html', 1800);

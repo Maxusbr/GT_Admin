@@ -60,6 +60,12 @@
                 .error(function (data) { return data; });
         }
 
+        service.getUser = function (id, callback) {
+            return $http.get(`${serviceUrl}users/${id}`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         return service;
 
         function getUsers() {
