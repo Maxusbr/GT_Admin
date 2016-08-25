@@ -8,7 +8,7 @@
         $scope.file = '';
         $scope.file_video = 'https://www.youtube.com/watch?v=undefined';
         $scope.association = { type: 'events' }
-        $scope.embed = '//img.youtube.com/vi/undefined';
+        $scope.embed = '';
 
         if (!$rootScope.events)
             eventService.getEvents();
