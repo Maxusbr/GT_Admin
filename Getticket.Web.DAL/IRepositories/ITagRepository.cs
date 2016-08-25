@@ -14,31 +14,31 @@ namespace Getticket.Web.DAL.IRepositories
         /// Возвращает список <see cref="Tag"/>
         /// </summary>
         /// <returns></returns>
-        IList<Tag> GeTags();
+        IList<Tag> GetTags();
 
         /// <summary>
         /// Возвращает список <see cref="Tag"/> для <see cref="Person"/> с Id = <paramref name="personId"/>
         /// </summary>
         /// <returns></returns>
-        IList<Tag> GePersonTags(int personId);
+        IList<Tag> GetPersonTags(int personId);
 
         /// <summary>
         /// Возвращает список <see cref="Tag"/> для <see cref="PersonDescription"/> с Id = <paramref name="descriptionId"/>
         /// </summary>
         /// <returns></returns>
-        IList<Tag> GeDescriptionTags(int descriptionId);
+        IList<Tag> GetDescriptionTags(int descriptionId);
 
         /// <summary>
         /// Возвращает список <see cref="Tag"/> для <see cref="TagAntro"/> с Id = <paramref name="tagAntroId"/>
         /// </summary>
         /// <returns></returns>
-        IList<Tag> GeAntroTags(int tagAntroId);
+        IList<Tag> GetAntroTags(int tagAntroId);
 
         /// <summary>
         /// Возвращает список <see cref="Tag"/> для <see cref="PersonMedia"/> с Id = <paramref name="mediaId"/>
         /// </summary>
         /// <returns></returns>
-        IList<Tag> GePersonMediaTags(int mediaId);
+        IList<Tag> GetPersonMediaTags(int mediaId);
 
         /// <summary>
         /// Добавляет  <see cref="Tag"/>
@@ -107,6 +107,95 @@ namespace Getticket.Web.DAL.IRepositories
         /// Возвращает список <see cref="Tag"/> для <see cref="EventMedia"/> с Id = <paramref name="mediaId"/>
         /// </summary>
         /// <returns></returns>
-        IList<Tag> GeEventMediaTags(int mediaId);
+        IList<EventGenre> GetEventGenres();
+
+        /// <summary>
+        /// Возвращает список <see cref="EventGenre"/> для <see cref="Event"/> с Id = <paramref name="eventId"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<EventGenre> GetEventGenres(int eventId);
+
+        /// <summary>
+        /// Возвращает список <see cref="Tag"/> для <see cref="EventMedia"/> с Id = <paramref name="mediaId"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<Tag> GetEventMediaTags(int mediaId);
+
+        /// <summary>
+        /// Возвращает список <see cref="TagEvent"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<TagEvent> GetEventListTags();
+
+        /// <summary>
+        /// Возвращает список <see cref="Tag"/> для <see cref="Event"/> с Id = <paramref name="eventId"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<TagEvent> GetEventTags(int eventId);
+
+        /// <summary>
+        /// Возвращает список <see cref="Tag"/> для <see cref="EventDescription"/> с Id = <paramref name="descriptionId"/>
+        /// </summary>
+        /// <returns></returns>
+        IList<Tag> GetEventDescriptionTags(int descriptionId);
+
+        /// <summary>
+        /// Добавляет  <see cref="TagEvent"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        TagEvent AddTag(TagEvent model);
+
+        /// <summary>
+        /// Добавляет связь <see cref="Tag"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        TagEventDescriptionLink AddTagLink(TagEventDescriptionLink model);
+
+        /// <summary>
+        /// Добавляет связь <see cref="Tag"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        TagEventMediaLink AddTagLink(TagEventMediaLink model);
+
+        /// <summary>
+        /// Добавляет связь <see cref="TagEvent"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        TagEventLink AddTagLink(TagEventLink model);
+
+        /// <summary>
+        /// Удалить все ссылки на <see cref="Event"/>
+        /// </summary>
+        /// <param name="idEvent"></param>
+        void DeleteEventTags(int idEvent);
+
+        /// <summary>
+        /// Удалить все ссылки на <see cref="EventDescription"/>
+        /// </summary>
+        /// <param name="idDescription"></param>
+        void DeleteEventDescriptionTags(int idDescription);
+
+        /// <summary>
+        /// Удалить все ссылки на <see cref="EventMedia"/>
+        /// </summary>
+        /// <param name="idMedia"></param>
+        void DeleteEventMediaTags(int idMedia);
+
+        /// <summary>
+        /// Удалить все жанры для <see cref="Event"/>
+        /// </summary>
+        /// <param name="idEvent"></param>
+        void DeleteEventGenres(int idEvent);
+
+        /// <summary>
+        /// Добавляет жанр <see cref="EventGenre"/> к <see cref="Event"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        EventGenreLink AddGenreLink(EventGenreLink model);
     }
 }

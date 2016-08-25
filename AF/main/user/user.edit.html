@@ -1,4 +1,4 @@
-﻿<div class="win-container r2 userCreate" style="width:350px;" ng-controller="UserEditController">
+﻿<div class="win-container r3 userCreate" style="width:350px;" ng-controller="UserEditController">
     <div class="win-header">
         <div class="win-header-text">
             Редактирование
@@ -9,7 +9,7 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#">
+            <a href="#" ng-click="save()">
                 <span class="fa fa-save"></span> Сохранить
             </a>
         </div>
@@ -19,31 +19,31 @@
         <div class="panel-info" cg-busy="Promise">
             Имя
             <br/>
-            <input class="form-control" placeholder="от 3 знаков"/>   
+            <input class="form-control" placeholder="от 3 знаков" ng-model="user.Name"/>   
             <br />         
             Фамилия
             <br />
-            <input class="form-control" placeholder="от 3 знаков" />
+            <input class="form-control" placeholder="от 3 знаков" ng-model="user.LastName"/>
             <br />
             Компания
             <br />
-            <input class="form-control" placeholder="от 3 знаков" />
+            <input class="form-control" placeholder="от 3 знаков" ng-model="user.Company"/>
             <br />
             Должность
             <br />
-            <input class="form-control" placeholder="от 3 знаков" />
+            <input class="form-control" placeholder="от 3 знаков" ng-model="user.Position"/>
             <br />
             Мейл
             <br />
-            <input class="form-control" placeholder="example@example.ru" />
+            <input class="form-control" placeholder="example@example.ru" ng-model="user.Email"/>
             <br />
             Телефон
             <br />
-            <input class="form-control" placeholder="+7 999 999 99 99" />
+            <input class="form-control" placeholder="+7 999 999 99 99" ng-model="user.Phone"/>
             <br />            
             Пароль
             <br />
-            <input class="form-control" placeholder="*******" />
+            <input class="form-control" placeholder="*******" ng-model="user.Password"/>
             <br />
             <label>
                 <input type="checkbox" ng-click="generatePassword()" id="generatePassword" value="">
@@ -63,7 +63,7 @@
             <div class="form-group">
                 <select name="role" id="role"
                         ng-model="user.RoleId" class="form-control"
-                        ng-options="role.id as role.name for role in roles"
+                        ng-options="role.Id as role.Name for role in roles"
                         required>
                     <option value="">Выберите роль</option>
                 </select>

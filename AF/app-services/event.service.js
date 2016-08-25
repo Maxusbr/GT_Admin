@@ -22,6 +22,12 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.getOrganizers = function (callback) {
+            return $http.get(`${serviceUrl}events/organizers`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
         service.getEvents = function (callback) {
             return $http.get(`${serviceUrl}events`).success(function (data) {
                 $rootScope.events = data;
@@ -62,8 +68,25 @@
                 callback(data);
             });
         };
+        service.getListEventsTags = function (callback) {
+            return $http.get(`${serviceUrl}events/tags/events`).success(function (data) {
+                callback(data);
+            });
+        };
         service.getEventTags = function (id, callback) {
             return $http.get(`${serviceUrl}events/tags/${id}`).success(function (data) {
+                callback(data);
+            });
+        };
+
+        service.getEventListGenres = function (callback) {
+            return $http.get(`${serviceUrl}events/genre`).success(function (data) {
+                callback(data);
+            });
+        };
+
+        service.getEventGenres = function (id, callback) {
+            return $http.get(`${serviceUrl}events/genre/${id}`).success(function (data) {
                 callback(data);
             });
         };
@@ -107,9 +130,9 @@
                 .success(function (data) { callback(data); })
                 .error(function (data) { callback(data); });
         }
-        
+
         service.getFact = function getFact(id, callback) {
-            console.log('get facts - '+ id);
+            console.log('get facts - ' + id);
             return $http.get(`${serviceUrl}events/fact/${id}`).success(function (data) {
                 callback(data);
             });
@@ -141,7 +164,7 @@
             var model = {
                 Id: event.Id,
                 Name: event.Name,
-                
+
             }
             return $http.post(`${serviceUrl}events/add`, event).success(function (data) {
                 callback(data);
@@ -160,19 +183,11 @@
 
         service.SaveCategory = function (model, callback) {
             return $http.post(`${serviceUrl}events/categories/save`, model).success(function (data) {
-                if(callback) callback(data);
+                if (callback) callback(data);
             }).error(function (data) {
-                if(callback) callback(data);
+                if (callback) callback(data);
             });
         }
-
-        service.saveEventTags = function (id, model, callback) {
-            return $http.post(`${serviceUrl}events/tags/save/${id}`, model).success(function (data) {
-                callback(data);
-            }).error(function (data) {
-                callback(data);
-            });
-        };
 
         service.saveEntitiesTypes = function (list, entity, callback) {
             $http.post(`${serviceUrl}events/${entity}/updatetypes`, list).success(function (response) {
@@ -187,6 +202,33 @@
                 .error(function (data) { callback(data); });
         }
 
+        service.saveMediaLink = function (id, idEntity, entity, callback) {
+            return $http.post(`${serviceUrl}events/media/${id}/link/${entity}/${idEntity}`)
+                .success(function (data) { if (callback) callback(data); })
+                .error(function (data) { if (callback) callback(data); });
+        }
+
+        service.saveMediaLinks = function (id, model, callback) {
+            return $http.post(`${serviceUrl}events/media/${id}/links`, model)
+                .success(function (data) { if (callback) callback(data); })
+                .error(function (data) { if (callback) callback(data); });
+        }
+
+        service.saveTags = function (id, model, entity, callback) {
+            return $http.post(`${serviceUrl}events/tags/save/${entity}/${id}`, model).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
+        }
+
+        service.getEntityTags = function (id, entity, callback) {
+            $http.get(`${serviceUrl}events/tags/${entity}/${id}`).success(function (data) {
+                callback(data);
+            });
+        }
         return service;;
     }
 

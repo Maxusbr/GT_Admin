@@ -2,18 +2,18 @@
     'use strict';
 
    
-    function UserViewoneController($rootScope, $scope, personService) {
+    function UserViewoneController($rootScope, $scope, userService) {
         var vm = this;
 
-        $rootScope.displayStatistic = function display_statistic() {
+        $rootScope.displayStatistic = function () {
             app.closeThird();
             app.loadContentView('/main/user/r3/user.statistic.html', 2500);
         }
-        $rootScope.displayMessege = function display_messege() {
+        $rootScope.displayMessege = function () {
             app.closeThird();
             app.loadContentView('/main/user/r3/user.message.html', 2500);
         }
-        $rootScope.displayEntry = function display_entry() {
+        $rootScope.displayEntry = function () {
             app.closeThird();
             app.loadContentView('/main/user/r3/user.entry.html', 2500);
         }
@@ -31,17 +31,18 @@
         // }
 
         //перепилить для user
-        $scope.Id = $rootScope.eventId;
-        $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
-        $scope.Promise = personService.getPerson($scope.Id, function (data) {
-            $scope.person = data;
-            personService.getCountes($scope.Id, function (counts) {
-                $scope.counts = counts;
-            });
+        $scope.Id = $rootScope.userId;
+        $scope.counts = { Statistic: 0, Messages: 0, Logins: 0}
+        $scope.Promise = userService.getUser($scope.Id, function (data) {
+            $scope.user = data;
+            //userService.getCountes($rootScope.userId, function (counts) {
+            //    $scope.counts = counts;
+            //});
         });
         //
         
-        $rootScope.editUser = function edit_user() {
+        $rootScope.editUser = function () {
+            $rootScope.editedUser = $scope.user;
             app.closeThird();
             app.loadContentView('/main/user/user.edit.html', 2200);
         }
@@ -51,6 +52,6 @@
         .module('app')
         .controller('UserViewoneController', UserViewoneController);
 
-    UserViewoneController.$inject = ['$rootScope', '$scope', 'personService'];
+    UserViewoneController.$inject = ['$rootScope', '$scope', 'userService'];
     
 })();

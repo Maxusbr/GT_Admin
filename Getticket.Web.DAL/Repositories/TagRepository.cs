@@ -17,8 +17,8 @@ namespace Getticket.Web.DAL.Repositories
     public class TagRepository : BaseRepository<Tag>, ITagRepository
     {
 
-        /// <see cref="ITagRepository.GeTags()" />
-        public IList<Tag> GeTags()
+        /// <see cref="ITagRepository.GetTags" />
+        public IList<Tag> GetTags()
         {
             var result = db.Tags.ToList();
             foreach (var tag in result)
@@ -35,31 +35,31 @@ namespace Getticket.Web.DAL.Repositories
             return result;
         }
 
-        /// <see cref="ITagRepository.GePersonTags(int)" />
-        public IList<Tag> GePersonTags(int personId)
+        /// <see cref="ITagRepository.GetPersonTags" />
+        public IList<Tag> GetPersonTags(int personId)
         {
             return db.TagPersonLinks.Where(o => o.IdPerson == personId).Include(o => o.Tag).Select(o => o.Tag).ToList();
         }
 
-        /// <see cref="ITagRepository.GeDescriptionTags(int)" />
-        public IList<Tag> GeDescriptionTags(int descriptionId)
+        /// <see cref="ITagRepository.GetDescriptionTags" />
+        public IList<Tag> GetDescriptionTags(int descriptionId)
         {
             return db.TagDescriptionLinks.Where(o => o.IdDescription == descriptionId).Include(o => o.Tag).Select(o => o.Tag).ToList();
         }
 
-        /// <see cref="ITagRepository.GeAntroTags(int)" />
-        public IList<Tag> GeAntroTags(int tagAntroId)
+        /// <see cref="ITagRepository.GetAntroTags" />
+        public IList<Tag> GetAntroTags(int tagAntroId)
         {
             return db.TagAntroLinks.Where(o => o.IdTagAntro == tagAntroId).Include(o => o.Tag).Select(o => o.Tag).ToList();
         }
 
-        /// <see cref="ITagRepository.GePersonMediaTags(int)" />
-        public IList<Tag> GePersonMediaTags(int mediaId)
+        /// <see cref="ITagRepository.GetPersonMediaTags" />
+        public IList<Tag> GetPersonMediaTags(int mediaId)
         {
             return db.TagPersonMediaLinks.Where(o => o.IdMedia == mediaId).Include(o => o.Tag).Select(o => o.Tag).ToList();
         }
 
-        /// <see cref="ITagRepository.AddTag" />
+        /// <see cref="ITagRepository.AddTag(Tag)" />
         public Tag AddTag(Tag model)
         {
             var tag = db.Tags.FirstOrDefault(o => o.Name.ToLower().Equals(model.Name.ToLower()));
@@ -177,12 +177,166 @@ namespace Getticket.Web.DAL.Repositories
             db.SaveChanges();
         }
 
-        /// <see cref="ITagRepository.GeEventMediaTags" />
-        public IList<Tag> GeEventMediaTags(int mediaId)
+        /// <see cref="ITagRepository.GetEventGenres()" />
+        public IList<EventGenre> GetEventGenres()
         {
-            return db.TagPersonMediaLinks.Where(o => o.IdMedia == mediaId).Include(o => o.Tag).Select(o => o.Tag).ToList();
+            return db.EventGenres.ToList();
         }
 
+        /// <see cref="ITagRepository.GetEventGenres(int)" />
+        public IList<EventGenre> GetEventGenres(int eventId)
+        {
+            return db.EventGenreLinks.Where(o => o.IdEvent == eventId)
+                .Include(o => o.Genre).Select(o => o.Genre).ToList();
+        }
+
+        /// <see cref="ITagRepository.GetEventMediaTags" />
+        public IList<Tag> GetEventMediaTags(int mediaId)
+        {
+            return db.TagEventMediaLinks.Where(o => o.IdMedia == mediaId)
+                .Include(o => o.Tag).Select(o => o.Tag).ToList();
+        }
+
+        /// <see cref="ITagRepository.GetEventListTags" />
+        public IList<TagEvent> GetEventListTags()
+        {
+            return db.EventCategoryTags.ToList();
+        }
+
+        /// <see cref="ITagRepository.GetEventTags" />
+        public IList<TagEvent> GetEventTags(int eventId)
+        {
+            return db.TagEventLinks.Where(o => o.IdEvent == eventId)
+                .Include(o => o.Tag).Select(o => o.Tag).ToList();
+        }
+
+        /// <see cref="ITagRepository.GetEventDescriptionTags" />
+        public IList<Tag> GetEventDescriptionTags(int descriptionId)
+        {
+            return db.TagEventDescriptionLinks.Where(o => o.IdDescription == descriptionId)
+                .Include(o => o.Tag).Select(o => o.Tag).ToList();
+        }
+
+        /// <see cref="ITagRepository.AddTag(TagEvent)" />
+        public TagEvent AddTag(TagEvent model)
+        {
+            var tag = db.EventCategoryTags.FirstOrDefault(o => o.Name.ToLower().Equals(model.Name.ToLower()));
+            if (tag != null) return tag;
+            tag = model;
+            db.EventCategoryTags.Add(tag);
+            db.SaveChanges();
+            return tag;
+        }
+
+        /// <see cref="ITagRepository.AddTagLink(TagEventDescriptionLink)" />
+        public TagEventDescriptionLink AddTagLink(TagEventDescriptionLink model)
+        {
+            if (model.IdTag == 0)
+            {
+                if (model.Tag == null) return null;
+                model.IdTag = AddTag(model.Tag).Id;
+            }
+            var tag = db.TagEventDescriptionLinks.FirstOrDefault(o => o.IdDescription == model.IdDescription && o.IdTag == model.IdTag);
+            if (tag == null)
+            {
+                tag = new TagEventDescriptionLink { IdTag = model.IdTag, IdDescription = model.IdDescription };
+                db.TagEventDescriptionLinks.Add(tag);
+                db.SaveChanges();
+            }
+            return tag;
+        }
+
+        /// <see cref="ITagRepository.AddTagLink(TagEventMediaLink)" />
+        public TagEventMediaLink AddTagLink(TagEventMediaLink model)
+        {
+            if (model.IdTag == 0)
+            {
+                if (model.Tag == null) return null;
+                model.IdTag = AddTag(model.Tag).Id;
+            }
+            var tag = db.TagEventMediaLinks.FirstOrDefault(o => o.IdMedia == model.IdMedia && o.IdTag == model.IdTag);
+            if (tag == null)
+            {
+                tag = new TagEventMediaLink { IdTag = model.IdTag, IdMedia = model.IdMedia };
+                db.TagEventMediaLinks.Add(tag);
+                db.SaveChanges();
+            }
+            return tag;
+        }
+
+        /// <see cref="ITagRepository.AddTagLink(TagEventLink)" />
+        public TagEventLink AddTagLink(TagEventLink model)
+        {
+            if (model.IdTag == 0)
+            {
+                if (model.Tag == null) return null;
+                model.IdTag = AddTag(model.Tag).Id;
+            }
+            var tag = db.TagEventLinks.FirstOrDefault(o => o.IdEvent == model.IdEvent && o.IdTag == model.IdTag);
+            if (tag == null)
+            {
+                tag = new TagEventLink { IdTag = model.IdTag, IdEvent = model.IdEvent };
+                db.TagEventLinks.Add(tag);
+                db.SaveChanges();
+            }
+            return tag;
+        }
+
+        /// <see cref="ITagRepository.DeleteEventTags" />
+        public void DeleteEventTags(int idEvent)
+        {
+            db.TagEventLinks.RemoveRange(db.TagEventLinks.Where(o => o.IdEvent == idEvent));
+            db.SaveChanges();
+        }
+
+        /// <see cref="ITagRepository.DeleteEventDescriptionTags" />
+        public void DeleteEventDescriptionTags(int idDescription)
+        {
+            db.TagEventDescriptionLinks.RemoveRange(db.TagEventDescriptionLinks.Where(o => o.IdDescription == idDescription));
+            db.SaveChanges();
+        }
+
+        /// <see cref="ITagRepository.DeleteEventMediaTags" />
+        public void DeleteEventMediaTags(int idMedia)
+        {
+            db.TagEventMediaLinks.RemoveRange(db.TagEventMediaLinks.Where(o => o.IdMedia == idMedia));
+            db.SaveChanges();
+        }
+
+        /// <see cref="ITagRepository.DeleteEventGenres" />
+        public void DeleteEventGenres(int idEvent)
+        {
+            db.EventGenreLinks.RemoveRange(db.EventGenreLinks.Where(o => o.IdEvent == idEvent));
+            db.SaveChanges();
+        }
+
+        /// <see cref="ITagRepository.AddGenreLink" />
+        public EventGenreLink AddGenreLink(EventGenreLink model)
+        {
+            if (model.IdGenre == 0)
+            {
+                if (model.Genre == null) return null;
+                model.IdGenre = AddGenre(model.Genre).Id;
+            }
+            var gnr = db.EventGenreLinks.FirstOrDefault(o => o.IdEvent == model.IdEvent && o.IdGenre == model.IdGenre);
+            if (gnr == null)
+            {
+                gnr = new EventGenreLink { IdGenre = model.IdGenre, IdEvent = model.IdEvent, IsMain = model.IsMain};
+                db.EventGenreLinks.Add(gnr);
+                db.SaveChanges();
+            }
+            return gnr;
+        }
+
+        private EventGenre AddGenre(EventGenre model)
+        {
+            var gnr = db.EventGenres.FirstOrDefault(o => o.Name.ToLower().Equals(model.Name.ToLower()));
+            if (gnr != null) return gnr;
+            gnr = model;
+            db.EventGenres.Add(gnr);
+            db.SaveChanges();
+            return gnr;
+        }
 
         private TagAntro AddTagAntro(TagAntro model)
         {

@@ -1,5 +1,5 @@
 ﻿
-<div class="win-container r3 eventEdit" style="width:700px;" ng-controller="EventsEditController">
+<div class="win-container r3 eventEdit" style="width:700px;" ng-controller="EventsEditController as ctrl">
     <div class="win-header">
         <div class="win-header-text">
             Изменить событие
@@ -57,10 +57,33 @@
                 <a href="#" ng-click="editCat()">Редактировать</a>
             </div>
             <div class="col-lg-6">
-                Организатор
-                <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="event.Organizer" />
-                <a href="#" ng-click="editOrg()">Редактировать</a>
+                <!--Организатор
+                <br />-->
+                <!--<input class="form-control" placeholder="от 3 знаков" ng-model="event.Organizer"/>-->
+                <md-autocomplete flex required
+                                 md-input-name="autocompleteField"
+                                 md-input-minlength="3"
+                                 md-no-cache="ctrl.noCache"
+                                 md-selected-item="selectedOrganizer"
+                                 md-search-text="event.Organizer"
+                                 md-items="item in ctrl.querySearch(event.Organizer)"
+                                 md-item-text="item.Name"
+                                 
+                                 md-floating-label="Организатор">
+                    <md-item-template>
+                        <span md-highlight-text="event.Organizer">{{item.Name}}</span>
+                    </md-item-template>
+                    <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                        <div ng-message="required">You <b>must</b> have a favorite state.</div>
+                        <div ng-message="md-require-match">Please select an existing state.</div>
+                        <div ng-message="minlength">Your entry is not long enough.</div>
+                        <div ng-message="maxlength">Your entry is too long.</div>
+                    </div>-->
+                    <md-not-found>
+                        Совпадений не найдено...
+                    </md-not-found>
+                </md-autocomplete>
+                <!--<a href="#" ng-click="editOrg()">Редактировать</a>-->
             </div>
             <div class="col-lg-6">
                 Возрастные ограничения

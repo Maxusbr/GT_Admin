@@ -31,7 +31,6 @@ namespace Getticket.Web.DAL.Entities
         /// Второе уникальное поле для пользователя,
         /// также является логином
         /// </summary>
-        [Required]
         [Index("UserPhoneIndex", IsUnique = true)]
         [MaxLength(50)]
         public string UserPhone { get; set; }

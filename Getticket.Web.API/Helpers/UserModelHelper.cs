@@ -32,7 +32,9 @@ namespace Getticket.Web.API.Helpers
                 Email = user.UserName,
                 Status = user.UserStatuses.Status,
                 StatusName = user.UserStatuses.Name,
-                StatusDescription = user.UserStatuses.Description
+                StatusDescription = user.UserStatuses.Description,
+                Roles = user.AccessRoles?.Name,
+                RoleId = user.AccessRoleId
             };
 
             return model;

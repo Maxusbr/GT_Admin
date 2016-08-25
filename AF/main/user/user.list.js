@@ -88,23 +88,28 @@
         //        "id": "6"
         //    },
         //]
+        $rootScope.getListUsers = function() {
+            $scope.Promise = userService.getListUsers();
+        }
+        if (!$rootScope.userlist) $rootScope.getListUsers();
 
-        if (!$rootScope.userlist) $scope.Promise = userService.getListUsers();
-
-        $rootScope.createUser = function create_user() {
+        $rootScope.createUser = function () {
+            $rootScope.editedUser = {};
             console.log('create user');
             app.closeSecond();
             app.loadContentView('/main/user/user.create.html', 1800);
         }
 
-        $rootScope.showUser = function edit_user() {
-            console.log('create user');
+        $rootScope.showUser = function (id) {
+            $rootScope.userId = id;
+            console.log('show user');
             app.closeSecond();
             app.loadContentView('/main/user/user.viewone.html', 1800);
         }
 
-        $rootScope.inviteUser= function invite_user() {
-            console.log('create user');
+        $rootScope.inviteUser = function () {
+
+            console.log('invite user');
             app.closeSecond();
             app.loadContentView('/main/user/user.invite.html', 1800);
         }

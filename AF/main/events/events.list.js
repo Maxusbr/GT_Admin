@@ -17,8 +17,9 @@
 
         $scope.createEvent = function () {
             console.log('create event');
+            $rootScope.editEvent = {}
             app.closeSecond();
-            app.loadContentView('/main/events/events.create.html', 1800);
+            app.loadContentView('/main/events/events.edit.html', 1800);
         }
 
         $scope.selectEvents = function (id) {

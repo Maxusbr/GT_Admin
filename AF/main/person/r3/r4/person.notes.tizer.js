@@ -53,6 +53,7 @@
 
 
         $scope.loadTags = function (query) {
+            if (!$scope.tags) return [];
             var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
             result = $filter('orderBy')(result, function (item) {
                 item.Name.substring(0, query.length);

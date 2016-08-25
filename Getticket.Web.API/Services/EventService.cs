@@ -98,7 +98,12 @@ namespace Getticket.Web.API.Services
             foreach (var item in list)
             {
                 item.LastChange = LogModelHelper.GetLastChangeModel(_logRepository.GetLastChangeEventMedia(item.id_Event, item.Id));
-                item.Tags = TagModelHelper.GeTagModels(_tagRepository.GeEventMediaTags(item.Id));
+                item.Tags = TagModelHelper.GeTagModels(_tagRepository.GetEventMediaTags(item.Id));
+                item.Links = new LinksModel
+                {
+                    PersonLinks = PersonModelHelper.GetPersonModels(_eventRepository.GetMediaPersonLinks(item.Id)),
+                    EventLinks = EventModelHelper.GetEventModels(_eventRepository.GetMediaEventLinks(item.Id))
+                };
             }
             var types = list.GroupBy(o => o.id_MediaType).Select(o => o.Key);
             return types.Select(tp => new Models.Events.EntityCollection<EventMediaModel> { List = list.Where(o => o.id_MediaType == tp), Type = tp });
@@ -130,6 +135,9 @@ namespace Getticket.Web.API.Services
         public ServiceResponce SaveEvent(EventModel model, int userId)
         {
             var _event = EventModelHelper.GetEvent(model);
+            var org = _eventRepository.SaveOrganizer(model.Organizer);
+            if (org != null)
+                _event.IdCompany = org.Id;
             var res = _eventRepository.SaveEvent(_event, userId);
             var response = res != null ? ServiceResponce
                 .FromSuccess()
@@ -335,6 +343,20 @@ namespace Getticket.Web.API.Services
             }, userId)).All(result => result != null);
         }
 
+        /// <see cref="IEventService.UpdateMedia(EventMediaModel,int)"/>
+        public int UpdateMedia(EventMediaModel model, int userId)
+        {
+            var result = _eventRepository.UpdateMedia(new EventMedia
+            {
+                Id = model.Id,
+                IdEvent = model.id_Event,
+                IdMediaType = model.id_MediaType,
+                MediaLink = model.MediaLink,
+                Description = model.Description
+            }, userId);
+            return result?.Id ?? -1;
+        }
+
         /// <summary>
         /// Удалить список медиа
         /// </summary>
@@ -444,7 +466,7 @@ namespace Getticket.Web.API.Services
                 .Result("Descriptions save complete");
         }
 
-
+        /// <see cref="IEventService.UpdateDescriptions(EventDescriptionModel, int)"/>
         public int UpdateDescriptions(EventDescriptionModel model, int userId)
         {
             var result = _eventRepository.UpdateDescription(new EventDescription
@@ -620,6 +642,12 @@ namespace Getticket.Web.API.Services
                 {
                     Id = model.Id, Name = model.Name, IdParent = model.IdParent, Description = model.Description
                 }));
+        }
+
+        /// <see cref="IEventService.GetOrganizers"/>
+        public IList<EventOrganizerModel> GetOrganizers()
+        {
+            return _eventRepository.GetOrganizers().Select(o => new EventOrganizerModel {Id = o.Id, Name = o.Name}).ToList();
         }
     }
 

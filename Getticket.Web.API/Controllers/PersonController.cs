@@ -11,6 +11,7 @@ using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Events;
 using Getticket.Web.API.Models.Persons;
 using Getticket.Web.API.Services;
 using Microsoft.AspNet.Identity;
@@ -415,6 +416,27 @@ namespace Getticket.Web.API.Controllers
             var error = ServiceResponce.FromFailed().Result($"Error save media");
             return Ok(_personService.UpdateMedia(model, userId));
         }
+        /// <see cref="IPersonService.LinkMediaPerson" />
+        [HttpPost]
+        [Route("media/{id}/links")]
+        public IHttpActionResult MediaLinkPerson(int id, [FromBody] IEnumerable<AssociationModel> models)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            foreach (var model in models)
+            {
+                switch (model.types)
+                {
+                    case "person":
+                        if (!_personService.LinkMediaPerson(id, model.Id)) return Ok(error.Response());
+                        break;
+                    case "event":
+                        if (!_personService.LinkMediaEvent(id, model.Id)) return Ok(error.Response());
+                        break;
+                }
+            }
+            return Ok(succes.Response());
+        }
 
         /// <see cref="PersonService.DeleteMedia" />
         [HttpPost]
@@ -616,36 +638,36 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.GetCountryPlaces(string.Empty));
         }
 
-        /// <see cref="ITagService.GeTags()" />
+        /// <see cref="ITagService.GetTags" />
         [HttpGet]
         [Route("tags")]
         public IHttpActionResult GeTags()
         {
-            return Ok(_tagService.GeTags());
+            return Ok(_tagService.GetTags());
         }
 
-        /// <see cref="ITagService.GePersonTags" />
+        /// <see cref="ITagService.GetPersonTags" />
         [HttpGet]
         [Route("tags/person/{id}")]
         public IHttpActionResult GePersonTags(int id)
         {
-            return Ok(_tagService.GePersonTags(id));
+            return Ok(_tagService.GetPersonTags(id));
         }
 
-        /// <see cref="ITagService.GePersonTags" />
+        /// <see cref="ITagService.GetPersonTags" />
         [HttpGet]
         [Route("tags/tizer/{id}")]
         public IHttpActionResult GeTizerTags(int id)
         {
-            return Ok(_tagService.GeDescriptionTags(id));
+            return Ok(_tagService.GetDescriptionTags(id));
         }
 
-        /// <see cref="ITagService.GePersonTags" />
+        /// <see cref="ITagService.GetPersonTags" />
         [HttpGet]
         [Route("tags/media/{id}")]
         public IHttpActionResult GeMediaTags(int id)
         {
-            return Ok(_tagService.GePersonMediaTags(id));
+            return Ok(_tagService.GetPersonMediaTags(id));
         }
         /// <summary>
         /// Сохранить описания и теги
@@ -732,6 +754,26 @@ namespace Getticket.Web.API.Controllers
             var succes = ServiceResponce.FromSuccess().Result("All save complete");
 
             return Ok(!_tagService.AddTagLinks(new TagsTizerModel { IdTizer = id, Tags = models.ToList() }) ? error.Response() : succes.Response());
+        }
+
+        /// <summary>
+        /// Сохранить теги медиа персоны
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("tags/save/media/{id}")]
+        public IHttpActionResult SaveMediaTags(int id, [FromBody] IEnumerable<TagModel> models)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var error = ServiceResponce.FromFailed().Result($"Error save tags");
+            var succes = ServiceResponce.FromSuccess().Result("All save complete");
+
+            return Ok(!_tagService.AddTagLinks(new TagsPersonMediaModel { IdMedia = id, Tags = models.ToList() }) ? error.Response() : succes.Response());
         }
 
 

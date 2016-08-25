@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function EventsNotesController($rootScope, $scope, eventService, personService) {
+    function EventsNotesController($rootScope, $scope, eventService, personService, $filter) {
         var vm = this;
         if (!$rootScope.persons)
             $scope.Promise = personService.getPersons();
@@ -66,11 +66,70 @@
                     return "";
             }
         }
+
+        //Tags
+        eventService.getListEventsTags(function (data) {
+            $scope.tags = [];
+            $scope.tags.push.apply($scope.tags, data);
+        });
+
+        function getEventTags() {
+            if ($scope.eventId)
+                eventService.getEventTags($scope.eventId, function (data) {
+                    $scope.categoryTags = [];
+                    $scope.categoryTags.push.apply($scope.categoryTags, data);
+                });
+        }
+        getEventTags();
+
+
+        $scope.loadTags = function (query) {
+            if (!$scope.tags) return [];
+            var result = $scope.tags.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
+            result = $filter('orderBy')(result, function (item) {
+                item.Name.substring(0, query.length);
+            });
+            return result;
+        }
+
+        //Genre
+        eventService.getEventListGenres(function (data) {
+            $scope.listGenres = [];
+            $scope.listGenres.push.apply($scope.listGenres, data);
+        });
+
+        function getEventGenres() {
+            if ($scope.eventId)
+                eventService.getEventGenres($scope.eventId, function (data) {
+                    $scope.genres = [];
+                    $scope.genres.push.apply($scope.genres, data);
+                });
+        }
+        getEventGenres();
+
+        $scope.loadGenres = function (query) {
+            if (!$scope.listGenres) return [];
+            var result = $scope.listGenres.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
+            result = $filter('orderBy')(result, function (item) {
+                item.Name.substring(0, query.length);
+            });
+            return result;
+        }
+
+        $scope.saveEventTags = function() {
+            if ($scope.genres.length) {
+                eventService.saveTags($scope.eventId, $scope.categoryTags, 'event', function(deta) {
+                    eventService.saveTags($scope.eventId, $scope.genres, 'genre', function (deta) {
+
+                    });
+                });
+            }
+        }
     }
 
     angular
         .module('app')
         .controller('EventsNotesController', EventsNotesController);
 
-    EventsNotesController.$inject = ['$rootScope', '$scope', 'eventService', 'personService'];
+    EventsNotesController.$inject = ['$rootScope', '$scope', 'eventService', 'personService', '$filter'];
 })();

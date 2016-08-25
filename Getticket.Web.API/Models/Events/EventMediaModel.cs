@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Getticket.Web.API.Models.Persons;
 
 namespace Getticket.Web.API.Models.Events
 {
@@ -9,6 +10,7 @@ namespace Getticket.Web.API.Models.Events
     public class EventMediaModel : BaseModel
     {
         public int id_Event { get; set; }
+        public string Name { get; set; }
         [Required]public int id_MediaType { get; set; }
         /// <summary>
         /// Путь к файлу
@@ -18,5 +20,6 @@ namespace Getticket.Web.API.Models.Events
         public string Description { get; set; }
         public LastChangeModel LastChange { get; set; }
         public IList<TagModel> Tags { get; set; }
+        public LinksModel Links { get; set; }
     }
 }

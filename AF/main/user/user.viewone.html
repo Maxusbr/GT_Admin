@@ -19,30 +19,30 @@
     </div>
     <div class="win-content">
         <div class="panel-info" cg-busy="Promise">
-            <div class="row" ng-if="person">
+            <div class="row" ng-if="user">
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-lg-6">
                             <br>
-                            <p>Имя: </p>
+                            <p>Имя: {{user.Name}}</p>
                             <br>
-                            <p>Фамилия: </p>
+                            <p>Фамилия: {{user.LastName}}</p>
                             <br>
-                            <p>Компания: </p>
+                            <p>Компания: {{user.Company}}</p>
                             <br>
-                            <p>Роль: </p>
+                            <p>Роль: {{user.Roles}}</p>
                             <br>
                            
                         </div>
                         <div class="col-lg-6">
                             <br>
-                            <p>Должность: </p>
+                            <p>Должность: {{user.Position}}</p>
                             <br>
-                            <p>Мейл: </p>
+                            <p>Мейл: {{user.Email}}</p>
                             <br>
-                            <p>Телефон: </p>
+                            <p>Телефон: {{user.Phone}}</p>
                             <br>
-                            <p>Статутс: </p>
+                            <p>Статутс: {{user.StatusName}}</p>
                             <br>
                         </div>
                         

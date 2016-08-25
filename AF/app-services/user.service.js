@@ -4,6 +4,16 @@
     function userService($http, $rootScope) {
         var service = {};
 
+        function handleSuccess(res) {
+            return { success: true, data: res.data };
+        }
+
+        function handleError(error) {
+            return function () {
+                return { success: false, message: error };
+            };
+        }
+
         service.GetAll = function getAll() {
             return $http.get('http://webapiadmin.azurewebsites.net').then(handleSuccess, handleError('Error getting all users'));
         }
@@ -46,39 +56,35 @@
                 });
         }
 
-        service.getListRoles = function getListRoles() {
+        service.getListRoles = function getListRoles(callback) {
             return $http.get(`${serviceUrl}sysroles`)
-                .success(function (data) { return data })
+                .success(function (data) { if (callback) callback(data) })
                 .error(function (data) {
-                    return { success: false, message: data };
+                    if (callback) callback({ error: true, message: data });
                 });
         }
 
-        service.registerUser = function registerUser(user) {
+        service.registerUser = function registerUser(user, callback) {
             return $http.post(`${serviceUrl}users/register`, user)
-                .success(function (data) { return data })
-                .error(function (data) { return data; });
+                .success(function (data) { if (callback) callback(data) })
+                .error(function (data) { if (callback) callback(data) });
         }
+
+        service.getUser = function (id, callback) {
+            return $http.get(`${serviceUrl}users/${id}`)
+                .success(function (data) { callback(data); })
+                .error(function (data) { callback(data); });
+        }
+
+        service.inviteUser = function (user, callback) {
+            return $http.post(`${serviceUrl}invites/send`, user)
+                .success(function (data) { if (callback) callback(data) })
+                .error(function (data) { if (callback) callback(data) });
+        }
+
 
         return service;
 
-        function getUsers() {
-            return $http.get(`${serviceUrl}users`)
-                .success(function (data) { return data })
-                .error(function (data) {
-                    return { success: false, message: data };
-                });
-        } // private functions
-
-        function handleSuccess(res) {
-            return { success: true, data: res.data };
-        }
-
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
-        }
     }
 
     angular

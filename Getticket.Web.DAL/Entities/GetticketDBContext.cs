@@ -119,8 +119,10 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="EventDescriptionTizerLink"/>
         public virtual DbSet<EventDescriptionTizerLink> EventDescriptionTizerLinks { get; set; }
 
+        /// <see cref="EventFact"/>
         public virtual DbSet<EventFact> EventFacts { get; set; }
 
+        /// <see cref="EventFactType"/>
         public virtual DbSet<EventFactType> EventFactTypes { get; set; }
 
         /// <summary>
@@ -544,7 +546,19 @@ namespace Getticket.Web.DAL.Entities
 
         /// <see cref="TagPersonMediaLink"/>
         public virtual DbSet<TagPersonMediaLink> TagPersonMediaLinks { get; set; }
-        
+
+        /// <see cref="TagEvent"/>
+        public virtual DbSet<TagEvent> EventCategoryTags { get; set; }
+
+        /// <see cref="TagEventLink"/>
+        public virtual DbSet<TagEventLink> TagEventLinks { get; set; }
+
+        /// <see cref="TagEventDescriptionLink"/>
+        public virtual DbSet<TagEventDescriptionLink> TagEventDescriptionLinks { get; set; }
+
+        /// <see cref="TagEventMediaLink"/>
+        public virtual DbSet<TagEventMediaLink> TagEventMediaLinks { get; set; }
+
         /// <summary>
         /// Настройки сущности <see cref="Tag"/>
         /// </summary>

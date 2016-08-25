@@ -42,13 +42,13 @@
                 <td style="width: 160px">Медиа/Фото</td>
                 <td>
 
-                    <a class="button"  ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                    <a class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
                        ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Выберите файл</a>
                 </td>
             </tr>
             <tr ng-show="editedMedia.id_MediaType === 1">
                 <td style="width: 160px">Медиа/Видео</td>
-                <td><input class="form-control" ng-model="file_video" ng-change="videoPreview()"/></td>
+                <td><input class="form-control" ng-model="file_video" ng-change="videoPreview()" /></td>
             </tr>
             <tr ng-show="editedMedia.id_MediaType === 1">
                 <td colspan="2" style="border: none;">
@@ -101,6 +101,14 @@
                                     <th>Тип связи</th>
                                     <th>Объект связи</th>
                                 </tr>
+                                <tr ng-repeat="link in personeRange">
+                                    <td>Персона</td>
+                                    <td>{{link.LastName}} {{link.Name}}</td>
+                                </tr>
+                                <tr ng-repeat="link in eventRange">
+                                    <td>Мероприятие</td>
+                                    <td>{{link.Name}}</td>
+                                </tr>
                             </thead>
                         </table>
                         <br />
@@ -111,39 +119,39 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <input type="radio"
-                                           ng-checked="association.type == 'event'"
-                                           ng-click="association.type = 'event'"> Мероприятие
+                                           ng-checked="association.types == 'event'"
+                                           ng-click="association.types = 'event'"> Мероприятие
                                     <br />
                                     <input type="radio"
-                                           ng-checked="association.type == 'person'"
-                                           ng-click="association.type = 'person'"> Персона
+                                           ng-checked="association.types == 'person'"
+                                           ng-click="association.types = 'person'"> Персона
                                     <br />
-                                    <input type="radio"
-                                           ng-checked="association.type == 'media'"
-                                           ng-click="association.type = 'media'"> Медиа
-                                    <br />
+                                    <!--<input type="radio"
+                                           ng-checked="association.types == 'media'"
+                                           ng-click="association.types = 'media'"> Медиа
+                                    <br />-->
                                 </div>
                                 <div class="col-lg-4">
                                     <!--if event-->
-                                    <div ng-show="association.type == 'event'">
+                                    <div ng-show="association.types == 'event'">
                                         <i>Укажите мероприятие, для которого создается связь</i>
-                                        <select class="form-control" ng-model="association.eventId"
+                                        <select class="form-control" ng-model="association.Id"
                                                 ng-options="item.Id as item.Name for item in events"></select>
                                     </div>
                                     <!--if person-->
-                                    <div ng-show="association.type == 'person'">
+                                    <div ng-show="association.types == 'person'">
                                         <i>Укажите персону, для которой создается связь</i>
-                                        <select class="form-control" ng-model="association.personId"
+                                        <select class="form-control" ng-model="association.Id"
                                                 ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
                                     </div>
                                     <!-- if media-->
-                                    <div ng-show="association.type == 'media'">
+                                    <div ng-show="association.types == 'media'">
                                         <i>Укажите персону, для которой создается связь</i>
                                         <select class="form-control" ng-model="association.personId" ng-change="getPersonMedia(association.personId)"
                                                 ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
                                         <i>Укажите медиа</i>
-                                        <select class="form-control" ng-model="association.mediaId"
-                                                ng-options="item.Id as item.Name for item in personMedias"></select>
+                                        <select class="form-control" ng-model="association.Id"
+                                                ng-options="item.Id as item.Name for item in personmedialist"></select>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -157,7 +165,7 @@
         </table>
     </div>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -173,7 +181,7 @@
         </div>
     </div>
     <div class="modal fade bs-example-modal-lg" id="myModal_video" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -181,7 +189,7 @@
                 </div>
                 <div class="modal-body">
                     <div style="width: auto; margin: 0px auto; text-align: center;">
-                       <youtube-video video-url="file_video"></youtube-video>
+                        <youtube-video video-url="file_video"></youtube-video>
                     </div>
                 </div>
             </div>

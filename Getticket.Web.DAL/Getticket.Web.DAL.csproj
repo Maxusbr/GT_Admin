@@ -70,6 +70,10 @@
     <Compile Include="Entities\PageBlock.cs" />
     <Compile Include="Entities\EventFact.cs" />
     <Compile Include="Entities\EventFactType.cs" />
+    <Compile Include="Entities\TagEvent.cs" />
+    <Compile Include="Entities\TagEventDescriptionLink.cs" />
+    <Compile Include="Entities\TagEventMediaLink.cs" />
+    <Compile Include="Entities\TagEventLink.cs" />
     <Compile Include="Entities\UserPageCategory.cs" />
     <Compile Include="Entities\PageSchema.cs" />
     <Compile Include="Entities\PageBlockType.cs" />

@@ -36,19 +36,20 @@
                 <tbody>
                 <tr ng-repeat="row in userlist">
                     <td>
-                        <a href="" ng-click="showUser()">{{row.LastName}} {{row.Name}}</a>
+                        <a href="" ng-click="showUser(row.Id)" ng-if="row.LastName || row.Name">{{row.LastName}} {{row.Name}}</a>
+                        <a href="" ng-click="showUser(row.Id)" ng-if="!row.LastName && !row.Name">{{row.Email}}</a>
                     </td>
                     <td>
-                        <a href="" ng-click="showUser()">{{row.Company}}</a>
+                        <a href="" ng-click="showUser(row.Id)">{{row.Company}}</a>
                     </td>
                     <td style="width: 200px; text-wrap: normal">
-                        <a href="" ng-click="showUser()">{{row.event}}</a>
+                        <a href="" ng-click="showUser(row.Id)">{{row.Event}}</a>
                     </td>
                     <td>
-                        <a href="" ng-click="showUser()">{{row.role}}</a>
+                        <a href="" ng-click="showUser(row.Id)">{{row.Roles}}</a>
                     </td>
                     <td class="{{row.StatusName}}">
-                        <a href="" ng-click="showUser()">{{row.StatusDescription}}</a>
+                        <a href="" ng-click="showUser(row.Id)">{{row.StatusDescription}}</a>
                     </td>
                 </tr>
                 </tbody>

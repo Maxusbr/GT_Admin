@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Getticket.Web.API.Models;
+using Getticket.Web.API.Models.Events;
 using Getticket.Web.API.Models.Persons;
 using Getticket.Web.DAL.Entities;
 
@@ -50,6 +51,16 @@ namespace Getticket.Web.API.Helpers
             return
                 model.Tags.Select(o => new TagPersonMediaLink {IdMedia = model.IdMedia, IdTag = o.Id, Tag = GetTag(o)})
                     .ToList();
+        }
+
+        public static IList<EventGenreModel> GeGenreModels(IList<EventGenre> genres)
+        {
+            return genres.Select(o => new EventGenreModel {Id = o.Id, Name = o.Name}).ToList();
+        }
+
+        public static IList<TagEventModel> GeTagModels(IList<TagEvent> list)
+        {
+            return list.Select(o => new TagEventModel { Id = o.Id, Name = o.Name, UsesType = o.UsesType }).ToList();
         }
     }
 }

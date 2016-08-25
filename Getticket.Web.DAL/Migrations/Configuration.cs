@@ -17,9 +17,9 @@ namespace Getticket.Web.DAL.Migrations
         // Update-Database -ProjectName Getticket.Web.DAL -StartUpProjectName Getticket.Web.API -Force -Verbose
         protected override void Seed(GetticketDBContext context)
         {
-            BaseDb(context);
-            TempDb(context);
-            LinkDb(context);
+            //BaseDb(context);
+            //TempDb(context);
+            //LinkDb(context);
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 1, Name = "Ноги" });
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 2, Name = "Длинные" });
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 3, Name = "Теннис" });

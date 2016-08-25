@@ -80,9 +80,24 @@ namespace Getticket.Web.API.Helpers
             } : new EventConnectionModel();
         }
 
-        public static IEnumerable<EventMediaModel> GetMediaModels(IList<EventMedia> getMedia)
+        public static IEnumerable<EventMediaModel> GetMediaModels(IList<EventMedia> listMedia)
         {
-            throw new NotImplementedException();
+            var list = listMedia.Select(GetMediaModel);
+            return list.ToList();
+        }
+
+        private static EventMediaModel GetMediaModel(EventMedia media)
+        {
+            return media != null ? new EventMediaModel
+            {
+                Id = media.Id,
+                Name = media.Name,
+                id_Event = media.IdEvent,
+                id_MediaType = media.IdMediaType,
+                MediaLink = media.MediaLink,
+                MediaType = media.MediaType.Name,
+                Description = media.Description
+            } : new EventMediaModel();
         }
 
         public static IEnumerable<EventDescriptionModel> GetDescriptionModels(IList<EventDescription> descriptions)
