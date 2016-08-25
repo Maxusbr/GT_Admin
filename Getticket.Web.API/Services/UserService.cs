@@ -17,16 +17,16 @@ namespace Getticket.Web.API.Services
     /// </summary>
     public class UserService
     {
-        private IUserRepository UserRep;
-        private IRazorEngineService TemplateServ;
+        private readonly IUserRepository _userRep;
+        private readonly IRazorEngineService _templateServ;
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        public UserService(IUserRepository UserRep, IRazorEngineService TemplateServ)
+        public UserService(IUserRepository userRep, IRazorEngineService templateServ)
         {
-            this.UserRep = UserRep;
-            this.TemplateServ = TemplateServ;
+            this._userRep = userRep;
+            this._templateServ = templateServ;
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public IList<UserModel> GetAll()
         {
-            IList<User> users = UserRep.FindAllNotDeleted();
+            IList<User> users = _userRep.FindAllNotDeleted();
             return UserModelHelper.GetUserModel(users);
         }
 
@@ -46,7 +46,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public UserModel GetById(int Id)
         {
-            User user = UserRep.FindOneById(Id);
+            User user = _userRep.FindOneById(Id);
             return UserModelHelper.GetUserModel(user);
         }
 
@@ -65,7 +65,7 @@ namespace Getticket.Web.API.Services
             }
 
             model.Phone = PhoneService.PhoneConvert(model.Phone);
-            if (UserRep.CountByCredentails(model.Email, model.Phone) != 0)
+            if (_userRep.CountByCredentails(model.Email, model.Phone) != 0)
             {
                 return ServiceResponce
                     .FromFailed()
@@ -81,7 +81,7 @@ namespace Getticket.Web.API.Services
             model.Password = PasswordService.GeneratePasswordHash(UnHashedPassword);
 
             User user = RegisterUserModelHelper.CreateUser(model);
-            UserRep.Save(user);
+            _userRep.Save(user);
             ServiceResponce response = ServiceResponce
                 .FromSuccess()
                 .Result("User registered")
@@ -99,7 +99,7 @@ namespace Getticket.Web.API.Services
                 {
                     RegisteredEmailModel RegisteredEmailModel
                         = RegisteredEmailModelHelper.GetRegisteredEmailModel(model, UnHashedPassword);
-                    string RegisteredText = TemplateServ
+                    string RegisteredText = _templateServ
                         .Run("Emails/Registered", typeof(RegisteredEmailModel), RegisteredEmailModel);
                     EmailService.SendMail(RegisteredEmailModel, RegisteredText);
 
@@ -117,7 +117,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce RestorePassword(RestorePasswordModel model)
         {
-            IList<User> users = UserRep.FindAllByCredentails(model.Email, model.Phone);
+            IList<User> users = _userRep.FindAllByCredentails(model.Email, model.Phone);
             if (users == null)
             {
                 return ServiceResponce
@@ -143,12 +143,12 @@ namespace Getticket.Web.API.Services
 
             string Password = PasswordService.GeneratePasswordString();
             user.Password = PasswordService.GeneratePasswordHash(Password);
-            UserRep.Save(user);
+            _userRep.Save(user);
 
             new Thread(send =>
             {
                 RestorePasswordEmailModel RestorePasswordEmailModel = RestorePasswordEmailModelHelper.GetRestorePasswordEmailModel(user.UserName, Password);
-                string RestoreText = TemplateServ
+                string RestoreText = _templateServ
                     .Run("Emails/RestorePassword", typeof(RestorePasswordEmailModel), RestorePasswordEmailModel);
                 if (!EmailService.SendMail(RestorePasswordEmailModel, RestoreText))
                 {
@@ -178,7 +178,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce ChangePassword(int id, string currentUserEmail, ChangePasswordModel model)
         {
-            User user = UserRep.FindOneById(id);
+            User user = _userRep.FindOneById(id);
             if (user == null)
             {
                 return ServiceResponce
@@ -199,7 +199,7 @@ namespace Getticket.Web.API.Services
             }
 
             user.Password = PasswordService.GeneratePasswordHash(model.NewPassword);
-            UserRep.Save(user);
+            _userRep.Save(user);
 
             if (model.SendCopyPassword)
             {
@@ -208,7 +208,7 @@ namespace Getticket.Web.API.Services
                 {
                     ChangePasswordEmailModel ChangePasswordEmailModel
                         = ChangePasswordEmailModelHelper.GetChangePasswordEmailModel(user.UserName, model.NewPassword, SelfChangePassword);
-                    string ChangePasswordText = TemplateServ
+                    string ChangePasswordText = _templateServ
                         .Run("Emails/ChangePassword", typeof(ChangePasswordEmailModel), ChangePasswordEmailModel);
                     EmailService.SendMail(ChangePasswordEmailModel, ChangePasswordText);
                 }).Start();
@@ -227,7 +227,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce Lock(int id)
         {
-            User user = UserRep.FindOneById(id);
+            User user = _userRep.FindOneById(id);
             if (user == null)
             {
                 return ServiceResponce
@@ -243,7 +243,7 @@ namespace Getticket.Web.API.Services
             }
 
             StatusService.ChangeStatus(user, UserStatusType.Locked);
-            UserRep.Save(user);
+            _userRep.Save(user);
 
             return ServiceResponce.FromSuccess();
         }
@@ -255,7 +255,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce Unlock(int id)
         {
-            User user = UserRep.FindOneById(id);
+            User user = _userRep.FindOneById(id);
             if (user == null)
             {
                 return ServiceResponce
@@ -270,7 +270,7 @@ namespace Getticket.Web.API.Services
                    .Add("error", "it is impossible to unlock because the user isn't locked");
             }
             StatusService.ChangeStatus(user, UserStatusType.System);
-            UserRep.Save(user);
+            _userRep.Save(user);
 
             return ServiceResponce.FromSuccess();
         }
@@ -284,7 +284,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce UpdateUser(int id, UpdateUserModel model)
         {
-            User user = UserRep.FindOneById(id);
+            User user = _userRep.FindOneById(id);
             if (user == null)
             {
                 return ServiceResponce
@@ -294,11 +294,11 @@ namespace Getticket.Web.API.Services
 
             user = UpdateUserModelHelper.UpdateUser(user, model);
 
-            if (!CanUpdateUserCredentails(user.Id, model.Email, model.Phone, UserRep))
+            if (!CanUpdateUserCredentails(user.Id, model.Email, model.Phone, _userRep))
             {
                 return ServiceResponce.FromFailed().Add("error", "Can't update to specified email or phone");
             }
-            UserRep.Save(user);
+            _userRep.Save(user);
             return ServiceResponce.FromSuccess();
 
         }
@@ -312,7 +312,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce MarkDeleted(int id)
         {
-            User user = UserRep.FindOneById(id);
+            User user = _userRep.FindOneById(id);
             if (user == null)
             {
                 return ServiceResponce
@@ -328,7 +328,7 @@ namespace Getticket.Web.API.Services
             }
 
             StatusService.ChangeStatus(user, UserStatusType.MarkDeleted);
-            UserRep.Save(user);
+            _userRep.Save(user);
 
             return ServiceResponce.FromSuccess();
         }
@@ -340,7 +340,7 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         public ServiceResponce MarkNotDeleted(int id)
         {
-            User user = UserRep.FindOneById(id);
+            User user = _userRep.FindOneById(id);
             if (user == null)
             {
                 return ServiceResponce
@@ -355,7 +355,7 @@ namespace Getticket.Web.API.Services
                 .Add("error", "the user isn't deleted");
             }
 
-            if (UserRep.CountByCredentails(user.UserName, user.UserPhone) != 0)
+            if (_userRep.CountByCredentails(user.UserName, user.UserPhone) != 0)
             {
                 return ServiceResponce
                     .FromFailed()
@@ -363,7 +363,7 @@ namespace Getticket.Web.API.Services
             }
 
             StatusService.ChangeStatus(user, UserStatusType.System);
-            UserRep.Save(user);
+            _userRep.Save(user);
             return ServiceResponce.FromSuccess();
         }
 

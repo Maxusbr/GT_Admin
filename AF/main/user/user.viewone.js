@@ -42,6 +42,7 @@
         //
         
         $rootScope.editUser = function () {
+            $rootScope.editedUser = $scope.user;
             app.closeThird();
             app.loadContentView('/main/user/user.edit.html', 2200);
         }

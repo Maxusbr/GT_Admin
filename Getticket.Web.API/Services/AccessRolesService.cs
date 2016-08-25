@@ -8,17 +8,17 @@ using System;
 
 namespace Getticket.Web.API.Services {
     /// <summary>
-    /// Сервис предоставляющий доступ к системным ролям <see cref="AccessRole"/>
+    /// Сервис предоставляющий доступ к системным ролям <see cref="AccessRoleModel"/>
     /// </summary>
     public class AccessRolesService {
 
-        private IAccessRoleRepository AccessRep;
+        private readonly IAccessRoleRepository _accessRep;
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        public AccessRolesService(IAccessRoleRepository AccessRep) {
-            this.AccessRep = AccessRep;
+        public AccessRolesService(IAccessRoleRepository accessRep) {
+            this._accessRep = accessRep;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Getticket.Web.API.Services {
         /// </summary>
         /// <returns></returns>
         public IList<AccessRoleModel> GetAllRoles() {
-            IList<AccessRoles> roles = AccessRep.GetAll();
+            IList<AccessRoles> roles = _accessRep.GetAll();
             return AccessRoleModelHelper.GetAccessRoleModel(roles);
         }
 
@@ -38,7 +38,7 @@ namespace Getticket.Web.API.Services {
         /// <param name="id"></param>
         /// <returns></returns>
         public AccessRoleModel GetRole(int id) {
-            AccessRoles role = AccessRep.GetOneById(id);
+            AccessRoles role = _accessRep.GetOneById(id);
             return AccessRoleModelHelper.GetAccessRoleModel(role);
         }
 
@@ -49,7 +49,7 @@ namespace Getticket.Web.API.Services {
         /// <param name="id"></param>
         /// <returns></returns>
         public IList<UserModel> GetUsersByRole(int id) {
-            IList<User> users = AccessRep.GetAllByRole(id);
+            IList<User> users = _accessRep.GetAllByRole(id);
             return UserModelHelper.GetUserModel(users);
         }
 
@@ -63,7 +63,7 @@ namespace Getticket.Web.API.Services {
             if (model.Id == 0) {
                 toSave = new AccessRoles();
             } else {
-                toSave = AccessRep.GetOneById(model.Id);
+                toSave = _accessRep.GetOneById(model.Id);
                 if (toSave == null) {
                     return ServiceResponce
                         .FromFailed()
@@ -78,7 +78,7 @@ namespace Getticket.Web.API.Services {
                         .Add("error", "Error while parsing AccessRoles in specified role");
             }
 
-            AccessRep.Save(toSave);
+            _accessRep.Save(toSave);
 
             return ServiceResponce
                 .FromSuccess()

@@ -68,7 +68,7 @@
                                  md-search-text="event.Organizer"
                                  md-items="item in ctrl.querySearch(event.Organizer)"
                                  md-item-text="item.Name"
-                                 md-require-match
+                                 
                                  md-floating-label="Организатор">
                     <md-item-template>
                         <span md-highlight-text="event.Organizer">{{item.Name}}</span>
@@ -79,6 +79,9 @@
                         <div ng-message="minlength">Your entry is not long enough.</div>
                         <div ng-message="maxlength">Your entry is too long.</div>
                     </div>-->
+                    <md-not-found>
+                        Совпадений не найдено...
+                    </md-not-found>
                 </md-autocomplete>
                 <!--<a href="#" ng-click="editOrg()">Редактировать</a>-->
             </div>
