@@ -395,5 +395,21 @@ namespace Getticket.Web.API.Services
             return false;
         }
 
+        /// <summary>
+        /// Список сообщений пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IList<UserMessageModel> GetUserMessages(int id)
+        {
+            return UserModelHelper.GetMessageModels(_userRep.GetUserMessages(id));
+        }
+
+        public UserMessageModel SendMessage(UserMessageModel model)
+        {
+
+
+            return model;
+        }
     }
 }

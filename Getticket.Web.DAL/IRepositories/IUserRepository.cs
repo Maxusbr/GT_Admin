@@ -95,5 +95,19 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="dt"></param>
         /// <returns></returns>
         bool UpdateLastEnter(int id, DateTime dt);
+
+        /// <summary>
+        /// Список сообщений пользователя
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<UserMessage> GetUserMessages(int id);
+
+        /// <summary>
+        /// Сохранить сообщение
+        /// </summary>
+        /// <returns></returns>
+        UserMessage SaveMessages(UserMessage msg);
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Getticket.Web.API.Models;
 using Getticket.Web.DAL.Entities;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Getticket.Web.API.Helpers
 {
@@ -57,6 +58,21 @@ namespace Getticket.Web.API.Helpers
                 listModel.Add(GetUserModel(u));
             }
             return listModel;
+        }
+
+        public static IList<UserMessageModel> GetMessageModels(IList<UserMessage> msgs)
+        {
+            return msgs.Select(o => new UserMessageModel
+            {
+                Id = o.Id,
+                Date = o.Date,
+                Text = o.Text,
+                Status = o.Status,
+                SenderId = o.SenderId,
+                RecipientId = o.RecipientId,
+                Sender = GetUserModel(o.Sender),
+                Recipient = GetUserModel(o.Recipient)
+            }).ToList();
         }
     }
 }

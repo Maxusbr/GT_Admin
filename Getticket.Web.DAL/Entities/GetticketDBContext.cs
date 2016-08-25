@@ -27,7 +27,8 @@ namespace Getticket.Web.DAL.Entities
         public virtual DbSet<AccessRoles> AccessRoles { get; set; }
         /// <see cref="Entities.UserStatuses" />
         public virtual DbSet<UserStatuses> UserStatuses { get; set; }
-
+        /// <see cref="Entities.UserMessage" />
+        public virtual DbSet<UserMessage> UserMessages { get; set; }
         /// <summary>
         /// Настройки сущности <see cref="User"/>
         /// </summary>

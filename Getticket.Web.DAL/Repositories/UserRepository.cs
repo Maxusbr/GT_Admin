@@ -164,6 +164,38 @@ namespace Getticket.Web.DAL.Repositories
             return true;
         }
 
+        /// <see cref="IUserRepository.GetUserMessages" />
+        public IList<UserMessage> GetUserMessages(int id)
+        {
+            return db.UserMessages.Where(o => o.SenderId == id)
+                .Include(o => o.Sender)
+                .Include(o => o.Recipient)
+                .ToList();
+        }
+
+        /// <see cref="IUserRepository.SaveMessages" />
+        public UserMessage SaveMessages(UserMessage msg)
+        {
+            if (msg.Id == 0)
+            {
+                db.Entry(msg).State = EntityState.Added;
+            }
+            else if (msg.Id > 0)
+            {
+                var pr = db.UserMessages.FirstOrDefault(o => o.Id == msg.Id);
+                db.Entry(pr).CurrentValues.SetValues(msg);
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return msg;
+        }
+
         /// <see cref="IUserRepository.DeleteUserByEmail(string)" />
         public bool DeleteUserByEmail(string userName)
         {

@@ -70,6 +70,7 @@
     <Compile Include="Entities\PageBlock.cs" />
     <Compile Include="Entities\EventFact.cs" />
     <Compile Include="Entities\EventFactType.cs" />
+    <Compile Include="Entities\UserMessage.cs" />
     <Compile Include="Entities\TagEvent.cs" />
     <Compile Include="Entities\TagEventDescriptionLink.cs" />
     <Compile Include="Entities\TagEventMediaLink.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Enums\PageTypes.cs" />
     <Compile Include="Enums\Sex.cs" />
     <Compile Include="Enums\DestinationTypes.cs" />
+    <Compile Include="Enums\MessageStatus.cs" />
     <Compile Include="Enums\UserStatusType.cs" />
     <Compile Include="Infrastructure\PageInfo.cs" />
     <Compile Include="Infrastructure\PredicateBuilder.cs" />
