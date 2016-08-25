@@ -129,9 +129,12 @@ var app;
         };
     }
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
-    function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', '$mdDateLocaleProvider'];
+    function config($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdDateLocaleProvider) {
+        $mdDateLocaleProvider.firstDayOfWeek = 1;
+        $mdDateLocaleProvider.formatDate = function (date) {
+            return moment(date).format('DD.MM.YYYY');
+        };
 
         $urlRouterProvider.when("", "/main");
         $urlRouterProvider.when("/", "/main");
