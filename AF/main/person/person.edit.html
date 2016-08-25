@@ -29,7 +29,11 @@
                 <br />
                 Отчество
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Patronymic" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Patronymic"/>
+                <br />
+                Псевдоним
+                <br />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Alias" />
             </div>
             <div class="col-lg-6">
                 <h5>На английском</h5>
@@ -56,10 +60,18 @@
         <div class="row">
             <div class="col-lg-4">
                 Дата рождения
-                <br />
-                <md-content>
+                <br/>
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="person.bithday"
+                           is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <!--<md-content>
                     <md-datepicker ng-model="person.bithday" md-placeholder="Дата рождения"></md-datepicker>
-                </md-content>
+                </md-content>-->
             </div>
             <div class="col-lg-4">
                 Город рождения

@@ -56,6 +56,10 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         public string PatronymicLatin { get; set; }
         /// <summary>
+        /// Псевдоним
+        /// </summary>
+        public string Alias { get; set; }
+        /// <summary>
         /// Ссылка на фото
         /// </summary>
         public string MediaLink { get; set; }

@@ -152,7 +152,8 @@
                 Place: person.Place,
                 Country: person.Country,
                 Sex: person.Sex,
-                MediaLink: person.MediaLink
+                MediaLink: person.MediaLink,
+                Alias: person.Alias
             }
             if (person.bithday)
                 model.Bithday = `${person.bithday.getFullYear()}-${person.bithday.getMonth() + 1}-${person.bithday.getDate()}`;

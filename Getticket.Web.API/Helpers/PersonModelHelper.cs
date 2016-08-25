@@ -42,7 +42,8 @@ namespace Getticket.Web.API.Helpers
                 ZodiacYear = GetZodiacYears(person.Bithday),
                 ZodiacMonth = GetZodiacMonth(person.Bithday),
                 BirthdayTxt = person.Bithday.ToLongDateString(),
-                Age = (DateTime.Now - person.Bithday).GetYears()
+                Age = (DateTime.Now - person.Bithday).GetYears(),
+                Alias = person.Alias
             };
 
             return model;
@@ -336,6 +337,7 @@ namespace Getticket.Web.API.Helpers
                 MediaLink = model.MediaLink,
                 Sex = (Sex)model.Sex,
                 id_Bithplace = model.IdBithplace,
+                Alias = model.Alias
             };
             return person;
         }

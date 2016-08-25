@@ -73,5 +73,7 @@ namespace Getticket.Web.API.Models.Persons
         /// Последние изменения
         /// </summary>
         public LastChangeModel LastChange { get; set; }
+
+        public string Alias { get; set; }
     }
 }
