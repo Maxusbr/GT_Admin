@@ -2,11 +2,13 @@
     'use strict';
 
     function EventsMediaCreateController($rootScope, $scope, personService, eventService, $filter) {
+
         var vm = this;
 
         $scope.file = $rootScope.editedMedia.MediaLink;
         $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink: 'https://www.youtube.com/watch?v=undefined';
         $scope.embed = '//img.youtube.com/vi/undefined';
+
 
         if (!$rootScope.events)
             eventService.getEvents();
