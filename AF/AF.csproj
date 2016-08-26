@@ -73,6 +73,10 @@
     <Content Include="Content\select.min.css" />
     <Content Include="login\login.controller.js" />
     <Content Include="login\login.view.html" />
+    <Content Include="main\concert\concert.create.calendar.html" />
+    <Content Include="main\concert\concert.create.calendar.js" />
+    <Content Include="main\concert\concert.create.html" />
+    <Content Include="main\concert\concert.create.js" />
     <Content Include="main\concert\concert.list.html" />
     <Content Include="main\concert\concert.list.js" />
     <Content Include="main\concert\concert.viewone.html" />
