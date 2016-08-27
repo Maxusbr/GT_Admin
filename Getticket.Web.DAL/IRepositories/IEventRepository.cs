@@ -29,10 +29,10 @@ namespace Getticket.Web.DAL.IRepositories
         /// Если <see cref="Event"/> новый - добавляем новую запись в БД.
         /// Если <see cref="Event"/> уже существует - сохраняем изменения записи.
         /// </summary>
-        /// <param name="person"></param>
+        /// <param name="_event"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        Event SaveEvent(Event person, int userId);
+        Event SaveEvent(Event _event, int userId);
 
         /// <summary>
         /// Удаляет <see cref="Event"/> из БД по его <paramref name="id" />
@@ -42,7 +42,7 @@ namespace Getticket.Web.DAL.IRepositories
         bool DeleteEvent(int id);
 
         /// <summary>
-        /// Возвращает список <see cref="EventConnectionType"/>
+        /// Возвращает список <see cref="ConnectionType"/>
         /// </summary>
         /// <returns></returns>
         IList<ConnectionType> GetConnectionTypes();

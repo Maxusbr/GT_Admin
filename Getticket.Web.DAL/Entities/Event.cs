@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -78,5 +79,45 @@ namespace Getticket.Web.DAL.Entities
         [ForeignKey("IdCompany")]
         public virtual Company Organizer { get; set; }
 
+        /// <summary>
+        /// Внешний ключ для <see cref="Event"/>
+        /// </summary>
+        public int? ParentId { get; set; }
+
+        /// <summary>
+        /// <see cref="Event"/>
+        /// </summary>
+        [ForeignKey("ParentId")]
+        public virtual Event Parent { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="Hall"/>
+        /// </summary>
+        public int? HallId { get; set; }
+        /// <summary>
+        /// Зал
+        /// </summary>
+        [ForeignKey("HallId")]
+        public virtual Hall Hall { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="ConcertPlaceId"/>
+        /// </summary>
+        public int? ConcertPlaceId { get; set; }
+        /// <summary>
+        /// Площадка
+        /// </summary>
+        [ForeignKey("ConcertPlaceId")]
+        public virtual ConcertPlace ConcertPlace { get; set; }
+
+        /// <summary>
+        /// Серии концерта
+        /// </summary>
+        public virtual IList<SeriesConcert> Series { get; set; }
+
+        /// <summary>
+        /// Билеты
+        /// </summary>
+        public virtual ConcertTicket Tickets { get; set; }
     }
 }

@@ -208,9 +208,9 @@ namespace Getticket.Web.DAL.Repositories
         public bool DeleteDescriptionType(int id)
         {
             if (id <= 0) return false;
-            var item = db.EventDescriptionTypes.FirstOrDefault(u => u.Id == id);
+            var item = db.PersonDescriptionType.FirstOrDefault(u => u.Id == id);
             if (item == null) return false;
-            db.EventDescriptionTypes.Remove(item);
+            db.PersonDescriptionType.Remove(item);
             db.SaveChanges();
             return true;
         }

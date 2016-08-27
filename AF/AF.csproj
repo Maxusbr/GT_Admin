@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app-services\dictionary.service.js" />
+    <Content Include="app-services\concert.service.js" />
     <Content Include="app-services\event.service.js" />
     <Content Include="Content\angular-material.min.css" />
     <Content Include="Content\select.css" />
@@ -77,6 +78,8 @@
     <Content Include="main\concert\concert.list.js" />
     <Content Include="main\concert\concert.viewone.html" />
     <Content Include="main\concert\concert.viewone.js" />
+    <Content Include="main\concert\concert.edit.html" />
+    <Content Include="main\concert\concert.edit.js" />
     <Content Include="main\dashboard.html" />
     <Content Include="main\dictionary\dictionary.antro.types.html" />
     <Content Include="main\dictionary\dictionary.antro.types.js" />

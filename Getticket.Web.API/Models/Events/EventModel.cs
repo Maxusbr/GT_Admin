@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Getticket.Web.API.Models.Concerts;
 
 namespace Getticket.Web.API.Models.Events
 {
@@ -71,6 +73,39 @@ namespace Getticket.Web.API.Models.Events
         /// </summary>
         public bool IsPublished { get; set; }
 
+        /// <summary>
+        /// Ссылка на организатора
+        /// </summary>
         public int? IdCompany { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="EventModel"/>
+        /// </summary>
+        public int? ParentId { get; set; }
+
+        /// <summary>
+        /// <see cref="EventModel"/>
+        /// </summary>
+        public virtual EventModel Parent { get; set; }
+
+        /// <summary>
+        /// Зал
+        /// </summary>
+        public virtual HallModel Hall { get; set; }
+
+        /// <summary>
+        /// Площадка
+        /// </summary>
+        public virtual ConcertPlaceModel ConcertPlace { get; set; }
+
+        /// <summary>
+        /// Серии концерта
+        /// </summary>
+        public virtual IList<SeriesConcertModel> Series { get; set; }
+
+        /// <summary>
+        /// Билеты
+        /// </summary>
+        public virtual ConcertTicketModel Tickets { get; set; }
     }
 }

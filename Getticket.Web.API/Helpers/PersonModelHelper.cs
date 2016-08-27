@@ -429,5 +429,16 @@ namespace Getticket.Web.API.Helpers
                 CountryName = o.Region.Country.Name
             }).ToList();
         }
+
+        public static CountryPlaceModel GetCountryPlaceModel(CountryPlace o)
+        {
+            return new CountryPlaceModel
+            {
+                Id = o.Id,
+                Name = o.Name,
+                IdCountry = o.Region.Country_Id,
+                CountryName = o.Region.Country.Name
+            };
+        }
     }
 }

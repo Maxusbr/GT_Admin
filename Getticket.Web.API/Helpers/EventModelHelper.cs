@@ -48,7 +48,7 @@ namespace Getticket.Web.API.Helpers
                 AgeLimit = entity.AgeLimit,
                 IdCompany = entity.Organizer?.Id,
                 Organizer = entity.Organizer?.Name
-            } : new EventModel();
+            } : null;
 
             return result;
         }

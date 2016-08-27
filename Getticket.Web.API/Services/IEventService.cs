@@ -66,7 +66,7 @@ namespace Getticket.Web.API.Services
         /// <param name="model"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResponce SaveEvent(EventModel model, int userId);
+        EventModel SaveEvent(EventModel model, int userId);
 
         /// <summary>
         /// Delete Event entity

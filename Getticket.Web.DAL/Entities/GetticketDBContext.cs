@@ -90,8 +90,8 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="EventDescription"/>
         public virtual DbSet<EventDescription> EventDescriptions { get; set; }
 
-        /// <see cref="EventDescriptionType"/>
-        public virtual DbSet<EventDescriptionType> EventDescriptionTypes { get; set; }
+        ///// <see cref="EventDescriptionType"/>
+        //public virtual DbSet<EventDescriptionType> EventDescriptionTypes { get; set; }
 
         /// <see cref="EventGenre"/>
         public virtual DbSet<EventGenre> EventGenres { get; set; }
@@ -575,6 +575,114 @@ namespace Getticket.Web.DAL.Entities
         }
         #endregion
 
+        #region Concert
+
+        /// <summary>
+        /// <see cref="Entities.ConcertSchedule"/>
+        /// </summary>
+        public virtual DbSet<ConcertSchedule> ConcertSchedules { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.ConcertDateRange"/>
+        /// </summary>
+        public virtual DbSet<ConcertDateRange> ConcertDateRanges { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.ConcertProgramm"/>
+        /// </summary>
+        public virtual DbSet<ConcertProgramm> ConcertProgramms { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.Actor"/>
+        /// </summary>
+        public virtual DbSet<Actor> Actors { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.ActorGroup"/>
+        /// </summary>
+        public virtual DbSet<ActorGroup> ActorGroups { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.Hall"/>
+        /// </summary>
+        public virtual DbSet<Hall> Halls { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.ConcertPlace"/>
+        /// </summary>
+        public virtual DbSet<ConcertPlace> ConcertPlaces { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.SeriesName"/>
+        /// </summary>
+        public virtual DbSet<SeriesName> Series { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.SeriesName"/>
+        /// </summary>
+        public virtual DbSet<SeriesConcert> SeriesConcerts { get; set; }
+
+        /// <summary>
+        /// <see cref="Entities.ConcertTicket"/>
+        /// </summary>
+        public virtual DbSet<ConcertTicket> ConcertTickets { get; set; }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.SeriesConcert"/>
+        /// </summary>
+        public class SeriesEventConfiguration : EntityTypeConfiguration<SeriesConcert>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public SeriesEventConfiguration()
+            {
+                this
+                    .HasRequired(e => e.Event)
+                    .WithMany()
+                    .HasForeignKey(e => e.EventId)
+                    .WillCascadeOnDelete(false);
+                this
+                    .HasRequired(e => e.Series)
+                    .WithMany()
+                    .HasForeignKey(e => e.SeriesId)
+                    .WillCascadeOnDelete(false);
+            }
+        }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.Event"/>
+        /// </summary>
+        public class EventConfiguration : EntityTypeConfiguration<Event>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public EventConfiguration()
+            {
+                this
+                    .HasMany(o => o.Series)
+                    .WithRequired(o => o.Event)
+                    .HasForeignKey(o => o.EventId)
+                    .WillCascadeOnDelete(false);
+                this
+                    .HasRequired(ic => ic.Tickets)
+                    .WithRequiredPrincipal(t => t.Event)
+                    .WillCascadeOnDelete(true);
+                //this
+                //    .HasRequired(ic => ic.Hall)
+                //    .WithRequiredPrincipal()
+                //    .WillCascadeOnDelete(false);
+                //this
+                //    .HasRequired(ic => ic.ConcertPlace)
+                //    .WithRequiredPrincipal()
+                //    .WillCascadeOnDelete(false);
+            }
+        }
+
+        #endregion
+
+
         /// <summary>
         /// Настройка БД через Fluent API
         /// Имеет приоритет над Code First
@@ -595,6 +703,9 @@ namespace Getticket.Web.DAL.Entities
             modelBuilder.Configurations.Add(new AntroLinkEventConfiguration());
             modelBuilder.Configurations.Add(new EventMediaLinkPersonConfiguration());
             modelBuilder.Configurations.Add(new EventMediaLinkEventConfiguration());
+            modelBuilder.Configurations.Add(new SeriesEventConfiguration());
+            modelBuilder.Configurations.Add(new EventConfiguration());
+
         }
     }
 }

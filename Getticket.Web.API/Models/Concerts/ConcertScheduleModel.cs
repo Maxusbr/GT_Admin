@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Getticket.Web.DAL.Entities
+namespace Getticket.Web.API.Models.Concerts
 {
     /// <summary>
     /// Расписание концерта
     /// </summary>
-    public class ConcertSchedule: BaseEntity
+    public class ConcertScheduleModel: BaseModel
     {
         /// <summary>
         /// Время начала концерта
@@ -39,15 +34,14 @@ namespace Getticket.Web.DAL.Entities
         public int? Period { get; set; }
 
         /// <summary>
-        /// Внешний ключ для <see cref="Entities.ConcertDateRange"/>
+        /// Внешний ключ для <see cref="ConcertDateRangeModel"/>
         /// </summary>
         [Required]
         public int IdRange { get; set; }
 
         /// <summary>
-        /// <see cref="Entities.ConcertDateRange"/>
+        /// <see cref="ConcertDateRangeModel"/>
         /// </summary>
-        [ForeignKey("IdRange")]
-        public virtual ConcertDateRange Range { get; set; }
+        public virtual ConcertDateRangeModel Range { get; set; }
     }
 }

@@ -1,11 +1,77 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
+﻿<div class="win-container r2 personViewOne" style="width:800px;" ng-controller="concertViewoneController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Событие: {{concert.Name}}
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('personViewOne')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="editConcert(concert)">
+                <span class="fa fa-edit"></span> Редактировать
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+        <div class="panel-info" cg-busy="Promise">
+            <div class="row" ng-if="concert">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <br />
+                            <h5>Название:  {{concert.Name}}</h5>
+                            <br />
+                        </div>
+                        <div class="col-lg-6">
+                            <br />
+                            Серия: <span ng-if="concert.Series.length"><i ng-repeat="row in item.Series">{{row.Series.Name}}</i></span>
+                            <span ng-if="!concert.Series.length">Не указана</span>
+                            <br />
+                            <br />
+                            Площадка: <span ng-if="concert.ConcertPlace"><i>{{row.ConcertPlace.Name}}</i></span>
+                            <span ng-if="!concert.ConcertPlace">Не указана</span>
+                            <br />
+                            <br />
+                            Билеты: <span ng-if="concert.Tickets"><i>{{row.Tickets.DateStart}}</i></span>
+                            <span ng-if="!concert.Tickets">Не опубликовано</span>
+                            <br />
+                        </div>
+                        <div class="col-lg-6">
+                            <br />
+                            Календарь: <span ng-if="shedules"><i>{{shedules}}</i></span>
+                            <span ng-if="!shedules">Не указан</span>
+                            <br />
+                            <br />
+                            Программа: <span ng-if="programms"><i>{{programms}}</i></span>
+                            <span ng-if="!programms">Не указана</span>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <!--person menu-->
+                    <a href="#" class="btn btn-block btn-info" ng-click="displaySeries()">
+                        <span class="fa fa-bookmark pull-left"></span> Серия ({{counts.CountFacts}})
+                    </a>
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayHall()">
+                        <span class="fa fa-file-video-o pull-left"></span> Площадка ({{counts.CountMedias}})
+                    </a>
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayCalendar()">
+                        <span class="fa fa-bookmark pull-left"></span> Календарь ({{counts.CountFacts}})
+                    </a>
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayProgramms()">
+                        <span class="fa fa-child pull-left"></span> Программа ({{counts.CountConnects}})
+                    </a>
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayTickets()">
+                        <span class="fa fa-cloud pull-left"></span> Билеты ({{counts.CountLinks}})
+                    </a>
+                </div>
+            </div>
+        </div>
 
-</body>
-</html>
+        <br />
+
+    </div>
+</div>

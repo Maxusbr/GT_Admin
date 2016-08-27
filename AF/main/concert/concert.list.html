@@ -1,4 +1,4 @@
-﻿<div class="win-container r1 disConcertList" style="width:1000px;">
+﻿<div class="win-container r1 disConcertList" style="width:1000px;" ng-controller="concertListController">
     <div class="win-header">
         <div class="win-header-text">
             Список событий
@@ -9,11 +9,11 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="createPreson()">
+            <a href="#" ng-click="createConcert()">
                 <span class="fa fa-plus"></span> Добавить
             </a>
         </div>
-        <div class="win-menu-button">
+        <!--<div class="win-menu-button">
             <a href="#" ng-click="createPreson()">
                 <span class="fa fa-arrow-left"></span> Прошедшие
             </a>
@@ -27,25 +27,45 @@
             <a href="#" ng-click="createPreson()">
                 <span class="fa fa-arrow-right"></span> Будущие
             </a>
-        </div>
+        </div>-->
         <div class="win-menu-button" style="width:250px;">
-            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" ng-model="personaMenuFilter" />
+            <input class="form-control" placeholder="Имя, фамилия, отчество, событие" ng-model="concertFilter" />
         </div>
     </div>
     <div class="win-content">
-        <table class="table">
+        <table class="table" cg-busy="Promise">
             <thead>
                 <tr>
                     <th>Название</th>
                     <th>Место</th>
+                    <th>Серия</th>
                     <th>Начало</th>
                     <th>Окончание</th>
-                    <th>Билетов</th>
-                    <th>Продано</th>
+                    <th>Билеты</th>
+                    <th>Изменено</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="item in concerts | filter:concertFilter">
+                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.Name}}</a></td>
+                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.ConcertPlace.Name}}</a></td>
+                    <td><span ng-repeat="row in item.Series">{{row.Series.Name}}</span></td>
+                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStartSold}}</a></td>
+                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStopSold}}</a></td>
+                    <td>
+                        <a href="#" ng-click="selectConcert(item.Id)">
+                            <span ng-if="item.Tickets">{{item.Tickets.DateStartSold}}</span>
+                            <span ng-if="!item.Tickets">Не опубликовано</span>
+                        </a>
+                    </td>
+                    <td>
+                        <i>
+                            {{item.LastChange.UserName}}<br>
+                            {{item.LastChange.Date | amCalendar}}
+                        </i>
+                    </td>
+                </tr>
+                <!--<tr>
                     <td>Бой за звание чемпиона мира по боксув супертяжелом весе по версии WBA</td>
                     <td>СК Олимпийский</td>
                     <td>22.12.2016 18:00</td>
@@ -76,7 +96,7 @@
                     <td>22.12.2016 24:00</td>
                     <td>6000</td>
                     <td>3214</td>
-                </tr>
+                </tr>-->
             </tbody>
         </table>
     </div>
