@@ -1,0 +1,229 @@
+﻿<div class="win-container r1 disReport" style="width:1000px;">
+    <div class="win-header">
+        <div class="win-header-text">
+            Календарь события
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disReport')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+    </div>
+    <div class="win-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <input type="radio"/>Разовое событие (может быть только один раз за все время)
+            </div>
+            <div class="col-lg-6">
+                <input type="radio" />Повторяющееся событие (периодическое или несколько показов за период)
+            </div>
+        </div>
+        <!-- div for one time concert-->
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel">
+                <h5>Дата события</h5>
+                <i>Укажите даты начала и окончания всей группы событий</i>
+                <br />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input class="form-control" placeholder="Дата начала"/>
+                    </div>
+                    <div class="col-lg-6">
+                        <input class="form-control" placeholder="Дата окончания" />
+                    </div>
+                </div>
+            </div>
+            <!--this for display all time graphs-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5>Существующие диапазоны</h5>
+                </div>
+                <div class="panel-body">
+                    <div style="white-space:nowrap; overflow-x:scroll; overflow-y:hidden">
+                        <div style="width:200px;" class="win-container">
+                            <div class="row">
+                                <a href="#">Еженедельные сеансы</a>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <span class="label label-default">Пн</span>
+                                    <span class="label label-default">Вт</span>
+                                </div>
+                                <div class="col-lg-5">
+                                    14:00, 15:00
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width:200px;" class="win-container">
+                            <div class="row">
+                                <a href="#">Дополнительные/однократные сеансы</a>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <span class="label label-default">12.12.2016</span>
+                                </div>
+                                <div class="col-lg-5">
+                                    14:00, 15:00
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a href="#">Добавить еженедельное</a>
+                    <a href="#">Добавить однократное</a>
+                </div>
+            </div>
+            <!--this for one repeat-->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5>Редактирование однократного события внутри повторяющегося</h5>
+                    <i>Внесите сюда дополнительные показы либо однократные показы в рамках одного события. Например, концерт 10, 12 и 14 числа, либо дополнительно к еженедельным сеансам показ 18 числа</i>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input type="radio" /> Одна дата
+                            <br/>
+                            <i>Если показ будет проходить только один день</i>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="radio" /> Период дат
+                            <br />
+                            <i>Если несколько дней подряд</i>
+                        </div>
+                        <!--if one date-->
+                        <div class="panel">
+                            <input class="form-control" placeholder="22.12.2016"/>
+                            <br/>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <i>В эту дату мероприятия пройдут:</i>
+                                    <br />
+                                    <span class="label label-default">12:00</span>
+                                    <span class="label label-default">13:00</span>
+                                    <span class="label label-default">14:00</span>
+                                </div>
+                                <div class="col-lg-4">
+                                    <input class="form-control" placeholder="12:00"/>
+                                    <br/>
+                                    <button class="btn btn-info">Добавить в список</button>
+                                    <br />
+                                    <button class="btn btn-info">Очистить список</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--if periodic-->
+                        <div class="panel">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input class="form-control" placeholder="c 22.12.2016" />
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <input class="form-control" placeholder="по 22.12.2016" />
+
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <i>В эту дату мероприятия пройдут:</i>
+                                    <br />
+                                    <span class="label label-default">12:00</span>
+                                    <span class="label label-default">13:00</span>
+                                    <span class="label label-default">14:00</span>
+                                </div>
+                                <div class="col-lg-4">
+                                    <input class="form-control" placeholder="12:00" />
+                                    <br />
+                                    <button class="btn btn-info">Добавить в список</button>
+                                    <br />
+                                    <button class="btn btn-info">Очистить список</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--this for weekly-->
+            <div class="panel">
+                <i>Добавьте время в дни недели</i>
+                <br />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Пн</th>
+                            <th>Вт</th>
+                            <th>Ср</th>
+                            <th>Чт</th>
+                            <th>Птн</th>
+                            <th>Сб</th>
+                            <th>Вс</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="label label-default">12:00</span></td>
+                            <td><span class="label label-default">12:00</span></td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="label label-default">12:00</span></td>
+                            <td></td>
+                            <td><span class="label label-default">19:00</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label label-default">14:00</span></td>
+                            <td><span class="label label-default">14:00</span></td>
+                            <td></td>
+                            <td></td>
+                            <td><span class="label label-default">15:00</span></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label label-default">18:00</span></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <i>Добавить время в указанный день</i>
+                <br />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <select class="form-control">
+                            <option>понедельник</option>
+                            <option>вторник</option>
+                            <option>среда</option>
+                            <option>четверг</option>
+                            <option>пятница</option>
+                            <option>суббота</option>
+                            <option>воскресенье</option>
+                        </select>
+                        <br />
+                        <a href="#">Очистить этот день</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <input class="form-control" placeholder="12:00" />
+                    </div>
+                    <div class="col-lg-4">
+                        <button class="btn btn-default">Добавить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
