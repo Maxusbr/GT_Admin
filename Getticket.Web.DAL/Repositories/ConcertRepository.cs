@@ -50,11 +50,10 @@ namespace Getticket.Web.DAL.Repositories
             return result;
         }
 
-        /// <see cref="IConcertRepository.GetConcertSeries" />
-        public IList<SeriesName> GetConcertSeries(int id)
+        /// <see cref="IConcertRepository.GetConcertSeriesName" />
+        public IList<SeriesName> GetConcertSeriesName()
         {
-            return db.SeriesConcerts.Where(o => o.EventId == id)
-                .Include(o => o.Series).Select(o => o.Series).ToList();
+            return db.Series.ToList();
         }
 
         /// <see cref="IConcertRepository.GetConcertSchedules" />
@@ -82,7 +81,8 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IConcertRepository.GetConcertPlace" />
         public IList<ConcertPlace> GetConcertPlace(int placeId)
         {
-            return db.ConcertPlaces.Where(o => o.PlaceId == placeId).ToList();
+            return db.ConcertPlaces.Where(o => o.PlaceId == placeId)
+                .Include(o => o.Halls).ToList();
         }
 
         /// <see cref="IConcertRepository.AddConcert" />
@@ -120,6 +120,8 @@ namespace Getticket.Web.DAL.Repositories
             try
             {
                 db.SaveChanges();
+                foreach (var el in model.Series)
+                    SaveConcertSeries(model.Id, el.SeriesId);
             }
             catch (Exception e)
             {
@@ -160,13 +162,15 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IConcertRepository.SaveConcertPlace" />
         public ConcertPlace SaveConcertPlace(ConcertPlace model)
         {
+            var pr = db.ConcertPlaces.FirstOrDefault(o => o.Name.ToLower().Equals(model.Name.ToLower()) && o.PlaceId == model.PlaceId);
+            if (pr != null) return pr;
             if (model.Id == 0)
             {
                 db.Entry(model).State = EntityState.Added;
             }
             else if (model.Id > 0)
             {
-                var pr = db.ConcertPlaces.FirstOrDefault(o => o.Id == model.Id);
+                pr = db.ConcertPlaces.FirstOrDefault(o => o.Id == model.Id);
                 db.Entry(pr).CurrentValues.SetValues(model);
             }
             try
@@ -183,13 +187,15 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IConcertRepository.SaveSeriesName" />
         public SeriesName SaveSeriesName(SeriesName model)
         {
+            var pr = db.Series.FirstOrDefault(o => o.Name.ToLower().Equals(model.Name.ToLower()));
+            if (pr != null) return pr;
             if (model.Id == 0)
             {
                 db.Entry(model).State = EntityState.Added;
             }
             else if (model.Id > 0)
             {
-                var pr = db.Series.FirstOrDefault(o => o.Id == model.Id);
+                pr = db.Series.FirstOrDefault(o => o.Id == model.Id);
                 db.Entry(pr).CurrentValues.SetValues(model);
             }
             try

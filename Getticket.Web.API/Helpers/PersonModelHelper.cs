@@ -430,15 +430,15 @@ namespace Getticket.Web.API.Helpers
             }).ToList();
         }
 
-        public static CountryPlaceModel GetCountryPlaceModel(CountryPlace o)
+        public static CountryPlaceModel GetCountryPlaceModel(CountryPlace model)
         {
-            return new CountryPlaceModel
+            return model != null ? new CountryPlaceModel
             {
-                Id = o.Id,
-                Name = o.Name,
-                IdCountry = o.Region.Country_Id,
-                CountryName = o.Region.Country.Name
-            };
+                Id = model.Id,
+                Name = model.Name,
+                IdCountry = model.Region.Country_Id,
+                CountryName = model.Region.Country.Name
+            }: null;
         }
     }
 }

@@ -48,8 +48,8 @@
             <tbody>
                 <tr ng-repeat="item in concerts | filter:concertFilter">
                     <td><a href="#" ng-click="selectConcert(item.Id)">{{item.Name}}</a></td>
-                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.ConcertPlace.Name}}</a></td>
-                    <td><span ng-repeat="row in item.Series">{{row.Series.Name}}</span></td>
+                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.ConcertPlace.Name}} <span ng-show="item.Hall"> ({{item.Hall.Name}})</span></a></td>
+                    <td><span ng-repeat="row in item.Series">{{row.Name}}</span></td>
                     <td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStartSold}}</a></td>
                     <td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStopSold}}</a></td>
                     <td>

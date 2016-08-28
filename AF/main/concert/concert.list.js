@@ -6,6 +6,7 @@
         $rootScope.loadConcerts = function () {
             $scope.Promise = concertService.getConcerts(function(data) {
                 $rootScope.concerts = data;
+                //TODO get change
             });
         }
         $rootScope.loadConcerts();

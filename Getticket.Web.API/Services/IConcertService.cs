@@ -29,10 +29,10 @@ namespace Getticket.Web.API.Services
         EventModel GetConcert(int id);
 
         /// <summary>
-        /// Список концертных серий для концерта <see cref="EventModel"/> с Id = <paramref name="id" /> 
+        /// Список наименований концертных серий
         /// </summary>
         /// <returns></returns>
-        IEnumerable<SeriesNameModel> GetConcertSeries(int id);
+        IEnumerable<SeriesNameModel> GetConcertSeriesName();
 
         /// <summary>
         /// Список расписаний концерта <see cref="EventModel"/> с Id = <paramref name="id"/>
@@ -73,14 +73,14 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        ServiceResponce SaveHall(HallModel model);
+        HallModel SaveHall(HallModel model);
 
         /// <summary>
         /// Сохранить/добавить серию <see cref="SeriesNameModel"/> 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        ServiceResponce SaveSeriesName(SeriesNameModel model);
+        ServiceResponce SaveSeriesName(SeriesConcertModel model);
 
         /// <summary>
         /// Сохранить/добавить расписания <see cref="ConcertScheduleModel"/> для концерта <see cref="EventModel"/> с Id = <paramref name="eventId"/>
@@ -120,6 +120,12 @@ namespace Getticket.Web.API.Services
         /// <returns></returns>
         ServiceResponce SaveGroup(ActorGroupModel model);
 
+        /// <summary>
+        /// Сохранить название концертной площадки
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        ConcertPlaceModel SaveConcertPlace(ConcertPlaceModel model);
     }
 
     

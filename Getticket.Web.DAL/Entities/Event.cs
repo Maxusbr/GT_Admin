@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -71,12 +72,14 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="EventCategory"/>
         /// </summary>
         [ForeignKey("IdCategory")]
+        [JsonIgnore]
         public virtual EventCategory Category { get; set; }
 
         /// <summary>
         /// <see cref="Company"/>
         /// </summary>
         [ForeignKey("IdCompany")]
+        [JsonIgnore]
         public virtual Company Organizer { get; set; }
 
         /// <summary>
@@ -88,6 +91,7 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="Event"/>
         /// </summary>
         [ForeignKey("ParentId")]
+        [JsonIgnore]
         public virtual Event Parent { get; set; }
 
         /// <summary>
@@ -98,6 +102,7 @@ namespace Getticket.Web.DAL.Entities
         /// Зал
         /// </summary>
         [ForeignKey("HallId")]
+        [JsonIgnore]
         public virtual Hall Hall { get; set; }
 
         /// <summary>
@@ -108,16 +113,19 @@ namespace Getticket.Web.DAL.Entities
         /// Площадка
         /// </summary>
         [ForeignKey("ConcertPlaceId")]
+        [JsonIgnore]
         public virtual ConcertPlace ConcertPlace { get; set; }
 
         /// <summary>
         /// Серии концерта
         /// </summary>
+        [JsonIgnore]
         public virtual IList<SeriesConcert> Series { get; set; }
 
         /// <summary>
         /// Билеты
         /// </summary>
+        [JsonIgnore]
         public virtual ConcertTicket Tickets { get; set; }
     }
 }

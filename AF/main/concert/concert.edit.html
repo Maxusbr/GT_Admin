@@ -1,5 +1,5 @@
 ﻿
-<div class="win-container r3 concertEdit" style="width:700px;" ng-controller="concertEditController as ctrl">
+<div class="win-container r3 concertEdit" style="width:350px;" ng-controller="concertEditController as ctrl">
     <div class="win-header">
         <div class="win-header-text">
             Изменить событие
@@ -15,118 +15,71 @@
             </a>
         </div>
     </div>
-    <div class="win-content">
+    <div class="win-content" cg-busy="Promise">
         <div class="row">
-            <div class="col-lg-6">
-                <h5>На русском</h5>
+            <div class="col-md-12">
+                <h4>{{concert.Parent.Name}}</h4>
+                <h6 style="white-space: normal;"><span>{{concert.Parent.Description}}</span></h6>
+                <br />
                 Название
                 <br />
                 <input class="form-control" placeholder="от 3 знаков" ng-model="concert.Name" />
                 <br />
                 Описание
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="concert.Description" />
-                <br />
-            </div>
-            <div class="col-lg-6">
-                <h5>На английском</h5>
-                Название
-                <br />
-                <input class="form-control" placeholder="от 3 знаков" />
-                <br />
-                Описание
-                <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <textarea class="form-control" placeholder="до 150 знаков" ng-model="concert.Description"></textarea>
                 <br />
             </div>
         </div>
-        <hr />
-        <div class="row">
-            <div class="col-lg-6">
-                Категория
-                <br />
-                <select class="form-control" ng-model="concert.ConcertParentCategoryId"
-                        ng-options="item.Id as item.Name for item in baseCategory"></select>
-                <a href="#" ng-click="editCat()">Редактировать</a>
-            </div>
-            <div class="col-lg-6">
-                Подкатегория
-                <br />
-                <select class="form-control" ng-model="concert.ConcertCategoryId"
-                        ng-options="item.Id as item.Name for item in getChildCategory(concert.ConcertParentCategoryId)"></select>
-                <a href="#" ng-click="editCat()">Редактировать</a>
-            </div>
-            <div class="col-lg-6">
-                <!--Организатор
-                <br />-->
-                <!--<input class="form-control" placeholder="от 3 знаков" ng-model="concert.Organizer"/>-->
-                <md-autocomplete flex required
-                                 md-input-name="autocompleteField"
-                                 md-input-minlength="3"
-                                 md-no-cache="ctrl.noCache"
-                                 md-selected-item="selectedOrganizer"
-                                 md-search-text="concert.Organizer"
-                                 md-items="item in ctrl.querySearch(concert.Organizer)"
-                                 md-item-text="item.Name"
-                                 md-floating-label="Организатор">
-                    <md-item-template>
-                        <span md-highlight-text="concert.Organizer">{{item.Name}}</span>
-                    </md-item-template>
-                    <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-                        <div ng-message="required">You <b>must</b> have a favorite state.</div>
-                        <div ng-message="md-require-match">Please select an existing state.</div>
-                        <div ng-message="minlength">Your entry is not long enough.</div>
-                        <div ng-message="maxlength">Your entry is too long.</div>
-                    </div>-->
-                    <md-not-found>
-                        Совпадений не найдено...
-                    </md-not-found>
-                </md-autocomplete>
-                <!--<a href="#" ng-click="editOrg()">Редактировать</a>-->
-            </div>
-            <div class="col-lg-6">
-                Возрастные ограничения
-                <br />
-                <input class="form-control" placeholder="12+" ng-model="concert.AgeLimit" />
-                <br />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4">
-                <span style="padding-right: 5px;">Опубликовано</span>
-                <input class="form-control" placeholder="от 3 знаков" type="checkbox"
-                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 30px;" ng-model="concert.IsPublished" />
-            </div>
-            <div class="col-lg-4">
-                Дата начала доступности
-                <p class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStartSold"
-                           is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
-                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </p>
 
-                <!--<md-content>
-                    <md-datepicker ng-model="dateStartSold" md-placeholder="Дата начала "></md-datepicker>
-                </md-content>-->
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Входит в серию</h5>
+                <div class="tags">
+                    <tags-input ng-model="concert.Series" display-property="Name" add-on-paste="true" placeholder="серия">
+                        <auto-complete source="loadSeries($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
+                    </tags-input>
+                </div>
+                <script type="text/ng-template" id="my-custom-template">
+                    <div class="right-panel">
+                        <span ng-bind-html="$highlight($getDisplayText())"></span>
+                        <!--<span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>-->
+                    </div>
+                </script>
             </div>
-            <div class="col-lg-4">
-                Дата окончания доступности
-                <p class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStopSold"
-                           is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
-                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </p>
-                <!--<md-content>
-                    <md-datepicker ng-model="dateStopSold" md-placeholder="Дата окончания "></md-datepicker>
-                </md-content>-->
-                <!-- <input type="date" name="calendar" value="" class="form-control" placeholder=""/> -->
-
+            <br />
+            <div class="col-md-12">
+                <h5>Площадка</h5>
+                Населенный пункт
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Город" name="Place" uib-typeahead="item as item.Name for item in getPlaces($viewValue)"
+                           ng-model="place" typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                           typeahead-template-url="customTemplate.html" typeahead-min-length="3"> <!--uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">-->
+                    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                    <div ng-show="noResults">
+                        <i class="glyphicon glyphicon-remove"></i> Не найдено
+                    </div>
+                    <script type="text/ng-template" id="customTemplate.html">
+                        <a>
+                            <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+                            <span> ({{match.model.CountryName}})</span>
+                        </a>
+                    </script>
+                </div>
+                <div ng-if="isPlace(place)">
+                    Площадка
+                    <br />
+                    <select class="form-control" ng-model="concert.ConcertPlaceId"
+                            ng-options="item.Id as item.Name for item in concertPlaces"></select>
+                    <a href="#" ng-click="editPlace()">Редактировать</a>
+                    <div ng-show="existHall(concert.ConcertPlaceId)">
+                        Зал
+                        <br />
+                        <select class="form-control" ng-model="concert.HallId"
+                                ng-options="item.Id as item.Name for item in getHall(concert.ConcertPlaceId)"></select>
+                        <a href="#" ng-click="editPlace()">Редактировать</a>
+                    </div>
+                </div>
             </div>
         </div>
 

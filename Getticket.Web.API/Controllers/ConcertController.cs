@@ -54,22 +54,37 @@ namespace Getticket.Web.API.Controllers
             return Ok(_concertService.GetConcert(id));
         }
 
+        /// <see cref="IConcertService.GetConcertSeriesName" />
+        [Route("series")]
+        [HttpGet]
+        public IHttpActionResult GetConcertSeriesName()
+        {
+            return Ok(_concertService.GetConcertSeriesName());
+        }
 
 
-        /// <see cref="IConcertService.GetConcert" />
+        /// <see cref="IConcertService.GetConcertSchedules" />
         [Route("schedule/{id}")]
         [HttpGet]
-        public IHttpActionResult GetConcertSchedule(int id)
+        public IHttpActionResult GetConcertSchedules(int id)
         {
             return Ok(_concertService.GetConcertSchedules(id));
         }
 
-        /// <see cref="IConcertService.GetConcert" />
+        /// <see cref="IConcertService.GetConcertProgramms" />
         [Route("programm/{id}")]
         [HttpGet]
-        public IHttpActionResult GetConcertProgramm(int id)
+        public IHttpActionResult GetConcertProgramms(int id)
         {
             return Ok(_concertService.GetConcertProgramms(id));
+        }
+
+        /// <see cref="IConcertService.GetConcertProgramms" />
+        [Route("halls/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetConcertHalls(int id)
+        {
+            return Ok(_concertService.GetConcertPlaces(id));
         }
 
         /// <see cref="IConcertService.SaveConcert" />
@@ -90,7 +105,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(succes.Response());
         }
 
-        /// <see cref="IConcertService.SaveConcert" />
+        /// <see cref="IConcertService.SaveConcertProgramm" />
         [HttpPost]
         [Route("programm/{id}")]
         public IHttpActionResult Post(int id, [FromBody] IEnumerable<ConcertProgrammModel> models)
@@ -106,7 +121,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(_concertService.SaveConcertProgramm(id, models) ? succes.Response() : error.Response());
         }
 
-        /// <see cref="IConcertService.SaveConcert" />
+        /// <see cref="IConcertService.SaveConcertSchedules" />
         [HttpPost]
         [Route("schedule/{id}")]
         public IHttpActionResult Post(int id, [FromBody] IEnumerable<ConcertDateRangeModel> models)
@@ -121,6 +136,41 @@ namespace Getticket.Web.API.Controllers
 
             return Ok(_concertService.SaveConcertSchedules(id, models) ? succes.Response() : error.Response());
         }
+
+        /// <see cref="IConcertService.SaveConcertPlace" />
+        [HttpPost]
+        [Route("concertplace/save")]
+        public IHttpActionResult Post([FromBody] ConcertPlaceModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var succes = ServiceResponce.FromSuccess().Result("Concert schedules save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save concert schedules");
+            var res = _concertService.SaveConcertPlace(model);
+            if (res != null)
+                succes.Add("ConcertPlaceId", res.Id);
+            return Ok(res != null ? succes.Response() : error.Response());
+        }
+
+        /// <see cref="IConcertService.SaveConcertPlace" />
+        [HttpPost]
+        [Route("hall/save")]
+        public IHttpActionResult Post([FromBody] HallModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var succes = ServiceResponce.FromSuccess().Result("Concert schedules save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save concert schedules");
+            var res = _concertService.SaveHall(model);
+            if (res != null)
+                succes.Add("ConcertPlaceId", res.Id);
+            return Ok(res != null ? succes.Response() : error.Response());
+        }
+
 
         #endregion
 

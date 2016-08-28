@@ -32,10 +32,10 @@ namespace Getticket.Web.DAL.IRepositories
         Event GetConcert(int id);
 
         /// <summary>
-        /// Список концертных серий для концерта <see cref="Event"/> с Id = <paramref name="id" /> 
+        /// Список названий концертных серий 
         /// </summary>
         /// <returns></returns>
-        IList<SeriesName> GetConcertSeries(int id);
+        IList<SeriesName> GetConcertSeriesName();
 
         /// <summary>
         /// Список расписаний концерта <see cref="Event"/> с Id = <paramref name="id"/>

@@ -26,46 +26,52 @@
                         </div>
                         <div class="col-lg-6">
                             <br />
-                            Серия: <span ng-if="concert.Series.length"><i ng-repeat="row in item.Series">{{row.Series.Name}}</i></span>
-                            <span ng-if="!concert.Series.length">Не указана</span>
+                            Серия: <span ng-show="concert.Series.length" style="white-space: normal">
+                                <i ng-repeat="row in concert.Series">{{row.Name}}</i>
+                            </span>
+                            <span ng-show="!concert.Series.length">Не указана</span>
                             <br />
                             <br />
-                            Площадка: <span ng-if="concert.ConcertPlace"><i>{{row.ConcertPlace.Name}}</i></span>
-                            <span ng-if="!concert.ConcertPlace">Не указана</span>
+                            Площадка:
+                            <span ng-show="concert.ConcertPlace">
+                                {{concert.ConcertPlace.Name}}
+                                <i ng-show="concert.Hall"> ({{concert.Hall.Name}})</i>
+                            </span>
+                            <span ng-show="!concert.ConcertPlace">Не указана</span>
                             <br />
                             <br />
-                            Билеты: <span ng-if="concert.Tickets"><i>{{row.Tickets.DateStart}}</i></span>
-                            <span ng-if="!concert.Tickets">Не опубликовано</span>
+                            Билеты: <span ng-show="concert.Tickets"><i>{{concert.Tickets.DateStart}}</i></span>
+                            <span ng-show="!concert.Tickets">Не опубликовано</span>
                             <br />
                         </div>
                         <div class="col-lg-6">
                             <br />
-                            Календарь: <span ng-if="shedules"><i>{{shedules}}</i></span>
-                            <span ng-if="!shedules">Не указан</span>
+                            Календарь: <span ng-show="shedules"><i>{{shedules}}</i></span>
+                            <span ng-show="!shedules">Не указан</span>
                             <br />
                             <br />
-                            Программа: <span ng-if="programms"><i>{{programms}}</i></span>
-                            <span ng-if="!programms">Не указана</span>
+                            Программа: <span ng-show="programms"><i>{{programms}}</i></span>
+                            <span ng-show="!programms">Не указана</span>
                             <br />
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <!--person menu-->
-                    <a href="#" class="btn btn-block btn-info" ng-click="displaySeries()">
-                        <span class="fa fa-bookmark pull-left"></span> Серия ({{counts.CountFacts}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displaySeries(concert)">
+                        <span class="fa fa-bookmark pull-left"></span> Серия
                     </a>
-                    <a href="#" class="btn btn-block btn-info" ng-click="displayHall()">
-                        <span class="fa fa-file-video-o pull-left"></span> Площадка ({{counts.CountMedias}})
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayHall(concert)">
+                        <span class="fa fa-file-video-o pull-left"></span> Площадка
                     </a>
                     <a href="#" class="btn btn-block btn-info" ng-click="displayCalendar()">
-                        <span class="fa fa-bookmark pull-left"></span> Календарь ({{counts.CountFacts}})
+                        <span class="fa fa-bookmark pull-left"></span> Календарь
                     </a>
                     <a href="#" class="btn btn-block btn-info" ng-click="displayProgramms()">
-                        <span class="fa fa-child pull-left"></span> Программа ({{counts.CountConnects}})
+                        <span class="fa fa-child pull-left"></span> Программа
                     </a>
                     <a href="#" class="btn btn-block btn-info" ng-click="displayTickets()">
-                        <span class="fa fa-cloud pull-left"></span> Билеты ({{counts.CountLinks}})
+                        <span class="fa fa-cloud pull-left"></span> Билеты
                     </a>
                 </div>
             </div>

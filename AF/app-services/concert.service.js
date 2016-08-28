@@ -29,7 +29,14 @@
                 if (callback) callback(data);
             });
         }
-
+        service.getSeries = function (callback) {
+            return $http.get(`${serviceUrl}concerts/series`).success(function (data) {
+                if (callback) callback(data);
+            });
+        }
+        service.getHalls = function (id) {
+            return $http.get(`${serviceUrl}concerts/halls/${id}`);
+        }
         service.saveConcert = function (model, callback) {
             return $http.post(`${serviceUrl}concerts/add`, model).success(function (data) {
                 if (callback)
@@ -50,6 +57,24 @@
         }
         service.saveSchedule = function (id, model, callback) {
             return $http.post(`${serviceUrl}concerts/schedule/${id}`, model).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
+        }
+        service.saveConcertPlace = function (model, callback) {
+            return $http.post(`${serviceUrl}concerts/concertplace/save`, model).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
+        }
+        service.saveHall = function (model, callback) {
+            return $http.post(`${serviceUrl}concerts/hall/save`, model).success(function (data) {
                 if (callback)
                     callback(data);
             }).error(function (data) {

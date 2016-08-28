@@ -41,10 +41,10 @@ namespace Getticket.Web.API.Services
             return ConcertModelHelper.GetConcertModel(_concertRepository.GetConcert(id));
         }
 
-        /// <see cref="IConcertService.GetConcertSeries"/>
-        public IEnumerable<SeriesNameModel> GetConcertSeries(int id)
+        /// <see cref="IConcertService.GetConcertSeriesName"/>
+        public IEnumerable<SeriesNameModel> GetConcertSeriesName()
         {
-            return _concertRepository.GetConcertSeries(id).Select(ConcertModelHelper.GetSeriesNameModel);
+            return _concertRepository.GetConcertSeriesName().Select(ConcertModelHelper.GetSeriesNameModel);
         }
 
         /// <see cref="IConcertService.GetConcertSchedules"/>
@@ -83,7 +83,11 @@ namespace Getticket.Web.API.Services
                 entity.ConcertPlace = _concertRepository.SaveConcertPlace(ConcertModelHelper.GetConcertPlace(concert.ConcertPlace));
             if (concert.Tickets != null)
                 entity.Tickets = _concertRepository.SaveConcertTicket(ConcertModelHelper.GetConcertTicket(concert.Tickets, entity));
-            entity.Series = concert.Series?.Select(o => ConcertModelHelper.GetSeries(entity.Id, o.EventId)).ToList();
+            var series =
+                concert.Series.Select(o => _concertRepository.SaveSeriesName(ConcertModelHelper.GetSeriesName(o)));
+            entity.Series = series.Select(o => ConcertModelHelper.GetSeries(entity.Id, o.Id)).ToList();
+
+            //entity.Series = concert.Series?.Select(o => ConcertModelHelper.GetSeries(entity.Id, o.EventId)).ToList();
             //concert.Series?.Select(o => _concertRepository.SaveConcertSeries(entity.Id, o.SeriesId));
 
             entity = _concertRepository.UpdateConcert(entity, userId);
@@ -91,7 +95,7 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IConcertService.SaveSeriesName"/>
-        public ServiceResponce SaveSeriesName(SeriesNameModel model)
+        public ServiceResponce SaveSeriesName(SeriesConcertModel model)
         {
             var res = _concertRepository.SaveSeriesName(ConcertModelHelper.GetSeriesName(model));
             var response = res != null ? ServiceResponce
@@ -138,11 +142,17 @@ namespace Getticket.Web.API.Services
             return response;
         }
 
+        /// <see cref="IConcertService.SaveConcertPlace"/>
+        public ConcertPlaceModel SaveConcertPlace(ConcertPlaceModel model)
+        {
+            return ConcertModelHelper.GetConcertPlaceModel(_concertRepository.SaveConcertPlace(ConcertModelHelper.GetConcertPlace(model)));
+        }
+
 
         /// <see cref="IConcertService.SaveHall"/>
-        public ServiceResponce SaveHall(HallModel model)
+        public HallModel SaveHall(HallModel model)
         {
-            throw new System.NotImplementedException();
+            return ConcertModelHelper.GetHallModel(_concertRepository.SaveHall(ConcertModelHelper.GetHall(model)));
         }
 
         /// <see cref="IConcertService.SaveConcertTicket"/>

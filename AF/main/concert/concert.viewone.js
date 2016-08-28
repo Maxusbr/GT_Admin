@@ -5,13 +5,15 @@
     function concertViewoneController($rootScope, $scope, concertService) {
         var vm = this;
 
-        $scope.displaySeries = function () {
+        $scope.displaySeries = function (concert) {
+            $rootScope.editedConcert = concert;
             app.closeThird();
-            app.loadContentView('/main/concert/r3/concert.series.html', 2500);
+            app.loadContentView('/main/concert/concert.edit.html', 1800);
         }
-        $scope.displayHall = function () {
+        $scope.displayHall = function (concert) {
+            $rootScope.editedConcert = concert;
             app.closeThird();
-            app.loadContentView('/main/concert/r3/concert.hall.html', 2500);
+            app.loadContentView('/main/concert/concert.edit.html', 1800);
         }
         $scope.displayCalendar = function () {
             app.closeThird();
@@ -32,6 +34,7 @@
         $rootScope.getConcert = function (id) {
             $scope.Promise = concertService.getConcert(id, function (data) {
                 $scope.concert = data;
+                //TODO get programm & calendar
                 //concertService.getCountes(id, function (counts) {
                 //    $scope.counts = counts;
                 //});

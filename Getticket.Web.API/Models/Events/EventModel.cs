@@ -56,7 +56,7 @@ namespace Getticket.Web.API.Models.Events
         /// <summary>
         /// Id Категории
         /// </summary>
-        public int EventParentCategoryId { get; set; }
+        public int? EventParentCategoryId { get; set; }
 
         /// <summary>
         /// Возрастное ограничение
@@ -87,15 +87,22 @@ namespace Getticket.Web.API.Models.Events
         /// <see cref="EventModel"/>
         /// </summary>
         public virtual EventModel Parent { get; set; }
-
+        /// <summary>
+        /// Внешний ключ для <see cref="HallModel"/>
+        /// </summary>
+        public int? HallId { get; set; }
         /// <summary>
         /// Зал
         /// </summary>
         public virtual HallModel Hall { get; set; }
-
+        /// <summary>
+        /// Внешний ключ для <see cref="ConcertPlaceModel"/>
+        /// </summary>
+        public int? ConcertPlaceId { get; set; }
         /// <summary>
         /// Площадка
         /// </summary>
+
         public virtual ConcertPlaceModel ConcertPlace { get; set; }
 
         /// <summary>

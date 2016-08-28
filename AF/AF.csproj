@@ -74,10 +74,12 @@
     <Content Include="Content\select.min.css" />
     <Content Include="login\login.controller.js" />
     <Content Include="login\login.view.html" />
-    <Content Include="main\concert\concert.create.calendar.html" />
-    <Content Include="main\concert\concert.create.calendar.js" />
-    <Content Include="main\concert\concert.create.html" />
-    <Content Include="main\concert\concert.create.js" />
+    <Content Include="main\concert\r3\concert.tickets.html" />
+    <Content Include="main\concert\r3\concert.tickets.js" />
+    <Content Include="main\concert\r3\concert.programm.html" />
+    <Content Include="main\concert\r3\concert.programm.js" />
+    <Content Include="main\concert\r3\concert.calendar.html" />
+    <Content Include="main\concert\r3\concert.calendar.js" />
     <Content Include="main\concert\concert.list.html" />
     <Content Include="main\concert\concert.list.js" />
     <Content Include="main\concert\concert.viewone.html" />
@@ -87,6 +89,8 @@
     <Content Include="main\dashboard.html" />
     <Content Include="main\dictionary\dictionary.antro.types.html" />
     <Content Include="main\dictionary\dictionary.antro.types.js" />
+    <Content Include="main\dictionary\dictionary.concert.hall.html" />
+    <Content Include="main\dictionary\dictionary.concert.hall.js" />
     <Content Include="main\dictionary\dictionary.event.category.html" />
     <Content Include="main\dictionary\dictionary.event.category.js" />
     <Content Include="main\dictionary\dictionary.event.org.html" />

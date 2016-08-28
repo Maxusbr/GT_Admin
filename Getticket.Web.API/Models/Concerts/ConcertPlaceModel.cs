@@ -26,6 +26,6 @@ namespace Getticket.Web.API.Models.Concerts
         /// <summary>
         /// Площадки
         /// </summary>
-        public virtual IList<HallModel> Halls { get; set; }
+        public virtual IEnumerable<HallModel> Halls { get; set; }
     }
 }

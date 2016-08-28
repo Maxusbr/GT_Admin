@@ -225,3 +225,12 @@ div.scrolled-view{
         background-color: #dc4f35;
         color: #fff;
     }
+    md-autocomplete[md-floating-label] md-input-container {
+        width: 100%;
+}
+    md-chips .md-chips {
+        box-shadow: none
+    } 
+       md-chips .md-chips.md-focused{
+        box-shadow: none
+    }

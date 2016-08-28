@@ -1,77 +1,82 @@
 ﻿(function () {
     'use strict';
 
-    function concertEditController($rootScope, $scope, concertService, $filter) {
+    function concertEditController($rootScope, $scope, concertService, personService, $filter) {
         var vm = this;
-
-        
         vm.organizers = [];
 
         $scope.concert = $rootScope.editedConcert;
-
-        if ($scope.concert.DateStartSold)
-            $scope.dateStartSold = new Date($scope.concert.DateStartSold);
-        if ($scope.concert.DateStopSold)
-            $scope.dateStopSold = new Date($scope.concert.DateStopSold);
-        $scope.$watch('dateStartSold', function (date) {
-            if (date) $scope.concert.DateStartSold = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-        });
-        $scope.$watch('dateStopSold', function (date) {
-            if (date) $scope.concert.DateStopSold = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-        });
-        $rootScope.$watch('concertCategories', function (items) {
-            if (!items) return;
-            $scope.baseCategory = items.filter(function (item) {
-                return item.IdParent == null;
+        $scope.getPlaces = function (value) {
+            $scope.places = [];
+            return personService.getPlaces(value).then(function (response) {
+                $scope.places.push.apply($scope.places, response.data);
+                return response.data.map(function (item) {
+                    return item;
+                });
             });
+        }
+        if ($scope.concert && $scope.concert.ConcertPlace)
+            $scope.place = $scope.concert.ConcertPlace.CountryPlace;
+
+        $scope.isPlace = function (place) {
+            return place && typeof place !== 'string';
+        }
+        $rootScope.getHalls = function (id) {
+            $rootScope.concertPlaces = [];
+            $scope.Promise = concertService.getHalls(id).then(function (response) {
+                $rootScope.concertPlaces.push.apply($rootScope.concertPlaces, response.data);
+            });
+        }
+        $scope.$watch('place', function (data) {
+            if (!$scope.isPlace(data) || !data.Id) return;
+            $rootScope.getHalls(data.Id);
         });
 
-        $scope.editCat = function () {
+        $scope.existHall = function (id) {
+            var place = $rootScope.concertPlaces.filter(function (item) { return item.Id === id; })[0];
+            return place && place.Halls && place.Halls.length;
+        }
+        $scope.getHall = function (id) {
+            var place = $rootScope.concertPlaces.filter(function (item) { return item.Id === id; })[0];
+            return place && place.Halls ? place.Halls : [];
+        }
+        $scope.editPlace = function () {
+            $rootScope.countryPlace = $scope.place;
+            $rootScope.$watch('countryPlace', function (place) {
+                $scope.place = place;
+            });
             app.closeFive();
-            app.loadContentView('/main/dictionary/dictionary.concert.category.html', 3200);
+            app.loadContentView('/main/dictionary/dictionary.concert.hall.html', 3200);
         }
 
-        $scope.editOrg = function () {
-            app.closeFive();
-            app.loadContentView('/main/dictionary/dictionary.concert.org.html', 3200);
+        // Series
+        concertService.getSeries(function (data) {
+            $scope.series = [];
+            $scope.series.push.apply($scope.series, data);
+        });
+        $scope.loadSeries = function (query) {
+            if (!$scope.series) return [];
+            var result = $scope.series.filter(function (item) { return item.Name.toLowerCase().indexOf(query.toLowerCase()) >= 0; });
+            result = $filter('orderBy')(result, function (item) {
+                item.Name.substring(0, query.length);
+            });
+            return result;
         }
 
-        $scope.saveEvent = function () {
-            if ($scope.concert.AgeLimit)
-                $scope.concert.AgeLimit = parseInt($scope.concert.AgeLimit, 10);
-            concertService.Save($scope.concert, function (data) {
-                $rootScope.loadEvent();
-                if ($rootScope.getEvent)
-                    $rootScope.getEvent($scope.concert.Id);
+        $scope.saveConcert = function () {
+            concertService.saveConcert($scope.concert, function (data) {
+                $rootScope.loadConcerts();
+                if ($rootScope.getConcert)
+                    $rootScope.getConcert($scope.concert.Id);
                 app.closeView('concertEdit');
             });
         }
 
-        // Datepicker
-        $scope.dateOptions = {
-            formatYear: 'yyyy',
-            startingDay: 1,
-            showWeeks: false
-        };
-        $scope.open1 = function () {
-            $scope.popup1.opened = true;
-        };
-
-        $scope.open2 = function () {
-            $scope.popup2.opened = true;
-        };
-        $scope.popup1 = {
-            opened: false
-        };
-
-        $scope.popup2 = {
-            opened: false
-        };
     }
 
     angular
         .module('app')
         .controller('concertEditController', concertEditController);
 
-    concertEditController.$inject = ['$rootScope', '$scope', 'concertService', '$filter'];
+    concertEditController.$inject = ['$rootScope', '$scope', 'concertService', 'personService', '$filter'];
 })();

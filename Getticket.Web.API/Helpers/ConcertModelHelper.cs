@@ -15,47 +15,49 @@ namespace Getticket.Web.API.Helpers
     /// </summary>
     public static class ConcertModelHelper
     {
-        public static Event GetConcertBase(EventModel concert)
+        public static Event GetConcertBase(EventModel model)
         {
-            return new Event
+            return model != null ? new Event
             {
-                Id = concert.Id,
-                Name = concert.Name,
-                Description = concert.Description,
-                IdCategory = concert.EventCategoryId ?? concert.EventParentCategoryId,
-                AgeLimit = concert.AgeLimit,
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                IdCategory = (int)(model.EventCategoryId ?? model.EventParentCategoryId),
+                AgeLimit = model.AgeLimit,
                 IsReallyEvent = true,
-                DateStartSold = concert.DateStartSold,
-                DateStopSold = concert.DateStopSold,
-                ParentId = concert.ParentId,
-                IsPublished = concert.IsPublished
-            };
+                DateStartSold = model.DateStartSold,
+                DateStopSold = model.DateStopSold,
+                ParentId = model.ParentId,
+                IsPublished = model.IsPublished,
+                HallId = model.HallId,
+                ConcertPlaceId = model.ConcertPlaceId
+            } : null;
         }
 
         public static Hall GetHall(HallModel model)
         {
-            return new Hall
+            return model != null ? new Hall
             {
                 Id = model.Id,
                 Name = model.Name,
-                PlaceId = model.Id,
+                PlaceId = model.PlaceId,
                 ConcertPlace = GetConcertPlace(model.ConcertPlace)
-            };
+            } : null;
         }
 
         public static ConcertPlace GetConcertPlace(ConcertPlaceModel model)
         {
-            return new ConcertPlace
+            return model != null ? new ConcertPlace
             {
                 Id = model.Id,
                 Name = model.Name,
                 PlaceId = model.PlaceId
-            };
+            } : null;
         }
 
         public static ConcertTicket GetConcertTicket(ConcertTicketModel model, Event _event)
         {
-            return new ConcertTicket
+            return model != null ? new ConcertTicket
             {
                 Id = model.Id,
                 DateStart = model.DateStart,
@@ -67,12 +69,12 @@ namespace Getticket.Web.API.Helpers
                 ShowFormWhileEmpty = model.ShowFormWhileEmpty,
                 ShowFormWhileEndTime = model.ShowFormWhileEndTime,
                 Event = _event
-            };
+            } : null;
         }
 
         public static ConcertSchedule GetSchedule(ConcertScheduleModel model)
         {
-            return new ConcertSchedule
+            return model != null ? new ConcertSchedule
             {
                 Id = model.Id,
                 Duration = model.Duration,
@@ -81,18 +83,18 @@ namespace Getticket.Web.API.Helpers
                 IdRange = model.IdRange,
                 Period = model.Period,
                 WeekDay = model.WeekDay
-            };
+            } : null;
         }
 
         public static ConcertDateRange GetDateRange(ConcertDateRangeModel model)
         {
-            return new ConcertDateRange
+            return model != null ? new ConcertDateRange
             {
                 Id = model.Id,
                 DateStart = model.DateStart,
                 DateEnd = model.DateEnd,
                 IsRepeated = model.IsRepeated
-            };
+            } : null;
         }
 
         public static IEnumerable<ConcertSchedule> GetSchedules(IEnumerable<ConcertScheduleModel> model)
@@ -102,7 +104,7 @@ namespace Getticket.Web.API.Helpers
 
         public static ConcertProgramm GetProgramm(ConcertProgrammModel model)
         {
-            return new ConcertProgramm
+            return model != null ? new ConcertProgramm
             {
                 Id = model.Id,
                 Name = model.Name,
@@ -114,7 +116,7 @@ namespace Getticket.Web.API.Helpers
                 Description = model.Description,
                 IdEvent = model.IdEvent,
                 MediaLink = model.MediaLink
-            };
+            } : null;
         }
 
         public static IEnumerable<Actor> GetActors(IEnumerable<ActorModel> models)
@@ -131,42 +133,44 @@ namespace Getticket.Web.API.Helpers
 
         public static ActorGroup GetActorGroup(ActorGroupModel model)
         {
-            return new ActorGroup
+            return model != null ? new ActorGroup
             {
                 Id = model.Id,
                 Name = model.Name
-            };
+            } : null;
         }
 
         public static SeriesConcert GetSeries(int eventId, int seriesId)
         {
-            return new SeriesConcert {EventId = eventId, SeriesId = seriesId};
+            return new SeriesConcert { EventId = eventId, SeriesId = seriesId };
         }
 
-        public static SeriesName GetSeriesName(SeriesNameModel model)
+        public static SeriesName GetSeriesName(SeriesConcertModel model)
         {
-            return new SeriesName {Id = model.Id, Name = model.Name};
+            return new SeriesName { Id = model.Id, Name = model.Name };
         }
 
-        public static EventModel GetConcertModel(Event concert)
+        public static EventModel GetConcertModel(Event model)
         {
-            if (concert == null) return null;
+            if (model == null) return null;
             return new EventModel
             {
-                Id = concert.Id,
-                Name = concert.Name,
-                Description = concert.Description,
-                EventCategoryId = concert.IdCategory,
-                AgeLimit = concert.AgeLimit,
-                DateStartSold = concert.DateStartSold,
-                DateStopSold = concert.DateStopSold,
-                IsPublished = concert.IsPublished,
-                ParentId = concert.ParentId,
-                Parent = concert.ParentId != null ? GetConcertModel(concert.Parent): null,
-                Hall = GetHallModel(concert.Hall),
-                ConcertPlace = GetConcertPlaceModel(concert.ConcertPlace),
-                //Tickets = GetTicketsModel(concert.Tickets),
-                Series = concert.Series != null ? GetSeriesModels(concert.Series): null
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                EventCategoryId = model.IdCategory,
+                AgeLimit = model.AgeLimit,
+                DateStartSold = model.DateStartSold,
+                DateStopSold = model.DateStopSold,
+                IsPublished = model.IsPublished,
+                ParentId = model.ParentId,
+                Parent = model.ParentId != null ? GetConcertModel(model.Parent) : null,
+                HallId = model.HallId,
+                ConcertPlaceId = model.ConcertPlaceId,
+                Hall = GetHallModel(model.Hall),
+                ConcertPlace = GetConcertPlaceModel(model.ConcertPlace),
+                Tickets = GetTicketsModel(model.Tickets),
+                Series = model.Series != null ? GetSeriesModels(model.Series) : null
             };
         }
 
@@ -177,8 +181,11 @@ namespace Getticket.Web.API.Helpers
 
         public static SeriesConcertModel GetSeriesModel(SeriesConcert model)
         {
-            return new SeriesConcertModel { EventId = model.EventId, SeriesId = model.SeriesId,
-                Series = GetSeriesNameModel(model.Series) };
+            return model != null ? new SeriesConcertModel
+            {
+                Id = model.SeriesId,
+                Name = model.Series.Name
+            } : null;
         }
 
         public static SeriesNameModel GetSeriesNameModel(SeriesName model)
@@ -199,7 +206,7 @@ namespace Getticket.Web.API.Helpers
                 OrganizerLink = model.OrganizerLink,
                 ShowFormWhileEmpty = model.ShowFormWhileEmpty,
                 ShowFormWhileEndTime = model.ShowFormWhileEndTime
-            }: null;
+            } : null;
         }
 
         public static ConcertPlaceModel GetConcertPlaceModel(ConcertPlace model)
@@ -209,8 +216,9 @@ namespace Getticket.Web.API.Helpers
                 Id = model.Id,
                 Name = model.Name,
                 PlaceId = model.PlaceId,
-                CountryPlace = PersonModelHelper.GetCountryPlaceModel(model.CountryPlace)
-            }: null;
+                CountryPlace = PersonModelHelper.GetCountryPlaceModel(model.CountryPlace),
+                Halls = model.Halls?.Select(GetHallModel)
+            } : null;
         }
 
         public static HallModel GetHallModel(Hall model)
@@ -219,18 +227,22 @@ namespace Getticket.Web.API.Helpers
             {
                 Id = model.Id,
                 Name = model.Name,
-                PlaceId = model.Id,
-                ConcertPlace = GetConcertPlaceModel(model.ConcertPlace)
-            }: null;
+                PlaceId = model.PlaceId,
+                //ConcertPlace = GetConcertPlaceModel(model.ConcertPlace)
+            } : null;
         }
 
         public static ConcertDateRangeModel GetDateRangeModel(ConcertDateRange model)
         {
-            return new ConcertDateRangeModel
+            return model != null ? new ConcertDateRangeModel
             {
-                Id = model.Id, DateStart = model.DateStart, DateEnd = model.DateEnd, IsRepeated = model.IsRepeated,
-                IdEvent = model.IdEvent, Schedules = GetScheduleModels(model.Schedules)
-            };
+                Id = model.Id,
+                DateStart = model.DateStart,
+                DateEnd = model.DateEnd,
+                IsRepeated = model.IsRepeated,
+                IdEvent = model.IdEvent,
+                Schedules = GetScheduleModels(model.Schedules)
+            } : null;
         }
 
         private static IEnumerable<ConcertScheduleModel> GetScheduleModels(IList<ConcertSchedule> models)
@@ -240,7 +252,7 @@ namespace Getticket.Web.API.Helpers
 
         private static ConcertScheduleModel GetScheduleModel(ConcertSchedule model)
         {
-            return new ConcertScheduleModel
+            return model != null ? new ConcertScheduleModel
             {
                 Id = model.Id,
                 Duration = model.Duration,
@@ -249,7 +261,7 @@ namespace Getticket.Web.API.Helpers
                 IdRange = model.IdRange,
                 Period = model.Period,
                 WeekDay = model.WeekDay
-            };
+            } : null;
         }
 
         public static ConcertProgrammModel GetProgrammModel(ConcertProgramm model)
@@ -277,23 +289,23 @@ namespace Getticket.Web.API.Helpers
 
         private static ActorModel GetActorModel(Actor model)
         {
-            return new ActorModel
+            return model != null ? new ActorModel
             {
                 Id = model.Id,
                 IdPerson = model.IdPerson,
                 IdGroup = model.IdGroup,
                 Group = GetGroupModel(model.Group),
                 Role = model.Role
-            };
+            } : null;
         }
 
         private static ActorGroupModel GetGroupModel(ActorGroup model)
         {
-            return new ActorGroupModel
+            return model != null ? new ActorGroupModel
             {
                 Id = model.Id,
                 Name = model.Name
-            };
+            } : null;
         }
     }
 }
