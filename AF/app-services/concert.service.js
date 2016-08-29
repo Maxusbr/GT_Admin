@@ -82,6 +82,15 @@
                     callback(data);
             });
         }
+        service.saveTickets = function (model, callback) {
+            return $http.post(`${serviceUrl}concerts/tickets/save`, model).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
+        }
         
         return service;;
     }

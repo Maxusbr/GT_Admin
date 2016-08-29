@@ -54,7 +54,10 @@
                     <td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStopSold}}</a></td>
                     <td>
                         <a href="#" ng-click="selectConcert(item.Id)">
-                            <span ng-if="item.Tickets">{{item.Tickets.DateStartSold}}</span>
+                            <span ng-if="item.Tickets">
+                                <span>{{item.Tickets.DateStart | date:'dd.MM.yyyy'}}</span>
+                                <span ng-if="item.Tickets.DateEnd != item.Tickets.DateStart">- {{item.Tickets.DateEnd | date:'dd.MM.yyyy'}}</span>
+                            </span>
                             <span ng-if="!item.Tickets">Не опубликовано</span>
                         </a>
                     </td>

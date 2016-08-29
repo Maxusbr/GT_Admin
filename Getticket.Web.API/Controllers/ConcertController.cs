@@ -137,6 +137,19 @@ namespace Getticket.Web.API.Controllers
             return Ok(_concertService.SaveConcertSchedules(id, models) ? succes.Response() : error.Response());
         }
 
+        /// <see cref="IConcertService.SaveConcertSchedules" />
+        [HttpPost]
+        [Route("tickets/save")]
+        public IHttpActionResult Post([FromBody] ConcertTicketModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userId = User.Identity.GetUserId<int>();
+            return Ok(_concertService.SaveConcertTicket(model).Response());
+        }
+
         /// <see cref="IConcertService.SaveConcertPlace" />
         [HttpPost]
         [Route("concertplace/save")]

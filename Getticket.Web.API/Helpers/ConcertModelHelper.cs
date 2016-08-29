@@ -55,7 +55,7 @@ namespace Getticket.Web.API.Helpers
             } : null;
         }
 
-        public static ConcertTicket GetConcertTicket(ConcertTicketModel model, Event _event)
+        public static ConcertTicket GetConcertTicket(ConcertTicketModel model)
         {
             return model != null ? new ConcertTicket
             {
@@ -67,8 +67,7 @@ namespace Getticket.Web.API.Helpers
                 TimeEnd = model.TimeEnd,
                 OrganizerLink = model.OrganizerLink,
                 ShowFormWhileEmpty = model.ShowFormWhileEmpty,
-                ShowFormWhileEndTime = model.ShowFormWhileEndTime,
-                Event = _event
+                ShowFormWhileEndTime = model.ShowFormWhileEndTime
             } : null;
         }
 

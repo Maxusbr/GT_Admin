@@ -40,7 +40,10 @@
                             <span ng-show="!concert.ConcertPlace">Не указана</span>
                             <br />
                             <br />
-                            Билеты: <span ng-show="concert.Tickets"><i>{{concert.Tickets.DateStart}}</i></span>
+                            Билеты: <span ng-show="concert.Tickets">
+                                <i>{{concert.Tickets.DateStart | date:'dd.MM.yyyy'}}</i>
+                                <i ng-if="concert.Tickets.DateEnd != concert.Tickets.DateStart" >- {{concert.Tickets.DateEnd | date:'dd.MM.yyyy'}}</i>
+                            </span>
                             <span ng-show="!concert.Tickets">Не опубликовано</span>
                             <br />
                         </div>
@@ -64,13 +67,13 @@
                     <a href="#" class="btn btn-block btn-info" ng-click="displayHall(concert)">
                         <span class="fa fa-file-video-o pull-left"></span> Площадка
                     </a>
-                    <a href="#" class="btn btn-block btn-info" ng-click="displayCalendar()">
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayCalendar(concert.Id)">
                         <span class="fa fa-bookmark pull-left"></span> Календарь
                     </a>
-                    <a href="#" class="btn btn-block btn-info" ng-click="displayProgramms()">
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayProgramms(concert.Id)">
                         <span class="fa fa-child pull-left"></span> Программа
                     </a>
-                    <a href="#" class="btn btn-block btn-info" ng-click="displayTickets()">
+                    <a href="#" class="btn btn-block btn-info" ng-click="displayTickets(concert)">
                         <span class="fa fa-cloud pull-left"></span> Билеты
                     </a>
                 </div>

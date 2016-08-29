@@ -15,8 +15,6 @@
                 });
             });
         }
-        if ($scope.concert && $scope.concert.ConcertPlace)
-            $scope.place = $scope.concert.ConcertPlace.CountryPlace;
 
         $scope.isPlace = function (place) {
             return place && typeof place !== 'string';
@@ -25,12 +23,16 @@
             $rootScope.concertPlaces = [];
             $scope.Promise = concertService.getHalls(id).then(function (response) {
                 $rootScope.concertPlaces.push.apply($rootScope.concertPlaces, response.data);
+                $scope.concertPlaceId = $scope.concert.ConcertPlaceId;
+                $scope.hallId = $scope.concert.HallId;
             });
         }
         $scope.$watch('place', function (data) {
             if (!$scope.isPlace(data) || !data.Id) return;
             $rootScope.getHalls(data.Id);
         });
+        if ($scope.concert && $scope.concert.ConcertPlace)
+            $scope.place = $scope.concert.ConcertPlace.CountryPlace;
 
         $scope.existHall = function (id) {
             var place = $rootScope.concertPlaces.filter(function (item) { return item.Id === id; })[0];
@@ -64,10 +66,13 @@
         }
 
         $scope.saveConcert = function () {
+            $scope.concert.ConcertPlaceId = $scope.concertPlaceId;
+            $scope.concert.HallId = $scope.hallId;
             concertService.saveConcert($scope.concert, function (data) {
                 $rootScope.loadConcerts();
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);
+                app.closeFive();
                 app.closeView('concertEdit');
             });
         }

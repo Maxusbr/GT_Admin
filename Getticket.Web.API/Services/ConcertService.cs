@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models.Concerts;
@@ -38,7 +39,9 @@ namespace Getticket.Web.API.Services
         /// <see cref="IConcertService.GetConcert"/>
         public EventModel GetConcert(int id)
         {
-            return ConcertModelHelper.GetConcertModel(_concertRepository.GetConcert(id));
+            var res = ConcertModelHelper.GetConcertModel(_concertRepository.GetConcert(id));
+            //res.Tickets = new ConcertTicketModel { TimeStart = new TimeSpan(8, 15, 0), DateStart = new DateTime(2016, 9, 10)};
+            return res;
         }
 
         /// <see cref="IConcertService.GetConcertSeriesName"/>
@@ -77,18 +80,15 @@ namespace Getticket.Web.API.Services
             var entity = ConcertModelHelper.GetConcertBase(concert);
             if (concert.Id == 0)
                 entity = _concertRepository.AddConcert(entity, userId);
-            if (concert.Hall != null)
-                entity.Hall = _concertRepository.SaveHall(ConcertModelHelper.GetHall(concert.Hall));
-            if (concert.ConcertPlace != null)
-                entity.ConcertPlace = _concertRepository.SaveConcertPlace(ConcertModelHelper.GetConcertPlace(concert.ConcertPlace));
-            if (concert.Tickets != null)
-                entity.Tickets = _concertRepository.SaveConcertTicket(ConcertModelHelper.GetConcertTicket(concert.Tickets, entity));
+            //if (concert.Hall != null)
+            //    entity.Hall = _concertRepository.SaveHall(ConcertModelHelper.GetHall(concert.Hall));
+            //if (concert.ConcertPlace != null)
+            //    entity.ConcertPlace = _concertRepository.SaveConcertPlace(ConcertModelHelper.GetConcertPlace(concert.ConcertPlace));
+            //if (concert.Tickets != null)
+            //    entity.Tickets = _concertRepository.SaveConcertTicket(ConcertModelHelper.GetConcertTicket(concert.Tickets));
             var series =
                 concert.Series.Select(o => _concertRepository.SaveSeriesName(ConcertModelHelper.GetSeriesName(o)));
             entity.Series = series.Select(o => ConcertModelHelper.GetSeries(entity.Id, o.Id)).ToList();
-
-            //entity.Series = concert.Series?.Select(o => ConcertModelHelper.GetSeries(entity.Id, o.EventId)).ToList();
-            //concert.Series?.Select(o => _concertRepository.SaveConcertSeries(entity.Id, o.SeriesId));
 
             entity = _concertRepository.UpdateConcert(entity, userId);
             return EventModelHelper.GetEventModel(entity);
@@ -158,7 +158,12 @@ namespace Getticket.Web.API.Services
         /// <see cref="IConcertService.SaveConcertTicket"/>
         public ServiceResponce SaveConcertTicket(ConcertTicketModel model)
         {
-            throw new System.NotImplementedException();
+            var succes = ServiceResponce.FromSuccess().Result("Concert tickets save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save concert tickets");
+            var res = _concertRepository.SaveConcertTicket(ConcertModelHelper.GetConcertTicket(model));
+            if (res != null)
+                succes.Add("TicketsId", res.Id);
+            return res != null ? succes : error;
         }
 
         /// <see cref="IConcertService.SaveActor"/>

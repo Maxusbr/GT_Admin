@@ -359,13 +359,13 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IConcertRepository.SaveConcertTicket" />
         public ConcertTicket SaveConcertTicket(ConcertTicket model)
         {
-            if (model.Id == 0)
+            var pr = db.ConcertTickets.FirstOrDefault(o => o.Id == model.Id);
+            if (pr == null)
             {
                 db.Entry(model).State = EntityState.Added;
             }
             else if (model.Id > 0)
             {
-                var pr = db.EventDescriptions.FirstOrDefault(o => o.Id == model.Id);
                 db.Entry(pr).CurrentValues.SetValues(model);
             }
             try
