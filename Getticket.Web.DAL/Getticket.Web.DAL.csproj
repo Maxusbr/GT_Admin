@@ -60,16 +60,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AccessRole.cs" />
+    <Compile Include="Entities\Actor.cs" />
+    <Compile Include="Entities\ActorGroup.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\AntroLinkEvent.cs" />
     <Compile Include="Entities\AntroLinkPerson.cs" />
+    <Compile Include="Entities\ConcertPlace.cs" />
+    <Compile Include="Entities\ConcertProgramm.cs" />
+    <Compile Include="Entities\ConcertSchedule.cs" />
+    <Compile Include="Entities\ConcertTicket.cs" />
     <Compile Include="Entities\EventMediaLinkEvent.cs" />
     <Compile Include="Entities\EventMediaLinkPerson.cs" />
+    <Compile Include="Entities\Hall.cs" />
     <Compile Include="Entities\MediaLinkPerson.cs" />
     <Compile Include="Entities\MediaLinkEvent.cs" />
     <Compile Include="Entities\PageBlock.cs" />
     <Compile Include="Entities\EventFact.cs" />
     <Compile Include="Entities\EventFactType.cs" />
+    <Compile Include="Entities\SeriesConcert.cs" />
+    <Compile Include="Entities\SeriesName.cs" />
     <Compile Include="Entities\UserMessage.cs" />
     <Compile Include="Entities\TagEvent.cs" />
     <Compile Include="Entities\TagEventDescriptionLink.cs" />
