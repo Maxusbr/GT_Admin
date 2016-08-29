@@ -21,7 +21,7 @@
             app.loadContentView('/main/concert/r3/concert.calendar.html', 2500);
         }
         $scope.displayProgramms = function () {
-            $rootScope.editedConcert = concert;
+
             app.closeThird();
             app.loadContentView('/main/concert/r3/concert.programm.html', 2500);
         }

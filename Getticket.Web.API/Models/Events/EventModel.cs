@@ -114,5 +114,10 @@ namespace Getticket.Web.API.Models.Events
         /// Билеты
         /// </summary>
         public virtual ConcertTicketModel Tickets { get; set; }
+
+        /// <summary>
+        /// Одна программа для всех участников
+        /// </summary>
+        public bool IsOneProgramm { get; set; }
     }
 }

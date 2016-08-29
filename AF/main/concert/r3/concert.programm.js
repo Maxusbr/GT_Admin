@@ -3,7 +3,7 @@
 
     function concertProgrammController($rootScope, $scope, concertService) {
         var vm = this;
-
+        $scope.Id = $rootScope.concertId;
     }
 
     angular

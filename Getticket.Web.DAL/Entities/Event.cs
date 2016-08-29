@@ -64,6 +64,11 @@ namespace Getticket.Web.DAL.Entities
         public int IdCategory { get; set; }
 
         /// <summary>
+        /// Одна программа для всех участников
+        /// </summary>
+        public bool IsOneProgramm { get; set; }
+
+        /// <summary>
         /// Внешний ключ для <see cref="Company"/>
         /// </summary>
         public int? IdCompany { get; set; }

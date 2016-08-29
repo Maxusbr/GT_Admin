@@ -30,7 +30,8 @@ namespace Getticket.Web.API.Helpers
                 ParentId = model.ParentId,
                 IsPublished = model.IsPublished,
                 HallId = model.HallId,
-                ConcertPlaceId = model.ConcertPlaceId
+                ConcertPlaceId = model.ConcertPlaceId,
+                IsOneProgramm = model.IsOneProgramm
             } : null;
         }
 
@@ -169,7 +170,8 @@ namespace Getticket.Web.API.Helpers
                 Hall = GetHallModel(model.Hall),
                 ConcertPlace = GetConcertPlaceModel(model.ConcertPlace),
                 Tickets = GetTicketsModel(model.Tickets),
-                Series = model.Series != null ? GetSeriesModels(model.Series) : null
+                Series = model.Series != null ? GetSeriesModels(model.Series) : null,
+                IsOneProgramm = model.IsOneProgramm
             };
         }
 
