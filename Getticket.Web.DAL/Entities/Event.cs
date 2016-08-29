@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -62,6 +64,11 @@ namespace Getticket.Web.DAL.Entities
         public int IdCategory { get; set; }
 
         /// <summary>
+        /// Одна программа для всех участников
+        /// </summary>
+        public bool IsOneProgramm { get; set; }
+
+        /// <summary>
         /// Внешний ключ для <see cref="Company"/>
         /// </summary>
         public int? IdCompany { get; set; }
@@ -70,13 +77,60 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="EventCategory"/>
         /// </summary>
         [ForeignKey("IdCategory")]
+        [JsonIgnore]
         public virtual EventCategory Category { get; set; }
 
         /// <summary>
         /// <see cref="Company"/>
         /// </summary>
         [ForeignKey("IdCompany")]
+        [JsonIgnore]
         public virtual Company Organizer { get; set; }
 
+        /// <summary>
+        /// Внешний ключ для <see cref="Event"/>
+        /// </summary>
+        public int? ParentId { get; set; }
+
+        /// <summary>
+        /// <see cref="Event"/>
+        /// </summary>
+        [ForeignKey("ParentId")]
+        [JsonIgnore]
+        public virtual Event Parent { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="Hall"/>
+        /// </summary>
+        public int? HallId { get; set; }
+        /// <summary>
+        /// Зал
+        /// </summary>
+        [ForeignKey("HallId")]
+        [JsonIgnore]
+        public virtual Hall Hall { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="ConcertPlaceId"/>
+        /// </summary>
+        public int? ConcertPlaceId { get; set; }
+        /// <summary>
+        /// Площадка
+        /// </summary>
+        [ForeignKey("ConcertPlaceId")]
+        [JsonIgnore]
+        public virtual ConcertPlace ConcertPlace { get; set; }
+
+        /// <summary>
+        /// Серии концерта
+        /// </summary>
+        [JsonIgnore]
+        public virtual IList<SeriesConcert> Series { get; set; }
+
+        /// <summary>
+        /// Билеты
+        /// </summary>
+        [JsonIgnore]
+        public virtual ConcertTicket Tickets { get; set; }
     }
 }

@@ -31,6 +31,6 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Площадки
         /// </summary>
-        public virtual IList<Hall> Halls { get; set; }
+        public virtual ICollection<Hall> Halls { get; set; }
     }
 }

@@ -38,6 +38,7 @@
         }
         $scope.selectSubCat = function (item) {
             $scope.editItemSubCat = item;
+            $scope.editItemCat = $rootScope.eventCategories.filter(function (el) { return el.Id === item.IdParent; })[0];
         }
 
         $scope.saveCategories = function (cat) {

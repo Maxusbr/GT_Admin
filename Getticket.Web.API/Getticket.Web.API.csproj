@@ -202,6 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectInjectorConfig.cs" />
+    <Compile Include="Controllers\ConcertController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\SystemRolesController.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Helpers\PageModelHelper.cs" />
     <Compile Include="Helpers\RestorePasswordEmailModelHelper.cs" />
     <Compile Include="Helpers\LogModelHelper.cs" />
+    <Compile Include="Helpers\ConcertModelHelper.cs" />
     <Compile Include="Helpers\TagModelHelper.cs" />
     <Compile Include="Helpers\TimeSpanExtensions.cs" />
     <Compile Include="Helpers\UpdateInviteModelHelper.cs" />
@@ -220,6 +222,17 @@
     <Compile Include="Models\AccessRoleModel.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\AssociationModel.cs" />
+    <Compile Include="Models\Concerts\ActorModel.cs" />
+    <Compile Include="Models\Concerts\ActorGroupModel.cs" />
+    <Compile Include="Models\Concerts\ConcertDateRangeModel.cs" />
+    <Compile Include="Models\Concerts\ConcertPlaceModel.cs" />
+    <Compile Include="Models\Concerts\ConcertProgrammModel.cs" />
+    <Compile Include="Models\Concerts\ConcertScheduleModel.cs" />
+    <Compile Include="Models\Concerts\ConcertTicketModel.cs" />
+    <Compile Include="Models\Concerts\HallModel.cs" />
+    <Compile Include="Models\Concerts\SeriesConcertModel.cs" />
+    <Compile Include="Models\Concerts\SeriesNameModel.cs" />
+    <Compile Include="Models\Concerts\UpdateConcertModel.cs" />
     <Compile Include="Models\Events\EventOrganizerModel.cs" />
     <Compile Include="Models\Events\EventCategoryModel.cs" />
     <Compile Include="Models\Events\EventGenreLinkModel.cs" />
@@ -301,9 +314,11 @@
     <Compile Include="Models\Emails\InviteEmailModel.cs" />
     <Compile Include="Models\UpdateInviteModel.cs" />
     <Compile Include="Services\AccessRolesService.cs" />
+    <Compile Include="Services\ConcertService.cs" />
     <Compile Include="Services\IEventService.cs" />
     <Compile Include="Services\IPersonService.cs" />
     <Compile Include="Services\EventService.cs" />
+    <Compile Include="Services\IConcertService.cs" />
     <Compile Include="Services\ITagService.cs" />
     <Compile Include="Services\PersonService.cs" />
     <Compile Include="Services\StatusService.cs" />

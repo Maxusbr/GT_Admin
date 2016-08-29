@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Getticket.Web.API.Models.Concerts;
 
 namespace Getticket.Web.API.Models.Events
 {
@@ -54,7 +56,7 @@ namespace Getticket.Web.API.Models.Events
         /// <summary>
         /// Id Категории
         /// </summary>
-        public int EventParentCategoryId { get; set; }
+        public int? EventParentCategoryId { get; set; }
 
         /// <summary>
         /// Возрастное ограничение
@@ -71,6 +73,51 @@ namespace Getticket.Web.API.Models.Events
         /// </summary>
         public bool IsPublished { get; set; }
 
+        /// <summary>
+        /// Ссылка на организатора
+        /// </summary>
         public int? IdCompany { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для <see cref="EventModel"/>
+        /// </summary>
+        public int? ParentId { get; set; }
+
+        /// <summary>
+        /// <see cref="EventModel"/>
+        /// </summary>
+        public virtual EventModel Parent { get; set; }
+        /// <summary>
+        /// Внешний ключ для <see cref="HallModel"/>
+        /// </summary>
+        public int? HallId { get; set; }
+        /// <summary>
+        /// Зал
+        /// </summary>
+        public virtual HallModel Hall { get; set; }
+        /// <summary>
+        /// Внешний ключ для <see cref="ConcertPlaceModel"/>
+        /// </summary>
+        public int? ConcertPlaceId { get; set; }
+        /// <summary>
+        /// Площадка
+        /// </summary>
+
+        public virtual ConcertPlaceModel ConcertPlace { get; set; }
+
+        /// <summary>
+        /// Серии концерта
+        /// </summary>
+        public virtual IList<SeriesConcertModel> Series { get; set; }
+
+        /// <summary>
+        /// Билеты
+        /// </summary>
+        public virtual ConcertTicketModel Tickets { get; set; }
+
+        /// <summary>
+        /// Одна программа для всех участников
+        /// </summary>
+        public bool IsOneProgramm { get; set; }
     }
 }

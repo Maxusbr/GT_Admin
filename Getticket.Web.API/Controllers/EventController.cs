@@ -91,7 +91,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(_eventService.SaveCategory(model));
         }
 
-        /// <see cref="IEventService.GetCategories" />
+        /// <see cref="IEventService.GetOrganizers" />
         [Route("organizers")]
         [HttpGet]
         public IHttpActionResult GetOrganizers()
@@ -111,7 +111,12 @@ namespace Getticket.Web.API.Controllers
                 return BadRequest(ModelState);
             }
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_eventService.SaveEvent(model, userId).Response());
+            var res = _eventService.SaveEvent(model, userId);
+            var response = res != null ? ServiceResponce
+                .FromSuccess()
+                .Result("Event save")
+                .Add("EventId", res.Id) : ServiceResponce.FromFailed().Result("Error save event");
+            return Ok(response.Response());
         }
 
         /// <see cref="IEventService.SaveEvent" />
@@ -125,7 +130,12 @@ namespace Getticket.Web.API.Controllers
             }
             model.Id = id;
             var userId = User.Identity.GetUserId<int>();
-            return Ok(_eventService.SaveEvent(model, userId).Response());
+            var res = _eventService.SaveEvent(model, userId);
+            var response = res != null ? ServiceResponce
+                .FromSuccess()
+                .Result("Event save")
+                .Add("EventId", res.Id) : ServiceResponce.FromFailed().Result("Error save event");
+            return Ok(response.Response());
         }
 
         /// <see cref="IEventService.DeleteEvent" />

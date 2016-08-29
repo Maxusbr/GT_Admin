@@ -41,14 +41,14 @@ namespace Getticket.Web.API.Helpers
                 EventDate = entity.EventDate,
                 TicketReturn = entity.TicketReturn,
                 IsPublished = entity.IsPublished,
-                EventCategoryId = entity.Category.IdParent != null ? entity.Category.Id: (int?) null,
-                EventParentCategoryId = entity.Category.IdParent ?? entity.Category.Id,
-                EventCategory = entity.Category.IdParent != null ? entity.Category.Name: "",
-                EventParentCategory = entity.Category.IdParent != null ? entity.Category.ParentCategory.Name: entity.Category.Name,
+                EventCategoryId = entity.Category?.IdParent != null ? entity.Category?.Id: (int?) null,
+                EventParentCategoryId = entity.Category?.IdParent ?? entity.Category?.Id,
+                EventCategory = entity.Category?.IdParent != null ? entity.Category.Name: "",
+                EventParentCategory = entity.Category?.IdParent != null ? entity.Category?.ParentCategory?.Name: entity.Category?.Name,
                 AgeLimit = entity.AgeLimit,
                 IdCompany = entity.Organizer?.Id,
                 Organizer = entity.Organizer?.Name
-            } : new EventModel();
+            } : null;
 
             return result;
         }

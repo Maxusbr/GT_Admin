@@ -17,7 +17,7 @@ namespace Getticket.Web.DAL.Migrations
         // Update-Database -ProjectName Getticket.Web.DAL -StartUpProjectName Getticket.Web.API -Force -Verbose
         protected override void Seed(GetticketDBContext context)
         {
-            //BaseDb(context);
+            BaseDb(context);
             //TempDb(context);
             //LinkDb(context);
             context.Tags.AddOrUpdate(o => o.Id, new Tag { Id = 1, Name = "Ноги" });
@@ -118,6 +118,7 @@ namespace Getticket.Web.DAL.Migrations
             context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 6, Name = "Концерт", IdParent = 3 });
             context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 7, Name = "Спектакль", IdParent = 2 });
             context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 8, Name = "Балет", IdParent = 2 });
+            context.EventCategories.AddOrUpdate(o => o.Id, new EventCategory { Id = 9, Name = "Концерт", IdParent = 2 });
             context.SaveChanges();
 
             context.Events.AddOrUpdate(o => o.Id, new Event { Id = 1, Name = "Бокс", IdCategory = 4, AgeLimit = 16, IsReallyEvent = true,
@@ -140,7 +141,19 @@ namespace Getticket.Web.DAL.Migrations
                 AgeLimit = 16,
                 Description = "Чемпиона мира по боксу в супертяжелом весе по версии WBA"
             });
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 10, Name = "New Year. Titanic. Live.",
+                Description = "Новогодний симфонический киноконцерт инициативы Большого театра ", IdCategory = 9, AgeLimit = 12});
             context.SaveChanges();
+
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 11, IsReallyEvent = true, Name = "Классическая-сцена", IdCategory = 9,
+                AgeLimit = 12, ParentId = 10});
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 12, IsReallyEvent = true, Name = "Рок-сцена", IdCategory = 9,
+                AgeLimit = 12, ParentId = 10});
+            context.Events.AddOrUpdate(o => o.Id, new Event { Id = 13, IsReallyEvent = true, Name = "Chris LeDoux и легенды кантри",
+                IdCategory = 9, AgeLimit = 12, ParentId = 10});
+
+            context.SaveChanges();
+
 
             context.ConnectionTypes.AddOrUpdate(o => o.Id, new ConnectionType { Id = 1, Name = "Персона" });
             context.ConnectionTypes.AddOrUpdate(o => o.Id, new ConnectionType { Id = 2, Name = "Мероприятие" });

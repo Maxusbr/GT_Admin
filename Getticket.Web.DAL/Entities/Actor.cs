@@ -29,13 +29,25 @@ namespace Getticket.Web.DAL.Entities
         public string Role { get; set; }
 
         /// <summary>
+        /// Внешний ключ для типа связанного объекта <see cref="Entities.ActorGroup"/>
+        /// </summary>
+        public int IdGroup { get; set; }
+
+        /// <summary>
         /// <see cref="ActorGroup"/>
         /// </summary>
+        [ForeignKey("IdGroup")]
         public virtual ActorGroup Group  { get; set; }
+
+        /// <summary>
+        /// Внешний ключ для типа связанного объекта <see cref="Entities.ConcertProgramm"/>
+        /// </summary>
+        public int IdProgramm { get; set; }
 
         /// <summary>
         /// <see cref="ConcertProgramm"/>
         /// </summary>
+        [ForeignKey("IdProgramm")]
         public virtual ConcertProgramm Programm { get; set; }
     }
 }

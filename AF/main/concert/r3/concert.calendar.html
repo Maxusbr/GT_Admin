@@ -1,18 +1,23 @@
-﻿<div class="win-container r1 disReport" style="width:1000px;">
+﻿<div class="win-container r3 concertCalendarEdit" style="width:1000px;" ng-controller="concertCalendarController">
     <div class="win-header">
         <div class="win-header-text">
             Календарь события
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('disReport')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('concertCalendarEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="saveCalendar()">
+                <span class="fa fa-save"></span> Сохранить
+            </a>
+        </div>
     </div>
     <div class="win-content">
         <div class="row">
             <div class="col-lg-6">
-                <input type="radio"/>Разовое событие (может быть только один раз за все время)
+                <input type="radio" />Разовое событие (может быть только один раз за все время)
             </div>
             <div class="col-lg-6">
                 <input type="radio" />Повторяющееся событие (периодическое или несколько показов за период)
@@ -25,15 +30,14 @@
             </div>
         </div>
 
-        <!--if periodic-->
-        <div class="panel panel-body">
+        <div class="panel">
             <div class="panel">
                 <h5>Дата события</h5>
                 <i>Укажите даты начала и окончания всей группы событий</i>
                 <br />
                 <div class="row">
                     <div class="col-lg-6">
-                        <input class="form-control" placeholder="Дата начала"/>
+                        <input class="form-control" placeholder="Дата начала" />
                     </div>
                     <div class="col-lg-6">
                         <input class="form-control" placeholder="Дата окончания" />
@@ -47,7 +51,7 @@
                 </div>
                 <div class="panel-body">
                     <div style="white-space:nowrap; overflow-x:scroll; overflow-y:hidden">
-                        <div style="width:200px;" class="win-container">
+                        <div style="width:200px; margin: 5px;" class="win-container">
                             <div class="row">
                                 <a href="#">Еженедельные сеансы</a>
                             </div>
@@ -57,20 +61,29 @@
                                     <span class="label label-default">Вт</span>
                                 </div>
                                 <div class="col-lg-5">
-                                    14:00, 15:00
+                                    <span>14:00</span> <span>15:00</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <span class="label label-default">Ср</span>
+                                    <span class="label label-default">Чт</span>
+                                </div>
+                                <div class="col-lg-5">
+                                    <span>14:00</span> <span>15:00</span>
                                 </div>
                             </div>
                         </div>
-                        <div style="width:200px;" class="win-container">
+                        <div style="width:200px; margin: 5px;" class="win-container">
                             <div class="row">
-                                <a href="#">Дополнительные/однократные сеансы</a>
+                                <a href="#">Однократные сеансы</a>
                             </div>
                             <div class="row">
                                 <div class="col-lg-7">
                                     <span class="label label-default">12.12.2016</span>
                                 </div>
                                 <div class="col-lg-5">
-                                    14:00, 15:00
+                                    <span>14:00</span> <span>15:00</span>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +104,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <input type="radio" /> Одна дата
-                            <br/>
+                            <br />
                             <i>Если показ будет проходить только один день</i>
                         </div>
                         <div class="col-lg-6">
@@ -101,8 +114,8 @@
                         </div>
                         <!--if one date-->
                         <div class="panel">
-                            <input class="form-control" placeholder="22.12.2016"/>
-                            <br/>
+                            <input class="form-control" placeholder="22.12.2016" />
+                            <br />
                             <div class="row">
                                 <div class="col-lg-8">
                                     <i>В эту дату мероприятия пройдут:</i>
@@ -112,8 +125,8 @@
                                     <span class="label label-default">14:00</span>
                                 </div>
                                 <div class="col-lg-4">
-                                    <input class="form-control" placeholder="12:00"/>
-                                    <br/>
+                                    <input class="form-control" placeholder="12:00" />
+                                    <br />
                                     <button class="btn btn-info">Добавить в список</button>
                                     <br />
                                     <button class="btn btn-info">Очистить список</button>

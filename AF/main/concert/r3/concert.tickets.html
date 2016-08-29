@@ -1,0 +1,64 @@
+﻿<div class="win-container r3 concertTicketsEdit" style="width:500px;" ng-controller="concertTicketsController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Билеты
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('concertTicketsEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="saveTickets()">
+                <span class="fa fa-save"></span> Сохранить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+        <div class="row">
+            <div class="col-lg-12">
+                Ссылка на сайт организатора
+                <br />
+                <input class="form-control" placeholder="http://" ng-model="ticket.OrganizerLink" />
+                <input class="form-control" placeholder="от 3 знаков" type="checkbox" ng-model="ticket.ShowFormWhileEmpty" 
+                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 10px;"/>
+                <span style="padding-right: 5px;">Отображать форму подписки при пустом</span>
+                <br />
+            </div>
+        </div>
+        <hr />
+
+        <div class="row">
+            <h5 class="col-lg-12">Даты доступности на витрине</h5>
+            <div class="col-lg-6">
+                Дата с
+                <md-content>
+                    <md-datepicker ng-model="dateStart" md-placeholder="Дата начала "></md-datepicker>
+                </md-content>
+            </div>
+            <div class="col-lg-6">
+                Дата по
+                <md-content>
+                    <md-datepicker ng-model="dateEnd" md-placeholder="Дата окончания "></md-datepicker>
+                </md-content>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                Время начала
+                <div uib-timepicker ng-model="timeStart" hour-step="1" minute-step="15" show-meridian="false"></div>
+
+            </div>
+            <div class="col-lg-6">
+                Время окончания
+                <div uib-timepicker ng-model="timeEnd" hour-step="1" minute-step="15" show-meridian="false"></div>
+            </div>
+            <div class="col-lg-12">
+                <input class="form-control" placeholder="от 3 знаков" type="checkbox" ng-model="ticket.ShowFormWhileEndTime"
+                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 10px;" />
+                <span style="padding-right: 5px;">Отображать форму подписки по завершении времени</span>
+            </div>
+        </div>
+    </div>
+</div>

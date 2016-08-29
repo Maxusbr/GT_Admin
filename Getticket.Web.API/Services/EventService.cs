@@ -132,18 +132,14 @@ namespace Getticket.Web.API.Services
         /// <param name="model"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public ServiceResponce SaveEvent(EventModel model, int userId)
+        public EventModel SaveEvent(EventModel model, int userId)
         {
             var _event = EventModelHelper.GetEvent(model);
             var org = _eventRepository.SaveOrganizer(model.Organizer);
             if (org != null)
                 _event.IdCompany = org.Id;
             var res = _eventRepository.SaveEvent(_event, userId);
-            var response = res != null ? ServiceResponce
-                .FromSuccess()
-                .Result("Event save")
-                .Add("EventId", _event.Id) : ServiceResponce.FromFailed().Result("Error save event");
-            return response;
+            return EventModelHelper.GetEventModel(res);
         }
 
         /// <summary>
