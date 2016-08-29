@@ -65,5 +65,7 @@ namespace Getticket.Web.API.Models.Concerts
         /// Событие <see cref="EventModel"/>
         /// </summary>
         public virtual EventModel Event { get; set; }
+
+        public IEnumerable<ActorGroupModel> Group { get; set; }
     }
 }

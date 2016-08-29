@@ -224,6 +224,7 @@
     <Compile Include="Models\AssociationModel.cs" />
     <Compile Include="Models\Concerts\ActorModel.cs" />
     <Compile Include="Models\Concerts\ActorGroupModel.cs" />
+    <Compile Include="Models\Concerts\ConcertExistModel.cs" />
     <Compile Include="Models\Concerts\ConcertDateRangeModel.cs" />
     <Compile Include="Models\Concerts\ConcertPlaceModel.cs" />
     <Compile Include="Models\Concerts\ConcertProgrammModel.cs" />

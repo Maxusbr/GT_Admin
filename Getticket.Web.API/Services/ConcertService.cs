@@ -148,6 +148,17 @@ namespace Getticket.Web.API.Services
             return ConcertModelHelper.GetConcertPlaceModel(_concertRepository.SaveConcertPlace(ConcertModelHelper.GetConcertPlace(model)));
         }
 
+        /// <param name="id"></param>
+        /// <see cref="IConcertService.GetConcertExist"/>
+        public ConcertExistModel GetConcertExist(int id)
+        {
+            return new ConcertExistModel
+            {
+                ExistProgramm = _concertRepository.ExistProgramm(id),
+                ExistCalendar = _concertRepository.ExistCalendar(id)
+            };
+        }
+
 
         /// <see cref="IConcertService.SaveHall"/>
         public HallModel SaveHall(HallModel model)

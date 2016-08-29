@@ -1,4 +1,4 @@
-﻿<div class="win-container r3 concertProgrammEdit" style="width:500px;" ng-controller="concertProgrammController">
+﻿<div class="win-container r3 concertProgrammEdit" style="width:600px;" ng-controller="concertProgrammController">
     <div class="win-header">
         <div class="win-header-text">
             Программа события
@@ -17,16 +17,75 @@
     <div class="win-content">
         <div class="row">
             <div class="col-lg-6">
-                <input type="radio" name="programmType"/>Одна программа для всех участников
+
+                <input type="radio" id="oneProgramm" name="programmType" ng-checked="concert.IsOneProgramm" ng-click="concert.IsOneProgramm = !concert.IsOneProgramm" />
+                <label for="oneProgramm">Одна программа для всех участников</label>
             </div>
             <div class="col-lg-6">
-                <input type="radio" name="programmType"/>Каждый участник со своей программой
+
+                <input type="radio" id="moreProgramm" name="programmType" ng-checked="!concert.IsOneProgramm"
+                       ng-click="concert.IsOneProgramm = !concert.IsOneProgramm" />
+                <label for="moreProgramm">Каждый участник со своей программой</label>
             </div>
         </div>
-        <div class="row">
-
+        <div class="row" ng-show="concert.IsOneProgramm">
+            <div class="col-lg-12">
+                <h5>Части программы</h5>
+                <table class="table" cg-busy="Promise">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Дата</th>
+                            <th>Время</th>
+                            <th>Описание</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in programms">
+                            <td><a href="#" ng-click="editProgramm(item)">{{item.Name}}</a></td>
+                            <td>
+                                <span>{{item.DateStart | date:'dd.MM.yyyy'}}</span>
+                                <span ng-if="item.DateEnd != item.DateStart">- {{item.DateEnd | date:'dd.MM.yyyy'}}</span>
+                            </td>
+                            <td>
+                                <span>{{item.TimeStart | date:'dd.MM.yyyy'}}</span>
+                                <span ng-if="item.TimeEnd != item.TimeStart">- {{item.TimeEnd | date:'dd.MM.yyyy'}}</span>
+                            </td>
+                            <td>
+                                <span ng-show="item.Description"><a href="#" ng-click="editProgramm(item)">Редактировать</a></span>
+                                <span ng-show="!item.Description"><a href="#" ng-click="editProgramm(item)">Не указано</a></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" ng-click="editProgramm()">Добавить</a>
+            </div>
+            <div class="col-lg-12">
+                <h5>Состав участников</h5>
+                <table class="table" cg-busy="Promise">
+                    <thead>
+                        <tr>
+                            <th>Название состава</th>
+                            <th>Участники</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in actorgroups">
+                            <td><a href="#" ng-click="editGroup(item)">{{item.Name}}</a></td>
+                            <td>
+                                <table>
+                                    <tr ng-repeat="actor in item.Actors">
+                                        <td><a href="#" ng-click="editActor(actor)">{{actor.Person.LastName}} {{actor.Person.Name}} ({{actor.Role}})</a></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" ng-click="editGroup()">Добавить</a>
+            </div>
         </div>
-        <div class="row">
+        <div class="row" ng-show="!concert.IsOneProgramm">
 
         </div>
     </div>

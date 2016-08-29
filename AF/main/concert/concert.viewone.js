@@ -20,8 +20,8 @@
             app.closeThird();
             app.loadContentView('/main/concert/r3/concert.calendar.html', 2500);
         }
-        $scope.displayProgramms = function () {
-
+        $scope.displayProgramms = function (concert) {
+            $rootScope.editedConcert = concert;
             app.closeThird();
             app.loadContentView('/main/concert/r3/concert.programm.html', 2500);
         }
@@ -38,9 +38,10 @@
             $scope.Promise = concertService.getConcert(id, function (data) {
                 $scope.concert = data;
                 //TODO get programm & calendar
-                //concertService.getCountes(id, function (counts) {
-                //    $scope.counts = counts;
-                //});
+                concertService.getExist(id, function (data) {
+                    $scope.concert.ExistProgramm = data.ExistProgramm;
+                    $scope.concert.ExistCalendar = data.ExistCalendar;
+                });
             });
         }
         $rootScope.getConcert($scope.Id);

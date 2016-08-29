@@ -355,6 +355,18 @@ namespace Getticket.Web.DAL.Repositories
             return model;
         }
 
+        /// <see cref="IConcertRepository.ExistProgramm" />
+        public bool ExistProgramm(int id)
+        {
+            return db.ConcertProgramms.Any(o => o.IdEvent == id);
+        }
+
+        /// <see cref="IConcertRepository.ExistCalendar" />
+        public bool ExistCalendar(int id)
+        {
+            return db.ConcertDateRanges.Any(o => o.IdEvent == id);
+        }
+
 
         /// <see cref="IConcertRepository.SaveConcertTicket" />
         public ConcertTicket SaveConcertTicket(ConcertTicket model)

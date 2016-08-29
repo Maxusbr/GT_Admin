@@ -157,5 +157,18 @@ namespace Getticket.Web.DAL.IRepositories
         /// <returns></returns>
         ActorGroup SaveGroup(ActorGroup model);
 
+        /// <summary>
+        /// Проверка наличия программы у концерта
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool ExistProgramm(int id);
+
+        /// <summary>
+        /// Проверка наличия календаря у концерта
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        bool ExistCalendar(int id);
     }
 }

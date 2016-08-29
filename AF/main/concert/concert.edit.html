@@ -69,14 +69,14 @@
                 <div ng-if="isPlace(place)">
                     Площадка
                     <br />
-                    <select class="form-control" ng-model="concertPlaceId"
+                    <select class="form-control" ng-model="ctrl.concertPlaceId"
                             ng-options="item.Id as item.Name for item in concertPlaces"></select>
                     <a href="#" ng-click="editPlace()">Редактировать</a>
-                    <div ng-show="existHall(concert.ConcertPlaceId)">
+                    <div ng-show="existHall(ctrl.concertPlaceId)">
                         Зал
                         <br />
-                        <select class="form-control" ng-model="hallId"
-                                ng-options="item.Id as item.Name for item in getHall(concertPlaceId)"></select>
+                        <select class="form-control" ng-model="ctrl.hallId"
+                                ng-options="item.Id as item.Name for item in getHall(ctrl.concertPlaceId)"></select>
                         <a href="#" ng-click="editPlace()">Редактировать</a>
                     </div>
                 </div>

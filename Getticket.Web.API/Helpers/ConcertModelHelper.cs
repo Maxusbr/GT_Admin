@@ -279,8 +279,17 @@ namespace Getticket.Web.API.Helpers
                 Description = model.Description,
                 IdEvent = model.IdEvent,
                 MediaLink = model.MediaLink,
-                Actors = GetActorModels(model.Actors)
+                Actors = GetActorModels(model.Actors),
+                Group = GetActorGroupModelss(model.Actors)
             };
+        }
+
+        private static IEnumerable<ActorGroupModel> GetActorGroupModelss(IList<Actor> actors)
+        {
+            var grp = actors.GroupBy(o => o.Group).Select(o => GetGroupModel(o.Key));
+            foreach (var el in grp)
+                el.Actors = actors.Where(o => o.IdGroup == el.Id).Select(GetActorModel);
+            return grp;
         }
 
         private static IEnumerable<ActorModel> GetActorModels(IList<Actor> models)

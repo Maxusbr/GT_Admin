@@ -13,7 +13,7 @@
 
         $scope.createConcert = function () {
             console.log('create event');
-            $rootScope.editedConcert = {}
+            $rootScope.editedConcert = {IsOneProgramm: true}
             app.closeSecond();
             app.loadContentView('/main/concert/concert.edit.html', 1800);
         }

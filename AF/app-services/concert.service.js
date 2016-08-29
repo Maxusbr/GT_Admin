@@ -37,6 +37,9 @@
         service.getHalls = function (id) {
             return $http.get(`${serviceUrl}concerts/halls/${id}`);
         }
+        service.getExist = function (id) {
+            return $http.get(`${serviceUrl}concerts/exist/${id}`);
+        }
         service.saveConcert = function (model, callback) {
             return $http.post(`${serviceUrl}concerts/add`, model).success(function (data) {
                 if (callback)

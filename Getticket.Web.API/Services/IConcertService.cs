@@ -126,6 +126,13 @@ namespace Getticket.Web.API.Services
         /// <param name="model"></param>
         /// <returns></returns>
         ConcertPlaceModel SaveConcertPlace(ConcertPlaceModel model);
+
+        /// <summary>
+        /// Проверка наличия программы и календаря концерта
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        ConcertExistModel GetConcertExist(int id);
     }
 
     

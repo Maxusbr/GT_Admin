@@ -3,7 +3,7 @@
 
     function concertEditController($rootScope, $scope, concertService, personService, $filter) {
         var vm = this;
-        vm.organizers = [];
+        vm.concertPlaceId = vm.hallId = 0;
 
         $scope.concert = $rootScope.editedConcert;
         $scope.getPlaces = function (value) {
@@ -23,8 +23,10 @@
             $rootScope.concertPlaces = [];
             $scope.Promise = concertService.getHalls(id).then(function (response) {
                 $rootScope.concertPlaces.push.apply($rootScope.concertPlaces, response.data);
-                $scope.concertPlaceId = $scope.concert.ConcertPlaceId;
-                $scope.hallId = $scope.concert.HallId;
+                if($scope.concert.ConcertPlaceId)
+                    vm.concertPlaceId = $scope.concert.ConcertPlaceId;
+                if ($scope.concert.HallId)
+                    vm.hallId = $scope.concert.HallId;
             });
         }
         $scope.$watch('place', function (data) {
@@ -35,10 +37,12 @@
             $scope.place = $scope.concert.ConcertPlace.CountryPlace;
 
         $scope.existHall = function (id) {
+            if (!id) return false;
             var place = $rootScope.concertPlaces.filter(function (item) { return item.Id === id; })[0];
             return place && place.Halls && place.Halls.length;
         }
         $scope.getHall = function (id) {
+            if (!id) return [];
             var place = $rootScope.concertPlaces.filter(function (item) { return item.Id === id; })[0];
             return place && place.Halls ? place.Halls : [];
         }
@@ -66,8 +70,8 @@
         }
 
         $scope.saveConcert = function () {
-            $scope.concert.ConcertPlaceId = $scope.concertPlaceId;
-            $scope.concert.HallId = $scope.hallId;
+            $scope.concert.ConcertPlaceId = vm.concertPlaceId;
+            $scope.concert.HallId = vm.hallId;
             concertService.saveConcert($scope.concert, function (data) {
                 $rootScope.loadConcerts();
                 if ($rootScope.getConcert)

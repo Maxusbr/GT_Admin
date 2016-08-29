@@ -15,6 +15,6 @@ namespace Getticket.Web.API.Models.Concerts
         /// <summary>
         /// Состав участников
         /// </summary>
-        public virtual IList<ActorModel> Actors  { get; set; }
+        public virtual IEnumerable<ActorModel> Actors  { get; set; }
     }
 }

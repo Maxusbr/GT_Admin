@@ -87,6 +87,14 @@ namespace Getticket.Web.API.Controllers
             return Ok(_concertService.GetConcertPlaces(id));
         }
 
+        /// <see cref="IConcertService.GetConcertExist" />
+        [Route("exist/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetConcertExist(int id)
+        {
+            return Ok(_concertService.GetConcertExist(id));
+        }
+
         /// <see cref="IConcertService.SaveConcert" />
         [HttpPost]
         [Route("add")]

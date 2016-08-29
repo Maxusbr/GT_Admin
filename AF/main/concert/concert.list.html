@@ -39,8 +39,8 @@
                     <th>Название</th>
                     <th>Место</th>
                     <th>Серия</th>
-                    <th>Начало</th>
-                    <th>Окончание</th>
+                    <!--<th>Начало</th>
+                    <th>Окончание</th>-->
                     <th>Билеты</th>
                     <th>Изменено</th>
                 </tr>
@@ -50,8 +50,8 @@
                     <td><a href="#" ng-click="selectConcert(item.Id)">{{item.Name}}</a></td>
                     <td><a href="#" ng-click="selectConcert(item.Id)">{{item.ConcertPlace.Name}} <span ng-show="item.Hall"> ({{item.Hall.Name}})</span></a></td>
                     <td><span ng-repeat="row in item.Series">{{row.Name}}</span></td>
-                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStartSold}}</a></td>
-                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStopSold}}</a></td>
+                    <!--<td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStartSold}}</a></td>
+                    <td><a href="#" ng-click="selectConcert(item.Id)">{{item.DateStopSold}}</a></td>-->
                     <td>
                         <a href="#" ng-click="selectConcert(item.Id)">
                             <span ng-if="item.Tickets">
