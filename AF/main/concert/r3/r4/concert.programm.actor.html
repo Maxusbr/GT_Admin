@@ -1,0 +1,49 @@
+﻿<div class="win-container r4 disConcertProgrammActor" style="width:350px;" ng-controller="concertProgrammActorController">
+    <div class="win-header">
+        <div class="win-header-text">
+            Редактирование состава
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disConcertProgrammActor')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+            <a href="#" ng-click="saveActor()">
+                <span class="fa fa-save"></span>
+                Сохранить
+            </a>
+        </div>
+    </div>
+    <div class="win-content">
+        <h5>Участники</h5>
+        <br />
+        <div class="row" cg-busy="Promise">
+            <div class="col-lg-12">
+                Участник<br />
+                <select name="" id="" class="form-control" ng-model="actor.IdPerson"
+                        ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                Амплуа \ Роль<br />
+                <input class="form-control" placeholder="Амплуа \ Роль" ng-model="actor.Role" />
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="col-lg-12">
+                Входит в Состав<br />
+                <select name="" id="" class="form-control" ng-model="actor.IdGroup"
+                        ng-options="item.Id as item.Name for item in actorgroups"></select>
+
+                <a href="#" ng-click="editActorGroup()">Редактировать</a>
+            </div>
+        </div>
+    </div>
+</div>

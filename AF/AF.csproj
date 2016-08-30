@@ -86,6 +86,12 @@
     <Content Include="main\concert\concert.viewone.js" />
     <Content Include="main\concert\concert.edit.html" />
     <Content Include="main\concert\concert.edit.js" />
+    <Content Include="main\concert\r3\r4\concert.programm.actor.html" />
+    <Content Include="main\concert\r3\r4\concert.programm.actor.js" />
+    <Content Include="main\concert\r3\r4\concert.programm.actor.part.html" />
+    <Content Include="main\concert\r3\r4\concert.programm.actor.part.js" />
+    <Content Include="main\concert\r3\r4\concert.programm.part.html" />
+    <Content Include="main\concert\r3\r4\concert.programm.part.js" />
     <Content Include="main\dashboard.html" />
     <Content Include="main\dictionary\dictionary.antro.types.html" />
     <Content Include="main\dictionary\dictionary.antro.types.js" />
@@ -93,6 +99,8 @@
     <Content Include="main\dictionary\dictionary.concert.hall.js" />
     <Content Include="main\dictionary\dictionary.event.category.html" />
     <Content Include="main\dictionary\dictionary.event.category.js" />
+    <Content Include="main\dictionary\dictionary.concert.actorgroup.html" />
+    <Content Include="main\dictionary\dictionary.concert.actorgroup.js" />
     <Content Include="main\dictionary\dictionary.event.org.html" />
     <Content Include="main\dictionary\dictionary.event.org.js" />
     <Content Include="main\dictionary\dictionary.person.links.html" />

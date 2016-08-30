@@ -9,16 +9,16 @@
     </div>
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="saveProgramm()">
+            <!--<a href="#" ng-click="saveProgramm()">
                 <span class="fa fa-save"></span> Сохранить
-            </a>
+            </a>-->
         </div>
     </div>
     <div class="win-content">
         <div class="row">
             <div class="col-lg-6">
-
-                <input type="radio" id="oneProgramm" name="programmType" ng-checked="concert.IsOneProgramm" ng-click="concert.IsOneProgramm = !concert.IsOneProgramm" />
+                <input type="radio" id="oneProgramm" name="programmType" ng-checked="concert.IsOneProgramm"
+                       ng-click="concert.IsOneProgramm = !concert.IsOneProgramm" />
                 <label for="oneProgramm">Одна программа для всех участников</label>
             </div>
             <div class="col-lg-6">
@@ -45,7 +45,7 @@
                             <td><a href="#" ng-click="editProgramm(item)">{{item.Name}}</a></td>
                             <td>
                                 <span>{{item.DateStart | date:'dd.MM.yyyy'}}</span>
-                                <span ng-if="item.DateEnd != item.DateStart">- {{item.DateEnd | date:'dd.MM.yyyy'}}</span>
+                                <span ng-if="item.AllDay">- {{item.DateEnd | date:'dd.MM.yyyy'}}</span>
                             </td>
                             <td>
                                 <span>{{item.TimeStart | date:'dd.MM.yyyy'}}</span>
@@ -60,7 +60,7 @@
                 </table>
                 <a href="#" ng-click="editProgramm()">Добавить</a>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12" ng-show="programms.length">
                 <h5>Состав участников</h5>
                 <table class="table" cg-busy="Promise">
                     <thead>
@@ -71,11 +71,11 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in actorgroups">
-                            <td><a href="#" ng-click="editGroup(item)">{{item.Name}}</a></td>
+                            <td><a href="#" ng-click="editActorGroup(item)">{{item.Name}}</a></td>
                             <td>
                                 <table>
                                     <tr ng-repeat="actor in item.Actors">
-                                        <td><a href="#" ng-click="editActor(actor)">{{actor.Person.LastName}} {{actor.Person.Name}} ({{actor.Role}})</a></td>
+                                        <td><a href="#" ng-click="editGroup(actor)">{{actor.Person.LastName}} {{actor.Person.Name}} ({{actor.Role}})</a></td>
                                     </tr>
                                 </table>
                             </td>

@@ -51,6 +51,10 @@ namespace Getticket.Web.API.Models.Concerts
         public string MediaLink { get; set; }
 
         /// <summary>
+        /// Программа на все дни
+        /// </summary>
+        public bool AllDay { get; set; }
+        /// <summary>
         /// Участники <see cref="ActorModel"/>
         /// </summary>
         public virtual IEnumerable<ActorModel> Actors { get; set; }

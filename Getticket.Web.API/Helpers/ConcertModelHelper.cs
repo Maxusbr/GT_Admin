@@ -121,16 +121,20 @@ namespace Getticket.Web.API.Helpers
 
         public static IEnumerable<Actor> GetActors(IEnumerable<ActorModel> models)
         {
-            return models.Select(o => new Actor
-            {
-                Id = o.Id,
-                IdPerson = o.IdPerson,
-                IdGroup = o.IdGroup,
-                //Group = GetActorGroup(o.Group),
-                Role = o.Role
-            });
+            return models.Select(GetActor);
         }
 
+        public static Actor GetActor(ActorModel model)
+        {
+            return new Actor
+            {
+                Id = model.Id,
+                IdPerson = model.IdPerson,
+                IdGroup = model.IdGroup,
+                //Group = GetActorGroup(o.Group),
+                Role = model.Role
+            };
+        }
         public static ActorGroup GetActorGroup(ActorGroupModel model)
         {
             return model != null ? new ActorGroup
@@ -280,13 +284,14 @@ namespace Getticket.Web.API.Helpers
                 IdEvent = model.IdEvent,
                 MediaLink = model.MediaLink,
                 Actors = GetActorModels(model.Actors),
-                Group = GetActorGroupModelss(model.Actors)
+                Group = GetActorGroupModels(model.Actors),
+                AllDay = model.DateEnd != null
             };
         }
 
-        private static IEnumerable<ActorGroupModel> GetActorGroupModelss(IList<Actor> actors)
+        private static IEnumerable<ActorGroupModel> GetActorGroupModels(IList<Actor> actors)
         {
-            var grp = actors.GroupBy(o => o.Group).Select(o => GetGroupModel(o.Key));
+            var grp = actors.GroupBy(o => o.Group).Select(o => GetGroupModel(o.Key)).ToList();
             foreach (var el in grp)
                 el.Actors = actors.Where(o => o.IdGroup == el.Id).Select(GetActorModel);
             return grp;
@@ -305,11 +310,12 @@ namespace Getticket.Web.API.Helpers
                 IdPerson = model.IdPerson,
                 IdGroup = model.IdGroup,
                 Group = GetGroupModel(model.Group),
-                Role = model.Role
+                Role = model.Role,
+                Person = PersonModelHelper.GetPersonModel(model.Person)
             } : null;
         }
 
-        private static ActorGroupModel GetGroupModel(ActorGroup model)
+        public static ActorGroupModel GetGroupModel(ActorGroup model)
         {
             return model != null ? new ActorGroupModel
             {

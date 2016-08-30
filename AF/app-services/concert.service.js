@@ -34,11 +34,22 @@
                 if (callback) callback(data);
             });
         }
+        service.getGroups = function (callback) {
+            return $http.get(`${serviceUrl}concerts/groups`).success(function (data) {
+                if (callback) callback(data);
+            });
+        }
         service.getHalls = function (id) {
             return $http.get(`${serviceUrl}concerts/halls/${id}`);
         }
-        service.getExist = function (id) {
-            return $http.get(`${serviceUrl}concerts/exist/${id}`);
+        service.getExist = function (id, callback) {
+            return $http.get(`${serviceUrl}concerts/exist/${id}`).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
         }
         service.saveConcert = function (model, callback) {
             return $http.post(`${serviceUrl}concerts/add`, model).success(function (data) {
@@ -49,8 +60,17 @@
                     callback(data);
             });
         }
-        service.saveProgramm = function (id, model, callback) {
-            return $http.post(`${serviceUrl}concerts/programm/${id}`, model).success(function (data) {
+        service.saveProgramms = function (id, models, callback) {
+            return $http.post(`${serviceUrl}concerts/programm/${id}`, models).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
+        }
+        service.saveProgramm = function (model, callback) {
+            return $http.post(`${serviceUrl}concerts/programm/save`, model).success(function (data) {
                 if (callback)
                     callback(data);
             }).error(function (data) {
@@ -94,7 +114,24 @@
                     callback(data);
             });
         }
-        
+        service.saveActorGroup = function (model, callback) {
+            return $http.post(`${serviceUrl}concerts/group/save`, model).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
+        }
+        service.saveActor = function (model, callback) {
+            return $http.post(`${serviceUrl}concerts/actor/save`, model).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
+        }
         return service;;
     }
 

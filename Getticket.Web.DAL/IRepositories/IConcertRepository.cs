@@ -64,6 +64,12 @@ namespace Getticket.Web.DAL.IRepositories
         IList<ConcertPlace> GetConcertPlace(int placeId);
 
         /// <summary>
+        /// Список составов участников
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<ActorGroup> GetActorGroups();
+
+        /// <summary>
         /// Создать концерт
         /// </summary>
         /// <param name="model"></param>
@@ -136,6 +142,13 @@ namespace Getticket.Web.DAL.IRepositories
         ConcertProgramm SaveConcertProgramm(int eventId, ConcertProgramm model, IEnumerable<Actor> actors);
 
         /// <summary>
+        /// Сохранить/добавить программу <see cref="ConcertProgramm"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        ConcertProgramm SaveConcertProgramm(ConcertProgramm model);
+
+        /// <summary>
         /// Сохранить/добавить билеты <see cref="ConcertTicket"/> 
         /// </summary>
         /// <param name="model"></param>
@@ -170,5 +183,6 @@ namespace Getticket.Web.DAL.IRepositories
         /// <param name="id"></param>
         /// <returns></returns>
         bool ExistCalendar(int id);
+
     }
 }

@@ -1,0 +1,40 @@
+﻿<div class="win-container r2 r5 disoncertActorGroup" style="width:300px;" ng-controller="dictConcertActorGroupController as cntrl">
+    <div class="win-header">
+        <div class="win-header-text">
+            Состав
+        </div>
+        <div class="win_buttons">
+            <a href="#" ng-click="closeMe('disoncertActorGroup')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        </div>
+    </div>
+    <div class="win-menu">
+        <div class="win-menu-button">
+
+        </div>
+    </div>
+    <div class="win-content">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h5>Редактирование</h5>
+            </div>
+            <div class="panel-body">
+                <input type="text" class="form-control" ng-model="cntrl.editItem.Name" />
+                <br />
+                <button class="btn btn-default" ng-click="saveChanges()">Сохранить</button>
+                <button class="btn btn-default" ng-click="cntrl.editItem = {}">Очистить</button>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in actorgroups">
+                    <td><a href="#" ng-click="cntrl.editItem = item">{{item.Name}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

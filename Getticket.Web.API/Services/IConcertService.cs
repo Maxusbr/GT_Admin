@@ -61,6 +61,12 @@ namespace Getticket.Web.API.Services
         IEnumerable<ConcertPlaceModel> GetConcertPlaces(int placeId);
 
         /// <summary>
+        /// Список составов участников
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<ActorGroupModel> GetActorGroups();
+
+        /// <summary>
         /// Сохранить концерт
         /// </summary>
         /// <param name="concert"></param>
@@ -99,6 +105,13 @@ namespace Getticket.Web.API.Services
         bool SaveConcertProgramm(int eventId, IEnumerable<ConcertProgrammModel> models);
 
         /// <summary>
+        /// Сохранить/добавить программу <see cref="ConcertProgrammModel"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        ServiceResponce SaveConcertProgramm(ConcertProgrammModel model);
+
+        /// <summary>
         /// Сохранить/добавить билеты <see cref="ConcertTicketModel"/> 
         /// </summary>
         /// <param name="model"></param>
@@ -108,10 +121,9 @@ namespace Getticket.Web.API.Services
         /// <summary>
         /// Сохранить/добавить актера <see cref="ActorModel"/> 
         /// </summary>
-        /// <param name="programmId"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        ServiceResponce SaveActor(int programmId, ActorModel model);
+        ServiceResponce SaveActor(ActorModel model);
 
         /// <summary>
         /// Сохранить/добавить состав <see cref="ActorGroupModel"/> 
@@ -133,6 +145,8 @@ namespace Getticket.Web.API.Services
         /// <param name="id"></param>
         /// <returns></returns>
         ConcertExistModel GetConcertExist(int id);
+
+        
     }
 
     

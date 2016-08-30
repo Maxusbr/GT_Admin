@@ -85,6 +85,12 @@ namespace Getticket.Web.DAL.Repositories
                 .Include(o => o.Halls).ToList();
         }
 
+        /// <see cref="IConcertRepository.GetActorGroups" />
+        public IEnumerable<ActorGroup> GetActorGroups()
+        {
+            return db.ActorGroups.ToList();
+        }
+
         /// <see cref="IConcertRepository.AddConcert" />
         public Event AddConcert(Event model, int userId)
         {
@@ -236,7 +242,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (model.Id > 0)
             {
-                var pr = db.EventDescriptions.FirstOrDefault(o => o.Id == model.Id);
+                var pr = db.ConcertSchedules.FirstOrDefault(o => o.Id == model.Id);
                 db.Entry(pr).CurrentValues.SetValues(model);
             }
             try
@@ -259,7 +265,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (model.Id > 0)
             {
-                var pr = db.EventDescriptions.FirstOrDefault(o => o.Id == model.Id);
+                var pr = db.ConcertSchedules.FirstOrDefault(o => o.Id == model.Id);
                 db.Entry(pr).CurrentValues.SetValues(model);
             }
             try
@@ -277,8 +283,17 @@ namespace Getticket.Web.DAL.Repositories
             return model;
         }
 
-        /// <see cref="IConcertRepository.SaveConcertProgramm" />
+        /// <see cref="IConcertRepository.SaveConcertProgramm(int, ConcertProgramm, IEnumerable{Actor})" />
         public ConcertProgramm SaveConcertProgramm(int eventId, ConcertProgramm model, IEnumerable<Actor> actors)
+        {
+            var res = SaveConcertProgramm(model);
+            if (res != null)
+                SaveActors(model.Id, actors);
+            return res;
+        }
+
+        /// <see cref="IConcertRepository.SaveConcertProgramm(ConcertProgramm)" />
+        public ConcertProgramm SaveConcertProgramm(ConcertProgramm model)
         {
             if (model.Id == 0)
             {
@@ -286,7 +301,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (model.Id > 0)
             {
-                var pr = db.EventDescriptions.FirstOrDefault(o => o.Id == model.Id);
+                var pr = db.ConcertProgramms.FirstOrDefault(o => o.Id == model.Id);
                 db.Entry(pr).CurrentValues.SetValues(model);
             }
             try
@@ -297,7 +312,6 @@ namespace Getticket.Web.DAL.Repositories
             {
                 return null;
             }
-            SaveActors(model.Id, actors);
             return model;
         }
 
@@ -309,8 +323,11 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IConcertRepository.SaveActor" />
         public Actor SaveActor(int programmId, Actor model)
         {
-            var grp = SaveGroup(model.Group);
-            model.IdGroup = grp.Id;
+            if(model.Group != null)
+            {
+                var grp = SaveGroup(model.Group);
+                model.IdGroup = grp.Id;
+            }
             model.IdProgramm = programmId;
             if (model.Id == 0)
             {
@@ -318,7 +335,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (model.Id > 0)
             {
-                var pr = db.EventDescriptions.FirstOrDefault(o => o.Id == model.Id);
+                var pr = db.Actors.FirstOrDefault(o => o.Id == model.Id);
                 db.Entry(pr).CurrentValues.SetValues(model);
             }
             try
@@ -341,7 +358,7 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (model.Id > 0)
             {
-                var pr = db.EventDescriptions.FirstOrDefault(o => o.Id == model.Id);
+                var pr = db.ActorGroups.FirstOrDefault(o => o.Id == model.Id);
                 db.Entry(pr).CurrentValues.SetValues(model);
             }
             try

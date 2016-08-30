@@ -51,7 +51,7 @@
             $rootScope.$watch('countryPlace', function (place) {
                 $scope.place = place;
             });
-            app.closeFive();
+            app.closeFour();
             app.loadContentView('/main/dictionary/dictionary.concert.hall.html', 3200);
         }
 
@@ -76,7 +76,7 @@
                 $rootScope.loadConcerts();
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);
-                app.closeFive();
+                app.closeFour();
                 app.closeView('concertEdit');
             });
         }
