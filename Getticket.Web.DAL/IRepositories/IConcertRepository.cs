@@ -50,6 +50,13 @@ namespace Getticket.Web.DAL.IRepositories
         IList<ConcertProgramm> GetConcertProgramms(int id);
 
         /// <summary>
+        /// Список участников с программами
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<Actor> GetActorProgramms(int id);
+
+        /// <summary>
         /// Список площадок <see cref="Hall"/>
         /// </summary>
         /// <param name="placeId"></param>
@@ -142,11 +149,18 @@ namespace Getticket.Web.DAL.IRepositories
         ConcertProgramm SaveConcertProgramm(int eventId, ConcertProgramm model, IEnumerable<Actor> actors);
 
         /// <summary>
-        /// Сохранить/добавить программу <see cref="ConcertProgramm"/>
+        /// Добавить программу <see cref="ConcertProgramm"/>
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        ConcertProgramm SaveConcertProgramm(ConcertProgramm model);
+        ConcertProgramm AddConcertProgramm(ConcertProgramm model);
+
+        /// <summary>
+        /// Обновить программу <see cref="ConcertProgramm"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        ConcertProgramm UpdateConcertProgramm(ConcertProgramm model);
 
         /// <summary>
         /// Сохранить/добавить билеты <see cref="ConcertTicket"/> 
@@ -156,12 +170,18 @@ namespace Getticket.Web.DAL.IRepositories
         ConcertTicket SaveConcertTicket(ConcertTicket model);
 
         /// <summary>
-        /// Сохранить/добавить актера <see cref="Actor"/> 
+        /// Добавить актера <see cref="Actor"/> 
         /// </summary>
-        /// <param name="programmId"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        Actor SaveActor(int programmId, Actor model);
+        Actor AddActor(Actor model);
+
+        /// <summary>
+        /// Сохранить актера <see cref="Actor"/> 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Actor UpdateActor(Actor model);
 
         /// <summary>
         /// Сохранить/добавить состав <see cref="ActorGroup"/> 
@@ -184,5 +204,6 @@ namespace Getticket.Web.DAL.IRepositories
         /// <returns></returns>
         bool ExistCalendar(int id);
 
+        
     }
 }

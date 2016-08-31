@@ -57,9 +57,15 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IConcertService.GetConcertProgramms"/>
-        public IEnumerable<ConcertProgrammModel> GetConcertProgramms(int id)
+        public IEnumerable<ActorProgrammModel> GetConcertProgramms(int id)
         {
-            return _concertRepository.GetConcertProgramms(id).Select(ConcertModelHelper.GetProgrammModel);
+            return _concertRepository.GetConcertProgramms(id).Select(ConcertModelHelper.GetActorProgrammModel);
+        }
+
+        /// <see cref="IConcertService.GetActorProgramms"/>
+        public IEnumerable<ActorModel> GetActorProgramms(int id)
+        {
+            return ConcertModelHelper.GetActorModels(_concertRepository.GetActorProgramms(id));
         }
 
         /// <see cref="IConcertService.GetHalls"/>
@@ -128,10 +134,10 @@ namespace Getticket.Web.API.Services
         public bool SaveConcertProgramm(int eventId, IEnumerable<ConcertProgrammModel> models)
         {
             var res =
-                models.Select(o => _concertRepository.SaveConcertProgramm(eventId,
-                    ConcertModelHelper.GetProgramm(o),
-                    ConcertModelHelper.GetActors(o.Actors)))
+                models.Select(o => _concertRepository.UpdateConcertProgramm(
+                    ConcertModelHelper.GetProgramm(o)))
                     .Any(o => o != null);
+
             return res;
         }
 
@@ -140,11 +146,34 @@ namespace Getticket.Web.API.Services
         {
             var succes = ServiceResponce.FromSuccess().Result("Concert programm save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save concert programm");
-            var res = _concertRepository.SaveConcertProgramm(
+            var res = _concertRepository.AddConcertProgramm(
                 ConcertModelHelper.GetProgramm(model));
             if (res != null)
                 succes.Add("ProgrammId", res.Id);
             return res != null ? succes : error;
+        }
+
+        /// <see cref="IConcertService.UpdateConcertProgramm"/>
+        public bool UpdateConcertProgramm(ConcertProgrammModel model)
+        {
+            return _concertRepository.UpdateConcertProgramm(ConcertModelHelper.GetProgramm(model)) != null;
+        }
+
+        /// <see cref="IConcertService.SaveActor"/>
+        public ServiceResponce SaveActor(ActorModel model)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Concert tickets save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save concert tickets");
+            var res = _concertRepository.AddActor(ConcertModelHelper.GetActor(model));
+            if (res != null)
+                succes.Add("ActorId", res.Id);
+            return res != null ? succes : error;
+        }
+
+        /// <see cref="IConcertService.UpdateActor"/>
+        public bool UpdateActor(ActorModel model)
+        {
+            return _concertRepository.UpdateActor(ConcertModelHelper.GetActor(model)) != null;
         }
 
         /// <see cref="IConcertService.SaveGroup"/>
@@ -197,16 +226,6 @@ namespace Getticket.Web.API.Services
             return res != null ? succes : error;
         }
 
-        /// <see cref="IConcertService.SaveActor"/>
-        public ServiceResponce SaveActor(ActorModel model)
-        {
-            var succes = ServiceResponce.FromSuccess().Result("Concert tickets save complete");
-            var error = ServiceResponce.FromFailed().Result($"Error save concert tickets");
-            var res = _concertRepository.SaveActor(model.IdProgramm, ConcertModelHelper.GetActor(model));
-            if (res != null)
-                succes.Add("TicketsId", res.Id);
-            return res != null ? succes : error;
-        }
     }
 
 

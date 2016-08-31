@@ -227,13 +227,15 @@
     <Compile Include="Models\Concerts\ConcertExistModel.cs" />
     <Compile Include="Models\Concerts\ConcertDateRangeModel.cs" />
     <Compile Include="Models\Concerts\ConcertPlaceModel.cs" />
+    <Compile Include="Models\Concerts\ActorProgrammModel.cs" />
     <Compile Include="Models\Concerts\ConcertProgrammModel.cs" />
     <Compile Include="Models\Concerts\ConcertScheduleModel.cs" />
     <Compile Include="Models\Concerts\ConcertTicketModel.cs" />
     <Compile Include="Models\Concerts\HallModel.cs" />
     <Compile Include="Models\Concerts\SeriesConcertModel.cs" />
     <Compile Include="Models\Concerts\SeriesNameModel.cs" />
-    <Compile Include="Models\Concerts\UpdateConcertModel.cs" />
+    <Compile Include="Models\Concerts\UpdateConcertCalendarModel.cs" />
+    <Compile Include="Models\Concerts\UpdateConcertProgrammModel.cs" />
     <Compile Include="Models\Events\EventOrganizerModel.cs" />
     <Compile Include="Models\Events\EventCategoryModel.cs" />
     <Compile Include="Models\Events\EventGenreLinkModel.cs" />

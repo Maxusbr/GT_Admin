@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AccessRole.cs" />
+    <Compile Include="Entities\ActorInProgramm.cs" />
     <Compile Include="Entities\ActorGroup.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\AntroLinkEvent.cs" />

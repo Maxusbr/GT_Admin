@@ -1,71 +1,51 @@
 ﻿(function () {
     'use strict';
 
-    function concertProgrammActorPartController($rootScope, $scope, concertService) {
+    function concertProgrammActorPartController($rootScope, $scope, concertService, personService) {
         var vm = this;
+        $scope.actor = $rootScope.editedActor;
 
-        $scope.part = $rootScope.editedProgrammPart;
-        $scope.$watch('dateStart', function (date) {
-            if (!date) return;
-            if (date > $scope.dateEnd)
-                $scope.dateEnd = date;
-            if (!$scope.timeStart) return;
-            var dt = $scope.timeStart;
-            $scope.timeStart = date;
-            $scope.timeStart.setHours(dt.getHours(), dt.getMinutes());
-        });
-        $scope.$watch('dateEnd', function (date) {
-            if (!date) return;
-            if (date < $scope.dateEnd)
-                $scope.dateStart = date;
-            if (!$scope.timeEnd) return;
-            var dt = $scope.timeEnd;
-            $scope.timeEnd = date;
-            $scope.timeEnd.setHours(dt.getHours(), dt.getMinutes());
-        });
-        $scope.$watch('timeStart', function (date) {
-            if (!date) return;
-            if (date > $scope.timeEnd)
-                $scope.timeEnd = date;
-        });
-        $scope.$watch('timeEnd', function (date) {
-            if (!date) return;
-            if (date < $scope.timeStart)
-                $scope.timeStart = date;
-        });
-        $scope.dateEnd = $scope.part.DateEnd ? new Date($scope.part.DateEnd) : new Date($scope.part.DateStart);
-        if ($scope.part.DateStart)
-            $scope.dateStart = new Date($scope.part.DateStart);
-
-        if ($scope.part.TimeStart) {
-            $scope.timeStart = new Date($scope.part.DateStart);
-            var times = $scope.part.TimeStart.split(':');
-            $scope.timeStart.setHours(times[0], times[1]);
-        }
-        if ($scope.part.TimeEnd) {
-            $scope.timeEnd = new Date($scope.part.DateEnd ? $scope.part.DateEnd : $scope.part.DateStart);
-            var timee = $scope.part.TimeEnd.split(':');
-            $scope.timeEnd.setHours(timee[0], timee[1]);
+        $scope.editProgramm = function (item) {
+            $rootScope.editedProgrammPart = item ? item : {
+                DateStart: new Date(),
+                TimeStart: "00:00",
+                TimeEnd: "00:00",
+                IdEvent: $rootScope.editedConcert.Id
+            };
+            app.closeFive();
+            app.loadContentView('/main/concert/r3/r4/concert.programm.part.html', 3200);
         }
 
-        $scope.savePart = function () {
-            $scope.part.DateStart = `${$scope.dateStart.getFullYear()}-${$scope.dateStart.getMonth() + 1}-${$scope.dateStart.getDate()}`;
-            $scope.part.DateEnd = $scope.part.AllDay ? `${$scope.dateEnd.getFullYear()}-${$scope.dateEnd.getMonth() + 1}-${$scope.dateEnd.getDate()}`: null;
-            $scope.part.TimeStart = `${$scope.timeStart.getHours()}:${$scope.timeStart.getMinutes()}`;
-            $scope.part.TimeEnd = `${$scope.timeEnd.getHours()}:${$scope.timeEnd.getMinutes()}`;
-            concertService.saveProgramm($scope.part, function (data) {
+        
+        if (!$rootScope.persons)
+            $scope.Promise = personService.getPersons();
+
+        $scope.saveActor = function () {
+            concertService.saveActor($scope.actor, function (data) {
                 $rootScope.getProgramms($rootScope.concertId);
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($rootScope.concertId);
-                app.closeView('disConcertProgrammPart');
+                app.closeFive();
+                app.closeView('disConcertActorPart');
             });
         }
 
+        $rootScope.saveActorPart = function (part) {
+            var pr = $scope.actor.Programms.filter(function (item) { return item.Id === part.Id })[0];
+            if (pr) {
+                $scope.actor.Programms.forEach(function (item) {
+                    if (item.Id === part.Id)
+                        $scope.actor[$scope.actor.indexOf(item)] = part;
+                });
+            } else {
+                $scope.actor.Programms.push(part);
+            }
+        }
     }
 
     angular
         .module('app')
         .controller('concertProgrammActorPartController', concertProgrammActorPartController);
 
-    concertProgrammActorPartController.$inject = ['$rootScope', '$scope', 'concertService'];
+    concertProgrammActorPartController.$inject = ['$rootScope', '$scope', 'concertService', 'personService'];
 })();

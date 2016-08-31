@@ -50,13 +50,19 @@
 
         $scope.savePart = function () {
             $scope.part.DateStart = `${$scope.dateStart.getFullYear()}-${$scope.dateStart.getMonth() + 1}-${$scope.dateStart.getDate()}`;
-            $scope.part.DateEnd = $scope.part.AllDay ? `${$scope.dateEnd.getFullYear()}-${$scope.dateEnd.getMonth() + 1}-${$scope.dateEnd.getDate()}`: null;
+            $scope.part.DateEnd = $scope.part.AllDay ? `${$scope.dateEnd.getFullYear()}-${$scope.dateEnd.getMonth() + 1}-${$scope.dateEnd.getDate()}` : null;
             $scope.part.TimeStart = `${$scope.timeStart.getHours()}:${$scope.timeStart.getMinutes()}`;
             $scope.part.TimeEnd = `${$scope.timeEnd.getHours()}:${$scope.timeEnd.getMinutes()}`;
             concertService.saveProgramm($scope.part, function (data) {
-                $rootScope.getProgramms($rootScope.concertId);
-                if ($rootScope.getConcert)
-                    $rootScope.getConcert($rootScope.concertId);
+                $scope.part.Id = data.programmid;
+                if ($rootScope.saveActorPart) {
+                    $rootScope.saveActorPart($scope.part);
+                } else {
+                    $rootScope.getProgramms($rootScope.concertId);
+                    if ($rootScope.getConcert)
+                        $rootScope.getConcert($rootScope.concertId);
+                }
+
                 app.closeView('disConcertProgrammPart');
             });
         }

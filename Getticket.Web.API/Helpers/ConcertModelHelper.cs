@@ -115,7 +115,8 @@ namespace Getticket.Web.API.Helpers
                 TimeEnd = model.TimeEnd,
                 Description = model.Description,
                 IdEvent = model.IdEvent,
-                MediaLink = model.MediaLink
+                MediaLink = model.MediaLink,
+                //Actors = model.Actors != null ? GetActors(model.Actors).ToList(): null
             } : null;
         }
 
@@ -132,7 +133,8 @@ namespace Getticket.Web.API.Helpers
                 IdPerson = model.IdPerson,
                 IdGroup = model.IdGroup,
                 //Group = GetActorGroup(o.Group),
-                Role = model.Role
+                Role = model.Role,
+                Programms = model.Programms?.Select(GetProgramm).ToList()
             };
         }
         public static ActorGroup GetActorGroup(ActorGroupModel model)
@@ -271,7 +273,7 @@ namespace Getticket.Web.API.Helpers
 
         public static ConcertProgrammModel GetProgrammModel(ConcertProgramm model)
         {
-            return new ConcertProgrammModel
+            return model != null ? new ConcertProgrammModel
             {
                 Id = model.Id,
                 Name = model.Name,
@@ -283,21 +285,35 @@ namespace Getticket.Web.API.Helpers
                 Description = model.Description,
                 IdEvent = model.IdEvent,
                 MediaLink = model.MediaLink,
-                Actors = GetActorModels(model.Actors),
-                Group = GetActorGroupModels(model.Actors),
                 AllDay = model.DateEnd != null
+            } : null;
+        }
+
+        public static ActorProgrammModel GetActorProgrammModel(ConcertProgramm model)
+        {
+            var res = new ActorProgrammModel
+            {
+                Programm = GetProgrammModel(model),
+                Actors = GetActorModels(model.Actors),
+                Group = GetActorGroupModels(model.Actors)
             };
+            return res;
         }
 
         private static IEnumerable<ActorGroupModel> GetActorGroupModels(IList<Actor> actors)
         {
-            var grp = actors.GroupBy(o => o.Group).Select(o => GetGroupModel(o.Key)).ToList();
+            var grp = actors.GroupBy(o => o.Group).Select(o => o.Key).ToList();
+            var list = new List<ActorGroupModel>();
             foreach (var el in grp)
-                el.Actors = actors.Where(o => o.IdGroup == el.Id).Select(GetActorModel);
-            return grp;
+            {
+                var grpel = el == null ? new ActorGroupModel() : GetGroupModel(el);
+                grpel.Actors = actors.Where(o => o.IdGroup == el?.Id).Select(GetActorModel);
+                list.Add(grpel);
+            }
+            return list;
         }
 
-        private static IEnumerable<ActorModel> GetActorModels(IList<Actor> models)
+        public static IEnumerable<ActorModel> GetActorModels(IList<Actor> models)
         {
             return models.Select(GetActorModel);
         }
@@ -311,7 +327,8 @@ namespace Getticket.Web.API.Helpers
                 IdGroup = model.IdGroup,
                 Group = GetGroupModel(model.Group),
                 Role = model.Role,
-                Person = PersonModelHelper.GetPersonModel(model.Person)
+                Person = PersonModelHelper.GetPersonModel(model.Person),
+                Programms = model.Programms.Select(GetProgrammModel)
             } : null;
         }
 

@@ -29,6 +29,11 @@
                 if (callback) callback(data);
             });
         }
+        service.getActors = function (id, callback) {
+            return $http.get(`${serviceUrl}concerts/actor/${id}`).success(function (data) {
+                if (callback) callback(data);
+            });
+        }
         service.getSeries = function (callback) {
             return $http.get(`${serviceUrl}concerts/series`).success(function (data) {
                 if (callback) callback(data);
@@ -53,6 +58,15 @@
         }
         service.saveConcert = function (model, callback) {
             return $http.post(`${serviceUrl}concerts/add`, model).success(function (data) {
+                if (callback)
+                    callback(data);
+            }).error(function (data) {
+                if (callback)
+                    callback(data);
+            });
+        }
+        service.updateConcert = function (model, callback) {
+            return $http.post(`${serviceUrl}concerts/update`, model).success(function (data) {
                 if (callback)
                     callback(data);
             }).error(function (data) {
