@@ -93,7 +93,8 @@ namespace Getticket.Web.API.Helpers
                 Id = model.Id,
                 DateStart = model.DateStart,
                 DateEnd = model.DateEnd,
-                IsRepeated = model.IsRepeated
+                IsRepeated = model.IsRepeated,
+                IdEvent = model.IdEvent
             } : null;
         }
 
@@ -239,29 +240,172 @@ namespace Getticket.Web.API.Helpers
             } : null;
         }
 
-        public static ConcertDateRangeModel GetDateRangeModel(ConcertDateRange model)
+        public static ConcertDateRangeModel GetDateRangeModel(IList<ConcertDateRange> models)
         {
-            return model != null ? new ConcertDateRangeModel
+            if (!models.Any()) return null;
+            var maxDayEnd = models.Max(o => o.DateEnd);
+            var maxDayStart = models.Max(o => o.DateStart);
+            var res = new ConcertDateRangeModel
             {
-                Id = model.Id,
-                DateStart = model.DateStart,
-                DateEnd = model.DateEnd,
-                IsRepeated = model.IsRepeated,
-                IdEvent = model.IdEvent,
-                Schedules = GetScheduleModels(model.Schedules)
-            } : null;
+                DateStart = models.Min(o => o.DateStart),
+                DateEnd = maxDayStart > maxDayEnd ? maxDayStart : maxDayEnd,
+                IsRepeated = models.Any(o => o.IsRepeated)
+            };
+            var weeks = models.Where(o => o.IsRepeated && o.Schedules.Any(x => x.WeekDay != null)).ToList();
+            if (weeks.Any())
+            {
+                res.WeekSchedules = GetWeekScheduleModels(weeks);
+                res.PreviewWeek = GetPreviewWeek(weeks);
+            }
+            var range = models.Where(o => o.IsRepeated && o.Schedules.Any(x => x.WeekDay == null)).ToList();
+            if (range.Any())
+            {
+                res.RangeSchedules = GetRangeScheduleModels(range);
+                res.PreviewRange = GetPreviewRange(range);
+            }
+            var one = models.OrderByDescending(o => o.DateStart).FirstOrDefault(o => !o.IsRepeated);
+            if (one != null)
+                res.OneSchedule = GetScheduleModel(one.Schedules.FirstOrDefault(), one);
+            return res;
         }
 
-        private static IEnumerable<ConcertScheduleModel> GetScheduleModels(IList<ConcertSchedule> models)
+        private static IEnumerable<PreviewScheduleModel> GetPreviewWeek(IEnumerable<ConcertDateRange> range)
         {
-            return models.Select(GetScheduleModel);
+            var schedules = range.SelectMany(item => item.Schedules, (item, el) => el);
+
+            var list = schedules.OrderBy(o => o.WeekDay)
+                    .GroupBy(o => o.TimeStart)
+                    .Select(o => new
+                    {
+                        Time = o.Key,
+                        WeekDay = string.Join(",", o.Select(x => GetWeekDay(x.WeekDay ?? 0))),
+                        WeekDayArr = o.Select(x => GetWeekDay(x.WeekDay ?? 0))
+                    }).ToList();
+            var res = list.GroupBy(o => o.WeekDay).Select(o => new PreviewScheduleModel
+            {
+                Range = o.FirstOrDefault().WeekDayArr,
+                Times = o.Select(x => $"{x.Time.Hours:00}:{x.Time.Minutes:00}")
+            });
+            return res.ToList();
+        }
+        public static IEnumerable<PreviewScheduleModel> GetPreviewWeek(IEnumerable<WeekScheduleModel> models)
+        {
+            var schedules = models.SelectMany(item => item.WeekDays, (item, el) => new ConcertSchedule
+            {
+             TimeStart = item.TimeStart, WeekDay = el
+            });
+            var list = schedules.OrderBy(o => o.WeekDay)
+                    .GroupBy(o => o.TimeStart)
+                    .Select(o => new
+                    {
+                        Time = o.Key,
+                        WeekDay = string.Join(",", o.Select(x => GetWeekDay(x.WeekDay ?? 0))),
+                        WeekDayArr = o.Select(x => GetWeekDay(x.WeekDay ?? 0))
+                    }).ToList();
+            var res = list.GroupBy(o => o.WeekDay).Select(o => new PreviewScheduleModel
+            {
+                Range = o.FirstOrDefault().WeekDayArr,
+                Times = o.Select(x => $"{x.Time.Hours:00}:{x.Time.Minutes:00}")
+            });
+            return res.ToList();
+        }
+        public static IEnumerable<PreviewScheduleModel> GetPreviewRange(IEnumerable<RangeScheduleModel> models)
+        {
+            var schedules = models.SelectMany(item => item.Schedules, (item, el) => new ConcertScheduleModel
+            {
+                DateStart = item.DateStart,
+                DateEnd = item.DateEnd,
+                TimeStart = el.TimeStart,
+                IsRepeated = el.IsRepeated
+            });
+            var res = schedules.GroupBy(o => new { ds = o.DateStart, de = o.DateEnd }).Select(o => new PreviewScheduleModel
+            {
+                Dates = o.Key.ds.ToString("dd.MM.yyyy") + (o.Key.de != null ? $"-{o.Key.de?.ToString("dd.MM.yyyy")}" : ""),
+                Times = o.Select(x => $"{x.TimeStart.Hours:00}:{x.TimeStart.Minutes:00}")
+            });
+            return res.ToList();
+        }
+        public static IEnumerable<PreviewScheduleModel> GetPreviewRange(IEnumerable<ConcertDateRange> range)
+        {
+            var schedules = range.SelectMany(item => item.Schedules, (item, el) => GetScheduleModel(el, item));
+
+            var res = schedules.GroupBy(o => new { ds = o.DateStart, de = o.DateEnd }).Select(o => new PreviewScheduleModel
+            {
+                Dates = o.Key.ds.ToString("dd.MM.yyyy") + (o.Key.de != null ? $"-{o.Key.de?.ToString("dd.MM.yyyy")}" : ""),
+                Times = o.Select(x => $"{x.TimeStart.Hours:00}:{x.TimeStart.Minutes:00}")
+            });
+
+            //var list = schedules.GroupBy(o => new { ts = o.TimeStart, rep = o.IsRepeated }).Select(o => new
+            //{
+            //    Time = o.Key.ts,
+            //    Days = !o.Key.rep ? string.Join(",", o.Select(x => x.DateStart.ToString("dd.MM.yyyy"))) :
+            //                    string.Join(",", o.Select(x => $"{x.DateStart:dd.MM.yyyy}-{x.DateEnd:dd.MM.yyyy}")),
+            //    DayArr = !o.Key.rep ? o.Select(x => x.DateStart.ToString("dd.MM.yyyy")) :
+            //                    o.Select(x => $"{x.DateStart:dd.MM.yyyy}-{x.DateEnd:dd.MM.yyyy}")
+            //}).ToList();
+            //var res = list.GroupBy(o => o.Days).Select(o => new PreviewScheduleModel
+            //{
+            //    Range = o.FirstOrDefault().DayArr,
+            //    Times = o.Select(x => $"{x.Time.Hours:00}:{x.Time.Minutes:00}")
+            //});
+            return res.ToList();
         }
 
-        private static ConcertScheduleModel GetScheduleModel(ConcertSchedule model)
+        private static string GetWeekDay(int num)
+        {
+            switch (num)
+            {
+                case 0:
+                    return "Вс";
+                case 1:
+                    return "Пн";
+                case 2:
+                    return "Вт";
+                case 3:
+                    return "Ср";
+                case 4:
+                    return "Чт";
+                case 5:
+                    return "Пт";
+                case 6:
+                    return "Сб";
+                default:
+                    return "";
+            }
+        }
+
+        private static IEnumerable<WeekScheduleModel> GetWeekScheduleModels(IEnumerable<ConcertDateRange> range)
+        {
+            var models = range.SelectMany(item => item.Schedules, (item, el) => GetScheduleModel(el, item));
+
+            return models.OrderBy(o => o.TimeStart).GroupBy(o => o.TimeStart)
+                .Select(o => new WeekScheduleModel
+                {
+                    DateStart = o.Min(x => x.DateStart),
+                    DateEnd = o.Max(x => x.DateEnd),
+                    TimeStart = o.Key,
+                    WeekDays = o.Select(x => x.WeekDay ?? 0)
+                }).ToList();
+        }
+
+        private static IEnumerable<RangeScheduleModel> GetRangeScheduleModels(IEnumerable<ConcertDateRange> range)
+        {
+            var schedules = range.SelectMany(item => item.Schedules, (item, el) => GetScheduleModel(el, item));
+            var list = schedules.GroupBy(o => new { ds = o.DateStart, de = o.DateEnd })
+                .Select(o => new RangeScheduleModel { DateStart = o.Key.ds, DateEnd = o.Key.de, Schedules = o });
+
+            return list.ToList(); //range.SelectMany(item => item.Schedules, (item, el) => GetScheduleModel(el, item)).ToList();
+
+        }
+
+        private static ConcertScheduleModel GetScheduleModel(ConcertSchedule model, ConcertDateRange range)
         {
             return model != null ? new ConcertScheduleModel
             {
                 Id = model.Id,
+                DateStart = range.DateStart,
+                DateEnd = range.DateEnd,
+                IsRepeated = range.IsRepeated,
                 Duration = model.Duration,
                 TimeStart = model.TimeStart,
                 TimeEnd = model.TimeEnd,
@@ -339,6 +483,34 @@ namespace Getticket.Web.API.Helpers
                 Id = model.Id,
                 Name = model.Name
             } : null;
+        }
+
+
+        public static IEnumerable<ConcertScheduleModel> GetSchedules(IEnumerable<WeekScheduleModel> weekSchedules)
+        {
+            return weekSchedules.SelectMany(item => item.WeekDays, (item, el) => new ConcertScheduleModel
+            {
+                DateStart = item.DateStart,
+                DateEnd = item.DateEnd,
+                IsRepeated = true,
+                TimeStart = item.TimeStart,
+                Duration = item.Duration,
+                TimeEnd = item.TimeEnd,
+                WeekDay = el
+            });
+        }
+
+        public static IEnumerable<ConcertScheduleModel> GetSchedules(IEnumerable<RangeScheduleModel> rangeSchedules)
+        {
+            return rangeSchedules.SelectMany(item => item.Schedules, (item, el) => new ConcertScheduleModel
+            {
+                DateStart = item.DateStart,
+                DateEnd = item.DateEnd,
+                IsRepeated = true,
+                TimeStart = el.TimeStart,
+                Duration = el.Duration,
+                TimeEnd = el.TimeEnd
+            });
         }
     }
 }

@@ -24,6 +24,16 @@
                 if (callback) callback(data);
             });
         }
+        service.getScheduleWeekPreviews = function (models, callback) {
+            return $http.post(`${serviceUrl}concerts/schedule/week/preview`, models).success(function (data) {
+                if (callback) callback(data);
+            });
+        }
+        service.getSchedulePreviews = function (models, callback) {
+            return $http.post(`${serviceUrl}concerts/schedule/preview`, models).success(function (data) {
+                if (callback) callback(data);
+            });
+        }
         service.getProgramms = function (id, callback) {
             return $http.get(`${serviceUrl}concerts/programm/${id}`).success(function (data) {
                 if (callback) callback(data);

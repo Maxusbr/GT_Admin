@@ -51,6 +51,7 @@
         $rootScope.AddActor = function (item) {
             item.Programms = $scope.programms;
             concertService.saveActor(item, function (data) {
+                $rootScope.getProgramms($scope.concert.Id);
                 app.closeFive();
                 app.closeView('disConcertProgrammActor');
             });

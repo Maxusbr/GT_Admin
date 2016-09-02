@@ -132,5 +132,11 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [JsonIgnore]
         public virtual ConcertTicket Tickets { get; set; }
+
+        /// <summary>
+        /// Календарь
+        /// </summary>
+        [JsonIgnore]
+        public virtual ICollection<ConcertDateRange> Calendar { get; set; }
     }
 }

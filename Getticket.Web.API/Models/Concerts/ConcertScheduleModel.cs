@@ -6,8 +6,18 @@ namespace Getticket.Web.API.Models.Concerts
     /// <summary>
     /// Расписание концерта
     /// </summary>
-    public class ConcertScheduleModel: BaseModel
+    public class ConcertScheduleModel : BaseModel
     {
+        /// <summary>
+        /// Дата начала концерта
+        /// </summary>
+        public DateTime DateStart { get; set; }
+
+        /// <summary>
+        /// Дата окончания концерта
+        /// </summary>
+        public DateTime? DateEnd { get; set; }
+
         /// <summary>
         /// Время начала концерта
         /// </summary>
@@ -16,12 +26,17 @@ namespace Getticket.Web.API.Models.Concerts
         /// <summary>
         /// Время окончания концерта
         /// </summary>
-        public TimeSpan TimeEnd { get; set; }
+        public TimeSpan? TimeEnd { get; set; }
 
         /// <summary>
         /// Продолжительность концерта
         /// </summary>
-        public TimeSpan Duration { get; set; }
+        public TimeSpan? Duration { get; set; }
+
+        /// <summary>
+        /// Повторяющийся концерт
+        /// </summary>
+        public bool IsRepeated { get; set; }
 
         /// <summary>
         /// День недели (если указан, период = 7 дней)
@@ -36,7 +51,6 @@ namespace Getticket.Web.API.Models.Concerts
         /// <summary>
         /// Внешний ключ для <see cref="ConcertDateRangeModel"/>
         /// </summary>
-        [Required]
         public int IdRange { get; set; }
 
         /// <summary>

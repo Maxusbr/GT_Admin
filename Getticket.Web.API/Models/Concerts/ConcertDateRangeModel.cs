@@ -26,19 +26,23 @@ namespace Getticket.Web.API.Models.Concerts
         public bool IsRepeated { get; set; }
 
         /// <summary>
-        /// Расписание концерта
+        /// Ссылка на концерт
         /// </summary>
-        public virtual IEnumerable<ConcertScheduleModel> Schedules { get; set; }
-
-        /// <summary>
-        /// Внешний ключ для <see cref="EventModel"/>
-        /// </summary>
-        [Required]
         public int IdEvent { get; set; }
 
         /// <summary>
-        /// Событие <see cref="EventModel"/>
+        /// Расписание концерта
         /// </summary>
-        public virtual EventModel Event { get; set; }
+        public virtual IEnumerable<WeekScheduleModel> WeekSchedules { get; set; }
+
+        /// <summary>
+        /// Расписание концерта
+        /// </summary>
+        public virtual IEnumerable<RangeScheduleModel> RangeSchedules { get; set; }
+
+        public virtual IEnumerable<PreviewScheduleModel> PreviewWeek { get; set; }
+        public virtual IEnumerable<PreviewScheduleModel> PreviewRange { get; set; }
+
+        public ConcertScheduleModel OneSchedule { get; set; }
     }
 }

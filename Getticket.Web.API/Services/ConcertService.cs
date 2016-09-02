@@ -4,6 +4,7 @@ using System.Linq;
 using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models.Concerts;
 using Getticket.Web.API.Models.Events;
+using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
 
 namespace Getticket.Web.API.Services
@@ -51,9 +52,20 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IConcertService.GetConcertSchedules"/>
-        public IEnumerable<ConcertDateRangeModel> GetConcertSchedules(int id)
+        public ConcertDateRangeModel GetConcertSchedules(int id)
         {
-            return _concertRepository.GetConcertSchedules(id).Select(ConcertModelHelper.GetDateRangeModel);
+            return ConcertModelHelper.GetDateRangeModel(_concertRepository.GetConcertSchedules(id));
+        }
+
+        /// <see cref="IConcertService.GetPreview"/>
+        public IEnumerable<PreviewScheduleModel> GetPreview(IEnumerable<WeekScheduleModel> models)
+        {
+            return ConcertModelHelper.GetPreviewWeek(models);
+        }
+
+        public IEnumerable<PreviewScheduleModel> GetPreview(IEnumerable<RangeScheduleModel> models)
+        {
+            return ConcertModelHelper.GetPreviewRange(models);
         }
 
         /// <see cref="IConcertService.GetConcertProgramms"/>
@@ -120,14 +132,41 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IConcertService.SaveConcertSchedules"/>
-        public bool SaveConcertSchedules(int eventId, IEnumerable<ConcertDateRangeModel> models)
+        public bool SaveConcertSchedules(ConcertDateRangeModel model)
         {
-            var res =
-                models.Select(o => _concertRepository.SaveConcertSchedule(eventId,
-                    ConcertModelHelper.GetDateRange(o),
-                    ConcertModelHelper.GetSchedules(o.Schedules)))
-                    .Any(o => o != null);
-            return res;
+            var list = new List<ConcertScheduleModel>();
+            ConcertDateRange res = null;
+            _concertRepository.DeleteConcertSchedule(model.IdEvent);
+            if (model.IsRepeated)
+            {
+                if (model.WeekSchedules != null)
+                    list.AddRange(ConcertModelHelper.GetSchedules(model.WeekSchedules));
+                if (model.RangeSchedules != null)
+                    list.AddRange(ConcertModelHelper.GetSchedules(model.RangeSchedules));
+                var sort =
+                    list.GroupBy(o => new { ds = o.DateStart, de = o.DateEnd }).Select(o => new ConcertDateRangeModel
+                    {
+                        DateStart = o.Key.ds,
+                        DateEnd = o.Key.de,
+                        IdEvent = model.IdEvent,
+                        IsRepeated = true
+                    });
+                foreach (var el in sort)
+                {
+                    var sched = list.Where(o => o.DateStart == el.DateStart && o.DateEnd == el.DateEnd);
+                    res = _concertRepository.SaveConcertSchedule(ConcertModelHelper.GetDateRange(el),
+                        ConcertModelHelper.GetSchedules(sched));
+                    if (res == null) return false;
+                }
+            }
+            else
+            {
+                if (model.OneSchedule == null) return true;
+                list.Add(model.OneSchedule);
+                res = _concertRepository.SaveConcertSchedule(ConcertModelHelper.GetDateRange(model),
+                    ConcertModelHelper.GetSchedules(list));
+            }
+            return res != null;
         }
 
         /// <see cref="IConcertService.SaveConcertProgramm(int, IEnumerable{ConcertProgrammModel})"/>

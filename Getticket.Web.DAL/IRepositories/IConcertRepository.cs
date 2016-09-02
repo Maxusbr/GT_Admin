@@ -133,11 +133,17 @@ namespace Getticket.Web.DAL.IRepositories
         /// <summary>
         /// Сохранить/добавить расписания <see cref="ConcertDateRange"/> для концерта <see cref="Event"/> с Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="eventId"></param>
         /// <param name="model"></param>
         /// <param name="schedules"></param>
         /// <returns></returns>
-        ConcertDateRange SaveConcertSchedule(int eventId, ConcertDateRange model, IEnumerable<ConcertSchedule> schedules);
+        ConcertDateRange SaveConcertSchedule(ConcertDateRange model, IEnumerable<ConcertSchedule> schedules);
+
+        /// <summary>
+        /// Удалить календарь для концерта
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        bool DeleteConcertSchedule(int eventId);
 
         /// <summary>
         /// Сохранить/добавить программы <see cref="ConcertProgramm"/> для концерта <see cref="Event"/> с Id = <paramref name="eventId"/>

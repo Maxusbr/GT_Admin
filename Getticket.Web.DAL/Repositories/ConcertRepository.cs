@@ -45,6 +45,7 @@ namespace Getticket.Web.DAL.Repositories
                 .Include(o => o.Tickets)
                 .Include(o => o.ConcertPlace)
                 .Include(o => o.ConcertPlace.CountryPlace)
+                .Include(o => o.Calendar)
                 .FirstOrDefault();
 
             return result;
@@ -57,7 +58,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IConcertRepository.GetConcertSchedules" />
-        public IList<ConcertDateRange> GetConcertSchedules(int id)
+        IList<ConcertDateRange> IConcertRepository.GetConcertSchedules(int id)
         {
             return db.ConcertDateRanges.Where(o => o.IdEvent == id)
                 .Include(o => o.Schedules).ToList();
@@ -242,6 +243,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IConcertRepository.SaveConcertSchedule(int, ConcertSchedule)" />
         public ConcertSchedule SaveConcertSchedule(int dateRange, ConcertSchedule model)
         {
+            model.IdRange = dateRange;
             if (model.Id == 0)
             {
                 db.Entry(model).State = EntityState.Added;
@@ -262,17 +264,12 @@ namespace Getticket.Web.DAL.Repositories
             return model;
         }
 
-        /// <see cref="IConcertRepository.SaveConcertSchedule(int, ConcertDateRange, IEnumerable{ConcertSchedule})" />
-        public ConcertDateRange SaveConcertSchedule(int eventId, ConcertDateRange model, IEnumerable<ConcertSchedule> schedules)
+        /// <see cref="IConcertRepository.SaveConcertSchedule(ConcertDateRange, IEnumerable{ConcertSchedule})" />
+        public ConcertDateRange SaveConcertSchedule(ConcertDateRange model, IEnumerable<ConcertSchedule> schedules)
         {
             if (model.Id == 0)
             {
                 db.Entry(model).State = EntityState.Added;
-            }
-            else if (model.Id > 0)
-            {
-                var pr = db.ConcertSchedules.FirstOrDefault(o => o.Id == model.Id);
-                db.Entry(pr).CurrentValues.SetValues(model);
             }
             try
             {
@@ -281,12 +278,28 @@ namespace Getticket.Web.DAL.Repositories
                 {
                     model.Schedules.Add(sch);
                 }
+                db.SaveChanges();
             }
             catch (Exception e)
             {
                 return null;
             }
             return model;
+        }
+
+        /// <see cref="IConcertRepository.DeleteConcertSchedule" />
+        public bool DeleteConcertSchedule(int eventId)
+        {
+            db.ConcertDateRanges.RemoveRange(db.ConcertDateRanges.Where(o => o.IdEvent == eventId));
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <see cref="IConcertRepository.SaveConcertProgramm(int, ConcertProgramm, IEnumerable{Actor})" />
