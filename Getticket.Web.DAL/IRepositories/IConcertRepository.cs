@@ -50,6 +50,13 @@ namespace Getticket.Web.DAL.IRepositories
         IList<ConcertProgramm> GetConcertProgramms(int id);
 
         /// <summary>
+        /// Список участников с программами
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IList<Actor> GetActorProgramms(int id);
+
+        /// <summary>
         /// Список площадок <see cref="Hall"/>
         /// </summary>
         /// <param name="placeId"></param>
@@ -126,11 +133,17 @@ namespace Getticket.Web.DAL.IRepositories
         /// <summary>
         /// Сохранить/добавить расписания <see cref="ConcertDateRange"/> для концерта <see cref="Event"/> с Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="eventId"></param>
         /// <param name="model"></param>
         /// <param name="schedules"></param>
         /// <returns></returns>
-        ConcertDateRange SaveConcertSchedule(int eventId, ConcertDateRange model, IEnumerable<ConcertSchedule> schedules);
+        ConcertDateRange SaveConcertSchedule(ConcertDateRange model, IEnumerable<ConcertSchedule> schedules);
+
+        /// <summary>
+        /// Удалить календарь для концерта
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        bool DeleteConcertSchedule(int eventId);
 
         /// <summary>
         /// Сохранить/добавить программы <see cref="ConcertProgramm"/> для концерта <see cref="Event"/> с Id = <paramref name="eventId"/>
@@ -142,11 +155,18 @@ namespace Getticket.Web.DAL.IRepositories
         ConcertProgramm SaveConcertProgramm(int eventId, ConcertProgramm model, IEnumerable<Actor> actors);
 
         /// <summary>
-        /// Сохранить/добавить программу <see cref="ConcertProgramm"/>
+        /// Добавить программу <see cref="ConcertProgramm"/>
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        ConcertProgramm SaveConcertProgramm(ConcertProgramm model);
+        ConcertProgramm AddConcertProgramm(ConcertProgramm model);
+
+        /// <summary>
+        /// Обновить программу <see cref="ConcertProgramm"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        ConcertProgramm UpdateConcertProgramm(ConcertProgramm model);
 
         /// <summary>
         /// Сохранить/добавить билеты <see cref="ConcertTicket"/> 
@@ -156,12 +176,18 @@ namespace Getticket.Web.DAL.IRepositories
         ConcertTicket SaveConcertTicket(ConcertTicket model);
 
         /// <summary>
-        /// Сохранить/добавить актера <see cref="Actor"/> 
+        /// Добавить актера <see cref="Actor"/> 
         /// </summary>
-        /// <param name="programmId"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        Actor SaveActor(int programmId, Actor model);
+        Actor AddActor(Actor model);
+
+        /// <summary>
+        /// Сохранить актера <see cref="Actor"/> 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Actor UpdateActor(Actor model);
 
         /// <summary>
         /// Сохранить/добавить состав <see cref="ActorGroup"/> 
@@ -184,5 +210,6 @@ namespace Getticket.Web.DAL.IRepositories
         /// <returns></returns>
         bool ExistCalendar(int id);
 
+        
     }
 }

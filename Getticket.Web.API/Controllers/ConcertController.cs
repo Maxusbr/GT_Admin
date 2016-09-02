@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
 using Getticket.Web.API.Models.Concerts;
 using Getticket.Web.API.Models.Events;
@@ -71,12 +72,38 @@ namespace Getticket.Web.API.Controllers
             return Ok(_concertService.GetConcertSchedules(id));
         }
 
+        /// <see cref="IConcertService.GetConcertSchedules" />
+        [Route("schedule/week/preview")]
+        [HttpPost]
+        public IHttpActionResult GetConcertSchedules([FromBody] IEnumerable<WeekScheduleModel> models)
+        {
+            return Ok(_concertService.GetPreview(models));
+        }
+
+        /// <see cref="IConcertService.GetConcertSchedules" />
+        [Route("schedule/preview")]
+        [HttpPost]
+        public IHttpActionResult GetConcertSchedules([FromBody] IEnumerable<RangeScheduleModel> models)
+        {
+            return Ok(_concertService.GetPreview(models));
+        }
+
+
+
         /// <see cref="IConcertService.GetConcertProgramms" />
         [Route("programm/{id}")]
         [HttpGet]
         public IHttpActionResult GetConcertProgramms(int id)
         {
             return Ok(_concertService.GetConcertProgramms(id));
+        }
+
+        /// <see cref="IConcertService.GetConcertProgramms" />
+        [Route("actor/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetActorProgramms(int id)
+        {
+            return Ok(_concertService.GetActorProgramms(id));
         }
 
         /// <see cref="IConcertService.GetConcertPlaces" />
@@ -102,6 +129,7 @@ namespace Getticket.Web.API.Controllers
         {
             return Ok(_concertService.GetActorGroups());
         }
+
         /// <see cref="IConcertService.SaveConcert" />
         [HttpPost]
         [Route("add")]
@@ -115,6 +143,30 @@ namespace Getticket.Web.API.Controllers
             var succes = ServiceResponce.FromSuccess().Result("Concert save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save concert");
             var concert = _concertService.SaveConcert(model, userId);
+            if (concert == null) return Ok(error.Response());
+            succes.Add("concertId", concert.Id);
+            return Ok(succes.Response());
+        }
+
+        /// <see cref="IConcertService.SaveConcert" />
+        [HttpPost]
+        [Route("update")]
+        public IHttpActionResult Post([FromBody] UpdateConcertProgrammModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var userId = User.Identity.GetUserId<int>();
+            var succes = ServiceResponce.FromSuccess().Result("Concert save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save concert");
+            var concert = _concertService.SaveConcert(model.Concert, userId);
+            if (model.Programms != null)
+                foreach (var el in model.Programms)
+                    _concertService.UpdateConcertProgramm(el);
+            if (model.Actors != null)
+                foreach (var el in model.Actors)
+                    _concertService.UpdateActor(el);
             if (concert == null) return Ok(error.Response());
             succes.Add("concertId", concert.Id);
             return Ok(succes.Response());
@@ -153,7 +205,7 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="IConcertService.SaveConcertSchedules" />
         [HttpPost]
         [Route("schedule/{id}")]
-        public IHttpActionResult Post(int id, [FromBody] IEnumerable<ConcertDateRangeModel> models)
+        public IHttpActionResult Post(int id, [FromBody] ConcertDateRangeModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -163,7 +215,7 @@ namespace Getticket.Web.API.Controllers
             var succes = ServiceResponce.FromSuccess().Result("Concert schedules save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save concert schedules");
 
-            return Ok(_concertService.SaveConcertSchedules(id, models) ? succes.Response() : error.Response());
+            return Ok(_concertService.SaveConcertSchedules(model) ? succes.Response() : error.Response());
         }
 
         /// <see cref="IConcertService.SaveConcertSchedules" />
@@ -241,5 +293,5 @@ namespace Getticket.Web.API.Controllers
 
     }
 
-    
+
 }

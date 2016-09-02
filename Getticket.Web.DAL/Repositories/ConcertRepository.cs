@@ -45,6 +45,7 @@ namespace Getticket.Web.DAL.Repositories
                 .Include(o => o.Tickets)
                 .Include(o => o.ConcertPlace)
                 .Include(o => o.ConcertPlace.CountryPlace)
+                .Include(o => o.Calendar)
                 .FirstOrDefault();
 
             return result;
@@ -57,7 +58,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IConcertRepository.GetConcertSchedules" />
-        public IList<ConcertDateRange> GetConcertSchedules(int id)
+        IList<ConcertDateRange> IConcertRepository.GetConcertSchedules(int id)
         {
             return db.ConcertDateRanges.Where(o => o.IdEvent == id)
                 .Include(o => o.Schedules).ToList();
@@ -69,6 +70,12 @@ namespace Getticket.Web.DAL.Repositories
             return db.ConcertProgramms.Where(o => o.IdEvent == id)
                 .Include(o => o.Actors)
                 .ToList();
+        }
+
+        /// <see cref="IConcertRepository.GetConcertProgramms" />
+        public IList<Actor> GetActorProgramms(int id)
+        {
+            return db.Actors.Include(o => o.Programms).Where(o => o.Programms.Any(p => p.IdEvent == id)).ToList();
         }
 
         /// <param name="placeId"></param>
@@ -236,6 +243,7 @@ namespace Getticket.Web.DAL.Repositories
         /// <see cref="IConcertRepository.SaveConcertSchedule(int, ConcertSchedule)" />
         public ConcertSchedule SaveConcertSchedule(int dateRange, ConcertSchedule model)
         {
+            model.IdRange = dateRange;
             if (model.Id == 0)
             {
                 db.Entry(model).State = EntityState.Added;
@@ -256,17 +264,12 @@ namespace Getticket.Web.DAL.Repositories
             return model;
         }
 
-        /// <see cref="IConcertRepository.SaveConcertSchedule(int, ConcertDateRange, IEnumerable{ConcertSchedule})" />
-        public ConcertDateRange SaveConcertSchedule(int eventId, ConcertDateRange model, IEnumerable<ConcertSchedule> schedules)
+        /// <see cref="IConcertRepository.SaveConcertSchedule(ConcertDateRange, IEnumerable{ConcertSchedule})" />
+        public ConcertDateRange SaveConcertSchedule(ConcertDateRange model, IEnumerable<ConcertSchedule> schedules)
         {
             if (model.Id == 0)
             {
                 db.Entry(model).State = EntityState.Added;
-            }
-            else if (model.Id > 0)
-            {
-                var pr = db.ConcertSchedules.FirstOrDefault(o => o.Id == model.Id);
-                db.Entry(pr).CurrentValues.SetValues(model);
             }
             try
             {
@@ -275,6 +278,7 @@ namespace Getticket.Web.DAL.Repositories
                 {
                     model.Schedules.Add(sch);
                 }
+                db.SaveChanges();
             }
             catch (Exception e)
             {
@@ -283,27 +287,51 @@ namespace Getticket.Web.DAL.Repositories
             return model;
         }
 
+        /// <see cref="IConcertRepository.DeleteConcertSchedule" />
+        public bool DeleteConcertSchedule(int eventId)
+        {
+            db.ConcertDateRanges.RemoveRange(db.ConcertDateRanges.Where(o => o.IdEvent == eventId));
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
         /// <see cref="IConcertRepository.SaveConcertProgramm(int, ConcertProgramm, IEnumerable{Actor})" />
         public ConcertProgramm SaveConcertProgramm(int eventId, ConcertProgramm model, IEnumerable<Actor> actors)
         {
-            var res = SaveConcertProgramm(model);
-            if (res != null)
-                SaveActors(model.Id, actors);
+            var res = UpdateConcertProgramm(model);
+            //if (res != null)
+            //    SaveActors(model.Id, actors);
             return res;
         }
 
-        /// <see cref="IConcertRepository.SaveConcertProgramm(ConcertProgramm)" />
-        public ConcertProgramm SaveConcertProgramm(ConcertProgramm model)
+        /// <see cref="IConcertRepository.AddConcertProgramm" />
+        public ConcertProgramm AddConcertProgramm(ConcertProgramm model)
         {
-            if (model.Id == 0)
+            var pr = db.ConcertProgramms.FirstOrDefault(o => o.Id == model.Id);
+            if (pr != null) return pr;
+            db.Entry(model).State = EntityState.Added;
+            try
             {
-                db.Entry(model).State = EntityState.Added;
+                db.SaveChanges();
             }
-            else if (model.Id > 0)
+            catch (Exception e)
             {
-                var pr = db.ConcertProgramms.FirstOrDefault(o => o.Id == model.Id);
-                db.Entry(pr).CurrentValues.SetValues(model);
+                return null;
             }
+            return model;
+        }
+
+        /// <see cref="IConcertRepository.UpdateConcertProgramm" />
+        public ConcertProgramm UpdateConcertProgramm(ConcertProgramm model)
+        {
+            db.Entry(model).State = EntityState.Modified;
             try
             {
                 db.SaveChanges();
@@ -317,29 +345,67 @@ namespace Getticket.Web.DAL.Repositories
 
         private bool SaveActors(int programmId, IEnumerable<Actor> actors)
         {
-            return actors.Select(o => SaveActor(programmId, o)).Any(o => o != null);
+            return actors.Select(UpdateActor).Any(o => o != null);
         }
 
-        /// <see cref="IConcertRepository.SaveActor" />
-        public Actor SaveActor(int programmId, Actor model)
+        /// <see cref="IConcertRepository.UpdateActor" />
+        public Actor UpdateActor(Actor model)
         {
-            if(model.Group != null)
+            var act = db.Actors.FirstOrDefault(o => o.Id == model.Id);
+            db.Entry(act).CurrentValues.SetValues(model);
+            try
+            {
+                db.SaveChanges();
+                act?.Programms.Clear();
+                foreach (var pr in model.Programms.Select(o => db.ConcertProgramms.FirstOrDefault(p => p.Id == o.Id)).Where(pr => pr != null))
+                {
+                    act?.Programms.Add(pr);
+                }
+
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return model;
+        }
+
+        /// <see cref="IConcertRepository.AddActor" />
+        public Actor AddActor(Actor model)
+        {
+            if (model.Group != null)
             {
                 var grp = SaveGroup(model.Group);
                 model.IdGroup = grp.Id;
             }
-            model.IdProgramm = programmId;
-            if (model.Id == 0)
-            {
-                db.Entry(model).State = EntityState.Added;
-            }
-            else if (model.Id > 0)
-            {
-                var pr = db.Actors.FirstOrDefault(o => o.Id == model.Id);
-                db.Entry(pr).CurrentValues.SetValues(model);
-            }
+            var pr = db.Actors.FirstOrDefault(o => o.Id == model.Id);
             try
             {
+                if (pr == null)
+                {
+                    pr = new Actor { IdGroup = model.IdGroup, IdPerson = model.IdPerson, Role = model.Role };
+                    db.Entry(pr).State = EntityState.Added;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.Entry(pr).CurrentValues.SetValues(model);
+                    pr.Programms.Clear();
+                }
+                if (pr.Programms == null) pr.Programms = new List<ConcertProgramm>();
+                foreach (var act in model.Programms)
+                {
+                    var item = db.ConcertProgramms.FirstOrDefault(p => p.Id == act.Id);
+                    if (item == null)
+                    {
+                        db.Entry(act).State = EntityState.Added;
+                        pr.Programms.Add(act);
+                    }
+                    else
+                        pr.Programms.Add(item);
+                }
+
                 db.SaveChanges();
             }
             catch (Exception e)

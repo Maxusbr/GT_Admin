@@ -1,4 +1,5 @@
-﻿using Getticket.Web.API.Models.Persons;
+﻿using System.Collections.Generic;
+using Getticket.Web.API.Models.Persons;
 
 namespace Getticket.Web.API.Models.Concerts
 {
@@ -25,7 +26,7 @@ namespace Getticket.Web.API.Models.Concerts
         /// <summary>
         /// Внешний ключ для типа связанного объекта <see cref="ActorGroupModel"/>
         /// </summary>
-        public int IdGroup { get; set; }
+        public int? IdGroup { get; set; }
 
         /// <summary>
         /// <see cref="ActorGroupModel"/>
@@ -33,13 +34,8 @@ namespace Getticket.Web.API.Models.Concerts
         public virtual ActorGroupModel Group  { get; set; }
 
         /// <summary>
-        /// Внешний ключ для типа связанного объекта <see cref="ConcertProgrammModel"/>
-        /// </summary>
-        public int IdProgramm { get; set; }
-
-        /// <summary>
         /// <see cref="ConcertProgrammModel"/>
         /// </summary>
-        public virtual ConcertProgrammModel Programm { get; set; }
+        public virtual IEnumerable<ConcertProgrammModel> Programms { get; set; }
     }
 }

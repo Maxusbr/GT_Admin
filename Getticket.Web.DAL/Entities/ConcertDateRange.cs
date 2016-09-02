@@ -33,16 +33,15 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         public virtual IList<ConcertSchedule> Schedules { get; set; }
 
-            /// <summary>
-        /// Внешний ключ для <see cref="Entities.Event"/>
+        /// <summary>
+        /// ForeignKey <see cref="Entities.Event"/>
         /// </summary>
-        [Required]
         public int IdEvent { get; set; }
 
         /// <summary>
         /// Событие <see cref="Entities.Event"/>
         /// </summary>
-        [ForeignKey("IdEvent")]
+        //[ForeignKey("IdEvent")]
         public virtual Event Event { get; set; }
     }
 }

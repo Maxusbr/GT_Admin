@@ -31,7 +31,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Внешний ключ для типа связанного объекта <see cref="Entities.ActorGroup"/>
         /// </summary>
-        public int IdGroup { get; set; }
+        public int? IdGroup { get; set; }
 
         /// <summary>
         /// <see cref="ActorGroup"/>
@@ -40,14 +40,8 @@ namespace Getticket.Web.DAL.Entities
         public virtual ActorGroup Group  { get; set; }
 
         /// <summary>
-        /// Внешний ключ для типа связанного объекта <see cref="Entities.ConcertProgramm"/>
+        /// Программа актера
         /// </summary>
-        public int IdProgramm { get; set; }
-
-        /// <summary>
-        /// <see cref="ConcertProgramm"/>
-        /// </summary>
-        [ForeignKey("IdProgramm")]
-        public virtual ConcertProgramm Programm { get; set; }
+        public virtual ICollection<ConcertProgramm> Programms  { get; set; }
     }
 }

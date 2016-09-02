@@ -4,6 +4,7 @@ using System.Linq;
 using Getticket.Web.API.Helpers;
 using Getticket.Web.API.Models.Concerts;
 using Getticket.Web.API.Models.Events;
+using Getticket.Web.DAL.Entities;
 using Getticket.Web.DAL.IRepositories;
 
 namespace Getticket.Web.API.Services
@@ -51,15 +52,32 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IConcertService.GetConcertSchedules"/>
-        public IEnumerable<ConcertDateRangeModel> GetConcertSchedules(int id)
+        public ConcertDateRangeModel GetConcertSchedules(int id)
         {
-            return _concertRepository.GetConcertSchedules(id).Select(ConcertModelHelper.GetDateRangeModel);
+            return ConcertModelHelper.GetDateRangeModel(_concertRepository.GetConcertSchedules(id));
+        }
+
+        /// <see cref="IConcertService.GetPreview"/>
+        public IEnumerable<PreviewScheduleModel> GetPreview(IEnumerable<WeekScheduleModel> models)
+        {
+            return ConcertModelHelper.GetPreviewWeek(models);
+        }
+
+        public IEnumerable<PreviewScheduleModel> GetPreview(IEnumerable<RangeScheduleModel> models)
+        {
+            return ConcertModelHelper.GetPreviewRange(models);
         }
 
         /// <see cref="IConcertService.GetConcertProgramms"/>
-        public IEnumerable<ConcertProgrammModel> GetConcertProgramms(int id)
+        public IEnumerable<ActorProgrammModel> GetConcertProgramms(int id)
         {
-            return _concertRepository.GetConcertProgramms(id).Select(ConcertModelHelper.GetProgrammModel);
+            return _concertRepository.GetConcertProgramms(id).Select(ConcertModelHelper.GetActorProgrammModel);
+        }
+
+        /// <see cref="IConcertService.GetActorProgramms"/>
+        public IEnumerable<ActorModel> GetActorProgramms(int id)
+        {
+            return ConcertModelHelper.GetActorModels(_concertRepository.GetActorProgramms(id));
         }
 
         /// <see cref="IConcertService.GetHalls"/>
@@ -114,24 +132,51 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IConcertService.SaveConcertSchedules"/>
-        public bool SaveConcertSchedules(int eventId, IEnumerable<ConcertDateRangeModel> models)
+        public bool SaveConcertSchedules(ConcertDateRangeModel model)
         {
-            var res =
-                models.Select(o => _concertRepository.SaveConcertSchedule(eventId,
-                    ConcertModelHelper.GetDateRange(o),
-                    ConcertModelHelper.GetSchedules(o.Schedules)))
-                    .Any(o => o != null);
-            return res;
+            var list = new List<ConcertScheduleModel>();
+            ConcertDateRange res = null;
+            _concertRepository.DeleteConcertSchedule(model.IdEvent);
+            if (model.IsRepeated)
+            {
+                if (model.WeekSchedules != null)
+                    list.AddRange(ConcertModelHelper.GetSchedules(model.WeekSchedules));
+                if (model.RangeSchedules != null)
+                    list.AddRange(ConcertModelHelper.GetSchedules(model.RangeSchedules));
+                var sort =
+                    list.GroupBy(o => new { ds = o.DateStart, de = o.DateEnd }).Select(o => new ConcertDateRangeModel
+                    {
+                        DateStart = o.Key.ds,
+                        DateEnd = o.Key.de,
+                        IdEvent = model.IdEvent,
+                        IsRepeated = true
+                    });
+                foreach (var el in sort)
+                {
+                    var sched = list.Where(o => o.DateStart == el.DateStart && o.DateEnd == el.DateEnd);
+                    res = _concertRepository.SaveConcertSchedule(ConcertModelHelper.GetDateRange(el),
+                        ConcertModelHelper.GetSchedules(sched));
+                    if (res == null) return false;
+                }
+            }
+            else
+            {
+                if (model.OneSchedule == null) return true;
+                list.Add(model.OneSchedule);
+                res = _concertRepository.SaveConcertSchedule(ConcertModelHelper.GetDateRange(model),
+                    ConcertModelHelper.GetSchedules(list));
+            }
+            return res != null;
         }
 
         /// <see cref="IConcertService.SaveConcertProgramm(int, IEnumerable{ConcertProgrammModel})"/>
         public bool SaveConcertProgramm(int eventId, IEnumerable<ConcertProgrammModel> models)
         {
             var res =
-                models.Select(o => _concertRepository.SaveConcertProgramm(eventId,
-                    ConcertModelHelper.GetProgramm(o),
-                    ConcertModelHelper.GetActors(o.Actors)))
+                models.Select(o => _concertRepository.UpdateConcertProgramm(
+                    ConcertModelHelper.GetProgramm(o)))
                     .Any(o => o != null);
+
             return res;
         }
 
@@ -140,11 +185,34 @@ namespace Getticket.Web.API.Services
         {
             var succes = ServiceResponce.FromSuccess().Result("Concert programm save complete");
             var error = ServiceResponce.FromFailed().Result($"Error save concert programm");
-            var res = _concertRepository.SaveConcertProgramm(
+            var res = _concertRepository.AddConcertProgramm(
                 ConcertModelHelper.GetProgramm(model));
             if (res != null)
                 succes.Add("ProgrammId", res.Id);
             return res != null ? succes : error;
+        }
+
+        /// <see cref="IConcertService.UpdateConcertProgramm"/>
+        public bool UpdateConcertProgramm(ConcertProgrammModel model)
+        {
+            return _concertRepository.UpdateConcertProgramm(ConcertModelHelper.GetProgramm(model)) != null;
+        }
+
+        /// <see cref="IConcertService.SaveActor"/>
+        public ServiceResponce SaveActor(ActorModel model)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Concert tickets save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save concert tickets");
+            var res = _concertRepository.AddActor(ConcertModelHelper.GetActor(model));
+            if (res != null)
+                succes.Add("ActorId", res.Id);
+            return res != null ? succes : error;
+        }
+
+        /// <see cref="IConcertService.UpdateActor"/>
+        public bool UpdateActor(ActorModel model)
+        {
+            return _concertRepository.UpdateActor(ConcertModelHelper.GetActor(model)) != null;
         }
 
         /// <see cref="IConcertService.SaveGroup"/>
@@ -197,16 +265,6 @@ namespace Getticket.Web.API.Services
             return res != null ? succes : error;
         }
 
-        /// <see cref="IConcertService.SaveActor"/>
-        public ServiceResponce SaveActor(ActorModel model)
-        {
-            var succes = ServiceResponce.FromSuccess().Result("Concert tickets save complete");
-            var error = ServiceResponce.FromFailed().Result($"Error save concert tickets");
-            var res = _concertRepository.SaveActor(model.IdProgramm, ConcertModelHelper.GetActor(model));
-            if (res != null)
-                succes.Add("TicketsId", res.Id);
-            return res != null ? succes : error;
-        }
     }
 
 

@@ -11,15 +11,10 @@
             app.closeFive();
             app.loadContentView('/main/dictionary/dictionary.concert.actorgroup.html', 3200);
         }
-        
 
         $scope.saveActor = function () {
-            concertService.saveActor($scope.actor, function (data) {
-                $rootScope.getProgramms($rootScope.concertId);
-                app.closeFive();
-                app.closeView('disConcertProgrammActor');
-            });
-            
+            if ($rootScope.AddActor)
+                $rootScope.AddActor($scope.actor);
         }
     }
 

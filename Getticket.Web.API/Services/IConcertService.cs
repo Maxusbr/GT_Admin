@@ -38,13 +38,32 @@ namespace Getticket.Web.API.Services
         /// Список расписаний концерта <see cref="EventModel"/> с Id = <paramref name="id"/>
         /// </summary>
         /// <returns></returns>
-        IEnumerable<ConcertDateRangeModel> GetConcertSchedules(int id);
+        ConcertDateRangeModel GetConcertSchedules(int id);
+        /// <summary>
+        /// Список превью недельных расписаний
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        IEnumerable<PreviewScheduleModel> GetPreview(IEnumerable<WeekScheduleModel> models);
+        /// <summary>
+        /// Список превью недельных расписаний
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        IEnumerable<PreviewScheduleModel> GetPreview(IEnumerable<RangeScheduleModel> models);
 
         /// <summary>
         /// Список программ концерта <see cref="EventModel"/> с Id = <paramref name="id"/>
         /// </summary>
         /// <returns></returns>
-        IEnumerable<ConcertProgrammModel> GetConcertProgramms(int id);
+        IEnumerable<ActorProgrammModel> GetConcertProgramms(int id);
+
+        /// <summary>
+        /// Список участников с программами
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IEnumerable<ActorModel> GetActorProgramms(int id);
 
         /// <summary>
         /// Список площадок <see cref="HallModel"/>
@@ -91,10 +110,9 @@ namespace Getticket.Web.API.Services
         /// <summary>
         /// Сохранить/добавить расписания <see cref="ConcertScheduleModel"/> для концерта <see cref="EventModel"/> с Id = <paramref name="eventId"/>
         /// </summary>
-        /// <param name="eventId"></param>
-        /// <param name="models"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        bool SaveConcertSchedules(int eventId, IEnumerable<ConcertDateRangeModel> models);
+        bool SaveConcertSchedules(ConcertDateRangeModel model);
 
         /// <summary>
         /// Сохранить/добавить программы <see cref="ConcertProgrammModel"/> для концерта <see cref="EventModel"/> с Id = <paramref name="eventId"/>
@@ -105,11 +123,18 @@ namespace Getticket.Web.API.Services
         bool SaveConcertProgramm(int eventId, IEnumerable<ConcertProgrammModel> models);
 
         /// <summary>
-        /// Сохранить/добавить программу <see cref="ConcertProgrammModel"/>
+        /// Добавить программу <see cref="ConcertProgrammModel"/>
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         ServiceResponce SaveConcertProgramm(ConcertProgrammModel model);
+
+        /// <summary>
+        /// Обновить программу <see cref="ConcertProgrammModel"/>
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool UpdateConcertProgramm(ConcertProgrammModel model);
 
         /// <summary>
         /// Сохранить/добавить билеты <see cref="ConcertTicketModel"/> 
@@ -119,11 +144,18 @@ namespace Getticket.Web.API.Services
         ServiceResponce SaveConcertTicket(ConcertTicketModel model);
 
         /// <summary>
-        /// Сохранить/добавить актера <see cref="ActorModel"/> 
+        /// Добавить актера <see cref="ActorModel"/> 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         ServiceResponce SaveActor(ActorModel model);
+
+        /// <summary>
+        /// Обновить актера <see cref="ActorModel"/> 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        bool UpdateActor(ActorModel model);
 
         /// <summary>
         /// Сохранить/добавить состав <see cref="ActorGroupModel"/> 
@@ -145,6 +177,7 @@ namespace Getticket.Web.API.Services
         /// <param name="id"></param>
         /// <returns></returns>
         ConcertExistModel GetConcertExist(int id);
+
 
         
     }

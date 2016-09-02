@@ -9,7 +9,7 @@ namespace Getticket.Web.API.Models.Concerts
     /// <summary>
     /// Модель для обновления концерта
     /// </summary>
-    public class UpdateConcertModel
+    public class UpdateConcertProgrammModel
     {
         /// <summary>
         /// Концерт (включая серию, зал и билеты)
@@ -26,5 +26,9 @@ namespace Getticket.Web.API.Models.Concerts
         /// </summary>
         public IEnumerable<ConcertProgrammModel> Programms { get; set; }
 
+        /// <summary>
+        /// Участники концерта
+        /// </summary>
+        public IEnumerable<ActorModel> Actors { get; set; }
     }
 }

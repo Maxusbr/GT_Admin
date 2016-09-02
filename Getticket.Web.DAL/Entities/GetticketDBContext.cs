@@ -523,7 +523,7 @@ namespace Getticket.Web.DAL.Entities
             {
                 this
                     .Ignore(o => o.StaticDescription);
-                
+
             }
         }
 
@@ -570,7 +570,7 @@ namespace Getticket.Web.DAL.Entities
             /// </summary>
             public TagConfiguration()
             {
-                
+
             }
         }
         #endregion
@@ -627,6 +627,9 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         public virtual DbSet<ConcertTicket> ConcertTickets { get; set; }
 
+        ///// <see cref="Entities.ActorInProgramm"/>
+        //public virtual DbSet<ActorInProgramm> ActorInProgramms { get; set; }
+
         /// <summary>
         /// Настройка сущности <see cref="Entities.SeriesConcert"/>
         /// </summary>
@@ -650,6 +653,58 @@ namespace Getticket.Web.DAL.Entities
             }
         }
 
+
+        public class ProgrammConfiguration : EntityTypeConfiguration<Actor>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public ProgrammConfiguration()
+            {
+                this
+                    .HasMany(cr => cr.Programms)
+                    .WithMany(c => c.Actors)
+                    .Map(x => {
+                        x.MapLeftKey("IdActor");
+                        x.MapRightKey("IdProgramm");
+                        x.ToTable("ActorInProgramms");
+                    });
+            }
+        }
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.PersonDescriptionTizerLink"/>
+        /// </summary>
+        //public class ProgrammConfiguration : EntityTypeConfiguration<ConcertProgramm>
+        //{
+        //    /// <summary>
+        //    /// Конструктр
+        //    /// </summary>
+        //    public ProgrammConfiguration()
+        //    {
+        //        this
+        //            .HasMany(e => e.Actors)
+        //            .WithRequired()
+        //            .WillCascadeOnDelete(true);
+        //    }
+        //}
+
+        /// <summary>
+        /// Настройка сущности <see cref="Entities.PersonDescriptionTizerLink"/>
+        /// </summary>
+        public class ActorConfiguration : EntityTypeConfiguration<Actor>
+        {
+            /// <summary>
+            /// Конструктр
+            /// </summary>
+            public ActorConfiguration()
+            {
+                this
+                    .HasMany(e => e.Programms)
+                    .WithRequired()
+                    .WillCascadeOnDelete(true);
+            }
+        }
         /// <summary>
         /// Настройка сущности <see cref="Entities.Event"/>
         /// </summary>
@@ -668,6 +723,11 @@ namespace Getticket.Web.DAL.Entities
                 this
                     .HasRequired(ic => ic.Tickets)
                     .WithRequiredPrincipal(t => t.Event)
+                    .WillCascadeOnDelete(true);
+                this
+                    .HasMany(ic => ic.Calendar)
+                    .WithRequired(t => t.Event)
+                    .HasForeignKey(o => o.IdEvent)
                     .WillCascadeOnDelete(true);
                 //this
                 //    .HasRequired(ic => ic.Hall)
@@ -705,6 +765,8 @@ namespace Getticket.Web.DAL.Entities
             modelBuilder.Configurations.Add(new EventMediaLinkEventConfiguration());
             modelBuilder.Configurations.Add(new SeriesEventConfiguration());
             modelBuilder.Configurations.Add(new EventConfiguration());
+            modelBuilder.Configurations.Add(new ProgrammConfiguration());
+            //modelBuilder.Configurations.Add(new ActorConfiguration());
 
         }
     }
