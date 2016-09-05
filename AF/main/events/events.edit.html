@@ -15,28 +15,29 @@
             </a>
         </div>
     </div>
+    <form name='editEvent'>
     <div class="win-content">
         <div class="row">
             <div class="col-lg-6">
                 <h5>На русском</h5>
                 Название
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="event.Name" />
+                <input type="text" class="form-control" placeholder="от 3 знаков" ng-model="event.Name" required ng-minlength='3'/>
                 <br />
                 Описание
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="event.Description" />
+                <input type="text" class="form-control" placeholder="от 3 знаков" ng-model="event.Description" required ng-minlength='3'/>
                 <br />
             </div>
             <div class="col-lg-6">
                 <h5>На английском</h5>
                 Название
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="event.NameEn" required ng-minlength='3'/>
                 <br />
                 Описание
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="event.DescriptionEn" required ng-minlength='3'/>
                 <br />
             </div>
         </div>
@@ -56,7 +57,7 @@
                         ng-options="item.Id as item.Name for item in getChildCategory(event.EventParentCategoryId)"></select>
                 <a href="#" ng-click="editCat()">Редактировать</a>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="margin-top: 10px;">
                 <!--Организатор
                 <br />-->
                 <!--<input class="form-control" placeholder="от 3 знаков" ng-model="event.Organizer"/>-->
@@ -84,10 +85,17 @@
                 </md-autocomplete>
                 <!--<a href="#" ng-click="editOrg()">Редактировать</a>-->
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="margin-top: 10px;">
                 Возрастные ограничения
                 <br />
-                <input class="form-control" placeholder="12+" ng-model="event.AgeLimit" />
+                <select name="" id="" class="form-control" ng-model="event.AgeLimit">
+                    <option value="0+">0+</option>
+                    <option value="6+">6+</option>
+                    <option value="12+">12+</option>
+                    <option value="16+">16+</option>
+                    <option value="18+">18+</option>
+                </select>
+               
                 <br />
             </div>
         </div>
@@ -116,10 +124,10 @@
                 Дата окончания доступности
                 <p class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStopSold"
-                           is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                           is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
                            alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </p>
                 <!--<md-content>
@@ -131,4 +139,5 @@
         </div>
 
     </div>
+    </form>
 </div>

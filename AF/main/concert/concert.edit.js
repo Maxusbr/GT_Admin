@@ -55,6 +55,11 @@
             app.loadContentView('/main/dictionary/dictionary.concert.hall.html', 3200);
         }
 
+        $scope.editCity = function () {
+            app.closeFour();
+            app.loadContentView('/main/dictionary/dictionary.concert.city.html', 3200);
+        }
+
         // Series
         concertService.getSeries(function (data) {
             $scope.series = [];

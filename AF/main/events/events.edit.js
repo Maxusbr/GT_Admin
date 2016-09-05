@@ -81,6 +81,10 @@
             });
         }
 
+        $scope.validFuncNumber = function(fild) {
+            
+        } 
+
         // Datepicker
         $scope.dateOptions = {
             formatYear: 'yyyy',
