@@ -21,12 +21,12 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Время окончания концерта
         /// </summary>
-        public TimeSpan TimeEnd { get; set; }
+        public TimeSpan? TimeEnd { get; set; }
 
         /// <summary>
         /// Продолжительность концерта
         /// </summary>
-        public TimeSpan Duration { get; set; }
+        public TimeSpan? Duration { get; set; }
 
         /// <summary>
         /// День недели (если указан, период = 7 дней)

@@ -724,6 +724,11 @@ namespace Getticket.Web.DAL.Entities
                     .HasRequired(ic => ic.Tickets)
                     .WithRequiredPrincipal(t => t.Event)
                     .WillCascadeOnDelete(true);
+                this
+                    .HasMany(ic => ic.Calendar)
+                    .WithRequired(t => t.Event)
+                    .HasForeignKey(o => o.IdEvent)
+                    .WillCascadeOnDelete(true);
                 //this
                 //    .HasRequired(ic => ic.Hall)
                 //    .WithRequiredPrincipal()

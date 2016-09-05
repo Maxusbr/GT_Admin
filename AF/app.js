@@ -1,8 +1,9 @@
 ﻿//set api adress
-// var apiUrl = 'http://localhost:5831/';
-//var serviceUrl = 'http://localhost:35162/';
- var apiUrl = 'http://getticket.azurewebsites.net/';
-var serviceUrl = 'http://getticketwebapi.azurewebsites.net/';
+var apiUrl = 'http://localhost:5831/';
+var serviceUrl = 'http://localhost:35162/';
+// var apiUrl = 'http://getticket.azurewebsites.net/';
+//var serviceUrl = 'http://getticketwebapi.azurewebsites.net/';
+
 
 var pageNumber = 1;
 var pageSize = 20;
@@ -72,7 +73,7 @@ var app;
         }
 
 
-        app.closeAll = function close_all() {
+        app.closeAll = function () {
             app.closeView('r1');
             app.closeView('r2');
             app.closeView('r3');
@@ -80,26 +81,26 @@ var app;
             app.closeView('r5');
         }
 
-        app.closeSecond = function close_second() {
+        app.closeSecond = function () {
             app.closeView('r2');
             app.closeView('r3');
             app.closeView('r4');
             app.closeView('r5');
         }
 
-        app.closeThird = function close_third(){
+        app.closeThird = function (){
             app.closeView('r3');
             app.closeView('r4');
             app.closeView('r5');
         }
 
-        app.closeFour = function close_four()
+        app.closeFour = function ()
         {
             app.closeView('r4');
             app.closeView('r5');
         }
 
-        app.closeFive = function close_five()
+        app.closeFive = function ()
         {
             app.closeView('r5');
         }
@@ -361,6 +362,11 @@ var app;
                 return arr;
             }
             return arr.join(glue);
+        };
+    });
+    app.filter('inArray', function () {
+        return function (array, value) {
+            return array.indexOf(value) !== -1;
         };
     });
     //this.scrollRight = function (pixels) {

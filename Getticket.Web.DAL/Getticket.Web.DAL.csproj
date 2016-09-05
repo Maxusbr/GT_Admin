@@ -153,6 +153,10 @@
     <Compile Include="IRepositories\ILogRepository.cs" />
     <Compile Include="IRepositories\ITagRepository.cs" />
     <Compile Include="IRepositories\IUserRepository.cs" />
+    <Compile Include="Migrations\201609021346266_fixCalendar.cs" />
+    <Compile Include="Migrations\201609021346266_fixCalendar.Designer.cs">
+      <DependentUpon>201609021346266_fixCalendar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\AccessRoleRepository.cs" />
@@ -173,6 +177,11 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201609021346266_fixCalendar.resx">
+      <DependentUpon>201609021346266_fixCalendar.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
