@@ -1,8 +1,8 @@
 ﻿//set api adress
 var apiUrl = 'http://localhost:5831/';
-var serviceUrl = 'http://localhost:35162/';
+// var serviceUrl = 'http://localhost:35162/';
 // var apiUrl = 'http://getticket.azurewebsites.net/';
-//var serviceUrl = 'http://getticketwebapi.azurewebsites.net/';
+var serviceUrl = 'http://getticketwebapi.azurewebsites.net/';
 
 
 var pageNumber = 1;
@@ -23,7 +23,8 @@ var app;
             'ngResource', 'cgBusy',
             'angularMoment', 'isteven-multi-select', 'datePicker', 'ui.bootstrap', 'ngTagsInput', 'ngMaterial', 'ngFileUpload',
             'ui.select',
-            'youtube-embed'
+            'youtube-embed',
+            'monospaced.elastic'
             // 'webix'
         ])
         .config(config)

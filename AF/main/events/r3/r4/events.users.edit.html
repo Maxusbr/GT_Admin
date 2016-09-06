@@ -7,21 +7,24 @@
             <a href="#" ng-click="closeMe('personFactCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
+
+    <form name='editEvent' ng-submit="saveFact()">
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="saveFact()">
+            <!--<a href="#" ng-click="saveFact()">
                 <span class="fa fa-save"></span> Добавить
-            </a>
+            </a>-->
+            <button class="clearBtn"><span class="fa fa-save"></span> Добавить</button>
         </div>
     </div>
     <div class="win-content">
         <table class="table">
             <tr>
-                <td>Фио</td>
-                <td><input class="form-control" /></td>
+                <td>Фио *</td>
+                <td><input class="form-control" required='required'/></td>
             </tr>
             <tr>
-                <td>Роль</td>
+                <td>Роль *</td>
                 <td>
                     <select name="" id="" class="form-control">
                         <option value="">Редактор</option>
@@ -33,4 +36,5 @@
             </tr>
         </table>
     </div>
+    </form>
 </div>
