@@ -24,7 +24,7 @@ namespace Getticket.Web.DAL.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// Название
+        /// Тип населенного пункта (аббревиатура)
         /// </summary>
         [MaxLength(50)]
         public string Abr { get; set; }
@@ -36,8 +36,14 @@ namespace Getticket.Web.DAL.Entities
         public int id_Region { get; set; }
 
         /// <summary>
+        /// Внешний ключ для <see cref="Entities.Country"/>
+        /// </summary>
+        public int? CountryId { get; set; }
+
+        /// <summary>
         /// <see cref="Entities.Country"/>
         /// </summary>
+        [ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
 
         /// <summary>

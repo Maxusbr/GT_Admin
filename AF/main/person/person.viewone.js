@@ -32,15 +32,17 @@
 
         $scope.Id = $rootScope.personId;
         $scope.counts = { CountDescriptions: 0, CountFacts: 0, CountConnects: 0, CountMedias: 0, CountLinks: 0, CountAntros: 0 }
-
+        $rootScope.getPersonCounts = function() {
+            personService.getCountes($rootScope.personId, function (counts) {
+                $scope.counts = counts;
+            });
+        }
         $rootScope.getPerson = function(id) {
             $scope.Promise = personService.getPerson(id, function (data) {
                 $rootScope.person = data;
                 if ($rootScope.person.MediaLink)
                     $scope.file = $rootScope.person.MediaLink;
-                personService.getCountes(id, function (counts) {
-                    $scope.counts = counts;
-                });
+                $rootScope.getPersonCounts();
             });
         }
         $rootScope.getPerson($scope.Id);

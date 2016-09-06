@@ -39,14 +39,30 @@
                 <br />
                 <div class="row">
                     <div class="col-lg-6">
-                        <md-content>
+                        <!--<md-content>
                             <md-datepicker ng-model="dateStart" md-placeholder="Дата начала "></md-datepicker>
-                        </md-content>
+                        </md-content>-->
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStart"
+                                   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                                   alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
                     </div>
                     <div class="col-lg-6" ng-show="calendar.IsRepeated">
-                        <md-content>
+                        <!--<md-content>
                             <md-datepicker ng-model="dateEnd" md-placeholder="Дата окончания "></md-datepicker>
-                        </md-content>
+                        </md-content>-->
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateEnd"
+                                   is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                                   alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
                     </div>
                     <div class="col-lg-6" ng-show="!calendar.IsRepeated" style="margin-top: -23px;">
                         <div uib-timepicker ng-model="oneSchedule.timeStart" hour-step="1" minute-step="5" show-meridian="false"></div>
@@ -156,14 +172,30 @@
                         <div class="panel" ng-show="schedule.dateEnd">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <md-content>
+                                    <!--<md-content>
                                         <md-datepicker ng-model="schedule.dateStart" md-placeholder="Дата начала "></md-datepicker>
-                                    </md-content>
+                                    </md-content>-->
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="schedule.dateStart"
+                                               is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                                               alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
                                 </div>
                                 <div class="col-lg-6">
-                                    <md-content>
+                                    <!--<md-content>
                                         <md-datepicker ng-model="schedule.dateEnd" md-placeholder="Дата окончания "></md-datepicker>
-                                    </md-content>
+                                    </md-content>-->
+                                    <p class="input-group">
+                                        <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="schedule.dateEnd"
+                                               is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                                               alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                             <br />
@@ -192,14 +224,30 @@
         <div class="panel" ng-show="weekSchedule">
             <div class="row">
                 <div class="col-lg-6">
-                    <md-content>
+                    <!--<md-content>
                         <md-datepicker ng-model="weekDayStart" md-placeholder="Дата начала "></md-datepicker>
-                    </md-content>
+                    </md-content>-->
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="weekDayStart"
+                               is-open="popup5.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                               alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open5()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
                 </div>
                 <div class="col-lg-6">
-                    <md-content>
+                    <!--<md-content>
                         <md-datepicker ng-model="weekDayEnd" md-placeholder="Дата окончания "></md-datepicker>
-                    </md-content>
+                    </md-content>-->
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="weekDayEnd"
+                               is-open="popup6.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                               alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open6()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
                 </div>
             </div>
             <i>Добавьте время в дни недели</i>

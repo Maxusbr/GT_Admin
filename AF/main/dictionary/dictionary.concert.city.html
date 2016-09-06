@@ -1,39 +1,71 @@
-<div class="win-container r2 r5 disDicEventCategory" style="width:600px;" ng-controller="DictionaryConcertCityController">
+<div class="win-container r2 r5 DictionaryConcertCityController" style="width:600px;" ng-controller="DictionaryConcertCityController">
     <div class="win-header">
         <div class="win-header-text">
             Редактор Страна/Город
         </div>
         <div class="win_buttons">
-            <a href="#" ng-click="closeMe('disDicEventCategory')"><span class="glyphicon glyphicon-remove-sign"></span></a>
+            <a href="#" ng-click="closeMe('DictionaryConcertCityController')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
     <div class="win-menu">
+        <div class="win-menu-button">
+        </div>
     </div>
     <div class="win-content">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <h5>Страна</h5>
                 <div class="panel panel-default">
                     <!-- <div class="panel-heading">
                         <h5>Редактирование</h5>
                     </div> -->
                     <div class="panel-body">
-                        <input type="text" class="form-control" ng-model="editItemCat.Name" />
-                        <br />
-                        <button class="btn btn-default" ng-click="saveCategories(editItemCat)">Сохранить</button>
+                        <!--<input type="text" class="form-control" ng-model="countryName"/>
+                        <br/>
+                        <button class="btn btn-default" ng-click="saveCategories(editItemCat)">Сохранить</button>-->
+                        <input type="text" class="form-control" placeholder="Страна" name="Country"
+                               uib-typeahead="item as item.Name for item in countries | filter:$viewValue"
+                               ng-model="countryName" typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                               typeahead-min-length="0"> <!--uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">-->
+                        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                        <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> Не найдено
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <h5>Город</h5>
+            <div class="col-lg-7">
+                <h5>Населенный пункт</h5>
                 <div class="panel panel-default">
                     <!-- <div class="panel-heading">
                         <h5>Редактирование</h5>
                     </div> -->
+
                     <div class="panel-body">
-                        <input type="text" class="form-control" ng-model="editItemSubCat.Name" />
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <select type="text" class="form-control" ng-model="abr" ng-options="item for item in abrs"></select>
+                            </div>
+                            <div class="col-lg-8">
+                                <!--<input type="text" class="form-control" ng-model="PlaceName"/>-->
+                                <input type="text" class="form-control" placeholder="Город" name="Place" 
+                                       uib-typeahead="item as item.Name for item in getPlaces($viewValue)"
+                                       ng-model="placeName" typeahead-loading="loadingPlace" typeahead-no-results="noPlaceResults"
+                                       typeahead-template-url="customTemplate.html" typeahead-min-length="3"> <!--uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">-->
+                                <i ng-show="loadingPlace" class="glyphicon glyphicon-refresh"></i>
+                                <div ng-show="noPlaceResults">
+                                    <i class="glyphicon glyphicon-remove"></i> Не найдено
+                                </div>
+                                <script type="text/ng-template" id="customTemplate.html">
+                                    <a>
+                                        <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+                                        <span> ({{match.model.CountryName}})</span>
+                                    </a>
+                                </script>
+                            </div>
+                        </div>
                         <br />
-                        <button class="btn btn-default" ng-click="saveSubCategories()">Сохранить</button>
+                        <button class="btn btn-default" ng-click="savePlace()">Сохранить</button>
                     </div>
                 </div>
 
@@ -47,16 +79,16 @@
                         </tr>
                     </thead>
                     <tbody>
-<!--                         <tr ng-repeat="item in baseCategory">
-                            <td><a href="#" ng-click="selectCat(item)">{{item.Name}}</a></td>
-                            <td>
-                                <table>
-                                    <tr ng-repeat="child in getChildCategory(item.Id)">
-                                        <td><a href="#" ng-click="selectSubCat(child)">{{child.Name}}</a></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr> -->
+                        <!--                         <tr ng-repeat="item in baseCategory">
+                                                    <td><a href="#" ng-click="selectCat(item)">{{item.Name}}</a></td>
+                                                    <td>
+                                                        <table>
+                                                            <tr ng-repeat="child in getChildCategory(item.Id)">
+                                                                <td><a href="#" ng-click="selectSubCat(child)">{{child.Name}}</a></td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr> -->
                     </tbody>
                 </table>
             </div>

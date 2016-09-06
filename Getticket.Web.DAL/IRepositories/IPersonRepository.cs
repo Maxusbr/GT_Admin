@@ -466,6 +466,12 @@ namespace Getticket.Web.DAL.IRepositories
         IList<CountryPlace> GetCountryPlaces(string foundName);
 
         /// <summary>
+        /// Возвращает список <see cref="CountryPlace"/> 
+        /// </summary>
+        /// <returns></returns>
+        IList<CountryPlace> GetCountryPlaces(int idCountry, string foundName);
+
+        /// <summary>
         /// Если <see cref="CountryPlace"/> новый - добавляем новую запись в БД.
         /// Если <see cref="CountryPlace"/> уже существует - сохраняем изменения записи.
         /// </summary>
@@ -485,8 +491,9 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="country"></param>
         /// <param name="place"></param>
+        /// <param name="abr"></param>
         /// <returns></returns>
-        int UpdatePlace(string country, string place);
+        int UpdatePlace(string country, string place, string abr);
 
         /// <summary>
         /// Возвращает количество описаний
@@ -571,5 +578,6 @@ namespace Getticket.Web.DAL.IRepositories
         /// <returns></returns>
         IList<Event> GetAntroEventLinks(int id);
 
+        
     }
 }

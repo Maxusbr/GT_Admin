@@ -26,6 +26,13 @@
                 app.closeView('personEdit');
             });
         }
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.popup1 = {
+            opened: false
+        };
     }
 
     angular

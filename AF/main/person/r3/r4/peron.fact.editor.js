@@ -12,6 +12,8 @@
 
             $rootScope.editedFact.id_Person = $rootScope.personId;
             personService.saveEntity($rootScope.personId, $rootScope.editedFact, 'fact', function (data) {
+                if ($rootScope.getPersonCounts)
+                    $rootScope.getPersonCounts();
                 $rootScope.getFacts();
                 app.closeView('personFactEdit');
             });

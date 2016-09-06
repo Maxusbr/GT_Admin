@@ -33,6 +33,8 @@
                     $rootScope.getDescript();
                     app.closeView('disPersonNotesTizer');
                 }
+                if ($rootScope.getPersonCounts)
+                    $rootScope.getPersonCounts();
             });
         }
 
