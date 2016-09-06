@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function EventsFactEditController($rootScope, $scope, eventService) {
+    function EventsFactEditController($rootScope, $scope, eventService, $timeout) {
         var vm = this;
         
         $rootScope.saveFact = function save_fact() {
@@ -21,11 +21,18 @@
             })[0];
             $rootScope.editedFact.FactType = type;
         }
+        // $scope.autoExpand = function(e) {
+        //     var element = typeof e === 'object' ? e.target : document.getElementById(e);
+        //     var scrollHeight = element.scrollHeight - 60; 
+        //     element.style.height =  scrollHeight + "px";    
+        // }
+        // $scope.autoExpand('TextArea');
+
     }
 
     angular
         .module('app')
         .controller('EventsFactEditController', EventsFactEditController);
 
-    EventsFactEditController.$inject = ['$rootScope', '$scope', 'eventService'];
+    EventsFactEditController.$inject = ['$rootScope', '$scope', 'eventService', '$timeout'];
 })();

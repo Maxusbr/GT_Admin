@@ -7,11 +7,14 @@
             <a href="#" ng-click="closeMe('eventMediaCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
+
+    <form name='editEvent' ng-submit="saveMedia()">
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="saveMedia()">
+           <!--  <a href="#" ng-click="saveMedia()">
                 <span class="fa fa-save"></span> Добавить
-            </a>
+            </a> -->
+            <button class="clearBtn"><span class="fa fa-save"></span> Добавить</button>
         </div>
     </div>
     <div class="win-content">
@@ -66,12 +69,12 @@
                 </td>
             </tr>
             <tr>
-                <td>Название</td>
-                <td><input class="form-control" ng-model="editedMedia.Name" /></td>
+                <td>Название *</td>
+                <td><input required='required' class="form-control" ng-model="editedMedia.Name" /></td>
             </tr>
             <tr>
                 <td>Данные</td>
-                <td><textarea class="form-control" style="height:100px;" ng-model="editedMedia.Description" /></td>
+                <td><textarea class="form-control" msd-elastic style="min-height: 150px !important;" ng-model="editedMedia.Description" /></td>
             </tr>
 
 
@@ -164,6 +167,7 @@
             </tr>
         </table>
     </div>
+    </form>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

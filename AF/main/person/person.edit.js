@@ -18,7 +18,14 @@
                 });
             });
         }
-        $scope.save= function() {
+        $scope.save = function () {
+            if (typeof $scope.person.Place !== 'string') {
+                $scope.person.Country = $scope.person.Place.CountryName;
+                $scope.person.IdBithplace = $scope.person.Place.Id;
+                var place = $scope.person.Place.Name;
+                $scope.person.Place = place;
+            }
+            
             personService.Save($scope.person, function (data) {
                 $rootScope.getPerson($scope.Id);
                 app.closeView('personEdit');

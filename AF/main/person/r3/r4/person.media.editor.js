@@ -3,7 +3,7 @@
 
     function PersonMediaEditController($rootScope, $scope, personService, eventService, $filter) {
         var vm = this;
-        
+
         $scope.file = $rootScope.editedMedia.MediaLink;
         console.log($rootScope.editedMedia);
         $scope.association = { types: 'person' }
@@ -23,8 +23,8 @@
             $rootScope.editedMedia.MediaLink = path;
             personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (id) {
                 if (id > 0 && mediaAssociations.length > 0) {
-                    personService.saveMediaLinks(id, mediaAssociations);
-                    
+                    personService.saveMediaLinks(id, mediaAssociations, $rootScope.getPersonCounts);
+
                 }
                 $rootScope.getMedias();
                 app.closeView('personMediaEdit');
@@ -33,12 +33,12 @@
 
         $scope.saveMedia = function () {
             if ($rootScope.editedMedia.id_MediaType === 2 && typeof $scope.file != 'string')
-                personService.uploadImage($scope.file, function(data) {
+                personService.uploadImage($scope.file, function (data) {
                     save(`${serviceUrl}${data.path}`);
                 });
             else save($scope.file);
         }
-        
+
         $scope.addAssociation = function (item) {
             if ($rootScope.editedMedia.Id)
                 personService.saveMediaLink($rootScope.editedMedia.Id, item.Id, item.types, function (data) {
@@ -47,10 +47,10 @@
             else mediaAssociations.push({ Id: item.Id, types: item.types });
             switch (item.types) {
                 case 'person':
-                    var pers = $rootScope.persons.filter(function(el) {
+                    var pers = $rootScope.persons.filter(function (el) {
                         return el.Id === item.Id;
                     })[0];
-                    $scope.personeRange.push({Name: pers.Name, LastName: pers.LastName});
+                    $scope.personeRange.push({ Name: pers.Name, LastName: pers.LastName });
                     break;
                 case 'event':
                     var event = $rootScope.events.filter(function (el) {
@@ -58,10 +58,10 @@
                     })[0];
                     $scope.eventRange.push({ Name: event.Name });
                     break;
-            default:
+                default:
             }
         }
-        $scope.getPersonMedia = function(personId) {
+        $scope.getPersonMedia = function (personId) {
             personService.getMedia(personId, function (data) {
                 $scope.personmedialist = [];
                 data.forEach(function (item) {

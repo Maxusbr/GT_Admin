@@ -68,6 +68,18 @@
                 app.closeView('concertTicketsEdit');
             });
         }
+        $scope.open1 = function () {
+            $scope.popup1.opened = true;
+        };
+        $scope.popup1 = {
+            opened: false
+        };
+        $scope.open2 = function () {
+            $scope.popup2.opened = true;
+        };
+        $scope.popup2 = {
+            opened: false
+        };
     }
 
     angular

@@ -32,15 +32,31 @@
             <h5 class="col-lg-12">Даты доступности на витрине</h5>
             <div class="col-lg-6">
                 Дата с
-                <md-content>
+                <!--<md-content>
                     <md-datepicker ng-model="dateStart" md-placeholder="Дата начала "></md-datepicker>
-                </md-content>
+                </md-content>-->
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStart"
+                           is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
             </div>
             <div class="col-lg-6">
                 Дата по
-                <md-content>
+                <!--<md-content>
                     <md-datepicker ng-model="dateEnd" md-placeholder="Дата окончания "></md-datepicker>
-                </md-content>
+                </md-content>-->
+                <p class="input-group">
+                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateEnd"
+                           is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
             </div>
         </div>
         <hr />

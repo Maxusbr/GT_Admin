@@ -108,7 +108,7 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [ForeignKey("HallId")]
         [JsonIgnore]
-        public virtual Hall Hall { get; set; }
+        public Hall Hall { get; set; }
 
         /// <summary>
         /// Внешний ключ для <see cref="ConcertPlaceId"/>
@@ -119,24 +119,24 @@ namespace Getticket.Web.DAL.Entities
         /// </summary>
         [ForeignKey("ConcertPlaceId")]
         [JsonIgnore]
-        public virtual ConcertPlace ConcertPlace { get; set; }
+        public ConcertPlace ConcertPlace { get; set; }
 
         /// <summary>
         /// Серии концерта
         /// </summary>
         [JsonIgnore]
-        public virtual IList<SeriesConcert> Series { get; set; }
+        public IList<SeriesConcert> Series { get; set; }
 
         /// <summary>
         /// Билеты
         /// </summary>
         [JsonIgnore]
-        public virtual ConcertTicket Tickets { get; set; }
+        public ConcertTicket Tickets { get; set; }
 
         /// <summary>
         /// Календарь
         /// </summary>
         [JsonIgnore]
-        public virtual ICollection<ConcertDateRange> Calendar { get; set; }
+        public ICollection<ConcertDateRange> Calendar { get; set; }
     }
 }

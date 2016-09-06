@@ -885,6 +885,21 @@ namespace Getticket.Web.DAL.Repositories
             var result = string.IsNullOrEmpty(foundName) ? new List<CountryPlace>() :
                 db.CountryPlaces.Where(o => o.Name.ToLower().StartsWith(foundName.ToLower()))
                 .Include(o => o.Region)
+                .Include(o => o.Country)
+                .Include(o => o.Region.Country).ToList();
+            return result;
+        }
+
+        /// <see cref="IPersonRepository.GetCountryPlaces(int, string)" />
+        public IList<CountryPlace> GetCountryPlaces(int idCountry, string foundName)
+        {
+            var result = string.IsNullOrEmpty(foundName) ? db.CountryPlaces.Where(o => o.CountryId == idCountry)
+                .Include(o => o.Region)
+                .Include(o => o.Country)
+                .Include(o => o.Region.Country).ToList() :
+                db.CountryPlaces.Where(o => o.Region.Country_Id == idCountry && o.Name.ToLower().StartsWith(foundName.ToLower()))
+                .Include(o => o.Region)
+                .Include(o => o.Country)
                 .Include(o => o.Region.Country).ToList();
             return result;
         }
@@ -898,7 +913,9 @@ namespace Getticket.Web.DAL.Repositories
             }
             else if (place.Id > 0)
             {
-                db.Entry(place).State = System.Data.Entity.EntityState.Modified;
+                var pls = db.CountryPlaces.FirstOrDefault(o => o.Name.ToLower().Equals(place.Name));
+                if (pls != null)
+                    db.Entry(pls).CurrentValues.SetValues(place);
             }
             try
             {
@@ -923,7 +940,7 @@ namespace Getticket.Web.DAL.Repositories
         }
 
         /// <see cref="IPersonRepository.UpdatePlace" />
-        public int UpdatePlace(string country, string place)
+        public int UpdatePlace(string country, string place, string abr)
         {
             var cnt = db.Country.FirstOrDefault(o => o.Name.ToLower().Equals(country));
             if (cnt == null)
@@ -931,9 +948,12 @@ namespace Getticket.Web.DAL.Repositories
                 cnt = db.Country.Add(new Country { Name = country });
                 db.SaveChanges();
             }
+            var model = new CountryPlace { Name = place, Abr = abr, CountryId = cnt.Id };
             var pls = db.CountryPlaces.FirstOrDefault(o => o.Name.ToLower().Equals(place));
-            if (pls != null) return pls.Id;
-            pls = db.CountryPlaces.Add(new CountryPlace { Name = place, id_Region = cnt.Id });
+            if (pls != null)
+                db.Entry(pls).CurrentValues.SetValues(model);
+            else
+                pls = db.CountryPlaces.Add(model);
             db.SaveChanges();
             return pls.Id;
         }
@@ -986,7 +1006,7 @@ namespace Getticket.Web.DAL.Repositories
             var desc = db.PersonDescriptions.FirstOrDefault(o => o.Id == id);
             if (desc == null)
             {
-                desc = new PersonDescription {id_DescriptionType = 1, id_Person = personId};
+                desc = new PersonDescription { id_DescriptionType = 1, id_Person = personId };
                 db.Entry(desc).State = EntityState.Added;
             }
             desc.IdBlock = pageblock.Id;

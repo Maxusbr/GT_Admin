@@ -29,7 +29,7 @@
                     });
 
             }).error(function (err, status) {
-                logOut();
+                service.Logout();
                 callback(false);
                 deferred.reject(err);
             });
@@ -39,7 +39,7 @@
         };
         service.Logout = function logOut() {
 
-            ClearCredentials();
+            service.ClearCredentials();
             service.isAuth = false;
         };
         service.SetCredentials = function setCredentials(username, password, token) {

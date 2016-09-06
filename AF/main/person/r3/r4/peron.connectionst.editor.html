@@ -28,8 +28,25 @@
             </tr>
             <tr>
                 <td>Что связываем</td>
-                <td><select name="" id="" class="form-control" ng-model="connectionId" 
-                            ng-options="item.Id as item.Name for item in connectionList"></select></td>
+                <td>
+                    <!--<select name="" id="" class="form-control" ng-model="connectionId"
+                                 ng-options="item.Id as item.Name for item in connectionList"></select>-->
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Что связываем" name="Place" uib-typeahead="item.Id as item.Name for item in connectionList | filter:$viewValue"
+                               ng-model="connectionId" typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                               typeahead-min-length="0"> <!--uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">-->
+                        <!--<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>-->
+                        <div ng-show="noResults">
+                            <i class="glyphicon glyphicon-remove"></i> Не найдено
+                        </div>
+                        <script type="text/ng-template" id="customTemplate.html">
+                            <a>
+                                <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+                                <span> ({{match.model.Name}})</span>
+                            </a>
+                        </script>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>Характеристика</td>
