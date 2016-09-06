@@ -73,6 +73,8 @@
         $scope.saveEvent = function () {
             if ($scope.event.AgeLimit)
                 $scope.event.AgeLimit = parseInt($scope.event.AgeLimit, 10);
+            if ($scope.selectedOrganizer)
+                $scope.event.IdCompany = $scope.selectedOrganizer.Id;
             eventService.Save($scope.event, function (data) {
                 $rootScope.loadEvent();
                 if ($rootScope.getEvent)
