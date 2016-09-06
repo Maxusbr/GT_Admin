@@ -39,6 +39,7 @@
             }
         }
         $scope.$watch('connectionId', function (id) {
+            if (typeof $scope.connectionId !== "number") return;
             $rootScope.editedConnection.PersonConnectionType = $rootScope.connectiontypes.filter(function (item) {
                 return item.Id === $rootScope.editedConnection.id_ConnectionType;
             })[0].Name;
@@ -55,6 +56,7 @@
                         return item.Id === $scope.connectionId;
                     })[0];
                     $rootScope.editedConnection.PersonConnectTo = { Name: person.Name, Id: person.Id };
+                    $scope.connectionId = person.Name;
                     break;
                 case 2:
                 case 3:
@@ -63,6 +65,7 @@
                         return item.Id === $scope.connectionId;
                     })[0];
                     $rootScope.editedConnection.Event = { Id: event.Id, Name: event.Name };
+                    $scope.connectionId = event.Name;
                     break;
                 default:
                     break;
