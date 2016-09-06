@@ -50,9 +50,8 @@
         <div class="row">
             <div class="col-lg-6">
                 Категория *
-                <br />
-                <select required='required' class="form-control" ng-model="event.EventParentCategoryId"
-                        ng-options="item.Id as item.Name for item in baseCategory"></select >
+                <br/>
+                <select class="form-control" ng-model="event.EventParentCategoryId" ng-options="item.Id as item.Name for item in baseCategory"></select >
                 <a href="#" ng-click="editCat()">Редактировать</a>
             </div>
             <div class="col-lg-6">
