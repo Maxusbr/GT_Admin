@@ -166,7 +166,7 @@
                 Name: event.Name,
 
             }
-            return $http.post(`${serviceUrl}events/add`, event).success(function (data) {
+            $http.post(`${serviceUrl}events/add`, event).success(function (data) {
                 callback(data);
             }).error(function (data) {
                 callback(data);
