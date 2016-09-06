@@ -138,6 +138,11 @@
             return $http.get(`${serviceUrl}persons/place/${name}`);
         }
 
+        function getCountryPlaces(id, name) {
+            return $http.get(`${serviceUrl}persons/place/${id}/${name}`);
+        }
+
+
         function save(person, callback) {
             var model = {
                 Id: person.Id,
@@ -227,6 +232,7 @@
 
         service.getCountries = getCountries;
         service.getPlaces = getPlaces;
+        service.getCountryPlaces = getCountryPlaces;
         service.Save = save;
         service.saveDescriptions = saveDescriptions;
         service.saveTags = saveTags;

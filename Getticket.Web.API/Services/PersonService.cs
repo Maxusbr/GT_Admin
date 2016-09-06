@@ -946,10 +946,17 @@ namespace Getticket.Web.API.Services
             return PersonModelHelper.GetCountryModels(result);
         }
 
-        /// <see cref="IPersonService.GetCountryPlaces"/>
+        /// <see cref="IPersonService.GetCountryPlaces(string)"/>
         public IList<CountryPlaceModel> GetCountryPlaces(string foundName)
         {
             var result = _personRepository.GetCountryPlaces(foundName);
+            return PersonModelHelper.GetCountryPlaceModels(result);
+        }
+
+        /// <see cref="IPersonService.GetCountryPlaces(int, string)"/>
+        public IList<CountryPlaceModel> GetCountryPlaces(int idCountry, string foundName)
+        {
+            var result = _personRepository.GetCountryPlaces(idCountry, foundName);
             return PersonModelHelper.GetCountryPlaceModels(result);
         }
 

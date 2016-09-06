@@ -622,7 +622,7 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.GetCountries(string.Empty));
         }
 
-        /// <see cref="IPersonService.GetCountryPlaces" />
+        /// <see cref="IPersonService.GetCountryPlaces(string)" />
         [HttpGet]
         [Route("place/{found}")]
         public IHttpActionResult GetPlaces(string found="")
@@ -630,7 +630,14 @@ namespace Getticket.Web.API.Controllers
             return Ok(_personService.GetCountryPlaces(found));
         }
 
-        /// <see cref="IPersonService.GetCountryPlaces" />
+        /// <see cref="IPersonService.GetCountryPlaces(int, string)" />
+        [HttpGet]
+        [Route("place/{id}/{found}")]
+        public IHttpActionResult GetPlaces(int id, string found="")
+        {
+            return Ok(_personService.GetCountryPlaces(id, found));
+        }
+        /// <see cref="IPersonService.GetCountryPlaces(string)" />
         [HttpPost]
         [Route("place/save")]
         public IHttpActionResult SavePlace([FromBody] CountryPlaceModel model)

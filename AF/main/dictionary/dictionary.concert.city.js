@@ -6,15 +6,19 @@
 
         $scope.abrs = ['г', 'с', 'д', 'пос', 'пгт', 'ст-ца'];
         $scope.abr = $scope.abrs[0];
+        var countryId = 0;
+
+        function addPlace(response) {
+            $scope.places.push.apply($scope.places, response.data);
+            return response.data.map(function (item) {
+                return item;
+            });
+        }
 
         $scope.getPlaces = function (value) {
             $scope.places = [];
-            return personService.getPlaces(value).then(function (response) {
-                $scope.places.push.apply($scope.places, response.data);
-                return response.data.map(function (item) {
-                    return item;
-                });
-            });
+            return countryId > 0 ? personService.getCountryPlaces(countryId, value).then(addPlace) :
+                personService.getPlaces(value).then(addPlace);
         }
 
         function getCountries(value) {
@@ -36,8 +40,19 @@
             //});
         }
 
-        $scope.savePlace = function () {
+        $scope.$watch('countryName', function(data) {
+            if (!data || typeof data === "string") return;
+            countryId = data.Id;
+            $scope.countryName = data.Name;
+        });
 
+        $scope.savePlace = function () {
+            if (countryId > 0)
+                $scope.placeName.IdCountry = countryId;
+            personService.saveCountryPlace($scope.placeName, function(data) {
+                app.closeFive();
+                app.closeView('DictionaryConcertCityController');
+            });
         }
     }
 

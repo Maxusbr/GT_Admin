@@ -890,6 +890,20 @@ namespace Getticket.Web.DAL.Repositories
             return result;
         }
 
+        /// <see cref="IPersonRepository.GetCountryPlaces(int, string)" />
+        public IList<CountryPlace> GetCountryPlaces(int idCountry, string foundName)
+        {
+            var result = string.IsNullOrEmpty(foundName) ? db.CountryPlaces.Where(o => o.CountryId == idCountry)
+                .Include(o => o.Region)
+                .Include(o => o.Country)
+                .Include(o => o.Region.Country).ToList() :
+                db.CountryPlaces.Where(o => o.Region.Country_Id == idCountry && o.Name.ToLower().StartsWith(foundName.ToLower()))
+                .Include(o => o.Region)
+                .Include(o => o.Country)
+                .Include(o => o.Region.Country).ToList();
+            return result;
+        }
+
         /// <see cref="IPersonRepository.SaveCountryPlace" />
         public CountryPlace SaveCountryPlace(CountryPlace place)
         {

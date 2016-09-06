@@ -421,6 +421,14 @@ namespace Getticket.Web.API.Services
         IList<CountryPlaceModel> GetCountryPlaces(string foundName);
 
         /// <summary>
+        /// Возвращает список <see cref="CountryPlaceModel"/> 
+        /// </summary>
+        /// <param name="idCountry"></param>
+        /// <param name="foundName"></param>
+        /// <returns></returns>
+        IList<CountryPlaceModel> GetCountryPlaces(int idCountry, string foundName);
+
+        /// <summary>
         /// Добавить город
         /// </summary>
         /// <param name="model"></param>
@@ -441,6 +449,8 @@ namespace Getticket.Web.API.Services
         /// </summary>
         /// <returns></returns>
         IList<UserPageCategoryModel> GetUserPageCategory();
+
+        
     }
 
 }
