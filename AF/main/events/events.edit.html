@@ -1,5 +1,4 @@
-﻿
-<div class="win-container r3 eventEdit" style="width:700px;" ng-controller="EventsEditController as ctrl">
+﻿<div class="win-container r3 eventEdit" style="width:700px;" ng-controller="EventsEditController as ctrl">
     <div class="win-header">
         <div class="win-header-text">
             Изменить событие
@@ -20,6 +19,7 @@
         </div>
     </div>
     <div class="win-content">
+     <div class="panel-info" >
         <div class="row">
             <div class="col-lg-6">
                 <h5>На русском</h5>
@@ -29,7 +29,8 @@
                 <br />
                 Описание *
                 <br />
-                <input type="text" class="form-control" placeholder="от 3 знаков" ng-model="event.Description" required='required' pattern=".{3,}" ng-minlength='3' minlength='3'/>
+                <textarea msd-elastic style="min-height: 50px !important;" class="form-control" placeholder="от 3 знаков" ng-model="event.Description" required='required' pattern=".{3,}" maxlength='700'/></textarea>
+                <p>Осталось: {{700 - event.Description.length}} сим.</p>
                 <br />
             </div>
             <div class="col-lg-6">
@@ -40,21 +41,22 @@
                 <br />
                 Описание
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="event.DescriptionEn"  ng-minlength='3' pattern=".{3,}"/>
+                <textarea msd-elastic style="min-height: 50px !important;" class="form-control" placeholder="от 3 знаков" ng-model="event.DescriptionEn"  ng-minlength='3' pattern=".{3,}" maxlength='700'/></textarea>
+                <p>Осталось: {{700 - event.DescriptionEn.length}} сим.</p>
                 <br />
             </div>
         </div>
-        <hr />
+<!--         <hr /> -->
         <div class="row">
             <div class="col-lg-6">
                 Категория *
                 <br />
-                <select class="form-control" ng-model="event.EventParentCategoryId"
-                        ng-options="item.Id as item.Name for item in baseCategory"></select>
+                <select required='required' class="form-control" ng-model="event.EventParentCategoryId"
+                        ng-options="item.Id as item.Name for item in baseCategory"></select >
                 <a href="#" ng-click="editCat()">Редактировать</a>
             </div>
             <div class="col-lg-6">
-                Подкатегория *
+                Подкатегория
                 <br />
                 <select class="form-control" ng-model="event.EventCategoryId"
                         ng-options="item.Id as item.Name for item in getChildCategory(event.EventParentCategoryId)"></select>
@@ -141,6 +143,7 @@
             </div>
         </div>
 
+    </div>
     </div>
     </form>
 </div>
