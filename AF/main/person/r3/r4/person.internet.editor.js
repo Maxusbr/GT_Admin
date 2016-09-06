@@ -22,7 +22,7 @@
             console.log('save link click');
             //TODO: save changes or create new
             var list = [$rootScope.editedModel];
-            personService.saveEntities($rootScope.personId, list, 'social', $rootScope.getLinks);
+            personService.saveEntities($rootScope.personId, list, 'social', $rootScope.getLinks, $rootScope.getPersonCounts);
             //close this view
             $rootScope.closeMe('personInternetCreate');
         }

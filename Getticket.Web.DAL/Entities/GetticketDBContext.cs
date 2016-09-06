@@ -16,6 +16,7 @@ namespace Getticket.Web.DAL.Entities
             // For logging queries for db in Debug window
             // PROD disable it
             this.Database.Log = (s => System.Diagnostics.Debug.WriteLine(s));
+            //this.Configuration.LazyLoadingEnabled = false;
         }
 
         #region User Config

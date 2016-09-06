@@ -326,6 +326,15 @@
                 .success(function (data) { if (callback) callback(data); })
                 .error(function (data) { if (callback) callback(data); });
         }
+
+        service.saveCountryPlace = function (model, callback) {
+            $http.post(`${serviceUrl}persons/place/save`, model).success(function (id) {
+                if (callback)
+                    callback(id);
+            });
+        }
+
+
         return service;;
     }
 

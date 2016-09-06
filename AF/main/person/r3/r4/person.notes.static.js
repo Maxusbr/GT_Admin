@@ -16,8 +16,11 @@
             $scope.staticDescription.id_DescriptionType = 2;
             personService.saveEntity($scope.tizerId, $scope.staticDescription, 'description', function (data) {
                 $rootScope.getDescript();
+                if ($rootScope.getPersonCounts)
+                    $rootScope.getPersonCounts();
                 app.closeView('disPersonNotesStatic');
             });
+            
         }
     }
 

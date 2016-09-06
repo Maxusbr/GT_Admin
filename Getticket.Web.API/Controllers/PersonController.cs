@@ -108,7 +108,7 @@ namespace Getticket.Web.API.Controllers
                     return BadRequest("Укажите название страны");
                 }
 
-                model.IdBithplace = _personService.UpdatePlace(model.Country, model.Place);
+                model.IdBithplace = _personService.UpdatePlace(new CountryPlaceModel {Name = model.Place, CountryName = model.Country});
             }
             var userId = User.Identity.GetUserId<int>();
             return Ok(_personService.SavePerson(model, userId).Response());
@@ -625,17 +625,17 @@ namespace Getticket.Web.API.Controllers
         /// <see cref="IPersonService.GetCountryPlaces" />
         [HttpGet]
         [Route("place/{found}")]
-        public IHttpActionResult GetPlaces(string found)
+        public IHttpActionResult GetPlaces(string found="")
         {
             return Ok(_personService.GetCountryPlaces(found));
         }
 
         /// <see cref="IPersonService.GetCountryPlaces" />
-        [HttpGet]
-        [Route("place/")]
-        public IHttpActionResult GetPlaces()
+        [HttpPost]
+        [Route("place/save")]
+        public IHttpActionResult SavePlace([FromBody] CountryPlaceModel model)
         {
-            return Ok(_personService.GetCountryPlaces(string.Empty));
+            return Ok(_personService.UpdatePlace(model));
         }
 
         /// <see cref="ITagService.GetTags" />

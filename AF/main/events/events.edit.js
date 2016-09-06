@@ -105,6 +105,8 @@
         $scope.popup2 = {
             opened: false
         };
+
+        $scope.ageLimits = [0, 6, 12, 16, 18];
     }
 
     angular

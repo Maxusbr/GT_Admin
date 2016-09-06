@@ -485,8 +485,9 @@ namespace Getticket.Web.DAL.IRepositories
         /// </summary>
         /// <param name="country"></param>
         /// <param name="place"></param>
+        /// <param name="abr"></param>
         /// <returns></returns>
-        int UpdatePlace(string country, string place);
+        int UpdatePlace(string country, string place, string abr);
 
         /// <summary>
         /// Возвращает количество описаний

@@ -192,7 +192,7 @@ namespace Getticket.Web.API.Helpers
             return model != null ? new SeriesConcertModel
             {
                 Id = model.SeriesId,
-                Name = model.Series.Name
+                Name = model.Series?.Name
             } : null;
         }
 

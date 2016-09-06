@@ -423,10 +423,9 @@ namespace Getticket.Web.API.Services
         /// <summary>
         /// Добавить город
         /// </summary>
-        /// <param name="country"></param>
-        /// <param name="place"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        int UpdatePlace(string country, string place);
+        int UpdatePlace(CountryPlaceModel model);
 
         /// <summary>
         /// Сохранить схему описания

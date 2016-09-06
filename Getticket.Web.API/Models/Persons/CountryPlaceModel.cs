@@ -13,5 +13,6 @@ namespace Getticket.Web.API.Models.Persons
         public string Name { get; set; }
 
         public string CountryName { get; set; }
+        public string Abr { get; set; }
     }
 }

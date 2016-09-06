@@ -95,6 +95,8 @@
     <Content Include="main\dashboard.html" />
     <Content Include="main\dictionary\dictionary.antro.types.html" />
     <Content Include="main\dictionary\dictionary.antro.types.js" />
+    <Content Include="main\dictionary\dictionary.concert.city.html" />
+    <Content Include="main\dictionary\dictionary.concert.city.js" />
     <Content Include="main\dictionary\dictionary.concert.hall.html" />
     <Content Include="main\dictionary\dictionary.concert.hall.js" />
     <Content Include="main\dictionary\dictionary.event.category.html" />

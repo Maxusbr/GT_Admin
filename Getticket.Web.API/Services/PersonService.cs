@@ -954,9 +954,9 @@ namespace Getticket.Web.API.Services
         }
 
         /// <see cref="IPersonService.UpdatePlace"/>
-        public int UpdatePlace(string country, string place)
+        public int UpdatePlace(CountryPlaceModel model)
         {
-            return _personRepository.UpdatePlace(country, place);
+            return _personRepository.UpdatePlace(model.CountryName, model.Name, model.Abr);
         }
 
         /// <see cref="IPersonService.SaveDescriptionSchema"/>

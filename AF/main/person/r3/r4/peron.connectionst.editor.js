@@ -82,6 +82,8 @@
             $rootScope.editedConnection.id_Person = $rootScope.personId;
             console.log($rootScope.editedConnection);
             personService.saveEntity($rootScope.personId, $rootScope.editedConnection, 'connection', function (data) {
+                if ($rootScope.getPersonCounts)
+                    $rootScope.getPersonCounts();
                 $rootScope.getPersonConnection();
                 app.closeView('personConnectionEdit');
             });

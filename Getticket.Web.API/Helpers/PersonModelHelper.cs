@@ -411,7 +411,11 @@ namespace Getticket.Web.API.Helpers
         /// <exception cref="NotImplementedException"></exception>
         public static IList<CountryModel> GetCountryModels(IList<Country> result)
         {
-            return result.Select(o => new CountryModel { Id = o.Id, Name = o.Name }).ToList();
+            return result.Select(o => new CountryModel
+            {
+                Id = o.Id,
+                Name = o.Name,
+            }).ToList();
         }
 
         /// <summary>
@@ -438,7 +442,7 @@ namespace Getticket.Web.API.Helpers
                 Name = model.Name,
                 IdCountry = model.Region.Country_Id,
                 CountryName = model.Region.Country.Name
-            }: null;
+            } : null;
         }
     }
 }
