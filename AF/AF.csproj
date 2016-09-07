@@ -70,6 +70,7 @@
     <Content Include="app-services\concert.service.js" />
     <Content Include="app-services\event.service.js" />
     <Content Include="Content\angular-material.min.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="Content\select.css" />
     <Content Include="Content\select.min.css" />
     <Content Include="login\login.controller.js" />
