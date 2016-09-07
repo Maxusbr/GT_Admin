@@ -1,11 +1,15 @@
 ﻿(function () {
     'use strict';
 
-    function EventsEditController($rootScope, $scope, eventService, $filter) {
+    function EventsEditController($rootScope, $scope, eventService, $filter, $timeout) {
         var vm = this;
 
         
         vm.organizers = [];
+
+        $scope.showMessage = true;
+        $scope.errorYes = false;
+        $scope.message = 'Error';
 
         $scope.event = $rootScope.editEvent;
         $scope.selectedOrganizer = $scope.event.Organizer;
@@ -76,6 +80,7 @@
             if ($scope.selectedOrganizer)
                 $scope.event.IdCompany = $scope.selectedOrganizer.Id;
             eventService.Save($scope.event, function (data) {
+                
                 $rootScope.loadEvent();
                 if ($rootScope.getEvent)
                     $rootScope.getEvent($scope.event.Id);
@@ -110,13 +115,12 @@
 
         $scope.ageLimits = [0, 6, 12, 16, 18];
 
-        $scope.showMessage = true;
-        $scope.errorYes = false;
+        
     }
 
     angular
         .module('app')
         .controller('EventsEditController', EventsEditController);
 
-    EventsEditController.$inject = ['$rootScope', '$scope', 'eventService', '$filter'];
+    EventsEditController.$inject = ['$rootScope', '$scope', 'eventService', '$filter', '$timeout'];
 })();

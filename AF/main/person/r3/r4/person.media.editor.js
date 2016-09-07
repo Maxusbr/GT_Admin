@@ -5,7 +5,9 @@
         var vm = this;
 
         $scope.file = $rootScope.editedMedia.MediaLink;
-        console.log($rootScope.editedMedia);
+        $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink: 'https://www.youtube.com/watch?v=undefined';
+        $scope.embed = '//img.youtube.com/vi/undefined';
+
         $scope.association = { types: 'person' }
 
         if (!$rootScope.events)
@@ -17,6 +19,13 @@
         } else {
             $scope.personeRange = [];
             $scope.eventRange = [];
+        }
+        
+        $scope.videoPreview = function () {
+            $scope.youtube_link = $scope.file_video.split('v=');
+            // $scope.embed_link = $scope.youtube_link[1];
+            $scope.embed = '//img.youtube.com/vi/' + $scope.youtube_link[1] + '/3.jpg';
+
         }
         function save(path) {
             $rootScope.editedMedia.id_Person = $rootScope.personId;
@@ -36,7 +45,7 @@
                 personService.uploadImage($scope.file, function (data) {
                     save(`${serviceUrl}${data.path}`);
                 });
-            else save($scope.file);
+            else save($scope.file_video);
         }
 
         $scope.addAssociation = function (item) {

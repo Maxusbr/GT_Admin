@@ -20,7 +20,7 @@
 
         }
 
-        console.log($rootScope.editedMedia);
+        
         $scope.association = { types: 'person' }
 
         var mediaAssociations = [];

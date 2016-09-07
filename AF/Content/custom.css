@@ -24,3 +24,10 @@
 .messager_sucsses {
 	background-color: #DFF0D8;
 }
+
+.win-content h1, .win-content h2, .win-content h3, .win-content h4, .win-content h5, .win-content p, .win-content span  {
+	white-space: normal !important;
+}
+.win-content p {
+	font-weight: 400;
+}

@@ -20,32 +20,29 @@
     <div class="win-content">
         <div class="panel-info" cg-busy="Promise">
             <div class="row" ng-if="event">
-                <div class="col-lg-9">
+                <div class="col-lg-9 col-md-9">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12 col-md-12">
                             <br/>
                             <h5>Название:  {{event.Name}}</h5>
                             <br/>
-                        </div>
-                        <div class="col-lg-6">
-                            <br/>
-                            Катагория: {{event.EventParentCategory}}
-                            <br/>
-                            <br/>
-                            Подкатегория: {{event.EventCategory}}
-                            <br/>
-                        </div>
-                        <div class="col-lg-6">
-                            <br/>
-                            Организатор: {{event.Organizer}}
-                            <br/>
-                            <br/>
-                            Возрастные ограничегия: {{event.AgeLimit}}+
-                            <br/>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <th><p>Катагория: {{event.EventParentCategory}}</p></th>
+                                        <th><p>Подкатегория: {{event.EventCategory}}</p></th>
+                                    </tr>
+                                    <tr>
+                                        <th><p>Организатор: {{event.Organizer}}</p></th>
+                                        <th><p>Возрастные ограничегия: {{event.AgeLimit}}+</p></th>
+                                    </tr>
+                                </tbody>
+                            </table>  
+                            
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-3 col-md-3">
                     <!--person menu-->
                     <a href="#" class="btn btn-block btn-info" ng-click="displayNotes()">
                         <span class="fa fa-book pull-left"></span> Описание ({{counts.CountDescriptions}})
