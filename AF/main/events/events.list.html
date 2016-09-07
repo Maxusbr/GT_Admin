@@ -22,15 +22,30 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Название</th>
-                    <th>Категория</th>
-                    <th>Подкатегория</th>
-                    <th>Организатор</th>
-                    <th>Возрастные ограничегия</th>
+                    <th ng-click="orders('Name')" >
+                        Название
+                        <span ng-class='arrows[0] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
+                    <th ng-click="orders('EventParentCategory')" >
+                        Категория
+                        <span ng-class='arrows[1] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
+                    <th ng-click="orders('EventCategory')" >
+                        Подкатегория 
+                        <span ng-class='arrows[2] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
+                    <th ng-click="orders('Organizer')" >
+                        Организатор 
+                        <span ng-class='arrows[3] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
+                    <th ng-click="orders('AgeLimit')">
+                        Возрастные ограничегия 
+                        <span ng-class='arrows[4] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                 <tr ng-repeat="row in events | filter:personaMenuFilter">
+                 <tr ng-repeat="row in events | filter:personaMenuFilter | orderBy: order">
                     <td><a href="#" ng-click="selectEvents(row.Id)">{{row.Name}}</a></td>
                     <td><a href="#" ng-click="selectEvents(row.Id)">{{row.EventParentCategory}}</a></td>
                     <td><a href="#" ng-click="selectEvents(row.Id)">{{row.EventCategory}}</a></td>

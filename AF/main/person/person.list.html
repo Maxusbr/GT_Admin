@@ -22,15 +22,30 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Фамилия</th>
-                    <th>Имя</th>
-                    <th>Отчество</th>
-                    <th>Жанр</th>
-                    <th>Событие</th>
+                    <th ng-click="orders('name.lastName')">
+                        Фамилия
+                        <span ng-class='arrows[0] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
+                    <th ng-click="orders('name.firstName')">
+                        Имя
+                        <span ng-class='arrows[1] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
+                    <th ng-click="orders('name.middleName')">
+                        Отчество
+                        <span ng-class='arrows[2] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
+                    <th ng-click="orders('type')">
+                        Жанр
+                        <span ng-class='arrows[3] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
+                    <th ng-click="orders('event')">
+                        Событие
+                        <span ng-class='arrows[4] ? "fa fa-caret-up":"fa fa-caret-down"' ></span>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="row in menuScope | filter:personaMenuFilter">
+                <tr ng-repeat="row in menuScope | filter:personaMenuFilter | orderBy: order">
                     <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.lastName}}</a></td>
                     <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.firstName}}</a></td>
                     <td><a href="#" ng-click="selectPerson(row.id)">{{row.name.middleName}}</a></td>
