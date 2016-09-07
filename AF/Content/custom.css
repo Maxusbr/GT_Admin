@@ -5,3 +5,8 @@
 .activeOrder {
 	color: #3c763d;;
 }
+.form_custom {
+	min-height: 100vh;
+	height: calc(100% - 140px);
+	padding-bottom: 19px;
+}

@@ -8,42 +8,46 @@
             <a href="#" ng-click="closeMe('personEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
+
+    <form name='editEvent' ng-submit="saveNewPerson()" class="form_custom" >
+
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="save()">
+            <!-- <a href="#" ng-click="save()">
                 <span class="fa fa-save"></span> Сохранить
-            </a>
+            </a> -->
+            <button class="clearBtn"><span class="fa fa-save"></span> Сохранить</button>
         </div>
     </div>
     <div class="win-content">
         <div class="row">
             <div class="col-lg-6">
                 <h5>На русском</h5>
-                Имя
+                Имя *
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Name" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Name" required='required' pattern=".{3,}" ng-minlength='3' minlength='3'/>
                 <br />
-                Фамилия
+                Фамилия *
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="person.LastName" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.LastName" required='required' pattern=".{3,}" ng-minlength='3' minlength='3'/>
                 <br />
                 Отчество
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Patronymic"/>
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Patronymic" pattern=".{3,}" ng-minlength='3' minlength='3'/>
                 <br />
                 Псевдоним
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Alias" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.Alias" pattern=".{3,}" ng-minlength='3' minlength='3'/>
             </div>
             <div class="col-lg-6">
                 <h5>На английском</h5>
                 Имя
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="person.NameLatin" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.NameLatin"  pattern=".{3,}" ng-minlength='3' minlength='3'/>
                 <br />
                 Фамилия
                 <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="person.LastNameLatin" />
+                <input class="form-control" placeholder="от 3 знаков" ng-model="person.LastNameLatin" pattern=".{3,}" ng-minlength='3' minlength='3'/>
                 <br />
                 Отчество
                 <br />
@@ -59,10 +63,10 @@
         </script>
         <div class="row">
             <div class="col-lg-4">
-                Дата рождения
+                Дата рождения *
                 <br/>
                 <p class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="person.bithday"
+                    <input required='required' type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="person.bithday"
                            is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
                            alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
                     <span class="input-group-btn">
@@ -92,5 +96,6 @@
                 <select class="form-control" ng-model="person.Sex" ng-options="item.id as item.name for item in sexes"></select>
             </div>
         </div>
+        </form>
     </div>
 </div>

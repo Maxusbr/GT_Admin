@@ -7,22 +7,27 @@
             <a href="#" ng-click="closeMe('personFactEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
+
+
+    <form name='editEvent' ng-submit="saveFact()">
+
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="saveFact()">
+            <!-- <a href="#" ng-click="saveFact()">
                 <span class="fa fa-save"></span> Сохранить
-            </a>
+            </a> -->
+            <button class="clearBtn"><span class="fa fa-save"></span> Сохранить</button>
         </div>
     </div>
     <div class="win-content">
         <table class="table">
             <tr>
-                <td>Текст факта</td>
-                <td><textarea class="form-control" style="height:150px;" ng-model="editedFact.FactText" /></td>
+                <td>Текст факта *</td>
+                <td><textarea msd-elastic style="min-height: 150px !important;" class="form-control" required='required' ng-model="editedFact.FactText" /></td>
             </tr>
             <tr>
-                <td>Статус</td>
-                <td><input class="form-control" ng-model="editedFact.Status"/></td>
+                <td>Статус *</td>
+                <td><input class="form-control" ng-model="editedFact.Status" required='required'/></td>
             </tr>
             <tr>
                 <td>Изменен</td>
@@ -31,7 +36,6 @@
             </tr>
             <tr>
                 <td>Связь</td>
-                
                 <td>
                     <select name="" id="" class="form-control" ng-model="editedFact.id_FactType" ng-change="chaneTypes(editedFact.id_FactType)"
                             ng-options="item.Id as item.Name + '/' + item.Descript  for item in facttypes">
@@ -48,4 +52,5 @@
             </tr>
         </table>
     </div>
+    </form>
 </div>
