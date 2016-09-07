@@ -10,3 +10,17 @@
 	height: calc(100% - 140px);
 	padding-bottom: 19px;
 }
+.messager {
+	padding: 10px;
+}
+.messager a{
+	float: right;
+	position: relative;
+	top: -30px;
+}
+.messager_error {
+	background-color: #F2DEDE;
+}
+.messager_sucsses {
+	background-color: #DFF0D8;
+}
