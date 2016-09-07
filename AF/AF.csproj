@@ -214,6 +214,7 @@
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="Scripts\angular-youtube-embed.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\elastic.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\FileAPI.flash.swf" />
     <Content Include="Scripts\FileAPI.js" />
