@@ -109,6 +109,9 @@
         };
 
         $scope.ageLimits = [0, 6, 12, 16, 18];
+
+        $scope.showMessage = true;
+        $scope.errorYes = false;
     }
 
     angular

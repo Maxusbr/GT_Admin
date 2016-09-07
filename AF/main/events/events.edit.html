@@ -1,7 +1,7 @@
 ﻿<div class="win-container r3 eventEdit" style="width:700px;" ng-controller="EventsEditController as ctrl">
     <div class="win-header">
         <div class="win-header-text">
-            Изменить событие
+            Изменить мероприятие
         </div>
         <div class="win_buttons">
             <a href="#" ng-click="closeMe('eventEdit')"><span class="glyphicon glyphicon-remove-sign"></span></a>
@@ -21,6 +21,12 @@
     <div class="win-content">
      <div class="panel-info" >
         <div class="row">
+            <div class="com-md-12">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
+                    <p>Ошибка: блала</p>
+                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                </div>
+            </div>
             <div class="col-lg-6">
                 <h5>На русском</h5>
                 Название *
