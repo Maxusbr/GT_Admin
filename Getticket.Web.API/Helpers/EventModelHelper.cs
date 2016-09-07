@@ -140,7 +140,7 @@ namespace Getticket.Web.API.Helpers
                 EventDate = model.EventDate,
                 TicketReturn = model.TicketReturn,
                 IsPublished = model.IsPublished, 
-                IdCategory = model.EventCategoryId??0,
+                IdCategory = model.EventCategoryId??(int)model.EventParentCategoryId,
                 AgeLimit = model.AgeLimit,
                 IdCompany = model.IdCompany
             } : null;
