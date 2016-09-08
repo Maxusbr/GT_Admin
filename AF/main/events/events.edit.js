@@ -7,7 +7,7 @@
         
         vm.organizers = [];
 
-        $scope.showMessage = true;
+        $scope.showMessage = false;
         $scope.errorYes = false;
         $scope.message = 'Error';
 
