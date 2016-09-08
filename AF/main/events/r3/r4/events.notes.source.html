@@ -17,15 +17,18 @@
         </div>
     </div>
     <div class="win-content">
-        <h5>Страница</h5>
-        <i>Откуда бедный посетитель попадает на эту страницу</i>
-        <br/>
+        
         <div class="row" cg-busy="Promise">
             <div class="com-md-12">
                 <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
                     <p ng-bind="message"></p>
                     <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </div>
+            </div>
+            <div class="col-md-12">
+                <h5>Страница</h5>
+                <i>Откуда бедный посетитель попадает на эту страницу</i>
+                <br/>
             </div>
             <div class="col-lg-6">
                 Страница <select class="form-control" ng-change="getDetail(pageSchema.Page.PageType)" ng-model="pageSchema.Page.PageType" 

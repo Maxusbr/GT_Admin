@@ -3,6 +3,9 @@
 
     function eventNotesTizerController($rootScope, $cookieStore, $scope, $filter, eventService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = 'Error';
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
 

@@ -3,6 +3,9 @@
 
     function PersonFactEditorController($rootScope, $scope, personService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
 
         $rootScope.saveFact = function save_fact() {
             console.log('save fact click');

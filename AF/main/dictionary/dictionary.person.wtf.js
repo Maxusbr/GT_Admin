@@ -3,6 +3,9 @@
 
     function DictionaryPersonWTFController($rootScope, $scope, $filter) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
 
         $scope.editItem = {Id: 0, Name: ""};
 

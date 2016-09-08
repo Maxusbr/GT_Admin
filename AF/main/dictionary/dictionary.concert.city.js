@@ -3,6 +3,9 @@
 
     function DictionaryConcertCityController($rootScope, $scope, personService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
 
         $scope.abrs = ['г', 'с', 'д', 'пос', 'пгт', 'ст-ца'];
         $scope.abr = $scope.abrs[0];

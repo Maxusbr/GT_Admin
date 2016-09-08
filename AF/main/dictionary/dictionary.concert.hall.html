@@ -11,6 +11,12 @@
     </div>
     <div class="win-content" cg-busy="Promise">
         <div class="row">
+            <div class="com-md-12">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
+                    <p ng-bind="message"></p>
+                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                </div>
+            </div>
             Населенный пункт
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Город" name="Place" uib-typeahead="item as item.Name for item in getPlaces($viewValue)"

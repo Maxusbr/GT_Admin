@@ -3,6 +3,9 @@
 
     function DictionaryPersonLinkController($rootScope, $scope, $cookieStore, personService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
 

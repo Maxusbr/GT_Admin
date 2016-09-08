@@ -3,6 +3,9 @@
 
     function dictConcertActorGroupController($rootScope, $scope, concertService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
 
         vm.editItem = $rootScope.editedGroup? $rootScope.editedGroup: { Name: "" };
 

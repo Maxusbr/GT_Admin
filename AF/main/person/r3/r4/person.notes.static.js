@@ -3,6 +3,9 @@
 
     function personNotesStaticController($rootScope, $cookieStore, $scope, $filter, personService) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
 

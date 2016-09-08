@@ -3,6 +3,10 @@
 
     function EventsNotesEditController($rootScope, $scope) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
+        
         $scope.fact = $rootScope.fact ? $rootScope.fact: {
             FactText: "",
             LastChange: {

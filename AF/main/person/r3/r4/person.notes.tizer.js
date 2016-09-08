@@ -3,6 +3,9 @@
 
     function personNotesTizerController($rootScope, $cookieStore, $scope, $filter, $timeout, personService) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
 

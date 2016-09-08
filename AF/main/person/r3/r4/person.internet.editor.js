@@ -3,6 +3,9 @@
 
     function PersonInternetEditorController($rootScope, $scope, personService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
         
         //редактируемая запись
         $rootScope.editedModel = $rootScope.EditedLink ? $rootScope.EditedLink : { IdDestination: 1, Link: "", Description: ""};

@@ -5,7 +5,7 @@
         var vm = this;
         $scope.showMessage = false;
         $scope.errorYes = false;
-        $scope.message = 'Error';
+        $scope.message = '';
 
         if (!$rootScope.pageSchema.Page)
             $rootScope.pageSchema.Page = {};

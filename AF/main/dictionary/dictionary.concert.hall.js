@@ -3,6 +3,10 @@
 
     function dictionaryConcertHallController($rootScope, $scope, personService, concertService) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
+        
         $scope.clear = function() {
             $scope.concertPlace = {}
             $scope.concertHall = {}
