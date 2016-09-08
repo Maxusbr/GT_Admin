@@ -46,10 +46,10 @@
                 </thead>
                 <tbody>
                  <tr ng-repeat="row in events | filter:personaMenuFilter | orderBy: order">
-                    <td><a href="#" ng-click="selectEvents(row.Id)">{{row.Name}}</a></td>
+                    <td><a href="#" ng-click="selectEvents(row.Id)"><span >{{row.Name}}</span></a></td>
                     <td><a href="#" ng-click="selectEvents(row.Id)">{{row.EventParentCategory}}</a></td>
                     <td><a href="#" ng-click="selectEvents(row.Id)">{{row.EventCategory}}</a></td>
-                    <td>{{row.Organizer}}</td>
+                    <td><span >{{row.Organizer}}</span></td>
                     <td>{{row.AgeLimit}}+</td>
                 </tr> 
                     <!--<tr >
