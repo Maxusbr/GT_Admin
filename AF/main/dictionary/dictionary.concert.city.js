@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function DictionaryConcertCityController($rootScope, $scope, personService) {
+    function DictionaryConcertCityController($rootScope, $scope, personService, $timeout) {
         var vm = this;
 
         $scope.abrs = ['г', 'с', 'д', 'пос', 'пгт', 'ст-ца'];
@@ -49,9 +49,12 @@
         $scope.savePlace = function () {
             if (countryId > 0)
                 $scope.placeName.IdCountry = countryId;
-            personService.saveCountryPlace($scope.placeName, function(data) {
+            personService.saveCountryPlace($scope.placeName, function (data) {
+                //TODO show msg
                 app.closeFive();
-                app.closeView('DictionaryConcertCityController');
+                $timeout(function () {
+                    return app.closeView('DictionaryConcertCityController');
+                }, 3000);
             });
         }
     }
@@ -60,5 +63,5 @@
         .module('app')
         .controller('DictionaryConcertCityController', DictionaryConcertCityController);
 
-    DictionaryConcertCityController.$inject = ['$rootScope', '$scope', 'personService'];
+    DictionaryConcertCityController.$inject = ['$rootScope', '$scope', 'personService', '$timeout'];
 })();

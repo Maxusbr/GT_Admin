@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function concertProgrammActorPartController($rootScope, $scope, concertService, personService) {
+    function concertProgrammActorPartController($rootScope, $scope, concertService, personService, $timeout) {
         var vm = this;
         $scope.actor = $rootScope.editedActor;
 
@@ -22,11 +22,15 @@
 
         $scope.saveActor = function () {
             concertService.saveActor($scope.actor, function (data) {
+                //TODO show msg
                 $rootScope.getProgramms($rootScope.concertId);
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($rootScope.concertId);
                 app.closeFive();
-                app.closeView('disConcertActorPart');
+                
+                $timeout(function () {
+                    return app.closeView('disConcertActorPart');
+                }, 3000);
             });
         }
 
@@ -47,5 +51,5 @@
         .module('app')
         .controller('concertProgrammActorPartController', concertProgrammActorPartController);
 
-    concertProgrammActorPartController.$inject = ['$rootScope', '$scope', 'concertService', 'personService'];
+    concertProgrammActorPartController.$inject = ['$rootScope', '$scope', 'concertService', 'personService', '$timeout'];
 })();

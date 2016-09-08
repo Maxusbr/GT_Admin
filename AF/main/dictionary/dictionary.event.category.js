@@ -44,6 +44,7 @@
         $scope.saveCategories = function (cat) {
             if (!cat.Name) return;
             eventService.SaveCategory(cat, function (data) {
+                //TODO show msg
                 cat = {}
                 eventService.getCategories(function (data) {
                     $rootScope.eventCategories = data;

@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function concertProgrammController($rootScope, $scope, concertService, $q) {
+    function concertProgrammController($rootScope, $scope, concertService, $q, $timeout) {
         var vm = this;
         var actors = [];
         $scope.concert = $rootScope.editedConcert;
@@ -85,9 +85,13 @@
 
         function update(model) {
             concertService.updateConcert(model, function (data) {
+            //TODO show msg
                 $rootScope.getConcert($rootScope.concertId);
                 app.closeFour();
-                app.closeView('concertProgrammEdit');
+                
+                $timeout(function () {
+                    return app.closeView('concertProgrammEdit');
+                }, 3000);
             });
         }
         $scope.saveProgramm = function () {
@@ -106,5 +110,5 @@
         .module('app')
         .controller('concertProgrammController', concertProgrammController);
 
-    concertProgrammController.$inject = ['$rootScope', '$scope', 'concertService', '$q'];
+    concertProgrammController.$inject = ['$rootScope', '$scope', 'concertService', '$q', '$timeout'];
 })();

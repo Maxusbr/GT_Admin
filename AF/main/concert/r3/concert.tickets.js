@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function concertTicketsController($rootScope, $scope, concertService) {
+    function concertTicketsController($rootScope, $scope, concertService, $timeout) {
         var vm = this;
         $scope.concert = $rootScope.editedConcert;
 
@@ -62,10 +62,13 @@
             $scope.ticket.TimeStart = `${$scope.timeStart.getHours()}:${$scope.timeStart.getMinutes()}`;
             $scope.ticket.TimeEnd = `${$scope.timeEnd.getHours()}:${$scope.timeEnd.getMinutes()}`;
             concertService.saveTickets($scope.ticket, function(data) {
+            //TODO Show msg
                 $rootScope.loadConcerts();
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);
-                app.closeView('concertTicketsEdit');
+                $timeout(function () {
+                    return app.closeView('concertTicketsEdit');
+                }, 3000);
             });
         }
         $scope.open1 = function () {
@@ -86,5 +89,5 @@
         .module('app')
         .controller('concertTicketsController', concertTicketsController);
 
-    concertTicketsController.$inject = ['$rootScope', '$scope', 'concertService'];
+    concertTicketsController.$inject = ['$rootScope', '$scope', 'concertService', '$timeout'];
 })();
