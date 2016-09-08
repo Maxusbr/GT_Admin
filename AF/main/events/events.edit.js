@@ -9,7 +9,7 @@
 
         $scope.showMessage = false;
         $scope.errorYes = false;
-        $scope.message = 'Error';
+        $scope.message = '';
 
         $scope.event = $rootScope.editEvent;
         $scope.selectedOrganizer = $scope.event.Organizer;

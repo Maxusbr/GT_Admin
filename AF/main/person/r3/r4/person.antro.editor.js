@@ -3,6 +3,9 @@
 
     function personAntroEditorController($rootScope, $scope, eventService, personService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
 
 
         $rootScope.saveAntro = function save_antro() {

@@ -3,6 +3,9 @@
 
     function personNotesController($rootScope, $cookieStore, $scope, personService, $filter) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
 
         $rootScope.getDescript = function () {
             $scope.Promise = personService.getDescript($rootScope.personId, function (data) {

@@ -3,6 +3,9 @@
 
     function PersonCreatController($rootScope, $scope, $timeout, personService) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
         $scope.sexes = [{ id: 0, name: "Мужской" }, { id: 1, name: "Женский" }];
         $scope.person = { Id: 0 };
         $scope.getPlaces = function (value) {

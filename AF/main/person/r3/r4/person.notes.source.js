@@ -3,6 +3,9 @@
 
     function personNotesSourceController($rootScope, $scope, $cookieStore, $timeout, personService, eventService) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
         if (!$rootScope.pageSchema.Page)

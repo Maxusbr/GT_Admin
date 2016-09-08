@@ -3,6 +3,9 @@
 
     function PersonConnectionstEditorController($rootScope, $scope, $filter, personService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
 
         function getConnectionId() {
             switch ($rootScope.editedConnection.id_ConnectionType) {

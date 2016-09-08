@@ -3,6 +3,9 @@
 
     function PersonEditController($rootScope, $scope, $timeout, personService) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
         $scope.Id = $rootScope.personId;
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
             $scope.person = data;

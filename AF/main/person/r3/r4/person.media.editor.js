@@ -3,6 +3,9 @@
 
     function PersonMediaEditController($rootScope, $scope, personService, eventService, $filter, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = '';
 
         $scope.file = $rootScope.editedMedia.MediaLink;
         $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink : 'https://www.youtube.com/watch?v=undefined';
