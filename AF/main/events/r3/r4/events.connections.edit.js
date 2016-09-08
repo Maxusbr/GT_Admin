@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function EventsConnectionsEditController($rootScope, $scope, eventService, personService) {
+    function EventsConnectionsEditController($rootScope, $scope, eventService, personService, $timeout) {
         var vm = this;
 
         $rootScope.saveConnection = function () {
@@ -11,8 +11,12 @@
             $rootScope.editedConnection.id_Event = $rootScope.eventId;
             console.log($rootScope.editedConnection);
             $scope.Promise = eventService.saveEntity($rootScope.eventId, $rootScope.editedConnection, 'connection', function (data) {
+                //TODO show msg
                 $rootScope.getEventConnection();
-                app.closeView('eventConnectionCreate');
+                $timeout(function () {
+                    return app.closeView('eventConnectionCreate');
+                }, 3000);
+                
             });
         }
 
@@ -107,5 +111,5 @@
         .module('app')
         .controller('EventsConnectionsEditController', EventsConnectionsEditController);
 
-    EventsConnectionsEditController.$inject = ['$rootScope', '$scope', 'eventService', 'personService'];
+    EventsConnectionsEditController.$inject = ['$rootScope', '$scope', 'eventService', 'personService', '$timeout'];
 })();

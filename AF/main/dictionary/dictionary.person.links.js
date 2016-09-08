@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function DictionaryPersonLinkController($rootScope, $scope, $cookieStore, personService) {
+    function DictionaryPersonLinkController($rootScope, $scope, $cookieStore, personService, $timeout) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
@@ -18,8 +18,15 @@
         $scope.saveChanges = function () {
             //TODO: save changes to server
             var list = [$scope.editItem];
-            personService.saveEntitieTypes(list, 'social', $rootScope.getLinkTypes);
-            $rootScope.closeMe('disDicPersonLinks');
+            personService.saveEntitieTypes(list, 'social', function (data) {
+                //TODO show msg
+                $rootScope.getLinkTypes();
+                $timeout(function () {
+                    return $rootScope.closeMe('disDicPersonLinks');
+                }, 3000);
+            });
+            
+            
         }
     }
 
@@ -27,5 +34,5 @@
         .module('app')
         .controller('DictionaryPersonLinkController', DictionaryPersonLinkController);
 
-    DictionaryPersonLinkController.$inject = ['$rootScope', '$scope', '$cookieStore', 'personService'];
+    DictionaryPersonLinkController.$inject = ['$rootScope', '$scope', '$cookieStore', 'personService', '$timeout'];
 })();

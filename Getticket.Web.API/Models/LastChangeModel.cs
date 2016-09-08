@@ -13,7 +13,7 @@ namespace Getticket.Web.API.Models
         /// <summary>
         /// Дата
         /// </summary>
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         /// <summary>
         /// Имя пользователя

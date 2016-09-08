@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function EventsNotesController($rootScope, $scope, eventService, personService, $filter) {
+    function EventsNotesController($rootScope, $scope, eventService, personService, $filter, $timeout) {
         var vm = this;
         if (!$rootScope.persons)
             $scope.Promise = personService.getPersons();
@@ -120,7 +120,7 @@
             if ($scope.genres.length) {
                 eventService.saveTags($scope.eventId, $scope.categoryTags, 'event', function(deta) {
                     eventService.saveTags($scope.eventId, $scope.genres, 'genre', function (deta) {
-
+                        //TODO show msg
                     });
                 });
             }
@@ -131,5 +131,5 @@
         .module('app')
         .controller('EventsNotesController', EventsNotesController);
 
-    EventsNotesController.$inject = ['$rootScope', '$scope', 'eventService', 'personService', '$filter'];
+    EventsNotesController.$inject = ['$rootScope', '$scope', 'eventService', 'personService', '$filter', '$timeout'];
 })();

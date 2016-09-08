@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function PersonMediaEditController($rootScope, $scope, personService, eventService, $filter) {
+    function PersonMediaEditController($rootScope, $scope, personService, eventService, $filter, $timeout) {
         var vm = this;
 
         $scope.file = $rootScope.editedMedia.MediaLink;
@@ -31,18 +31,21 @@
             $rootScope.editedMedia.id_Person = $rootScope.personId;
             $rootScope.editedMedia.MediaLink = path;
             personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (id) {
+                //TODO show msg
                 if (id > 0 && mediaAssociations.length > 0) {
                     personService.saveMediaLinks(id, mediaAssociations, $rootScope.getPersonCounts);
-
                 }
                 $rootScope.getMedias();
-                app.closeView('personMediaEdit');
+                $timeout(function () {
+                    return app.closeView('personMediaEdit');
+                }, 3000);
             });
         }
 
         $scope.saveMedia = function () {
             if ($rootScope.editedMedia.id_MediaType === 2 && typeof $scope.file != 'string')
                 personService.uploadImage($scope.file, function (data) {
+                    //TODO show msg
                     save(`${serviceUrl}${data.path}`);
                 });
             else save($scope.file_video);
@@ -99,5 +102,5 @@
         .module('app')
         .controller('PersonMediaEditController', PersonMediaEditController);
 
-    PersonMediaEditController.$inject = ['$rootScope', '$scope', 'personService', 'eventService', '$filter'];
+    PersonMediaEditController.$inject = ['$rootScope', '$scope', 'personService', 'eventService', '$filter', '$timeout'];
 })();

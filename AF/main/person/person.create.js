@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function PersonCreatController($rootScope, $scope, personService) {
+    function PersonCreatController($rootScope, $scope, $timeout, personService) {
         var vm = this;
         $scope.sexes = [{ id: 0, name: "Мужской" }, { id: 1, name: "Женский" }];
         $scope.person = { Id: 0 };
@@ -23,7 +23,10 @@
             console.log($scope.person);
             personService.Save($scope.person, function (data) {
                 personService.getPersons();
-                app.closeView('personEdit');
+                //TODO show msg
+                $timeout(function () {
+                    return app.closeView('personEdit');
+                }, 3000);
             });
         }
         $scope.open1 = function () {
@@ -39,5 +42,5 @@
         .module('app')
         .controller('PersonCreatController', PersonCreatController);
 
-    PersonCreatController.$inject = ['$rootScope', '$scope', 'personService'];
+    PersonCreatController.$inject = ['$rootScope', '$scope', '$timeout', 'personService'];
 })();

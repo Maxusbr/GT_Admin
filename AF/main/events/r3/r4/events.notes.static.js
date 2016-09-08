@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function eventsNotesStaticController($rootScope, $cookieStore, $scope, $filter, eventService) {
+    function eventsNotesStaticController($rootScope, $cookieStore, $scope, $filter, eventService, $timeout) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
@@ -12,7 +12,9 @@
 
         function saveTizerTags() {
             if ($scope.tizerTags.length && $scope.staticDescription.Id > 0)
-                eventService.saveTags($scope.staticDescription.Id, $scope.tizerTags, 'tizer');
+                eventService.saveTags($scope.staticDescription.Id, $scope.tizerTags, 'tizer', function(data) {
+                //TODO show msg                    
+                });
         }
 
         $scope.savePersonNotesStatic = function () {
@@ -20,10 +22,13 @@
             $scope.staticDescription.id_Person = $rootScope.personId;
             $scope.staticDescription.id_DescriptionType = 2;
             eventService.saveEntity($scope.tizerId, $scope.staticDescription, 'description', function (data) {
+                //TODO show msg
                 $scope.staticDescription.Id = data;
                 saveTizerTags();
                 $rootScope.getDescript();
-                app.closeView('disPersonNotesStatic');
+                $timeout(function () {
+                    return app.closeView('disPersonNotesStatic');
+                }, 3000);
             });
         }
 
@@ -57,5 +62,5 @@
         .module('app')
         .controller('eventsNotesStaticController', eventsNotesStaticController);
 
-    eventsNotesStaticController.$inject = ['$rootScope', '$cookieStore', '$scope', '$filter', 'personService'];
+    eventsNotesStaticController.$inject = ['$rootScope', '$cookieStore', '$scope', '$filter', 'eventService', '$timeout'];
 })();

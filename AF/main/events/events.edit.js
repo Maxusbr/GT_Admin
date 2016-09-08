@@ -80,11 +80,13 @@
             if ($scope.selectedOrganizer)
                 $scope.event.IdCompany = $scope.selectedOrganizer.Id;
             eventService.Save($scope.event, function (data) {
-                
+                //TODO show msg
                 $rootScope.loadEvent();
                 if ($rootScope.getEvent)
                     $rootScope.getEvent($scope.event.Id);
-                app.closeView('eventEdit');
+                $timeout(function () {
+                    return app.closeView('eventEdit');
+                }, 3000);
             });
         }
 
