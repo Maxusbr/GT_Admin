@@ -54,7 +54,9 @@
             $scope.part.TimeStart = `${$scope.timeStart.getHours()}:${$scope.timeStart.getMinutes()}`;
             $scope.part.TimeEnd = `${$scope.timeEnd.getHours()}:${$scope.timeEnd.getMinutes()}`;
             concertService.saveProgramm($scope.part, function (data) {
-            //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $scope.part.Id = data.programmid;
                 if ($rootScope.saveActorPart) {
                     $rootScope.saveActorPart($scope.part);

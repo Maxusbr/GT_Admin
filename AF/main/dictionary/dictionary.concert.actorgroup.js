@@ -9,7 +9,9 @@
         $scope.saveChanges = function () {
             if (vm.editItem)
                 concertService.saveActorGroup(vm.editItem, function (data) {
-                    //TODO show msg
+                    $scope.errorYes = data.status !== "success";
+                    $scope.message = data.result;
+                    $scope.showMessage = true;
                     $rootScope.getGroups();
                     $timeout(function () {
                         return app.closeView('disoncertActorGroup');

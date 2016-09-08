@@ -29,7 +29,7 @@
         }
         getCountries('');
 
-        $scope.getCountry = function(value) {
+        $scope.getCountry = function (value) {
             return $scope.countries.filter(function (item) {
                 return !value || item.Name.indexOf(value) >= 0;
             }).map(function (el) {
@@ -40,7 +40,7 @@
             //});
         }
 
-        $scope.$watch('countryName', function(data) {
+        $scope.$watch('countryName', function (data) {
             if (!data || typeof data === "string") return;
             countryId = data.Id;
             $scope.countryName = data.Name;
@@ -48,14 +48,16 @@
 
         $scope.savePlace = function () {
             if (countryId > 0)
-                $scope.placeName.IdCountry = countryId;
-            personService.saveCountryPlace($scope.placeName, function (data) {
-                //TODO show msg
-                app.closeFive();
-                $timeout(function () {
-                    return app.closeView('DictionaryConcertCityController');
-                }, 3000);
-            });
+                $scope.placeName.IdCountry =
+                countryId; personService.saveCountryPlace($scope.placeName, function (id) {
+                    $scope.errorYes = id <= 0;
+                    $scope.message = id > 0 ? 'Save "complete' : 'Error save';
+                    $scope.showMessage = true;
+                    app.closeFive(); $timeout(function () {
+                        return app.closeView('DictionaryConcertCityController');
+                    },
+                    3000);
+                });
         }
     }
 

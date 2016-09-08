@@ -22,7 +22,9 @@
 
         $scope.saveActor = function () {
             concertService.saveActor($scope.actor, function (data) {
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.getProgramms($rootScope.concertId);
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($rootScope.concertId);

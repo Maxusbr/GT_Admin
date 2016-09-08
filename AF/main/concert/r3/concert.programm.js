@@ -85,7 +85,9 @@
 
         function update(model) {
             concertService.updateConcert(model, function (data) {
-            //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.getConcert($rootScope.concertId);
                 app.closeFour();
                 

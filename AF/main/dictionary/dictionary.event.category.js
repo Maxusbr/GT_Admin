@@ -44,7 +44,10 @@
         $scope.saveCategories = function (cat) {
             if (!cat.Name) return;
             eventService.SaveCategory(cat, function (data) {
-                //TODO show msg
+                var res = !data || data.Id <= 0;
+                $scope.errorYes = res;
+                $scope.message = res ? 'Error save': 'Save complete';
+                $scope.showMessage = true;
                 cat = {}
                 eventService.getCategories(function (data) {
                     $rootScope.eventCategories = data;

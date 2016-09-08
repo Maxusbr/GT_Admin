@@ -16,10 +16,11 @@
         $scope.editItem = { Name: "" };
 
         $scope.saveChanges = function () {
-            //TODO: save changes to server
             var list = [$scope.editItem];
             personService.saveEntitieTypes(list, 'social', function (data) {
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.getLinkTypes();
                 $timeout(function () {
                     return $rootScope.closeMe('disDicPersonLinks');

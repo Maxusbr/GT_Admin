@@ -85,9 +85,6 @@
         }
 
         $rootScope.savePersonNotesSource = function() {
-            //TODO: save changes or create new source
-            //TODO: update notes list
-            //TODO: close this window
             if (!$rootScope.editDescriptionId)$rootScope.editDescriptionId = 0;
             personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.personId, $rootScope.pageSchema, function () {
                 //TODO show msg

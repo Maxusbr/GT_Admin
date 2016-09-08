@@ -16,9 +16,6 @@
         }
 
         $scope.savePersonNotesTizer = function () {
-            //TODO: save changes
-            //TODO: update notes table
-            //TODO: close window
             $scope.tizer.id_Person = $rootScope.personId;
             $scope.tizer.id_DescriptionType = 1;
             personService.saveEntity(0, $scope.tizer, 'description', function (data) {

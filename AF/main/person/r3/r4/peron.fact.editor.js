@@ -6,10 +6,6 @@
 
         $rootScope.saveFact = function save_fact() {
             console.log('save fact click');
-            //TODO: save changes or create new
-            //TODO: close this view
-            //TODO: refresh facts table
-
             $rootScope.editedFact.id_Person = $rootScope.personId;
             personService.saveEntity($rootScope.personId, $rootScope.editedFact, 'fact', function (data) {
                 //TODO show msg

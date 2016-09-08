@@ -78,7 +78,9 @@
             $scope.concert.ConcertPlaceId = vm.concertPlaceId;
             $scope.concert.HallId = vm.hallId;
             concertService.saveConcert($scope.concert, function (data) {
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.loadConcerts();
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);

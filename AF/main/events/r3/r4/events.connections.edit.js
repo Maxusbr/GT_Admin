@@ -10,8 +10,10 @@
             $rootScope.editedConnection.Person = null;
             $rootScope.editedConnection.id_Event = $rootScope.eventId;
             console.log($rootScope.editedConnection);
-            $scope.Promise = eventService.saveEntity($rootScope.eventId, $rootScope.editedConnection, 'connection', function (data) {
-                //TODO show msg
+            $scope.Promise = eventService.saveEntity($rootScope.eventId, $rootScope.editedConnection, 'connection', function (id) {
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save': 'Save complete';
+                $scope.showMessage = true;
                 $rootScope.getEventConnection();
                 $timeout(function () {
                     return app.closeView('eventConnectionCreate');

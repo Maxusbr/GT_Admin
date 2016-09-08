@@ -201,8 +201,8 @@ namespace Getticket.Web.API.Services
         /// <see cref="IConcertService.SaveActor"/>
         public ServiceResponce SaveActor(ActorModel model)
         {
-            var succes = ServiceResponce.FromSuccess().Result("Concert tickets save complete");
-            var error = ServiceResponce.FromFailed().Result($"Error save concert tickets");
+            var succes = ServiceResponce.FromSuccess().Result("Actor save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save actor");
             var res = _concertRepository.AddActor(ConcertModelHelper.GetActor(model));
             if (res != null)
                 succes.Add("ActorId", res.Id);
@@ -221,10 +221,10 @@ namespace Getticket.Web.API.Services
             var res = _concertRepository.SaveGroup(ConcertModelHelper.GetActorGroup(model));
             var response = res != null ? ServiceResponce
                 .FromSuccess()
-                .Result("Event delete") :
+                .Result("Actor group save") :
                 ServiceResponce
                 .FromFailed()
-                .Result("Error delete event");
+                .Result("Error save actor group");
             if (res != null)
                 response.Add("GroupId", res.Id);
             return response;

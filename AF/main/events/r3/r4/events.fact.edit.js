@@ -8,8 +8,10 @@
             console.log('save fact click, event - ' + $rootScope.eventId);
 
             $rootScope.editedFact.id_Event = $rootScope.eventId;
-            eventService.saveEntity($rootScope.eventId, $rootScope.editedFact, 'fact', function (data) {
-                //TODO show msg
+            eventService.saveEntity($rootScope.eventId, $rootScope.editedFact, 'fact', function (id) {
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
                 $rootScope.getFacts();
                 $timeout(function () {
                     return app.closeView('personFactCreate');

@@ -4,7 +4,7 @@
     function EventsEditController($rootScope, $scope, eventService, $filter, $timeout) {
         var vm = this;
 
-        
+
         vm.organizers = [];
 
         $scope.showMessage = false;
@@ -57,7 +57,7 @@
         }
 
         //Organizer
-        $rootScope.getOrganizers = function() {
+        $rootScope.getOrganizers = function () {
             eventService.getOrganizers(function (data) {
                 vm.organizers = [];
                 vm.organizers.push.apply(vm.organizers, data);
@@ -80,7 +80,9 @@
             if ($scope.selectedOrganizer)
                 $scope.event.IdCompany = $scope.selectedOrganizer.Id;
             eventService.Save($scope.event, function (data) {
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.loadEvent();
                 if ($rootScope.getEvent)
                     $rootScope.getEvent($scope.event.Id);
@@ -90,9 +92,9 @@
             });
         }
 
-        $scope.validFuncNumber = function(fild) {
-            
-        } 
+        $scope.validFuncNumber = function (fild) {
+
+        }
 
         // Datepicker
         $scope.dateOptions = {
@@ -117,7 +119,7 @@
 
         $scope.ageLimits = [0, 6, 12, 16, 18];
 
-        
+
     }
 
     angular

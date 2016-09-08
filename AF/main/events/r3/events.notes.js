@@ -118,9 +118,14 @@
 
         $scope.saveEventTags = function() {
             if ($scope.genres.length) {
-                eventService.saveTags($scope.eventId, $scope.categoryTags, 'event', function(deta) {
-                    eventService.saveTags($scope.eventId, $scope.genres, 'genre', function (deta) {
-                        //TODO show msg
+                eventService.saveTags($scope.eventId, $scope.categoryTags, 'event', function (data) {
+                    $scope.errorYes = data.status !== "success";
+                    $scope.message = data.result;
+                    $scope.showMessage = true;
+                    eventService.saveTags($scope.eventId, $scope.genres, 'genre', function (data) {
+                        $scope.errorYes = data.status !== "success";
+                        $scope.message = data.result;
+                        $scope.showMessage = true;
                     });
                 });
             }

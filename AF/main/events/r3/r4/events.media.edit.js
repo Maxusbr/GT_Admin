@@ -36,7 +36,9 @@
             $rootScope.editedMedia.id_Event = $rootScope.eventId;
             $rootScope.editedMedia.MediaLink = path;
             eventService.saveEntity($rootScope.eventId, $rootScope.editedMedia, 'media', function (id) {
-                //TODO show msg
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
                 if (id > 0 && mediaAssociations.length > 0) {
                     eventService.saveMediaLinks(id, mediaAssociations);
                 }
@@ -52,8 +54,14 @@
             console.log($scope.file);
             if ($rootScope.editedMedia.id_MediaType === 2 && typeof $scope.file != 'string')
                 personService.uploadImage($scope.file, function (data) {
-                    //TODO show msg
-                    save(`${serviceUrl}${data.path}`);
+                    $scope.errorYes = !data.path;
+                    if (data.path) {
+                        $scope.message = 'Save complete';
+                        save(`${serviceUrl}${data.path}`);
+                    } else {
+                        $scope.message = 'Error save: ' + data;
+                    }
+                    $scope.showMessage = true;
                 });
             else save($scope.file_video);
         }

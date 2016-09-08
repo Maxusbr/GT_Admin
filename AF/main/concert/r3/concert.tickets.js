@@ -62,7 +62,9 @@
             $scope.ticket.TimeStart = `${$scope.timeStart.getHours()}:${$scope.timeStart.getMinutes()}`;
             $scope.ticket.TimeEnd = `${$scope.timeEnd.getHours()}:${$scope.timeEnd.getMinutes()}`;
             concertService.saveTickets($scope.ticket, function(data) {
-            //TODO Show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.loadConcerts();
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);

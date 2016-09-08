@@ -35,7 +35,9 @@
             if (!place.Name) return;
             place.PlaceId = $scope.place.Id;
             concertService.saveConcertPlace(place, function (data) {
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 place = {}
                 $rootScope.getHalls($scope.place.Id);
             });
@@ -44,7 +46,9 @@
             if (!place.Name || !$scope.concertPlace.Id) return;
             place.PlaceId = $scope.concertPlace.Id;
             concertService.saveHall(place, function (data) {
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 place = {}
                 $rootScope.getHalls($scope.place.Id);
             });
