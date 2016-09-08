@@ -3,9 +3,13 @@
 
     function EventsConnectionsEditController($rootScope, $scope, eventService, personService, $timeout) {
         var vm = this;
-
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = 'Error';
+        
         $rootScope.saveConnection = function () {
             console.log('save connection click');
+            $scope.showMessage = true;
             $rootScope.editedConnection.EventConnectTo = null;
             $rootScope.editedConnection.Person = null;
             $rootScope.editedConnection.id_Event = $rootScope.eventId;

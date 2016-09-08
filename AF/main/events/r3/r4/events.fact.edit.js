@@ -3,10 +3,13 @@
 
     function EventsFactEditController($rootScope, $scope, eventService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = 'Error';
 
         $rootScope.saveFact = function save_fact() {
             console.log('save fact click, event - ' + $rootScope.eventId);
-
+            $scope.showMessage = true;
             $rootScope.editedFact.id_Event = $rootScope.eventId;
             eventService.saveEntity($rootScope.eventId, $rootScope.editedFact, 'fact', function (id) {
                 $scope.errorYes = id <= 0;

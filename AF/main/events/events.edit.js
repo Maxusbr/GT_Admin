@@ -75,6 +75,7 @@
         }
 
         $scope.saveEvent = function () {
+            $scope.showMessage = true;
             if ($scope.event.AgeLimit)
                 $scope.event.AgeLimit = parseInt($scope.event.AgeLimit, 10);
             if ($scope.selectedOrganizer)
@@ -90,6 +91,7 @@
                     return app.closeView('eventEdit');
                 }, 3000);
             });
+
         }
 
         $scope.validFuncNumber = function (fild) {

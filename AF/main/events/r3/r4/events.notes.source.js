@@ -3,6 +3,9 @@
 
     function eventsNotesSourceController($rootScope, $scope, eventService, personService, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = 'Error';
 
         if (!$rootScope.pageSchema.Page)
             $rootScope.pageSchema.Page = {};
@@ -84,6 +87,7 @@
 
 
         $rootScope.saveEventNotesSource = function () {
+            $scope.showMessage = true;
             if (!$rootScope.editDescriptionId) $rootScope.editDescriptionId = 0;
             eventService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.eventId, $rootScope.pageSchema, function () {
                 //TODO show msg

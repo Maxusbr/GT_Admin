@@ -3,6 +3,9 @@
 
     function EventsNotesController($rootScope, $scope, eventService, personService, $filter, $timeout) {
         var vm = this;
+        $scope.showMessage = false;
+        $scope.errorYes = false;
+        $scope.message = 'Error';
         if (!$rootScope.persons)
             $scope.Promise = personService.getPersons();
 
@@ -128,6 +131,7 @@
                         $scope.showMessage = true;
                     });
                 });
+                $scope.showMessage = true;
             }
         }
     }
