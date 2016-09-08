@@ -76,7 +76,7 @@
 
         $scope.saveEvent = function () {
             $scope.showMessage = true;
-
+            
             $scope.timeout_save = $timeout(function(){
                 if ($scope.event.AgeLimit)
                   $scope.event.AgeLimit = parseInt($scope.event.AgeLimit, 10);
