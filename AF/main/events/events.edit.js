@@ -7,7 +7,7 @@
         
         vm.organizers = [];
 
-        $scope.showMessage = true;
+        $scope.showMessage = false;
         $scope.errorYes = false;
         $scope.message = 'Error';
 
@@ -75,17 +75,23 @@
         }
 
         $scope.saveEvent = function () {
-            if ($scope.event.AgeLimit)
-                $scope.event.AgeLimit = parseInt($scope.event.AgeLimit, 10);
-            if ($scope.selectedOrganizer)
-                $scope.event.IdCompany = $scope.selectedOrganizer.Id;
-            eventService.Save($scope.event, function (data) {
-                
-                $rootScope.loadEvent();
-                if ($rootScope.getEvent)
-                    $rootScope.getEvent($scope.event.Id);
-                app.closeView('eventEdit');
-            });
+            $scope.showMessage = true;
+
+            $scope.timeout_save = $timeout(function(){
+                if ($scope.event.AgeLimit)
+                  $scope.event.AgeLimit = parseInt($scope.event.AgeLimit, 10);
+                if ($scope.selectedOrganizer)
+                    $scope.event.IdCompany = $scope.selectedOrganizer.Id;
+                    eventService.Save($scope.event, function (data) {
+                        $rootScope.loadEvent();
+                        if ($rootScope.getEvent)
+                            $rootScope.getEvent($scope.event.Id);
+                        app.closeView('eventEdit');
+                    });
+            }, 3000);
+
+            $scope.timeout_save;
+            
         }
 
         $scope.validFuncNumber = function(fild) {
