@@ -7,8 +7,10 @@
         function save(path) {
             $rootScope.editedMedia.MediaLink = path;
             $rootScope.editedMedia.id_Person = $rootScope.personId;
-            personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (data) {
-                //TODO show msg
+            personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (id) {
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
                 $rootScope.getMedias();
                 $timeout(function () {
                     return app.closeView('personMediaCreate');
@@ -21,7 +23,14 @@
             if (!$scope.file) return;
             if ($rootScope.editedMedia.id_MediaType === 2 && typeof $scope.file != 'string')
                 personService.uploadImage($scope.file, function (data) {
-                    save(`${serviceUrl}${data.path}`);
+                    $scope.errorYes = !data.path;
+                    if (data.path) {
+                        $scope.message = 'Save complete';
+                        save(`${serviceUrl}${data.path}`);
+                    } else {
+                        $scope.message = 'Error save: ' + data;
+                    }
+                    $scope.showMessage = true;
                 });
             else save($scope.file);
         }

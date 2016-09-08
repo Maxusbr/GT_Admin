@@ -12,16 +12,22 @@
 
         function saveTizerTags() {
             if ($scope.tizerTags.length && $scope.staticDescription.Id > 0)
-                personService.saveTags($scope.staticDescription.Id, $scope.tizerTags, 'tizer');
+                personService.saveTags($scope.staticDescription.Id, $scope.tizerTags, 'tizer', function (data) {
+                    $scope.errorYes = data.status !== "success";
+                    $scope.message = data.result;
+                    $scope.showMessage = true;
+                });
         }
 
         $scope.savePersonNotesStatic = function () {
 
             $scope.staticDescription.id_Person = $rootScope.personId;
             $scope.staticDescription.id_DescriptionType = 2;
-            personService.saveEntity($scope.tizerId, $scope.staticDescription, 'description', function (data) {
-                //TODO show msg
-                $scope.staticDescription.Id = data;
+            personService.saveEntity($scope.tizerId, $scope.staticDescription, 'description', function (id) {
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
+                $scope.staticDescription.Id = id;
                 saveTizerTags();
                 $rootScope.getDescript();
                 if ($rootScope.getPersonCounts)

@@ -13,7 +13,9 @@
         function saveTizerTags() {
             if ($scope.tizerTags.length && $scope.staticDescription.Id > 0)
                 eventService.saveTags($scope.staticDescription.Id, $scope.tizerTags, 'tizer', function(data) {
-                //TODO show msg                    
+                    $scope.errorYes = data.status !== "success";
+                    $scope.message = data.result;
+                    $scope.showMessage = true;
                 });
         }
 
@@ -21,9 +23,11 @@
 
             $scope.staticDescription.id_Person = $rootScope.personId;
             $scope.staticDescription.id_DescriptionType = 2;
-            eventService.saveEntity($scope.tizerId, $scope.staticDescription, 'description', function (data) {
-                //TODO show msg
-                $scope.staticDescription.Id = data;
+            eventService.saveEntity($scope.tizerId, $scope.staticDescription, 'description', function (id) {
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
+                $scope.staticDescription.Id = id;
                 saveTizerTags();
                 $rootScope.getDescript();
                 $timeout(function () {

@@ -87,7 +87,9 @@
         $rootScope.savePersonNotesSource = function() {
             if (!$rootScope.editDescriptionId)$rootScope.editDescriptionId = 0;
             personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.personId, $rootScope.pageSchema, function () {
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.getDescript();
                 $timeout(function () {
                     return app.closeView('disPersonNotesSource');

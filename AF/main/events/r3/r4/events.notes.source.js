@@ -90,7 +90,9 @@
             $scope.showMessage = true;
             if (!$rootScope.editDescriptionId) $rootScope.editDescriptionId = 0;
             eventService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.eventId, $rootScope.pageSchema, function () {
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.getDescript();
                 $timeout(function () {
                     return app.closeView('disEventNotesSource');

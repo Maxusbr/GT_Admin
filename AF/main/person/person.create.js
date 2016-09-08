@@ -23,7 +23,9 @@
             console.log($scope.person);
             personService.Save($scope.person, function (data) {
                 personService.getPersons();
-                //TODO show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $timeout(function () {
                     return app.closeView('personEdit');
                 }, 3000);

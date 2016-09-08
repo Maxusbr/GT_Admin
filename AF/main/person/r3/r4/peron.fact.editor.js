@@ -7,8 +7,10 @@
         $rootScope.saveFact = function save_fact() {
             console.log('save fact click');
             $rootScope.editedFact.id_Person = $rootScope.personId;
-            personService.saveEntity($rootScope.personId, $rootScope.editedFact, 'fact', function (data) {
-                //TODO show msg
+            personService.saveEntity($rootScope.personId, $rootScope.editedFact, 'fact', function (id) {
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
                 $rootScope.getFacts();

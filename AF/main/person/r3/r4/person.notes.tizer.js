@@ -12,7 +12,11 @@
 
         function saveTizerTags() {
             if ($scope.tizerTags.length && $scope.tizer.Id > 0)
-                personService.saveTags($scope.tizer.Id, $scope.tizerTags, 'tizer');
+                personService.saveTags($scope.tizer.Id, $scope.tizerTags, 'tizer', function (data) {
+                    $scope.errorYes = data.status !== "success";
+                    $scope.message = data.result;
+                    $scope.showMessage = true;
+                });
         }
 
         $scope.savePersonNotesTizer = function () {
@@ -22,8 +26,10 @@
                 $scope.tizer.Id = data;
                 saveTizerTags();
                 if ($rootScope.editableDesc.id_DescriptionType === 2 && $scope.tizer.Id > 0)
-                    personService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (data) {
-                        //TODO show msg
+                    personService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (id) {
+                        $scope.errorYes = id <= 0;
+                        $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                        $scope.showMessage = true;
                         $rootScope.getDescript();
                         $timeout(function () {
                             return app.closeView('disPersonNotesTizer');
@@ -31,7 +37,9 @@
                     });
                 else {
                     $rootScope.getDescript();
-                    app.closeView('disPersonNotesTizer');
+                    $timeout(function () {
+                        return app.closeView('disPersonNotesTizer');
+                    }, 3000);
                 }
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();

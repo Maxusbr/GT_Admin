@@ -12,20 +12,28 @@
 
         function saveTizerTags() {
             if ($scope.tizerTags.length && $scope.tizer.Id > 0)
-                eventService.saveTags($scope.tizer.Id, $scope.tizerTags, 'tizer');
+                eventService.saveTags($scope.tizer.Id, $scope.tizerTags, 'tizer', function (data) {
+                    $scope.errorYes = data.status !== "success";
+                    $scope.message = data.result;
+                    $scope.showMessage = true;
+                });
         }
 
         $scope.savePersonNotesTizer = function () {
 
             $scope.tizer.id_Person = $rootScope.personId;
             $scope.tizer.id_DescriptionType = 1;
-            eventService.saveEntity(0, $scope.tizer, 'description', function (data) {
-                //TODO: show msg
-                $scope.tizer.Id = data;
+            eventService.saveEntity(0, $scope.tizer, 'description', function (id) {
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
+                $scope.tizer.Id = id;
                 saveTizerTags();
                 if ($rootScope.editableDesc.id_DescriptionType === 2 && $scope.tizer.Id > 0)
-                    eventService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (data) {
-                        //TODO: show msg
+                    eventService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (id) {
+                        $scope.errorYes = id <= 0;
+                        $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                        $scope.showMessage = true;
                         $rootScope.getDescript();
                         $timeout(function () {
                             return app.closeView('disEventnNotesTizer');
@@ -33,7 +41,9 @@
                     });
                 else {
                     $rootScope.getDescript();
-                    app.closeView('disEventnNotesTizer');
+                    $timeout(function () {
+                        return app.closeView('disEventnNotesTizer');
+                    }, 3000);
                 }
             });
         }

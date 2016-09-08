@@ -84,8 +84,10 @@
             $rootScope.editedConnection.PersonConnectTo = null;
             $rootScope.editedConnection.id_Person = $rootScope.personId;
             console.log($rootScope.editedConnection);
-            personService.saveEntity($rootScope.personId, $rootScope.editedConnection, 'connection', function (data) {
-            //TODO show msg
+            personService.saveEntity($rootScope.personId, $rootScope.editedConnection, 'connection', function (id) {
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
                 $rootScope.getPersonConnection();

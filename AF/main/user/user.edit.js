@@ -42,7 +42,9 @@
 
         $scope.save = function () {
             userService.Update($scope.user).then(function (data) {
-                //TODO show msg
+                $scope.errorYes = data.success;
+                $scope.message = data.success ? data.message : 'Save complete';
+                $scope.showMessage = true;
                 if (data.success) {
                     userService.getListUsers();
                     var promiseObj = $timeout(function () {

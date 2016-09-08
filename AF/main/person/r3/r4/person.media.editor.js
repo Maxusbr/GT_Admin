@@ -5,7 +5,7 @@
         var vm = this;
 
         $scope.file = $rootScope.editedMedia.MediaLink;
-        $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink: 'https://www.youtube.com/watch?v=undefined';
+        $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink : 'https://www.youtube.com/watch?v=undefined';
         $scope.embed = '//img.youtube.com/vi/undefined';
 
         $scope.association = { types: 'person' }
@@ -20,7 +20,7 @@
             $scope.personeRange = [];
             $scope.eventRange = [];
         }
-        
+
         $scope.videoPreview = function () {
             $scope.youtube_link = $scope.file_video.split('v=');
             // $scope.embed_link = $scope.youtube_link[1];
@@ -31,7 +31,9 @@
             $rootScope.editedMedia.id_Person = $rootScope.personId;
             $rootScope.editedMedia.MediaLink = path;
             personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (id) {
-                //TODO show msg
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
                 if (id > 0 && mediaAssociations.length > 0) {
                     personService.saveMediaLinks(id, mediaAssociations, $rootScope.getPersonCounts);
                 }
@@ -45,8 +47,14 @@
         $scope.saveMedia = function () {
             if ($rootScope.editedMedia.id_MediaType === 2 && typeof $scope.file != 'string')
                 personService.uploadImage($scope.file, function (data) {
-                    //TODO show msg
-                    save(`${serviceUrl}${data.path}`);
+                    $scope.errorYes = !data.path;
+                    if (data.path) {
+                        $scope.message = 'Save complete';
+                        save(`${serviceUrl}${data.path}`);
+                    } else {
+                        $scope.message = 'Error save: ' + data;
+                    }
+                    $scope.showMessage = true;
                 });
             else save($scope.file_video);
         }

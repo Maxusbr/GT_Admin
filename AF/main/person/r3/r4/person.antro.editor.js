@@ -35,8 +35,11 @@
             $rootScope.editedAntro.IdPerson = $rootScope.personId;
 
             personService.saveEntity($rootScope.personId, $rootScope.editedAntro, 'antro', function (id) {
-                //TODO show msg
+                $scope.errorYes = id <= 0;
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
+                $scope.showMessage = true;
                 if (id > 0 && antroAssociations.length > 0) {
+                    //TODO change metod
                     antroAssociations.forEach(function (item) {
                         personService.saveAntroLink(id, item.Id, item.type);
                     });

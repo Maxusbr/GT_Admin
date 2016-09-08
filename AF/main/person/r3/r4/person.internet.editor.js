@@ -23,7 +23,9 @@
             
             var list = [$rootScope.editedModel];
             personService.saveEntities($rootScope.personId, list, 'social', $rootScope.getLinks, function (data) {
-                //TODO: show msg
+                $scope.errorYes = data.status !== "success";
+                $scope.message = data.result;
+                $scope.showMessage = true;
                 $rootScope.getPersonCounts();
                 $timeout(function () {
                     return $rootScope.closeMe('personInternetCreate');

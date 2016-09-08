@@ -42,8 +42,10 @@
 
         $scope.save = function () {
             userService.registerUser($scope.user, function (data) {
-                //TODO show msg
-                if (data.status === 'success') {
+                $scope.errorYes = data.success;
+                $scope.message = data.success ? data.message : 'Save complete';
+                $scope.showMessage = true;
+                if (data.success) {
                     userService.getListUsers();
                     var promiseObj = $timeout(function () {
                         return app.closeView('userCreate');
