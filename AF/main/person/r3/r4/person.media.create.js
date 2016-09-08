@@ -1,15 +1,19 @@
 ﻿(function () {
     'use strict';
 
-    function PersonMediaCreateController($rootScope, $scope, personService, $filter) {
+    function PersonMediaCreateController($rootScope, $scope, personService, $filter, $timeout) {
         var vm = this;
 
         function save(path) {
             $rootScope.editedMedia.MediaLink = path;
             $rootScope.editedMedia.id_Person = $rootScope.personId;
             personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (data) {
+                //TODO show msg
                 $rootScope.getMedias();
-                app.closeView('personMediaCreate');
+                $timeout(function () {
+                    return app.closeView('personMediaCreate');
+                }, 3000);
+                
             });
         }
 
@@ -41,5 +45,5 @@
         .module('app')
         .controller('PersonMediaCreateController', PersonMediaCreateController);
 
-    PersonMediaCreateController.$inject = ['$rootScope', '$scope', 'personService', '$filter'];
+    PersonMediaCreateController.$inject = ['$rootScope', '$scope', 'personService', '$filter', '$timeout'];
 })();

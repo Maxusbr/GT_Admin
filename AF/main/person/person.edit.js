@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function PersonEditController($rootScope, $scope, personService) {
+    function PersonEditController($rootScope, $scope, $timeout, personService) {
         var vm = this;
         $scope.Id = $rootScope.personId;
         $scope.Promise = personService.getPerson($scope.Id, function (data) {
@@ -27,8 +27,11 @@
             }
             
             personService.Save($scope.person, function (data) {
+                //TODO show msg
                 $rootScope.getPerson($scope.Id);
-                app.closeView('personEdit');
+                $timeout(function () {
+                    return app.closeView('personEdit');
+                }, 3000);
             });
         }
 
@@ -59,5 +62,5 @@
         .module('app')
         .controller('PersonEditController', PersonEditController);
 
-    PersonEditController.$inject = ['$rootScope', '$scope', 'personService'];
+    PersonEditController.$inject = ['$rootScope', '$scope', '$timeout', 'personService'];
 })();

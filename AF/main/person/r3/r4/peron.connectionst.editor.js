@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function PersonConnectionstEditorController($rootScope, $scope, $filter, personService) {
+    function PersonConnectionstEditorController($rootScope, $scope, $filter, personService, $timeout) {
         var vm = this;
 
         function getConnectionId() {
@@ -85,10 +85,14 @@
             $rootScope.editedConnection.id_Person = $rootScope.personId;
             console.log($rootScope.editedConnection);
             personService.saveEntity($rootScope.personId, $rootScope.editedConnection, 'connection', function (data) {
+            //TODO show msg
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
                 $rootScope.getPersonConnection();
-                app.closeView('personConnectionEdit');
+                $timeout(function () {
+                    return app.closeView('personConnectionEdit');
+                }, 3000);
+                
             });
         }
     }
@@ -97,5 +101,5 @@
         .module('app')
         .controller('PersonConnectionstEditorController', PersonConnectionstEditorController);
 
-    PersonConnectionstEditorController.$inject = ['$rootScope', '$scope', '$filter', 'personService'];
+    PersonConnectionstEditorController.$inject = ['$rootScope', '$scope', '$filter', 'personService', '$timeout'];
 })();

@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function PersonFactEditorController($rootScope, $scope, personService) {
+    function PersonFactEditorController($rootScope, $scope, personService, $timeout) {
         var vm = this;
 
         $rootScope.saveFact = function save_fact() {
@@ -12,10 +12,14 @@
 
             $rootScope.editedFact.id_Person = $rootScope.personId;
             personService.saveEntity($rootScope.personId, $rootScope.editedFact, 'fact', function (data) {
+                //TODO show msg
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
                 $rootScope.getFacts();
-                app.closeView('personFactEdit');
+                $timeout(function () {
+                    return app.closeView('personFactEdit');
+                }, 3000);
+                
             });
         }
 
@@ -32,5 +36,5 @@
         .module('app')
         .controller('PersonFactEditorController', PersonFactEditorController);
 
-    PersonFactEditorController.$inject = ['$rootScope', '$scope', 'personService'];
+    PersonFactEditorController.$inject = ['$rootScope', '$scope', 'personService', '$timeout'];
 })();

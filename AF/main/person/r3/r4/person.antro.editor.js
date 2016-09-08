@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function personAntroEditorController($rootScope, $scope, eventService, personService) {
+    function personAntroEditorController($rootScope, $scope, eventService, personService, $timeout) {
         var vm = this;
 
 
@@ -35,13 +35,16 @@
             $rootScope.editedAntro.IdPerson = $rootScope.personId;
 
             personService.saveEntity($rootScope.personId, $rootScope.editedAntro, 'antro', function (id) {
+                //TODO show msg
                 if (id > 0 && antroAssociations.length > 0) {
                     antroAssociations.forEach(function (item) {
                         personService.saveAntroLink(id, item.Id, item.type);
                     });
                 }
                 $rootScope.getAntros();
-                app.closeView('disAntroEditor');
+                $timeout(function () {
+                    return $rootScope.app.closeView('disAntroEditor');
+                }, 3000);
             });
         }
 
@@ -82,5 +85,5 @@
         .module('app')
         .controller('personAntroEditorController', personAntroEditorController);
 
-    personAntroEditorController.$inject = ['$rootScope', '$scope', 'eventService', 'personService'];
+    personAntroEditorController.$inject = ['$rootScope', '$scope', 'eventService', 'personService', '$timeout'];
 })();

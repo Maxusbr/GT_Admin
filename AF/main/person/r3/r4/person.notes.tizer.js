@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function personNotesTizerController($rootScope, $cookieStore, $scope, $filter, personService) {
+    function personNotesTizerController($rootScope, $cookieStore, $scope, $filter, $timeout, personService) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
@@ -26,8 +26,11 @@
                 saveTizerTags();
                 if ($rootScope.editableDesc.id_DescriptionType === 2 && $scope.tizer.Id > 0)
                     personService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (data) {
+                        //TODO show msg
                         $rootScope.getDescript();
-                        app.closeView('disPersonNotesTizer');
+                        $timeout(function () {
+                            return app.closeView('disPersonNotesTizer');
+                        }, 3000);
                     });
                 else {
                     $rootScope.getDescript();
@@ -69,5 +72,5 @@
         .module('app')
         .controller('personNotesTizerController', personNotesTizerController);
 
-    personNotesTizerController.$inject = ['$rootScope', '$cookieStore', '$scope', '$filter', 'personService'];
+    personNotesTizerController.$inject = ['$rootScope', '$cookieStore', '$scope', '$filter', '$timeout', 'personService'];
 })();

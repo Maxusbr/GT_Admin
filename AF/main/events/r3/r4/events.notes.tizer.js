@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function eventNotesTizerController($rootScope, $cookieStore, $scope, $filter, eventService) {
+    function eventNotesTizerController($rootScope, $cookieStore, $scope, $filter, eventService, $timeout) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
@@ -16,18 +16,20 @@
         }
 
         $scope.savePersonNotesTizer = function () {
-            //TODO: save changes
-            //TODO: update notes table
-            //TODO: close window
+
             $scope.tizer.id_Person = $rootScope.personId;
             $scope.tizer.id_DescriptionType = 1;
             eventService.saveEntity(0, $scope.tizer, 'description', function (data) {
+                //TODO: show msg
                 $scope.tizer.Id = data;
                 saveTizerTags();
                 if ($rootScope.editableDesc.id_DescriptionType === 2 && $scope.tizer.Id > 0)
                     eventService.saveEntity($scope.tizer.Id, $rootScope.editableDesc, 'description', function (data) {
+                        //TODO: show msg
                         $rootScope.getDescript();
-                        app.closeView('disEventnNotesTizer');
+                        $timeout(function () {
+                            return app.closeView('disEventnNotesTizer');
+                        }, 3000);
                     });
                 else {
                     $rootScope.getDescript();
@@ -67,5 +69,5 @@
         .module('app')
         .controller('eventNotesTizerController', eventNotesTizerController);
 
-    eventNotesTizerController.$inject = ['$rootScope', '$cookieStore', '$scope', '$filter', 'eventService'];
+    eventNotesTizerController.$inject = ['$rootScope', '$cookieStore', '$scope', '$filter', 'eventService', '$timeout'];
 })();

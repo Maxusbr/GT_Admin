@@ -5,8 +5,8 @@
         .module('app')
         .controller('UserCreateController', UserCreateController);
 
-    UserCreateController.$inject = ['$rootScope', '$scope', 'userService'];
-    function UserCreateController($rootScope, $scope, userService) {
+    UserCreateController.$inject = ['$rootScope', '$scope', 'userService', '$timeout'];
+    function UserCreateController($rootScope, $scope, userService, $timeout) {
         var vm = this;
         $scope.user = $rootScope.editedUser;
 
@@ -42,9 +42,13 @@
 
         $scope.save = function () {
             userService.registerUser($scope.user, function (data) {
+                //TODO show msg
                 if (data.status === 'success') {
                     userService.getListUsers();
-                    app.closeView('userCreate');
+                    var promiseObj = $timeout(function () {
+                        return app.closeView('userCreate');
+                    }, 3000);
+                    
                 }
             });
 

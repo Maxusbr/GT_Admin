@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function personNotesSourceController($rootScope, $scope, $cookieStore, personService, eventService) {
+    function personNotesSourceController($rootScope, $scope, $cookieStore, $timeout, personService, eventService) {
         var vm = this;
         if (!$rootScope.UserName)
             $rootScope.UserName = $cookieStore.get('username');
@@ -90,8 +90,12 @@
             //TODO: close this window
             if (!$rootScope.editDescriptionId)$rootScope.editDescriptionId = 0;
             personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.personId, $rootScope.pageSchema, function () {
+                //TODO show msg
                 $rootScope.getDescript();
-                app.closeView('disPersonNotesSource');
+                $timeout(function () {
+                    return app.closeView('disPersonNotesSource');
+                }, 3000);
+                
             });
         }
 
@@ -118,5 +122,5 @@
         .module('app')
         .controller('personNotesSourceController', personNotesSourceController);
 
-    personNotesSourceController.$inject = ['$rootScope', '$scope', '$cookieStore', 'personService', 'eventService'];
+    personNotesSourceController.$inject = ['$rootScope', '$scope', '$cookieStore', '$timeout', 'personService', 'eventService'];
 })();

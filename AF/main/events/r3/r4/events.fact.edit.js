@@ -3,14 +3,18 @@
 
     function EventsFactEditController($rootScope, $scope, eventService, $timeout) {
         var vm = this;
-        
+
         $rootScope.saveFact = function save_fact() {
-            console.log('save fact click, event - '+  $rootScope.eventId);
+            console.log('save fact click, event - ' + $rootScope.eventId);
 
             $rootScope.editedFact.id_Event = $rootScope.eventId;
             eventService.saveEntity($rootScope.eventId, $rootScope.editedFact, 'fact', function (data) {
+                //TODO show msg
                 $rootScope.getFacts();
-                app.closeView('personFactCreate');
+                $timeout(function () {
+                    return app.closeView('personFactCreate');
+                }, 3000);
+
             });
         }
 

@@ -20,12 +20,16 @@
             $scope.staticDescription.id_Person = $rootScope.personId;
             $scope.staticDescription.id_DescriptionType = 2;
             personService.saveEntity($scope.tizerId, $scope.staticDescription, 'description', function (data) {
+                //TODO show msg
                 $scope.staticDescription.Id = data;
                 saveTizerTags();
                 $rootScope.getDescript();
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
-                app.closeView('disPersonNotesStatic');
+                $timeout(function () {
+                    return app.closeView('disPersonNotesStatic');
+                }, 3000);
+
             });
 
         }

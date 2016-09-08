@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function PersonInternetEditorController($rootScope, $scope, personService) {
+    function PersonInternetEditorController($rootScope, $scope, personService, $timeout) {
         var vm = this;
         
         //редактируемая запись
@@ -20,11 +20,17 @@
 
         $rootScope.saveInternet = function() {
             console.log('save link click');
-            //TODO: save changes or create new
+            
             var list = [$rootScope.editedModel];
-            personService.saveEntities($rootScope.personId, list, 'social', $rootScope.getLinks, $rootScope.getPersonCounts);
+            personService.saveEntities($rootScope.personId, list, 'social', $rootScope.getLinks, function (data) {
+                //TODO: show msg
+                $rootScope.getPersonCounts();
+                $timeout(function () {
+                    return $rootScope.closeMe('personInternetCreate');
+                }, 3000);
+            });
             //close this view
-            $rootScope.closeMe('personInternetCreate');
+            
         }
 
         $rootScope.displayLinkTypes = function display_link_types() {
@@ -37,5 +43,5 @@
         .module('app')
         .controller('PersonInternetEditorController', PersonInternetEditorController);
 
-    PersonInternetEditorController.$inject = ['$rootScope', '$scope', 'personService'];
+    PersonInternetEditorController.$inject = ['$rootScope', '$scope', 'personService', '$timeout'];
 })();

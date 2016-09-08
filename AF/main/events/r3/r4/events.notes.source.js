@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function eventsNotesSourceController($rootScope, $scope, eventService, personService) {
+    function eventsNotesSourceController($rootScope, $scope, eventService, personService, $timeout) {
         var vm = this;
 
         if (!$rootScope.pageSchema.Page)
@@ -86,8 +86,11 @@
         $rootScope.saveEventNotesSource = function () {
             if (!$rootScope.editDescriptionId) $rootScope.editDescriptionId = 0;
             eventService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.eventId, $rootScope.pageSchema, function () {
+                //TODO show msg
                 $rootScope.getDescript();
-                app.closeView('disEventNotesSource');
+                $timeout(function () {
+                    return app.closeView('disEventNotesSource');
+                }, 3000);
             });
         }
 
@@ -114,5 +117,5 @@
         .module('app')
         .controller('eventsNotesSourceController', eventsNotesSourceController);
 
-    eventsNotesSourceController.$inject = ['$rootScope', '$scope', 'eventService', 'personService'];
+    eventsNotesSourceController.$inject = ['$rootScope', '$scope', 'eventService', 'personService', '$timeout'];
 })();
