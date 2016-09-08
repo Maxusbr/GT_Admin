@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function concertProgrammPartController($rootScope, $scope, concertService) {
+    function concertProgrammPartController($rootScope, $scope, concertService, $timeout) {
         var vm = this;
 
         $scope.part = $rootScope.editedProgrammPart;
@@ -54,6 +54,7 @@
             $scope.part.TimeStart = `${$scope.timeStart.getHours()}:${$scope.timeStart.getMinutes()}`;
             $scope.part.TimeEnd = `${$scope.timeEnd.getHours()}:${$scope.timeEnd.getMinutes()}`;
             concertService.saveProgramm($scope.part, function (data) {
+            //TODO show msg
                 $scope.part.Id = data.programmid;
                 if ($rootScope.saveActorPart) {
                     $rootScope.saveActorPart($scope.part);
@@ -62,8 +63,10 @@
                     if ($rootScope.getConcert)
                         $rootScope.getConcert($rootScope.concertId);
                 }
-
-                app.closeView('disConcertProgrammPart');
+                $timeout(function () {
+                    return app.closeView('disConcertProgrammPart');
+                }, 3000);
+                
             });
         }
 
@@ -73,5 +76,5 @@
         .module('app')
         .controller('concertProgrammPartController', concertProgrammPartController);
 
-    concertProgrammPartController.$inject = ['$rootScope', '$scope', 'concertService'];
+    concertProgrammPartController.$inject = ['$rootScope', '$scope', 'concertService', '$timeout'];
 })();

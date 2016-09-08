@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    function concertCalendarController($rootScope, $scope, concertService, $q) {
+    function concertCalendarController($rootScope, $scope, concertService, $q, $timeout) {
         var vm = this;
         $scope.concert = $rootScope.editedConcert;
         $scope.weekDay = 1;
@@ -278,8 +278,12 @@
                     }
                 }
                 concertService.saveSchedule($scope.concert.Id, calendar, function (data) {
+                    //TODO show msg
                     $rootScope.getConcert($scope.concert.Id);
-                    app.closeView('concertCalendarEdit');
+                    
+                    $timeout(function () {
+                        return app.closeView('concertCalendarEdit');
+                    }, 3000);
                 });
             });
             deferred.resolve();
@@ -327,5 +331,5 @@
         .module('app')
         .controller('concertCalendarController', concertCalendarController);
 
-    concertCalendarController.$inject = ['$rootScope', '$scope', 'concertService', '$q'];
+    concertCalendarController.$inject = ['$rootScope', '$scope', 'concertService', '$q', '$timeout'];
 })();
