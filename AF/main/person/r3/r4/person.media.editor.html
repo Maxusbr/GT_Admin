@@ -47,7 +47,7 @@
             </tr>
 
             <tr ng-show="editedMedia.id_MediaType === 2">
-                <td style="width: 160px">Медиа/Фото</td>
+                <td style="width: 160px">Медиа/Фото *</td>
                 <td>
 
                     <a class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
@@ -55,7 +55,7 @@
                 </td>
             </tr>
             <tr ng-show="editedMedia.id_MediaType === 1">
-                <td style="width: 160px">Медиа/Видео</td>
+                <td style="width: 160px">Медиа/Видео *</td>
                 <td><input class="form-control" ng-model="file_video" ng-change="videoPreview()" /></td>
             </tr>
             <tr ng-show="editedMedia.id_MediaType === 1">

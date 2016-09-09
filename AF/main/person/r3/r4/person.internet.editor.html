@@ -7,11 +7,15 @@
             <a href="#" ng-click="closeMe('personInternetCreate')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
+
+    <form name='editEvent' ng-submit="saveInternet()" class="form_custom">
+
     <div class="win-menu">
         <div class="win-menu-button">
-            <a href="#" ng-click="saveInternet()">
+            <!-- <a href="#" ng-click="saveInternet()">
                 <span class="fa fa-save"></span> Сохранить
-            </a>
+            </a> -->
+            <button class="clearBtn"><span class="fa fa-save"></span> Сохранить</button>
         </div>
         <div class="win-menu-button">
             <a href="#" ng-click="displayLinkTypes()">
@@ -19,6 +23,9 @@
             </a>
         </div>
     </div>
+
+    
+
     <div class="win-content">
         <div class="row">
             <div class="com-md-12">
@@ -29,13 +36,13 @@
             </div>
         </div>
         <div class="row" cg-busy="Promise">
-            Тип ссылки
+            Тип ссылки *
             <br />
-            <select class="form-control" ng-model="editedModel.IdSocialLinkType" ng-options="type.Id as type.Name for type in socialtypes" required />
+            <select class="form-control" ng-model="editedModel.IdSocialLinkType" ng-options="type.Id as type.Name for type in socialtypes"  />
             <br />
-            Ссылка
+            Ссылка *
             <br />
-            <input type="text" class="form-control" ng-model="editedModel.Link" required />
+            <input required type="text" class="form-control" ng-model="editedModel.Link" />
             <br />
             Описание
             <br />
@@ -47,4 +54,5 @@
             <br />
         </div>
     </div>
+    </form>
 </div>

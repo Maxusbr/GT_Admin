@@ -31,11 +31,13 @@
         <table class="table" cg-busy="Promise">
             <tr>
                 <td>Текст факта *</td>
-                <td><textarea msd-elastic style="min-height: 150px !important;" class="form-control" required='required' ng-model="editedFact.FactText" /></td>
+                <td><textarea msd-elastic style="min-height: 150px !important;" class="form-control" required='required' ng-model="editedFact.FactText" maxlength='190'/>
+                <p>Осталось {{190 - editedFact.FactText.length}} сим.</p></td>
+                
             </tr>
             <tr>
-                <td>Статус *</td>
-                <td><input class="form-control" ng-model="editedFact.Status" required='required'/></td>
+                <td>Статус</td>
+                <td><input class="form-control" ng-model="editedFact.Status" /></td>
             </tr>
             <tr>
                 <td>Изменен</td>

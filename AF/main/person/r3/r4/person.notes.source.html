@@ -29,7 +29,7 @@
         <div class="row" cg-busy="Promise">
 
             <div class="col-lg-6">
-                Страница <select class="form-control" ng-change="getDetail(pageSchema.Page.PageType)" ng-model="pageSchema.Page.PageType"
+                Страница *<select class="form-control" ng-change="getDetail(pageSchema.Page.PageType)" ng-model="pageSchema.Page.PageType"
                                  ng-options="type.Id as type.Name for type in pages">
                     <!--<option>Персона</option>
                     <option>Поиск</option>
@@ -40,7 +40,7 @@
                 </select>
             </div>
             <div class="col-lg-6">
-                Уточнение <select class="form-control" ng-model="detailId" ng-change="changeDetail(detailId)"
+                Уточнение *<select class="form-control" ng-model="detailId" ng-change="changeDetail(detailId)"
                                   ng-options="type.Id as type.Name for type in details"></select>
             </div>
         </div>

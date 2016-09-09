@@ -82,6 +82,22 @@
         $scope.getConnections($rootScope.editedConnection.id_ConnectionType);
 
         $rootScope.saveConnection = function () {
+            console.log($scope.editedConnection.id_ConnectionType);
+            console.log($scope.connectionId);
+
+            if ($scope.editedConnection.id_ConnectionType == undefined) {
+                $scope.errorYes = true;
+                $scope.message = 'Выберите тип связи';
+                $scope.showMessage = true;
+                return;
+            }
+            if ($scope.connectionId == undefined) {
+                $scope.errorYes = true;
+                $scope.message = 'Выберите тип связи';
+                $scope.showMessage = true;
+                return;
+            }
+          
             console.log('save connection click');
             $rootScope.editedConnection.Event = null;
             $rootScope.editedConnection.PersonConnectTo = null;
