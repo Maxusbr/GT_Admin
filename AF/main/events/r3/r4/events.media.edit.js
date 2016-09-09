@@ -6,7 +6,7 @@
         var vm = this;
         $scope.showMessage = false;
         $scope.errorYes = false;
-        $scope.message = 'Error';
+        $scope.message = '';
         $scope.file = $rootScope.editedMedia.MediaLink;
         $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink: 'https://www.youtube.com/watch?v=undefined';
         $scope.embed = '//img.youtube.com/vi/undefined';
@@ -35,7 +35,15 @@
         }
 
         function save(path) {
-            $scope.showMessage = true;
+            console.log(path);
+            if (path == 'https://www.youtube.com/watch?v=undefined')
+                {
+                    $scope.showMessage = true;
+                    $scope.errorYes = true;
+                    $scope.message = 'Error';
+                    return;
+                }
+            
             $rootScope.editedMedia.id_Event = $rootScope.eventId;
             $rootScope.editedMedia.MediaLink = path;
             eventService.saveEntity($rootScope.eventId, $rootScope.editedMedia, 'media', function (id) {

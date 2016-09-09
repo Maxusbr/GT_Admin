@@ -8,173 +8,173 @@
         </div>
     </div>
 
-    <form name='editEvent' ng-submit="saveMedia()">
-    <div class="win-menu">
-        <div class="win-menu-button">
-           <!--  <a href="#" ng-click="saveMedia()">
-                <span class="fa fa-save"></span> Добавить
-            </a> -->
-            <button class="clearBtn"><span class="fa fa-save"></span> Добавить</button>
-        </div>
-    </div>
-    <div class="win-content">
-        <div class="row">
-            <div class="com-md-12">
-                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
-                    <p ng-bind="message"></p>
-                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
-                </div>
+    <form name='editEvent' ng-submit="saveMedia()" class="form_custom">
+        <div class="win-menu">
+            <div class="win-menu-button">
+               <!--  <a href="#" ng-click="saveMedia()">
+                    <span class="fa fa-save"></span> Добавить
+                </a> -->
+                <button class="clearBtn"><span class="fa fa-save"></span> Добавить</button>
             </div>
         </div>
-        <table class="table" cg-busy="Promise">
-            <tr>
-                <td>
-                    <span style="position: relative; top: -10px;">Фото</span>
-                    <input class="form-control"
-                           type="radio"
-                           ng-click="editedMedia.id_MediaType = 2"
-                           ng-checked="editedMedia.id_MediaType == 2"
-                           style="display: inline; width: 50px;"
-                           name='foto_vs_video' />
-                </td>
-                <td>
-                    <span style="position: relative; top: -10px;">Видео</span>
-                    <input class="form-control"
-                           type="radio"
-                           ng-click="editedMedia.id_MediaType = 1"
-                           ng-checked="editedMedia.id_MediaType == 1"
-                           style="display: inline; width: 50px;"
-                           checked="checked"
-                           name='foto_vs_video' />
-                </td>
-            </tr>
-
-            <tr ng-show="editedMedia.id_MediaType === 2">
-                <td style="width: 160px">Медиа/Фото</td>
-                <td>
-
-                    <a class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-                       ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Выберите файл</a>
-                </td>
-            </tr>
-            <tr ng-show="editedMedia.id_MediaType === 1">
-                <td style="width: 160px">Медиа/Видео</td>
-                <td><input class="form-control" ng-model="file_video" ng-change="videoPreview()" /></td>
-            </tr>
-            <tr ng-show="editedMedia.id_MediaType === 1">
-                <td colspan="2" style="border: none;">
-                    <div style="width: 100px; margin: 0px auto;">
-                        <img src="{{embed}}" alt="" data-toggle="modal" data-target="#myModal_video">
+        <div class="win-content">
+            <div class="row">
+                <div class="com-md-12">
+                    <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
+                        <p ng-bind="message"></p>
+                        <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
                     </div>
-                </td>
-            </tr>
-            <tr ng-show="editedMedia.id_MediaType === 2">
-                <td colspan="2" style="border: none;">
-                    <div style="width: 100px; margin: 0px auto;" ng-show="$scope.file != '';">
-                        <md-progress-linear md-mode="determinate" ng-show="progressPercentage" value="{{progressPercentage}}"></md-progress-linear>
-                        <img data-toggle="modal" data-target="#myModal" ngf-src="file" ngf-background="file" ngf-resize="{width: 100, height: 100, quality: 0.9}" style="width: 100px;">
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Название *</td>
-                <td><input required='required' class="form-control" ng-model="editedMedia.Name" /></td>
-            </tr>
-            <tr>
-                <td>Данные</td>
-                <td><textarea class="form-control" msd-elastic style="min-height: 150px !important;" ng-model="editedMedia.Description" /></td>
-            </tr>
+                </div>
+            </div>
+            <table class="table" cg-busy="Promise">
+                <tr>
+                    <td>
+                        <span style="position: relative; top: -10px;">Фото</span>
+                        <input class="form-control"
+                               type="radio"
+                               ng-click="editedMedia.id_MediaType = 2"
+                               ng-checked="editedMedia.id_MediaType == 2"
+                               style="display: inline; width: 50px;"
+                               name='foto_vs_video' />
+                    </td>
+                    <td>
+                        <span style="position: relative; top: -10px;">Видео</span>
+                        <input class="form-control"
+                               type="radio"
+                               ng-click="editedMedia.id_MediaType = 1"
+                               ng-checked="editedMedia.id_MediaType == 1"
+                               style="display: inline; width: 50px;"
+                               checked="checked"
+                               name='foto_vs_video' />
+                    </td>
+                </tr>
 
+                <tr ng-show="editedMedia.id_MediaType === 2">
+                    <td style="width: 160px">Медиа/Фото *</td>
+                    <td>
 
-            <tr>
-                <td>Теги</td>
-                <td>
-                    <div class="tags">
-                        <tags-input ng-model="editedMedia.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи">
-                            <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
-                        </tags-input>
-                    </div>
-                    <script type="text/ng-template" id="my-custom-template">
-                        <div class="right-panel">
-                            <span ng-bind-html="$highlight($getDisplayText())"></span>
-                            <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
+                        <a class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+                           ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Выберите файл</a>
+                    </td>
+                </tr>
+                <tr ng-show="editedMedia.id_MediaType === 1">
+                    <td style="width: 160px">Медиа/Видео *</td>
+                    <td><input required class="form-control" ng-model="file_video" ng-change="videoPreview()" /></td>
+                </tr>
+                <tr ng-show="editedMedia.id_MediaType === 1">
+                    <td colspan="2" style="border: none;">
+                        <div style="width: 100px; margin: 0px auto;">
+                            <img src="{{embed}}" alt="" data-toggle="modal" data-target="#myModal_video">
                         </div>
-                    </script>
-                </td>
-            </tr>
-            <tr>
-                <td colspan='2'>
-                    <h5>Ассоциации</h5>
-                    <div class="panel">
-                        <table class="table" style="max-height:300px;">
-                            <thead>
-                                <tr>
-                                    <th>Тип связи</th>
-                                    <th>Объект связи</th>
-                                </tr>
-                                <tr ng-repeat="link in personeRange">
-                                    <td>Персона</td>
-                                    <td>{{link.LastName}} {{link.Name}}</td>
-                                </tr>
-                                <tr ng-repeat="link in eventRange">
-                                    <td>Мероприятие</td>
-                                    <td>{{link.Name}}</td>
-                                </tr>
-                            </thead>
-                        </table>
-                        <br />
-                        <hr />
-                        <br />
+                    </td>
+                </tr>
+                <tr ng-show="editedMedia.id_MediaType === 2">
+                    <td colspan="2" style="border: none;">
+                        <div style="width: 100px; margin: 0px auto;" ng-show="$scope.file != '';">
+                            <md-progress-linear md-mode="determinate" ng-show="progressPercentage" value="{{progressPercentage}}"></md-progress-linear>
+                            <img data-toggle="modal" data-target="#myModal" ngf-src="file" ngf-background="file" ngf-resize="{width: 100, height: 100, quality: 0.9}" style="width: 100px;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Название </td>
+                    <td><input  class="form-control" ng-model="editedMedia.Name" /></td>
+                </tr>
+                <tr>
+                    <td>Данные</td>
+                    <td><textarea class="form-control" msd-elastic style="min-height: 150px !important;" ng-model="editedMedia.Description" maxlength = '700'/></td>
+                </tr>
+
+
+                <tr>
+                    <td>Теги</td>
+                    <td>
+                        <div class="tags">
+                            <tags-input ng-model="editedMedia.Tags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                                <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
+                            </tags-input>
+                        </div>
+                        <script type="text/ng-template" id="my-custom-template">
+                            <div class="right-panel">
+                                <span ng-bind-html="$highlight($getDisplayText())"></span>
+                                <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
+                            </div>
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan='2'>
+                        <h5>Ассоциации</h5>
                         <div class="panel">
-                            Добавить/редактировать ассоциацию
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <input type="radio"
-                                           ng-checked="association.types == 'event'"
-                                           ng-click="association.types = 'event'"> Мероприятие
-                                    <br />
-                                    <input type="radio"
-                                           ng-checked="association.types == 'person'"
-                                           ng-click="association.types = 'person'"> Персона
-                                    <br />
-                                    <!--<input type="radio"
-                                           ng-checked="association.types == 'media'"
-                                           ng-click="association.types = 'media'"> Медиа
-                                    <br />-->
-                                </div>
-                                <div class="col-lg-4">
-                                    <!--if event-->
-                                    <div ng-show="association.types == 'event'">
-                                        <i>Укажите мероприятие, для которого создается связь</i>
-                                        <select class="form-control" ng-model="association.Id"
-                                                ng-options="item.Id as item.Name for item in events"></select>
+                            <table class="table" style="max-height:300px;">
+                                <thead>
+                                    <tr>
+                                        <th>Тип связи</th>
+                                        <th>Объект связи</th>
+                                    </tr>
+                                    <tr ng-repeat="link in personeRange">
+                                        <td>Персона</td>
+                                        <td>{{link.LastName}} {{link.Name}}</td>
+                                    </tr>
+                                    <tr ng-repeat="link in eventRange">
+                                        <td>Мероприятие</td>
+                                        <td>{{link.Name}}</td>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <br />
+                            <hr />
+                            <br />
+                            <div class="panel">
+                                Добавить/редактировать ассоциацию
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <input type="radio"
+                                               ng-checked="association.types == 'event'"
+                                               ng-click="association.types = 'event'"> Мероприятие
+                                        <br />
+                                        <input type="radio"
+                                               ng-checked="association.types == 'person'"
+                                               ng-click="association.types = 'person'"> Персона
+                                        <br />
+                                        <!--<input type="radio"
+                                               ng-checked="association.types == 'media'"
+                                               ng-click="association.types = 'media'"> Медиа
+                                        <br />-->
                                     </div>
-                                    <!--if person-->
-                                    <div ng-show="association.types == 'person'">
-                                        <i>Укажите персону, для которой создается связь</i>
-                                        <select class="form-control" ng-model="association.Id"
-                                                ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
+                                    <div class="col-lg-4">
+                                        <!--if event-->
+                                        <div ng-show="association.types == 'event'">
+                                            <i>Укажите мероприятие, для которого создается связь</i>
+                                            <select class="form-control" ng-model="association.Id"
+                                                    ng-options="item.Id as item.Name for item in events"></select>
+                                        </div>
+                                        <!--if person-->
+                                        <div ng-show="association.types == 'person'">
+                                            <i>Укажите персону, для которой создается связь</i>
+                                            <select class="form-control" ng-model="association.Id"
+                                                    ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
+                                        </div>
+                                        <!-- if media-->
+                                        <div ng-show="association.types == 'media'">
+                                            <i>Укажите персону, для которой создается связь</i>
+                                            <select class="form-control" ng-model="association.personId" ng-change="getPersonMedia(association.personId)"
+                                                    ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
+                                            <i>Укажите медиа</i>
+                                            <select class="form-control" ng-model="association.Id"
+                                                    ng-options="item.Id as item.Name for item in personmedialist"></select>
+                                        </div>
                                     </div>
-                                    <!-- if media-->
-                                    <div ng-show="association.types == 'media'">
-                                        <i>Укажите персону, для которой создается связь</i>
-                                        <select class="form-control" ng-model="association.personId" ng-change="getPersonMedia(association.personId)"
-                                                ng-options="item.Id as item.LastName + ' ' + item.Name for item in persons"></select>
-                                        <i>Укажите медиа</i>
-                                        <select class="form-control" ng-model="association.Id"
-                                                ng-options="item.Id as item.Name for item in personmedialist"></select>
+                                    <div class="col-lg-4">
+                                        <button class="btn btn-default" ng-click="addAssociation(association)">Сохранить</button>
                                     </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <button class="btn btn-default" ng-click="addAssociation(association)">Сохранить</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </form>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">

@@ -23,7 +23,7 @@
         }
 
         $scope.savePersonNotesTizer = function () {
-
+            console.log($scope.tizer);
             $scope.tizer.id_Person = $rootScope.personId;
             $scope.tizer.id_DescriptionType = 1;
             eventService.saveEntity(0, $scope.tizer, 'description', function (id) {

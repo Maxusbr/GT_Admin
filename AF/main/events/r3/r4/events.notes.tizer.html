@@ -7,46 +7,54 @@
             <a href="#" ng-click="closeMe('disEventnNotesTizer')"><span class="glyphicon glyphicon-remove-sign"></span></a>
         </div>
     </div>
-    <div class="win-menu">
-        <div class="win-menu-button">
-            <a href="#" ng-click="savePersonNotesTizer()">
-                <span class="fa fa-save"></span> Сохранить
-            </a>
-        </div>
-    </div>
-    <div class="win-content">
-        <div class="row">
-            <div class="com-md-12">
-                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
-                    <p ng-bind="message"></p>
-                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
-                </div>
+
+    <form name='editEvent' ng-submit="savePersonNotesTizer()" class="form_custom">
+        <div class="win-menu">
+            <div class="win-menu-button">
+                <!-- <a href="#" ng-click="savePersonNotesTizer()">
+                    <span class="fa fa-save"></span> Сохранить
+                </a> -->
+                <button class="clearBtn"><span class="fa fa-save"></span> Сохранить</button>
             </div>
         </div>
-        <div class="row" cg-busy="Promise">
-            <textarea style="min-height: 200px; width: 360px;" ng-model="tizer.DescriptionText"></textarea>
-            <br />
-            <label>
-                <input type="checkbox" value="" name="noletter" ng-model="notRequired" ng-change="tizer.RequiredStaticDescription = !notRequired">
-                <span ng-if="notRequired" class="glyphicon glyphicon-ok"></span>
-                <span ng-if="!notRequired" class="glyphicon"></span>
-                Статичное описание не требуется
-            </label>
-            <br />
-            <h5>Ключи (от 3 до 10)</h5>
-            <div class="tags">
-                <tags-input ng-model="tizerTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
-                    <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
-                </tags-input>
-            </div>
-            <script type="text/ng-template" id="my-custom-template">
-                <div class="right-panel">
-                    <span ng-bind-html="$highlight($getDisplayText())"></span>
-                    <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
+        <div class="win-content">
+            <div class="row">
+                <div class="com-md-12">
+                    <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
+                        <p ng-bind="message"></p>
+                        <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                    </div>
                 </div>
-            </script>
-            <br />
-            <i>Тизер = это краткая штукотень. Напишите сюда 180 символов для "прочитал - и все пиздец как понятно". Тут Виталий должен какой то текст скостромить для пользователя, который подскажет ему, что это за хрень</i>
+            </div>
+            <div class="row" cg-busy="Promise">
+                Тизер * 
+                <br />
+                <textarea required='required' msd-elastic style="min-height: 50px; width: 360px;" ng-model="tizer.DescriptionText" maxlength = '190'></textarea>
+                <p>Осталось: {{190 - tizer.DescriptionText.length}} сим.</p>
+
+                <br />
+                <label>
+                    <input type="checkbox" value="" name="noletter" ng-model="notRequired" ng-change="tizer.RequiredStaticDescription = !notRequired">
+                    <span ng-if="notRequired" class="glyphicon glyphicon-ok"></span>
+                    <span ng-if="!notRequired" class="glyphicon"></span>
+                    Статичное описание не требуется
+                </label>
+                <br />
+                <h5>Ключи (от 3 до 10)</h5>
+                <div class="tags">
+                    <tags-input ng-model="tizerTags" display-property="Name" add-on-paste="true" placeholder="Ключи">
+                        <auto-complete source="loadTags($query)" min-length="0" debounce-delay="0" template="my-custom-template" />
+                    </tags-input>
+                </div>
+                <script type="text/ng-template" id="my-custom-template">
+                    <div class="right-panel">
+                        <span ng-bind-html="$highlight($getDisplayText())"></span>
+                        <span ng-show="data.UsesType.length">({{data.UsesType | join: ','}})</span>
+                    </div>
+                </script>
+                <br />
+                <i>Тизер = это краткая штукотень. Напишите сюда 180 символов для "прочитал - и все пиздец как понятно". Тут Виталий должен какой то текст скостромить для пользователя, который подскажет ему, что это за хрень</i>
+            </div>
         </div>
-    </div>
+    </form>
 </div>

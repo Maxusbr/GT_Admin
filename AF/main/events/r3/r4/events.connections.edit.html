@@ -25,12 +25,12 @@
         </div>
         <div class="row" cg-busy="Promise">
             <div class="col-lg-6">
-                <i>С чем связано редактируемое Мероприятие</i>
+                <i>С чем связано редактируемое Мероприятие *</i>
                 <select name="" id="" class="form-control" ng-model="editedConnection.id_ConnectionType" ng-change="getConnections(editedConnection.id_ConnectionType)"
                         ng-options="item.Id as item.Name for item in connectiontypes"></select>
             </div>
             <div class="col-lg-6">
-                <i>Уточните объект</i>
+                <i>Уточните объект *</i>
                 <select name="" id="" class="form-control" ng-model="connectionId"
                         ng-options="item.Id as item.Name for item in connectionList"></select>
             </div>
@@ -44,7 +44,8 @@
                 <i>Уточните характеристику</i>
                 <input class="form-control" placeholder="только если требуется характеристика" />
                 <i>Добавьте тизер-комментарий к вашей характеристике</i>
-                <textarea msd-elastic class="form-control" style="min-height: 100px;" ng-model='test' />
+                <textarea msd-elastic class="form-control" style="min-height: 100px;" ng-model='test' maxlength='190'/>
+                <p>Осталось: {{190 - test}} сим.</p>
             </div>
             <div class="col-lg-5">
 

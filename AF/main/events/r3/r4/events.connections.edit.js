@@ -8,8 +8,17 @@
         $scope.message = 'Error';
         
         $rootScope.saveConnection = function () {
+            console.log($scope.connectionId);
+            
+            if ($scope.connectionId == undefined) {
+                $scope.showMessage = true;
+                $scope.errorYes = true;
+                $scope.message = 'Объект обязательное поле';
+                return;
+            }
+
             console.log('save connection click');
-            $scope.showMessage = true;
+            
             $rootScope.editedConnection.EventConnectTo = null;
             $rootScope.editedConnection.Person = null;
             $rootScope.editedConnection.id_Event = $rootScope.eventId;

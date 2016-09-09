@@ -87,7 +87,6 @@
 
 
         $rootScope.saveEventNotesSource = function () {
-            $scope.showMessage = true;
             if (!$rootScope.editDescriptionId) $rootScope.editDescriptionId = 0;
             eventService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.eventId, $rootScope.pageSchema, function () {
                 $scope.errorYes = data.status !== "success";
