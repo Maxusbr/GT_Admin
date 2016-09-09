@@ -16,7 +16,7 @@
             app.loadContentView('/main/concert/r3/r4/concert.programm.part.html', 3200);
         }
 
-        
+
         if (!$rootScope.persons)
             $scope.Promise = personService.getPersons();
 
@@ -29,10 +29,10 @@
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($rootScope.concertId);
                 app.closeFive();
-                
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('disConcertActorPart');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('disConcertActorPart');
+                    }, timeoutMsgShow);
             });
         }
 

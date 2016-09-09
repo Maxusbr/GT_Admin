@@ -23,7 +23,7 @@
             $rootScope.concertPlaces = [];
             $scope.Promise = concertService.getHalls(id).then(function (response) {
                 $rootScope.concertPlaces.push.apply($rootScope.concertPlaces, response.data);
-                if($scope.concert.ConcertPlaceId)
+                if ($scope.concert.ConcertPlaceId)
                     vm.concertPlaceId = $scope.concert.ConcertPlaceId;
                 if ($scope.concert.HallId)
                     vm.hallId = $scope.concert.HallId;
@@ -85,9 +85,10 @@
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);
                 app.closeFour();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('concertEdit');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('concertEdit');
+                    }, timeoutMsgShow);
             });
         }
 

@@ -282,9 +282,10 @@
                     $scope.message = data.result;
                     $scope.showMessage = true;
                     $rootScope.getConcert($scope.concert.Id);
-                    $scope.Promise = $timeout(function () {
-                        return app.closeView('concertCalendarEdit');
-                    }, timeoutMsgShow);
+                    if (!$scope.errorYes)
+                        $scope.Promise = $timeout(function () {
+                            return app.closeView('concertCalendarEdit');
+                        }, timeoutMsgShow);
                 });
             });
             deferred.resolve();

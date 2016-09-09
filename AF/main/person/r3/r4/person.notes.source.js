@@ -27,14 +27,14 @@
             { Id: null, Name: "Не указано" },
             { Id: 1, Name: "Другие персоны подборки" }
         ];
-        
+
         $scope.getDetail = function (item) {
             $scope.detailId = 0;
             $scope.details = [];
             switch (item) {
                 case 0:
                     $scope.detailId = $rootScope.pageSchema.Page.IdPerson;
-                    return $rootScope.persons.forEach(function(item) {
+                    return $rootScope.persons.forEach(function (item) {
                         $scope.details.push({ Id: item.Id, Name: `${item.LastName} ${item.Name}` });
                     });
                 case 1:
@@ -81,23 +81,24 @@
             }
         }
         if (!$rootScope.userPageCategories) {
-            $rootScope.userPageCategories = [{Id: null, Name: "Не указано"}];
+            $rootScope.userPageCategories = [{ Id: null, Name: "Не указано" }];
             personService.getUserPageCategories(function (data) {
                 $rootScope.userPageCategories.push.apply($rootScope.userPageCategories, data);
             });
         }
 
-        $rootScope.savePersonNotesSource = function() {
-            if (!$rootScope.editDescriptionId)$rootScope.editDescriptionId = 0;
+        $rootScope.savePersonNotesSource = function () {
+            if (!$rootScope.editDescriptionId) $rootScope.editDescriptionId = 0;
             personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.personId, $rootScope.pageSchema, function () {
                 $scope.errorYes = data.status !== "success";
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.getDescript();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('disPersonNotesSource');
-                }, timeoutMsgShow);
-                
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('disPersonNotesSource');
+                    }, timeoutMsgShow);
+
             });
         }
 
@@ -105,14 +106,14 @@
             app.closeFive();
             app.loadContentView('/main/dictionary/dictionary.person.wtf.html', 3200);
         }
-            
+
         $scope.changeCat = function (id) {
             if ($rootScope.userPageCategories)
-                $rootScope.pageSchema.UserPageCategory = $rootScope.userPageCategories.filter(function(item) {
+                $rootScope.pageSchema.UserPageCategory = $rootScope.userPageCategories.filter(function (item) {
                     return item.Id === id;
                 })[0].Name;
         }
-            
+
         $scope.cangeType = function (id) {
             $rootScope.pageSchema.Type.Name = $scope.bloks.filter(function (item) {
                 return item.Id === id;

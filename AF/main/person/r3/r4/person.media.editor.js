@@ -41,9 +41,10 @@
                     personService.saveMediaLinks(id, mediaAssociations, $rootScope.getPersonCounts);
                 }
                 $rootScope.getMedias();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('personMediaEdit');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('personMediaEdit');
+                    }, timeoutMsgShow);
             });
         }
 

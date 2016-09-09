@@ -17,10 +17,11 @@
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
                 $rootScope.getFacts();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('personFactEdit');
-                }, timeoutMsgShow);
-                
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('personFactEdit');
+                    }, timeoutMsgShow);
+
             });
         }
 

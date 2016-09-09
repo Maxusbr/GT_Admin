@@ -28,15 +28,16 @@
                 var place = $scope.person.Place.Name;
                 $scope.person.Place = place;
             }
-            
+
             personService.Save($scope.person, function (data) {
                 $scope.errorYes = data.status !== "success";
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.getPerson($scope.Id);
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('personEdit');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('personEdit');
+                    }, timeoutMsgShow);
             });
         }
 
