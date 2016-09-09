@@ -12,9 +12,9 @@
                 $scope.message = id <= 0 ? 'Error save' : 'Save complete';
                 $scope.showMessage = true;
                 $rootScope.getMedias();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('personMediaCreate');
-                }, 3000);
+                }, timeoutMsgShow);
                 
             });
         }

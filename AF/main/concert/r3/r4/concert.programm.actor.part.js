@@ -30,9 +30,9 @@
                     $rootScope.getConcert($rootScope.concertId);
                 app.closeFive();
                 
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('disConcertActorPart');
-                }, 3000);
+                }, timeoutMsgShow);
             });
         }
 

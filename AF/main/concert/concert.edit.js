@@ -85,9 +85,9 @@
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);
                 app.closeFour();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('concertEdit');
-                }, 3000);
+                }, timeoutMsgShow);
             });
         }
 

@@ -35,9 +35,9 @@
                 $rootScope.getDescript();
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('disPersonNotesStatic');
-                }, 3000);
+                }, timeoutMsgShow);
 
             });
 

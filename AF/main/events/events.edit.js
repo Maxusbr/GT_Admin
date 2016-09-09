@@ -87,9 +87,9 @@
                 $rootScope.loadEvent();
                 if ($rootScope.getEvent)
                     $rootScope.getEvent($scope.event.Id);
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('eventEdit');
-                }, 3000);
+                }, timeoutMsgShow);
             });
 
         }

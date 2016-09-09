@@ -16,21 +16,32 @@
         </div>
     </div>
     <div class="win-content">
-        <div class="row" cg-busy="Promise">
-            <div class="col-lg-12"><h5>Название</h5></div>
-            <div class="col-lg-12"><input class="form-control" placeholder="Название" ng-model="part.Name" /></div>
+        <div class="row">
+            <div class="com-md-12">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
+                    <p ng-bind="message"></p>
+                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                </div>
+            </div>
         </div>
-        <br />
+        <div class="row" cg-busy="Promise">
+            <div class="col-lg-12"><h5>Название</h5>
+            </div>
+            <div class="col-lg-12"><input class="form-control" placeholder="Название" ng-model="part.Name"/>
+            </div>
+        </div>
+        <br/>
 
         <div class="row">
-            <div class="col-lg-12"><h5>Дата - время</h5></div>
+            <div class="col-lg-12"><h5>Дата - время</h5>
+            </div>
             <div class="col-lg-2">
-                <input type="radio" id="moreProgramm" name="allDay" ng-checked="part.AllDay" ng-click="part.AllDay = !part.AllDay" />
+                <input type="radio" id="moreProgramm" name="allDay" ng-checked="part.AllDay" ng-click="part.AllDay = !part.AllDay"/>
                 <label for="moreProgramm">Все дни</label>
             </div>
             <div class="col-lg-2">
 
-                <input type="radio" id="oneProgramm" name="allDay" ng-checked="!part.AllDay" ng-click="part.AllDay = !part.AllDay" />
+                <input type="radio" id="oneProgramm" name="allDay" ng-checked="!part.AllDay" ng-click="part.AllDay = !part.AllDay"/>
                 <label for="oneProgramm">Точно</label>
             </div>
         </div>
@@ -48,7 +59,7 @@
                 </md-content>
             </div>
         </div>
-        <br />
+        <br/>
         <div class="row">
             <div class="col-lg-6">
                 Время начала
@@ -60,20 +71,22 @@
                 <div uib-timepicker ng-model="timeEnd" hour-step="1" minute-step="15" show-meridian="false"></div>
             </div>
         </div>
-        <br />
+        <br/>
 
         <div class="row">
-            <div class="col-lg-12"><h5>Описание</h5></div>
+            <div class="col-lg-12"><h5>Описание</h5>
+            </div>
             <div class="col-lg-12">
                 <textarea class="form-control" placeholder="до 150 знаков" ng-model="part.Description"></textarea>
             </div>
         </div>
-        <br />
+        <br/>
 
         <div class="row">
-            <div class="col-lg-12"><h5>Ссылка на плейлист</h5></div>
+            <div class="col-lg-12"><h5>Ссылка на плейлист</h5>
+            </div>
             <div class="col-lg-12">
-                <input class="form-control" placeholder="Ссылка на плейлист" ng-model="part.Description" />
+                <input class="form-control" placeholder="Ссылка на плейлист" ng-model="part.Description"/>
             </div>
         </div>
     </div>

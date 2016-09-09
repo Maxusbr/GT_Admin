@@ -20,14 +20,16 @@
         </div>
     </div>
     <div class="win-content">
-        
+
         <div class="row">
             <div class="com-md-12">
-                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
                     <p ng-bind="message"></p>
                     <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </div>
             </div>
+        </div>
+        <div class="row" cg-busy="Promise">
             <div class="col-md-12">
                 <h5>Данные</h5>
             </div>
@@ -42,10 +44,10 @@
             </div>
             <div class="col-lg-6">
                 Значение
-                <input class="form-control" ng-model="editedAntro.Value"/>
+                <input class="form-control" ng-model="editedAntro.Value" />
             </div>
         </div>
-        <br/>
+        <br />
         <h5>Ассоциации</h5>
         <div class="panel">
             <table class="table" style="max-height:300px;">
@@ -66,9 +68,9 @@
                     </tr>
                 </tbody>
             </table>
-            <br/>
-            <hr/>
-            <br/>
+            <br />
+            <hr />
+            <br />
             <div class="panel">
                 Добавить/редактировать ассоциацию
                 <div class="row">
@@ -82,9 +84,9 @@
                                ng-click="association.type = 'person'"> Персона
                         <br />
                         <!--<input type="radio"
-                       ng-checked="association.type == 'media'"
-                       ng-click="association.type = 'media'"> Медиа
-                <br />-->
+                               ng-checked="association.type == 'media'"
+                               ng-click="association.type = 'media'"> Медиа
+                        <br />-->
                     </div>
                     <div class="col-lg-4">
                         <!--if event-->

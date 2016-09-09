@@ -10,145 +10,148 @@
 
     <form name='editEvent' ng-submit="saveEvent()" class="form_custom">
 
-    <div class="win-menu">
-        <div class="win-menu-button">
-            <!-- <a href="#" ng-click="">
-                <span class="fa fa-save"></span> Сохранить
-            </a> -->
-            <button class="clearBtn"><span class="fa fa-save"></span> Сохранить</button>
+        <div class="win-menu">
+            <div class="win-menu-button">
+                <!-- <a href="#" ng-click="">
+                    <span class="fa fa-save"></span> Сохранить
+                </a> -->
+                <button class="clearBtn"><span class="fa fa-save"></span> Сохранить</button>
+            </div>
         </div>
-    </div>
-    <div class="win-content">
-     <div class="panel-info" >
-        <div class="row">
-            <div class="com-md-12">
-                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
-                    <p ng-bind="message"></p>
-                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+        <div class="win-content">
+            <div class="panel-info">
+                <div class="row">
+                    <div class="com-md-12">
+                        <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
+                            <p ng-bind="message"></p>
+                            <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <h5>На русском</h5>
-                Название *
-                <br />
-                <input type="text" class="form-control" placeholder="от 3 знаков" ng-model="event.Name" required='required' pattern=".{3,}" ng-minlength='3' minlength='3' />
-                <br />
-                <!--Описание *
-                <br />
-                <textarea msd-elastic style="min-height: 50px !important;" class="form-control" placeholder="от 3 знаков" ng-model="event.Description" required='required' pattern=".{3,}" maxlength='700'/></textarea>
-                <p>Осталось: {{700 - event.Description.length}} сим.</p>
-                <br />-->
-            </div>
-            <div class="col-lg-6">
-                <h5>На английском</h5>
-                Название
-                <br />
-                <input class="form-control" placeholder="от 3 знаков" ng-model="event.NameEn"  ng-minlength='3' pattern=".{3,}"/>
-                <br />
-                <!--Описание
-                <br />
-                <textarea msd-elastic style="min-height: 50px !important;" class="form-control" placeholder="от 3 знаков" ng-model="event.DescriptionEn"  ng-minlength='3' pattern=".{3,}" maxlength='700'/></textarea>
-                <p>Осталось: {{700 - event.DescriptionEn.length}} сим.</p>
-                <br />-->
+                <div class="row" cg-busy="Promise">
+
+                    <div class="col-lg-6">
+                        <h5>На русском</h5>
+                        Название *
+                        <br />
+                        <input type="text" class="form-control" placeholder="от 3 знаков" ng-model="event.Name" required='required' pattern=".{3,}" ng-minlength='3' minlength='3' />
+                        <br />
+                        <!--Описание *
+                        <br/>
+                        <textarea msd-elastic style="min-height: 50px !important;" class="form-control" placeholder="от 3 знаков" ng-model="event.Description" required='required' pattern=".{3,}" maxlength='700'/></textarea>
+                        <p>Осталось: {{700 - event.Description.length}} сим.</p>
+                        <br/>-->
+                    </div>
+                    <div class="col-lg-6">
+                        <h5>На английском</h5>
+                        Название
+                        <br />
+                        <input class="form-control" placeholder="от 3 знаков" ng-model="event.NameEn" ng-minlength='3' pattern=".{3,}" />
+                        <br />
+                        <!--Описание
+                        <br/>
+                        <textarea msd-elastic style="min-height: 50px !important;" class="form-control" placeholder="от 3 знаков" ng-model="event.DescriptionEn" ng-minlength='3' pattern=".{3,}" maxlength='700'/></textarea>
+                        <p>Осталось: {{700 - event.DescriptionEn.length}} сим.</p>
+                        <br/>-->
+                    </div>
+                </div>
+                <!-- <hr/> -->
+                <div class="row">
+                    <div class="col-lg-6">
+                        Категория *
+                        <br />
+                        <select class="form-control" ng-model="event.EventParentCategoryId" ng-options="item.Id as item.Name for item in baseCategory"></select>
+                        <a href="#" ng-click="editCat()">Редактировать</a>
+                    </div>
+                    <div class="col-lg-6">
+                        Подкатегория
+                        <br />
+                        <select class="form-control" ng-model="event.EventCategoryId"
+                                ng-options="item.Id as item.Name for item in getChildCategory(event.EventParentCategoryId)"></select>
+                        <a href="#" ng-click="editCat()">Редактировать</a>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 10px;">
+                        <!--Организатор
+                        <br/>-->
+                        <!--<input class="form-control" placeholder="от 3 знаков" ng-model="event.Organizer"/>-->
+                        <md-autocomplete flex required
+                                         md-input-name="autocompleteField"
+                                         md-input-minlength="3"
+                                         md-no-cache="ctrl.noCache"
+                                         md-selected-item="selectedOrganizer"
+                                         md-search-text="event.Organizer"
+                                         md-items="item in ctrl.querySearch(event.Organizer)"
+                                         md-item-text="item.Name"
+                                         md-floating-label="Организатор">
+                            <md-item-template>
+                                <span md-highlight-text="event.Organizer">{{item.Name}}</span>
+                            </md-item-template>
+                            <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
+                                <div ng-message="required">You <b>must</b> have a favorite state.</div>
+                                <div ng-message="md-require-match">Please select an existing state.</div>
+                                <div ng-message="minlength">Your entry is not long enough.</div>
+                                <div ng-message="maxlength">Your entry is too long.</div>
+                            </div>-->
+                            <md-not-found>
+                                Совпадений не найдено...
+                            </md-not-found>
+                        </md-autocomplete>
+                        <!--<a href="#" ng-click="editOrg()">Редактировать</a>-->
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 10px;">
+                        Возрастные ограничения
+                        <br />
+                        <select name="" id="" class="form-control" ng-model="event.AgeLimit" ng-options="item as item + '+' for item in ageLimits">
+                            <option value="0">0+</option>
+                            <option value="6">6+</option>
+                            <option value="12">12+</option>
+                            <option value="16">16+</option>
+                            <option value="18">18+</option>
+                        </select>
+
+                        <br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <span style="padding-right: 5px;">Опубликовано</span>
+                        <input class="form-control" placeholder="от 3 знаков" type="checkbox"
+                               style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 30px;" ng-model="event.IsPublished" />
+                    </div>
+                    <div class="col-lg-4">
+                        Дата начала доступности *
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStartSold"
+                                   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                                   alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+
+                        <!--<md-content>
+                            <md-datepicker ng-model="dateStartSold" md-placeholder="Дата начала "></md-datepicker>
+                        </md-content>-->
+                    </div>
+                    <div class="col-lg-4">
+                        Дата окончания доступности *
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStopSold"
+                                   is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                                   alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <!--<md-content>
+                            <md-datepicker ng-model="dateStopSold" md-placeholder="Дата окончания "></md-datepicker>
+                        </md-content>-->
+                        <!-- <input type="date" name="calendar" value="" class="form-control" placeholder=""/> -->
+
+                    </div>
+                </div>
+
             </div>
         </div>
-<!--         <hr /> -->
-        <div class="row">
-            <div class="col-lg-6">
-                Категория *
-                <br/>
-                <select class="form-control" ng-model="event.EventParentCategoryId" ng-options="item.Id as item.Name for item in baseCategory"></select >
-                <a href="#" ng-click="editCat()">Редактировать</a>
-            </div>
-            <div class="col-lg-6">
-                Подкатегория
-                <br />
-                <select class="form-control" ng-model="event.EventCategoryId"
-                        ng-options="item.Id as item.Name for item in getChildCategory(event.EventParentCategoryId)"></select>
-                <a href="#" ng-click="editCat()">Редактировать</a>
-            </div>
-            <div class="col-lg-6" style="margin-top: 10px;">
-                <!--Организатор
-                <br />-->
-                <!--<input class="form-control" placeholder="от 3 знаков" ng-model="event.Organizer"/>-->
-                <md-autocomplete flex required
-                                 md-input-name="autocompleteField"
-                                 md-input-minlength="3"
-                                 md-no-cache="ctrl.noCache"
-                                 md-selected-item="selectedOrganizer"
-                                 md-search-text="event.Organizer"
-                                 md-items="item in ctrl.querySearch(event.Organizer)"
-                                 md-item-text="item.Name"
-                                 md-floating-label="Организатор">
-                    <md-item-template>
-                        <span md-highlight-text="event.Organizer">{{item.Name}}</span>
-                    </md-item-template>
-                    <!--<div ng-messages="searchForm.autocompleteField.$error" ng-if="searchForm.autocompleteField.$touched">
-                        <div ng-message="required">You <b>must</b> have a favorite state.</div>
-                        <div ng-message="md-require-match">Please select an existing state.</div>
-                        <div ng-message="minlength">Your entry is not long enough.</div>
-                        <div ng-message="maxlength">Your entry is too long.</div>
-                    </div>-->
-                    <md-not-found>
-                        Совпадений не найдено...
-                    </md-not-found>
-                </md-autocomplete>
-                <!--<a href="#" ng-click="editOrg()">Редактировать</a>-->
-            </div>
-            <div class="col-lg-6" style="margin-top: 10px;">
-                Возрастные ограничения
-                <br />
-                <select name="" id="" class="form-control" ng-model="event.AgeLimit" ng-options="item as item + '+' for item in ageLimits">
-                    <option value="0">0+</option>
-                    <option value="6">6+</option>
-                    <option value="12">12+</option>
-                    <option value="16">16+</option>
-                    <option value="18">18+</option>
-                </select>
-               
-                <br />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4">
-                <span style="padding-right: 5px;">Опубликовано</span>
-                <input class="form-control" placeholder="от 3 знаков" type="checkbox"
-                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 30px;" ng-model="event.IsPublished" />
-            </div>
-            <div class="col-lg-4">
-                Дата начала доступности *
-                <p class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStartSold"
-                           is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
-                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </p>
-
-                <!--<md-content>
-                    <md-datepicker ng-model="dateStartSold" md-placeholder="Дата начала "></md-datepicker>
-                </md-content>-->
-            </div>
-            <div class="col-lg-4">
-                Дата окончания доступности *
-                <p class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStopSold"
-                           is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
-                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                </p>
-                <!--<md-content>
-                    <md-datepicker ng-model="dateStopSold" md-placeholder="Дата окончания "></md-datepicker>
-                </md-content>-->
-                <!-- <input type="date" name="calendar" value="" class="form-control" placeholder=""/> -->
-
-            </div>
-        </div>
-
-    </div>
-    </div>
     </form>
 </div>

@@ -16,9 +16,9 @@
                     $scope.message = data.result;
                     $scope.showMessage = true;
                     $rootScope.getGroups();
-                    $timeout(function () {
+                    $scope.Promise = $timeout(function () {
                         return app.closeView('disoncertActorGroup');
-                    }, 3000);
+                    }, timeoutMsgShow);
                 });
         }
     }

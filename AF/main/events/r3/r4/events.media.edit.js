@@ -46,9 +46,9 @@
                     eventService.saveMediaLinks(id, mediaAssociations);
                 }
                 $rootScope.getMedias();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('eventMediaCreate');
-                }, 3000);
+                }, timeoutMsgShow);
                 
             });
         }

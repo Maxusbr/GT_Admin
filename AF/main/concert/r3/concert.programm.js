@@ -91,9 +91,9 @@
                 $rootScope.getConcert($rootScope.concertId);
                 app.closeFour();
                 
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('concertProgrammEdit');
-                }, 3000);
+                }, timeoutMsgShow);
             });
         }
         $scope.saveProgramm = function () {

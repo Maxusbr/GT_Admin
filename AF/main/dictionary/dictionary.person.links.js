@@ -25,9 +25,9 @@
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.getLinkTypes();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return $rootScope.closeMe('disDicPersonLinks');
-                }, 3000);
+                }, timeoutMsgShow);
             });
             
             

@@ -47,9 +47,9 @@
                 $scope.showMessage = true;
                 if (data.success) {
                     userService.getListUsers();
-                    var promiseObj = $timeout(function () {
+                    $scope.Promise = $timeout(function () {
                         return app.closeView('userCreate');
-                    }, 3000);
+                    }, timeoutMsgShow);
                     
                 }
             });

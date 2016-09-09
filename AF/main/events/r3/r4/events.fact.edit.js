@@ -16,9 +16,9 @@
                 $scope.message = id <= 0 ? 'Error save' : 'Save complete';
                 $scope.showMessage = true;
                 $rootScope.getFacts();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('personFactCreate');
-                }, 3000);
+                }, timeoutMsgShow);
 
             });
         }

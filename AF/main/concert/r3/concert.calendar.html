@@ -16,6 +16,14 @@
     </div>
     <div class="win-content">
         <div class="row">
+            <div class="com-md-12">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
+                    <p ng-bind="message"></p>
+                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="row" cg-busy="Promise">
             <div class="col-lg-6">
                 <input type="radio" id="notRepeated" ng-checked="!calendar.IsRepeated" ng-click="changeRepeat()" />
                 <label for="notRepeated">Разовое событие (может быть только один раз за все время)</label>
@@ -149,20 +157,20 @@
                                     </md-content>
                                 </div>
                             </div>
-                            <br/>
+                            <br />
                             <div class="row">
                                 <div class="col-lg-8">
                                     <i>В эту дату мероприятия пройдут:</i>
-                                    <br/>
+                                    <br />
                                     <span class="label label-default" ng-repeat="item in schedule.Schedules">{{getTime(item)}}</span>
                                     <!--<span class="label label-default">13:00</span>
                                     <span class="label label-default">14:00</span>-->
                                 </div>
                                 <div class="col-lg-4">
                                     <div uib-timepicker ng-model="addedTime" hour-step="1" minute-step="5" show-meridian="false"></div>
-                                    <br/>
+                                    <br />
                                     <button class="btn btn-info" ng-click="addToRange()">Добавить в список</button>
-                                    <br/>
+                                    <br />
                                     <button class="btn btn-info" ng-click="clearRange()">Очистить список</button>
                                 </div>
                             </div>
@@ -221,86 +229,86 @@
             </div>
 
             <!--this for weekly-->
-        <div class="panel" ng-show="weekSchedule">
-            <div class="row">
-                <div class="col-lg-6">
-                    <!--<md-content>
-                        <md-datepicker ng-model="weekDayStart" md-placeholder="Дата начала "></md-datepicker>
-                    </md-content>-->
-                    <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="weekDayStart"
-                               is-open="popup5.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
-                               alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open5()"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                    </p>
+            <div class="panel" ng-show="weekSchedule">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <!--<md-content>
+                            <md-datepicker ng-model="weekDayStart" md-placeholder="Дата начала "></md-datepicker>
+                        </md-content>-->
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="weekDayStart"
+                                   is-open="popup5.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                                   alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open5()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-lg-6">
+                        <!--<md-content>
+                            <md-datepicker ng-model="weekDayEnd" md-placeholder="Дата окончания "></md-datepicker>
+                        </md-content>-->
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="weekDayEnd"
+                                   is-open="popup6.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
+                                   alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open6()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <!--<md-content>
-                        <md-datepicker ng-model="weekDayEnd" md-placeholder="Дата окончания "></md-datepicker>
-                    </md-content>-->
-                    <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="weekDayEnd"
-                               is-open="popup6.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
-                               alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open6()"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
-                    </p>
-                </div>
-            </div>
-            <i>Добавьте время в дни недели</i>
-            <br/>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Пн</th>
-                    <th>Вт</th>
-                    <th>Ср</th>
-                    <th>Чт</th>
-                    <th>Пт</th>
-                    <th>Сб</th>
-                    <th>Вс</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in weekSchedule">
-                    <td><span class="label label-default" ng-show="item.WeekDays | inArray : 1">{{getTime(item)}}</span></td>
-                    <td><span class="label label-default" ng-show="item.WeekDays | inArray : 2">{{getTime(item)}}</span></td>
-                    <td><span class="label label-default" ng-show="item.WeekDays | inArray : 3">{{getTime(item)}}</span></td>
-                    <td><span class="label label-default" ng-show="item.WeekDays | inArray : 4">{{getTime(item)}}</span></td>
-                    <td><span class="label label-default" ng-show="item.WeekDays | inArray : 5">{{getTime(item)}}</span></td>
-                    <td><span class="label label-default" ng-show="item.WeekDays | inArray : 6">{{getTime(item)}}</span></td>
-                    <td><span class="label label-default" ng-show="item.WeekDays | inArray : 0">{{getTime(item)}}</span></td>
-                </tr>
-                </tbody>
-            </table>
-            <br/>
+                <i>Добавьте время в дни недели</i>
+                <br />
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Пн</th>
+                            <th>Вт</th>
+                            <th>Ср</th>
+                            <th>Чт</th>
+                            <th>Пт</th>
+                            <th>Сб</th>
+                            <th>Вс</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in weekSchedule">
+                            <td><span class="label label-default" ng-show="item.WeekDays | inArray : 1">{{getTime(item)}}</span></td>
+                            <td><span class="label label-default" ng-show="item.WeekDays | inArray : 2">{{getTime(item)}}</span></td>
+                            <td><span class="label label-default" ng-show="item.WeekDays | inArray : 3">{{getTime(item)}}</span></td>
+                            <td><span class="label label-default" ng-show="item.WeekDays | inArray : 4">{{getTime(item)}}</span></td>
+                            <td><span class="label label-default" ng-show="item.WeekDays | inArray : 5">{{getTime(item)}}</span></td>
+                            <td><span class="label label-default" ng-show="item.WeekDays | inArray : 6">{{getTime(item)}}</span></td>
+                            <td><span class="label label-default" ng-show="item.WeekDays | inArray : 0">{{getTime(item)}}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
 
-            <div class="row">
-                <div class="col-lg-4" style="margin-top: 12px;">
-                    <i>Добавить время в указанный день</i>
-                    <select class="form-control" ng-model="weekDay" ng-options="item.Id as item.Name for item in weekDays">
-                        <option value="1">понедельник</option>
-                        <option value="2">вторник</option>
-                        <option value="3">среда</option>
-                        <option value="4">четверг</option>
-                        <option value="5">пятница</option>
-                        <option value="6">суббота</option>
-                        <option value="0">воскресенье</option>
-                    </select>
-                    <br/>
-                    <a href="#" ng-click="clearWeek()">Очистить этот день</a>
-                </div>
-                <div class="col-lg-4">
-                    <div uib-timepicker ng-model="timeStartWeek" hour-step="1" minute-step="5" show-meridian="false"></div>
-                </div>
-                <div class="col-lg-4" style="margin-top: 29px;">
-                    <button class="btn btn-default" ng-click="addTimeWeek()">Добавить</button>
+                <div class="row">
+                    <div class="col-lg-4" style="margin-top: 12px;">
+                        <i>Добавить время в указанный день</i>
+                        <select class="form-control" ng-model="weekDay" ng-options="item.Id as item.Name for item in weekDays">
+                            <option value="1">понедельник</option>
+                            <option value="2">вторник</option>
+                            <option value="3">среда</option>
+                            <option value="4">четверг</option>
+                            <option value="5">пятница</option>
+                            <option value="6">суббота</option>
+                            <option value="0">воскресенье</option>
+                        </select>
+                        <br />
+                        <a href="#" ng-click="clearWeek()">Очистить этот день</a>
+                    </div>
+                    <div class="col-lg-4">
+                        <div uib-timepicker ng-model="timeStartWeek" hour-step="1" minute-step="5" show-meridian="false"></div>
+                    </div>
+                    <div class="col-lg-4" style="margin-top: 29px;">
+                        <button class="btn btn-default" ng-click="addTimeWeek()">Добавить</button>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </div>

@@ -68,9 +68,9 @@
                 $rootScope.loadConcerts();
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('concertTicketsEdit');
-                }, 3000);
+                }, timeoutMsgShow);
             });
         }
         $scope.open1 = function () {

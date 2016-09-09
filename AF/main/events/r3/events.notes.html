@@ -20,15 +20,17 @@
         </div>
     </div>
     <div class="win-content">
-        
         <div class="row">
             <div class="com-md-12">
                 <h5>Общее описание мероприятия</h5>
-                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
                     <p ng-bind="message"></p>
                     <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </div>
             </div>
+        </div>
+        <div class="row" cg-busy="Promise">
+
             <div class="col-lg-6">
                 <h5>Теги (подкатегории)</h5>
                 <tags-input ng-model="categoryTags" display-property="Name" add-on-paste="true" placeholder="Теги (подкатегории)">
@@ -42,7 +44,7 @@
                 </tags-input>
             </div>
         </div>
-        <hr/>
+        <hr />
         <!--<h5>Все теги мероприятия</h5>
         <i>Ноги, Руки, главноеХвост</i>
         <div class="tags">
@@ -104,30 +106,30 @@
                     </td>
                     <td><a href="#" ng-click="displayNotesAdaptDescription()">TODO 8</a></td>
                 </tr>
-            <!--<tr>
-                <td><a href="#" ng-click="displaySource()">тыдыдыщ</a></td>
-                <td>нет редактора в ТЗ</td>
-                <td>Не опубликован</td>
-                <td>admin, 18/08/16</td>
-                <td><a href="#">Ссылка</a></td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td><a href="#" ng-click="displaySource()">тыдыдыщ</a></td>
-                <td>нет редактора в ТЗ</td>
-                <td>Не опубликован</td>
-                <td>admin, 18/08/16</td>
-                <td><a href="#">Оригинальный текст</a></td>
-                <td>---</td>
-            </tr>
-            <tr>
-                <td><a href="#" ng-click="displaySource()">Бтыдыдыщ</a></td>
-                <td>нет редактора в ТЗ</td>
-                <td>Не опубликован</td>
-                <td>admin, 18/08/16</td>
-                <td><a href="#">Оригинальный текст</a></td>
-                <td>---</td>
-            </tr>-->
+                <!--<tr>
+                    <td><a href="#" ng-click="displaySource()">тыдыдыщ</a></td>
+                    <td>нет редактора в ТЗ</td>
+                    <td>Не опубликован</td>
+                    <td>admin, 18/08/16</td>
+                    <td><a href="#">Ссылка</a></td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td><a href="#" ng-click="displaySource()">тыдыдыщ</a></td>
+                    <td>нет редактора в ТЗ</td>
+                    <td>Не опубликован</td>
+                    <td>admin, 18/08/16</td>
+                    <td><a href="#">Оригинальный текст</a></td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td><a href="#" ng-click="displaySource()">Бтыдыдыщ</a></td>
+                    <td>нет редактора в ТЗ</td>
+                    <td>Не опубликован</td>
+                    <td>admin, 18/08/16</td>
+                    <td><a href="#">Оригинальный текст</a></td>
+                    <td>---</td>
+                </tr>-->
             </tbody>
         </table>
     </div>

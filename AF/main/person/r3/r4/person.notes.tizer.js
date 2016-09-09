@@ -34,15 +34,15 @@
                         $scope.message = id <= 0 ? 'Error save' : 'Save complete';
                         $scope.showMessage = true;
                         $rootScope.getDescript();
-                        $timeout(function () {
+                        $scope.Promise = $timeout(function () {
                             return app.closeView('disPersonNotesTizer');
-                        }, 3000);
+                        }, timeoutMsgShow);
                     });
                 else {
                     $rootScope.getDescript();
-                    $timeout(function () {
+                    $scope.Promise = $timeout(function () {
                         return app.closeView('disPersonNotesTizer');
-                    }, 3000);
+                    }, timeoutMsgShow);
                 }
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();

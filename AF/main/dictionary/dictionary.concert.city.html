@@ -14,11 +14,13 @@
     <div class="win-content">
         <div class="row">
             <div class="com-md-12">
-                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
                     <p ng-bind="message"></p>
                     <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </div>
             </div>
+        </div>
+        <div class="row" cg-busy="Promise">
             <div class="col-lg-5">
                 <h5>Страна</h5>
                 <div class="panel panel-default">
@@ -54,7 +56,7 @@
                             </div>
                             <div class="col-lg-8">
                                 <!--<input type="text" class="form-control" ng-model="PlaceName"/>-->
-                                <input type="text" class="form-control" placeholder="Город" name="Place" 
+                                <input type="text" class="form-control" placeholder="Город" name="Place"
                                        uib-typeahead="item as item.Name for item in getPlaces($viewValue)"
                                        ng-model="placeName" typeahead-loading="loadingPlace" typeahead-no-results="noPlaceResults"
                                        typeahead-template-url="customTemplate.html" typeahead-min-length="3"> <!--uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">-->
@@ -85,16 +87,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!--                         <tr ng-repeat="item in baseCategory">
-                                                    <td><a href="#" ng-click="selectCat(item)">{{item.Name}}</a></td>
-                                                    <td>
-                                                        <table>
-                                                            <tr ng-repeat="child in getChildCategory(item.Id)">
-                                                                <td><a href="#" ng-click="selectSubCat(child)">{{child.Name}}</a></td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr> -->
+                        <!-- <tr ng-repeat="item in baseCategory">
+                            <td><a href="#" ng-click="selectCat(item)">{{item.Name}}</a></td>
+                            <td>
+                                <table>
+                                    <tr ng-repeat="child in getChildCategory(item.Id)">
+                                        <td><a href="#" ng-click="selectSubCat(child)">{{child.Name}}</a></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>

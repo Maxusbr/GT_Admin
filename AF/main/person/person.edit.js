@@ -34,9 +34,9 @@
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.getPerson($scope.Id);
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('personEdit');
-                }, 3000);
+                }, timeoutMsgShow);
             });
         }
 

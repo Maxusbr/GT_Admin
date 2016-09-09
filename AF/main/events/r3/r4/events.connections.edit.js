@@ -19,9 +19,9 @@
                 $scope.message = id <= 0 ? 'Error save': 'Save complete';
                 $scope.showMessage = true;
                 $rootScope.getEventConnection();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('eventConnectionCreate');
-                }, 3000);
+                }, timeoutMsgShow);
                 
             });
         }

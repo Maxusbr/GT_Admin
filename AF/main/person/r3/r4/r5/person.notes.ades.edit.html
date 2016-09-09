@@ -17,15 +17,18 @@
     <div class="win-content">
         <div class="row">
             <div class="com-md-12">
-                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
                     <p ng-bind="message"></p>
                     <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </div>
             </div>
+
+        </div>
+        <div class="row" cg-busy="Promise">
             <div class="col-lg-5">
                 <h5>Ключи</h5>
-                <textarea style="width:100%; min-height:100px;" />
-                <br/>
+                <textarea style="width: 100%; min-height: 100px;" />
+                <br />
 
                 <h5>Связь</h5>
                 <select class="form-control">
@@ -39,7 +42,7 @@
                 <select class="form-control">
                     <option selected="selected">Длина ноги</option>
                 </select>
-                <br/>
+                <br />
                 <div class="row">
                     <div class="col-lg-4">
                         <select class="form-control">
@@ -48,7 +51,7 @@
                         </select>
                     </div>
                     <div class="col-lg-4">
-                        <input class="form-control"/>
+                        <input class="form-control" />
                     </div>
                     <div class="col-lg-4">
                         <select class="form-control">
@@ -61,7 +64,7 @@
             <div class="col-lg-7">
                 <h5>Подходящие факты</h5>
                 <input type="radio" />Факт 1
-                <br/>
+                <br />
                 <input type="radio" />Факт 2
                 <br />
                 <input type="radio" />Факт 3

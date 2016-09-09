@@ -6,13 +6,13 @@
         $scope.showMessage = false;
         $scope.errorYes = false;
         $scope.message = 'Error';
-		$scope.saveUser = function () {
+        $scope.saveUser = function () {
             $scope.showMessage = true;
-                $timeout(function () {
-                    return app.closeView('personFactCreate');
-                }, 3000);
-            });
-        }
+            $scope.Promise = $timeout(function () {
+                return app.closeView('personFactCreate');
+            }, timeoutMsgShow);
+        };
+
     }
 
     angular

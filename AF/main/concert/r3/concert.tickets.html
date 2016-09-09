@@ -16,17 +16,25 @@
     </div>
     <div class="win-content">
         <div class="row">
-            <div class="col-lg-12">
-                Ссылка на сайт организатора
-                <br />
-                <input class="form-control" placeholder="http://" ng-model="ticket.OrganizerLink" />
-                <input class="form-control" placeholder="от 3 знаков" type="checkbox" ng-model="ticket.ShowFormWhileEmpty" 
-                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 10px;"/>
-                <span style="padding-right: 5px;">Отображать форму подписки при пустом</span>
-                <br />
+            <div class="com-md-12">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
+                    <p ng-bind="message"></p>
+                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                </div>
             </div>
         </div>
-        <hr />
+        <div class="row" cg-busy="Promise">
+            <div class="col-lg-12">
+                Ссылка на сайт организатора
+                <br/>
+                <input class="form-control" placeholder="http://" ng-model="ticket.OrganizerLink"/>
+                <input class="form-control" placeholder="от 3 знаков" type="checkbox" ng-model="ticket.ShowFormWhileEmpty"
+                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 10px;"/>
+                <span style="padding-right: 5px;">Отображать форму подписки при пустом</span>
+                <br/>
+            </div>
+        </div>
+        <hr/>
 
         <div class="row">
             <h5 class="col-lg-12">Даты доступности на витрине</h5>
@@ -38,7 +46,7 @@
                 <p class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateStart"
                            is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
-                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня"/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
@@ -52,14 +60,14 @@
                 <p class="input-group">
                     <input type="text" class="form-control" uib-datepicker-popup="dd.MM.yyyy" ng-model="dateEnd"
                            is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Закрыть"
-                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня" />
+                           alt-input-formats="dd.MM.yyyy" clear-text="Очистить" current-text="Сегодня"/>
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </p>
             </div>
         </div>
-        <hr />
+        <hr/>
         <div class="row">
             <div class="col-lg-6">
                 Время начала
@@ -72,7 +80,7 @@
             </div>
             <div class="col-lg-12">
                 <input class="form-control" placeholder="от 3 знаков" type="checkbox" ng-model="ticket.ShowFormWhileEndTime"
-                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 10px;" />
+                       style="display: inline-block; width: auto; padding: 0px; height: auto; margin-top: 10px;"/>
                 <span style="padding-right: 5px;">Отображать форму подписки по завершении времени</span>
             </div>
         </div>

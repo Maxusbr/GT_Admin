@@ -30,9 +30,9 @@
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.getPersonCounts();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return $rootScope.closeMe('personInternetCreate');
-                }, 3000);
+                }, timeoutMsgShow);
             });
             //close this view
             

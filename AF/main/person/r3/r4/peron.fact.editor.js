@@ -17,9 +17,9 @@
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
                 $rootScope.getFacts();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('personFactEdit');
-                }, 3000);
+                }, timeoutMsgShow);
                 
             });
         }

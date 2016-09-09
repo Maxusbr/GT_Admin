@@ -56,10 +56,11 @@
                     $scope.errorYes = id <= 0;
                     $scope.message = id > 0 ? 'Save "complete' : 'Error save';
                     $scope.showMessage = true;
-                    app.closeFive(); $timeout(function () {
+                    app.closeFive();
+                    $scope.Promise = $timeout(function () {
                         return app.closeView('DictionaryConcertCityController');
                     },
-                    3000);
+                    timeoutMsgShow);
                 });
         }
     }

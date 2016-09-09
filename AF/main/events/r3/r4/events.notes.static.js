@@ -33,9 +33,9 @@
                 $scope.staticDescription.Id = id;
                 saveTizerTags();
                 $rootScope.getDescript();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('disPersonNotesStatic');
-                }, 3000);
+                }, timeoutMsgShow);
             });
         }
 

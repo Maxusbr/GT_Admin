@@ -15,18 +15,19 @@
         </div>
     </div>
     <div class="win-content">
-        <div class="row" cg-busy="Promise">
+        <div class="row">
             <div class="com-md-12">
-                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'"  ng-show="showMessage">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
                     <p ng-bind="message"></p>
                     <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </div>
             </div>
+        </div>
+        <div class="row" cg-busy="Promise">
             <div class="col-lg-6">
                 <i>С чем связано редактируемое Мероприятие</i>
                 <select name="" id="" class="form-control" ng-model="editedConnection.id_ConnectionType" ng-change="getConnections(editedConnection.id_ConnectionType)"
-                        ng-options="item.Id as item.Name for item in connectiontypes">
-                </select>
+                        ng-options="item.Id as item.Name for item in connectiontypes"></select>
             </div>
             <div class="col-lg-6">
                 <i>Уточните объект</i>
@@ -34,16 +35,16 @@
                         ng-options="item.Id as item.Name for item in connectionList"></select>
             </div>
         </div>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div class="row">
             <div class="col-lg-7">
                 <i>Охарактеризуйте, как связано редактируемое Мероприятие с объектом связи</i>
-                <input class="form-control" placeholder="например, выступали" ng-model="editedConnection.Description"/>
+                <input class="form-control" placeholder="например, выступали" ng-model="editedConnection.Description" />
                 <i>Уточните характеристику</i>
                 <input class="form-control" placeholder="только если требуется характеристика" />
                 <i>Добавьте тизер-комментарий к вашей характеристике</i>
-                <textarea msd-elastic class="form-control" style="min-height:100px;" ng-model='test'/>
+                <textarea msd-elastic class="form-control" style="min-height: 100px;" ng-model='test' />
             </div>
             <div class="col-lg-5">
 

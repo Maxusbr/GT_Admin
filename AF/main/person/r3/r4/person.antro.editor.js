@@ -48,9 +48,9 @@
                     });
                 }
                 $rootScope.getAntros();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return $rootScope.app.closeView('disAntroEditor');
-                }, 3000);
+                }, timeoutMsgShow);
             });
         }
 

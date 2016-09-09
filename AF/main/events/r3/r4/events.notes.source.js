@@ -94,9 +94,9 @@
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.getDescript();
-                $timeout(function () {
+                $scope.Promise = $timeout(function () {
                     return app.closeView('disEventNotesSource');
-                }, 3000);
+                }, timeoutMsgShow);
             });
         }
 

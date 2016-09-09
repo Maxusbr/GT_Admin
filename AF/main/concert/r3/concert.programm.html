@@ -16,15 +16,23 @@
     </div>
     <div class="win-content">
         <div class="row">
+            <div class="com-md-12">
+                <div ng-class="errorYes ? 'messager messager_error':'messager messager_sucsses'" ng-show="showMessage">
+                    <p ng-bind="message"></p>
+                    <a href="#" ng-click="showMessage = false"><span class="glyphicon glyphicon-remove-sign"></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="row" cg-busy="Promise">
             <div class="col-lg-6">
                 <input type="radio" id="oneProgramm" name="programmType" ng-checked="concert.IsOneProgramm"
-                       ng-click="concert.IsOneProgramm = !concert.IsOneProgramm; getProgramms(concert.Id)" />
+                       ng-click="concert.IsOneProgramm = !concert.IsOneProgramm; getProgramms(concert.Id)"/>
                 <label for="oneProgramm">Одна программа для всех участников</label>
             </div>
             <div class="col-lg-6">
 
                 <input type="radio" id="moreProgramm" name="programmType" ng-checked="!concert.IsOneProgramm"
-                       ng-click="concert.IsOneProgramm = !concert.IsOneProgramm; getProgramms(concert.Id)" />
+                       ng-click="concert.IsOneProgramm = !concert.IsOneProgramm; getProgramms(concert.Id)"/>
                 <label for="moreProgramm">Каждый участник со своей программой</label>
             </div>
         </div>
@@ -33,29 +41,29 @@
                 <h5>Части программы</h5>
                 <table class="table" cg-busy="Promise">
                     <thead>
-                        <tr>
-                            <th>Название</th>
-                            <th>Дата</th>
-                            <th>Время</th>
-                            <th>Описание</th>
-                        </tr>
+                    <tr>
+                        <th>Название</th>
+                        <th>Дата</th>
+                        <th>Время</th>
+                        <th>Описание</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in programms">
-                            <td><a href="#" ng-click="editProgramm(item)">{{item.Name}}</a></td>
-                            <td>
-                                <span>{{item.DateStart | date:'dd.MM.yyyy'}}</span>
-                                <span ng-if="item.AllDay">- {{item.DateEnd | date:'dd.MM.yyyy'}}</span>
-                            </td>
-                            <td>
-                                <span>{{item.TimeStart | date:'dd.MM.yyyy'}}</span>
-                                <span ng-if="item.TimeEnd != item.TimeStart">- {{item.TimeEnd | date:'dd.MM.yyyy'}}</span>
-                            </td>
-                            <td>
-                                <span ng-show="item.Description"><a href="#" ng-click="editProgramm(item)">Редактировать</a></span>
-                                <span ng-show="!item.Description"><a href="#" ng-click="editProgramm(item)">Не указано</a></span>
-                            </td>
-                        </tr>
+                    <tr ng-repeat="item in programms">
+                        <td><a href="#" ng-click="editProgramm(item)">{{item.Name}}</a></td>
+                        <td>
+                            <span>{{item.DateStart | date:'dd.MM.yyyy'}}</span>
+                            <span ng-if="item.AllDay">- {{item.DateEnd | date:'dd.MM.yyyy'}}</span>
+                        </td>
+                        <td>
+                            <span>{{item.TimeStart | date:'dd.MM.yyyy'}}</span>
+                            <span ng-if="item.TimeEnd != item.TimeStart">- {{item.TimeEnd | date:'dd.MM.yyyy'}}</span>
+                        </td>
+                        <td>
+                            <span ng-show="item.Description"><a href="#" ng-click="editProgramm(item)">Редактировать</a></span>
+                            <span ng-show="!item.Description"><a href="#" ng-click="editProgramm(item)">Не указано</a></span>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
                 <a href="#" ng-click="editProgramm()">Добавить</a>
@@ -64,22 +72,22 @@
                 <h5>Состав участников</h5>
                 <table class="table" cg-busy="Promise">
                     <thead>
-                        <tr>
-                            <th>Название состава</th>
-                            <th>Участники</th>
-                        </tr>
+                    <tr>
+                        <th>Название состава</th>
+                        <th>Участники</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in actorgroups">
-                            <td><a href="#" ng-click="editActorGroup(item)">{{item.Name}}</a></td>
-                            <td>
-                                <table>
-                                    <tr ng-repeat="actor in item.Actors">
-                                        <td><a href="#" ng-click="editActor(actor)">{{actor.Person.LastName}} {{actor.Person.Name}} ({{actor.Role}})</a></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
+                    <tr ng-repeat="item in actorgroups">
+                        <td><a href="#" ng-click="editActorGroup(item)">{{item.Name}}</a></td>
+                        <td>
+                            <table>
+                                <tr ng-repeat="actor in item.Actors">
+                                    <td><a href="#" ng-click="editActor(actor)">{{actor.Person.LastName}} {{actor.Person.Name}} ({{actor.Role}})</a></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
                 <a href="#" ng-click="editActor()">Добавить</a>
@@ -90,22 +98,22 @@
                 <h5>Состав участников</h5>
                 <table class="table" cg-busy="Promise">
                     <thead>
-                        <tr>
-                            <th>Участник</th>
-                            <th>Программа</th>
-                        </tr>
+                    <tr>
+                        <th>Участник</th>
+                        <th>Программа</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in actors">
-                            <td><a href="#" ng-click="editActorProgramm(item)">{{item.Person.LastName}} {{item.Person.Name}} ({{item.Role}})</a></td>
-                            <td>
-                                <table>
-                                    <tr ng-repeat="prog in item.Programms">
-                                        <td><a href="#" ng-click="editProgramm(prog)">{{prog.Name}}</a></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
+                    <tr ng-repeat="item in actors">
+                        <td><a href="#" ng-click="editActorProgramm(item)">{{item.Person.LastName}} {{item.Person.Name}} ({{item.Role}})</a></td>
+                        <td>
+                            <table>
+                                <tr ng-repeat="prog in item.Programms">
+                                    <td><a href="#" ng-click="editProgramm(prog)">{{prog.Name}}</a></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
                 <a href="#" ng-click="editActorProgramm()">Добавить</a>
