@@ -75,7 +75,12 @@
         }
 
         $scope.saveEvent = function () {
-            $scope.showMessage = true;
+            if ($scope.event.EventParentCategoryId == undefined) {
+                $scope.showMessage = true;
+                $scope.errorYes = true;
+                $scope.message = 'Категория обязательное поле';
+                return;
+            }
             if ($scope.event.AgeLimit)
                 $scope.event.AgeLimit = parseInt($scope.event.AgeLimit, 10);
             if ($scope.selectedOrganizer)
