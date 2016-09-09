@@ -7,7 +7,7 @@
         $scope.errorYes = false;
         $scope.message = '';
 
-        vm.editItem = $rootScope.editedGroup? $rootScope.editedGroup: { Name: "" };
+        vm.editItem = $rootScope.editedGroup ? $rootScope.editedGroup : { Name: "" };
 
         $scope.saveChanges = function () {
             if (vm.editItem)
@@ -16,9 +16,10 @@
                     $scope.message = data.result;
                     $scope.showMessage = true;
                     $rootScope.getGroups();
-                    $scope.Promise = $timeout(function () {
-                        return app.closeView('disoncertActorGroup');
-                    }, timeoutMsgShow);
+                    if (!$scope.errorYes)
+                        $scope.Promise = $timeout(function () {
+                            return app.closeView('disoncertActorGroup');
+                        }, timeoutMsgShow);
                 });
         }
     }

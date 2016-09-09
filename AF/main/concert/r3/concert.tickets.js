@@ -13,7 +13,7 @@
             TimeStart: "00:00",
             TimeEnd: "00:00"
         }
-        $scope.$watch('dateStart', function(date) {
+        $scope.$watch('dateStart', function (date) {
             if (!date) return;
             if (date > $scope.dateEnd)
                 $scope.dateEnd = date;
@@ -44,7 +44,7 @@
         $scope.dateEnd = $scope.ticket.DateEnd ? new Date($scope.ticket.DateEnd) : new Date($scope.ticket.DateStart);
         if ($scope.ticket.DateStart)
             $scope.dateStart = new Date($scope.ticket.DateStart);
-        
+
         if ($scope.ticket.TimeStart) {
             $scope.timeStart = new Date($scope.ticket.DateStart);
             var times = $scope.ticket.TimeStart.split(':');
@@ -56,21 +56,22 @@
             $scope.timeEnd.setHours(timee[0], timee[1]);
         }
 
-        $scope.saveTickets = function() {
+        $scope.saveTickets = function () {
             $scope.ticket.DateStart = `${$scope.dateStart.getFullYear()}-${$scope.dateStart.getMonth() + 1}-${$scope.dateStart.getDate()}`;
             $scope.ticket.DateEnd = `${$scope.dateEnd.getFullYear()}-${$scope.dateEnd.getMonth() + 1}-${$scope.dateEnd.getDate()}`;
             $scope.ticket.TimeStart = `${$scope.timeStart.getHours()}:${$scope.timeStart.getMinutes()}`;
             $scope.ticket.TimeEnd = `${$scope.timeEnd.getHours()}:${$scope.timeEnd.getMinutes()}`;
-            concertService.saveTickets($scope.ticket, function(data) {
+            concertService.saveTickets($scope.ticket, function (data) {
                 $scope.errorYes = data.status !== "success";
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.loadConcerts();
                 if ($rootScope.getConcert)
                     $rootScope.getConcert($scope.concert.Id);
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('concertTicketsEdit');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('concertTicketsEdit');
+                    }, timeoutMsgShow);
             });
         }
         $scope.open1 = function () {

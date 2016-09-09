@@ -25,12 +25,13 @@
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.getLinkTypes();
-                $scope.Promise = $timeout(function () {
-                    return $rootScope.closeMe('disDicPersonLinks');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return $rootScope.closeMe('disDicPersonLinks');
+                    }, timeoutMsgShow);
             });
-            
-            
+
+
         }
     }
 

@@ -18,7 +18,7 @@
         }
 
         $scope.antronames = [];
-        personService.getAntroNames(function(data) {
+        personService.getAntroNames(function (data) {
             $scope.antronames = data;
         });
 
@@ -37,9 +37,10 @@
 
         function continueSave() {
             $rootScope.getAntros();
-            $scope.Promise = $timeout(function () {
-                return $rootScope.app.closeView('disAntroEditor');
-            }, timeoutMsgShow);
+            if (!$scope.errorYes)
+                $scope.Promise = $timeout(function () {
+                    return $rootScope.app.closeView('disAntroEditor');
+                }, timeoutMsgShow);
         }
         $scope.saveAntro = function () {
             $rootScope.editedAntro.IdPerson = $rootScope.personId;
@@ -48,7 +49,7 @@
                 $scope.message = id <= 0 ? 'Error save' : 'Save complete';
                 $scope.showMessage = true;
                 if (id > 0 && antroAssociations.length > 0) {
-                    personService.saveAntroLinks(id, antroAssociations, function(data) {
+                    personService.saveAntroLinks(id, antroAssociations, function (data) {
                         $scope.errorYes = data.success;
                         $scope.message = data.success ? data.message : 'Save complete';
                         $scope.showMessage = true;

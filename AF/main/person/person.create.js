@@ -29,9 +29,10 @@
                 $scope.errorYes = data.status !== "success";
                 $scope.message = data.result;
                 $scope.showMessage = true;
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('personEdit');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('personEdit');
+                    }, timeoutMsgShow);
             });
         }
         $scope.open1 = function () {

@@ -47,10 +47,11 @@
                 $scope.showMessage = true;
                 if (data.success) {
                     userService.getListUsers();
-                    $scope.Promise = $timeout(function () {
-                        return app.closeView('userCreate');
-                    }, timeoutMsgShow);
-                    
+                    if (!$scope.errorYes)
+                        $scope.Promise = $timeout(function () {
+                            return app.closeView('userCreate');
+                        }, timeoutMsgShow);
+
                 }
             });
 

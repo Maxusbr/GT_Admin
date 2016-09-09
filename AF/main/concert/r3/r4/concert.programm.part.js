@@ -65,10 +65,11 @@
                     if ($rootScope.getConcert)
                         $rootScope.getConcert($rootScope.concertId);
                 }
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('disConcertProgrammPart');
-                }, timeoutMsgShow);
-                
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('disConcertProgrammPart');
+                    }, timeoutMsgShow);
+
             });
         }
 

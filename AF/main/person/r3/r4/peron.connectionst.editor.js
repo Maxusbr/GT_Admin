@@ -94,10 +94,11 @@
                 if ($rootScope.getPersonCounts)
                     $rootScope.getPersonCounts();
                 $rootScope.getPersonConnection();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('personConnectionEdit');
-                }, timeoutMsgShow);
-                
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('personConnectionEdit');
+                    }, timeoutMsgShow);
+
             });
         }
     }
