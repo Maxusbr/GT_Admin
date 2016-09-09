@@ -22,6 +22,12 @@
         $rootScope.getLinkTypes();
 
         $rootScope.saveInternet = function () {
+            if ($scope.editedModel.IdSocialLinkType == undefined) {
+                $scope.errorYes = true;
+                $scope.message = 'Выберите тип ссылки';
+                $scope.showMessage = true;
+                return;
+            }
             console.log('save link click');
 
             var list = [$rootScope.editedModel];

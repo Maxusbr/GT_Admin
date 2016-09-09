@@ -19,6 +19,13 @@
         }
         $scope.saveNewPerson = function () {
             console.log('save person click');
+            if ($scope.person.Sex == undefined) {
+                $scope.errorYes = true;
+                $scope.message = 'Пол обязательное поле';
+                $scope.showMessage = true;
+                return;
+                console.log('save person click');
+            }
             if ($scope.place) {
                 $scope.person.Place = $scope.place.Name;
                 $scope.person.Country = $scope.place.CountryName;

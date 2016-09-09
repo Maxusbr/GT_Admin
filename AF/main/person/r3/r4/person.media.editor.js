@@ -31,6 +31,12 @@
 
         }
         function save(path) {
+            if (path == 'https://www.youtube.com/watch?v=undefined') {
+                $scope.showMessage = true;
+                $scope.errorYes = true;
+                $scope.message = 'Error';
+                return;
+            }
             $rootScope.editedMedia.id_Person = $rootScope.personId;
             $rootScope.editedMedia.MediaLink = path;
             personService.saveEntity($rootScope.personId, $rootScope.editedMedia, 'media', function (id) {

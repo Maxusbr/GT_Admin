@@ -24,8 +24,9 @@
             </div>
         </div>
         <div class="row" cg-busy="Promise">
-            <textarea style="min-height: 200px; width: 360px;" ng-model="tizer.DescriptionText"></textarea>
-            <br />
+            <textarea maxlength='190' required='required' msd-elastic style="min-height: 150px; width: 360px;" ng-model="tizer.DescriptionText" ></textarea>
+            <p>Осталось: {{190 - tizer.DescriptionText.length}} сим.</p>
+            <br/>
             <label>
                 <input type="checkbox" value="" name="noletter" ng-model="notRequired" ng-change="tizer.RequiredStaticDescription = !notRequired">
                 <span ng-if="notRequired" class="glyphicon glyphicon-ok"></span>

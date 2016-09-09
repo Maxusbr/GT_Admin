@@ -116,6 +116,21 @@
         }
 
         $rootScope.savePersonNotesSource = function () {
+            if (($scope.pageSchema.Page.PageType == undefined)) {
+                $scope.showMessage = true;
+                $scope.errorYes = true;
+                $scope.message = 'Страница обязательные поле';
+                return;
+            }
+
+            if (($scope.pageSchema.Page.PageType === 0) || ($scope.pageSchema.Page.PageType === 2) || ($scope.pageSchema.Page.PageType === 3)) {
+                if ($scope.detailId == undefined) {
+                    $scope.showMessage = true;
+                    $scope.errorYes = true;
+                    $scope.message = 'Уточнение обязательные поля';
+                    return;
+                }
+            }
             if (!$rootScope.editDescriptionId) $rootScope.editDescriptionId = 0;
 
             personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.personId, $rootScope.pageSchema, function () {

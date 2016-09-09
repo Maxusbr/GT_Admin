@@ -22,6 +22,12 @@
             });
         }
         $scope.save = function () {
+            if ($scope.person.Sex == undefined) {
+                $scope.errorYes = true;
+                $scope.message = 'Пол обязательное поле';
+                $scope.showMessage = true;
+                return;
+            }
             if (typeof $scope.person.Place !== 'string') {
                 $scope.person.Country = $scope.person.Place.CountryName;
                 $scope.person.IdBithplace = $scope.person.Place.Id;

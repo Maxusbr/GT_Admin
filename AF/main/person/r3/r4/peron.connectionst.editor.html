@@ -25,7 +25,7 @@
         </div>
         <table class="table" cg-busy="Promise">
             <tr>
-                <td>Тип связи</td>
+                <td>Тип связи *</td>
                 <td>
                     <select name="" id="" class="form-control" ng-model="editedConnection.id_ConnectionType" ng-change="getConnections(editedConnection.id_ConnectionType)"
                             ng-options="item.Id as item.Name for item in connectiontypes">
@@ -35,12 +35,12 @@
                 </td>
             </tr>
             <tr>
-                <td>Что связываем</td>
+                <td>Что связываем *</td>
                 <td>
                     <!--<select name="" id="" class="form-control" ng-model="connectionId"
                                  ng-options="item.Id as item.Name for item in connectionList"></select>-->
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Что связываем" name="Place" uib-typeahead="item.Id as item.Name for item in connectionList | filter:$viewValue"
+                        <input required='required' type="text" class="form-control" placeholder="Что связываем" name="Place" uib-typeahead="item.Id as item.Name for item in connectionList | filter:$viewValue"
                                ng-model="connectionId" typeahead-loading="loadingLocations" typeahead-no-results="noResults"
                                typeahead-min-length="0"> <!--uib-typeahead="item.Name as item.Name for item in places | filter:$viewValue">-->
                         <!--<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>-->
