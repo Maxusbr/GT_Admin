@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Getticket.Web.DAL.Enums;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -30,12 +31,14 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="Entities.PageSchema"/>
         /// </summary>
         [ForeignKey("IdPage")]
+        [JsonIgnore]
         public virtual PageSchema Page { get; set; }
 
         /// <summary>
         /// <see cref="Entities.PageBlockType"/>
         /// </summary>
         [ForeignKey("IdBlockType")]
+        [JsonIgnore]
         public virtual PageBlockType Type { get; set; }
 
 

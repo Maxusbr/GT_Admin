@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -20,6 +21,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Состав участников
         /// </summary>
+        [JsonIgnore]
         public virtual IList<Actor> Actors  { get; set; }
     }
 }

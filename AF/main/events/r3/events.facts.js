@@ -7,6 +7,10 @@
         $rootScope.getFacts = function () {
             eventService.getFact($rootScope.eventId, function (data) {
                 $scope.factlist = data;
+                $scope.factlist.forEach(function (item) {
+                    if (item.LastChange)
+                        item.LastChange.localdate = new Date(item.LastChange.Date);
+                });
             });
         }
         $rootScope.getFacts();

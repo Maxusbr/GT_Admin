@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -19,6 +20,7 @@ namespace Getticket.Web.DAL.Entities
         /// Событие <see cref="Entities.Event"/>
         /// </summary>
         [ForeignKey("IdEvent")]
+        [JsonIgnore]
         public virtual Event Event { get; set; }
 
         /// <summary>
@@ -36,6 +38,7 @@ namespace Getticket.Web.DAL.Entities
         /// Тип события <see cref="PersonDescriptionType"/>
         /// </summary>
         [ForeignKey("IdType")]
+        [JsonIgnore]
         public virtual PersonDescriptionType DescriptionType { get; set; }
 
         /// <summary>
@@ -56,12 +59,14 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Статическое описание
         /// </summary>
+        [JsonIgnore]
         public EventDescription StaticDescription { get; set; }
 
         /// <summary>
         /// размещение описания
         /// </summary>
         [ForeignKey("IdBlock")]
+        [JsonIgnore]
         public virtual PageBlock PageBlock { get; set; }
 
         /// <summary>
@@ -73,6 +78,7 @@ namespace Getticket.Web.DAL.Entities
         /// Источник
         /// </summary>
         [ForeignKey("IdUserPageCategory")]
+        [JsonIgnore]
         public virtual UserPageCategory UserPageCategory { get; set; }
     }
 }

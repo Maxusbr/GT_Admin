@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -24,6 +25,7 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="Entities.Actor"/>
         /// </summary>
         [ForeignKey("IdActor")]
+        [JsonIgnore]
         public virtual Actor Actor { get; set; }
 
         /// <summary>
@@ -37,6 +39,7 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="ConcertProgramm"/>
         /// </summary>
         [ForeignKey("IdProgramm")]
+        [JsonIgnore]
         public virtual ConcertProgramm Programm { get; set; }
     }
 }

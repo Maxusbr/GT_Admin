@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -26,11 +27,13 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="CountryPlace"/>
         /// </summary>
         [ForeignKey("PlaceId")]
+        [JsonIgnore]
         public virtual CountryPlace CountryPlace { get; set; }
 
         /// <summary>
         /// Площадки
         /// </summary>
+        [JsonIgnore]
         public virtual ICollection<Hall> Halls { get; set; }
     }
 }

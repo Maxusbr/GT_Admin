@@ -7,6 +7,10 @@
             $scope.Promise = concertService.getConcerts(function(data) {
                 $rootScope.concerts = data;
                 //TODO get change
+                $rootScope.concerts.forEach(function (item) {
+                    if (item.LastChange)
+                        item.LastChange.localdate = new Date(item.LastChange.Date);
+                });
             });
         }
         $rootScope.loadConcerts();

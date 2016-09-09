@@ -32,7 +32,7 @@
                             <br/>
                             <span ng-if="item.LastChange">
                                 {{item.LastChange.UserName}}<br>
-                                {{item.LastChange.Date | amCalendar}}
+                                {{item.LastChange.localdate | amCalendar}}
                             </span>
                         </td>
                         <td><span>{{item.FactType.Name}} / {{item.FactType.Descript}}</span></td>

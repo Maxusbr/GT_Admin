@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -27,6 +28,7 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Где используется
         /// </summary>
+        [JsonIgnore]
         public virtual IList<string> UsesType { get; set; } = new List<string>();
     }
 }

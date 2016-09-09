@@ -7,6 +7,10 @@
             $scope.Promise = personService.getAntro($rootScope.personId, function (data) {
                 $scope.antro = [];
                 $scope.antro.push.apply($scope.antro, data);
+                $scope.antro.forEach(function (item) {
+                    if (item.LastChange)
+                        item.LastChange.localdate = new Date(item.LastChange.Date);
+                });
             });
         }
         $rootScope.getAntros();

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Getticket.Web.DAL.Enums;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -29,6 +30,7 @@ namespace Getticket.Web.DAL.Entities
         /// Ссылка на пользователя <see cref="Entities.User" />
         /// </summary>
         [ForeignKey("SenderId")]
+        [JsonIgnore]
         public virtual User Sender { get; set; }
 
         /// <summary>
@@ -40,6 +42,7 @@ namespace Getticket.Web.DAL.Entities
         /// Ссылка на пользователя <see cref="Entities.User" />
         /// </summary>
         [ForeignKey("RecipientId")]
+        [JsonIgnore]
         public virtual User Recipient { get; set; }
 
         /// <summary>

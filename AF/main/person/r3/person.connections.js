@@ -1,17 +1,29 @@
 ﻿(function () {
     'use strict';
 
-    function PersonConnectionsController($rootScope, $scope, personService, eventService) {
+    function PersonConnectionsController($rootScope, $scope, personService, eventService, $q) {
         var vm = this;
-        $rootScope.getPersonConnection = function() {
+        $rootScope.getPersonConnection = function () {
             $scope.Promise = personService.getConnection($rootScope.personId, function (data) {
-            $scope.connectionList = [];
-            data.forEach(function (item) {
-                if (item.List.length > 0) {
-                    $scope.connectionList.push.apply($scope.connectionList, item.List);
-                }
+                $scope.connectionList = [];
+
+                var deferred = $q.defer();
+                var promise = deferred.promise;
+                promise.then(function () {
+                    data.forEach(function (item) {
+                        if (item.List.length > 0) {
+                            $scope.connectionList.push.apply($scope.connectionList, item.List);
+                        }
+                    });
+                }).then(function () {
+                    $scope.connectionList.forEach(function (item) {
+                        if (item.LastChange)
+                            item.LastChange.localdate = new Date(item.LastChange.Date);
+                    });
+                });
+                deferred.resolve();
+
             });
-        });
         }
         $rootScope.getPersonConnection();
 
@@ -25,7 +37,7 @@
         if (!$rootScope.realyEvents)
             eventService.getRealyEvents();
         $rootScope.addConnection = function () {
-            $rootScope.editedConnection = { id_ConnectionType: 1};
+            $rootScope.editedConnection = { id_ConnectionType: 1 };
             app.closeFour();
             app.loadContentView('/main/person/r3/r4/peron.connectionst.editor.html', 3200);
         }
@@ -40,5 +52,5 @@
         .module('app')
         .controller('PersonConnectionsController', PersonConnectionsController);
 
-    PersonConnectionsController.$inject = ['$rootScope', '$scope', 'personService', 'eventService'];
+    PersonConnectionsController.$inject = ['$rootScope', '$scope', 'personService', 'eventService', '$q'];
 })();

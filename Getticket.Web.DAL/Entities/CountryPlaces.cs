@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -44,12 +45,14 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="Entities.Country"/>
         /// </summary>
         [ForeignKey("CountryId")]
+        [JsonIgnore]
         public virtual Country Country { get; set; }
 
         /// <summary>
         /// <see cref="Entities.Region"/>
         /// </summary>
         [ForeignKey("id_Region")]
+        [JsonIgnore]
         public virtual Region Region { get; set; }
 
     }

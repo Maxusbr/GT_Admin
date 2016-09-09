@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -30,6 +31,7 @@ namespace Getticket.Web.DAL.Entities
         /// Тип события
         /// </summary>
         [ForeignKey("IdParent")]
+        [JsonIgnore]
         public virtual EventCategory ParentCategory { get; set; }
     }
 }

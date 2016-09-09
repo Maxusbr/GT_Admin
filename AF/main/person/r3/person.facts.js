@@ -3,9 +3,13 @@
 
     function PersonFactsController($rootScope, $scope, personService) {
         var vm = this;
-        $rootScope.getFacts = function() {
+        $rootScope.getFacts = function () {
             personService.getFact($rootScope.personId, function (data) {
                 $scope.factlist = data;
+                $scope.factlist.forEach(function (item) {
+                    if (item.LastChange)
+                        item.LastChange.localdate = new Date(item.LastChange.Date);
+                });
             });
         }
 
@@ -27,7 +31,6 @@
                 $rootScope.facttypes.push.apply($rootScope.facttypes, data);
             });
 
-        
     }
 
     angular

@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Getticket.Web.DAL.Enums;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -67,6 +68,7 @@ namespace Getticket.Web.DAL.Entities
         /// Место рождения <see cref="CountryPlace"/>
         /// </summary>
         [ForeignKey("id_Bithplace")]
+        [JsonIgnore]
         public virtual CountryPlace Place { get; set; }
 
         /// <summary>

@@ -9,6 +9,10 @@
             data.forEach(function (item) {
                 $scope.factlist.push.apply($scope.factlist, item.List);
             });
+            $scope.factlist.forEach(function (item) {
+                    if (item.LastChange)
+                        item.LastChange.localdate = new Date(item.LastChange.Date);
+                });
         });
 
         $rootScope.addHapens = function addHapens(){

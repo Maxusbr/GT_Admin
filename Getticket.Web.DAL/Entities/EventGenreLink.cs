@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -19,6 +20,7 @@ namespace Getticket.Web.DAL.Entities
         /// Событие <see cref="Entities.Event"/>
         /// </summary>
         [ForeignKey("IdEvent")]
+        [JsonIgnore]
         public virtual Event Event { get; set; }
 
         /// <summary>
@@ -31,6 +33,7 @@ namespace Getticket.Web.DAL.Entities
         /// Жанр <see cref="EventGenre"/>
         /// </summary>
         [ForeignKey("IdGenre")]
+        [JsonIgnore]
         public virtual EventGenre Genre { get; set; }
 
         /// <summary>

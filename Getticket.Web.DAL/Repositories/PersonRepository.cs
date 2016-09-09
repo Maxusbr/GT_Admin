@@ -1126,7 +1126,7 @@ namespace Getticket.Web.DAL.Repositories
         {
             var log = new PersonLog
             {
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
                 UserId = userId,
                 IdPerson = personId,
                 IdProperty = to.Id,

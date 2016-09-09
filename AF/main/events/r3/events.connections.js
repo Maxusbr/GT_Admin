@@ -1,16 +1,27 @@
 ﻿(function () {
     'use strict';
 
-    function EventsConnectionsController($rootScope, $scope, eventService) {
+    function EventsConnectionsController($rootScope, $scope, eventService, $q) {
         var vm = this;
         $rootScope.getEventConnection = function () {
             $scope.Promise = eventService.getConnection($rootScope.eventId, function (data) {
                 $scope.connectionList = [];
-                data.forEach(function (item) {
-                    if (item.List.length > 0) {
-                        $scope.connectionList.push.apply($scope.connectionList, item.List);
-                    }
+                
+                var deferred = $q.defer();
+                var promise = deferred.promise;
+                promise.then(function () {
+                    data.forEach(function (item) {
+                        if (item.List.length > 0) {
+                            $scope.connectionList.push.apply($scope.connectionList, item.List);
+                        }
+                    });
+                }).then(function () {
+                    $scope.connectionList.forEach(function (item) {
+                        if (item.LastChange)
+                            item.LastChange.localdate = new Date(item.LastChange.Date);
+                    });
                 });
+                deferred.resolve();
             });
         }
         $rootScope.getEventConnection();
@@ -36,5 +47,5 @@
         .module('app')
         .controller('EventsConnectionsController', EventsConnectionsController);
 
-    EventsConnectionsController.$inject = ['$rootScope', '$scope', 'eventService'];
+    EventsConnectionsController.$inject = ['$rootScope', '$scope', 'eventService', '$q'];
 })();

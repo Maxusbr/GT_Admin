@@ -1,21 +1,32 @@
 ﻿(function () {
     'use strict';
 
-    function PersonMediaController($rootScope, $scope, personService) {
+    function PersonMediaController($rootScope, $scope, personService, $q) {
         var vm = this;
-        $rootScope.getMedias = function() {
+        $rootScope.getMedias = function () {
             $scope.Promise = personService.getMedia($rootScope.personId, function (data) {
                 $scope.medias = [];
                 $scope.medialist = [];
-                data.forEach(function (item) {
-                    if (item.List.length > 0)
-                        $scope.medias.push({
-                            type: item.List[0].MediaType,
-                            value: item.List[0].MediaLink,
-                            count: item.Count - 1
-                        });
-                    $scope.medialist.push.apply($scope.medialist, item.List);
+
+                var deferred = $q.defer();
+                var promise = deferred.promise;
+                promise.then(function () {
+                    data.forEach(function (item) {
+                        if (item.List.length > 0)
+                            $scope.medias.push({
+                                type: item.List[0].MediaType,
+                                value: item.List[0].MediaLink,
+                                count: item.Count - 1
+                            });
+                        $scope.medialist.push.apply($scope.medialist, item.List);
+                    });
+                }).then(function () {
+                    $scope.medialist.forEach(function (item) {
+                        if (item.LastChange)
+                            item.LastChange.localdate = new Date(item.LastChange.Date);
+                    });
                 });
+                deferred.resolve();
             });
         }
         $rootScope.getMedias();
@@ -36,5 +47,5 @@
         .module('app')
         .controller('PersonMediaController', PersonMediaController);
 
-    PersonMediaController.$inject = ['$rootScope', '$scope', 'personService'];
+    PersonMediaController.$inject = ['$rootScope', '$scope', 'personService', '$q'];
 })();

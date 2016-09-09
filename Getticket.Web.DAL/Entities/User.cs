@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -49,6 +50,7 @@ namespace Getticket.Web.DAL.Entities
         /// Информация о пользователе
         /// Имя, Фамилия, Компания и т.д.virtual
         /// </summary>
+        [JsonIgnore]
         public virtual UserInfo UserInfo { get; set; }
 
         /// <summary>
@@ -59,11 +61,13 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// Роль доступа пользователя к API
         /// </summary>
+        [JsonIgnore]
         public virtual AccessRoles AccessRoles { get; set; }
 
         /// <summary>
         /// Статус пользователя в системе
         /// </summary>
+        [JsonIgnore]
         public virtual UserStatuses UserStatuses { get; set; }
     }
 }

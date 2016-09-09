@@ -14,12 +14,12 @@ namespace Getticket.Web.API.Helpers
     {
         public static LastChangeModel GetLastChangeModel(PersonLog log)
         {
-            return log != null ? new LastChangeModel { Date = log.Date.ToString("G"), UserName = $"{log.User.Name} {log.User.LastName}" }
+            return log != null ? new LastChangeModel { Date = log.Date.ToString("G") + " +0000", UserName = $"{log.User.Name} {log.User.LastName}" }
             : null;
         }
         public static LastChangeModel GetLastChangeModel(EventLog log)
         {
-            return log != null ? new LastChangeModel { Date = log.Date.ToString("G"), UserName = $"{log.User?.Name} {log.User?.LastName}" }
+            return log != null ? new LastChangeModel { Date = log.Date.ToString("G")+ " +0000", UserName = $"{log.User?.Name} {log.User?.LastName}" }
             : null;
         }
     }

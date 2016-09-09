@@ -695,7 +695,7 @@ namespace Getticket.Web.DAL.Repositories
         {
             var log = new EventLog
             {
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
                 UserId = userId,
                 EventId = eventId,
                 IdProperty = to.Id,

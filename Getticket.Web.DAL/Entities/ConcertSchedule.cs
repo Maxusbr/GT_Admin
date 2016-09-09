@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -48,6 +49,7 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="Entities.ConcertDateRange"/>
         /// </summary>
         [ForeignKey("IdRange")]
+        [JsonIgnore]
         public virtual ConcertDateRange Range { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -46,18 +47,21 @@ namespace Getticket.Web.DAL.Entities
         /// <see cref="Entities.Person"/>
         /// </summary>
         [ForeignKey("id_Person")]
+        [JsonIgnore]
         public virtual Person Person { get; set; }
 
         /// <summary>
         /// Изменяемая характеристика <see cref="Entities.PersonChangeParam"/>
         /// </summary>
         [ForeignKey("id_ChangeParam")]
+        [JsonIgnore]
         public virtual PersonChangeParam PersonChangeParam { get; set; }
 
         /// <summary>
         /// Кто изменил <see cref="Entities.User"/>
         /// </summary>
         [ForeignKey("id_WhoChange")]
+        [JsonIgnore]
         public virtual User User { get; set; }
 
     }

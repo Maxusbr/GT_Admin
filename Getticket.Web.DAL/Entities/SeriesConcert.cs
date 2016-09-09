@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Getticket.Web.DAL.Entities
 {
@@ -27,11 +28,13 @@ namespace Getticket.Web.DAL.Entities
         /// <summary>
         /// <see cref="Entities.Event"/>
         /// </summary>
+        [JsonIgnore]
         public virtual Event Event { get; set; }
 
         /// <summary>
         /// <see cref="Entities.SeriesName"/>
         /// </summary>
+        [JsonIgnore]
         public virtual SeriesName Series { get; set; }
     }
 }
