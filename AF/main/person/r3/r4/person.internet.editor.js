@@ -25,10 +25,11 @@
             console.log('save link click');
 
             var list = [$rootScope.editedModel];
-            personService.saveEntities($rootScope.personId, list, 'social', $rootScope.getLinks, function (data) {
+            personService.saveEntities($rootScope.personId, list, 'social', function (data) {
                 $scope.errorYes = data.status !== "success";
                 $scope.message = data.result;
                 $scope.showMessage = true;
+                $rootScope.getLinks();
                 $rootScope.getPersonCounts();
                 if (!$scope.errorYes)
                     $scope.Promise = $timeout(function () {

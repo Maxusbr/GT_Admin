@@ -115,8 +115,8 @@
 
         function saveEntities(id, list, entity, callback) {
             $http.post(`${serviceUrl}persons/${entity}/update/${id}`, list).success(function (response) {
-                if (response.status === 'success')
-                    callback(list);
+                callback(response);
+                    
             });
         }
 
