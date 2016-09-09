@@ -8,6 +8,7 @@
         $scope.message = 'Error';
         $scope.saveUser = function () {
             $scope.showMessage = true;
+            if (!$scope.errorYes)
             $scope.Promise = $timeout(function () {
                 return app.closeView('personFactCreate');
             }, timeoutMsgShow);

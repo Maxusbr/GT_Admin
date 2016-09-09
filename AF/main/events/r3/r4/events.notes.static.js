@@ -15,7 +15,7 @@
 
         function saveTizerTags() {
             if ($scope.tizerTags.length && $scope.staticDescription.Id > 0)
-                eventService.saveTags($scope.staticDescription.Id, $scope.tizerTags, 'tizer', function(data) {
+                eventService.saveTags($scope.staticDescription.Id, $scope.tizerTags, 'tizer', function (data) {
                     $scope.errorYes = data.status !== "success";
                     $scope.message = data.result;
                     $scope.showMessage = true;
@@ -33,9 +33,10 @@
                 $scope.staticDescription.Id = id;
                 saveTizerTags();
                 $rootScope.getDescript();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('disPersonNotesStatic');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('disPersonNotesStatic');
+                    }, timeoutMsgShow);
             });
         }
 

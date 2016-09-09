@@ -21,7 +21,13 @@
                     $scope.showMessage = true;
                 });
         }
-
+        function continueSave() {
+            $rootScope.getDescript();
+            if (!$scope.errorYes)
+                $scope.Promise = $timeout(function () {
+                    return app.closeView('disEventnNotesTizer');
+                }, timeoutMsgShow);
+        }
         $scope.savePersonNotesTizer = function () {
             console.log($scope.tizer);
             $scope.tizer.id_Person = $rootScope.personId;
@@ -37,16 +43,10 @@
                         $scope.errorYes = id <= 0;
                         $scope.message = id <= 0 ? 'Error save' : 'Save complete';
                         $scope.showMessage = true;
-                        $rootScope.getDescript();
-                        $scope.Promise = $timeout(function () {
-                            return app.closeView('disEventnNotesTizer');
-                        }, timeoutMsgShow);
+                        continueSave();
                     });
                 else {
-                    $rootScope.getDescript();
-                    $scope.Promise = $timeout(function () {
-                        return app.closeView('disEventnNotesTizer');
-                    }, timeoutMsgShow);
+                    continueSave();
                 }
             });
         }

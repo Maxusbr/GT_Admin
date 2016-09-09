@@ -622,12 +622,12 @@ namespace Getticket.Web.API.Services
         public bool SaveDescriptionSchema(int id, PageBlockModel model, int eventId)
         {
             return _eventRepository.SaveDescriptionSchema(id,
-                PageModelHelper.GetPageBlock(model),
+                PageModelHelper.GetPageBlock(model), model.UserPageCategoryId != null ?
                 new UserPageCategory
                 {
                     Id = model.UserPageCategoryId ?? 0,
                     Name = model.UserPageCategory
-                }, eventId);
+                } : null, eventId);
         }
 
         /// <see cref="IEventService.SaveCategory"/>
@@ -636,14 +636,17 @@ namespace Getticket.Web.API.Services
             return EventModelHelper.GetCategoryModels(_eventRepository.SaveCategory(
                 new EventCategory
                 {
-                    Id = model.Id, Name = model.Name, IdParent = model.IdParent, Description = model.Description
+                    Id = model.Id,
+                    Name = model.Name,
+                    IdParent = model.IdParent,
+                    Description = model.Description
                 }));
         }
 
         /// <see cref="IEventService.GetOrganizers"/>
         public IList<EventOrganizerModel> GetOrganizers()
         {
-            return _eventRepository.GetOrganizers().Select(o => new EventOrganizerModel {Id = o.Id, Name = o.Name}).ToList();
+            return _eventRepository.GetOrganizers().Select(o => new EventOrganizerModel { Id = o.Id, Name = o.Name }).ToList();
         }
     }
 

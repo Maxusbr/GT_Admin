@@ -678,7 +678,7 @@ namespace Getticket.Web.API.Services
         /// <see cref="IPersonService.LinkMediaPerson"/>
         public bool LinkMediaPerson(int idMedia, int idPerson)
         {
-            return _personRepository.LinkMedia(new MediaLinkPerson {IdMedia = idMedia, IdPerson = idPerson});
+            return _personRepository.LinkMedia(new MediaLinkPerson { IdMedia = idMedia, IdPerson = idPerson });
         }
 
         /// <see cref="IPersonService.LinkMediaEvent"/>
@@ -970,12 +970,12 @@ namespace Getticket.Web.API.Services
         public bool SaveDescriptionSchema(int id, PageBlockModel model, int parsonId)
         {
             return _personRepository.SaveDescriptionSchema(id,
-                PageModelHelper.GetPageBlock(model),
+                PageModelHelper.GetPageBlock(model), model.UserPageCategoryId != null ?
                 new UserPageCategory
                 {
                     Id = model.UserPageCategoryId ?? 0,
                     Name = model.UserPageCategory
-                }, parsonId);
+                } : null, parsonId);
         }
 
         /// <see cref="IPersonService.GetUserPageCategory"/>

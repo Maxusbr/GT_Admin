@@ -16,9 +16,10 @@
                 $scope.message = id <= 0 ? 'Error save' : 'Save complete';
                 $scope.showMessage = true;
                 $rootScope.getFacts();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('personFactCreate');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('personFactCreate');
+                    }, timeoutMsgShow);
 
             });
         }

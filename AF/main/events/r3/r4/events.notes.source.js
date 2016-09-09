@@ -7,9 +7,39 @@
         $scope.errorYes = false;
         $scope.message = '';
 
-        if (!$rootScope.pageSchema.Page)
-            $rootScope.pageSchema.Page = {};
+        //TODO get page blocks
+        $scope.bloks = [
+            { Id: null, Name: "Не указано" },
+            { Id: 1, Name: "Другие персоны подборки" }
+        ];
 
+        if (!$rootScope.userPageCategories) {
+            $rootScope.userPageCategories = [{ Id: null, Name: "Не указано" }];
+            personService.getUserPageCategories(function (data) {
+                $rootScope.userPageCategories.push.apply($rootScope.userPageCategories, data);
+            });
+        }
+        $scope.changeCat = function (id) {
+            if ($rootScope.userPageCategories)
+                $rootScope.pageSchema.UserPageCategory = $rootScope.userPageCategories.filter(function (item) {
+                    return item.Id === id;
+                })[0].Name;
+        }
+
+        $scope.cangeType = function (id) {
+            if ($scope.bloks)
+                $rootScope.pageSchema.Type.Name = $scope.bloks.filter(function (item) {
+                    return item.Id === id;
+                })[0].Name;
+        }
+        if (!$rootScope.pageSchema.Page)
+            $rootScope.pageSchema.Page = {  };
+        if (!$rootScope.pageSchema.Type)
+            $rootScope.pageSchema.Type = { Id: 1, Name: "" };
+        if (!$rootScope.pageSchema.UserPageCategoryId)
+            $rootScope.pageSchema.UserPageCategoryId = null;
+
+        $scope.cangeType($rootScope.pageSchema.Type.Id);
         $scope.pages = [
             { Id: 0, Name: "Персона" },
             { Id: 1, Name: "Поиск" },
@@ -19,11 +49,6 @@
             { Id: 5, Name: "Главная" }
         ];
 
-        //TODO get page blocks
-        $scope.bloks = [
-            { Id: null, Name: "Не указано" },
-            { Id: 1, Name: "Другие персоны подборки" }
-        ];
 
         $scope.getDetail = function (item) {
             $scope.detailId = 0;
@@ -54,7 +79,7 @@
                     return "";
             }
         }
-        
+
         $scope.getDetail($rootScope.pageSchema.Page.PageType);
 
         $scope.changeDetail = function (item) {
@@ -78,12 +103,7 @@
                     break;;
             }
         };
-        if (!$rootScope.userPageCategories) {
-            $rootScope.userPageCategories = [{ Id: null, Name: "Не указано" }];
-            personService.getUserPageCategories(function (data) {
-                $rootScope.userPageCategories.push.apply($rootScope.userPageCategories, data);
-            });
-        }
+
 
 
         $rootScope.saveEventNotesSource = function () {
@@ -95,24 +115,25 @@
                 return;
             }
 
-            if (($scope.pageSchema.Page.PageType == 0)||($scope.pageSchema.Page.PageType == 2)||($scope.pageSchema.Page.PageType == 3)) {
+            if (($scope.pageSchema.Page.PageType === 0) || ($scope.pageSchema.Page.PageType === 2) || ($scope.pageSchema.Page.PageType === 3)) {
                 if ($scope.detailId == undefined) {
                     $scope.showMessage = true;
                     $scope.errorYes = true;
                     $scope.message = 'Уточнение обязательные поля';
                     return;
                 }
-            }    
+            }
 
             if (!$rootScope.editDescriptionId) $rootScope.editDescriptionId = 0;
-            eventService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.eventId, $rootScope.pageSchema, function () {
+            eventService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.eventId, $rootScope.pageSchema, function (data) {
                 $scope.errorYes = data.status !== "success";
                 $scope.message = data.result;
                 $scope.showMessage = true;
                 $rootScope.getDescript();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('disEventNotesSource');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('disEventNotesSource');
+                    }, timeoutMsgShow);
             });
         }
 
@@ -121,18 +142,7 @@
             app.loadContentView('/main/dictionary/dictionary.person.wtf.html', 3200);
         }
 
-        $scope.changeCat = function (id) {
-            if ($rootScope.userPageCategories)
-                $rootScope.pageSchema.UserPageCategory = $rootScope.userPageCategories.filter(function (item) {
-                    return item.Id === id;
-                })[0].Name;
-        }
 
-        $scope.cangeType = function (id) {
-            $rootScope.pageSchema.Type.Name = $scope.bloks.filter(function (item) {
-                return item.Id === id;
-            })[0].Name;
-        }
     }
 
     angular

@@ -92,9 +92,10 @@
                 $rootScope.loadEvent();
                 if ($rootScope.getEvent)
                     $rootScope.getEvent($scope.event.Id);
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('eventEdit');
-                }, timeoutMsgShow);
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('eventEdit');
+                    }, timeoutMsgShow);
             });
 
         }

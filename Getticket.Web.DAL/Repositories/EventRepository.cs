@@ -667,6 +667,7 @@ namespace Getticket.Web.DAL.Repositories
 
         private UserPageCategory SaveUserPageCategory(UserPageCategory cat)
         {
+            if (cat == null) return null;
             if (cat.Id == 0)
             {
                 db.Entry(cat).State = EntityState.Added;

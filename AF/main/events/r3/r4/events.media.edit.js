@@ -2,13 +2,13 @@
     'use strict';
 
     function EventsMediaCreateController($rootScope, $scope, personService, eventService, $filter, $timeout) {
-  
+
         var vm = this;
         $scope.showMessage = false;
         $scope.errorYes = false;
         $scope.message = '';
         $scope.file = $rootScope.editedMedia.MediaLink;
-        $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink: 'https://www.youtube.com/watch?v=undefined';
+        $scope.file_video = $rootScope.editedMedia.id_MediaType === 1 ? $rootScope.editedMedia.MediaLink : 'https://www.youtube.com/watch?v=undefined';
         $scope.embed = '//img.youtube.com/vi/undefined';
 
 
@@ -22,7 +22,7 @@
 
         }
 
-        
+
         $scope.association = { types: 'person' }
 
         var mediaAssociations = [];
@@ -36,14 +36,13 @@
 
         function save(path) {
             console.log(path);
-            if (path == 'https://www.youtube.com/watch?v=undefined')
-                {
-                    $scope.showMessage = true;
-                    $scope.errorYes = true;
-                    $scope.message = 'Error';
-                    return;
-                }
-            
+            if (path == 'https://www.youtube.com/watch?v=undefined') {
+                $scope.showMessage = true;
+                $scope.errorYes = true;
+                $scope.message = 'Error';
+                return;
+            }
+
             $rootScope.editedMedia.id_Event = $rootScope.eventId;
             $rootScope.editedMedia.MediaLink = path;
             eventService.saveEntity($rootScope.eventId, $rootScope.editedMedia, 'media', function (id) {
@@ -54,10 +53,11 @@
                     eventService.saveMediaLinks(id, mediaAssociations);
                 }
                 $rootScope.getMedias();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('eventMediaCreate');
-                }, timeoutMsgShow);
-                
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('eventMediaCreate');
+                    }, timeoutMsgShow);
+
             });
         }
 

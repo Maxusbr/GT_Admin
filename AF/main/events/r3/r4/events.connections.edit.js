@@ -6,10 +6,10 @@
         $scope.showMessage = false;
         $scope.errorYes = false;
         $scope.message = 'Error';
-        
+
         $rootScope.saveConnection = function () {
             console.log($scope.connectionId);
-            
+
             if ($scope.connectionId == undefined) {
                 $scope.showMessage = true;
                 $scope.errorYes = true;
@@ -18,20 +18,21 @@
             }
 
             console.log('save connection click');
-            
+
             $rootScope.editedConnection.EventConnectTo = null;
             $rootScope.editedConnection.Person = null;
             $rootScope.editedConnection.id_Event = $rootScope.eventId;
             console.log($rootScope.editedConnection);
             $scope.Promise = eventService.saveEntity($rootScope.eventId, $rootScope.editedConnection, 'connection', function (id) {
                 $scope.errorYes = id <= 0;
-                $scope.message = id <= 0 ? 'Error save': 'Save complete';
+                $scope.message = id <= 0 ? 'Error save' : 'Save complete';
                 $scope.showMessage = true;
                 $rootScope.getEventConnection();
-                $scope.Promise = $timeout(function () {
-                    return app.closeView('eventConnectionCreate');
-                }, timeoutMsgShow);
-                
+                if (!$scope.errorYes)
+                    $scope.Promise = $timeout(function () {
+                        return app.closeView('eventConnectionCreate');
+                    }, timeoutMsgShow);
+
             });
         }
 
@@ -51,9 +52,9 @@
             }
 
         }
-        
 
-        
+
+
 
         function getConnectionList(id) {
             $scope.connectionList = [];
