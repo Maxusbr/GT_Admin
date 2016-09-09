@@ -118,7 +118,7 @@
         $rootScope.savePersonNotesSource = function () {
             if (!$rootScope.editDescriptionId) $rootScope.editDescriptionId = 0;
 
-            personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.personId, $rootScope.pageSchema, function () {
+            personService.saveDescriptionSchema($rootScope.editDescriptionId, $rootScope.personId, $rootScope.pageSchema, function (data) {
                 $scope.errorYes = data.status !== "success";
                 $scope.message = data.result;
                 $scope.showMessage = true;
