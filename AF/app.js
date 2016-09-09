@@ -8,6 +8,7 @@ var serviceUrl = 'http://getticketwebapi.azurewebsites.net/';
 var pageNumber = 1;
 var pageSize = 20;
 var timeoutMsgShow = 3000;
+var countSymbolPerview = 150;
 var app;
 
 (function () {
