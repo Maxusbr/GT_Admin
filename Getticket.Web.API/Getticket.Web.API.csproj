@@ -251,6 +251,7 @@
     <Compile Include="Models\Events\TagEventLinkModel.cs" />
     <Compile Include="Models\Events\TagEventMediaLinkModel.cs" />
     <Compile Include="Models\Events\TagsEventMediaModel.cs" />
+    <Compile Include="Models\Persons\AntroAssociationModel.cs" />
     <Compile Include="Models\Persons\CreateDescriptionModel.cs" />
     <Compile Include="Models\Emails\RestorePasswordEmailModel.cs" />
     <Compile Include="Models\Events\EventModel.cs" />

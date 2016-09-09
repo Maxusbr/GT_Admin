@@ -229,6 +229,30 @@ namespace Getticket.Web.API.Controllers
             var error = ServiceResponce.FromFailed().Result($"Error save link");
             return Ok(_personService.LinkAntroEvent(id, idEvent) ? succes.Response() : error.Response());
         }
+
+        /// <see cref="IPersonService.LinkMediaEvent" />
+        [HttpPost]
+        [Route("antro/link/{idEntity}")]
+        public IHttpActionResult AntroLinks(int idEntity, [FromBody] IEnumerable<AntroAssociationModel> list)
+        {
+            var succes = ServiceResponce.FromSuccess().Result("Link save complete");
+            var error = ServiceResponce.FromFailed().Result($"Error save link");
+            foreach (var el in list)
+            {
+                var res = false;
+                switch (el.type)
+                { case "person":
+                        res = _personService.LinkAntroPerson(el.Id, idEntity);
+                        break;
+                    case "event":
+                        res = _personService.LinkAntroEvent(el.Id, idEntity);
+                        break;
+                }
+                if (!res) return Ok(error.Response());
+            }
+            return Ok(succes.Response());
+        }
+
         #endregion
 
 

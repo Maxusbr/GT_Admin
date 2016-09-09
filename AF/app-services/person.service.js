@@ -321,7 +321,11 @@
                 .success(function (data) { if(callback) callback(data); })
                 .error(function (data) { if(callback) callback(data); });
         }
-
+        service.saveAntroLinks = function (idEntity, list, callback) {
+            return $http.post(`${serviceUrl}persons/antro/link/${idEntity}`, list)
+                .success(function (data) { if(callback) callback(data); })
+                .error(function (data) { if(callback) callback(data); });
+        }
         service.saveAntroLink = function (id, idEntity, entity, callback) {
             return $http.post(`${serviceUrl}persons/antro/${id}/link/${entity}/${idEntity}`)
                 .success(function (data) { if(callback) callback(data); })

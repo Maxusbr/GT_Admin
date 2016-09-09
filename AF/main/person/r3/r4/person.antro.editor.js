@@ -34,23 +34,27 @@
             $scope.personeRange = [];
             $scope.eventRange = [];
         }
+
+        function continueSave() {
+            $rootScope.getAntros();
+            $scope.Promise = $timeout(function () {
+                return $rootScope.app.closeView('disAntroEditor');
+            }, timeoutMsgShow);
+        }
         $scope.saveAntro = function () {
             $rootScope.editedAntro.IdPerson = $rootScope.personId;
-
             personService.saveEntity($rootScope.personId, $rootScope.editedAntro, 'antro', function (id) {
                 $scope.errorYes = id <= 0;
                 $scope.message = id <= 0 ? 'Error save' : 'Save complete';
                 $scope.showMessage = true;
                 if (id > 0 && antroAssociations.length > 0) {
-                    //TODO change metod
-                    antroAssociations.forEach(function (item) {
-                        personService.saveAntroLink(id, item.Id, item.type);
+                    personService.saveAntroLinks(id, antroAssociations, function(data) {
+                        $scope.errorYes = data.success;
+                        $scope.message = data.success ? data.message : 'Save complete';
+                        $scope.showMessage = true;
+                        continueSave();
                     });
-                }
-                $rootScope.getAntros();
-                $scope.Promise = $timeout(function () {
-                    return $rootScope.app.closeView('disAntroEditor');
-                }, timeoutMsgShow);
+                } else continueSave();
             });
         }
 
