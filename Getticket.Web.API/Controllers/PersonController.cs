@@ -100,16 +100,16 @@ namespace Getticket.Web.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            if (model.IdBithplace == null)
-            {
-                if (string.IsNullOrEmpty(model.Country))
-                {
-                    ModelState.AddModelError("Country", "Укажите название страны");
-                    return BadRequest("Укажите название страны");
-                }
+            //if (model.IdBithplace == null)
+            //{
+            //    if (string.IsNullOrEmpty(model.Country))
+            //    {
+            //        ModelState.AddModelError("Country", "Укажите название страны");
+            //        return BadRequest("Укажите название страны");
+            //    }
 
-                model.IdBithplace = _personService.UpdatePlace(new CountryPlaceModel {Name = model.Place, CountryName = model.Country});
-            }
+            //    model.IdBithplace = _personService.UpdatePlace(new CountryPlaceModel {Name = model.Place, CountryName = model.Country});
+            //}
             var userId = User.Identity.GetUserId<int>();
             return Ok(_personService.SavePerson(model, userId).Response());
         }
