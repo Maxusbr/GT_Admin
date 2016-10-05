@@ -10,3 +10,7 @@ packages/
 DOCS/~$BModel.docx
 /Getticket.Web.DAL/Migrations
 .vs
+/Getticket.Web.API/App_Data/ASPNETDB.MDF
+/Getticket.Web.API/images/uploaded-2
+/DOCS/Model Required.xlsx
+/DOCS/~$Model Required.xlsx
